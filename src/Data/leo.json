@@ -1,0 +1,82 @@
+[
+    {
+        "key": "2",
+        "title":"Fenda do Bikini",
+        "descri": "Ambiente tranquilo perto da UFES ,supermercado do lado de casa, vizinhos tranquilos e silencio total..",
+        "descriDetal":"•Quarto",
+        "nota": "1.6",
+        "valor":240,
+        "tipo":"Republica",
+        "quartos": 4,
+        "vagasTotais": 1,
+        "imagem":"https://estudiomodulo.com.br/wp-content/uploads/2016/01/VRP_TN_mini-500x500.jpg"
+    },
+    {
+        "key": "3",
+        "title":"Lan House",
+        "descri": "Ambiente tranquilo perto da UFES ,supermercado do lado de casa, vizinhos tranquilos e silencio total..",
+        "descriDetal":"Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60",
+        "nota": "5.0",
+        "valor":240,
+        "tipo":"republica",
+        "quartos": 4,
+        "vagasTotais": 1,
+        "imagem":"http://www.nelsonkon.com.br/wp-content/uploads/2019/01/reinach_mendonca_casa_rfc_x6MG_0801_07.jpg"
+    },
+    {
+        "key": "4",
+        "title":"Republica Tcheka",
+        "descri": "Ambiente tranquilo perto da UFES ,supermercado do lado de casa, vizinhos tranquilos e silencio total..",
+        "descriDetal":"Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60",
+        "nota": "10.0",
+        "valor":240,
+        "tipo":"republica",
+        "quartos": 4,
+        "vagasTotais": 1,
+        "imagem":"https://inonni.com.br/media/catalog/product/cache/1/image/500x500/9df78eab33525d08d6e5fb8d27136e95/2/2/2222_1.jpg"
+    },
+    {
+        "key": "5",
+        "title":"Zé comeia",
+        "descri": "Ambiente tranquilo perto da UFES ,supermercado do lado de casa, vizinhos tranquilos e silencio total..",
+        "nota": "2.4",
+        "valor":240,
+        "tipo":"republica",
+        "quartos": 4,
+        "vagasTotais": 1,
+        "imagem":"http://www.nelsonkon.com.br/wp-content/uploads/2018/12/grupo_sp_casa_no_morro_do_querosene_xIMG_3303_04a.jpg"
+    },
+    {
+        "key": "6",
+        "title":"Fenda do Bikini",
+        "descri": "Ambiente tranquilo perto da UFES ,supermercado do lado de casa, vizinhos tranquilos e silencio total..",
+        "nota": "1.6",
+        "valor":240,
+        "tipo":"republica",
+        "quartos": 4,
+        "vagasTotais": 1,
+        "imagem":"http://dgarquitetos.com/wp-content/uploads/2018/11/DG-Casa-Preta-03-500x500.jpg"
+    },
+    {
+        "key": "7",
+        "title":"Lan House",
+        "descri": "Ambiente tranquilo perto da UFES ,supermercado do lado de casa, vizinhos tranquilos e silencio total..",
+        "nota": "5.0",
+        "valor":240,
+        "tipo":"republica",
+        "quartos": 4,
+        "vagasTotais": 1,
+        "imagem":"http://www.nelsonkon.com.br/wp-content/uploads/2019/05/grupo_sp_casa_em_itu_x7MG_3621_22.jpg"
+    },
+    {
+        "key": "8",
+        "title":"Republica Tcheka",
+        "descri": "Ambiente tranquilo perto da UFES ,supermercado do lado de casa, vizinhos tranquilos e silencio total..",
+        "nota": "10.0",
+        "valor":240,
+        "tipo":"republica",
+        "quartos": 4,
+        "vagasTotais": 1,
+        "imagem":"http://www.nelsonkon.com.br/wp-content/uploads/2019/01/reinach_mendonca_casa_rfc_x6MG_0801_07.jpg"
+    }
+]
