@@ -27,7 +27,7 @@ const Navegacao = createStackNavigator(
     Confirmacao: Confirmacao,
   },
   {
-    initialRouteName: 'Cadastro',
+    initialRouteName: 'TabsHeader',
   }
 
 );

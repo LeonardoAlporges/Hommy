@@ -40,7 +40,8 @@ const estilo = StyleSheet.create({
         height:30,
         marginTop:'4%',
         width:'100%', 
-        paddingLeft:'10%'
+        paddingLeft:'10%',
+        
     },
     caracteristicaTitle:{   
         fontFamily:'Roboto',
@@ -60,12 +61,13 @@ const estilo = StyleSheet.create({
         
     },
     V_caracteristicaItens:{
+        
         display:'flex',
         flexDirection:'row',
         justifyContent:'space-around',
         height:40,
         marginTop:'2%',
-        width:'80%', 
+        width:'85%', 
         marginLeft:'10%',
         marginRight:'10%',
     },
@@ -75,9 +77,10 @@ const estilo = StyleSheet.create({
         display:'flex',
         flexDirection:'row',
         height:40,
-        width:'40%',
+        width:'42%',
     },
     V_caracteristicaAcomodacao:{
+        
         display:'flex',
         flexDirection:'row',
         justifyContent:'space-between',
@@ -89,13 +92,14 @@ const estilo = StyleSheet.create({
     },
     txtlabel:{
         paddingLeft:20,
-        color:'#475047',
-        fontSize:18,
+        color:'#687368',
+        fontSize:16,
         fontFamily:'Roboto',
         fontWeight:'600',
     },
     icone:{
-        fontSize:26,
+        justifyContent:'flex-start',
+        fontSize:28,
         fontFamily:'Roboto',
         color:'#1DA1F2',
         marginRight:10,
@@ -106,11 +110,12 @@ const estilo = StyleSheet.create({
         justifyContent:"space-around",
         display:'flex',
         flexDirection:'row',
-        paddingLeft:'8%',
+        paddingLeft:'5%',
         height:70,
         width:'90%',
     },
     V_vagas:{
+        
         display:'flex',
         flexDirection:'row',
         height:40,
@@ -124,7 +129,7 @@ const estilo = StyleSheet.create({
         justifyContent:"flex-start",
         display:'flex',
         flexDirection:'row',
-        paddingLeft:'4%',
+        paddingLeft:'2%',
         height:40,
         width:'90%',
     },
@@ -139,14 +144,24 @@ const estilo = StyleSheet.create({
         height:300,
         width:300,
     },
+    V_botao:{
+        marginTop:'15%',
+        height:60,
+        alignItems:"center",
+        justifyContent:'center',
+        flexDirection:"row",
+        justifyContent:'space-around'
+    },  
     botao:{
-        backgroundColor:'#2E2E2E',
+        
+        backgroundColor:'rgba(29,161,242,1)',
         display:'flex',
         flexDirection:"row",
-        width:'100%', 
-        height:50,
+        borderRadius:20,
+        width:'40%', 
+        height:60,
         alignItems:"center",
-        justifyContent:'center'
+        justifyContent:'space-around'
     },
 
     

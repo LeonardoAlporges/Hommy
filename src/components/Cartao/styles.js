@@ -42,12 +42,12 @@ const Estilos = StyleSheet.create({
     color:'#586880'
   },
   V_desc:{
-    width:'100%',
+    width:'93%',
     height:'50%',
-    paddingTop:15,
-    justifyContent:'space-around',
+    padding:10,
+    justifyContent:'space-evenly',
     flexDirection:'row',
-    paddingRight:10
+    marginBottom:0
   },
   txtDesc:{
     marginHorizontal:5,
@@ -57,9 +57,11 @@ const Estilos = StyleSheet.create({
     fontWeight:'bold'
   },
   txtIcon:{
-    marginHorizontal:5,
+    padding:0,
+    marginHorizontal:2,
     fontSize:22,
     color:'#1982C3'
+    
   },  
   V_notasImg:{
     borderRadius:10,

@@ -11,7 +11,7 @@ import style from "./style";
 
 class Login extends Component {
   MudarTela = () => {
-    this.props.navigation.navigate('Cadastro')
+    this.props.navigation.navigate('TabsHeader')
   }
   render() {
     return (
@@ -93,7 +93,9 @@ class Login extends Component {
               </View>
               <View style={style.V_cadastrar}>
                 <TouchableOpacity><Text style={style.touchTx}>Esqueci minha senha!</Text></TouchableOpacity>
-                <TouchableOpacity><Text>Cadastre-se </Text></TouchableOpacity>
+                <TouchableOpacity  onPress={() => {
+            this.props.navigation.navigate("Cadastro");
+          }} ><Text>Cadastre-se </Text></TouchableOpacity>
               </View>
               <View style={style.V_botoes}>
                 <Button
@@ -103,6 +105,16 @@ class Login extends Component {
                   title="Leo"
                 >
                   <Icon style={{ fontSize: 25 }} name='ios-arrow-forward' />
+                </Button>
+                <Button
+                  style={style.botao_login}
+                  onPress={() => {
+                    this.props.navigation.navigate("Cadastro");
+                  }}
+                  disabled={!isValid}
+                  title="Leo"
+                >
+                  <Icon style={{ fontSize: 25 }} name='md-person-add' />
                 </Button>
               </View>
 

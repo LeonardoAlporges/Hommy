@@ -36,7 +36,6 @@ class Republica extends Component {
   return (
     
     <View>
-      {console.log(this.props.navigation)}
       <ScrollView style={estilosRepublica.card}>   
         <FlatList 
           style={estilosRepublica.flatList}

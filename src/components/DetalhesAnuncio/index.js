@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Image, StyleSheet, TouchableOpacity, Text } from 'react-native';
-import { Button, Card, CardItem, Body, Header, Icon } from 'native-base';
+import { View, ScrollView, Image, StyleSheet, TouchableOpacity, Text,Linking  } from 'react-native';
+import { Button, Card, CardItem, Body, Header } from 'native-base';
 import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
 import { selecionarItem } from '../../actions/DetalhesActions';
 import estilo from './style';
 import ViewPager from '@react-native-community/viewpager';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 class DetalhesAnuncio extends Component {
-
+    AbrirUrl = () => {
+        Linking.openUrl('https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849')
+    }
     render() {
         return (
             <ScrollView style={{ marginBottom: 55 }}>
@@ -44,12 +47,12 @@ class DetalhesAnuncio extends Component {
                 </View>
                 <View style={estilo.V_caracteristicaItens}>
                     <View style={estilo.item}>
-                        <Icon name="home" style={estilo.icone}></Icon>
+                        <Icon name="home-outline" style={estilo.icone}></Icon>
                         <Text style={estilo.txtlabel}>Apartamento</Text>
                     </View>
                     <View style={estilo.item}>
-                        <Icon name="ios-people" style={estilo.icone}></Icon>
-                        <Text style={estilo.txtlabel}>Masculina - 4</Text>
+                        <Icon name="gender-transgender" style={estilo.icone}></Icon>
+                        <Text style={estilo.txtlabel}>Masculina</Text>
                     </View> 
                 </View>
                 <View style={estilo.V_tipo}>
@@ -57,7 +60,7 @@ class DetalhesAnuncio extends Component {
                 </View>
                 <View style={estilo.V_caracteristicaAcomodacao}>
                     <View style={estilo.itemAcomodacao}>
-                        <Icon name="ios-easel" style={estilo.icone}></Icon>
+                        <Icon name="sofa" style={estilo.icone}></Icon>
                         <Text style={estilo.txtlabel}>3 Camas,1 Suite, 1 Televisao, Wifi, Banheiro, Sala, Cozinha, Area de serviço</Text>
                     </View>
                 </View>
@@ -66,26 +69,17 @@ class DetalhesAnuncio extends Component {
                 </View>
                 <View style={estilo.V_caracteristicaAcomodacao}>
                     <View style={estilo.itemAcomodacao}>
-                        <Icon name="md-list-box" style={estilo.icone}></Icon>
+                        <Icon name="television-classic" style={estilo.icone}></Icon>
                         <Text style={estilo.txtlabel}>Geladeira, Fogao, Maquina de Lavar, Varal, Microondas, Panelas</Text>
                     </View>
                 </View>
 
                 <View style={estilo.V_tipo}>
-                    <Text style={estilo.tipo}>Contato</Text>
-                </View>
-                <View style={estilo.V_vagas}>
-                    <View style={estilo.vagas}>
-                        <Icon name="md-call" style={estilo.icone}></Icon>
-                        <Text style={estilo.txtlabel}>(27) 99748-8849 Leonardo </Text>
-                    </View>
-                </View>
-                <View style={estilo.V_tipo}>
                     <Text style={estilo.tipo}>Disponibilidade</Text>
                 </View>
                 <View style={estilo.V_vagas}>
                     <View style={estilo.vagas}>
-                        <Icon name="md-person-add" style={estilo.icone}></Icon>
+                        <Icon name="account-group-outline" style={estilo.icone}></Icon>
                         <Text style={estilo.txtlabel}>4 Vagas</Text>
                     </View>
                 </View>
@@ -94,17 +88,21 @@ class DetalhesAnuncio extends Component {
                 </View>
                 <View style={estilo.V_vagas}>
                     <View style={estilo.vagas}>
-                        <Icon name="ios-pin" style={estilo.icone}></Icon>
+                        <Icon name="map-marker-outline" style={estilo.icone}></Icon>
                         <Text style={estilo.txtlabel}>R. Anísio Fernandes Coelho, Alegre, ES</Text>
                     </View>
                 </View>
-                <View style={estilo.V_mapa}>
-                    <Image style={estilo.imageMapa} source={{uri : 'https://firebasestorage.googleapis.com/v0/b/republicas.appspot.com/o/Imagens%2Fmapa.jpeg?alt=media&token=d0ca424e-74af-4b42-9b0e-a9a2cac2fa49'}}/>
+                <View style={estilo.V_botao}>  
+                    <Button style={estilo.botao} onPress={() => { Linking.openURL('https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849') }}>
+                        <Icon name="whatsapp" style={{color: "#ffffff",fontSize:30}}></Icon>
+                        <Text style={{color: "#FFFFFF",paddingRight:15}} >ZipZop</Text>
+                    </Button>
+                    <Button style={estilo.botao} onPress={() => {Linking.openURL(`tel:${+5527997488849}`) }}>
+                        <Icon name="phone-outline" style={{color: "#ffffff",fontSize:30,marginRight:5}}></Icon>
+                        <Text style={{color: "#FFFFFF",paddingRight:15 }} >Contatinho</Text>
+                    </Button>
                 </View>
-                <Button style={estilo.botao} onPress={() => {alert('Em breve aqui voce sera redirecionado para a tela de discagem de seu celular :)')}}>
-                    <Icon name="ios-call" style={{color: "rgba(29,161,242,1)"}}></Icon>
-                    <Text style={{color: "rgba(29,161,242,1)"}} >Entrar em Contato</Text>
-                </Button>
+                
                 
             </ScrollView>
 

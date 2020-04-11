@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Image, Text, TouchableHighlight,StyleSheet} from 'react-native';
-import { Card, CardItem, Left, Body, Right, Button, Item, View, Icon } from 'native-base';
+import { Card, CardItem, Left, Body, Right, Button, Item, View } from 'native-base';
 
 import { withNavigation } from 'react-navigation';
 import { selecionarItem } from '../../actions/DetalhesActions';
@@ -11,6 +11,7 @@ import {
   editMovelQuarto, editMovelComun, editValorConta, editObservacao, editImg, editGenero,
   editNumVagas, editRepresentante, editRedeSocial, editRua, editNumero
 } from '../../actions/AuthActions';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import Estilos from './styles';
 
@@ -62,17 +63,17 @@ class Cartao extends Component {
           <View style={Estilos.V_titulo}>
             <Text style={Estilos.txtTitulo}>{this.props.leonardo.titulo}</Text>
           </View>
-          <View  style={{paddingTop:10,width:'90%'}}>
+          <View  style={{paddingTop:10,width:'90%',height:45,maxHeight:45}}>
             <Text>{this.props.leonardo.desc}</Text>
           </View>
           <View style={Estilos.V_desc}>
             
-            <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-              <Icon style={Estilos.txtIcon} name="md-cash"></Icon>
+            <View style={{flexDirection:'row',width:'50%'}}>
+              <Icon style={Estilos.txtIcon} name="currency-usd"></Icon>
               <Text style={Estilos.txtDesc}>150,00</Text>
             </View>
-            <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-              <Icon style={Estilos.txtIcon} name="md-people"></Icon>
+            <View style={{flexDirection:'row',width:'50%'}}>
+              <Icon style={Estilos.txtIcon} name="account-group-outline"></Icon>
               <Text style={Estilos.txtDesc}>{this.props.leonardo.pessoas} Vagas</Text>
             </View> 
             

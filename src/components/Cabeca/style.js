@@ -18,11 +18,11 @@ const Estilos = StyleSheet.create({
     txt:{
       fontFamily: "Roboto Bold",
       fontSize:25,
-      color: "#1DA1F2",
+      color: "#006fa9",
       
     },
     icon2: {
-      color: "#1DA1F2",
+      color: "#009ddb",
       fontSize: 35
     },
 

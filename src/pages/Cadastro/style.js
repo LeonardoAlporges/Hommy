@@ -8,7 +8,7 @@ const estilo = StyleSheet.create({
         height:55,
         backgroundColor:'#f8f8f8',
         borderBottomWidth:2,
-        borderBottomColor:'#50cb8b',
+        borderBottomColor:'#68c0e8',
         alignItems:'center',
         justifyContent:'flex-start'
     },
@@ -17,7 +17,7 @@ const estilo = StyleSheet.create({
     },  
     iconHeader:{
         fontSize:26,
-        color:'#00995d',
+        color:'#009ddb',
         marginHorizontal:'5%'
     },
     txtLabel:{
@@ -25,13 +25,13 @@ const estilo = StyleSheet.create({
         fontFamily:'Roboto',
         fontSize:16,
         fontWeight:'bold',
-        color:'#687368'
+        color:'#586880'
     }, 
     title:{
         fontSize:24,
         fontFamily:'Roboto',
         fontWeight:'bold',
-        color:'#006a33'
+        color:'#006fa9'
     },
     V_Conteudo:{
         height:'100%',
@@ -77,17 +77,17 @@ const estilo = StyleSheet.create({
         alignItems:'center',
         width:'80%',
         height:50,
-        backgroundColor:'#00995d',
+        backgroundColor:'#009ddb',
     },
     iconeBtn:{
         margin:0,
-        color:'#50cb8b'
+        color:'#68c0e8'
     },
     botaoEnv:{
         justifyContent:'center',
         alignItems:'center',  
-        backgroundColor:'#1DA1F2',
-        color:'#1DA1F2',
+        backgroundColor:'#009ddb',
+        color:'#009ddb',
     },
 
 
