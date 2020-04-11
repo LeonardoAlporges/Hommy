@@ -1,22 +1,23 @@
 const initialState = {
-    titulo:'Republica lan house',
+    nomeRepublica:'Republica lan house',
     valor:'270,00',
-    tipoImovel:'Casa or Ap*',
-    genero:'',
-    numVagas:'',
-    representante:'',
-    redeSocial:'',
+    genero:'Maculina',
+    numVagas:'3',
+    representante:'Leonardo Alporges',
     bairro:'Centro',
-    rua:'',
-    numero:'',
-    pessoas:'4',
-    desc:'Ambiente Tranquilo',
+    rua:'Rua Jose Almeida',
+    numeroCasa:'32',
+    pessoas:'1',
+    descricao:'Ambiente Tranquilo',
     animal:'Nao',
-    movelQuarto:'Cama,Ventilador,pscina',
-    moveisComun:'Fogao,Sofa ,Geladeira',
+    acomodacaoQuarto:'Cama,Ventilador,pscina',
+    acomodacaoRepublica:'Fogao,Sofa ,Geladeira',
     valorContas:'80,00R$',
-    observacao:'teste',
-    imagem:''
+    observacao:'Sem Observaçoes',
+    imagem1:'',
+    imagem2:'',
+    imagem3:'',
+
 }
 
 const AuthReducer = (state = [], action) => {
@@ -24,12 +25,12 @@ const AuthReducer = (state = [], action) => {
         return initialState;
     }
     //Recebe a acion do parametro e verifica se é a mesma
-    if(action.type == 'editTitulo'){
-        return {...state,titulo:action.payload.titulo};
+    if(action.type == 'editNomeRepublica'){
+        return {...state,nomeRepublica:action.payload.nomeRepublica};
                 // . . .State pega as informaçoes do state e substitui por aquilo que esta depois da virgula
     }
-    if(action.type == 'editValor'){
-        return {...state, valor:action.payload.valor};
+    if(action.type == 'editValorAluguel'){
+        return {...state, valorAluguel:action.payload.valorAluguel};
     }
     if(action.type == 'editBairro'){
         return {...state, bairro:action.payload.bairro};
@@ -37,17 +38,17 @@ const AuthReducer = (state = [], action) => {
     if(action.type == 'editPessoas'){
         return {...state, pessoas:action.payload.pessoas};
     }
-    if(action.type == 'editDesc'){
-        return {...state, desc:action.payload.desc};
+    if(action.type == 'editDescricao'){
+        return {...state, descricao:action.payload.descricao};
     }
     if(action.type == 'editAnimal'){
         return {...state, animal:action.payload.animal};
     }
-    if(action.type == 'editMovelQuarto'){
-        return {...state, movelQuarto:action.payload.movelQuarto};
+    if(action.type == 'editAcomodacaoQuarto'){
+        return {...state, acomodacaoQuarto:action.payload.acomodacaoQuarto};
     }
-    if(action.type == 'editMovelComun'){
-        return {...state, moveisComun:action.payload.moveisComun};
+    if(action.type == 'editAcomodacaoRepublica'){
+        return {...state, acomodacaoRepublica:action.payload.acomodacaoRepublica};
     }
     if(action.type == 'editValorConta'){
         return {...state, valorContas:action.payload.valorContas};
@@ -55,8 +56,14 @@ const AuthReducer = (state = [], action) => {
     if(action.type == 'editObservacao'){
         return {...state, observacao:action.payload.observacao};
     }
-    if(action.type == 'editImg'){
-        return {...state, imagem:action.payload.imagem};
+    if(action.type == 'editImg1'){
+        return {...state, imagem1:action.payload.imagem1};
+    }
+    if(action.type == 'editImg2'){
+        return {...state, imagem2:action.payload.imagem2};
+    }
+    if(action.type == 'editImg3'){
+        return {...state, imagem3:action.payload.imagem3};
     }
     if(action.type == 'editGenero'){
         return {...state, genero:action.payload.genero};
@@ -67,14 +74,11 @@ const AuthReducer = (state = [], action) => {
     if(action.type == 'editRepresentante'){
         return {...state, representante:action.payload.representante};
     }
-    if(action.type == 'editRedeSocial'){
-        return {...state, redeSocial:action.payload.redeSocial};
-    }
     if(action.type == 'editRua'){
         return {...state, rua:action.payload.rua};
     }
     if(action.type == 'editNumero'){
-        return {...state, numero:action.payload.numero};
+        return {...state, numeroCasa:action.payload.numeroCasa};
     }
     
     return state;

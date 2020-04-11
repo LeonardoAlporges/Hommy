@@ -1,170 +1,162 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const estilo = StyleSheet.create({
-    image:{
-        height:300,
-        width:420,
-    },
-    V_titulo:{
-        height:20,
-        marginTop:'3%',
-        width:'100%',
-        paddingLeft:'6%',
-    },  
-    titulo:{
-        color:'#586880',
-        fontFamily:'Roboto-bold',
-        fontSize:28,
-        fontWeight:'bold',
-    },
-    V_descricao:{
-        height:60,
-        marginTop:'4%',
-        width:'88%', 
-        marginLeft:'6%',
-        marginRight:'6%',   
-    },
-    descricao:{
-        color:'#586880',
-        fontFamily:'Roboto',
-        fontSize:18, 
-    },
-    barra:{
-        width:'88%',
-        marginLeft:'6%',
-        marginRight:'6%',
-        borderBottomWidth:1,
-        borderBottomColor:'#adadad'
-    },
-    V_caracteristicaTitle:{
-        height:30,
-        marginTop:'4%',
-        width:'100%', 
-        paddingLeft:'10%',
-        
-    },
-    caracteristicaTitle:{   
-        fontFamily:'Roboto',
-        fontSize:22, 
-        fontWeight:'600',
-        color:'#586880',
-    },
-    V_tipo:{
-        height:30,
-        marginTop:'2%',
-        width:'100%', 
-        paddingLeft:'10%'
-    },
-    tipo:{
-        fontFamily:'Roboto',
-        fontSize:20, 
-        
-    },
-    V_caracteristicaItens:{
-        
-        display:'flex',
-        flexDirection:'row',
-        justifyContent:'space-around',
-        height:40,
-        marginTop:'2%',
-        width:'85%', 
-        marginLeft:'10%',
-        marginRight:'10%',
-    },
-    item:{
-        alignItems:'center',
-        justifyContent:"space-around",
-        display:'flex',
-        flexDirection:'row',
-        height:40,
-        width:'42%',
-    },
-    V_caracteristicaAcomodacao:{
-        
-        display:'flex',
-        flexDirection:'row',
-        justifyContent:'space-between',
-        height:70,
-        marginTop:'1%',
-        width:'85%', 
-        marginLeft:'10%',
-        marginRight:'10%',
-    },
-    txtlabel:{
-        paddingLeft:20,
-        color:'#687368',
-        fontSize:16,
-        fontFamily:'Roboto',
-        fontWeight:'600',
-    },
-    icone:{
-        justifyContent:'flex-start',
-        fontSize:28,
-        fontFamily:'Roboto',
-        color:'#1DA1F2',
-        marginRight:10,
-        fontWeight:'600',
-    },
-    itemAcomodacao:{
-        alignItems:'center',
-        justifyContent:"space-around",
-        display:'flex',
-        flexDirection:'row',
-        paddingLeft:'5%',
-        height:70,
-        width:'90%',
-    },
-    V_vagas:{
-        
-        display:'flex',
-        flexDirection:'row',
-        height:40,
-        marginTop:'1%',
-        width:'85%', 
-        marginLeft:'10%',
-        marginRight:'10%',
-    },
-    vagas:{
-        alignItems:'center',
-        justifyContent:"flex-start",
-        display:'flex',
-        flexDirection:'row',
-        paddingLeft:'2%',
-        height:40,
-        width:'90%',
-    },
-    V_mapa:{
-        display:'flex',
-        width:'100%',
-        height:320, 
-        justifyContent:'center',
-        alignItems:'center',
-    },
-    imageMapa:{
-        height:300,
-        width:300,
-    },
-    V_botao:{
-        marginTop:'15%',
-        height:60,
-        alignItems:"center",
-        justifyContent:'center',
-        flexDirection:"row",
-        justifyContent:'space-around'
-    },  
-    botao:{
-        
-        backgroundColor:'rgba(29,161,242,1)',
-        display:'flex',
-        flexDirection:"row",
-        borderRadius:20,
-        width:'40%', 
-        height:60,
-        alignItems:"center",
-        justifyContent:'space-around'
-    },
-
-    
-  });
+  image: {
+    height: 300,
+    width: 420,
+  },
+  V_titulo: {
+    height: 20,
+    marginTop: '3%',
+    width: '100%',
+    paddingLeft: '6%',
+  },
+  titulo: {
+    color: '#586880',
+    fontFamily: 'Roboto-bold',
+    fontSize: 28,
+    fontWeight: 'bold',
+  },
+  V_descricao: {
+    height: 60,
+    marginTop: '4%',
+    width: '88%',
+    marginLeft: '6%',
+    marginRight: '6%',
+  },
+  descricao: {
+    color: '#586880',
+    fontFamily: 'Roboto',
+    fontSize: 18,
+  },
+  barra: {
+    width: '88%',
+    marginLeft: '6%',
+    marginRight: '6%',
+    borderBottomWidth: 1,
+    borderBottomColor: '#adadad',
+  },
+  V_caracteristicaTitle: {
+    height: 30,
+    marginTop: '4%',
+    width: '100%',
+    paddingLeft: '10%',
+  },
+  caracteristicaTitle: {
+    fontFamily: 'Roboto',
+    fontSize: 22,
+    fontWeight: '600',
+    color: '#586880',
+  },
+  V_tipo: {
+    height: 30,
+    marginTop: '2%',
+    width: '100%',
+    paddingLeft: '10%',
+  },
+  tipo: {
+    fontFamily: 'Roboto',
+    fontSize: 20,
+  },
+  V_caracteristicaItens: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    height: 40,
+    marginTop: '2%',
+    width: '85%',
+    marginLeft: '10%',
+    marginRight: '10%',
+  },
+  item: {
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    display: 'flex',
+    flexDirection: 'row',
+    height: 40,
+    width: '42%',
+  },
+  V_caracteristicaAcomodacao: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    height: 70,
+    marginTop: '1%',
+    width: '85%',
+    marginLeft: '10%',
+    marginRight: '10%',
+  },
+  txtlabel: {
+    paddingLeft: 20,
+    color: '#687368',
+    fontSize: 16,
+    fontFamily: 'Roboto',
+    fontWeight: '600',
+  },
+  icone: {
+    justifyContent: 'flex-start',
+    fontSize: 28,
+    fontFamily: 'Roboto',
+    color: '#1DA1F2',
+    marginRight: 10,
+    fontWeight: '600',
+  },
+  itemAcomodacao: {
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    display: 'flex',
+    flexDirection: 'row',
+    paddingLeft: '5%',
+    height: 70,
+    width: '90%',
+  },
+  V_vagas: {
+    display: 'flex',
+    flexDirection: 'row',
+    height: 40,
+    marginTop: '1%',
+    width: '85%',
+    marginLeft: '10%',
+    marginRight: '10%',
+  },
+  vagas: {
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    display: 'flex',
+    flexDirection: 'row',
+    paddingLeft: '2%',
+    height: 40,
+    width: '90%',
+  },
+  V_mapa: {
+    display: 'flex',
+    width: '100%',
+    height: 320,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  imageMapa: {
+    height: 300,
+    width: 300,
+  },
+  V_botao: {
+    marginTop: '15%',
+    height: 60,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  botao: {
+    backgroundColor: 'rgba(29,161,242,1)',
+    display: 'flex',
+    flexDirection: 'row',
+    borderRadius: 20,
+    width: '40%',
+    height: 60,
+    alignItems: 'center',
+    justifyContent: 'space-around',
+  },
+});
 
 export default estilo;

@@ -1,17 +1,17 @@
-export const editTitulo = (newTitulo) => {
+export const editNomeRepublica = (newNomeRepublica) => {
     return{
-        type:'editTitulo',//nome da açao
+        type:'editNomeRepublica',//nome da açao
         payload:{//Aqui é as informaçoes que vc ta enviando no caso aqui é so email
-            titulo:newTitulo
+            nomeRepublica:newNomeRepublica
         }
     };
 };
 
-export const editValor = ( newValor ) =>{
+export const editValor = ( newValorAluguel ) =>{
     return{
-        type:'editValor',//nome da açao
+        type:'editValorAluguel',//nome da açao
         payload:{//Aqui é as informaçoes que vc ta enviando no caso aqui é so email
-            valor:newValor
+            valorAluguel:newValorAluguel
         }
     }
 };
@@ -32,11 +32,11 @@ export const editPessoas = ( newPessoas ) =>{
         }
     }
 };
-export const editDesc = ( newDesc ) =>{
+export const editDescricao = ( newDescricao ) =>{
     return{
-        type:'editDesc',//nome da açao
+        type:'editDescricao',//nome da açao
         payload:{//Aqui é as informaçoes que vc ta enviando no caso aqui é so email
-            desc:newDesc
+            descricao:newDescricao
         }
     }
 };
@@ -48,19 +48,19 @@ export const editAnimal = ( newAnimal ) =>{
         }
     }
 };
-export const editMovelQuarto = ( newMovelQ ) =>{
+export const editAcomodacaoQuarto = ( newAcomodacaoQuarto ) =>{
     return{
-        type:'editMovelQuarto',//nome da açao
+        type:'editAcomodacaoQuarto',//nome da açao
         payload:{//Aqui é as informaçoes que vc ta enviando no caso aqui é so email
-            movelQuarto:newMovelQ
+            acomodacaoQuarto:newAcomodacaoQuarto
         }
     }
 };
-export const editMovelComun = ( newMovelC ) =>{
+export const editAcomodacaoRepublica = ( newAcomodacaoRepublica) =>{
     return{
-        type:'editMovelComun',//nome da açao
+        type:'editAcomodacaoRepublica',//nome da açao
         payload:{//Aqui é as informaçoes que vc ta enviando no caso aqui é so email
-            moveisComun:newMovelC
+            acomodacaoRepublica:newAcomodacaoRepublica
         }
     }
 };
@@ -91,11 +91,27 @@ export const selecionarItem = ( item,b ) => {
         }
     }
 };
-export const editImg = ( newImg ) =>{
+export const editImg1 = ( newImg1 ) =>{
     return{
-        type:'editImg',//nome da açao
+        type:'editImg1',//nome da açao
         payload:{//Aqui é as informaçoes que vc ta enviando no caso aqui é so email
-            imagem:newImg
+            imagem1:newImg1
+        }
+    }
+};
+export const editImg2 = ( newImg2 ) =>{
+    return{
+        type:'editImg2',//nome da açao
+        payload:{//Aqui é as informaçoes que vc ta enviando no caso aqui é so email
+            imagem2:newImg2
+        }
+    }
+};
+export const editImg3 = ( newImg3 ) =>{
+    return{
+        type:'editImg3',//nome da açao
+        payload:{//Aqui é as informaçoes que vc ta enviando no caso aqui é so email
+            imagem3:newImg3
         }
     }
 };
@@ -127,14 +143,7 @@ export const editRepresentante = ( newRepresentante ) =>{
         }
     }
 };
-export const editRedeSocial = ( newRede ) =>{
-    return{
-        type:'editRedeSocial',//nome da açao
-        payload:{//Aqui é as informaçoes que vc ta enviando no caso aqui é so email
-            redeSocial:newRede
-        }
-    }
-};
+
 export const editRua = ( newRua ) =>{
     return{
         type:'editRua',//nome da açao
@@ -144,11 +153,11 @@ export const editRua = ( newRua ) =>{
     }
 };
 
-export const editNumero = ( newNumhouse ) =>{
+export const editNumeroCasa = ( newNumhouse ) =>{
     return{
-        type:'editNumero',//nome da açao
+        type:'editNumeroCasa',//nome da açao
         payload:{//Aqui é as informaçoes que vc ta enviando no caso aqui é so email
-            numero:newNumhouse
+            numeroCasa:newNumhouse
         }
     }
 };
