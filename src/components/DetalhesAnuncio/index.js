@@ -27,23 +27,23 @@ class DetalhesAnuncio extends Component {
       <ScrollView style={{ marginBottom: 55 }}>
         <ViewPager style={estilo.image} showPageIndicator="true">
           <View key="1" showPageIndicator={true}>
-            <Image source={{ uri: this.props.image }} style={estilo.image} />
+            <Image source={{ uri: this.props.imagem1 }} style={estilo.image} />
           </View>
 
           <View key="2" showPageIndicator={true}>
-            <Image source={{ uri: this.props.image }} style={estilo.image} />
+            <Image source={{ uri: this.props.imagem2 }} style={estilo.image} />
           </View>
           <View key="4" showPageIndicator={true}>
-            <Image source={{ uri: this.props.image }} style={estilo.image} />
+            <Image source={{ uri: this.props.imagem3 }} style={estilo.image} />
           </View>
         </ViewPager>
 
         <View style={estilo.V_titulo}>
-          <Text style={estilo.titulo}>{this.props.titulo}</Text>
+          <Text style={estilo.titulo}>{this.props.nomeRepublica}</Text>
         </View>
 
         <View style={estilo.V_descricao}>
-          <Text style={estilo.descricao}>{this.props.desc}</Text>
+          <Text style={estilo.descricao}>{this.props.descricao}</Text>
         </View>
         <View style={estilo.barra} />
 
@@ -60,7 +60,7 @@ class DetalhesAnuncio extends Component {
           </View>
           <View style={estilo.item}>
             <Icon name="gender-transgender" style={estilo.icone} />
-            <Text style={estilo.txtlabel}>Masculina</Text>
+            <Text style={estilo.txtlabel}>{this.props.genero}</Text>
           </View>
         </View>
         <View style={estilo.V_tipo}>
@@ -69,10 +69,7 @@ class DetalhesAnuncio extends Component {
         <View style={estilo.V_caracteristicaAcomodacao}>
           <View style={estilo.itemAcomodacao}>
             <Icon name="sofa" style={estilo.icone} />
-            <Text style={estilo.txtlabel}>
-              3 Camas,1 Suite, 1 Televisao, Wifi, Banheiro, Sala, Cozinha, Area
-              de serviço
-            </Text>
+            <Text style={estilo.txtlabel}>{this.props.acomodacaoQuarto}</Text>
           </View>
         </View>
         <View style={estilo.V_tipo}>
@@ -82,7 +79,7 @@ class DetalhesAnuncio extends Component {
           <View style={estilo.itemAcomodacao}>
             <Icon name="television-classic" style={estilo.icone} />
             <Text style={estilo.txtlabel}>
-              Geladeira, Fogao, Maquina de Lavar, Varal, Microondas, Panelas
+              {this.props.acomodacaoRepublica}
             </Text>
           </View>
         </View>
@@ -93,7 +90,7 @@ class DetalhesAnuncio extends Component {
         <View style={estilo.V_vagas}>
           <View style={estilo.vagas}>
             <Icon name="account-group-outline" style={estilo.icone} />
-            <Text style={estilo.txtlabel}>4 Vagas</Text>
+            <Text style={estilo.txtlabel}>{this.props.numVagas} Vagas</Text>
           </View>
         </View>
         <View style={estilo.V_tipo}>
@@ -103,8 +100,36 @@ class DetalhesAnuncio extends Component {
           <View style={estilo.vagas}>
             <Icon name="map-marker-outline" style={estilo.icone} />
             <Text style={estilo.txtlabel}>
-              R. Anísio Fernandes Coelho, Alegre, ES
+              {this.props.rua},{this.props.bairro}, Nº
+              {this.props.numeroCasa}
             </Text>
+          </View>
+        </View>
+        <View style={estilo.V_tipo}>
+          <Text style={estilo.tipo}>Representante</Text>
+        </View>
+        <View style={estilo.V_vagas}>
+          <View style={estilo.vagas}>
+            <Icon name="account-badge-outline" style={estilo.icone} />
+            <Text style={estilo.txtlabel}>{this.props.representante}</Text>
+          </View>
+        </View>
+        <View style={estilo.V_tipo}>
+          <Text style={estilo.tipo}>Valor médio das contas</Text>
+        </View>
+        <View style={estilo.V_vagas}>
+          <View style={estilo.vagas}>
+            <Icon name="cart-outline" style={estilo.icone} />
+            <Text style={estilo.txtlabel}>{this.props.valorContas}</Text>
+          </View>
+        </View>
+        <View style={estilo.V_tipo}>
+          <Text style={estilo.tipo}>Valor Aluguel</Text>
+        </View>
+        <View style={estilo.V_vagas}>
+          <View style={estilo.vagas}>
+            <Icon name="cash" style={estilo.icone} />
+            <Text style={estilo.txtlabel}>{this.props.valor}</Text>
           </View>
         </View>
         <View style={estilo.V_botao}>
@@ -141,17 +166,25 @@ class DetalhesAnuncio extends Component {
 
 const mapsStateToProps = state => {
   return {
-    titulo: state.auth.titulo,
-    valor: state.auth.valor,
+    nomeRepublica: state.auth.nomeRepublica,
+    genero: state.auth.genero,
+    valor: state.auth.valorAluguel,
+    valorContas: state.auth.valorContas,
+    rua: state.auth.rua,
+    numeroCasa: state.auth.numeroCasa,
+    representante: state.auth.representante,
     bairro: state.auth.bairro,
-    pessoas: state.auth.pessoas,
-    desc: state.auth.desc,
+    pessoas: state.auth.pessoas1,
+    descricao: state.auth.descricao,
     animal: state.auth.animal,
-    movelQuarto: state.auth.movelQuarto,
-    moveisComun: state.auth.moveisComun,
+    acomodacaoQuarto: state.auth.acomodacaoQuarto,
+    acomodacaoRepublica: state.auth.acomodacaoRepublica,
     valorContas: state.auth.valorContas,
     observacao: state.auth.observacao,
-    imagem: state.auth.imagem,
+    imagem1: state.auth.imagem1,
+    imagem2: state.auth.imagem2,
+    imagem3: state.auth.imagem3,
+    numVagas: state.auth.numVagas,
   };
 };
 

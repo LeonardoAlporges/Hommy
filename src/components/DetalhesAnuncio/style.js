@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 const estilo = StyleSheet.create({
   image: {
     height: 300,
-    width: 420,
+    width: '100%',
   },
   V_titulo: {
     height: 20,
@@ -76,16 +76,7 @@ const estilo = StyleSheet.create({
     height: 40,
     width: '42%',
   },
-  V_caracteristicaAcomodacao: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    height: 70,
-    marginTop: '1%',
-    width: '85%',
-    marginLeft: '10%',
-    marginRight: '10%',
-  },
+
   txtlabel: {
     paddingLeft: 20,
     color: '#687368',
@@ -103,12 +94,21 @@ const estilo = StyleSheet.create({
   },
   itemAcomodacao: {
     alignItems: 'center',
-    justifyContent: 'space-around',
+    justifyContent: 'flex-start',
     display: 'flex',
     flexDirection: 'row',
     paddingLeft: '5%',
-    height: 70,
+    height: 40,
     width: '90%',
+  },
+  V_caracteristicaAcomodacao: {
+    display: 'flex',
+    flexDirection: 'row',
+    height: 40,
+    marginTop: '1%',
+    width: '85%',
+    marginLeft: '10%',
+    marginRight: '10%',
   },
   V_vagas: {
     display: 'flex',
@@ -124,7 +124,7 @@ const estilo = StyleSheet.create({
     justifyContent: 'flex-start',
     display: 'flex',
     flexDirection: 'row',
-    paddingLeft: '2%',
+    paddingLeft: '5%',
     height: 40,
     width: '90%',
   },

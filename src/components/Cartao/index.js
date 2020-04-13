@@ -9,8 +9,8 @@ import {
   editPessoas,
   editDescricao,
   editAnimal,
-  editAcomodacoesQuarto,
-  editAcomodacoesRepublica,
+  editAcomodacaoQuarto,
+  editAcomodacaoRepublica,
   editValorConta,
   editObservacao,
   editImg1,
@@ -34,24 +34,26 @@ class Cartao extends Component {
 
   onClickCard = () => {
     const dados = this.props.leonardo;
+
     console.log(this.props.leonardo);
-    /*this.props.editNomeRepublica(this.props.leonardo.nomeRepublica);
-    this.props.editValor(this.props.leonardo.valor)
-    this.props.editBairro(this.props.leonardo.bairro)
-    this.props.editRua(this.props.leonardo.rua)
-    this.props.editNumeroCasa(this.props.leonardo.numeroCasa)
-    this.props.editPessoas(this.props.leonardo.pessoas)
-    this.props.editAnimal(this.props.leonardo.animal)
-    this.props.editDescricao(this.props.leonardo.descricao)
-    this.props.editAcomodacaoQuarto(this.props.leonardo.acomodacaoQuarto)
-    this.props.editAcomodacaoRepublica(this.props.leonardo.acomodacaoRepublica)
-    this.props.editObservacao(this.props.leonardo.observacao)
-    this.props.editGenero(this.props.leonardo.genero)
-    this.props.editNumVagas(this.props.leonardo.numVagas)
-    this.props.editRepresentante(this.props.leonardo.representante)
-    this.props.editImg1(this.props.leonardo.imagem1)
-    this.props.editImg2(this.props.leonardo.imagem2)
-    this.props.editImg3(this.props.leonardo.imagem3)*/
+    this.props.editNomeRepublica(this.props.leonardo.nomeRepublica);
+    this.props.editValor(this.props.leonardo.valorAluguel);
+    this.props.editBairro(this.props.leonardo.bairro);
+    this.props.editRua(this.props.leonardo.rua);
+    this.props.editNumeroCasa(this.props.leonardo.numeroCasa);
+    this.props.editPessoas(this.props.leonardo.pessoas);
+    this.props.editAnimal(this.props.leonardo.animal);
+    this.props.editDescricao(this.props.leonardo.descricao);
+    this.props.editAcomodacaoQuarto(this.props.leonardo.acamodacaoQuarto);
+    this.props.editAcomodacaoRepublica(this.props.leonardo.acomodacaoRepublica);
+    this.props.editObservacao(this.props.leonardo.observacao);
+    this.props.editGenero(this.props.leonardo.genero);
+    this.props.editNumVagas(this.props.leonardo.numVagas);
+    this.props.editRepresentante(this.props.leonardo.representante);
+    this.props.editImg1(this.props.leonardo.imagem1);
+    this.props.editImg2(this.props.leonardo.imagem2);
+    this.props.editImg3(this.props.leonardo.imagem3);
+    console.log('leo', this.props.leonardo.valorAluguel);
     this.props.navigation.navigate('Detalhes');
   };
 
@@ -65,7 +67,7 @@ class Cartao extends Component {
         <View style={Estilos.V_cartao}>
           <View style={Estilos.V_imagem}>
             <Image
-              source={{ uri: this.props.leonardo.imagem }}
+              source={{ uri: this.props.leonardo.imagem1 }}
               style={Estilos.V_imagem}
             />
           </View>
@@ -83,12 +85,16 @@ class Cartao extends Component {
                 maxHeight: 45,
               }}
             >
-              <Text>{this.props.leonardo.descricao}</Text>
+              <Text numberOfLines={2}>{this.props.leonardo.descricao}</Text>
             </View>
             <View style={Estilos.V_desc}>
-              <View style={{ flexDirection: 'row', width: '50%' }}>
+              <View
+                style={{ flexDirection: 'row', width: '50%', marginRight: 10 }}
+              >
                 <Icon style={Estilos.txtIcon} name="currency-usd" />
-                <Text style={Estilos.txtDesc}>{this.props.leonardo.valor}</Text>
+                <Text style={Estilos.txtDesc}>
+                  {this.props.leonardo.valorAluguel}
+                </Text>
               </View>
               <View style={{ flexDirection: 'row', width: '50%' }}>
                 <Icon style={Estilos.txtIcon} name="account-group-outline" />
@@ -108,7 +114,7 @@ const mapStateToProps = state => {
   return {
     //para pegar do reducer e State."NOME DO REDUCER"."NOME DA PROPIEDADE"
     nomeRepublica: state.auth.nomeRepublica,
-    valor: state.auth.valor,
+    valorAluguel: state.auth.valorAluguel,
     bairro: state.auth.bairro,
     pessoas: state.auth.pessoas1,
     descricao: state.auth.descricao,
@@ -134,8 +140,8 @@ const cardConnect = connect(
     editPessoas,
     editDescricao,
     editAnimal,
-    editAcomodacoesQuarto,
-    editAcomodacoesRepublica,
+    editAcomodacaoQuarto,
+    editAcomodacaoRepublica,
     editValorConta,
     editObservacao,
     editImg1,

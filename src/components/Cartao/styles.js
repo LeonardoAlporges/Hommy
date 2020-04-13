@@ -42,9 +42,9 @@ const Estilos = StyleSheet.create({
     color: '#586880',
   },
   V_desc: {
-    width: '93%',
+    width: '100%',
     height: '50%',
-    padding: 10,
+    paddingVertical: 10,
     justifyContent: 'space-evenly',
     flexDirection: 'row',
     marginBottom: 0,
