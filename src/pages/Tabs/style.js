@@ -24,12 +24,10 @@ const estilo = StyleSheet.create({
         
     },
     tabs_style:{
-        
         borderColor:"#000",
         elevation:0,
         borderTopWidth:0,
         backgroundColor:"#fff",
-        color:'#00bb6c',
         
     },
     empty:{

@@ -1,110 +1,158 @@
-import React, {Component} from 'react';
-import { Image, Text, TouchableHighlight,StyleSheet} from 'react-native';
-import { Card, CardItem, Left, Body, Right, Button, Item, View, Icon } from 'native-base';
-
+import React, { Component } from 'react';
+import { Image, Text, TouchableHighlight, View } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { selecionarItem } from '../../actions/DetalhesActions';
 import { connect } from 'react-redux';
-
 import {
-  editTitulo, editSenha, editValor, editBairro, editPessoas, editDesc, editAnimal,
-  editMovelQuarto, editMovelComun, editValorConta, editObservacao, editImg, editGenero,
-  editNumVagas, editRepresentante, editRedeSocial, editRua, editNumero
+  editNomeRepublica,
+  editValor,
+  editBairro,
+  editPessoas,
+  editDescricao,
+  editAnimal,
+  editAcomodacaoQuarto,
+  editAcomodacaoRepublica,
+  editValorConta,
+  editObservacao,
+  editImg1,
+  editImg2,
+  editImg3,
+  editGenero,
+  editNumVagas,
+  editRepresentante,
+  editRua,
+  editNumeroCasa,
 } from '../../actions/AuthActions';
 
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Estilos from './styles';
 
-class Cartao extends Component { 
+class Cartao extends Component {
   constructor(props) {
     super(props);
-    this.onClickCard = this.onClickCard.bind(this)
-    
+    this.onClickCard = this.onClickCard.bind(this);
+  }
 
-  }
-  UNSAFE_componentWillMount(){
-    
-  }
   onClickCard = () => {
-    const dados  = this.props.leonardo
-    console.log('ww',this.props.leonardo.titulo)
-    this.props.editTitulo(this.props.leonardo.titulo);
-    this.props.editValor(this.props.leonardo.valor)
-    this.props.editBairro(this.props.leonardo.bairro)
-    this.props.editRua(this.props.leonardo.rua)
-    this.props.editNumero(this.props.leonardo.numero)
-    this.props.editPessoas(this.props.leonardo.numero)
-    this.props.editAnimal(this.props.leonardo.numero)
-    this.props.editDesc(this.props.leonardo.desc)
-    this.props.editMovelQuarto(this.props.leonardo.moveisQuarto)
-    this.props.editMovelComun(this.props.leonardo.moveisComun)
-    this.props.editObservacao(this.props.leonardo.observacao)
-    this.props.editGenero(this.props.leonardo.numero)
-    this.props.editNumVagas(this.props.leonardo.numero)
-    this.props.editRepresentante(this.props.leonardo.representante)
-    this.props.editRedeSocial(this.props.leonardo.redeSocial)
-    this.props.editImg(this.props.leonardo.imagem)
+    const dados = this.props.leonardo;
 
+    console.log(this.props.leonardo);
+    this.props.editNomeRepublica(this.props.leonardo.nomeRepublica);
+    this.props.editValor(this.props.leonardo.valorAluguel);
+    this.props.editBairro(this.props.leonardo.bairro);
+    this.props.editRua(this.props.leonardo.rua);
+    this.props.editNumeroCasa(this.props.leonardo.numeroCasa);
+    this.props.editPessoas(this.props.leonardo.pessoas);
+    this.props.editAnimal(this.props.leonardo.animal);
+    this.props.editDescricao(this.props.leonardo.descricao);
+    this.props.editAcomodacaoQuarto(this.props.leonardo.acamodacaoQuarto);
+    this.props.editAcomodacaoRepublica(this.props.leonardo.acomodacaoRepublica);
+    this.props.editObservacao(this.props.leonardo.observacao);
+    this.props.editGenero(this.props.leonardo.genero);
+    this.props.editNumVagas(this.props.leonardo.numVagas);
+    this.props.editRepresentante(this.props.leonardo.representante);
+    this.props.editImg1(this.props.leonardo.imagem1);
+    this.props.editImg2(this.props.leonardo.imagem2);
+    this.props.editImg3(this.props.leonardo.imagem3);
+    console.log('leo', this.props.leonardo.valorAluguel);
+    this.props.navigation.navigate('Detalhes');
+  };
 
-    this.props.navigation.navigate('Detalhes')
-  }
-
-  render(){
+  render() {
     return (
-      
-      <TouchableHighlight underlayColor='#fff' onPress={this.onClickCard} style={Estilos.touch_card}>
-      <View style={Estilos.V_cartao}>
-        <View style={Estilos.V_imagem}>
-        <Image source={{ uri:this.props.leonardo.imagem }} style={Estilos.V_imagem} />
-        </View>
-
-
-        <View style={Estilos.V_TituloDesc}>
-          <View style={Estilos.V_titulo}>
-            <Text style={Estilos.txtTitulo}>{this.props.leonardo.titulo}</Text>
+      <TouchableHighlight
+        underlayColor="#fff"
+        onPress={this.onClickCard}
+        style={Estilos.touch_card}
+      >
+        <View style={Estilos.V_cartao}>
+          <View style={Estilos.V_imagem}>
+            <Image
+              source={{ uri: this.props.leonardo.imagem1 }}
+              style={Estilos.V_imagem}
+            />
           </View>
-          <View  style={{paddingTop:10,width:'90%'}}>
-            <Text>{this.props.leonardo.desc}</Text>
-          </View>
-          <View style={Estilos.V_desc}>
-            
-            <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-              <Icon style={Estilos.txtIcon} name="md-cash"></Icon>
-              <Text style={Estilos.txtDesc}>150,00</Text>
+          <View style={Estilos.V_TituloDesc}>
+            <View style={Estilos.V_titulo}>
+              <Text style={Estilos.txtTitulo}>
+                {this.props.leonardo.nomeRepublica}
+              </Text>
             </View>
-            <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-              <Icon style={Estilos.txtIcon} name="md-people"></Icon>
-              <Text style={Estilos.txtDesc}>{this.props.leonardo.pessoas} Vagas</Text>
-            </View> 
-            
+            <View
+              style={{
+                paddingTop: 10,
+                width: '90%',
+                height: 45,
+                maxHeight: 45,
+              }}
+            >
+              <Text numberOfLines={2}>{this.props.leonardo.descricao}</Text>
+            </View>
+            <View style={Estilos.V_desc}>
+              <View
+                style={{ flexDirection: 'row', width: '50%', marginRight: 10 }}
+              >
+                <Icon style={Estilos.txtIcon} name="currency-usd" />
+                <Text style={Estilos.txtDesc}>
+                  {this.props.leonardo.valorAluguel}
+                </Text>
+              </View>
+              <View style={{ flexDirection: 'row', width: '50%' }}>
+                <Icon style={Estilos.txtIcon} name="account-group-outline" />
+                <Text style={Estilos.txtDesc}>
+                  {this.props.leonardo.numVagas} Vagas
+                </Text>
+              </View>
+            </View>
           </View>
         </View>
-      </View>
-    </TouchableHighlight>
- 
-  );
-  }  
-};
+      </TouchableHighlight>
+    );
+  }
+}
 
 const mapStateToProps = state => {
   return {
-      
-      //para pegar do reducer e State."NOME DO REDUCER"."NOME DA PROPIEDADE"
-      titulo: state.auth.titulo,
-      valor: state.auth.valor,
-      bairro: state.auth.bairro,
-      pessoas: state.auth.pessoas1,
-      desc: state.auth.desc,
-      animal: state.auth.animal,
-      movelQuarto: state.auth.movelQuarto,
-      moveisComun: state.auth.moveisComun,
-      valorContas: state.auth.valorContas,
-      observacao: state.auth.observacao,
-      imagem: state.auth.imagem,
-      // Ou seja agora e como se tivessemos duas props dentro do compoennte cadastro
+    //para pegar do reducer e State."NOME DO REDUCER"."NOME DA PROPIEDADE"
+    nomeRepublica: state.auth.nomeRepublica,
+    valorAluguel: state.auth.valorAluguel,
+    bairro: state.auth.bairro,
+    pessoas: state.auth.pessoas1,
+    descricao: state.auth.descricao,
+    animal: state.auth.animal,
+    acomodacaoQuarto: state.auth.acomodacaoQuarto,
+    acomodacaoRepublica: state.auth.acomodacaoRepublica,
+    valorContas: state.auth.valorContas,
+    observacao: state.auth.observacao,
+    imagem1: state.auth.imagem1,
+    imagem2: state.auth.imagem2,
+    imagem3: state.auth.imagem3,
+    numVagas: state.auth.numVagas,
+    // Ou seja agora e como se tivessemos duas props dentro do compoennte cadastro
   };
 };
 
-
-const cardConnect = connect(mapStateToProps, { editTitulo, editSenha, editTitulo, editValor, editBairro, editPessoas, editDesc, editAnimal, editMovelQuarto, editMovelComun, editValorConta, editObservacao, editImg, editGenero, editNumVagas, editRepresentante, editRedeSocial, editRua, editNumero })(Cartao);
+const cardConnect = connect(
+  mapStateToProps,
+  {
+    editNomeRepublica,
+    editValor,
+    editBairro,
+    editPessoas,
+    editDescricao,
+    editAnimal,
+    editAcomodacaoQuarto,
+    editAcomodacaoRepublica,
+    editValorConta,
+    editObservacao,
+    editImg1,
+    editImg2,
+    editImg3,
+    editGenero,
+    editNumVagas,
+    editRepresentante,
+    editRua,
+    editNumeroCasa,
+  }
+)(Cartao);
 
 export default withNavigation(cardConnect);
