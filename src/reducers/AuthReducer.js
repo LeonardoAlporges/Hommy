@@ -23,6 +23,10 @@ const AuthReducer = (state = [], action) => {
   if (state.length == 0) {
     return initialState;
   }
+  if (action.type == 'editLogado') {
+    return { ...state, logado: action.payload.logado };
+    // . . .State pega as informaçoes do state e substitui por aquilo que esta depois da virgula
+  }
   //Recebe a acion do parametro e verifica se é a mesma
   if (action.type == 'editNomeRepublica') {
     return { ...state, nomeRepublica: action.payload.nomeRepublica };

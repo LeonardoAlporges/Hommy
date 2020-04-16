@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
-import {
-  View,
-  ScrollView,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  Linking,
-} from 'react-native';
+import { View, ScrollView, Image, Text, Linking } from 'react-native';
 import { Button, Card, CardItem, Body, Header } from 'native-base';
 import { withNavigation } from 'react-navigation';
+
 import { connect } from 'react-redux';
-import { selecionarItem } from '../../actions/DetalhesActions';
+
 import estilo from './style';
 import ViewPager from '@react-native-community/viewpager';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';

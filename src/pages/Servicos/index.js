@@ -6,6 +6,7 @@ import CartaoServico from '../../components/CartaoServico';
 import Estilo from './style';
 
 class Servicos extends Component {
+  static navigationOptions = { header: null };
   constructor(props) {
     super(props);
     this.state = { listaServicos: [] };
