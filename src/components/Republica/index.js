@@ -8,6 +8,7 @@ import Cartao from '../Cartao/index';
 import api from '../../service/api';
 
 class Republica extends Component {
+  static navigationOptions = { header: null };
   constructor(props) {
     super(props);
     this.state = {

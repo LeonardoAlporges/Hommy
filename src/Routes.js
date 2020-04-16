@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
-
 import PageAnuncio from './pages/PageAnuncio';
 import Cadastro from './pages/Cadastro/index';
 import Login from './pages/Login';
@@ -13,56 +12,31 @@ import CadastroUsuario from './pages/CadastroUsuario';
 import DetalhesServicos from './components/DetalhesServicos';
 import Confirmacao from './components/Confirmacao';
 
-const Navegacao = createStackNavigator(
-
-  {
-    DetalhesServicos: DetalhesServicos,
-    Republica: Republica,
-    Servicos: Servicos,
-    Cadastro: Cadastro,
-    Detalhes: PageAnuncio,
-    CadastroUsuario: CadastroUsuario,
-    Login: Login,
-    TabsHeader: TabsHeader,
-    Confirmacao: Confirmacao,
-  },
-  {
-    initialRouteName: 'TabsHeader',
-  }
-
-);
-
-Confirmacao.navigationOptions = {
-  header: null,
-}
-DetalhesServicos.navigationOptions = {
-  header: null,
-}
-CadastroUsuario.navigationOptions = {
-  header: null,
-}
-
-Republica.navigationOptions = {
-  header: null,
-}
-Servicos.navigationOptions = {
-  header: null,
-
-}
-TabsHeader.navigationOptions = {
-  header: null,
-
-}
-Login.navigationOptions = {
-  header: null,
-}
-PageAnuncio.navigationOptions = {
-  header: null,
-}
-Cadastro.navigationOptions = {
-  header: null,
-}
-
-
-
-export default createAppContainer(Navegacao);
+export default isValid =>
+  createAppContainer(
+    createStackNavigator(
+      {
+        Login: createStackNavigator({
+          Login: Login,
+          CadastroUsuario: CadastroUsuario,
+        }),
+        App: createStackNavigator({
+          TabsHeader: TabsHeader,
+          Detalhes: PageAnuncio,
+          DetalhesServicos: DetalhesServicos,
+          Detalhes: PageAnuncio,
+          Republica: Republica,
+          Servicos: Servicos,
+          Cadastro: Cadastro,
+          Confirmacao: Confirmacao,
+        }),
+      },
+      {
+        initialRouteName: isValid ? 'App' : 'Login',
+        headerMode: 'none',
+        navigationOptions: {
+          headerVisible: false,
+        },
+      }
+    )
+  );

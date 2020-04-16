@@ -5,22 +5,50 @@ import React, { Component, Fragment } from 'react';
 import { View, Image, Text, Alert } from 'react-native';
 import { Icon, Input, Item, Button } from 'native-base';
 import { withNavigation } from 'react-navigation';
+import AsyncStorage from '@react-native-community/async-storage';
+import moduleName from '../../';
+import api from '../../service/api';
 
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import style from './style';
+import { asyncStorage } from 'reactotron-react-native';
 
 class Login extends Component {
-  MudarTela = () => {
+  static navigationOptions = { header: null };
+
+  async setToken() {
+    try {
+      await AsyncStorage.setItem('token', 'LaMJpEcAcCm');
+      console.tron.log('Token salvo com sucesso');
+    } catch (error) {
+      console.tron.log('Erro ao salvar token');
+    }
+  }
+
+  enviarlogin = value => {
+    Alert.alert('enc');
+    api
+      .post('/session', value)
+      .then(responseJson => {
+        console.tron.log('login ?', responseJson);
+      })
+      .catch(error => {
+        console.error('NAO ENCONTRADO');
+      });
+  };
+
+  Verlogin = values => {
+    this.enviarlogin(values);
+    this.setToken();
+    console.tron.log(values);
+    Alert.alert('Login Efetuado');
     this.props.navigation.navigate('TabsHeader');
   };
+
   render() {
     return (
       <View style={style.container}>
-        <TouchableOpacity
-          onPress={() => {
-            this.props.navigation.navigate('TabsHeader');
-          }}
-        >
+        <TouchableOpacity>
           <Image
             source={{
               uri:
@@ -43,7 +71,7 @@ class Login extends Component {
         <Formik
           initialValues={{ email: '', password: '' }}
           onSubmit={values => {
-            Alert.alert(JSON.stringify(values)), this.MudarTela();
+            this.Verlogin(values);
           }}
           validationSchema={yup.object().shape({
             email: yup

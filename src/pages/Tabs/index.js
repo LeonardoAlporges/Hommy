@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { View, Image, Text, StyleSheet, StatusBar, Alert } from 'react-native';
+import {
+  View,
+  Image,
+  Text,
+  StyleSheet,
+  StatusBar,
+  Alert,
+  ScrollView,
+} from 'react-native';
 import {
   Icon,
   Input,
@@ -23,6 +31,7 @@ import Servicos from '../Servicos';
 import { date } from 'yup';
 
 class TabsHeader extends Component {
+  static navigationOptions = { header: null };
   state = {
     loading: true,
   };
@@ -31,6 +40,7 @@ class TabsHeader extends Component {
       <Container>
         <StatusBar barStyle="light-content" backgroundColor="#000" />
         <Cabeca />
+
         <Tabs tabBarUnderlineStyle={{ backgroundColor: '#1DA1F2' }}>
           <Tab
             heading="Republica"
