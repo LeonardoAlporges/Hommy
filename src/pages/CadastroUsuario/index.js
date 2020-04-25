@@ -2,14 +2,31 @@ import * as yup from 'yup';
 import { Formik } from 'formik';
 
 import React, { Component, Fragment } from 'react';
-import { Text, Alert, Image } from 'react-native';
-import { Icon, Item, Input, Button } from 'native-base';
+import { Text, Alert, Image, Modal } from 'react-native';
+import { Item, Input, Button } from 'native-base';
 import estilo from './style';
 import { View } from 'native-base';
+import api from '../../service/api';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class CadastroUsuario extends Component {
-  MudarTela = () => {
-    this.props.navigation.navigate('Login');
+  state = {
+    isModalVisible: false,
+  };
+
+  static navigationOptions = { header: null };
+
+  EnviarCadastro = async value => {
+    await api
+      .post('/usuario', value)
+      .then(responseJson => {
+        console.tron.log('Cadastro', responseJson);
+        this.props.navigation.navigate('Login');
+      })
+      .catch(error => {
+        this.setState({ isModalVisible: true });
+        console.tron.log('Usuario Nao cadastrado');
+      });
   };
   render() {
     return (
@@ -28,9 +45,10 @@ export default class CadastroUsuario extends Component {
             email: '',
             confirmaEmail: '',
             password: '',
+            telefone: '',
           }}
           onSubmit={values => {
-            Alert.alert(JSON.stringify(values)), this.MudarTela();
+            this.EnviarCadastro(values);
           }}
           validationSchema={yup.object().shape({
             nome: yup.string().required('Insira um Apelido para sua conta'),
@@ -38,9 +56,13 @@ export default class CadastroUsuario extends Component {
               .string()
               .email('Insira um Email valido')
               .required('Insira um Email para sua conta'),
+            telefone: yup
+              .number()
+              .max(9999999999999)
+              .required(' Insira um telefone'),
             password: yup
               .string()
-              .min(6)
+              .min(4)
               .required('Insira uma senha para sua conta'),
           })}
         >
@@ -59,7 +81,7 @@ export default class CadastroUsuario extends Component {
                   <Icon
                     style={estilo.icons_CamposLogin}
                     active
-                    name="md-person"
+                    name="account-outline"
                   />
                   <Input
                     value={values.nome} //NOME
@@ -81,7 +103,7 @@ export default class CadastroUsuario extends Component {
                   <Icon
                     style={estilo.icons_CamposLogin}
                     active
-                    name="ios-mail"
+                    name="email-outline"
                   />
                   <Input
                     value={values.email} //EMAIL
@@ -99,7 +121,32 @@ export default class CadastroUsuario extends Component {
 
               <View style={estilo.view_CamposLogin}>
                 <Item>
-                  <Icon style={estilo.icons_CamposLogin} active name="md-key" />
+                  <Icon
+                    style={estilo.icons_CamposLogin}
+                    active
+                    name="phone-outline"
+                  />
+                  <Input
+                    value={values.telefone} //telefone
+                    onChangeText={handleChange('telefone')}
+                    placeholder="Telefone"
+                    onBlur={() => setFieldTouched('telefone')}
+                  />
+                </Item>
+              </View>
+              {touched.telefone && errors.telefone && (
+                <View style={estilo.V_Erro}>
+                  <Text style={estilo.txtErro}>{errors.telefone}</Text>
+                </View>
+              )}
+
+              <View style={estilo.view_CamposLogin}>
+                <Item>
+                  <Icon
+                    style={estilo.icons_CamposLogin}
+                    active
+                    name="key-outline"
+                  />
                   <Input
                     value={values.password} //Senha
                     onChangeText={handleChange('password')}
@@ -121,12 +168,75 @@ export default class CadastroUsuario extends Component {
                   disabled={!isValid}
                   title="Leo"
                 >
-                  <Icon style={{ fontSize: 25 }} name="ios-arrow-forward" />
+                  <Icon style={{ fontSize: 25 }} name="check" />
                 </Button>
               </View>
             </Fragment>
           )}
         </Formik>
+        <Modal transparent={true} visible={this.state.isModalVisible}>
+          <View
+            style={{
+              backgroundColor: 'rgba(0,0,0,0.7)',
+              flex: 1,
+            }}
+          >
+            <View
+              style={{
+                backgroundColor: '#ffff',
+
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginVertical: '55%',
+                marginHorizontal: '10%',
+                padding: 40,
+                borderRadius: 10,
+                height: 100,
+                flex: 1,
+              }}
+            >
+              <Image
+                source={{
+                  uri:
+                    'https://firebasestorage.googleapis.com/v0/b/republicas.appspot.com/o/Pictures%20Ilustrations%2FBug.png?alt=media&token=23b94406-dab1-4f51-9082-6c9429a27e07',
+                }}
+                style={{ width: 175, height: 175, marginTop: '80%' }}
+              />
+              <Text
+                style={{
+                  width: 200,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginTop: '5%',
+                  fontSize: 20,
+                  fontWeight: '600',
+                  fontFamily: 'Roboto',
+                  color: '#000',
+                }}
+              >
+                Nome de Usuario ou Email ja cadastrados
+              </Text>
+
+              <Button
+                style={{
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  position: 'absolute',
+
+                  bottom: 25,
+                  width: '70%',
+                  backgroundColor: 'rgba(29,161,242,1)',
+                  color: '#fff',
+                }}
+                onPress={() => {
+                  this.setState({ isModalVisible: false });
+                }}
+              >
+                <Text>Voltar</Text>
+              </Button>
+            </View>
+          </View>
+        </Modal>
       </View>
     );
   }

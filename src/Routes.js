@@ -11,6 +11,10 @@ import Republica from './components/Republica';
 import CadastroUsuario from './pages/CadastroUsuario';
 import DetalhesServicos from './components/DetalhesServicos';
 import Confirmacao from './components/Confirmacao';
+import Anuncios from './pages/Anuncios';
+import Caronas from './pages/Caronas';
+import DetalhesCarona from './pages/DetalhesCarona';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 
 export default isValid =>
   createAppContainer(
@@ -22,9 +26,11 @@ export default isValid =>
         }),
         App: createStackNavigator({
           TabsHeader: TabsHeader,
+          DetalhesCarona: DetalhesCarona,
+          Caronas: Caronas,
+          Anuncios: Anuncios,
           Detalhes: PageAnuncio,
           DetalhesServicos: DetalhesServicos,
-          Detalhes: PageAnuncio,
           Republica: Republica,
           Servicos: Servicos,
           Cadastro: Cadastro,

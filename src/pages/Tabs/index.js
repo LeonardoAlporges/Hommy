@@ -29,6 +29,7 @@ import Cabeca from '../../components/Cabeca';
 import Republica from '../../components/Republica';
 import Servicos from '../Servicos';
 import { date } from 'yup';
+import Caronas from '../Caronas';
 
 class TabsHeader extends Component {
   static navigationOptions = { header: null };
@@ -41,7 +42,10 @@ class TabsHeader extends Component {
         <StatusBar barStyle="light-content" backgroundColor="#000" />
         <Cabeca />
 
-        <Tabs tabBarUnderlineStyle={{ backgroundColor: '#1DA1F2' }}>
+        <Tabs
+          initialPage={0}
+          tabBarUnderlineStyle={{ backgroundColor: '#1DA1F2' }}
+        >
           <Tab
             heading="Republica"
             tabStyle={estilo.tabs_style}
@@ -69,34 +73,31 @@ class TabsHeader extends Component {
               style={{ backgroundColor: 'rgba(29,161,242,1)' }}
               position="bottomRight"
               onPress={() => {
-                this.props.navigation.navigate('Login');
+                this.props.navigation.navigate('Cadastro');
               }}
             >
               <Icon name="md-add" />
             </Fab>
           </Tab>
           <Tab
-            heading="Serviços"
+            heading="Caronas"
             initialPage="2"
             tabStyle={estilo.tabs_style}
             textStyle={estilo.tabs_TextStyle}
             activeTabStyle={estilo.tabs_ActiveTabs}
             activeTextStyle={estilo.tabs_ActiveTextStyle}
           >
-            <Servicos />
+            <Caronas />
             <Fab
               direction="up"
               containerStyle={{}}
               style={{ backgroundColor: 'rgba(29,161,242,1)' }}
               position="bottomRight"
-              onPress={() => {
-                this.props.navigation.navigate('Login');
-              }}
             >
               <Icon name="md-add" />
             </Fab>
           </Tab>
-          <Tab
+          {/* <Tab
             heading="Eventos"
             tabStyle={estilo.tabs_style}
             textStyle={estilo.tabs_TextStyle}
@@ -141,7 +142,7 @@ class TabsHeader extends Component {
                 </Text>
               </View>
             </View>
-          </Tab>
+          </Tab> */}
         </Tabs>
       </Container>
     );

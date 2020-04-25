@@ -37,12 +37,12 @@ import {
   ListItem,
   Body,
 } from 'native-base';
-import ImagePicker from 'react-native-image-picker';
 import ViewPager from '@react-native-community/viewpager';
-
+import api from '../../service/api';
 import estilo from './style';
 
 export class Cadastro extends Component {
+  static navigationOptions = { header: null };
   constructor(props) {
     super(props);
     this.entrar = this.entrar.bind(this);
@@ -62,7 +62,7 @@ export class Cadastro extends Component {
     });
   }
 
-  entrar() {
+  async entrar() {
     alert('Enviado');
     this.data = {
       titulo: this.props.titulo,
@@ -85,8 +85,8 @@ export class Cadastro extends Component {
     };
     console.log(this.data);
 
-    axios
-      .post('http://192.168.1.4:3333/main', this.data)
+    await api
+      .post('/main', this.data)
       .then(Response => {
         console.log('sucesso', this.data);
       })
