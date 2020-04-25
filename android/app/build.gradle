@@ -166,6 +166,8 @@ android {
             signingConfig signingConfigs.debug
         }
         release {
+            minifyEnabled false
+            shrinkResources false
             // Caution! In production, you need to generate your own keystore file.
             // see https://facebook.github.io/react-native/docs/signed-apk-android.
             signingConfig signingConfigs.release

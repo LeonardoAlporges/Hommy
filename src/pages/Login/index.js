@@ -1,48 +1,72 @@
 import * as yup from 'yup';
 import { Formik } from 'formik';
 
+import { connect } from 'react-redux';
+
 import React, { Component, Fragment } from 'react';
 import { View, Image, Text, Alert } from 'react-native';
+
 import { Icon, Input, Item, Button } from 'native-base';
+
 import { withNavigation } from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
-import moduleName from '../../';
 import api from '../../service/api';
 
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import style from './style';
 import { asyncStorage } from 'reactotron-react-native';
 
+import {
+  editNome,
+  editEmail,
+  editCpf,
+  editIdUser,
+  editLogado,
+  editTelefone,
+  editFoto,
+} from '../../actions/UserAction';
+
 class Login extends Component {
   static navigationOptions = { header: null };
+  state = {
+    user: [],
+  };
 
-  async setToken() {
+  async setToken(dados) {
     try {
-      await AsyncStorage.setItem('token', 'LaMJpEcAcCm');
+      await AsyncStorage.setItem('token', JSON.stringify(dados.token));
+      await AsyncStorage.setItem('user', JSON.stringify(dados.usuario));
+
       console.tron.log('Token salvo com sucesso');
     } catch (error) {
       console.tron.log('Erro ao salvar token');
     }
   }
 
-  enviarlogin = value => {
-    Alert.alert('enc');
-    api
+  enviarlogin = async value => {
+    await api
       .post('/session', value)
       .then(responseJson => {
+        this.setToken(responseJson.data);
         console.tron.log('login ?', responseJson);
+        this.setState({ user: responseJson.data.usuario });
+        console.tron.log('user:', this.state.user);
+        this.props.editNome(responseJson.data.usuario.nome);
+        this.props.editEmail(responseJson.data.usuario.email);
+        this.props.editCpf(responseJson.data.usuario.cpf);
+        this.props.editIdUser(responseJson.data.usuario.token);
+        this.props.editLogado(responseJson.data.usuario.nome);
+        this.props.editTelefone(responseJson.data.usuario.celular);
+        this.props.editFoto(responseJson.data.usuario.fotoPerfil);
+        this.props.navigation.navigate('TabsHeader');
       })
       .catch(error => {
-        console.error('NAO ENCONTRADO');
+        console.error('Usuario Não Encontrado');
       });
   };
 
   Verlogin = values => {
     this.enviarlogin(values);
-    this.setToken();
-    console.tron.log(values);
-    Alert.alert('Login Efetuado');
-    this.props.navigation.navigate('TabsHeader');
   };
 
   render() {
@@ -134,7 +158,7 @@ class Login extends Component {
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => {
-                    this.props.navigation.navigate('Cadastro');
+                    this.props.navigation.navigate('CadastroUsuario');
                   }}
                 >
                   <Text>Cadastre-se </Text>
@@ -152,7 +176,7 @@ class Login extends Component {
                 <Button
                   style={style.botao_login}
                   onPress={() => {
-                    this.props.navigation.navigate('Cadastro');
+                    this.props.navigation.navigate('CadastroUsuario');
                   }}
                   disabled={!isValid}
                   title="Leo"
@@ -168,4 +192,17 @@ class Login extends Component {
   }
 }
 
-export default withNavigation(Login);
+const loginConnect = connect(
+  null,
+  {
+    editNome,
+    editEmail,
+    editCpf,
+    editIdUser,
+    editLogado,
+    editTelefone,
+    editFoto,
+  }
+)(Login);
+
+export default withNavigation(loginConnect);
