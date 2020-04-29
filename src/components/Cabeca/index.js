@@ -25,11 +25,11 @@ class Cabeca extends Component {
   closeToken = async () => {
     await AsyncStorage.removeItem('token')
       .then(value => {
-        console.tron.log('Saiu da conta', value);
+        console.log('Saiu da conta', value);
         this.props.navigation.navigate('Login');
       })
       .catch(error => {
-        console.tron.log('Nao Foi possivel');
+        console.log('Nao Foi possivel');
       });
     Alert.alert('Conta deslogada com sucesso');
   };
