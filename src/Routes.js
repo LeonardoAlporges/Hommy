@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import PageAnuncio from './pages/PageAnuncio';
 import Cadastro from './pages/Cadastro/index';
@@ -14,35 +15,38 @@ import Confirmacao from './components/Confirmacao';
 import Anuncios from './pages/Anuncios';
 import Caronas from './pages/Caronas';
 import DetalhesCarona from './pages/DetalhesCarona';
+import Teste from './teste';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 
-export default isValid =>
-  createAppContainer(
-    createStackNavigator(
-      {
-        Login: createStackNavigator({
-          Login: Login,
-          CadastroUsuario: CadastroUsuario,
-        }),
-        App: createStackNavigator({
-          TabsHeader: TabsHeader,
-          DetalhesCarona: DetalhesCarona,
-          Caronas: Caronas,
-          Anuncios: Anuncios,
-          Detalhes: PageAnuncio,
-          DetalhesServicos: DetalhesServicos,
-          Republica: Republica,
-          Servicos: Servicos,
-          Cadastro: Cadastro,
-          Confirmacao: Confirmacao,
-        }),
+const Navegação = createAppContainer(
+  createStackNavigator(
+    {
+      Login: createStackNavigator({
+        Login: Login,
+        CadastroUsuario: CadastroUsuario,
+      }),
+      App: createStackNavigator({
+        Teste,
+        TabsHeader: TabsHeader,
+        DetalhesCarona: DetalhesCarona,
+        Caronas: Caronas,
+        Anuncios: Anuncios,
+        Detalhes: PageAnuncio,
+        DetalhesServicos: DetalhesServicos,
+        Republica: Republica,
+        Servicos: Servicos,
+        Cadastro: Cadastro,
+        Confirmacao: Confirmacao,
+      }),
+    },
+    {
+      initialRouteName: 'App',
+      headerMode: 'none',
+      navigationOptions: {
+        headerVisible: false,
       },
-      {
-        initialRouteName: isValid ? 'App' : 'Login',
-        headerMode: 'none',
-        navigationOptions: {
-          headerVisible: false,
-        },
-      }
-    )
-  );
+    }
+  )
+);
+
+export default Navegação;

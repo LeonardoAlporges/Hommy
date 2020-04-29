@@ -20,7 +20,7 @@ class Anuncios extends Component {
     api
       .get(`/userCarona/${'leo@hotmail.com'}`)
       .then(responseJson => {
-        console.tron.log('Caronas', responseJson);
+        console.log('Caronas', responseJson);
         this.setState({ listaCaronas: responseJson.data });
       })
       .catch(error => {
@@ -30,7 +30,7 @@ class Anuncios extends Component {
     api
       .get(`/userRepublica/${'leo@hotmail.com'}`)
       .then(responseJson => {
-        console.tron.log('leo', responseJson);
+        console.log('leo', responseJson);
         this.setState({ listaRepublicas: responseJson.data });
       })
       .catch(error => {
@@ -77,7 +77,7 @@ class Anuncios extends Component {
           <ScrollView style={estilo.card}>
             <FlatList
               style={estilo.flatList}
-              data={this.state.listaRepublicas}
+              data={this.state.listaCaronas}
               renderItem={({ item }) => <CartaoCarona dados={item} />}
               keyExtractor={item => item._id}
             />

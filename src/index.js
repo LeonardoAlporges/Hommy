@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import createRoutes from './Routes';
+import Routes from './Routes';
 import './config/ReactotronConfig';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -13,7 +13,7 @@ class App extends Component {
     console.disableYellowBox = false;
     return (
       <Provider store={store}>
-        <Splash />
+        <Routes />
       </Provider>
     );
   }

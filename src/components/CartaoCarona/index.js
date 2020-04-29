@@ -24,7 +24,7 @@ import { Button } from 'native-base';
 class CartaoCarona extends Component {
   Click = () => {
     const dados = this.props.dados;
-    console.tron.log(dados);
+    console.log(dados);
     this.props.editNome(dados.nome);
     this.props.editChegada(dados.localChegada);
     this.props.editData(dados.data);
