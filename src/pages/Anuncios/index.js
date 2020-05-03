@@ -97,7 +97,7 @@ class Anuncios extends Component {
     this.props.editImg1(dados.imagem1);
     this.props.editImg2(dados.imagem2);
     this.props.editImg3(dados.imagem3);
-    this.props.navigation.navigate('Cadastro', { update: false });
+    this.props.navigation.navigate('Cadastro', { update: true });
   }
 
   editCaronas(edit) {

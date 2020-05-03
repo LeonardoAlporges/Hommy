@@ -8,7 +8,7 @@ import {
   Modal,
   Image,
 } from 'react-native';
-
+import CustomModal from '../Alert';
 import { connect } from 'react-redux';
 import { Button } from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -20,18 +20,20 @@ class Cabeca extends Component {
   static navigationOptions = { header: null };
   state = {
     isModalVisible: false,
+    erro: false,
   };
 
   closeToken = async () => {
     await AsyncStorage.removeItem('token')
       .then(value => {
         console.log('Saiu da conta', value);
-        this.props.navigation.navigate('Login');
+        //this.props.navigation.navigate('Login');
+        this.setState({ erro: true });
       })
       .catch(error => {
         console.log('Nao Foi possivel');
       });
-    Alert.alert('Conta deslogada com sucesso');
+    //Alert.alert('Conta deslogada com sucesso');
   };
   render() {
     return (
@@ -42,6 +44,7 @@ class Cabeca extends Component {
             this.setState({ isModalVisible: true });
           }}
         >
+          {this.state.erro ? <CustomModal parametro="Sucesso" /> : <View />}
           <Icon style={Estilos.icon2} name="account-outline" />
         </TouchableOpacity>
         <View style={Estilos.Titulo}>
@@ -53,6 +56,7 @@ class Cabeca extends Component {
         >
           <Icon style={Estilos.icon2} name="settings-outline" />
         </TouchableOpacity>
+
         <Modal
           transparent={true}
           animationType="slide"

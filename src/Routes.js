@@ -30,9 +30,7 @@ const Navegação = createAppContainer(
         TabsHeader: TabsHeader,
         Anuncios,
         CadastroCaronas,
-
         Teste,
-
         DetalhesCarona: DetalhesCarona,
         Caronas: Caronas,
         Anuncios: Anuncios,

@@ -59,6 +59,8 @@ export class Cadastro extends Component {
   }
 
   verificarParametro(parametro) {
+    this.setState({ update: parametro });
+    console.tron.log(this.state.update);
     console.tron.log('valor Parametro ', parametro);
     if (parametro.update == false) {
       this.atualizarPropsRedux();
@@ -85,10 +87,7 @@ export class Cadastro extends Component {
     this.props.editImg3('');
   }
 
-  teste() {
-    this.setState({ update: this.props.navigation.state.params.update });
-    console.tron.log(this.state.update);
-  }
+  teste() {}
   onValueChange2(value) {
     this.setState({
       selected2: value,
@@ -100,8 +99,11 @@ export class Cadastro extends Component {
     });
   }
 
-  async entrar() {
+  entrar() {
     alert('Enviado', this.state.update);
+  }
+
+  async entrar() {
     this.data = {
       titulo: this.props.titulo,
       valor: this.props.valor,
@@ -121,7 +123,7 @@ export class Cadastro extends Component {
       rua: this.props.rua,
       numero: this.props.numero,
     };
-    console.log(this.data);
+    console.tron.log(this.data);
 
     await api
       .post('/main', this.data)
@@ -567,7 +569,7 @@ export class Cadastro extends Component {
                       <Button
                         style={estilo.btnProximo}
                         onPress={() => {
-                          this.teste();
+                          this.entrar();
                           //this.props.navigation.navigate('Confirmacao');
                         }}
                       >
