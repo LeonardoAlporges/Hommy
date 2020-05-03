@@ -20,12 +20,12 @@ export default class CadastroUsuario extends Component {
     await api
       .post('/usuario', value)
       .then(responseJson => {
-        console.tron.log('Cadastro', responseJson);
+        console.log('Cadastro', responseJson);
         this.props.navigation.navigate('Login');
       })
       .catch(error => {
         this.setState({ isModalVisible: true });
-        console.tron.log('Usuario Nao cadastrado');
+        console.log('Usuario Nao cadastrado');
       });
   };
   render() {

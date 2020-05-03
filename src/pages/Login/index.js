@@ -37,9 +37,9 @@ class Login extends Component {
       await AsyncStorage.setItem('token', JSON.stringify(dados.token));
       await AsyncStorage.setItem('user', JSON.stringify(dados.usuario));
 
-      console.tron.log('Token salvo com sucesso');
+      console.log('Token salvo com sucesso');
     } catch (error) {
-      console.tron.log('Erro ao salvar token');
+      console.log('Erro ao salvar token');
     }
   }
 
@@ -48,9 +48,9 @@ class Login extends Component {
       .post('/session', value)
       .then(responseJson => {
         this.setToken(responseJson.data);
-        console.tron.log('login ?', responseJson);
+        console.log('login ?', responseJson);
         this.setState({ user: responseJson.data.usuario });
-        console.tron.log('user:', this.state.user);
+        console.log('user:', this.state.user);
         this.props.editNome(responseJson.data.usuario.nome);
         this.props.editEmail(responseJson.data.usuario.email);
         this.props.editCpf(responseJson.data.usuario.cpf);
