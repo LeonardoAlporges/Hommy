@@ -4,6 +4,42 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import estilo from './style';
 import api from '../../service/api';
 import Cartao from '../../components/Cartao';
+import { Button } from 'native-base';
+import { withNavigation } from 'react-navigation';
+import {
+  editChegada,
+  editData,
+  editDesembarque,
+  editEmbarque,
+  editHChegada,
+  editHSaida,
+  editImagem,
+  editNome,
+  editNota,
+  editSaida,
+  editVagas,
+  editValor,
+} from '../../actions/CaronaActions';
+import {
+  editNomeRepublica,
+  editBairro,
+  editPessoas,
+  editDescricao,
+  editAnimal,
+  editAcomodacaoQuarto,
+  editAcomodacaoRepublica,
+  editValorConta,
+  editObservacao,
+  editImg1,
+  editImg2,
+  editImg3,
+  editGenero,
+  editNumVagas,
+  editRepresentante,
+  editRua,
+  editNumeroCasa,
+} from '../../actions/AuthActions';
+
 // import { Container } from './styles';
 
 import { connect } from 'react-redux';
@@ -15,7 +51,9 @@ class Anuncios extends Component {
     listaRepublicas: [],
     listaCaronas: [],
     email: 'leo@hotmail.com',
+    dados: [],
   };
+
   UNSAFE_componentWillMount() {
     api
       .get(`/userCarona/${'leo@hotmail.com'}`)
@@ -38,6 +76,48 @@ class Anuncios extends Component {
       });
   }
 
+  editRepublica(edit) {
+    const dados = edit;
+
+    console.tron.log(dados);
+    this.props.editNomeRepublica(dados.nomeRepublica);
+    this.props.editValor(dados.valorAluguel);
+    this.props.editBairro(dados.bairro);
+    this.props.editRua(dados.rua);
+    this.props.editNumeroCasa(dados.numeroCasa);
+    this.props.editPessoas(dados.pessoas);
+    this.props.editAnimal(dados.animal);
+    this.props.editDescricao(dados.descricao);
+    this.props.editAcomodacaoQuarto(dados.acamodacaoQuarto);
+    this.props.editAcomodacaoRepublica(dados.acomodacaoRepublica);
+    this.props.editObservacao(dados.observacao);
+    this.props.editGenero(dados.genero);
+    this.props.editNumVagas(dados.numVagas);
+    this.props.editRepresentante(dados.representante);
+    this.props.editImg1(dados.imagem1);
+    this.props.editImg2(dados.imagem2);
+    this.props.editImg3(dados.imagem3);
+    this.props.navigation.navigate('Cadastro', { update: false });
+  }
+
+  editCaronas(edit) {
+    const dados = edit;
+    console.log(dados);
+    this.props.editNome(dados.nome);
+    this.props.editChegada(dados.localChegada);
+    this.props.editData(dados.data);
+    this.props.editDesembarque(dados.desembarque);
+    this.props.editEmbarque(dados.embarque);
+    this.props.editHChegada(dados.horaChegada);
+    this.props.editHSaida(dados.horaSaida);
+    this.props.editImagem(dados.imagem);
+    this.props.editNota(dados.nota);
+    this.props.editSaida(dados.localSaida);
+    this.props.editVagas(dados.vagas);
+    this.props.editValor(dados.valor);
+    this.props.navigation.navigate('CadastroCaronas');
+  }
+
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -54,19 +134,31 @@ class Anuncios extends Component {
             <FlatList
               style={estilo.flatList}
               data={this.state.listaRepublicas}
-              renderItem={({ item }) => <Cartao leonardo={item} />}
+              renderItem={({ item }) => (
+                <View>
+                  <Cartao leonardo={item} />
+                  <View style={estilo.V_edit}>
+                    <Button
+                      style={estilo.edit}
+                      onPress={() => {
+                        this.editRepublica(item);
+                      }}
+                    >
+                      <Icon
+                        style={{
+                          fontSize: 25,
+                          marginRight: '2%',
+                          color: '#ffffff',
+                        }}
+                        name="pencil-outline"
+                      />
+                      <Text style={estilo.TxtEdit}>Editar</Text>
+                    </Button>
+                  </View>
+                </View>
+              )}
               keyExtractor={item => item._id}
             />
-
-            <View style={estilo.V_edit}>
-              <View style={estilo.edit}>
-                <Icon
-                  style={{ fontSize: 25, marginRight: '2%', color: '#ffffff' }}
-                  name="pencil-outline"
-                />
-                <Text style={estilo.TxtEdit}>Editar</Text>
-              </View>
-            </View>
           </ScrollView>
         </View>
         <View style={estilo.V_label}>
@@ -78,19 +170,31 @@ class Anuncios extends Component {
             <FlatList
               style={estilo.flatList}
               data={this.state.listaCaronas}
-              renderItem={({ item }) => <CartaoCarona dados={item} />}
+              renderItem={({ item }) => (
+                <View>
+                  <CartaoCarona dados={item} />
+                  <View style={estilo.V_edit}>
+                    <Button
+                      style={estilo.edit}
+                      onPress={() => {
+                        this.editCaronas(item);
+                      }}
+                    >
+                      <Icon
+                        style={{
+                          fontSize: 25,
+                          marginRight: '2%',
+                          color: '#ffffff',
+                        }}
+                        name="pencil-outline"
+                      />
+                      <Text style={estilo.TxtEdit}>Editar</Text>
+                    </Button>
+                  </View>
+                </View>
+              )}
               keyExtractor={item => item._id}
             />
-
-            <View style={estilo.V_edit}>
-              <View style={estilo.edit}>
-                <Icon
-                  style={{ fontSize: 25, marginRight: '2%', color: '#ffffff' }}
-                  name="pencil-outline"
-                />
-                <Text style={estilo.TxtEdit}>Editar</Text>
-              </View>
-            </View>
           </ScrollView>
         </View>
       </View>
@@ -98,4 +202,39 @@ class Anuncios extends Component {
   }
 }
 
-export default Anuncios;
+const EditConnect = connect(
+  null,
+  {
+    editNomeRepublica,
+    editBairro,
+    editPessoas,
+    editDescricao,
+    editAnimal,
+    editAcomodacaoQuarto,
+    editAcomodacaoRepublica,
+    editValorConta,
+    editObservacao,
+    editImg1,
+    editImg2,
+    editImg3,
+    editGenero,
+    editNumVagas,
+    editRepresentante,
+    editRua,
+    editNumeroCasa,
+    editChegada,
+    editData,
+    editDesembarque,
+    editEmbarque,
+    editHChegada,
+    editHSaida,
+    editImagem,
+    editNome,
+    editNota,
+    editSaida,
+    editVagas,
+    editValor,
+  }
+)(Anuncios);
+
+export default withNavigation(EditConnect);

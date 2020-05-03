@@ -5,26 +5,25 @@ import React, { Component, Fragment } from 'react';
 import { View, ScrollView, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import {
-  editTitulo,
-  editSenha,
   editValor,
+  editNomeRepublica,
   editBairro,
   editPessoas,
-  editDesc,
+  editDescricao,
   editAnimal,
-  editMovelQuarto,
-  editMovelComun,
+  editAcomodacaoQuarto,
+  editAcomodacaoRepublica,
   editValorConta,
   editObservacao,
-  editImg,
+  editImg1,
+  editImg2,
+  editImg3,
   editGenero,
   editNumVagas,
   editRepresentante,
-  editRedeSocial,
   editRua,
-  editNumero,
+  editNumeroCasa,
 } from '../../actions/AuthActions';
-import axios from 'axios';
 import {
   Text,
   Item,
@@ -36,6 +35,7 @@ import {
   CheckBox,
   ListItem,
   Body,
+  Spinner,
 } from 'native-base';
 import ViewPager from '@react-native-community/viewpager';
 import api from '../../service/api';
@@ -43,13 +43,51 @@ import estilo from './style';
 
 export class Cadastro extends Component {
   static navigationOptions = { header: null };
+
   constructor(props) {
     super(props);
+    const update = this.props.navigation.state.params.update;
     this.entrar = this.entrar.bind(this);
     this.state = {
+      loading: true,
+      update,
       selected2: undefined,
       selected3: undefined,
     };
+
+    this.verificarParametro(this.props.navigation.state.params);
+  }
+
+  verificarParametro(parametro) {
+    console.tron.log('valor Parametro ', parametro);
+    if (parametro.update == false) {
+      this.atualizarPropsRedux();
+    }
+  }
+  atualizarPropsRedux(dados) {
+    console.tron.log('Atulizando ');
+    this.props.editNomeRepublica('');
+    this.props.editValor('');
+    this.props.editBairro('');
+    this.props.editRua('');
+    this.props.editNumeroCasa('');
+    this.props.editPessoas('');
+    this.props.editAnimal('');
+    this.props.editDescricao('');
+    this.props.editAcomodacaoQuarto('');
+    this.props.editAcomodacaoRepublica('');
+    this.props.editObservacao('');
+    this.props.editGenero('');
+    this.props.editNumVagas('');
+    this.props.editRepresentante('');
+    this.props.editImg1('');
+    this.props.editImg2('');
+    this.props.editImg3('');
+  }
+
+  teste() {
+    this.setState({ update: this.props.navigation.state.params.update });
+    console.tron.log(this.state.update);
   }
   onValueChange2(value) {
     this.setState({
@@ -63,7 +101,7 @@ export class Cadastro extends Component {
   }
 
   async entrar() {
-    alert('Enviado');
+    alert('Enviado', this.state.update);
     this.data = {
       titulo: this.props.titulo,
       valor: this.props.valor,
@@ -93,7 +131,7 @@ export class Cadastro extends Component {
       .catch(e => {
         console.log(e);
       });
-    this.props.navigation.navigate('TabsHeader');
+    //this.props.navigation.navigate('TabsHeader');
   }
 
   //Na linha 23 no onchangeText ele vai receber uma entrada qualquer (um txt) e vai passar esse txt para a action que vem por props
@@ -102,18 +140,18 @@ export class Cadastro extends Component {
     return (
       <Formik
         initialValues={{
-          nome: '',
-          bairro: '',
-          rua: '',
-          numero: '',
-          aluguel: '',
-          contas: '',
-          moradores: '',
-          vagas: '',
-          genero: '',
-          animais: '',
-          aQuarto: '',
-          aRepublica: '',
+          nome: this.props.titulo,
+          bairro: this.props.bairro,
+          rua: this.props.rua,
+          numero: this.props.numeroCasa,
+          aluguel: this.props.valorAluguel,
+          contas: this.props.valorContas,
+          moradores: this.props.pessoas,
+          vagas: this.props.numVagas,
+          genero: this.props.genero,
+          animais: this.props.animal,
+          aQuarto: this.props.acomodacaoQuarto,
+          aRepublica: this.props.acomodacaoRepublica,
         }}
         onSubmit={values => {
           Alert.alert(JSON.stringify(values));
@@ -211,7 +249,7 @@ export class Cadastro extends Component {
                       <Input
                         value={values.nome}
                         onChangeText={handleChange('nome')}
-                        placeholder=""
+                        placeholder={this.props.titulo}
                         onBlur={() => setFieldTouched('nome')}
                       />
                     </Item>
@@ -529,7 +567,8 @@ export class Cadastro extends Component {
                       <Button
                         style={estilo.btnProximo}
                         onPress={() => {
-                          this.props.navigation.navigate('Confirmacao');
+                          this.teste();
+                          //this.props.navigation.navigate('Confirmacao');
                         }}
                       >
                         <Text>Publicar</Text>
@@ -555,17 +594,23 @@ export class Cadastro extends Component {
 const mapStateToProps = state => {
   return {
     //para pegar do reducer e State."NOME DO REDUCER"."NOME DA PROPIEDADE"
-    titulo: state.auth.titulo,
-    valor: state.auth.valor,
+    titulo: state.auth.nomeRepublica,
+    valorAluguel: state.auth.valorAluguel,
+    genero: state.auth.genero,
+    numVagas: state.auth.numVagas,
     bairro: state.auth.bairro,
+    rua: state.auth.rua,
     pessoas: state.auth.pessoas,
-    desc: state.auth.desc,
+    numeroCasa: state.auth.numeroCasa,
+    descricao: state.auth.descricao,
     animal: state.auth.animal,
-    movelQuarto: state.auth.movelQuarto,
-    moveisComun: state.auth.moveisComun,
+    acomodacaoQuarto: state.auth.acomodacaoQuarto,
+    acomodacaoRepublica: state.auth.acomodacaoRepublica,
     valorContas: state.auth.valorContas,
     observacao: state.auth.observacao,
-    imagem: state.auth.imagem,
+    imagem1: state.auth.imagem1,
+    imagem2: state.auth.imagem2,
+    imagem3: state.auth.imagem3,
     // Ou seja agora e como se tivessemos duas props dentro do compoennte cadastro
   };
 };
@@ -573,25 +618,24 @@ const mapStateToProps = state => {
 const CadastroConnect = connect(
   mapStateToProps,
   {
-    editTitulo,
-    editSenha,
-    editTitulo,
     editValor,
+    editNomeRepublica,
     editBairro,
     editPessoas,
-    editDesc,
+    editDescricao,
     editAnimal,
-    editMovelQuarto,
-    editMovelComun,
+    editAcomodacaoQuarto,
+    editAcomodacaoRepublica,
     editValorConta,
     editObservacao,
-    editImg,
+    editImg1,
+    editImg2,
+    editImg3,
     editGenero,
     editNumVagas,
     editRepresentante,
-    editRedeSocial,
     editRua,
-    editNumero,
+    editNumeroCasa,
   }
 )(Cadastro);
 

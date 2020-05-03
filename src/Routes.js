@@ -16,6 +16,7 @@ import Anuncios from './pages/Anuncios';
 import Caronas from './pages/Caronas';
 import DetalhesCarona from './pages/DetalhesCarona';
 import Teste from './teste';
+import CadastroCaronas from './pages/CadastroCarona';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 
 const Navegação = createAppContainer(
@@ -26,8 +27,12 @@ const Navegação = createAppContainer(
         CadastroUsuario: CadastroUsuario,
       }),
       App: createStackNavigator({
-        Teste,
         TabsHeader: TabsHeader,
+        Anuncios,
+        CadastroCaronas,
+
+        Teste,
+
         DetalhesCarona: DetalhesCarona,
         Caronas: Caronas,
         Anuncios: Anuncios,
