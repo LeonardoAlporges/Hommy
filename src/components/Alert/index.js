@@ -3,7 +3,7 @@ import { TouchableOpacity, View, Text, Modal, Image } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import Estilos from './style';
 
-export default class Aviso extends Component {
+export default class CustomModal extends Component {
   state = {
     modalVisible: true,
     icon: '',

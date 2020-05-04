@@ -46,21 +46,20 @@ export class Cadastro extends Component {
 
   constructor(props) {
     super(props);
-    const update = this.props.navigation.state.params.update;
     this.entrar = this.entrar.bind(this);
     this.state = {
       loading: true,
-      update,
+      update: this.props.navigation.state.params.update,
       selected2: undefined,
       selected3: undefined,
     };
 
-    this.verificarParametro(this.props.navigation.state.params);
+    this.verificarParametro(this.props.navigation.state.params.update);
   }
 
-  verificarParametro(parametro) {
-    this.setState({ update: parametro });
-    console.tron.log(this.state.update);
+  async verificarParametro(parametro) {
+    await this.setState({ update: parametro });
+    console.tron.log('VErificar parametro', this.state.update);
     console.tron.log('valor Parametro ', parametro);
     if (parametro.update == false) {
       this.atualizarPropsRedux();
@@ -99,50 +98,60 @@ export class Cadastro extends Component {
     });
   }
 
-  entrar() {
-    alert('Enviado', this.state.update);
-  }
-
-  async entrar() {
+  async entrar(values) {
+    console.tron.log('valores', values);
     this.data = {
-      titulo: this.props.titulo,
-      valor: this.props.valor,
-      bairro: this.props.bairro,
-      pessoas: this.props.pessoas,
-      desc: this.props.desc,
-      animal: this.props.animal,
-      movelQuarto: this.props.movelQuarto,
-      moveisComun: this.props.moveisComun,
-      valorContas: this.props.valorContas,
-      observacao: this.props.observacao,
-      imagem: this.props.imagem,
-      genero: this.props.genero,
-      numVagas: this.props.numVagas,
-      representante: this.props.representante,
-      redeSocial: this.props.redeSocial,
-      rua: this.props.rua,
-      numero: this.props.numero,
+      nomeRepublica: values.nome,
+      valorAluguel: values.aluguel,
+      bairro: values.bairro,
+      rua: values.rua,
+      numeroCasa: values.numeroCasa,
+      pessoas: values.moradores,
+      descricao: values.desc,
+      animal: values.animal,
+      acamodacaoQuarto: values.movelQuarto,
+      acomodacaoRepublica: values.moveisComun,
+      valorContas: values.valorContas,
+      observacao: values.observacao,
+      genero: values.genero,
+      numVagas: values.numVagas,
+      //representante: values.representante,
+      //redeSocial: values.redeSocial,
+      //rua: values.rua,
+      //numero: values.numero,
     };
-    console.tron.log(this.data);
+    console.tron.log('Envinado:', this.data);
+    console.tron.log('update', this.state.update);
 
-    await api
-      .post('/main', this.data)
-      .then(Response => {
-        console.log('sucesso', this.data);
-      })
-      .catch(e => {
-        console.log(e);
-      });
+    if (this.state.update == true) {
+      console.tron.log('Faznedo Update:', this.data);
+      await api
+        .put(`/main/${'leo@hotmail.com'}`, this.data)
+        .then(Response => {
+          console.log('sucesso', this.data);
+        })
+        .catch(e => {
+          console.tron.log(e);
+        });
+    } else if (this.state.update == false) {
+      console.tron.log('Criando Anuncio:', this.data);
+      await api
+        .post('/main', this.data)
+        .then(Response => {
+          console.log('sucesso', this.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
+
     //this.props.navigation.navigate('TabsHeader');
   }
-
-  //Na linha 23 no onchangeText ele vai receber uma entrada qualquer (um txt) e vai passar esse txt para a action que vem por props
-  //Da funçao connect
   render() {
     return (
       <Formik
         initialValues={{
-          nome: this.props.titulo,
+          nome: this.props.nome,
           bairro: this.props.bairro,
           rua: this.props.rua,
           numero: this.props.numeroCasa,
@@ -156,7 +165,7 @@ export class Cadastro extends Component {
           aRepublica: this.props.acomodacaoRepublica,
         }}
         onSubmit={values => {
-          Alert.alert(JSON.stringify(values));
+          this.entrar(values);
         }}
         validationSchema={yup.object().shape({
           nome: yup
@@ -176,18 +185,18 @@ export class Cadastro extends Component {
           numero: yup
             .number()
             .min(1)
-            .max(4)
+            .max(10000) //Aqui e um numero em valor nao em caracteres
             .required('Numero invalido'),
           aluguel: yup
             .number()
             .min(2)
-            .max(5)
-            .required('Valor invalido'),
+            .max(2000),
+          //.required('Valor invalido'),
           contas: yup
             .number()
             .min(2)
-            .max(5)
-            .required('Valor invalido'),
+            .max(600),
+          //.required('Valor invalido'),
           moradores: yup
             .number()
             .min(1)
@@ -198,11 +207,9 @@ export class Cadastro extends Component {
             .min(1)
             .max(10)
             .required('Quantidade invalida'),
-          genero: yup
-            .string()
-            .max(50)
-            .required('Genero invalido'),
-          animais: yup.boolean().required('Invalido'),
+          genero: yup.string().max(50),
+          //.required('Genero invalido'),
+          //animais: yup, //.required('Invalido'),
           aQuarto: yup
             .string()
             .min(3)
@@ -483,7 +490,7 @@ export class Cadastro extends Component {
                           )}
                         </View>
                       </View>
-                      <View style={{ width: '43%' }}>
+                      {/* <View style={{ width: '43%' }}>
                         <Text style={estilo.txtLabel}>Aceita Animais ?</Text>
                         <Item picker>
                           <Picker
@@ -511,7 +518,7 @@ export class Cadastro extends Component {
                             </Text>
                           )}
                         </View>
-                      </View>
+                      </View> */}
                     </View>
                     <View style={estilo.campos} inlineLabel>
                       <Label style={estilo.txtLabel}>
@@ -568,10 +575,11 @@ export class Cadastro extends Component {
                     >
                       <Button
                         style={estilo.btnProximo}
-                        onPress={() => {
-                          this.entrar();
+                        onPress={
+                          handleSubmit
+
                           //this.props.navigation.navigate('Confirmacao');
-                        }}
+                        }
                       >
                         <Text>Publicar</Text>
                         <Icon
