@@ -21,6 +21,7 @@ import {
   editValor,
 } from '../../actions/CaronaActions';
 import {
+  editValorAluguel,
   editNomeRepublica,
   editBairro,
   editPessoas,
@@ -37,7 +38,7 @@ import {
   editNumVagas,
   editRepresentante,
   editRua,
-  editNumeroCasa,
+  editNumero,
 } from '../../actions/AuthActions';
 
 // import { Container } from './styles';
@@ -78,17 +79,16 @@ class Anuncios extends Component {
 
   editRepublica(edit) {
     const dados = edit;
-
     console.tron.log(dados);
     this.props.editNomeRepublica(dados.nomeRepublica);
-    this.props.editValor(dados.valorAluguel);
+    this.props.editValorAluguel(dados.valorAluguel);
     this.props.editBairro(dados.bairro);
     this.props.editRua(dados.rua);
-    this.props.editNumeroCasa(dados.numeroCasa);
+    this.props.editNumero(dados.numeroCasa);
     this.props.editPessoas(dados.pessoas);
     this.props.editAnimal(dados.animal);
     this.props.editDescricao(dados.descricao);
-    this.props.editAcomodacaoQuarto(dados.acamodacaoQuarto);
+    this.props.editAcomodacaoQuarto(dados.acomodacaoQuarto);
     this.props.editAcomodacaoRepublica(dados.acomodacaoRepublica);
     this.props.editObservacao(dados.observacao);
     this.props.editGenero(dados.genero);
@@ -97,6 +97,8 @@ class Anuncios extends Component {
     this.props.editImg1(dados.imagem1);
     this.props.editImg2(dados.imagem2);
     this.props.editImg3(dados.imagem3);
+    this.props.editValor(dados.valor);
+    this.props.editValorConta(dados.valorContas);
     this.props.navigation.navigate('Cadastro', { update: true });
   }
 
@@ -205,6 +207,7 @@ class Anuncios extends Component {
 const EditConnect = connect(
   null,
   {
+    editValorAluguel,
     editNomeRepublica,
     editBairro,
     editPessoas,
@@ -221,7 +224,7 @@ const EditConnect = connect(
     editNumVagas,
     editRepresentante,
     editRua,
-    editNumeroCasa,
+    editNumero,
     editChegada,
     editData,
     editDesembarque,

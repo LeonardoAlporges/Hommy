@@ -18,7 +18,7 @@ export const editNomeRepublica = newNomeRepublica => {
   };
 };
 
-export const editValor = newValorAluguel => {
+export const editValorAluguel = newValorAluguel => {
   return {
     type: 'editValorAluguel', //nome da açao
     payload: {
@@ -176,9 +176,9 @@ export const editRua = newRua => {
   };
 };
 
-export const editNumeroCasa = newNumhouse => {
+export const editNumero = newNumhouse => {
   return {
-    type: 'editNumeroCasa', //nome da açao
+    type: 'editNumero', //nome da açao
     payload: {
       //Aqui é as informaçoes que vc ta enviando no caso aqui é so email
       numeroCasa: newNumhouse,

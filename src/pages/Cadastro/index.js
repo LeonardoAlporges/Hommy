@@ -50,9 +50,10 @@ export class Cadastro extends Component {
     this.state = {
       loading: true,
       update: this.props.navigation.state.params.update,
-      selected2: undefined,
-      selected3: undefined,
+      genero: '',
+      animal: '',
     };
+    console.tron.log('oque vem ?', this.props);
 
     this.verificarParametro(this.props.navigation.state.params.update);
   }
@@ -86,16 +87,17 @@ export class Cadastro extends Component {
     this.props.editImg3('');
   }
 
-  teste() {}
-  onValueChange2(value) {
+  onGeneroChange(value) {
     this.setState({
-      selected2: value,
+      genero: value,
     });
+    console.tron.log('Mudou Genero');
   }
-  onValueChange3(value) {
+  onAnimalChange(value) {
     this.setState({
-      selected3: value,
+      animal: value,
     });
+    console.tron.log('Mudou Animal');
   }
 
   async entrar(values) {
@@ -105,14 +107,14 @@ export class Cadastro extends Component {
       valorAluguel: values.aluguel,
       bairro: values.bairro,
       rua: values.rua,
-      numeroCasa: values.numeroCasa,
+      numeroCasa: values.numero,
       pessoas: values.moradores,
       descricao: values.desc,
-      animal: values.animal,
-      acamodacaoQuarto: values.movelQuarto,
-      acomodacaoRepublica: values.moveisComun,
-      valorContas: values.valorContas,
-      observacao: values.observacao,
+      animal: values.animais,
+      acamodacaoQuarto: values.aQuarto,
+      acomodacaoRepublica: values.aRepublica,
+      valorContas: values.contas,
+      //observacao: values.observacao,
       genero: values.genero,
       numVagas: values.numVagas,
       //representante: values.representante,
@@ -470,10 +472,10 @@ export class Cadastro extends Component {
                             placeholder=""
                             placeholderStyle={{ color: '#bfc6ea' }}
                             placeholderIconColor="#007aff"
-                            selectedValue={this.state.selected3}
-                            onValueChange={this.onValueChange3.bind(this)}
+                            selectedValue={values.genero}
+                            onValueChange={handleChange('genero')}
                             value={values.genero}
-                            onChangeText={handleChange('genero')}
+                            //onChangeText={handleChange('genero')}
                             placeholder=""
                             onBlur={() => setFieldTouched('genero')}
                           >
@@ -490,7 +492,7 @@ export class Cadastro extends Component {
                           )}
                         </View>
                       </View>
-                      {/* <View style={{ width: '43%' }}>
+                      <View style={{ width: '43%' }}>
                         <Text style={estilo.txtLabel}>Aceita Animais ?</Text>
                         <Item picker>
                           <Picker
@@ -500,10 +502,10 @@ export class Cadastro extends Component {
                             placeholder="Sim ou Nao"
                             placeholderStyle={{ color: '#bfc6ea' }}
                             placeholderIconColor="#007aff"
-                            selectedValue={this.state.selected2}
-                            onValueChange={this.onValueChange2.bind(this)}
+                            selectedValue={values.animais}
+                            onValueChange={handleChange('animais')}
                             value={values.animais}
-                            onChangeText={handleChange('animais')}
+                            //onChangeText={handleChange('animais')}
                             placeholder=""
                             onBlur={() => setFieldTouched('animais')}
                           >
@@ -518,7 +520,7 @@ export class Cadastro extends Component {
                             </Text>
                           )}
                         </View>
-                      </View> */}
+                      </View>
                     </View>
                     <View style={estilo.campos} inlineLabel>
                       <Label style={estilo.txtLabel}>
@@ -531,7 +533,7 @@ export class Cadastro extends Component {
                           onChangeText={handleChange('aQuarto')}
                           placeholder=""
                           onBlur={() => setFieldTouched('aQuarto')}
-                          placeholder="EX: Ar Condicionado, Janela, Criado Mudo"
+                          placeholder=""
                         />
                       </Item>
                     </View>
