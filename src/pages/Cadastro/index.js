@@ -187,18 +187,18 @@ export class Cadastro extends Component {
           numero: yup
             .number()
             .min(1)
-            .max(10000) //Aqui e um numero em valor nao em caracteres
+            .max(10000)
             .required('Numero invalido'),
           aluguel: yup
             .number()
             .min(2)
-            .max(2000),
-          //.required('Valor invalido'),
+            .max(2000)
+            .required('Valor invalido'),
           contas: yup
             .number()
             .min(2)
-            .max(600),
-          //.required('Valor invalido'),
+            .max(600)
+            .required('Valor invalido'),
           moradores: yup
             .number()
             .min(1)
@@ -209,19 +209,21 @@ export class Cadastro extends Component {
             .min(1)
             .max(10)
             .required('Quantidade invalida'),
-          genero: yup.string().max(50),
-          //.required('Genero invalido'),
-          //animais: yup, //.required('Invalido'),
+          genero: yup
+            .string()
+            .max(50)
+            .required('Genero invalido'),
+          animais: yup.string().required('Invalido'),
           aQuarto: yup
             .string()
             .min(3)
             .max(40)
-            .required(),
+            .required('Insira as acomodações do quarto'),
           aRepublica: yup
             .string()
             .min(3)
             .max(40)
-            .required(),
+            .required('Insira as acomodações da repúblicaaqui'),
         })}
       >
         {({
@@ -411,185 +413,139 @@ export class Cadastro extends Component {
                         </View>
                       </View>
                     </View>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        marginTop: 15,
-                      }}
-                    >
-                      <View style={{ width: '43%' }}>
-                        <Text style={estilo.txtLabel}>Moradores</Text>
-                        <Item>
-                          <Input
-                            value={values.moradores}
-                            onChangeText={handleChange('moradores')}
-                            placeholder=""
-                            onBlur={() => setFieldTouched('moradores')}
-                          />
-                        </Item>
-                        <View style={{ height: 15 }}>
-                          {touched.moradores && errors.moradores && (
-                            <Text style={{ fontSize: 10, color: 'red' }}>
-                              {errors.moradores}
-                            </Text>
-                          )}
-                        </View>
-                      </View>
-                      <View style={{ width: '43%' }}>
-                        <Text style={estilo.txtLabel}>Vagas Disponivel</Text>
-                        <Item>
-                          <Input
-                            value={values.vagas}
-                            onChangeText={handleChange('vagas')}
-                            placeholder=""
-                            onBlur={() => setFieldTouched('vagas')}
-                          />
-                        </Item>
-                        <View style={{ height: 15 }}>
-                          {touched.vagas && errors.vagas && (
-                            <Text style={{ fontSize: 10, color: 'red' }}>
-                              {errors.vagas}
-                            </Text>
-                          )}
-                        </View>
-                      </View>
-                    </View>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        marginTop: 15,
-                      }}
-                    >
-                      <View style={{ width: '43%' }}>
-                        <Text style={estilo.txtLabel}>Genero</Text>
-                        <Item picker>
-                          <Picker
-                            mode="dropdown"
-                            iosIcon={<Icon name="arrow-down" />}
-                            style={{ width: undefined }}
-                            placeholder=""
-                            placeholderStyle={{ color: '#bfc6ea' }}
-                            placeholderIconColor="#007aff"
-                            selectedValue={values.genero}
-                            onValueChange={handleChange('genero')}
-                            value={values.genero}
-                            //onChangeText={handleChange('genero')}
-                            placeholder=""
-                            onBlur={() => setFieldTouched('genero')}
-                          >
-                            <Picker.Item label="Feminina" value="feminina" />
-                            <Picker.Item label="Masculina" value="masculina" />
-                            <Picker.Item label="Mista" value="mista" />
-                          </Picker>
-                        </Item>
-                        <View style={{ height: 15 }}>
-                          {touched.genero && errors.genero && (
-                            <Text style={{ fontSize: 10, color: 'red' }}>
-                              {errors.genero}
-                            </Text>
-                          )}
-                        </View>
-                      </View>
-                      <View style={{ width: '43%' }}>
-                        <Text style={estilo.txtLabel}>Aceita Animais ?</Text>
-                        <Item picker>
-                          <Picker
-                            mode="dropdown"
-                            iosIcon={<Icon name="arrow-down" />}
-                            style={{ width: undefined }}
-                            placeholder="Sim ou Nao"
-                            placeholderStyle={{ color: '#bfc6ea' }}
-                            placeholderIconColor="#007aff"
-                            selectedValue={values.animais}
-                            onValueChange={handleChange('animais')}
-                            value={values.animais}
-                            //onChangeText={handleChange('animais')}
-                            placeholder=""
-                            onBlur={() => setFieldTouched('animais')}
-                          >
-                            <Picker.Item label="Sim" value="sim" />
-                            <Picker.Item label="Não" value="nao" />
-                          </Picker>
-                        </Item>
-                        <View style={{ height: 15 }}>
-                          {touched.animais && errors.animais && (
-                            <Text style={{ fontSize: 10, color: 'red' }}>
-                              {errors.animais}
-                            </Text>
-                          )}
-                        </View>
-                      </View>
-                    </View>
-                    <View style={estilo.campos} inlineLabel>
-                      <Label style={estilo.txtLabel}>
-                        Acomodaçoes do Quarto
-                      </Label>
-                      <Item>
-                        <Input
-                          style={estilo.place}
-                          value={values.aQuarto}
-                          onChangeText={handleChange('aQuarto')}
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      marginTop: 15,
+                    }}
+                  >
+                    <View style={{ width: '43%' }}>
+                      <Text style={estilo.txtLabel}>Genero</Text>
+                      <Item picker>
+                        <Picker
+                          mode="dropdown"
+                          iosIcon={<Icon name="arrow-down" />}
+                          style={{ width: undefined }}
                           placeholder=""
-                          onBlur={() => setFieldTouched('aQuarto')}
+                          placeholderStyle={{ color: '#bfc6ea' }}
+                          placeholderIconColor="#007aff"
+                          selectedValue={values.genero}
+                          onValueChange={handleChange('genero')}
+                          value={values.genero}
+                          //onChangeText={handleChange('genero')}
                           placeholder=""
-                        />
+                          onBlur={() => setFieldTouched('genero')}
+                        >
+                          <Picker.Item label="Feminina" value="feminina" />
+                          <Picker.Item label="Masculina" value="masculina" />
+                          <Picker.Item label="Mista" value="mista" />
+                        </Picker>
                       </Item>
+                      <View style={{ height: 15 }}>
+                        {touched.genero && errors.genero && (
+                          <Text style={{ fontSize: 10, color: 'red' }}>
+                            {errors.genero}
+                          </Text>
+                        )}
+                      </View>
                     </View>
-                    <View style={{ height: 15 }}>
-                      {touched.aQuarto && errors.aQuarto && (
-                        <Text style={{ fontSize: 10, color: 'red' }}>
-                          {errors.aQuarto}
-                        </Text>
-                      )}
-                    </View>
-                    <View style={estilo.campos} inlineLabel>
-                      <Label style={estilo.txtLabel}>
-                        Acomodaçoes da Republica
-                      </Label>
-                      <Item>
-                        <Input
-                          style={estilo.place}
-                          value={values.aRepublica}
-                          onChangeText={handleChange('aRepublica')}
+                    <View style={{ width: '43%' }}>
+                      <Text style={estilo.txtLabel}>Aceita Animais ?</Text>
+                      <Item picker>
+                        <Picker
+                          mode="dropdown"
+                          iosIcon={<Icon name="arrow-down" />}
+                          style={{ width: undefined }}
+                          placeholder="Sim ou Nao"
+                          placeholderStyle={{ color: '#bfc6ea' }}
+                          placeholderIconColor="#007aff"
+                          selectedValue={values.animais}
+                          onValueChange={handleChange('animais')}
+                          value={values.animais}
+                          //onChangeText={handleChange('animais')}
                           placeholder=""
-                          onBlur={() => setFieldTouched('aRepublica')}
-                          placeholder="EX: Wifi, Maquina de Lavar, Fogao"
-                        />
+                          onBlur={() => setFieldTouched('animais')}
+                        >
+                          <Picker.Item label="Sim" value="sim" />
+                          <Picker.Item label="Não" value="nao" />
+                        </Picker>
                       </Item>
+                      <View style={{ height: 15 }}>
+                        {touched.animais && errors.animais && (
+                          <Text style={{ fontSize: 10, color: 'red' }}>
+                            {errors.animais}
+                          </Text>
+                        )}
+                      </View>
                     </View>
-                    <View style={{ height: 15 }}>
-                      {touched.aRepublica && errors.aRepublica && (
-                        <Text style={{ fontSize: 10, color: 'red' }}>
-                          {errors.aRepublica}
-                        </Text>
-                      )}
-                    </View>
+                  </View>
+                  <View style={estilo.campos} inlineLabel>
+                    <Label style={estilo.txtLabel}>Acomodaçoes do Quarto</Label>
+                    <Item>
+                      <Input
+                        style={estilo.place}
+                        value={values.aQuarto}
+                        onChangeText={handleChange('aQuarto')}
+                        placeholder=""
+                        onBlur={() => setFieldTouched('aQuarto')}
+                        placeholder=""
+                      />
+                    </Item>
+                  </View>
+                  <View style={{ height: 15 }}>
+                    {touched.aQuarto && errors.aQuarto && (
+                      <Text style={{ fontSize: 10, color: 'red' }}>
+                        {errors.aQuarto}
+                      </Text>
+                    )}
+                  </View>
+                  <View style={estilo.campos} inlineLabel>
+                    <Label style={estilo.txtLabel}>
+                      Acomodaçoes da Republica
+                    </Label>
+                    <Item>
+                      <Input
+                        style={estilo.place}
+                        value={values.aRepublica}
+                        onChangeText={handleChange('aRepublica')}
+                        placeholder=""
+                        onBlur={() => setFieldTouched('aRepublica')}
+                        placeholder="EX: Wifi, Maquina de Lavar, Fogao"
+                      />
+                    </Item>
+                  </View>
+                  <View style={{ height: 15 }}>
+                    {touched.aRepublica && errors.aRepublica && (
+                      <Text style={{ fontSize: 10, color: 'red' }}>
+                        {errors.aRepublica}
+                      </Text>
+                    )}
+                  </View>
 
-                    <View
-                      style={{
-                        width: '100%',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        marginTop: '8%',
-                      }}
+                  <View
+                    style={{
+                      width: '100%',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      marginTop: '8%',
+                    }}
+                  >
+                    <Button
+                      style={estilo.btnProximo}
+                      onPress={
+                        handleSubmit
+
+                        //this.props.navigation.navigate('Confirmacao');
+                      }
                     >
-                      <Button
-                        style={estilo.btnProximo}
-                        onPress={
-                          handleSubmit
-
-                          //this.props.navigation.navigate('Confirmacao');
-                        }
-                      >
-                        <Text>Publicar</Text>
-                        <Icon
-                          name="ios-checkmark-circle"
-                          style={estilo.iconeBtn}
-                        />
-                      </Button>
-                    </View>
+                      <Text>Publicar</Text>
+                      <Icon
+                        name="ios-checkmark-circle"
+                        style={estilo.iconeBtn}
+                      />
+                    </Button>
                   </View>
                 </ScrollView>
               </View>
