@@ -51,7 +51,9 @@ export default class CadastroUsuario extends Component {
             this.EnviarCadastro(values);
           }}
           validationSchema={yup.object().shape({
-            nome: yup.string().required('Insira um Apelido para sua conta'),
+            nome: yup
+            .string()
+            .required('Insira um Apelido para sua conta'),
             email: yup
               .string()
               .email('Insira um Email valido')

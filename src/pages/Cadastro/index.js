@@ -86,7 +86,7 @@ export class Cadastro extends Component {
     this.props.editImg3('');
   }
 
-  teste() {}
+  teste() { }
   onValueChange2(value) {
     this.setState({
       selected2: value,
@@ -185,18 +185,18 @@ export class Cadastro extends Component {
           numero: yup
             .number()
             .min(1)
-            .max(10000) //Aqui e um numero em valor nao em caracteres
+            .max(10000)
             .required('Numero invalido'),
           aluguel: yup
             .number()
             .min(2)
-            .max(2000),
-          //.required('Valor invalido'),
+            .max(2000)
+            .required('Valor invalido'),
           contas: yup
             .number()
             .min(2)
-            .max(600),
-          //.required('Valor invalido'),
+            .max(600)
+            .required('Valor invalido'),
           moradores: yup
             .number()
             .min(1)
@@ -207,19 +207,22 @@ export class Cadastro extends Component {
             .min(1)
             .max(10)
             .required('Quantidade invalida'),
-          genero: yup.string().max(50),
-          //.required('Genero invalido'),
-          //animais: yup, //.required('Invalido'),
+          genero: yup
+          .string().max(50)
+          .required('Genero invalido'),
+          animais: yup
+          .string()
+          .required('Invalido'),
           aQuarto: yup
             .string()
             .min(3)
             .max(40)
-            .required(),
+            .required('Insira as acomodações do quarto'),
           aRepublica: yup
             .string()
             .min(3)
             .max(40)
-            .required(),
+            .required('Insira as acomodações da repúblicaaqui'),
         })}
       >
         {({
@@ -231,179 +234,98 @@ export class Cadastro extends Component {
           isValid,
           handleSubmit,
         }) => (
-          <Fragment>
-            <ViewPager style={{ flex: 1 }}>
-              <View key="1">
-                <View style={estilo.V_header}>
-                  <Icon name="ios-arrow-back" style={estilo.iconHeader} />
-                  <Text style={estilo.title}>Informações Basicas</Text>
-                </View>
-
-                <View style={estilo.V_Conteudo}>
-                  <Text
-                    style={{
-                      fontFamily: 'Roboto',
-                      fontSize: 14,
-                      color: '#687368',
-                      marginBottom: 25,
-                    }}
-                  >
-                    Nos passe algumas informaçoes basica para fazer o registro
-                    de sua republica{' '}
-                  </Text>
-
-                  <View>
-                    <Text style={estilo.txtLabel}>Nome da Republica</Text>
-                    <Item>
-                      <Input
-                        value={values.nome}
-                        onChangeText={handleChange('nome')}
-                        placeholder={this.props.titulo}
-                        onBlur={() => setFieldTouched('nome')}
-                      />
-                    </Item>
-                  </View>
-                  <View style={{ height: 15 }}>
-                    {touched.nome && errors.nome && (
-                      <Text style={{ fontSize: 10, color: 'red' }}>
-                        {errors.nome}
-                      </Text>
-                    )}
+            <Fragment>
+              <ViewPager style={{ flex: 1 }}>
+                <View key="1">
+                  <View style={estilo.V_header}>
+                    <Icon name="ios-arrow-back" style={estilo.iconHeader} />
+                    <Text style={estilo.title}>Informações Basicas</Text>
                   </View>
 
-                  <View style={estilo.campos} inlineLabel>
-                    <Label style={estilo.txtLabel}>Bairro</Label>
-                    <Item>
-                      <Input
-                        value={values.bairro}
-                        onChangeText={handleChange('bairro')}
-                        placeholder=""
-                        onBlur={() => setFieldTouched('bairro')}
-                      />
-                    </Item>
-                  </View>
-                  <View style={{ height: 15 }}>
-                    {touched.bairro && errors.bairro && (
-                      <Text style={{ fontSize: 10, color: 'red' }}>
-                        {errors.bairro}
-                      </Text>
-                    )}
-                  </View>
-                  <View style={estilo.ruaNum}>
-                    <View floatingLabel style={{ width: '70%' }}>
-                      <Label style={estilo.txtLabel}>Rua </Label>
-                      <Item>
-                        <Input
-                          value={values.rua}
-                          onChangeText={handleChange('rua')}
-                          placeholder=""
-                          onBlur={() => setFieldTouched('rua')}
-                        />
-                      </Item>
-                      <View style={{ height: 15 }}>
-                        {touched.rua && errors.rua && (
-                          <Text style={{ fontSize: 10, color: 'red' }}>
-                            {errors.rua}
-                          </Text>
-                        )}
-                      </View>
-                    </View>
-
-                    <View floatingLabel style={{ width: '20%' }}>
-                      <Label style={estilo.txtLabel}>N°</Label>
-                      <Item>
-                        <Input
-                          value={values.numero}
-                          onChangeText={handleChange('numero')}
-                          placeholder=""
-                          onBlur={() => setFieldTouched('numero')}
-                        />
-                      </Item>
-                      <View style={{ height: 15 }}>
-                        {touched.numero && errors.numero && (
-                          <Text style={{ fontSize: 10, color: 'red' }}>
-                            {errors.numero}
-                          </Text>
-                        )}
-                      </View>
-                    </View>
-                  </View>
-                  <View
-                    style={{
-                      width: '100%',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      marginTop: '50%',
-                    }}
-                  >
-                    <Button style={estilo.btnProximo} onPress={handleSubmit}>
-                      <Text>Prosseguir</Text>
-                    </Button>
-                  </View>
-                </View>
-              </View>
-
-              <View key="2">
-                <View style={estilo.V_header}>
-                  <Icon name="ios-arrow-back" style={estilo.iconHeader} />
-                  <Text style={estilo.title}>Detalhes da República</Text>
-                </View>
-                <ScrollView>
                   <View style={estilo.V_Conteudo}>
                     <Text
                       style={{
                         fontFamily: 'Roboto',
                         fontSize: 14,
                         color: '#687368',
-                        marginBottom: 10,
+                        marginBottom: 25,
                       }}
                     >
-                      Agora nos passe algumas caracteristicas basica de sua
-                      republica.{' '}
+                      Nos passe algumas informaçoes basica para fazer o registro
+                    de sua republica{' '}
                     </Text>
 
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        marginTop: 15,
-                      }}
-                    >
-                      <View style={{ width: '43%' }}>
-                        <Text style={estilo.txtLabel}>Aluguel</Text>
+                    <View>
+                      <Text style={estilo.txtLabel}>Nome da Republica</Text>
+                      <Item>
+                        <Input
+                          value={values.nome}
+                          onChangeText={handleChange('nome')}
+                          placeholder={this.props.titulo}
+                          onBlur={() => setFieldTouched('nome')}
+                        />
+                      </Item>
+                    </View>
+                    <View style={{ height: 15 }}>
+                      {touched.nome && errors.nome && (
+                        <Text style={{ fontSize: 10, color: 'red' }}>
+                          {errors.nome}
+                        </Text>
+                      )}
+                    </View>
+
+                    <View style={estilo.campos} inlineLabel>
+                      <Label style={estilo.txtLabel}>Bairro</Label>
+                      <Item>
+                        <Input
+                          value={values.bairro}
+                          onChangeText={handleChange('bairro')}
+                          placeholder=""
+                          onBlur={() => setFieldTouched('bairro')}
+                        />
+                      </Item>
+                    </View>
+                    <View style={{ height: 15 }}>
+                      {touched.bairro && errors.bairro && (
+                        <Text style={{ fontSize: 10, color: 'red' }}>
+                          {errors.bairro}
+                        </Text>
+                      )}
+                    </View>
+                    <View style={estilo.ruaNum}>
+                      <View floatingLabel style={{ width: '70%' }}>
+                        <Label style={estilo.txtLabel}>Rua </Label>
                         <Item>
-                          <Label fixedLabel>R$</Label>
                           <Input
-                            value={values.aluguel}
-                            onChangeText={handleChange('aluguel')}
+                            value={values.rua}
+                            onChangeText={handleChange('rua')}
                             placeholder=""
-                            onBlur={() => setFieldTouched('aluguel')}
+                            onBlur={() => setFieldTouched('rua')}
                           />
                         </Item>
                         <View style={{ height: 15 }}>
-                          {touched.aluguel && errors.aluguel && (
+                          {touched.rua && errors.rua && (
                             <Text style={{ fontSize: 10, color: 'red' }}>
-                              {errors.aluguel}
+                              {errors.rua}
                             </Text>
                           )}
                         </View>
                       </View>
 
-                      <View style={{ width: '43%' }}>
-                        <Text style={estilo.txtLabel}>Média de contas</Text>
+                      <View floatingLabel style={{ width: '20%' }}>
+                        <Label style={estilo.txtLabel}>N°</Label>
                         <Item>
-                          <Label fixedLabel>R$</Label>
                           <Input
-                            value={values.contas}
-                            onChangeText={handleChange('contas')}
+                            value={values.numero}
+                            onChangeText={handleChange('numero')}
                             placeholder=""
-                            onBlur={() => setFieldTouched('contas')}
+                            onBlur={() => setFieldTouched('numero')}
                           />
                         </Item>
                         <View style={{ height: 15 }}>
-                          {touched.contas && errors.contas && (
+                          {touched.numero && errors.numero && (
                             <Text style={{ fontSize: 10, color: 'red' }}>
-                              {errors.contas}
+                              {errors.numero}
                             </Text>
                           )}
                         </View>
@@ -411,86 +333,167 @@ export class Cadastro extends Component {
                     </View>
                     <View
                       style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        marginTop: 15,
+                        width: '100%',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginTop: '50%',
                       }}
                     >
-                      <View style={{ width: '43%' }}>
-                        <Text style={estilo.txtLabel}>Moradores</Text>
-                        <Item>
-                          <Input
-                            value={values.moradores}
-                            onChangeText={handleChange('moradores')}
-                            placeholder=""
-                            onBlur={() => setFieldTouched('moradores')}
-                          />
-                        </Item>
-                        <View style={{ height: 15 }}>
-                          {touched.moradores && errors.moradores && (
-                            <Text style={{ fontSize: 10, color: 'red' }}>
-                              {errors.moradores}
-                            </Text>
-                          )}
-                        </View>
-                      </View>
-                      <View style={{ width: '43%' }}>
-                        <Text style={estilo.txtLabel}>Vagas Disponivel</Text>
-                        <Item>
-                          <Input
-                            value={values.vagas}
-                            onChangeText={handleChange('vagas')}
-                            placeholder=""
-                            onBlur={() => setFieldTouched('vagas')}
-                          />
-                        </Item>
-                        <View style={{ height: 15 }}>
-                          {touched.vagas && errors.vagas && (
-                            <Text style={{ fontSize: 10, color: 'red' }}>
-                              {errors.vagas}
-                            </Text>
-                          )}
-                        </View>
-                      </View>
+                      <Button style={estilo.btnProximo} onPress={handleSubmit}>
+                        <Text>Prosseguir</Text>
+                      </Button>
                     </View>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        marginTop: 15,
-                      }}
-                    >
-                      <View style={{ width: '43%' }}>
-                        <Text style={estilo.txtLabel}>Genero</Text>
-                        <Item picker>
-                          <Picker
-                            mode="dropdown"
-                            iosIcon={<Icon name="arrow-down" />}
-                            style={{ width: undefined }}
-                            placeholder=""
-                            placeholderStyle={{ color: '#bfc6ea' }}
-                            placeholderIconColor="#007aff"
-                            selectedValue={this.state.selected3}
-                            onValueChange={this.onValueChange3.bind(this)}
-                            value={values.genero}
-                            onChangeText={handleChange('genero')}
-                            placeholder=""
-                            onBlur={() => setFieldTouched('genero')}
-                          >
-                            <Picker.Item label="Feminina" value="feminina" />
-                            <Picker.Item label="Masculina" value="masculina" />
-                            <Picker.Item label="Mista" value="mista" />
-                          </Picker>
-                        </Item>
-                        <View style={{ height: 15 }}>
-                          {touched.genero && errors.genero && (
-                            <Text style={{ fontSize: 10, color: 'red' }}>
-                              {errors.genero}
-                            </Text>
-                          )}
+                  </View>
+                </View>
+
+                <View key="2">
+                  <View style={estilo.V_header}>
+                    <Icon name="ios-arrow-back" style={estilo.iconHeader} />
+                    <Text style={estilo.title}>Detalhes da República</Text>
+                  </View>
+                  <ScrollView>
+                    <View style={estilo.V_Conteudo}>
+                      <Text
+                        style={{
+                          fontFamily: 'Roboto',
+                          fontSize: 14,
+                          color: '#687368',
+                          marginBottom: 10,
+                        }}
+                      >
+                        Agora nos passe algumas caracteristicas basica de sua
+                      republica.{' '}
+                      </Text>
+
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          justifyContent: 'space-between',
+                          marginTop: 15,
+                        }}
+                      >
+                        <View style={{ width: '43%' }}>
+                          <Text style={estilo.txtLabel}>Aluguel</Text>
+                          <Item>
+                            <Label fixedLabel>R$</Label>
+                            <Input
+                              value={values.aluguel}
+                              onChangeText={handleChange('aluguel')}
+                              placeholder=""
+                              onBlur={() => setFieldTouched('aluguel')}
+                            />
+                          </Item>
+                          <View style={{ height: 15 }}>
+                            {touched.aluguel && errors.aluguel && (
+                              <Text style={{ fontSize: 10, color: 'red' }}>
+                                {errors.aluguel}
+                              </Text>
+                            )}
+                          </View>
+                        </View>
+
+                        <View style={{ width: '43%' }}>
+                          <Text style={estilo.txtLabel}>Média de contas</Text>
+                          <Item>
+                            <Label fixedLabel>R$</Label>
+                            <Input
+                              value={values.contas}
+                              onChangeText={handleChange('contas')}
+                              placeholder=""
+                              onBlur={() => setFieldTouched('contas')}
+                            />
+                          </Item>
+                          <View style={{ height: 15 }}>
+                            {touched.contas && errors.contas && (
+                              <Text style={{ fontSize: 10, color: 'red' }}>
+                                {errors.contas}
+                              </Text>
+                            )}
+                          </View>
                         </View>
                       </View>
-                      {/* <View style={{ width: '43%' }}>
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          justifyContent: 'space-between',
+                          marginTop: 15,
+                        }}
+                      >
+                        <View style={{ width: '43%' }}>
+                          <Text style={estilo.txtLabel}>Moradores</Text>
+                          <Item>
+                            <Input
+                              value={values.moradores}
+                              onChangeText={handleChange('moradores')}
+                              placeholder=""
+                              onBlur={() => setFieldTouched('moradores')}
+                            />
+                          </Item>
+                          <View style={{ height: 15 }}>
+                            {touched.moradores && errors.moradores && (
+                              <Text style={{ fontSize: 10, color: 'red' }}>
+                                {errors.moradores}
+                              </Text>
+                            )}
+                          </View>
+                        </View>
+                        <View style={{ width: '43%' }}>
+                          <Text style={estilo.txtLabel}>Vagas Disponivel</Text>
+                          <Item>
+                            <Input
+                              value={values.vagas}
+                              onChangeText={handleChange('vagas')}
+                              placeholder=""
+                              onBlur={() => setFieldTouched('vagas')}
+                            />
+                          </Item>
+                          <View style={{ height: 15 }}>
+                            {touched.vagas && errors.vagas && (
+                              <Text style={{ fontSize: 10, color: 'red' }}>
+                                {errors.vagas}
+                              </Text>
+                            )}
+                          </View>
+                        </View>
+                      </View>
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          justifyContent: 'space-between',
+                          marginTop: 15,
+                        }}
+                      >
+                        <View style={{ width: '43%' }}>
+                          <Text style={estilo.txtLabel}>Genero</Text>
+                          <Item picker>
+                            <Picker
+                              mode="dropdown"
+                              iosIcon={<Icon name="arrow-down" />}
+                              style={{ width: undefined }}
+                              placeholder=""
+                              placeholderStyle={{ color: '#bfc6ea' }}
+                              placeholderIconColor="#007aff"
+                              selectedValue={this.state.selected3}
+                              onValueChange={this.onValueChange3.bind(this)}
+                              value={values.genero}
+                              onChangeText={handleChange('genero')}
+                              placeholder=""
+                              onBlur={() => setFieldTouched('genero')}
+                            >
+                              <Picker.Item label="Feminina" value="feminina" />
+                              <Picker.Item label="Masculina" value="masculina" />
+                              <Picker.Item label="Mista" value="mista" />
+                            </Picker>
+                          </Item>
+                          <View style={{ height: 15 }}>
+                            {touched.genero && errors.genero && (
+                              <Text style={{ fontSize: 10, color: 'red' }}>
+                                {errors.genero}
+                              </Text>
+                            )}
+                          </View>
+                        </View>
+                        {/* <View style={{ width: '43%' }}>
                         <Text style={estilo.txtLabel}>Aceita Animais ?</Text>
                         <Item picker>
                           <Picker
@@ -519,81 +522,81 @@ export class Cadastro extends Component {
                           )}
                         </View>
                       </View> */}
-                    </View>
-                    <View style={estilo.campos} inlineLabel>
-                      <Label style={estilo.txtLabel}>
-                        Acomodaçoes do Quarto
+                      </View>
+                      <View style={estilo.campos} inlineLabel>
+                        <Label style={estilo.txtLabel}>
+                          Acomodaçoes do Quarto
                       </Label>
-                      <Item>
-                        <Input
-                          style={estilo.place}
-                          value={values.aQuarto}
-                          onChangeText={handleChange('aQuarto')}
-                          placeholder=""
-                          onBlur={() => setFieldTouched('aQuarto')}
-                          placeholder="EX: Ar Condicionado, Janela, Criado Mudo"
-                        />
-                      </Item>
-                    </View>
-                    <View style={{ height: 15 }}>
-                      {touched.aQuarto && errors.aQuarto && (
-                        <Text style={{ fontSize: 10, color: 'red' }}>
-                          {errors.aQuarto}
-                        </Text>
-                      )}
-                    </View>
-                    <View style={estilo.campos} inlineLabel>
-                      <Label style={estilo.txtLabel}>
-                        Acomodaçoes da Republica
+                        <Item>
+                          <Input
+                            style={estilo.place}
+                            value={values.aQuarto}
+                            onChangeText={handleChange('aQuarto')}
+                            placeholder=""
+                            onBlur={() => setFieldTouched('aQuarto')}
+                            placeholder="EX: Ar Condicionado, Janela, Criado Mudo"
+                          />
+                        </Item>
+                      </View>
+                      <View style={{ height: 15 }}>
+                        {touched.aQuarto && errors.aQuarto && (
+                          <Text style={{ fontSize: 10, color: 'red' }}>
+                            {errors.aQuarto}
+                          </Text>
+                        )}
+                      </View>
+                      <View style={estilo.campos} inlineLabel>
+                        <Label style={estilo.txtLabel}>
+                          Acomodaçoes da Republica
                       </Label>
-                      <Item>
-                        <Input
-                          style={estilo.place}
-                          value={values.aRepublica}
-                          onChangeText={handleChange('aRepublica')}
-                          placeholder=""
-                          onBlur={() => setFieldTouched('aRepublica')}
-                          placeholder="EX: Wifi, Maquina de Lavar, Fogao"
-                        />
-                      </Item>
-                    </View>
-                    <View style={{ height: 15 }}>
-                      {touched.aRepublica && errors.aRepublica && (
-                        <Text style={{ fontSize: 10, color: 'red' }}>
-                          {errors.aRepublica}
-                        </Text>
-                      )}
-                    </View>
+                        <Item>
+                          <Input
+                            style={estilo.place}
+                            value={values.aRepublica}
+                            onChangeText={handleChange('aRepublica')}
+                            placeholder=""
+                            onBlur={() => setFieldTouched('aRepublica')}
+                            placeholder="EX: Wifi, Maquina de Lavar, Fogao"
+                          />
+                        </Item>
+                      </View>
+                      <View style={{ height: 15 }}>
+                        {touched.aRepublica && errors.aRepublica && (
+                          <Text style={{ fontSize: 10, color: 'red' }}>
+                            {errors.aRepublica}
+                          </Text>
+                        )}
+                      </View>
 
-                    <View
-                      style={{
-                        width: '100%',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        marginTop: '8%',
-                      }}
-                    >
-                      <Button
-                        style={estilo.btnProximo}
-                        onPress={
-                          handleSubmit
-
-                          //this.props.navigation.navigate('Confirmacao');
-                        }
+                      <View
+                        style={{
+                          width: '100%',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          marginTop: '8%',
+                        }}
                       >
-                        <Text>Publicar</Text>
-                        <Icon
-                          name="ios-checkmark-circle"
-                          style={estilo.iconeBtn}
-                        />
-                      </Button>
+                        <Button
+                          style={estilo.btnProximo}
+                          onPress={
+                            handleSubmit
+
+                            //this.props.navigation.navigate('Confirmacao');
+                          }
+                        >
+                          <Text>Publicar</Text>
+                          <Icon
+                            name="ios-checkmark-circle"
+                            style={estilo.iconeBtn}
+                          />
+                        </Button>
+                      </View>
                     </View>
-                  </View>
-                </ScrollView>
-              </View>
-            </ViewPager>
-          </Fragment>
-        )}
+                  </ScrollView>
+                </View>
+              </ViewPager>
+            </Fragment>
+          )}
       </Formik>
     );
   }
