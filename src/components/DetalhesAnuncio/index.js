@@ -7,7 +7,9 @@ import { connect } from 'react-redux';
 
 import estilo from './style';
 import ViewPager from '@react-native-community/viewpager';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import Icon2 from 'react-native-vector-icons/FontAwesome';
+
 
 class DetalhesAnuncio extends Component {
   AbrirUrl = () => {
@@ -48,11 +50,11 @@ class DetalhesAnuncio extends Component {
         </View>
         <View style={estilo.V_caracteristicaItens}>
           <View style={estilo.item}>
-            <Icon name="home-outline" style={estilo.icone} />
+            <Icon name="home" style={estilo.icone} />
             <Text style={estilo.txtlabel}>Apartamento</Text>
           </View>
           <View style={estilo.item}>
-            <Icon name="gender-transgender" style={estilo.icone} />
+            <Icon name="people" style={estilo.icone} />
             <Text style={estilo.txtlabel}>{this.props.genero}</Text>
           </View>
         </View>
@@ -61,7 +63,7 @@ class DetalhesAnuncio extends Component {
         </View>
         <View style={estilo.V_caracteristicaAcomodacao}>
           <View style={estilo.itemAcomodacao}>
-            <Icon name="sofa" style={estilo.icone} />
+            <Icon name="drawer" style={estilo.icone} />
             <Text style={estilo.txtlabel}>{this.props.acomodacaoQuarto}</Text>
           </View>
         </View>
@@ -70,7 +72,7 @@ class DetalhesAnuncio extends Component {
         </View>
         <View style={estilo.V_caracteristicaAcomodacao}>
           <View style={estilo.itemAcomodacao}>
-            <Icon name="television-classic" style={estilo.icone} />
+            <Icon name="screen-desktop" style={estilo.icone} />
             <Text style={estilo.txtlabel}>
               {this.props.acomodacaoRepublica}
             </Text>
@@ -82,7 +84,7 @@ class DetalhesAnuncio extends Component {
         </View>
         <View style={estilo.V_vagas}>
           <View style={estilo.vagas}>
-            <Icon name="account-group-outline" style={estilo.icone} />
+            <Icon name="user-follow" style={estilo.icone} />
             <Text style={estilo.txtlabel}>{this.props.numVagas} Vagas</Text>
           </View>
         </View>
@@ -91,7 +93,7 @@ class DetalhesAnuncio extends Component {
         </View>
         <View style={estilo.V_vagas}>
           <View style={estilo.vagas}>
-            <Icon name="map-marker-outline" style={estilo.icone} />
+            <Icon name="location-pin" style={estilo.icone} />
             <Text style={estilo.txtlabel}>
               {this.props.rua},{this.props.bairro}, Nº
               {this.props.numeroCasa}
@@ -103,7 +105,7 @@ class DetalhesAnuncio extends Component {
         </View>
         <View style={estilo.V_vagas}>
           <View style={estilo.vagas}>
-            <Icon name="account-badge-outline" style={estilo.icone} />
+            <Icon name="user" style={estilo.icone} />
             <Text style={estilo.txtlabel}>{this.props.representante}</Text>
           </View>
         </View>
@@ -112,7 +114,7 @@ class DetalhesAnuncio extends Component {
         </View>
         <View style={estilo.V_vagas}>
           <View style={estilo.vagas}>
-            <Icon name="cart-outline" style={estilo.icone} />
+            <Icon name="chart" style={estilo.icone} />
             <Text style={estilo.txtlabel}>{this.props.valorContas}</Text>
           </View>
         </View>
@@ -121,7 +123,7 @@ class DetalhesAnuncio extends Component {
         </View>
         <View style={estilo.V_vagas}>
           <View style={estilo.vagas}>
-            <Icon name="cash" style={estilo.icone} />
+            <Icon name="wallet" style={estilo.icone} />
             <Text style={estilo.txtlabel}>{this.props.valor}</Text>
           </View>
         </View>
@@ -134,7 +136,7 @@ class DetalhesAnuncio extends Component {
               );
             }}
           >
-            <Icon name="whatsapp" style={{ color: '#ffffff', fontSize: 30 }} />
+            <Icon2 name="whatsapp" style={{ color: '#ffffff', fontSize: 30 }} />
             <Text style={{ color: '#FFFFFF', paddingRight: 15 }}>ZipZop</Text>
           </Button>
           <Button
@@ -144,7 +146,7 @@ class DetalhesAnuncio extends Component {
             }}
           >
             <Icon
-              name="phone-outline"
+              name="phone"
               style={{ color: '#ffffff', fontSize: 30, marginRight: 5 }}
             />
             <Text style={{ color: '#FFFFFF', paddingRight: 15 }}>
@@ -172,7 +174,6 @@ const mapsStateToProps = state => {
     animal: state.auth.animal,
     acomodacaoQuarto: state.auth.acomodacaoQuarto,
     acomodacaoRepublica: state.auth.acomodacaoRepublica,
-    valorContas: state.auth.valorContas,
     observacao: state.auth.observacao,
     imagem1: state.auth.imagem1,
     imagem2: state.auth.imagem2,

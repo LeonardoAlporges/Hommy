@@ -22,7 +22,7 @@ const Estilos = StyleSheet.create({
   },
   icon2: {
     color: '#009ddb',
-    fontSize: 35,
+    fontSize: 25,
   },
 });
 

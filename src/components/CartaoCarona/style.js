@@ -29,7 +29,7 @@ const Estilos = StyleSheet.create({
     width: 40,
   },
   icon: {
-    fontSize: 16,
+    fontSize: 12,
     color: 'blue',
   },
   V_imagem: {
@@ -80,11 +80,11 @@ const Estilos = StyleSheet.create({
     fontWeight: 'bold',
   },
   iconDesCh: {
-    fontSize: 26,
+    fontSize: 12,
     color: 'green',
   },
   iconDesSa: {
-    fontSize: 26,
+    fontSize: 12,
     color: 'red',
   },
   txtdeslcSa: {

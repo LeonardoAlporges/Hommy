@@ -17,7 +17,7 @@ import {
   editValor,
 } from '../../actions/CaronaActions';
 
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import Estilos from './style';
 import { Button } from 'native-base';
 
@@ -58,8 +58,8 @@ class CartaoCarona extends Component {
             </View>
             <Text>{this.props.dados.nome}</Text>
             <View style={Estilos.V_nota}>
-              <Icon name="settings-outline" style={Estilos.icon} />
-              <Text>{this.props.dados.nota}.3</Text>
+              <Icon name="settings" style={Estilos.icon} />
+              <Text> {this.props.dados.nota}.3</Text>
             </View>
           </View>
           <View style={Estilos.V_local}>
@@ -67,16 +67,16 @@ class CartaoCarona extends Component {
               <Text style={Estilos.txtdeslcSa}>
                 {this.props.dados.horaSaida}
               </Text>
-              <Icon name="car-sports" style={Estilos.iconDesSa} />
+              <Icon name="action-redo" style={Estilos.iconDesSa} />
               <Text style={Estilos.txtdeslcSa}>
-                {this.props.dados.localSaida}
+                 {this.props.dados.localSaida}
               </Text>
             </View>
             <View style={Estilos.V_LocLabel}>
               <Text style={Estilos.txtdeslcCh}>
                 {this.props.dados.horaChegada}
               </Text>
-              <Icon name="flag-checkered" style={Estilos.iconDesCh} />
+              <Icon name="flag" style={Estilos.iconDesCh} />
               <Text style={Estilos.txtdeslcCh}>
                 {this.props.dados.localChegada}
               </Text>

@@ -4,7 +4,7 @@ import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
 import {
   editNomeRepublica,
-  editValor,
+  editValorAluguel,
   editBairro,
   editPessoas,
   editDescricao,
@@ -20,10 +20,10 @@ import {
   editNumVagas,
   editRepresentante,
   editRua,
-  editNumeroCasa,
+  editNumero,
 } from '../../actions/AuthActions';
 
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import Estilos from './styles';
 
 class Cartao extends Component {
@@ -37,10 +37,10 @@ class Cartao extends Component {
 
     console.log(this.props.leonardo);
     this.props.editNomeRepublica(this.props.leonardo.nomeRepublica);
-    this.props.editValor(this.props.leonardo.valorAluguel);
+    this.props.editValorAluguel(this.props.leonardo.valorAluguel);
     this.props.editBairro(this.props.leonardo.bairro);
     this.props.editRua(this.props.leonardo.rua);
-    this.props.editNumeroCasa(this.props.leonardo.numeroCasa);
+    this.props.editNumero(this.props.leonardo.numeroCasa);
     this.props.editPessoas(this.props.leonardo.pessoas);
     this.props.editAnimal(this.props.leonardo.animal);
     this.props.editDescricao(this.props.leonardo.descricao);
@@ -91,13 +91,13 @@ class Cartao extends Component {
               <View
                 style={{ flexDirection: 'row', width: '50%', marginRight: 10 }}
               >
-                <Icon style={Estilos.txtIcon} name="currency-usd" />
+                <Icon style={Estilos.txtIcon} name="wallet" />
                 <Text style={Estilos.txtDesc}>
                   {this.props.leonardo.valorAluguel}
                 </Text>
               </View>
               <View style={{ flexDirection: 'row', width: '50%' }}>
-                <Icon style={Estilos.txtIcon} name="account-group-outline" />
+                <Icon style={Estilos.txtIcon} name="people" />
                 <Text style={Estilos.txtDesc}>
                   {this.props.leonardo.numVagas} Vagas
                 </Text>
@@ -127,6 +127,7 @@ const mapStateToProps = state => {
     imagem2: state.auth.imagem2,
     imagem3: state.auth.imagem3,
     numVagas: state.auth.numVagas,
+    numeroCasa: state.auth.numeroCasa,
     // Ou seja agora e como se tivessemos duas props dentro do compoennte cadastro
   };
 };
@@ -135,7 +136,7 @@ const cardConnect = connect(
   mapStateToProps,
   {
     editNomeRepublica,
-    editValor,
+    editValorAluguel,
     editBairro,
     editPessoas,
     editDescricao,
@@ -151,7 +152,7 @@ const cardConnect = connect(
     editNumVagas,
     editRepresentante,
     editRua,
-    editNumeroCasa,
+    editNumero,
   }
 )(Cartao);
 

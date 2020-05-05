@@ -11,7 +11,7 @@ import {
 import CustomModal from '../Alert';
 import { connect } from 'react-redux';
 import { Button } from 'native-base';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import Estilos from './style';
@@ -45,7 +45,7 @@ class Cabeca extends Component {
           }}
         >
           {this.state.erro ? <CustomModal parametro="Sucesso" /> : <View />}
-          <Icon style={Estilos.icon2} name="account-outline" />
+          <Icon style={Estilos.icon2} name="user" />
         </TouchableOpacity>
         <View style={Estilos.Titulo}>
           <Text style={Estilos.txt}> HOMMY </Text>
@@ -54,7 +54,7 @@ class Cabeca extends Component {
           style={{ marginHorizontal: 20 }}
           onPress={this.closeToken}
         >
-          <Icon style={Estilos.icon2} name="settings-outline" />
+          <Icon style={Estilos.icon2} name="settings" />
         </TouchableOpacity>
 
         <Modal
@@ -93,10 +93,10 @@ class Cabeca extends Component {
                     this.setState({ isModalVisible: false });
                   }}
                 >
-                  <Icon style={{ fontSize: 35 }} name="arrow-left" />
+                  <Icon style={{ fontSize: 30 }} name="arrow-left" />
                 </TouchableOpacity>
 
-                <Icon style={{ fontSize: 35 }} name="pencil-outline" />
+                <Icon style={{ fontSize: 30 }} name="pencil" />
               </View>
               <Image
                 source={{
@@ -175,8 +175,8 @@ class Cabeca extends Component {
                   }}
                 >
                   <Icon
-                    style={{ fontSize: 35, color: '#ffff' }}
-                    name="ballot-outline"
+                    style={{ fontSize: 25, color: '#ffff' }}
+                    name="book-open"
                   />
                   <Text
                     style={{
@@ -201,8 +201,8 @@ class Cabeca extends Component {
                   }}
                 >
                   <Icon
-                    style={{ fontSize: 35, color: '#ffff' }}
-                    name="pencil-outline"
+                    style={{ fontSize: 25, color: '#ffff' }}
+                    name="pencil"
                   />
                   <Text
                     style={{
@@ -227,8 +227,8 @@ class Cabeca extends Component {
                   }}
                 >
                   <Icon
-                    style={{ fontSize: 35, color: '#ffff' }}
-                    name="comment-question-outline"
+                    style={{ fontSize: 25, color: '#ffff' }}
+                    name="question"
                   />
                   <Text
                     style={{
@@ -253,8 +253,8 @@ class Cabeca extends Component {
                   }}
                 >
                   <Icon
-                    style={{ fontSize: 35, color: '#ffff' }}
-                    name="information-outline"
+                    style={{ fontSize: 25, color: '#ffff' }}
+                    name="exclamation"
                   />
                   <Text
                     style={{
