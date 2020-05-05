@@ -15,6 +15,7 @@ import estilo from './style';
 import Cabeca from '../Cabeca';
 
 class DetalhesServicos extends Component {
+  static navigationOptions = { header: null };
   render() {
     return (
       <View style={{ flex: 1 }}>

@@ -12,6 +12,7 @@ import Icon2 from 'react-native-vector-icons/FontAwesome';
 
 
 class DetalhesAnuncio extends Component {
+  static navigationOptions = { header: null };
   AbrirUrl = () => {
     Linking.openUrl(
       'https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849'

@@ -19,6 +19,7 @@ import { connect } from 'react-redux';
 import Estilos from './style';
 
 class CartaoServico extends Component {
+  static navigationOptions = { header: null };
   constructor(props) {
     super(props);
     this.onClickCard = this.onClickCard.bind(this);
