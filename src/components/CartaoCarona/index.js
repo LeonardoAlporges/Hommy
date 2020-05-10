@@ -64,18 +64,14 @@ class CartaoCarona extends Component {
           </View>
           <View style={Estilos.V_local}>
             <View style={Estilos.V_LocLabel}>
-              <Text style={Estilos.txtdeslcSa}>
-                {this.props.dados.horaSaida}
-              </Text>
+              <Text style={Estilos.txtdeslcSa}>08:00</Text>
               <Icon name="action-redo" style={Estilos.iconDesSa} />
               <Text style={Estilos.txtdeslcSa}>
-                 {this.props.dados.localSaida}
+                {this.props.dados.localSaida}
               </Text>
             </View>
             <View style={Estilos.V_LocLabel}>
-              <Text style={Estilos.txtdeslcCh}>
-                {this.props.dados.horaChegada}
-              </Text>
+              <Text style={Estilos.txtdeslcCh}>11:00</Text>
               <Icon name="flag" style={Estilos.iconDesCh} />
               <Text style={Estilos.txtdeslcCh}>
                 {this.props.dados.localChegada}
@@ -84,12 +80,12 @@ class CartaoCarona extends Component {
           </View>
           <View style={Estilos.V_DataVal}>
             <View style={Estilos.Data}>
-              <Text style={Estilos.txtData}>{this.props.dados.data}</Text>
+              <Icon style={Estilos.txtIcon} name="event" />
+              <Text style={Estilos.txtData}>16/04</Text>
             </View>
             <View style={Estilos.Valor}>
-              <Text style={Estilos.txtvalor}>
-                R$ {this.props.dados.valor},00
-              </Text>
+              <Icon style={Estilos.txtIcon} name="wallet" />
+              <Text style={Estilos.txtvalor}>{this.props.dados.valor},00</Text>
             </View>
           </View>
         </View>

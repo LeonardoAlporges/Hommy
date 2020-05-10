@@ -17,6 +17,7 @@ const initialState = {
   imagem1: '',
   imagem2: '',
   imagem3: '',
+  tipoImovel: '',
 };
 
 const AuthReducer = (state = [], action) => {
@@ -30,6 +31,10 @@ const AuthReducer = (state = [], action) => {
   //Recebe a acion do parametro e verifica se é a mesma
   if (action.type == 'editNomeRepublica') {
     return { ...state, nomeRepublica: action.payload.nomeRepublica };
+    // . . .State pega as informaçoes do state e substitui por aquilo que esta depois da virgula
+  }
+  if (action.type == 'editTipoImovel') {
+    return { ...state, tipoImovel: action.payload.tipoImovel };
     // . . .State pega as informaçoes do state e substitui por aquilo que esta depois da virgula
   }
   if (action.type == 'editValorAluguel') {

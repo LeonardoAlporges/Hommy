@@ -9,6 +9,7 @@ export default class CustomModal extends Component {
     icon: '',
     titulo: '',
     descricao: '',
+    botao: '',
   };
   constructor(props) {
     super(props);
@@ -17,22 +18,25 @@ export default class CustomModal extends Component {
     if (this.props.parametro == 'Sucesso') {
       this.setState({
         icon: require('../../../assets/undraw_confirmed_81ex.png'),
-        titulo: 'Qualquer coisa concluida com sucesso!',
+        titulo: 'Socilitação concluida com sucesso!',
         descricao: 'Confirmar',
+        botao: 'Confirmar',
       });
     }
     if (this.props.parametro == 'Aviso') {
       this.setState({
         icon: require('../../../assets/undraw_warning_cyit.png'),
-        titulo: 'Qualquer coisa tem um aviso',
-        descricao: 'Confirmar',
+        titulo: 'Fique atento ',
+        descricao: 'Voçe pode ter inserido algum dado errado',
+        botao: 'Confirmar',
       });
     }
     if (this.props.parametro == 'Erro') {
       this.setState({
         icon: require('../../../assets/undraw_cancel_u1it.png'),
-        titulo: 'Qualquer coisa não foi concluido',
-        descricao: 'Confirmar',
+        titulo: 'Erro de conexao',
+        descricao: 'Nao foi possivel completar sua requisição',
+        botao: 'Voltar',
       });
     }
   }
@@ -48,14 +52,16 @@ export default class CustomModal extends Component {
           <View style={Estilos.ViewFundo}>
             <View style={Estilos.ViewModal}>
               <Image style={Estilos.Imagem} source={this.state.icon} />
-              <Text style={Estilos.descricao}>{this.state.titulo}</Text>
+
+              <Text style={Estilos.titulo}>{this.state.titulo}</Text>
+              <Text style={Estilos.descricao}>{this.state.descricao}</Text>
               <TouchableOpacity
                 style={Estilos.botao}
                 onPress={() => {
                   this.setState({ modalVisible: false });
                 }}
               >
-                <Text style={Estilos.botaoTxt}>{this.state.descricao}</Text>
+                <Text style={Estilos.botaoTxt}>{this.state.botao}</Text>
               </TouchableOpacity>
             </View>
           </View>

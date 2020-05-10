@@ -2,12 +2,19 @@ import React, { Component } from 'react';
 import { Spinner } from 'native-base';
 import { View, Text } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import Login from './pages/Login';
-import Tabs from './pages/Tabs';
-import { Button } from 'native-base';
-import Splash from './Splash';
-// import { Container } from './styles';
-export default class Teste extends Component {
+import { connect } from 'react-redux';
+
+import {
+  editNome,
+  editEmail,
+  editCpf,
+  editIdUser,
+  editLogado,
+  editTelefone,
+  editFoto,
+} from './actions/UserAction';
+
+class Teste extends Component {
   state = {
     loading: false,
     logado: true,
@@ -15,7 +22,7 @@ export default class Teste extends Component {
 
   async Buscar() {
     try {
-      console.log('firts');
+      console.log('Busncado Token');
       await AsyncStorage.getItem('token').then(value => {
         if (value != null) {
           console.log('user ????->', value);
@@ -24,6 +31,19 @@ export default class Teste extends Component {
           console.log('User False');
           this.setState({ logado: false });
         }
+      });
+      console.log('Buscando User');
+      await AsyncStorage.getItem('user').then(value => {
+        console.log(value);
+        const dados = JSON.parse(value);
+        this.props.editNome(dados.nome);
+        this.props.editEmail(dados.email);
+        this.props.editCpf(dados.cpf);
+        this.props.editIdUser(dados.nome);
+        this.props.editLogado(dados.nome);
+        this.props.editTelefone(dados.celular);
+        this.props.editFoto(dados.fotoPerfil);
+        console.log(value);
       });
     } catch (erro) {
       this.setState({ logado: false });
@@ -35,6 +55,7 @@ export default class Teste extends Component {
   constructor(props) {
     super(props);
     this.Buscar();
+    console.log(this.props.navigation);
     console.log('Logado->', this.state.logado);
   }
 
@@ -54,3 +75,18 @@ export default class Teste extends Component {
     );
   }
 }
+
+const TesteConnect = connect(
+  null,
+  {
+    editNome,
+    editEmail,
+    editCpf,
+    editIdUser,
+    editLogado,
+    editTelefone,
+    editFoto,
+  }
+)(Teste);
+
+export default TesteConnect;

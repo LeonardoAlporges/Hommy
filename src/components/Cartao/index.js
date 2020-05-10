@@ -21,6 +21,7 @@ import {
   editRepresentante,
   editRua,
   editNumero,
+  editTipoImovel,
 } from '../../actions/AuthActions';
 
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
@@ -44,16 +45,17 @@ class Cartao extends Component {
     this.props.editPessoas(this.props.leonardo.pessoas);
     this.props.editAnimal(this.props.leonardo.animal);
     this.props.editDescricao(this.props.leonardo.descricao);
-    this.props.editAcomodacaoQuarto(this.props.leonardo.acamodacaoQuarto);
+    this.props.editAcomodacaoQuarto(this.props.leonardo.acomodacaoQuarto);
     this.props.editAcomodacaoRepublica(this.props.leonardo.acomodacaoRepublica);
     this.props.editObservacao(this.props.leonardo.observacao);
     this.props.editGenero(this.props.leonardo.genero);
     this.props.editNumVagas(this.props.leonardo.numVagas);
     this.props.editRepresentante(this.props.leonardo.representante);
+    this.props.editTipoImovel(this.props.leonardo.tipoImovel);
     this.props.editImg1(this.props.leonardo.imagem1);
     this.props.editImg2(this.props.leonardo.imagem2);
     this.props.editImg3(this.props.leonardo.imagem3);
-    console.log('leo', this.props.leonardo.valorAluguel);
+
     this.props.navigation.navigate('Detalhes');
   };
 
@@ -89,14 +91,27 @@ class Cartao extends Component {
             </View>
             <View style={Estilos.V_desc}>
               <View
-                style={{ flexDirection: 'row', width: '50%', marginRight: 10 }}
+                style={{
+                  flexDirection: 'row',
+                  width: '45%',
+                  marginRight: 10,
+                  justifyContent: 'center',
+                  paddingTop: 8,
+                }}
               >
                 <Icon style={Estilos.txtIcon} name="wallet" />
                 <Text style={Estilos.txtDesc}>
-                  {this.props.leonardo.valorAluguel}
+                  R$ {this.props.leonardo.valorAluguel}
                 </Text>
               </View>
-              <View style={{ flexDirection: 'row', width: '50%' }}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  width: '55%',
+                  justifyContent: 'center',
+                  paddingTop: 8,
+                }}
+              >
                 <Icon style={Estilos.txtIcon} name="people" />
                 <Text style={Estilos.txtDesc}>
                   {this.props.leonardo.numVagas} Vagas
@@ -135,6 +150,7 @@ const mapStateToProps = state => {
 const cardConnect = connect(
   mapStateToProps,
   {
+    editTipoImovel,
     editNomeRepublica,
     editValorAluguel,
     editBairro,

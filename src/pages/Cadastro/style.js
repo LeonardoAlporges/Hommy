@@ -15,6 +15,9 @@ const estilo = StyleSheet.create({
   campos: {
     marginTop: 20,
   },
+  camposAmb: {
+    marginTop: 50,
+  },
   iconHeader: {
     fontSize: 26,
     color: '#009ddb',

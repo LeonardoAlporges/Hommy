@@ -27,8 +27,7 @@ class Cabeca extends Component {
     await AsyncStorage.removeItem('token')
       .then(value => {
         console.log('Saiu da conta', value);
-        //this.props.navigation.navigate('Login');
-        this.setState({ erro: true });
+        this.props.navigation.navigate('Login');
       })
       .catch(error => {
         console.log('Nao Foi possivel');

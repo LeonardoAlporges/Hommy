@@ -1,59 +1,67 @@
 import { StyleSheet } from 'react-native';
 
 const Estilos = StyleSheet.create({
-  ViewFundo:{
-    backgroundColor: "#00000080",
-    flex: 1
+  ViewFundo: {
+    backgroundColor: '#00000080',
+    flex: 1,
   },
-  ViewModal:{
+  ViewModal: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 400,
-    marginTop: 150,
+    height: 350,
+    marginTop: 250,
     marginHorizontal: 50,
-    backgroundColor: "white",
+    backgroundColor: 'white',
     borderRadius: 20,
-    alignItems: "center",
-    shadowColor: "#000",
+    alignItems: 'center',
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5
+    elevation: 5,
   },
-  Imagem:{
+  Imagem: {
     alignSelf: 'center',
-    width: 300,
-    height: 300,
-    justifyContent: "center",
+    width: 150,
+    height: 150,
+    justifyContent: 'center',
   },
-  descricao:{
+  titulo: {
+    marginVertical: '3%',
     marginBottom: 15,
-    textAlign: "center",
-    justifyContent: "center",
+    textAlign: 'center',
+    justifyContent: 'center',
     fontFamily: 'Roboto',
-    fontSize: 15
+    fontSize: 22,
+    fontWeight: 'bold',
   },
-  botao:{
+  descricao: {
+    marginBottom: '3%',
+    textAlign: 'center',
+    justifyContent: 'center',
+    fontFamily: 'Roboto',
+    fontSize: 15,
+  },
+  botao: {
+    marginTop: '10%',
     alignSelf: 'center',
-    backgroundColor: "#30C21E",
-    borderRadius: 20,
+    backgroundColor: '#30C21E',
+    borderRadius: 5,
     padding: 10,
     elevation: 2,
-    justifyContent: "center",
-    height: 45,
-    width: 170
+    justifyContent: 'center',
+    height: 50,
+    width: 170,
   },
-  botaoTxt:{
+  botaoTxt: {
     color: '#ffffff',
     fontFamily: 'Roboto',
     textAlign: 'center',
     fontSize: 20,
-  }
-
-
+  },
 });
 
 export default Estilos;

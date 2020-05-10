@@ -21,6 +21,7 @@ class Caronas extends Component {
       .get('/carona')
       .then(responseJson => {
         this.setState({ listaCaronas: responseJson.data });
+        console.log('oque tem ', responseJson);
       })
       .catch(error => {
         console.error('SERVIDOR ESTA DESLIGADO');

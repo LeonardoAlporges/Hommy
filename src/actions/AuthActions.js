@@ -18,6 +18,16 @@ export const editNomeRepublica = newNomeRepublica => {
   };
 };
 
+export const editTipoImovel = newValorAluguel => {
+  return {
+    type: 'editTipoImovel', //nome da açao
+    payload: {
+      //Aqui é as informaçoes que vc ta enviando no caso aqui é so email
+      tipoImovel: newValorAluguel,
+    },
+  };
+};
+
 export const editValorAluguel = newValorAluguel => {
   return {
     type: 'editValorAluguel', //nome da açao

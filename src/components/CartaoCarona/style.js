@@ -27,10 +27,12 @@ const Estilos = StyleSheet.create({
   V_nota: {
     flexDirection: 'row',
     width: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   icon: {
     fontSize: 12,
-    color: 'blue',
+    color: '#1982C3',
   },
   V_imagem: {
     height: 70,
@@ -44,7 +46,7 @@ const Estilos = StyleSheet.create({
     width: 60,
   },
   V_local: {
-    width: '40%',
+    width: '50%',
     height: '100%',
     paddingLeft: 0,
     justifyContent: 'flex-start',
@@ -58,57 +60,68 @@ const Estilos = StyleSheet.create({
     alignItems: 'center',
   },
   V_DataVal: {
-    padding: 10,
-    width: '60%',
+    padding: 5,
+    width: '21%',
     height: '100%',
   },
   Data: {
     width: '100%',
     height: '50%',
     justifyContent: 'center',
-    paddingHorizontal: 25,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   Valor: {
     width: '100%',
     height: '50%',
     justifyContent: 'center',
-    paddingHorizontal: 30,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+  },
+  txtIcon: {
+    padding: 0,
+    marginHorizontal: 2,
+    fontSize: 18,
+    color: '#2e2e2e',
   },
   txtdeslc: {
     fontSize: 18,
     fontFamily: 'Roboto',
     fontWeight: 'bold',
+    color: '#1982C3',
   },
   iconDesCh: {
     fontSize: 12,
-    color: 'green',
+    marginHorizontal: 6,
   },
   iconDesSa: {
     fontSize: 12,
-    color: 'red',
+    marginHorizontal: 6,
   },
   txtdeslcSa: {
     fontSize: 18,
     fontFamily: 'Roboto',
     fontWeight: 'bold',
-    color: 'red',
+    color: '#1982C3',
   },
   txtdeslcCh: {
     fontSize: 18,
     fontFamily: 'Roboto',
-    fontWeight: 'bold',
-    color: 'green',
+    fontWeight: '400',
+    color: '#1982C3',
   },
   txtData: {
     fontFamily: 'Roboto',
     fontSize: 16,
     fontWeight: 'bold',
+    color: '#1982C3',
   },
   txtvalor: {
     fontFamily: 'Roboto',
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'green',
+    fontSize: 16,
+    fontWeight: '400',
+    color: '#1982C3',
   },
 });
 
