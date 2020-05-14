@@ -34,7 +34,7 @@ import Caronas from '../Caronas';
 class TabsHeader extends Component {
   static navigationOptions = { header: null };
   state = {
-    loading: true,
+    loading: false,
   };
   render() {
     return (
