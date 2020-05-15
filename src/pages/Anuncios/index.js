@@ -79,7 +79,7 @@ class Anuncios extends Component {
 
   editRepublica(edit) {
     const dados = edit;
-    console.tron.log(dados);
+    console.log(dados);
     this.props.editNomeRepublica(dados.nomeRepublica);
     this.props.editValorAluguel(dados.valorAluguel);
     this.props.editBairro(dados.bairro);
@@ -117,7 +117,7 @@ class Anuncios extends Component {
     this.props.editSaida(dados.localSaida);
     this.props.editVagas(dados.vagas);
     this.props.editValor(dados.valor);
-    this.props.navigation.navigate('CadastroCaronas');
+    this.props.navigation.navigate('CadastroCaronas', { update: true });
   }
 
   render() {

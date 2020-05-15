@@ -27,10 +27,10 @@ const Navegação = createAppContainer(
         CadastroUsuario: CadastroUsuario,
       }),
       App: createStackNavigator({
+        Teste,
         TabsHeader: TabsHeader,
         Anuncios,
         CadastroCaronas,
-        Teste,
         DetalhesCarona: DetalhesCarona,
         Caronas: Caronas,
         Anuncios: Anuncios,

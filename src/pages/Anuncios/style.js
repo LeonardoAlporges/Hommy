@@ -51,7 +51,7 @@ const estilo = StyleSheet.create({
     marginTop: 0,
     marginBottom: 0,
     paddingVertical: '3%',
-    paddingHorizontal: '5%',
+    paddingHorizontal: '1%',
   },
   flatList: {
     padding: 1,

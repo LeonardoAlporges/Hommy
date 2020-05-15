@@ -18,87 +18,92 @@ class DetalhesCarona extends Component {
   static navigationOptions = { header: null };
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <View style={Estilo.header}>
-          <TouchableOpacity
-            onPress={() => {
-              this.props.navigation.goBack(null);
-            }}
-          >
-            <Icon style={Estilo.iconHer} name="arrow-left" />
-          </TouchableOpacity>
-        </View>
-        <View style={Estilo.V_HeaderUser}>
-          <Image
-            source={{
-              uri: this.props.imagem,
-            }}
-            style={Estilo.V_imagem}
-          />
-          <View style={Estilo.V_Nome}>
-            <Text style={Estilo.Nome}>{this.props.nome}</Text>
-            <View style={Estilo.V_nota}>
-              <Text style={Estilo.Nota}>{this.props.nome}</Text>
-              <Icon style={Estilo.iconNota} name="star-outline" />
+      <ScrollView style={{ paddingBottom: 100 }}>
+        <View style={{ marginBottom: '15%' }}>
+          <View style={Estilo.header}>
+            <TouchableOpacity
+              onPress={() => {
+                this.props.navigation.goBack(null);
+              }}
+            >
+              <Icon style={Estilo.iconHer} name="arrow-left" />
+            </TouchableOpacity>
+          </View>
+
+          <View style={Estilo.V_HeaderUser}>
+            <Image
+              source={{
+                uri: this.props.imagem,
+              }}
+              style={Estilo.V_imagem}
+            />
+            <View style={Estilo.V_Nome}>
+              <Text style={Estilo.Nome}>{this.props.nome}</Text>
+              <View style={Estilo.V_nota}>
+                <Text style={Estilo.Nota}>{this.props.nome}</Text>
+                <Icon style={Estilo.iconNota} name="star-outline" />
+              </View>
+            </View>
+            <View />
+          </View>
+
+          <View style={Estilo.V_Infor}>
+            <View style={Estilo.V_data}>
+              <Text style={Estilo.data}> Ter 07 de Abril</Text>
+            </View>
+            <View style={Estilo.V_partida}>
+              <Text style={Estilo.txtPartida}>Saida</Text>
+            </View>
+            <View style={Estilo.V_Hora}>
+              <Text style={Estilo.Txthora}>
+                {this.props.Hsaida} - {this.props.saida}
+              </Text>
+            </View>
+            <View style={Estilo.V_partida}>
+              <Text style={Estilo.txtPartida}>Previsão Chegada</Text>
+            </View>
+            <View style={Estilo.V_Hora}>
+              <Text style={Estilo.Txthora}>
+                {this.props.HChegada} - {this.props.chegada}
+              </Text>
+            </View>
+
+            <View style={Estilo.V_valor}>
+              <Text style={Estilo.Txtvalor1}>Preço para 1 passageiro</Text>
+              <Text style={Estilo.Txtvalor}>R$ {this.props.valor},00</Text>
             </View>
           </View>
-          <View />
-        </View>
-        <View style={Estilo.V_Infor}>
-          <View style={Estilo.V_data}>
-            <Text style={Estilo.data}> Ter 07 de Abril</Text>
+          <View style={Estilo.barra} />
+          <View style={Estilo.Pontos}>
+            <View style={Estilo.V_ptEm}>
+              <Text style={Estilo.T_ptEm}>Ponto de Embarque</Text>
+            </View>
+            <View style={Estilo.V_label}>
+              <Text style={Estilo.T_label}>•{this.props.embarque}</Text>
+            </View>
+            <View style={Estilo.V_ptEm}>
+              <Text style={Estilo.T_ptEm}>Ponto Final</Text>
+            </View>
+            <View style={Estilo.V_label}>
+              <Text style={Estilo.T_label}>•{this.props.desembarque}</Text>
+            </View>
           </View>
-          <View style={Estilo.V_partida}>
-            <Text style={Estilo.txtPartida}>Saida</Text>
-          </View>
-          <View style={Estilo.V_Hora}>
-            <Text style={Estilo.Txthora}>
-              {this.props.Hsaida} - {this.props.saida}
-            </Text>
-          </View>
-          <View style={Estilo.V_partida}>
-            <Text style={Estilo.txtPartida}>Previsão Chegada</Text>
-          </View>
-          <View style={Estilo.V_Hora}>
-            <Text style={Estilo.Txthora}>
-              {this.props.HChegada} - {this.props.chegada}
-            </Text>
-          </View>
-          <View style={Estilo.V_valor}>
-            <Text style={Estilo.Txtvalor1}>Preço para 1 passageiro</Text>
-            <Text style={Estilo.Txtvalor}>R$ {this.props.valor},00</Text>
-          </View>
-        </View>
-        <View style={Estilo.barra} />
-        <View style={Estilo.Pontos}>
-          <View style={Estilo.V_ptEm}>
-            <Text style={Estilo.T_ptEm}>Ponto de Embarque</Text>
-          </View>
-          <View style={Estilo.V_label}>
-            <Text style={Estilo.T_label}>•{this.props.embarque}</Text>
-          </View>
-          <View style={Estilo.V_ptEm}>
-            <Text style={Estilo.T_ptEm}>Ponto Final</Text>
-          </View>
-          <View style={Estilo.V_label}>
-            <Text style={Estilo.T_label}>•{this.props.desembarque}</Text>
+          <View style={Estilo.ViewButon}>
+            <Button
+              style={Estilo.Botao}
+              onPress={() => {
+                Linking.openURL(
+                  'https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849'
+                );
+              }}
+              title="Leo"
+            >
+              <Icon style={Estilo.iconBtn} name="whatsapp" />
+              <Text style={Estilo.txtBotao}>Tenho Interesse</Text>
+            </Button>
           </View>
         </View>
-        <View style={Estilo.ViewButon}>
-          <Button
-            style={Estilo.Botao}
-            onPress={() => {
-              Linking.openURL(
-                'https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849'
-              );
-            }}
-            title="Leo"
-          >
-            <Icon style={Estilo.iconBtn} name="whatsapp" />
-            <Text style={Estilo.txtBotao}>Entre em contato</Text>
-          </Button>
-        </View>
-      </View>
+      </ScrollView>
     );
   }
 }

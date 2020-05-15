@@ -4,10 +4,10 @@ const Estilo = StyleSheet.create({
   header: {
     padding: 20,
     width: '100%',
-    height: 60,
+    height: 50,
     justifyContent: 'center',
     alignItems: 'flex-start',
-    backgroundColor: '#592577',
+    backgroundColor: 'rgba(29,161,242,1)',
   },
   iconHer: {
     fontSize: 30,
@@ -16,7 +16,7 @@ const Estilo = StyleSheet.create({
   V_HeaderUser: {
     width: '100%',
     height: '30%',
-    backgroundColor: '#592577',
+    backgroundColor: 'rgba(29,161,242,1)',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -54,14 +54,14 @@ const Estilo = StyleSheet.create({
   },
   V_Infor: {
     paddingHorizontal: 30,
-    paddingVertical: 20,
+    paddingVertical: 10,
     width: '100%',
-    height: '30%',
+    height: '37%',
   },
   data: {
     fontSize: 24,
     fontFamily: 'Roboto',
-    color: '#592577',
+    color: 'rgba(29,161,242,1)',
     fontWeight: 'bold',
   },
   V_partida: {
@@ -74,15 +74,15 @@ const Estilo = StyleSheet.create({
     fontFamily: 'Roboto',
     fontWeight: '100',
     fontSize: 16,
-    color: '#732D91',
+    color: 'rgba(29,161,242,1)',
   },
   V_Hora: {
     width: '100%',
     height: 28,
-    color: '#732D91',
+    color: 'rgba(29,161,242,1)',
   },
   Txthora: {
-    color: '#732D91',
+    color: 'rgba(29,161,242,1)',
     fontSize: 22,
     fontFamily: 'Roboto',
   },
@@ -94,13 +94,13 @@ const Estilo = StyleSheet.create({
     justifyContent: 'space-around',
   },
   Txtvalor1: {
-    color: '#732D91',
+    color: 'rgba(29,161,242,1)',
     fontSize: 18,
     fontFamily: 'Roboto',
     fontWeight: '200',
   },
   Txtvalor: {
-    color: '#732D91',
+    color: 'rgba(29,161,242,1)',
     fontSize: 22,
     fontFamily: 'Roboto',
     fontWeight: 'bold',
@@ -115,7 +115,8 @@ const Estilo = StyleSheet.create({
   Pontos: {
     padding: 10,
     width: '100%',
-    height: '18%',
+    height: '20%',
+    marginBottom: '10%',
   },
   V_ptEm: {
     marginTop: 10,
@@ -124,7 +125,7 @@ const Estilo = StyleSheet.create({
     height: 20,
   },
   T_ptEm: {
-    color: '#732D91',
+    color: 'rgba(29,161,242,1)',
     fontSize: 18,
     fontFamily: 'Roboto',
   },
@@ -135,7 +136,7 @@ const Estilo = StyleSheet.create({
     paddingLeft: 30,
   },
   T_label: {
-    color: '#732D91',
+    color: 'rgba(29,161,242,1)',
     fontSize: 20,
     fontFamily: 'Roboto',
     fontWeight: 'bold',
@@ -144,15 +145,13 @@ const Estilo = StyleSheet.create({
     width: '100%',
     height: 45,
     alignItems: 'center',
-    marginTop: '3%',
   },
   Botao: {
-    marginTop: '3%',
     alignItems: 'center',
     justifyContent: 'center',
     width: '70%',
-    height: 45,
-    backgroundColor: '#732D91',
+    height: 50,
+    backgroundColor: 'rgba(29,161,242,1)',
   },
   txtBotao: {
     color: '#FFF',
@@ -163,6 +162,7 @@ const Estilo = StyleSheet.create({
   iconBtn: {
     fontSize: 20,
     color: '#ffffff',
+    marginHorizontal: 10,
   },
 });
 

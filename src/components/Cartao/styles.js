@@ -51,15 +51,15 @@ const Estilos = StyleSheet.create({
   },
   txtDesc: {
     marginHorizontal: 5,
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: 'Roboto',
     color: '#1982C3',
-    fontWeight: 'bold',
+    fontWeight: '500',
   },
   txtIcon: {
     padding: 0,
     marginHorizontal: 2,
-    fontSize: 22,
+    fontSize: 18,
     color: '#1982C3',
   },
   V_notasImg: {
