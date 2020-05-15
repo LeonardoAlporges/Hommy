@@ -9,7 +9,21 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-
+import {
+  editChegada,
+  editData,
+  editDesembarque,
+  editEmbarque,
+  editHChegada,
+  editHSaida,
+  editImagem,
+  editNome,
+  editNota,
+  editSaida,
+  editVagas,
+  editValor,
+} from '../../actions/CaronaActions';
+import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 
 import {
@@ -17,11 +31,12 @@ import {
   Spinner,
   ListItem,
   Fab,
-  Icon,
   Input,
   Item,
+  Button,
 } from 'native-base';
 
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import Estilo from './style';
 import CustomModal from '../../components/Alert';
 import CartaoCarona from '../../components/CartaoCarona';
@@ -33,6 +48,7 @@ class Caronas extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      active: false,
       listaCaronas: [],
       loading: true,
       erro: false,
@@ -46,6 +62,25 @@ class Caronas extends Component {
       aluguelMin: '',
       aluguelMax: '',
     };
+  }
+
+  limparPropsCaronaRedux() {
+    this.props.editChegada(''),
+      this.props.editData(''),
+      this.props.editDesembarque(''),
+      this.props.editEmbarque(''),
+      this.props.editHChegada(''),
+      this.props.editHSaida(''),
+      this.props.editImagem(''),
+      this.props.editNome(''),
+      this.props.editNota(''),
+      this.props.editSaida(''),
+      this.props.editVagas(''),
+      this.props.editValor('');
+
+    this.props.navigation.navigate('CadastroCaronas', {
+      update: false,
+    });
   }
 
   UNSAFE_componentWillMount() {
@@ -325,22 +360,62 @@ class Caronas extends Component {
           </Modal>
         </View>
         <Fab
+          active={this.state.active}
           direction="up"
           containerStyle={{}}
-          style={{
-            backgroundColor: 'rgba(29,161,242,1)',
-            position: 'absolute',
-          }}
-          position="bottomLeft"
+          style={{ backgroundColor: '#27496d' }}
+          position="bottomRight"
           onPress={() => {
-            this.setState({ modalVisible: true });
+            this.setState({ active: !this.state.active });
+            //this.limparPropsCaronaRedux();
           }}
         >
-          <Icon name="md-add" />
+          {this.state.active ? (
+            <Icon name="arrow-down" />
+          ) : (
+            <Icon name="arrow-up" />
+          )}
+
+          <Button
+            style={{
+              backgroundColor: '#27496d',
+            }}
+            onPress={() => {
+              this.setState({ modalVisible: true });
+            }}
+          >
+            <Icon name="equalizer" style={{ color: '#ffffff' }} />
+          </Button>
+          <Button
+            style={{ backgroundColor: '#27496d' }}
+            onPress={() => {
+              this.limparPropsCaronaRedux();
+            }}
+          >
+            <Icon name="pencil" style={{ color: '#ffffff' }} />
+          </Button>
         </Fab>
       </View>
     );
   }
 }
 
-export default withNavigation(Caronas);
+const CaronasConnect = connect(
+  null,
+  {
+    editChegada,
+    editData,
+    editDesembarque,
+    editEmbarque,
+    editHChegada,
+    editHSaida,
+    editImagem,
+    editNome,
+    editNota,
+    editSaida,
+    editVagas,
+    editValor,
+  }
+)(Caronas);
+
+export default withNavigation(CaronasConnect);

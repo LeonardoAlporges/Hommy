@@ -8,8 +8,11 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
+
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
-import { CheckBox, ListItem, Fab, Icon, Input, Item } from 'native-base';
+import { CheckBox, ListItem, Button, Fab, Input, Item } from 'native-base';
 
 import estilosRepublica from './style';
 import { Spinner } from 'native-base';
@@ -17,6 +20,27 @@ import Cartao from '../Cartao/index';
 import api from '../../service/api';
 import CustomModal from '../../components/Alert';
 import _ from 'lodash';
+import {
+  editValorAluguel,
+  editNomeRepublica,
+  editBairro,
+  editPessoas,
+  editDescricao,
+  editAnimal,
+  editAcomodacaoQuarto,
+  editAcomodacaoRepublica,
+  editValorConta,
+  editObservacao,
+  editImg1,
+  editImg2,
+  editImg3,
+  editGenero,
+  editNumVagas,
+  editRepresentante,
+  editRua,
+  editNumero,
+  editTipoImovel,
+} from '../../actions/AuthActions';
 //var aluguelMin = null;
 //var aluguelMax = null;
 
@@ -27,6 +51,7 @@ class Republica extends Component {
     this.state = {
       listaRepublicas: [],
       loading: true,
+      active: false,
       erro: false,
       fullData: [],
       modalVisible: false,
@@ -50,6 +75,30 @@ class Republica extends Component {
       aluguelMin: '',
       aluguelMax: '',
     };
+  }
+
+  limparPropsRepublicaRedux() {
+    this.props.editValorConta('');
+    this.props.editNomeRepublica('');
+    this.props.editValorAluguel('');
+    this.props.editBairro('');
+    this.props.editRua('');
+    this.props.editNumero('');
+    this.props.editPessoas('');
+    this.props.editAnimal('');
+    this.props.editDescricao('');
+    this.props.editAcomodacaoQuarto('');
+    this.props.editAcomodacaoRepublica('');
+    this.props.editObservacao('');
+    this.props.editGenero('');
+    this.props.editNumVagas('');
+    this.props.editRepresentante('');
+    this.props.editImg1('');
+    this.props.editImg2('');
+    this.props.editImg3('');
+    this.props.editTipoImovel('');
+
+    this.props.navigation.navigate('Cadastro', { update: false });
   }
 
   UNSAFE_componentWillMount() {
@@ -570,19 +619,66 @@ class Republica extends Component {
         </View>
 
         <Fab
+          active={this.state.active}
           direction="up"
           containerStyle={{}}
-          style={{ backgroundColor: 'rgba(29,161,242,1)' }}
-          position="bottomLeft"
+          style={{ backgroundColor: '#27496d' }}
+          position="bottomRight"
           onPress={() => {
-            this.setState({ modalVisible: true });
+            this.setState({ active: !this.state.active });
           }}
         >
-          <Icon name="md-add" />
+          {this.state.active ? (
+            <Icon name="arrow-down" />
+          ) : (
+            <Icon name="arrow-up" />
+          )}
+
+          <Button
+            style={{ backgroundColor: '#27496d' }}
+            onPress={() => {
+              this.setState({ modalVisible: true });
+            }}
+          >
+            <Icon name="equalizer" style={{ color: '#ffffff' }} />
+          </Button>
+          <Button
+            style={{ backgroundColor: '#27496d' }}
+            onPress={() => {
+              this.limparPropsRepublicaRedux();
+            }}
+          >
+            <Icon name="pencil" style={{ color: '#ffffff' }} />
+          </Button>
         </Fab>
       </View>
     );
   }
 }
 
-export default withNavigation(Republica);
+const RepublicaConnect = connect(
+  null,
+  {
+    editValorAluguel,
+    editNomeRepublica,
+    editBairro,
+    editPessoas,
+    editDescricao,
+    editAnimal,
+    editAcomodacaoQuarto,
+    editAcomodacaoRepublica,
+    editValorConta,
+    editObservacao,
+    editImg1,
+    editImg2,
+    editImg3,
+    editGenero,
+    editNumVagas,
+    editRepresentante,
+    editRua,
+    editNumero,
+    editTipoImovel,
+  }
+)(Republica);
+
+export default withNavigation(RepublicaConnect);
