@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, FlatList, View, Modal, Text, TouchableOpacity } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { CheckBox, ListItem, Fab, Icon } from 'native-base';
+import { CheckBox, ListItem, Fab, Icon, Input, Item } from 'native-base';
 
 import Estilo from './style';
 
@@ -20,6 +20,10 @@ class Caronas extends Component {
       filtroVagas1: false,
       filtroVagas2: false,
       filtroVagas3: false,
+      filtroValorMaior: false,
+      filtroValorMenor: false,
+      aluguelMin: '',
+      aluguelMax: '',
     };
   }
 
@@ -70,18 +74,41 @@ class Caronas extends Component {
         filtroVagas1: false,
       });
   }
+  valMenor = async (text) => {
+    if (text){   
+      await this.setState({ filtroValorMenor: true,  aluguelMin: text});
+    }else{
+      await this.setState({ filtroValorMenor: false, aluguelMin: text});
+    }
+  }
+
+  valMaior = async (text) => {
+    if (text){
+      await this.setState({ filtroValorMaior: true, aluguelMax: text});
+    }else{
+      await this.setState({ filtroValorMaior: false, aluguelMax: text});
+    }
+  }
 
   filtro = async () => {
    await this.setState({ listaCaronas: this.state.fullData });
+   let listaCaronas = this.state.listaCaronas;
     if ((this.state.filtroVagas1) === true) {
-      await this.setState({ listaCaronas: _.filter(this.state.listaCaronas, { "vagas": "1" }) });
+      listaCaronas = _.filter(this.state.listaCaronas, { "vagas": "1" });
     }
     if ((this.state.filtroVagas2) === true) {
-      await this.setState({ listaCaronas: _.filter(this.state.listaCaronas, { "vagas": "2" }) });
+      listaCaronas = _.filter(this.state.listaCaronas, { "vagas": "2" });
     }
     if ((this.state.filtroVagas3) === true) {
-      await  this.setState({ listaCaronas: _.filter(this.state.listaCaronas, { "vagas": "3" }) });
+      listaCaronas = _.filter(this.state.listaCaronas, { "vagas": "3" });
     }
+    if ((this.state.filtroValorMenor) === true) {
+      listaCaronas = _.filter(listaCaronas, ({ valor }) => valor >= this.state.aluguelMin);
+     }
+     if ((this.state.filtroValorMaior) === true) {
+      listaCaronas = _.filter(listaCaronas, ({ valor }) => valor <= this.state.aluguelMax);
+     }
+     await this.setState({ listaCaronas});
   };
 
 
@@ -123,6 +150,23 @@ class Caronas extends Component {
               shadowRadius: 3.84,
               elevation: 5
             }}>
+              <Text>Valor</Text>
+              <ListItem style={{ alignItems: "stretch", marginBottom: 10 }}>
+                <Text style={{ alignSelf: "stretch", paddingHorizontal: 15 }} >De</Text>
+                <Item underlined style={{width: 100, borderBottomColor: 'rgba(29,161,242,1)'}}>
+                  <Input style={{ alignSelf: "stretch" }} 
+                  onChangeText={text => this.valMenor(text)} 
+                  value={this.state.aluguelMin} 
+                  keyboardType="numeric"/>
+                </Item>
+                <Text style={{ alignSelf: "stretch", paddingHorizontal: 15 }} >Até</Text>
+                <Item underlined style={{width: 100,borderBottomColor: 'rgba(29,161,242,1)'}} >
+                  <Input style={{ alignSelf: "stretch" }} 
+                  onChangeText={text => this.valMaior(text)} 
+                  value={this.state.aluguelMax}
+                  keyboardType="numeric"/>
+                </Item>
+              </ListItem>
               <Text>Vagas disponíveis</Text>
               <ListItem style={{ alignItems: "stretch", marginBottom: 10 }}>
                 <CheckBox style={{ alignSelf: "stretch" }} onPress={this.fVagas1} checked={this.state.filtroVagas1} />

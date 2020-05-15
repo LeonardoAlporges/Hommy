@@ -8,8 +8,8 @@ import estilosRepublica from './style';
 import Cartao from '../Cartao/index';
 import api from '../../service/api';
 import _ from "lodash";
-var aluguelMin = null;
-var aluguelMax = null;
+//var aluguelMin = null;
+//var aluguelMax = null;
 
 
 class Republica extends Component {
@@ -37,6 +37,8 @@ class Republica extends Component {
       loading: false,
       filtroValorMenor: false,
       filtroValorMaior: false,
+      aluguelMin: '',
+      aluguelMax: '',
     };
   }
 
@@ -190,29 +192,24 @@ class Republica extends Component {
   }
   
   valMenor = async (text) => {
-    if (text){      
-      await this.setState({ filtroValorMenor: true});
-      aluguelMin = text;
-      console.log(aluguelMin);
+    if (text){   
+      await this.setState({ filtroValorMenor: true,  aluguelMin: text});
+    }else{
+      await this.setState({ filtroValorMenor: false, aluguelMin: text});
     }
   }
 
   valMaior = async (text) => {
     if (text){
-     aluguelMax = text;
-      await this.setState({ filtroValorMaior: true});
+      await this.setState({ filtroValorMaior: true, aluguelMax: text});
+    }else{
+      await this.setState({ filtroValorMaior: false, aluguelMax: text});
     }
   }
  
   filtro = async () => {
    await this.setState({ listaRepublicas: this.state.fullData })
     let listaRepublicas = this.state.listaRepublicas;
-    console.log(listaRepublicas);
-    console.log(this.state.listaRepublicas);
-    console.log(this.state.aluguelMin);
-    console.log(this.state.aluguelMax);
-    console.log(this.state.fullData);
-    console.log(this.state.filtroValorMenor);
     
     if ((this.state.filtroAnimalSim) === true) {
       listaRepublicas = _.filter(this.state.listaRepublicas, { "animal": "Sim" });
@@ -254,15 +251,12 @@ class Republica extends Component {
       listaRepublicas = _.filter(this.state.listaRepublicas, { "numVagas": "3" });
     }
     if ((this.state.filtroValorMenor) === true) {
-     listaRepublicas = _.filter(listaRepublicas, ({ valorAluguel }) => valorAluguel >= aluguelMin);
+     listaRepublicas = _.filter(listaRepublicas, ({ valorAluguel }) => valorAluguel >= this.state.aluguelMin);
     }
     if ((this.state.filtroValorMaior) === true) {
-     listaRepublicas = _.filter(listaRepublicas, ({ valorAluguel }) => valorAluguel <= aluguelMax);
+     listaRepublicas = _.filter(listaRepublicas, ({ valorAluguel }) => valorAluguel <= this.state.aluguelMax);
     }
-    await this.setState({ listaRepublicas, filtroValorMenor: false, filtroValorMaior: false });
-    aluguelMin = null;
-    aluguelMax = null;
-
+    await this.setState({ listaRepublicas});
   };
   render() {
     return (
@@ -306,11 +300,17 @@ class Republica extends Component {
               <ListItem style={{ alignItems: "stretch", marginBottom: 10 }}>
                 <Text style={{ alignSelf: "stretch", paddingHorizontal: 15 }} >De</Text>
                 <Item underlined style={{width: 100, borderBottomColor: 'rgba(29,161,242,1)'}}>
-                  <Input style={{ alignSelf: "stretch" }} onChangeText={text => this.valMenor(text)}/>
+                  <Input style={{ alignSelf: "stretch" }} 
+                  onChangeText={text => this.valMenor(text)} 
+                  value={this.state.aluguelMin} 
+                  keyboardType="numeric"/>
                 </Item>
                 <Text style={{ alignSelf: "stretch", paddingHorizontal: 15 }} >Até</Text>
                 <Item underlined style={{width: 100,borderBottomColor: 'rgba(29,161,242,1)'}} >
-                  <Input style={{ alignSelf: "stretch" }} onChangeText={text => this.valMaior(text)} />
+                  <Input style={{ alignSelf: "stretch" }} 
+                  onChangeText={text => this.valMaior(text)} 
+                  value={this.state.aluguelMax}
+                  keyboardType="numeric"/>
                 </Item>
               </ListItem>
               <Text>Aceita animais?</Text>
