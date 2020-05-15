@@ -7,7 +7,7 @@ const Estilo = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     alignItems: 'flex-start',
-    backgroundColor: 'rgba(29,161,242,1)',
+    backgroundColor: '#142850',
   },
   iconHer: {
     fontSize: 30,
@@ -16,7 +16,7 @@ const Estilo = StyleSheet.create({
   V_HeaderUser: {
     width: '100%',
     height: '30%',
-    backgroundColor: 'rgba(29,161,242,1)',
+    backgroundColor: '#142850',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -61,7 +61,7 @@ const Estilo = StyleSheet.create({
   data: {
     fontSize: 24,
     fontFamily: 'Roboto',
-    color: 'rgba(29,161,242,1)',
+    color: '#00909e',
     fontWeight: 'bold',
   },
   V_partida: {
@@ -74,15 +74,15 @@ const Estilo = StyleSheet.create({
     fontFamily: 'Roboto',
     fontWeight: '100',
     fontSize: 16,
-    color: 'rgba(29,161,242,1)',
+    color: '#142850',
   },
   V_Hora: {
     width: '100%',
     height: 28,
-    color: 'rgba(29,161,242,1)',
+    color: '#142850',
   },
   Txthora: {
-    color: 'rgba(29,161,242,1)',
+    color: '#142850',
     fontSize: 22,
     fontFamily: 'Roboto',
   },
@@ -94,13 +94,13 @@ const Estilo = StyleSheet.create({
     justifyContent: 'space-around',
   },
   Txtvalor1: {
-    color: 'rgba(29,161,242,1)',
+    color: '#142850',
     fontSize: 18,
     fontFamily: 'Roboto',
     fontWeight: '200',
   },
   Txtvalor: {
-    color: 'rgba(29,161,242,1)',
+    color: '#00909e',
     fontSize: 22,
     fontFamily: 'Roboto',
     fontWeight: 'bold',
@@ -125,7 +125,7 @@ const Estilo = StyleSheet.create({
     height: 20,
   },
   T_ptEm: {
-    color: 'rgba(29,161,242,1)',
+    color: '#142850',
     fontSize: 18,
     fontFamily: 'Roboto',
   },
@@ -136,7 +136,7 @@ const Estilo = StyleSheet.create({
     paddingLeft: 30,
   },
   T_label: {
-    color: 'rgba(29,161,242,1)',
+    color: '#142850',
     fontSize: 20,
     fontFamily: 'Roboto',
     fontWeight: 'bold',
@@ -145,13 +145,15 @@ const Estilo = StyleSheet.create({
     width: '100%',
     height: 45,
     alignItems: 'center',
+    justifyContent: 'center',
   },
   Botao: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: '70%',
+    width: '100%',
     height: 50,
-    backgroundColor: 'rgba(29,161,242,1)',
+    borderRadius: 6,
+    backgroundColor: '#142850',
   },
   txtBotao: {
     color: '#FFF',

@@ -103,7 +103,7 @@ class TabsHeader extends Component {
 
         <Tabs
           initialPage={0}
-          tabBarUnderlineStyle={{ backgroundColor: '#1DA1F2', height: 3 }}
+          tabBarUnderlineStyle={{ backgroundColor: '#27496d', height: 3 }}
           tabContainerStyle={{ height: 45 }}
         >
           <Tab
@@ -113,26 +113,12 @@ class TabsHeader extends Component {
             activeTabStyle={estilo.tabs_ActiveTabs}
             activeTextStyle={estilo.tabs_ActiveTextStyle}
           >
-            {this.state.loading ? (
-              <View
-                style={{
-                  flex: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                <Spinner color="rgba(29,161,242,1)" />
-              </View>
-            ) : (
-              <View />
-            )}
             <Republica style={estilo.card} navigation />
-            {this.state.erro ? <CustomModal parametro="Erro" /> : <View />}
             <Fab
               active={this.state.active}
               direction="up"
               containerStyle={{}}
-              style={{ backgroundColor: 'rgba(29,161,242,1)' }}
+              style={{ backgroundColor: '#27496d' }}
               position="bottomRight"
               onPress={() => {
                 this.setState({ active: !this.state.active });
@@ -144,11 +130,11 @@ class TabsHeader extends Component {
                 <Icon name="arrow-up" />
               )}
 
-              <Button style={{ backgroundColor: 'rgba(29,161,242,1)' }}>
+              <Button style={{ backgroundColor: '#27496d' }}>
                 <Icon name="equalizer" style={{ color: '#ffffff' }} />
               </Button>
               <Button
-                style={{ backgroundColor: 'rgba(29,161,242,1)' }}
+                style={{ backgroundColor: '#27496d' }}
                 onPress={() => {
                   this.limparPropsRepublicaRedux();
                 }}
@@ -165,25 +151,12 @@ class TabsHeader extends Component {
             activeTabStyle={estilo.tabs_ActiveTabs}
             activeTextStyle={estilo.tabs_ActiveTextStyle}
           >
-            {this.state.loading ? (
-              <View
-                style={{
-                  flex: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                <Spinner color="rgba(29,161,242,1)" />
-              </View>
-            ) : (
-              <View />
-            )}
             <Caronas />
             <Fab
               active={this.state.active}
               direction="up"
               containerStyle={{}}
-              style={{ backgroundColor: 'rgba(29,161,242,1)' }}
+              style={{ backgroundColor: '#27496d' }}
               position="bottomRight"
               onPress={() => {
                 this.setState({ active: !this.state.active });
@@ -198,13 +171,13 @@ class TabsHeader extends Component {
 
               <Button
                 style={{
-                  backgroundColor: 'rgba(29,161,242,1)',
+                  backgroundColor: '#27496d',
                 }}
               >
                 <Icon name="equalizer" style={{ color: '#ffffff' }} />
               </Button>
               <Button
-                style={{ backgroundColor: 'rgba(29,161,242,1)' }}
+                style={{ backgroundColor: '#27496d' }}
                 onPress={() => {
                   this.limparPropsCaronaRedux();
                 }}

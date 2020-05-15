@@ -22,7 +22,7 @@ const Estilos = StyleSheet.create({
   V_imagem: {
     height: 120,
     width: 120,
-    borderRadius: 10,
+    borderRadius: 6,
   },
   V_TituloDesc: {
     paddingLeft: 10,
@@ -39,7 +39,7 @@ const Estilos = StyleSheet.create({
     fontSize: 26,
     fontFamily: 'Roboto-Bold',
     fontWeight: 'bold',
-    color: '#586880',
+    color: '#27496d',
   },
   V_desc: {
     width: '100%',
@@ -53,14 +53,14 @@ const Estilos = StyleSheet.create({
     marginHorizontal: 5,
     fontSize: 16,
     fontFamily: 'Roboto',
-    color: '#1982C3',
+    color: '#27496d',
     fontWeight: '500',
   },
   txtIcon: {
     padding: 0,
-    marginHorizontal: 2,
+
     fontSize: 18,
-    color: '#1982C3',
+    color: '#27496d',
   },
   V_notasImg: {
     borderRadius: 10,

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL:'https://backendhommy.herokuapp.com',
+  baseURL: 'http://hommyapplication-com.umbler.net',
 });
 
 export default api;

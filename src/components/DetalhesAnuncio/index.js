@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, ScrollView, Image, Text, Linking } from 'react-native';
 import { Button, Card, CardItem, Body, Header } from 'native-base';
 import { withNavigation } from 'react-navigation';
+import CustomModal from '../../components/Alert';
 
 import { connect } from 'react-redux';
 
@@ -10,17 +11,43 @@ import ViewPager from '@react-native-community/viewpager';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
 
-
 class DetalhesAnuncio extends Component {
+  state = {
+    interesse: false,
+  };
+
   static navigationOptions = { header: null };
   AbrirUrl = () => {
     Linking.openUrl(
       'https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849'
     );
   };
+
+  clickInteresse() {
+    this.setState({ interesse: true });
+  }
+
   render() {
     return (
       <ScrollView style={{ marginBottom: 55 }}>
+        {this.state.interesse ? (
+          <View
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <CustomModal
+              parametro="Custom"
+              titulo="Obrigado pelo interesse"
+              descricao="Você sera adicionado a uma lista de interesse e sera notificado assim que o ofertante confirme sua vaga."
+              botao="Confirmar"
+            />
+          </View>
+        ) : (
+          <View />
+        )}
         <ViewPager style={estilo.image} showPageIndicator="true">
           <View key="1" showPageIndicator={true}>
             <Image source={{ uri: this.props.imagem1 }} style={estilo.image} />
@@ -138,20 +165,8 @@ class DetalhesAnuncio extends Component {
             }}
           >
             <Icon2 name="whatsapp" style={{ color: '#ffffff', fontSize: 30 }} />
-            <Text style={{ color: '#FFFFFF', paddingRight: 15 }}>ZipZop</Text>
-          </Button>
-          <Button
-            style={estilo.botao}
-            onPress={() => {
-              Linking.openURL(`tel:${+5527997488849}`);
-            }}
-          >
-            <Icon
-              name="phone"
-              style={{ color: '#ffffff', fontSize: 30, marginRight: 5 }}
-            />
-            <Text style={{ color: '#FFFFFF', paddingRight: 15 }}>
-              Contatinho
+            <Text style={{ color: '#FFFFFF', marginLeft: 15 }}>
+              Tenho Interesse
             </Text>
           </Button>
         </View>

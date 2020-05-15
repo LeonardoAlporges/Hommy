@@ -34,23 +34,24 @@ class Teste extends Component {
       });
       console.log('Buscando User');
       await AsyncStorage.getItem('user').then(value => {
-        console.log(value);
-        const dados = JSON.parse(value);
-        this.props.editNome(dados.nome);
-        this.props.editEmail(dados.email);
-        this.props.editCpf(dados.cpf);
-        this.props.editIdUser(dados.nome);
-        this.props.editLogado(dados.nome);
-        this.props.editTelefone(dados.celular);
-        this.props.editFoto(dados.fotoPerfil);
-        console.log(value);
+        if (value != null) {
+          console.log('oqeu vem ?', value);
+          const dados = JSON.parse(value);
+          this.props.editNome(dados.nome);
+          this.props.editEmail(dados.email);
+          this.props.editCpf(dados.cpf);
+          this.props.editIdUser(dados.nome);
+          this.props.editLogado(dados.nome);
+          this.props.editTelefone(dados.celular);
+          this.props.editFoto(dados.fotoPerfil);
+          console.log('???', dados);
+        }
       });
     } catch (erro) {
       this.setState({ logado: false });
-      console.log(erro, 'Nao tem nada no Storage');
+      console.log('Nao tem nada no Storage');
     }
     this.setState({ loading: false });
-    console.log('ACABOU');
   }
   constructor(props) {
     super(props);

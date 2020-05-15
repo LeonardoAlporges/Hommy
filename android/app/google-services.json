@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "896135200677",
+    "firebase_url": "https://hommy-d0890.firebaseio.com",
+    "project_id": "hommy-d0890",
+    "storage_bucket": "hommy-d0890.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:896135200677:android:77e8dc857fefc0fc59f24c",
+        "android_client_info": {
+          "package_name": "com.hommy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "896135200677-l6couqinr2mhpsj6jni1f37udjfra7ek.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTsvJMxAfWpaefV2GIt55sN_OBrRPeBq0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "896135200677-l6couqinr2mhpsj6jni1f37udjfra7ek.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

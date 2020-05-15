@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 
 const estilo = StyleSheet.create({
   container: {
-    paddingTop: '40%',
+    paddingTop: '5%',
     display: 'flex',
     flexDirection: 'column',
     flex: 1,
@@ -28,18 +28,31 @@ const estilo = StyleSheet.create({
     color: '#000',
     marginTop: '2%',
   },
-
+  icon_send: {
+    fontSize: 25,
+    margin: 5,
+    color: 'rgba(29,161,242,1)',
+  },
   view_BotaoEntar: {
-    marginTop: '15%',
-    height: '40%',
-    width: '20%',
+    marginTop: '5%',
+    height: 60,
+    width: 100,
   },
 
   botao_login: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 80,
-    borderRadius: 25,
+    height: 50,
+    width: 100,
+    backgroundColor: 'rgba(29,161,242,1)',
+    borderRadius: 15,
+  },
+  botao_send: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 150,
+    height: 40,
+    borderRadius: 8,
     backgroundColor: 'rgba(29,161,242,1)',
   },
   txtErro: {

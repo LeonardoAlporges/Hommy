@@ -8,7 +8,7 @@ const estilo = StyleSheet.create({
     height: 55,
     backgroundColor: '#f8f8f8',
     borderBottomWidth: 2,
-    borderBottomColor: '#68c0e8',
+    borderBottomColor: '#00909e',
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
@@ -18,10 +18,18 @@ const estilo = StyleSheet.create({
   camposAmb: {
     marginTop: 50,
   },
+  botao_send: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: 40,
+    borderRadius: 6,
+    backgroundColor: '#142850',
+  },
   iconHeader: {
     fontSize: 26,
-    color: '#009ddb',
-    marginHorizontal: '5%',
+    color: '#142850',
+    marginLeft: '5%',
   },
   txtLabel: {
     fontFamily: 'Roboto',
@@ -33,13 +41,14 @@ const estilo = StyleSheet.create({
     fontSize: 24,
     fontFamily: 'Roboto',
     fontWeight: 'bold',
-    color: '#006fa9',
+    color: '#142850',
   },
   V_Conteudo: {
     height: '100%',
     width: '100%',
     paddingVertical: 15,
     paddingHorizontal: 20,
+    backgroundColor: '#F8F8F8',
   },
   ruaNum: {
     display: 'flex',
@@ -75,9 +84,10 @@ const estilo = StyleSheet.create({
   btnProximo: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: '80%',
+    width: '100%',
     height: 50,
-    backgroundColor: '#009ddb',
+    backgroundColor: '#142850',
+    borderRadius: 6,
   },
   iconeBtn: {
     margin: 0,
@@ -86,8 +96,8 @@ const estilo = StyleSheet.create({
   botaoEnv: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#009ddb',
-    color: '#009ddb',
+    backgroundColor: '#142850',
+    color: '#142850',
   },
 });
 

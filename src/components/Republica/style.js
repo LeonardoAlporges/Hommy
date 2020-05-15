@@ -6,7 +6,7 @@ const estilosRepublica = StyleSheet.create({
     marginBottom: 0,
   },
   flatList: {
-    backgroundColor: '#f2f2f2f2',
+    backgroundColor: '#F8F8F8F8',
     padding: 1,
     marginBottom: 0,
     paddingBottom: 0,

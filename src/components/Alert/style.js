@@ -3,16 +3,18 @@ import { StyleSheet } from 'react-native';
 const Estilos = StyleSheet.create({
   ViewFundo: {
     backgroundColor: '#00000080',
-    flex: 1,
+    height: '100%',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   ViewModal: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 350,
-    marginTop: 250,
-    marginHorizontal: 50,
+    height: 370,
+    marginHorizontal: 20,
     backgroundColor: 'white',
-    borderRadius: 20,
+    borderRadius: 10,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
@@ -48,7 +50,7 @@ const Estilos = StyleSheet.create({
   botao: {
     marginTop: '10%',
     alignSelf: 'center',
-    backgroundColor: '#30C21E',
+    backgroundColor: '#142850',
     borderRadius: 5,
     padding: 10,
     elevation: 2,

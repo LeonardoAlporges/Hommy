@@ -56,23 +56,23 @@ class CartaoCarona extends Component {
                 style={Estilos.imagem}
               />
             </View>
-            <Text>{this.props.dados.nome}</Text>
+            <Text style={Estilos.txtnome}>{this.props.dados.nome}</Text>
             <View style={Estilos.V_nota}>
-              <Icon name="settings" style={Estilos.icon} />
-              <Text> {this.props.dados.nota}.3</Text>
+              <Icon name="star" style={Estilos.icon} />
+              <Text> {this.props.dados.nota}</Text>
             </View>
           </View>
           <View style={Estilos.V_local}>
             <View style={Estilos.V_LocLabel}>
               <Text style={Estilos.txtdeslcSa}>08:00</Text>
-              <Icon name="action-redo" style={Estilos.iconDesSa} />
+              <Icon name="action-redo" style={Estilos.txtIcon} />
               <Text style={Estilos.txtdeslcSa}>
                 {this.props.dados.localSaida}
               </Text>
             </View>
             <View style={Estilos.V_LocLabel}>
               <Text style={Estilos.txtdeslcCh}>11:00</Text>
-              <Icon name="flag" style={Estilos.iconDesCh} />
+              <Icon name="flag" style={Estilos.txtIcon} />
               <Text style={Estilos.txtdeslcCh}>
                 {this.props.dados.localChegada}
               </Text>

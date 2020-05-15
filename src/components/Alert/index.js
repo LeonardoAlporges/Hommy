@@ -15,9 +15,18 @@ export default class CustomModal extends Component {
     super(props);
   }
   UNSAFE_componentWillMount() {
+    if (this.props.parametro == 'Custom') {
+      this.setState({
+        icon: require('../../assets/Img/Question.png'),
+        titulo: this.props.titulo,
+        descricao: this.props.descricao,
+        botao: this.props.botao,
+      });
+    }
+
     if (this.props.parametro == 'Sucesso') {
       this.setState({
-        icon: require('../../../assets/undraw_confirmed_81ex.png'),
+        icon: require('../../assets/Img/Succes.png'),
         titulo: 'Socilitação concluida com sucesso!',
         descricao: 'Confirmar',
         botao: 'Confirmar',
@@ -25,7 +34,7 @@ export default class CustomModal extends Component {
     }
     if (this.props.parametro == 'Aviso') {
       this.setState({
-        icon: require('../../../assets/undraw_warning_cyit.png'),
+        icon: require('../../assets/Img/Question.png'),
         titulo: 'Fique atento ',
         descricao: 'Voçe pode ter inserido algum dado errado',
         botao: 'Confirmar',
@@ -33,9 +42,10 @@ export default class CustomModal extends Component {
     }
     if (this.props.parametro == 'Erro') {
       this.setState({
-        icon: require('../../../assets/undraw_cancel_u1it.png'),
+        icon: require('../../assets/Img/Fail_Connection.png'),
         titulo: 'Erro de conexao',
-        descricao: 'Nao foi possivel completar sua requisição',
+        descricao:
+          'Nao foi possivel completar sua requisição, verifique sua conexao com a internet',
         botao: 'Voltar',
       });
     }

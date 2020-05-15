@@ -92,10 +92,11 @@ class Cartao extends Component {
             <View style={Estilos.V_desc}>
               <View
                 style={{
+                  paddingLeft: '2%',
                   flexDirection: 'row',
                   width: '45%',
                   marginRight: 10,
-                  justifyContent: 'center',
+                  justifyContent: 'flex-start',
                   paddingTop: 8,
                 }}
               >
@@ -108,7 +109,7 @@ class Cartao extends Component {
                 style={{
                   flexDirection: 'row',
                   width: '55%',
-                  justifyContent: 'center',
+                  justifyContent: 'flex-start',
                   paddingTop: 8,
                 }}
               >

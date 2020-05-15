@@ -19,10 +19,10 @@ const Estilos = StyleSheet.create({
     fontFamily: 'Roboto',
     fontSize: 23,
     fontWeight: '600',
-    color: '#006fa9',
+    color: '#142850',
   },
   icon2: {
-    color: '#009ddb',
+    color: '#142850',
     fontSize: 22,
   },
 });

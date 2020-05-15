@@ -12,13 +12,40 @@ import { connect } from 'react-redux';
 import Estilo from './style';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Button } from 'native-base';
+import CustomModal from '../../components/Alert';
 // import { Container } from './styles';
 
 class DetalhesCarona extends Component {
+  state = {
+    interesse: false,
+  };
+
+  clickInteresse() {
+    this.setState({ interesse: true });
+  }
+
   static navigationOptions = { header: null };
   render() {
     return (
-      <ScrollView style={{ paddingBottom: 100 }}>
+      <ScrollView style={{ paddingBottom: 50 }}>
+        {this.state.interesse ? (
+          <View
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <CustomModal
+              parametro="Custom"
+              titulo="Obrigado pelo interesse"
+              descricao="Você sera adicionado a uma lista de interesse e sera notificado assim que o ofertante confirme sua vaga."
+              botao="Confirmar"
+            />
+          </View>
+        ) : (
+          <View />
+        )}
         <View style={{ marginBottom: '15%' }}>
           <View style={Estilo.header}>
             <TouchableOpacity
@@ -40,7 +67,7 @@ class DetalhesCarona extends Component {
             <View style={Estilo.V_Nome}>
               <Text style={Estilo.Nome}>{this.props.nome}</Text>
               <View style={Estilo.V_nota}>
-                <Text style={Estilo.Nota}>{this.props.nome}</Text>
+                <Text style={Estilo.Nota}>{this.props.nota}</Text>
                 <Icon style={Estilo.iconNota} name="star-outline" />
               </View>
             </View>
@@ -89,18 +116,24 @@ class DetalhesCarona extends Component {
             </View>
           </View>
           <View style={Estilo.ViewButon}>
-            <Button
-              style={Estilo.Botao}
-              onPress={() => {
-                Linking.openURL(
-                  'https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849'
-                );
+            <View
+              style={{
+                width: '80%',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
-              title="Leo"
             >
-              <Icon style={Estilo.iconBtn} name="whatsapp" />
-              <Text style={Estilo.txtBotao}>Tenho Interesse</Text>
-            </Button>
+              <Button
+                style={Estilo.Botao}
+                onPress={() => {
+                  this.clickInteresse();
+                }}
+                title="Leo"
+              >
+                <Icon style={Estilo.iconBtn} name="whatsapp" />
+                <Text style={Estilo.txtBotao}>Tenho Interesse</Text>
+              </Button>
+            </View>
           </View>
         </View>
       </ScrollView>

@@ -7,6 +7,7 @@ import {
   Alert,
   Modal,
   Image,
+  Linking,
 } from 'react-native';
 import CustomModal from '../Alert';
 import { connect } from 'react-redux';
@@ -22,7 +23,11 @@ class Cabeca extends Component {
     isModalVisible: false,
     erro: false,
   };
-
+  AbrirUrl = () => {
+    Linking.openUrl(
+      'https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849'
+    );
+  };
   closeToken = async () => {
     await AsyncStorage.removeItem('token')
       .then(value => {
@@ -63,23 +68,23 @@ class Cabeca extends Component {
         >
           <View
             style={{
-              backgroundColor: 'rgba(0,0,0,0.7)',
+              backgroundColor: '#f8f8f8',
               flex: 1,
             }}
           >
             <View
               style={{
-                backgroundColor: '#ffff',
+                backgroundColor: '#f8f8f8',
 
                 alignItems: 'center',
-                borderRadius: 10,
+                borderRadius: 5,
                 height: 100,
                 flex: 1,
               }}
             >
               <View
                 style={{
-                  height: 60,
+                  height: 55,
                   width: '100%',
                   marginTop: '3%',
                   paddingHorizontal: '3%',
@@ -92,22 +97,36 @@ class Cabeca extends Component {
                     this.setState({ isModalVisible: false });
                   }}
                 >
-                  <Icon style={{ fontSize: 30 }} name="arrow-left" />
+                  <Icon
+                    style={{ marginTop: 8, fontSize: 20, color: '#27496d' }}
+                    name="arrow-left"
+                  />
                 </TouchableOpacity>
-
-                <Icon style={{ fontSize: 30 }} name="pencil" />
               </View>
-              <Image
-                source={{
-                  uri: this.props.fotoPerfil,
-                }}
-                style={{
-                  width: 100,
-                  height: 100,
-                  borderRadius: 50,
-                  marginBottom: '5%',
-                }}
-              />
+              {this.props.fotoPerfil != null ? (
+                <Image
+                  source={{
+                    uri: this.props.fotoPerfil,
+                  }}
+                  style={{
+                    width: 120,
+                    height: 120,
+                    borderRadius: 100,
+                    marginBottom: '2%',
+                  }}
+                />
+              ) : (
+                <Image
+                  source={require('../../assets/Img/ProfilePicture.png')}
+                  style={{
+                    width: 130,
+                    height: 130,
+                    borderRadius: 100,
+                    marginBottom: '2%',
+                  }}
+                />
+              )}
+
               <View
                 style={{
                   width: 300,
@@ -120,7 +139,7 @@ class Cabeca extends Component {
                     fontSize: 18,
                     fontWeight: 'bold',
                     fontFamily: 'Roboto',
-                    color: '#000',
+                    color: '#27496d',
                   }}
                 >
                   {this.props.nome}
@@ -131,7 +150,7 @@ class Cabeca extends Component {
 
                     fontFamily: 'Roboto',
 
-                    color: '#000',
+                    color: '#00909e',
                   }}
                 >
                   {this.props.cpf}
@@ -145,13 +164,13 @@ class Cabeca extends Component {
                   marginLeft: '6%',
                   marginRight: '6%',
                   borderBottomWidth: 1,
-                  borderBottomColor: '#adadad',
+                  borderBottomColor: '#27496d',
                 }}
               />
 
               <View
                 style={{
-                  color: '#ffff',
+                  color: '#27496d',
                   width: '100%',
                   paddingHorizontal: '10%',
                   justifyContent: 'space-between',
@@ -161,12 +180,13 @@ class Cabeca extends Component {
               >
                 <Button
                   style={{
-                    height: 60,
-                    backgroundColor: 'rgba(29,161,242,1)',
+                    width: '100%',
+                    height: 55,
+                    backgroundColor: '#27496d',
                     justifyContent: 'flex-start',
                     borderRadius: 5,
-                    paddingLeft: '4%',
-                    color: '#ffff',
+                    paddingLeft: '6%',
+                    color: '#dae1e7',
                   }}
                   onPress={() => {
                     this.props.navigation.navigate('Anuncios'),
@@ -174,98 +194,148 @@ class Cabeca extends Component {
                   }}
                 >
                   <Icon
-                    style={{ fontSize: 25, color: '#ffff' }}
+                    style={{ fontSize: 18, color: '#dae1e7' }}
                     name="book-open"
                   />
+
                   <Text
                     style={{
+                      width: '75%',
                       fontSize: 18,
                       fontFamily: 'Roboto',
                       fontWeight: '600',
-                      marginLeft: '4%',
+                      marginLeft: '6%',
                       color: '#ffff',
                     }}
                   >
                     Meus Anuncios
                   </Text>
+                  <Icon
+                    style={{
+                      paddingLeft: '2%',
+                      fontSize: 18,
+                      color: '#dae1e7',
+                    }}
+                    name="arrow-right"
+                  />
                 </Button>
                 <Button
                   style={{
-                    height: 60,
-                    backgroundColor: 'rgba(29,161,242,1)',
+                    width: '100%',
+                    height: 55,
+                    backgroundColor: '#27496d',
                     justifyContent: 'flex-start',
                     borderRadius: 5,
-                    paddingLeft: '4%',
+                    paddingLeft: '6%',
                     color: '#ffff',
                   }}
                 >
                   <Icon
-                    style={{ fontSize: 25, color: '#ffff' }}
+                    style={{ fontSize: 18, color: '#ffff' }}
                     name="pencil"
                   />
                   <Text
                     style={{
                       fontSize: 18,
+                      width: '75%',
                       fontFamily: 'Roboto',
                       fontWeight: '600',
-                      marginLeft: '4%',
+                      marginLeft: '6%',
                       color: '#ffff',
                     }}
                   >
                     Editar perfil
                   </Text>
+                  <Icon
+                    style={{
+                      paddingLeft: '2%',
+                      fontSize: 18,
+                      color: '#dae1e7',
+                    }}
+                    name="arrow-right"
+                  />
                 </Button>
                 <Button
+                  onPress={() => {
+                    Linking.openURL(
+                      'https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849'
+                    );
+                  }}
                   style={{
-                    height: 60,
+                    width: '100%',
+                    height: 55,
                     color: '#ffff',
-                    backgroundColor: 'rgba(29,161,242,1)',
+                    backgroundColor: '#27496d',
                     justifyContent: 'flex-start',
                     borderRadius: 5,
-                    paddingLeft: '4%',
+                    paddingLeft: '6%',
                   }}
                 >
                   <Icon
-                    style={{ fontSize: 25, color: '#ffff' }}
+                    style={{ fontSize: 18, color: '#ffff' }}
                     name="question"
                   />
                   <Text
                     style={{
                       color: '#ffff',
+                      width: '75%',
                       fontSize: 18,
                       fontFamily: 'Roboto',
                       fontWeight: '600',
-                      marginLeft: '4%',
+                      marginLeft: '6%',
                     }}
                   >
                     Me ajuda
                   </Text>
+                  <Icon
+                    style={{
+                      paddingLeft: '2%',
+                      fontSize: 18,
+                      color: '#dae1e7',
+                    }}
+                    name="arrow-right"
+                  />
                 </Button>
                 <Button
+                  onPress={() => {
+                    Linking.openURL(
+                      'https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849'
+                    );
+                  }}
                   style={{
-                    height: 60,
-                    backgroundColor: 'rgba(29,161,242,1)',
+                    height: 55,
+                    width: '100%',
+                    backgroundColor: '#27496d',
                     justifyContent: 'flex-start',
                     borderRadius: 5,
-                    paddingLeft: '4%',
+                    paddingLeft: '6%',
                     color: '#ffff',
                   }}
                 >
                   <Icon
-                    style={{ fontSize: 25, color: '#ffff' }}
+                    style={{ fontSize: 18, color: '#ffff' }}
                     name="exclamation"
                   />
                   <Text
                     style={{
                       color: '#ffff',
                       fontSize: 18,
+                      width: '75%',
                       fontFamily: 'Roboto',
                       fontWeight: '600',
-                      marginLeft: '4%',
+                      marginLeft: '6%',
                     }}
                   >
                     Enviar feedback
                   </Text>
+                  <Icon
+                    style={{
+                      paddingLeft: '2%',
+                      fontSize: 18,
+                      color: '#dae1e7',
+                    }}
+                    name="arrow-right"
+                  />
                 </Button>
               </View>
               <View
@@ -273,8 +343,7 @@ class Cabeca extends Component {
                   alignItems: 'center',
                   justifyContent: 'center',
                   position: 'absolute',
-
-                  bottom: 25,
+                  bottom: 15,
                   width: '70%',
                   color: '#fff',
                 }}

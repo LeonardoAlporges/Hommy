@@ -18,6 +18,12 @@ const Estilos = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
   },
+  txtnome: {
+    fontSize: 16,
+    fontFamily: 'Roboto',
+    fontWeight: 'bold',
+    color: '#142850',
+  },
   V_ImgNome: {
     flexDirection: 'column',
     height: 118,
@@ -32,7 +38,7 @@ const Estilos = StyleSheet.create({
   },
   icon: {
     fontSize: 12,
-    color: '#1982C3',
+    color: '#00909e',
   },
   V_imagem: {
     height: 70,
@@ -42,6 +48,7 @@ const Estilos = StyleSheet.create({
     borderRadius: 20,
   },
   imagem: {
+    borderRadius: 50,
     height: 60,
     width: 60,
   },
@@ -83,13 +90,13 @@ const Estilos = StyleSheet.create({
     padding: 0,
     marginHorizontal: 2,
     fontSize: 18,
-    color: '#2e2e2e',
+    color: '#00909e',
   },
   txtdeslc: {
     fontSize: 18,
     fontFamily: 'Roboto',
     fontWeight: 'bold',
-    color: '#1982C3',
+    color: '#142850',
   },
   iconDesCh: {
     fontSize: 12,
@@ -103,25 +110,25 @@ const Estilos = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'Roboto',
     fontWeight: 'bold',
-    color: '#1982C3',
+    color: '#142850',
   },
   txtdeslcCh: {
     fontSize: 18,
     fontFamily: 'Roboto',
     fontWeight: '400',
-    color: '#1982C3',
+    color: '#142850',
   },
   txtData: {
     fontFamily: 'Roboto',
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#1982C3',
+    color: '#142850',
   },
   txtvalor: {
     fontFamily: 'Roboto',
     fontSize: 16,
     fontWeight: '400',
-    color: '#1982C3',
+    color: '#142850',
   },
 });
 

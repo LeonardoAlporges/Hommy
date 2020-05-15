@@ -12,7 +12,7 @@ const estilo = StyleSheet.create({
     paddingLeft: '6%',
   },
   titulo: {
-    color: '#586880',
+    color: '#142850',
     fontFamily: 'Roboto-bold',
     fontSize: 28,
     fontWeight: 'bold',
@@ -25,7 +25,7 @@ const estilo = StyleSheet.create({
     marginRight: '6%',
   },
   descricao: {
-    color: '#586880',
+    color: '#27496d',
     fontFamily: 'Roboto',
     fontSize: 18,
   },
@@ -34,7 +34,7 @@ const estilo = StyleSheet.create({
     marginLeft: '6%',
     marginRight: '6%',
     borderBottomWidth: 1,
-    borderBottomColor: '#adadad',
+    borderBottomColor: '#142850',
   },
   V_caracteristicaTitle: {
     height: 30,
@@ -46,7 +46,7 @@ const estilo = StyleSheet.create({
     fontFamily: 'Roboto',
     fontSize: 22,
     fontWeight: '600',
-    color: '#586880',
+    color: '#142850',
   },
   V_tipo: {
     height: 30,
@@ -65,8 +65,8 @@ const estilo = StyleSheet.create({
     height: 40,
     marginTop: '2%',
     width: '85%',
-    marginLeft: '10%',
-    marginRight: '10%',
+    marginLeft: '11%',
+    marginRight: '5%',
   },
   item: {
     alignItems: 'center',
@@ -74,12 +74,12 @@ const estilo = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     height: 40,
-    width: '42%',
+    width: '38%',
   },
 
   txtlabel: {
     paddingLeft: 20,
-    color: '#687368',
+    color: '#00909e',
     fontSize: 16,
     fontFamily: 'Roboto',
     fontWeight: '600',
@@ -88,8 +88,8 @@ const estilo = StyleSheet.create({
     justifyContent: 'flex-start',
     fontSize: 28,
     fontFamily: 'Roboto',
-    color: '#1DA1F2',
-    marginRight: 10,
+    color: '#27496d',
+    marginRight: 5,
     fontWeight: '600',
   },
   itemAcomodacao: {
@@ -140,7 +140,7 @@ const estilo = StyleSheet.create({
     width: 300,
   },
   V_botao: {
-    marginTop: '15%',
+    marginTop: 20,
     height: 60,
     alignItems: 'center',
     justifyContent: 'center',
@@ -148,14 +148,14 @@ const estilo = StyleSheet.create({
     justifyContent: 'space-around',
   },
   botao: {
-    backgroundColor: 'rgba(29,161,242,1)',
+    backgroundColor: '#142850',
     display: 'flex',
     flexDirection: 'row',
-    borderRadius: 20,
-    width: '40%',
+    borderRadius: 8,
+    width: '80%',
     height: 60,
     alignItems: 'center',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
   },
 });
 

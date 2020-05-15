@@ -9,12 +9,12 @@ const estilo = StyleSheet.create({
     height: 100,
   },
   tabs_TextStyle: {
-    color: '#1DA1F2',
+    color: '#142850',
     fontFamily: 'Roboto',
     fontSize: 15,
   },
   tabs_ActiveTextStyle: {
-    color: '#1DA1F2',
+    color: '#142850',
     fontFamily: 'Roboto',
     fontWeight: '700',
     fontSize: 18,

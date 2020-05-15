@@ -63,7 +63,7 @@ class Anuncios extends Component {
         this.setState({ listaCaronas: responseJson.data });
       })
       .catch(error => {
-        console.tron.error('Erro no Servidor');
+        console.log('Erro no Servidor');
       });
 
     api
@@ -73,7 +73,7 @@ class Anuncios extends Component {
         this.setState({ listaRepublicas: responseJson.data });
       })
       .catch(error => {
-        console.tron.error('Erro no Servidor');
+        console.log('Erro no Servidor');
       });
   }
 
