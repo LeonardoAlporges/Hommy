@@ -34,6 +34,7 @@ import {
   Input,
   Item,
   Button,
+  Picker
 } from 'native-base';
 
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
@@ -57,10 +58,15 @@ class Caronas extends Component {
       filtroVagas1: false,
       filtroVagas2: false,
       filtroVagas3: false,
+      filtroVagas4: false,
       filtroValorMaior: false,
       filtroValorMenor: false,
+      filtroCidadeD: false,
+      filtroCidadeS: false,
       aluguelMin: '',
       aluguelMax: '',
+      cidadeD: '',
+      cidadeS: '',
     };
   }
 
@@ -109,6 +115,7 @@ class Caronas extends Component {
         filtroVagas1: true,
         filtroVagas2: false,
         filtroVagas3: false,
+        filtroVagas4: false
       });
   };
 
@@ -119,6 +126,7 @@ class Caronas extends Component {
         filtroVagas2: true,
         filtroVagas1: false,
         filtroVagas3: false,
+        filtroVagas4: false
       });
   };
 
@@ -129,6 +137,17 @@ class Caronas extends Component {
         filtroVagas3: true,
         filtroVagas2: false,
         filtroVagas1: false,
+        filtroVagas4: false
+      });
+  };
+  fVagas4 = async checked => {
+    if (this.state.filtroVagas4) await this.setState({ filtroVagas4: false });
+    else
+      await this.setState({
+        filtroVagas4: true,
+        filtroVagas2: false,
+        filtroVagas1: false,
+        filtroVagas3: false,
       });
   };
   valMenor = async text => {
@@ -147,17 +166,54 @@ class Caronas extends Component {
     }
   };
 
+  FCidadeS = value => {
+    if (value != 'null')
+    this.setState({
+      cidadeS: value,
+      filtroCidadeS: true
+    });
+    else{
+      this.setState({
+        cidadeS: value,
+        filtroCidadeS: false
+      });
+    }
+  }
+
+  FCidadeD = value => {
+    if (value != 'null')
+    this.setState({
+      cidadeD: value,
+      filtroCidadeD: true
+    });
+    else{
+      this.setState({
+        cidadeD: value,
+        filtroCidadeD: false
+      });
+    }
+  }
+
   filtro = async () => {
     await this.setState({ listaCaronas: this.state.fullData });
     let listaCaronas = this.state.listaCaronas;
     if (this.state.filtroVagas1 === true) {
-      listaCaronas = _.filter(this.state.listaCaronas, { vagas: '1' });
+      listaCaronas = _.filter(listaCaronas, { vagas: '1' });
     }
     if (this.state.filtroVagas2 === true) {
-      listaCaronas = _.filter(this.state.listaCaronas, { vagas: '2' });
+      listaCaronas = _.filter(listaCaronas, { vagas: '2' });
     }
     if (this.state.filtroVagas3 === true) {
-      listaCaronas = _.filter(this.state.listaCaronas, { vagas: '3' });
+      listaCaronas = _.filter(listaCaronas, { vagas: '3' });
+    }
+    if (this.state.filtroVagas4 === true) {
+      listaCaronas = _.filter(listaCaronas, { vagas: '4' });
+    }
+    if (this.state.filtroCidadeS === true) {
+      listaCaronas = _.filter(listaCaronas, { localSaida: this.state.cidadeS });
+    }
+    if (this.state.filtroCidadeD === true) {
+      listaCaronas = _.filter(listaCaronas, { localChegada: this.state.cidadeD });
     }
     if (this.state.filtroValorMenor === true) {
       listaCaronas = _.filter(
@@ -176,7 +232,7 @@ class Caronas extends Component {
 
   render() {
     return (
-      <View>
+      <View style={{height: '100%'}}>
         {this.state.loading ? (
           <View
             style={{
@@ -235,7 +291,7 @@ class Caronas extends Component {
 
         <View
           style={{
-            backgroundColor: '#00000080',
+            backgroundColor: '#ffffff',
             flex: 1,
           }}
         >
@@ -248,7 +304,7 @@ class Caronas extends Component {
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
-                height: 400,
+                height: 500,
                 marginTop: 150,
                 marginHorizontal: 50,
                 backgroundColor: 'white',
@@ -273,7 +329,7 @@ class Caronas extends Component {
                   underlined
                   style={{
                     width: 100,
-                    borderBottomColor: 'rgba(29,161,242,1)',
+                    borderBottomColor: '#27496d',
                   }}
                 >
                   <Input
@@ -290,7 +346,7 @@ class Caronas extends Component {
                   underlined
                   style={{
                     width: 100,
-                    borderBottomColor: 'rgba(29,161,242,1)',
+                    borderBottomColor: '#27496d',
                   }}
                 >
                   <Input
@@ -304,6 +360,7 @@ class Caronas extends Component {
               <Text>Vagas disponíveis</Text>
               <ListItem style={{ alignItems: 'stretch', marginBottom: 10 }}>
                 <CheckBox
+                color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fVagas1}
                   checked={this.state.filtroVagas1}
@@ -312,6 +369,7 @@ class Caronas extends Component {
                   1
                 </Text>
                 <CheckBox
+                color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fVagas2}
                   checked={this.state.filtroVagas2}
@@ -320,6 +378,7 @@ class Caronas extends Component {
                   2
                 </Text>
                 <CheckBox
+                color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fVagas3}
                   checked={this.state.filtroVagas3}
@@ -327,12 +386,80 @@ class Caronas extends Component {
                 <Text style={{ alignSelf: 'stretch', paddingHorizontal: 15 }}>
                   3
                 </Text>
+                <CheckBox
+                color="#27496d"
+                  style={{ alignSelf: 'stretch' }}
+                  onPress={this.fVagas4}
+                  checked={this.state.filtroVagas4}
+                />
+                <Text style={{ alignSelf: 'stretch', paddingHorizontal: 15 }}>
+                  4
+                </Text>
               </ListItem>
+              <Text>Saida</Text>
+              <ListItem style={{  marginBottom: 10 }}>
+              <Item picker style={{ marginLeft:50, marginRight:50}}>
+              <Picker
+                mode="dropdown"
+                iosIcon={<Icon name="arrow-down" />}
+                style={{ width: undefined }}
+                placeholder="Destino"
+                placeholderStyle={{ color: "#bfc6ea" }}
+                placeholderIconColor="#007aff"
+                selectedValue={this.state.cidadeS}
+                onValueChange={this.FCidadeS.bind(this)}
+              >
+                <Picker.Item label="Cidades" value= 'null' />
+                <Picker.Item label="Alegre" value="Alegre" />
+                <Picker.Item label="Serra" value="Serra" />
+                <Picker.Item label="Piuma" value="Piuma" />
+                <Picker.Item label="Guarapari" value="Guarapari" />
+                <Picker.Item label="Cachoeiro" value="Cachoeiro" />
+                <Picker.Item label="Vitoria" value="Vitoria" />
+                <Picker.Item label="Vila Velha" value="Vila Velha" />
+                <Picker.Item label="Muniz Freire" value="Muniz Freire" />
+                <Picker.Item label="Guacui" value="Guacui" />
+                <Picker.Item label="Bom Jesus do Norte" value="Bom Jesus do Norte" />
+                <Picker.Item label="Celina" value="Celina" />
+                <Picker.Item label="Rive" value="Rive" />
+              </Picker>
+            </Item>
+              </ListItem>
+              <Text>Destino</Text>
+              <ListItem style={{ marginBottom: 10 }}>
+              <Item picker style={{ marginLeft:50, marginRight:50}}>
+              <Picker
+                mode="dropdown"
+                iosIcon={<Icon name="arrow-down" />}
+                style={{ width: undefined }}
+                placeholder="Destino"
+                placeholderStyle={{ color: "#bfc6ea" }}
+                placeholderIconColor="#007aff"
+                selectedValue={this.state.cidadeD}
+                onValueChange={this.FCidadeD.bind(this)}
+              >
+                <Picker.Item label="Cidades" value= 'null' />
+                <Picker.Item label="Alegre" value="Alegre" />
+                <Picker.Item label="Serra" value="Serra" />
+                <Picker.Item label="Piuma" value="Piuma" />
+                <Picker.Item label="Guarapari" value="Guarapari" />
+                <Picker.Item label="Cachoeiro" value="Cachoeiro" />
+                <Picker.Item label="Vitoria" value="Vitoria" />
+                <Picker.Item label="Vila Velha" value="Vila Velha" />
+                <Picker.Item label="Muniz Freire" value="Muniz Freire" />
+                <Picker.Item label="Guacui" value="Guacui" />
+                <Picker.Item label="Bom Jesus do Norte" value="Bom Jesus do Norte" />
+                <Picker.Item label="Celina" value="Celina" />
+                <Picker.Item label="Rive" value="Rive" />
+              </Picker>
+            </Item>
+              </ListItem>
+              
 
               <TouchableOpacity
                 style={{
                   alignSelf: 'center',
-                  backgroundColor: '#30C21E',
+                  backgroundColor: '#57A773',
                   borderRadius: 20,
                   padding: 10,
                   elevation: 2,
@@ -363,7 +490,7 @@ class Caronas extends Component {
           active={this.state.active}
           direction="up"
           containerStyle={{}}
-          style={{ backgroundColor: '#27496d' }}
+          style={{ backgroundColor: '#27496d', position: 'absolute' }}
           position="bottomRight"
           onPress={() => {
             this.setState({ active: !this.state.active });

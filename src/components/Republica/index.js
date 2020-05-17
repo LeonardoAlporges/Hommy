@@ -279,49 +279,49 @@ class Republica extends Component {
     let listaRepublicas = this.state.listaRepublicas;
 
     if (this.state.filtroAnimalSim === true) {
-      listaRepublicas = _.filter(this.state.listaRepublicas, { animal: 'Sim' });
+      listaRepublicas = _.filter(listaRepublicas, { animal: 'Sim' });
     }
     if (this.state.filtroAnimalNao === true) {
-      listaRepublicas = _.filter(this.state.listaRepublicas, { animal: 'Nao' });
+      listaRepublicas = _.filter(listaRepublicas, { animal: 'Nao' });
     }
     if (this.state.filtroMasc === true) {
-      listaRepublicas = _.filter(this.state.listaRepublicas, {
+      listaRepublicas = _.filter(listaRepublicas, {
         genero: 'Masculina',
       });
     }
     if (this.state.filtroFem === true) {
-      listaRepublicas = _.filter(this.state.listaRepublicas, {
+      listaRepublicas = _.filter(listaRepublicas, {
         genero: 'Feminina',
       });
     }
     if (this.state.filtroMista === true) {
-      listaRepublicas = _.filter(this.state.listaRepublicas, {
+      listaRepublicas = _.filter(listaRepublicas, {
         genero: 'Mista',
       });
     }
     if (this.state.filtroMoradores2 === true) {
-      listaRepublicas = _.filter(this.state.listaRepublicas, { pessoas: '2' });
+      listaRepublicas = _.filter(listaRepublicas, { pessoas: '2' });
     }
     if (this.state.filtroMoradores3 === true) {
-      listaRepublicas = _.filter(this.state.listaRepublicas, { pessoas: '3' });
+      listaRepublicas = _.filter(listaRepublicas, { pessoas: '3' });
     }
     if (this.state.filtroMoradores4 === true) {
-      listaRepublicas = _.filter(this.state.listaRepublicas, { pessoas: '4' });
+      listaRepublicas = _.filter(listaRepublicas, { pessoas: '4' });
     }
     if (this.state.filtroMoradores5 === true) {
-      listaRepublicas = _.filter(this.state.listaRepublicas, { pessoas: '5' });
+      listaRepublicas = _.filter(listaRepublicas, { pessoas: '5' });
     }
     if (this.state.filtroMoradores6 === true) {
-      listaRepublicas = _.filter(this.state.listaRepublicas, { pessoas: '6+' });
+      listaRepublicas = _.filter(listaRepublicas, { pessoas: '6+' });
     }
     if (this.state.filtroVagas1 === true) {
-      listaRepublicas = _.filter(this.state.listaRepublicas, { numVagas: '1' });
+      listaRepublicas = _.filter(listaRepublicas, { numVagas: '1' });
     }
     if (this.state.filtroVagas2 === true) {
-      listaRepublicas = _.filter(this.state.listaRepublicas, { numVagas: '2' });
+      listaRepublicas = _.filter(listaRepublicas, { numVagas: '2' });
     }
     if (this.state.filtroVagas3 === true) {
-      listaRepublicas = _.filter(this.state.listaRepublicas, { numVagas: '3' });
+      listaRepublicas = _.filter(listaRepublicas, { numVagas: '3' });
     }
     if (this.state.filtroValorMenor === true) {
       listaRepublicas = _.filter(
@@ -339,8 +339,8 @@ class Republica extends Component {
   };
   render() {
     return (
-      <View>
-        <View>
+      <View style={{ height: "100%", backgroundColor: "#ffffff" }}>
+        <View >
           {this.state.loading ? (
             <View
               style={{
@@ -348,6 +348,7 @@ class Republica extends Component {
                 height: '100%',
                 justifyContent: 'center',
                 alignItems: 'center',
+                backgroundColor: "#ffffff"
               }}
             >
               <Spinner color="#27496d" />
@@ -360,6 +361,7 @@ class Republica extends Component {
                 justifyContent: 'center',
                 alignItems: 'center',
                 paddingBottom: '10%',
+                backgroundColor: "#ffffff"
               }}
             >
               <CustomModal parametro="Erro" />
@@ -391,19 +393,19 @@ class Republica extends Component {
               </Text>
             </View>
           ) : (
-            <ScrollView style={estilosRepublica.card}>
-              <FlatList
-                style={estilosRepublica.flatList}
-                data={this.state.listaRepublicas}
-                renderItem={({ item }) => <Cartao leonardo={item} />}
-                keyExtractor={item => item._id}
-              />
-            </ScrollView>
-          )}
+                <ScrollView style={estilosRepublica.card}>
+                  <FlatList
+                    style={estilosRepublica.flatList}
+                    data={this.state.listaRepublicas}
+                    renderItem={({ item }) => <Cartao leonardo={item} />}
+                    keyExtractor={item => item._id}
+                  />
+                </ScrollView>
+              )}
         </View>
         <View
           style={{
-            backgroundColor: '#00000080',
+            backgroundColor: '#ffffff',
             flex: 1,
           }}
         >
@@ -441,7 +443,7 @@ class Republica extends Component {
                   underlined
                   style={{
                     width: 100,
-                    borderBottomColor: 'rgba(29,161,242,1)',
+                    borderBottomColor: '#27496d',
                   }}
                 >
                   <Input
@@ -458,7 +460,7 @@ class Republica extends Component {
                   underlined
                   style={{
                     width: 100,
-                    borderBottomColor: 'rgba(29,161,242,1)',
+                    borderBottomColor: '#27496d',
                   }}
                 >
                   <Input
@@ -472,6 +474,7 @@ class Republica extends Component {
               <Text>Aceita animais?</Text>
               <ListItem style={{ alignItems: 'center', marginBottom: 10 }}>
                 <CheckBox
+                  color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fAnimalSim}
                   checked={this.state.filtroAnimalSim}
@@ -480,6 +483,7 @@ class Republica extends Component {
                   Sim
                 </Text>
                 <CheckBox
+                  color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fAnimalNao}
                   checked={this.state.filtroAnimalNao}
@@ -491,6 +495,7 @@ class Republica extends Component {
               <Text> Tipo de república</Text>
               <ListItem style={{ alignItems: 'center', marginBottom: 10 }}>
                 <CheckBox
+                  color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fMasc}
                   checked={this.state.filtroMasc}
@@ -499,6 +504,7 @@ class Republica extends Component {
                   Masculina
                 </Text>
                 <CheckBox
+                  color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fFem}
                   checked={this.state.filtroFem}
@@ -507,6 +513,7 @@ class Republica extends Component {
                   Feminina
                 </Text>
                 <CheckBox
+                  color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fMista}
                   checked={this.state.filtroMista}
@@ -518,6 +525,7 @@ class Republica extends Component {
               <Text>Capacidade de moradores</Text>
               <ListItem style={{ alignItems: 'center', marginBottom: 10 }}>
                 <CheckBox
+                  color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fMoradores2}
                   checked={this.state.filtroMoradores2}
@@ -526,6 +534,7 @@ class Republica extends Component {
                   2
                 </Text>
                 <CheckBox
+                  color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fMoradores3}
                   checked={this.state.filtroMoradores3}
@@ -534,6 +543,7 @@ class Republica extends Component {
                   3
                 </Text>
                 <CheckBox
+                  color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fMoradores4}
                   checked={this.state.filtroMoradores4}
@@ -542,6 +552,7 @@ class Republica extends Component {
                   4
                 </Text>
                 <CheckBox
+                  color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fMoradores5}
                   checked={this.state.filtroMoradores5}
@@ -550,6 +561,7 @@ class Republica extends Component {
                   5
                 </Text>
                 <CheckBox
+                  color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fMoradores6}
                   checked={this.state.filtroMoradores6}
@@ -561,6 +573,7 @@ class Republica extends Component {
               <Text>Vagas disponíveis</Text>
               <ListItem style={{ alignItems: 'stretch', marginBottom: 10 }}>
                 <CheckBox
+                  color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fVagas1}
                   checked={this.state.filtroVagas1}
@@ -569,6 +582,7 @@ class Republica extends Component {
                   1
                 </Text>
                 <CheckBox
+                  color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fVagas2}
                   checked={this.state.filtroVagas2}
@@ -577,6 +591,7 @@ class Republica extends Component {
                   2
                 </Text>
                 <CheckBox
+                  color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fVagas3}
                   checked={this.state.filtroVagas3}
@@ -589,7 +604,7 @@ class Republica extends Component {
               <TouchableOpacity
                 style={{
                   alignSelf: 'center',
-                  backgroundColor: '#30C21E',
+                  backgroundColor: '#57A773',
                   borderRadius: 20,
                   padding: 10,
                   elevation: 2,
@@ -617,12 +632,11 @@ class Republica extends Component {
             </View>
           </Modal>
         </View>
-
         <Fab
           active={this.state.active}
           direction="up"
           containerStyle={{}}
-          style={{ backgroundColor: '#27496d' }}
+          style={{ backgroundColor: '#27496d', position: "absolute" }}
           position="bottomRight"
           onPress={() => {
             this.setState({ active: !this.state.active });
@@ -631,8 +645,8 @@ class Republica extends Component {
           {this.state.active ? (
             <Icon name="arrow-down" />
           ) : (
-            <Icon name="arrow-up" />
-          )}
+              <Icon name="arrow-up" />
+            )}
 
           <Button
             style={{ backgroundColor: '#27496d' }}
