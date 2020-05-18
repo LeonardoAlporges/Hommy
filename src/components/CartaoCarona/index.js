@@ -64,7 +64,7 @@ class CartaoCarona extends Component {
           </View>
           <View style={Estilos.V_local}>
             <View style={Estilos.V_LocLabel}>
-              <Text style={Estilos.txtdeslcSa}>08:00</Text>
+              <Text style={Estilos.txtdeslcSaHora}>08:00</Text>
               <Icon name="action-redo" style={Estilos.txtIcon} />
               <Text style={Estilos.txtdeslcSa}>
                 {this.props.dados.localSaida}

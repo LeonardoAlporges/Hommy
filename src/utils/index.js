@@ -14,15 +14,32 @@ export const getFileLocalPath = response => {
   return Platform.OS === 'android' ? path : uri;
 };
 
-export const createStorageReferenceToFile = response => {
+export const createStorageReferenceToFileRepublica = response => {
   const { fileName } = response;
-  return FireBaseStorage.ref(`/pictures/${fileName}`);
+  return FireBaseStorage.ref(`/pictures/republicas/${fileName}`);
   //return FireBaseStorage.ref(`/imagem/${fileName}`).delete();
+};
+export const createStorageReferenceToFileUser = response => {
+  const { fileName } = response;
+  return FireBaseStorage.ref(`/pictures/user/${fileName}`);
+  //return FireBaseStorage.ref(`/imagem/${fileName}`).delete();
+};
+
+export const uploadFileToFireBaseRepublica = imagePickerResponse => {
+  const fileSource = getFileLocalPath(imagePickerResponse);
+  const storageRef = createStorageReferenceToFileRepublica(imagePickerResponse);
+  return storageRef.putFile(fileSource);
 };
 
 export const uploadFileToFireBase = imagePickerResponse => {
   const fileSource = getFileLocalPath(imagePickerResponse);
   const storageRef = createStorageReferenceToFile(imagePickerResponse);
+  return storageRef.putFile(fileSource);
+};
+
+export const uploadFileToFireBaseUser = imagePickerResponse => {
+  const fileSource = getFileLocalPath(imagePickerResponse);
+  const storageRef = createStorageReferenceToFileUser(imagePickerResponse);
   return storageRef.putFile(fileSource);
 };
 export const uploadProgress = ratio => Math.round(ratio * 100);

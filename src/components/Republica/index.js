@@ -41,8 +41,6 @@ import {
   editNumero,
   editTipoImovel,
 } from '../../actions/AuthActions';
-//var aluguelMin = null;
-//var aluguelMax = null;
 
 class Republica extends Component {
   static navigationOptions = { header: null };
@@ -69,7 +67,6 @@ class Republica extends Component {
       filtroVagas1: false,
       filtroVagas2: false,
       filtroVagas3: false,
-      loading: false,
       filtroValorMenor: false,
       filtroValorMaior: false,
       aluguelMin: '',
@@ -98,7 +95,9 @@ class Republica extends Component {
     this.props.editImg3('');
     this.props.editTipoImovel('');
 
-    this.props.navigation.navigate('Cadastro', { update: false });
+    this.props.navigation.navigate('Cadastro', {
+      update: false,
+    });
   }
 
   UNSAFE_componentWillMount() {
@@ -339,7 +338,7 @@ class Republica extends Component {
   };
   render() {
     return (
-      <View>
+      <View style={{ width: '100%', height: '100%' }}>
         <View>
           {this.state.loading ? (
             <View
@@ -403,8 +402,9 @@ class Republica extends Component {
         </View>
         <View
           style={{
-            backgroundColor: '#00000080',
-            flex: 1,
+            backgroundColor: '#ffffff',
+            height: '100%',
+            width: '100%',
           }}
         >
           <Modal
@@ -622,7 +622,11 @@ class Republica extends Component {
           active={this.state.active}
           direction="up"
           containerStyle={{}}
-          style={{ backgroundColor: '#27496d' }}
+          style={{
+            backgroundColor: '#27496d',
+            position: 'absolute',
+            bottom: 10,
+          }}
           position="bottomRight"
           onPress={() => {
             this.setState({ active: !this.state.active });

@@ -37,7 +37,7 @@ class TabsHeader extends Component {
             activeTabStyle={estilo.tabs_ActiveTabs}
             activeTextStyle={estilo.tabs_ActiveTextStyle}
           >
-            <Republica style={estilo.card} navigation />
+            <Republica style={estilo.card} />
           </Tab>
           <Tab
             heading="Caronas"

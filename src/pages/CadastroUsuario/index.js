@@ -80,15 +80,16 @@ const CadastroUsuario = ({ navigation }) => {
       } else if (error) {
         alert('An error occurred: ', error);
       } else {
-        const uploadTask = uploadFileToFireBase(imagePickerResponse);
+        const uploadTask = uploadFileToFireBaseUser(imagePickerResponse);
         monitorFileUpload(uploadTask);
       }
     });
   };
 
   return (
-    <View style={estilo.container}>
-      {/* <Image
+    <ScrollView>
+      <View style={estilo.container}>
+        {/* <Image
         source={{
           uri:
             'https://firebasestorage.googleapis.com/v0/b/republicas.appspot.com/o/leo.png?alt=media&token=82587fae-0527-42f4-8ba1-4f9d1d8e3395',
@@ -96,180 +97,180 @@ const CadastroUsuario = ({ navigation }) => {
         style={{ width: 100, height: 100, marginTop: '10%' }}
       /> */}
 
-      {upload.loading ? (
-        <Image
-          source={imageURI}
-          style={{
-            width: 100,
-            height: 100,
-            marginTop: '10%',
-            borderRadius: 50,
-          }}
-        />
-      ) : (
-        <Image
-          source={imageURI}
-          style={{
-            width: 100,
-            height: 100,
-            marginTop: '10%',
-            borderRadius: 50,
-          }}
-        />
-      )}
-      <View
-        style={{
-          display: 'flex',
-          marginLeft: '55%',
-          width: '100%',
-          height: 50,
-          alignContent: 'center',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <Button style={estilo.botao_send} onPress={uploadFile}>
-          {/* //<Icon name="account-outline" style={estilo.icon_send} /> */}
-          <Text>Enviar Foto de perfil</Text>
-        </Button>
-      </View>
-      <Formik
-        initialValues={{
-          nome: '',
-          email: '',
-          confirmaEmail: '',
-          password: '',
-          celular: '',
-          fotoPerfil: '',
-        }}
-        onSubmit={values => {
-          console.log('Handle'), this.EnviarCadastro(values);
-        }}
-        validationSchema={yup.object().shape({
-          nome: yup.string().required('Insira um Apelido para sua conta'),
-          email: yup
-            .string()
-            .email('Insira um Email valido')
-            .required('Insira um Email para sua conta'),
-          celular: yup
-            .number()
-            .max(9999999999999)
-            .required(' Insira um celular'),
-          password: yup
-            .string()
-            .min(4)
-            .required('Insira uma senha para sua conta'),
-        })}
-      >
-        {({
-          values,
-          handleChange,
-          errors,
-          setFieldTouched,
-          touched,
-          isValid,
-          handleSubmit,
-        }) => (
-          <Fragment>
-            <View style={estilo.view_CamposLogin}>
-              <Item>
-                <Icon
-                  style={estilo.icons_CamposLogin}
-                  active
-                  name="account-outline"
-                />
-                <Input
-                  value={values.nome} //NOME
-                  onChangeText={handleChange('nome')}
-                  onBlur={() => setFieldTouched('nome')}
-                  placeholder="Nome"
-                />
-              </Item>
-            </View>
-
-            {touched.nome && errors.nome && (
-              <View style={estilo.V_Erro}>
-                <Text style={estilo.txtErro}>{errors.nome}</Text>
-              </View>
-            )}
-
-            <View style={estilo.view_CamposLogin}>
-              <Item>
-                <Icon
-                  style={estilo.icons_CamposLogin}
-                  active
-                  name="email-outline"
-                />
-                <Input
-                  value={values.email} //EMAIL
-                  onChangeText={handleChange('email')}
-                  placeholder="E-mail"
-                  onBlur={() => setFieldTouched('email')}
-                />
-              </Item>
-            </View>
-            {touched.email && errors.email && (
-              <View style={estilo.V_Erro}>
-                <Text style={estilo.txtErro}>{errors.email}</Text>
-              </View>
-            )}
-
-            <View style={estilo.view_CamposLogin}>
-              <Item>
-                <Icon
-                  style={estilo.icons_CamposLogin}
-                  active
-                  name="phone-outline"
-                />
-                <Input
-                  value={values.celular} //celular
-                  onChangeText={handleChange('celular')}
-                  placeholder="Telefone"
-                  onBlur={() => setFieldTouched('celular')}
-                />
-              </Item>
-            </View>
-            {touched.celular && errors.celular && (
-              <View style={estilo.V_Erro}>
-                <Text style={estilo.txtErro}>{errors.celular}</Text>
-              </View>
-            )}
-
-            <View style={estilo.view_CamposLogin}>
-              <Item>
-                <Icon
-                  style={estilo.icons_CamposLogin}
-                  active
-                  name="key-outline"
-                />
-                <Input
-                  value={values.password} //Senha
-                  onChangeText={handleChange('password')}
-                  placeholder="Senha"
-                  secureTextEntry={true}
-                />
-              </Item>
-            </View>
-            {touched.password && errors.password && (
-              <View style={estilo.V_Erro}>
-                <Text style={estilo.txtErro}>{errors.password}</Text>
-              </View>
-            )}
-
-            <View style={estilo.view_BotaoEntar}>
-              <Button
-                style={estilo.botao_login}
-                onPress={handleSubmit}
-                disabled={!isValid}
-                title="Leo"
-              >
-                <Text>Enviar!</Text>
-              </Button>
-            </View>
-          </Fragment>
+        {upload.loading ? (
+          <Image
+            source={imageURI}
+            style={{
+              width: 100,
+              height: 100,
+              marginTop: '10%',
+              borderRadius: 50,
+            }}
+          />
+        ) : (
+          <Image
+            source={imageURI}
+            style={{
+              width: 100,
+              height: 100,
+              marginTop: '10%',
+              borderRadius: 50,
+            }}
+          />
         )}
-      </Formik>
-      {/* <Modal transparent={true} visible={this.state.isModalVisible}>
+        <View
+          style={{
+            display: 'flex',
+            marginLeft: '55%',
+            width: '100%',
+            height: 50,
+            alignContent: 'center',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Button style={estilo.botao_send} onPress={uploadFile}>
+            {/* //<Icon name="account-outline" style={estilo.icon_send} /> */}
+            <Text>Enviar Foto de perfil</Text>
+          </Button>
+        </View>
+        <Formik
+          initialValues={{
+            nome: '',
+            email: '',
+            confirmaEmail: '',
+            password: '',
+            celular: '',
+            fotoPerfil: '',
+          }}
+          onSubmit={values => {
+            console.log('Handle'), this.EnviarCadastro(values);
+          }}
+          validationSchema={yup.object().shape({
+            nome: yup.string().required('Insira um Apelido para sua conta'),
+            email: yup
+              .string()
+              .email('Insira um Email valido')
+              .required('Insira um Email para sua conta'),
+            celular: yup
+              .number()
+              .max(9999999999999)
+              .required(' Insira um celular'),
+            password: yup
+              .string()
+              .min(4)
+              .required('Insira uma senha para sua conta'),
+          })}
+        >
+          {({
+            values,
+            handleChange,
+            errors,
+            setFieldTouched,
+            touched,
+            isValid,
+            handleSubmit,
+          }) => (
+            <Fragment>
+              <View style={estilo.view_CamposLogin}>
+                <Item>
+                  <Icon
+                    style={estilo.icons_CamposLogin}
+                    active
+                    name="account-outline"
+                  />
+                  <Input
+                    value={values.nome} //NOME
+                    onChangeText={handleChange('nome')}
+                    onBlur={() => setFieldTouched('nome')}
+                    placeholder="Nome"
+                  />
+                </Item>
+              </View>
+
+              {touched.nome && errors.nome && (
+                <View style={estilo.V_Erro}>
+                  <Text style={estilo.txtErro}>{errors.nome}</Text>
+                </View>
+              )}
+
+              <View style={estilo.view_CamposLogin}>
+                <Item>
+                  <Icon
+                    style={estilo.icons_CamposLogin}
+                    active
+                    name="email-outline"
+                  />
+                  <Input
+                    value={values.email} //EMAIL
+                    onChangeText={handleChange('email')}
+                    placeholder="E-mail"
+                    onBlur={() => setFieldTouched('email')}
+                  />
+                </Item>
+              </View>
+              {touched.email && errors.email && (
+                <View style={estilo.V_Erro}>
+                  <Text style={estilo.txtErro}>{errors.email}</Text>
+                </View>
+              )}
+
+              <View style={estilo.view_CamposLogin}>
+                <Item>
+                  <Icon
+                    style={estilo.icons_CamposLogin}
+                    active
+                    name="phone-outline"
+                  />
+                  <Input
+                    value={values.celular} //celular
+                    onChangeText={handleChange('celular')}
+                    placeholder="Telefone"
+                    onBlur={() => setFieldTouched('celular')}
+                  />
+                </Item>
+              </View>
+              {touched.celular && errors.celular && (
+                <View style={estilo.V_Erro}>
+                  <Text style={estilo.txtErro}>{errors.celular}</Text>
+                </View>
+              )}
+
+              <View style={estilo.view_CamposLogin}>
+                <Item>
+                  <Icon
+                    style={estilo.icons_CamposLogin}
+                    active
+                    name="key-outline"
+                  />
+                  <Input
+                    value={values.password} //Senha
+                    onChangeText={handleChange('password')}
+                    placeholder="Senha"
+                    secureTextEntry={true}
+                  />
+                </Item>
+              </View>
+              {touched.password && errors.password && (
+                <View style={estilo.V_Erro}>
+                  <Text style={estilo.txtErro}>{errors.password}</Text>
+                </View>
+              )}
+
+              <View style={estilo.view_BotaoEntar}>
+                <Button
+                  style={estilo.botao_login}
+                  onPress={handleSubmit}
+                  disabled={!isValid}
+                  title="Leo"
+                >
+                  <Text>Enviar!</Text>
+                </Button>
+              </View>
+            </Fragment>
+          )}
+        </Formik>
+        {/* <Modal transparent={true} visible={this.state.isModalVisible}>
         <View
           style={{
             backgroundColor: 'rgba(0,0,0,0.7)',
@@ -332,7 +333,8 @@ const CadastroUsuario = ({ navigation }) => {
           </View>
         </View>
       </Modal> */}
-    </View>
+      </View>
+    </ScrollView>
   );
 };
 export default CadastroUsuario;

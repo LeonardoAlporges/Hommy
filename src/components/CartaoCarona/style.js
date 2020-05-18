@@ -27,6 +27,7 @@ const Estilos = StyleSheet.create({
   V_ImgNome: {
     flexDirection: 'column',
     height: 118,
+    backgroundColor: 'red',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -88,7 +89,7 @@ const Estilos = StyleSheet.create({
   },
   txtIcon: {
     padding: 0,
-    marginHorizontal: 2,
+    marginHorizontal: 5,
     fontSize: 18,
     color: '#00909e',
   },
@@ -106,8 +107,20 @@ const Estilos = StyleSheet.create({
     fontSize: 12,
     marginHorizontal: 6,
   },
-  txtdeslcSa: {
+  txtdeslcSaHora: {
+    paddingTop: 13,
     fontSize: 18,
+    width: '30%',
+    height: '100%',
+    fontFamily: 'Roboto',
+    fontWeight: 'bold',
+    color: '#142850',
+  },
+  txtdeslcSa: {
+    paddingTop: 12,
+    fontSize: 18,
+    width: '55%',
+    height: '100%',
     fontFamily: 'Roboto',
     fontWeight: 'bold',
     color: '#142850',
