@@ -57,11 +57,11 @@ const estilo = StyleSheet.create({
   },
   txtErro: {
     fontFamily: 'Roboto-light',
-    fontSize: 15,
+    fontSize: 10,
     color: 'red',
   },
   V_Erro: {
-    marginTop: 30,
+    marginTop: 5,
     width: '80%',
     height: 20,
   },

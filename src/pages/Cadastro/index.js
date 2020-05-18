@@ -136,7 +136,7 @@ export class Cadastro extends Component {
       } else if (error) {
         alert('An error occurred: ', error);
       } else {
-        const uploadTask = uploadFileToFireBase(imagePickerResponse);
+        const uploadTask = uploadFileToFireBaseRepublica(imagePickerResponse);
         this.monitorFileUpload(uploadTask);
       }
     });
