@@ -66,39 +66,16 @@ class Cabeca extends Component {
           animationType="slide"
           visible={this.state.isModalVisible}
         >
-          <View
-            style={{
-              backgroundColor: '#f8f8f8',
-              flex: 1,
-            }}
-          >
-            <View
-              style={{
-                backgroundColor: '#f8f8f8',
-
-                alignItems: 'center',
-                borderRadius: 5,
-                height: 100,
-                flex: 1,
-              }}
-            >
-              <View
-                style={{
-                  height: 55,
-                  width: '100%',
-                  marginTop: '3%',
-                  paddingHorizontal: '3%',
-                  justifyContent: 'space-between',
-                  flexDirection: 'row',
-                }}
-              >
+          <View style={Estilos.bgModal}>
+            <View style={Estilos.modal}>
+              <View style={Estilos.voltar}>
                 <TouchableOpacity
                   onPress={() => {
                     this.setState({ isModalVisible: false });
                   }}
                 >
                   <Icon
-                    style={{ marginTop: 8, fontSize: 20, color: '#27496d' }}
+                    style={Estilos.iconModal}
                     name="arrow-left"
                   />
                 </TouchableOpacity>
@@ -108,150 +85,54 @@ class Cabeca extends Component {
                   source={{
                     uri: this.props.fotoPerfil,
                   }}
-                  style={{
-                    width: 120,
-                    height: 120,
-                    borderRadius: 100,
-                    marginBottom: '2%',
-                  }}
+                  style={Estilos.fotoPerfil}
                 />
               ) : (
-                <Image
-                  source={require('../../assets/Img/ProfilePicture.png')}
-                  style={{
-                    width: 130,
-                    height: 130,
-                    borderRadius: 100,
-                    marginBottom: '2%',
-                  }}
-                />
-              )}
+                  <Image
+                    source={require('../../assets/Img/ProfilePicture.png')}
+                    style={Estilos.fotoPerfil}
+                  />
+                )}
 
-              <View
-                style={{
-                  width: 300,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 18,
-                    fontWeight: 'bold',
-                    fontFamily: 'Roboto',
-                    color: '#27496d',
-                  }}
-                >
+              <View style={Estilos.viewNome}>
+                <Text style={Estilos.textNome}>
                   {this.props.nome}
                 </Text>
-                <Text
-                  style={{
-                    fontSize: 14,
-
-                    fontFamily: 'Roboto',
-
-                    color: '#00909e',
-                  }}
-                >
+                <Text style={Estilos.textCPF}>
                   {this.props.cpf}
                 </Text>
               </View>
-
-              <View
-                style={{
-                  marginTop: '8%',
-                  width: '88%',
-                  marginLeft: '6%',
-                  marginRight: '6%',
-                  borderBottomWidth: 1,
-                  borderBottomColor: '#27496d',
-                }}
-              />
-
-              <View
-                style={{
-                  color: '#27496d',
-                  width: '100%',
-                  paddingHorizontal: '10%',
-                  justifyContent: 'space-between',
-                  height: 325,
-                  marginTop: '10%',
-                }}
-              >
+              <View style={Estilos.viewDivisor} />
+              <View style={Estilos.viewBotoes}>
                 <Button
-                  style={{
-                    width: '100%',
-                    height: 55,
-                    backgroundColor: '#27496d',
-                    justifyContent: 'flex-start',
-                    borderRadius: 5,
-                    paddingLeft: '6%',
-                    color: '#dae1e7',
-                  }}
+                  style={Estilos.botoes}
                   onPress={() => {
                     this.props.navigation.navigate('Anuncios'),
                       this.setState({ isModalVisible: false });
                   }}
                 >
                   <Icon
-                    style={{ fontSize: 18, color: '#dae1e7' }}
+                    style={Estilos.iconBotoes}
                     name="book-open"
                   />
-
-                  <Text
-                    style={{
-                      width: '75%',
-                      fontSize: 18,
-                      fontFamily: 'Roboto',
-                      fontWeight: '600',
-                      marginLeft: '6%',
-                      color: '#ffff',
-                    }}
-                  >
+                  <Text style={Estilos.textBotoes}>
                     Meus Anuncios
                   </Text>
                   <Icon
-                    style={{
-                      paddingLeft: '2%',
-                      fontSize: 18,
-                      color: '#dae1e7',
-                    }}
+                    style={Estilos.iconBotoesArrow}
                     name="arrow-right"
                   />
                 </Button>
-                <Button
-                  style={{
-                    width: '100%',
-                    height: 55,
-                    backgroundColor: '#27496d',
-                    justifyContent: 'flex-start',
-                    borderRadius: 5,
-                    paddingLeft: '6%',
-                    color: '#ffff',
-                  }}
-                >
+                <Button style={Estilos.botoes}>
                   <Icon
-                    style={{ fontSize: 18, color: '#ffff' }}
+                    style={Estilos.iconBotoes}
                     name="pencil"
                   />
-                  <Text
-                    style={{
-                      fontSize: 18,
-                      width: '75%',
-                      fontFamily: 'Roboto',
-                      fontWeight: '600',
-                      marginLeft: '6%',
-                      color: '#ffff',
-                    }}
-                  >
+                  <Text style={Estilos.textBotoes}>
                     Editar perfil
                   </Text>
                   <Icon
-                    style={{
-                      paddingLeft: '2%',
-                      fontSize: 18,
-                      color: '#dae1e7',
-                    }}
+                    style={Estilos.iconBotoesArrow}
                     name="arrow-right"
                   />
                 </Button>
@@ -261,38 +142,17 @@ class Cabeca extends Component {
                       'https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849'
                     );
                   }}
-                  style={{
-                    width: '100%',
-                    height: 55,
-                    color: '#ffff',
-                    backgroundColor: '#27496d',
-                    justifyContent: 'flex-start',
-                    borderRadius: 5,
-                    paddingLeft: '6%',
-                  }}
+                  style={Estilos.botoes}
                 >
                   <Icon
-                    style={{ fontSize: 18, color: '#ffff' }}
+                    style={Estilos.iconBotoes}
                     name="question"
                   />
-                  <Text
-                    style={{
-                      color: '#ffff',
-                      width: '75%',
-                      fontSize: 18,
-                      fontFamily: 'Roboto',
-                      fontWeight: '600',
-                      marginLeft: '6%',
-                    }}
-                  >
+                  <Text style={Estilos.textBotoes}>
                     Me ajuda
                   </Text>
                   <Icon
-                    style={{
-                      paddingLeft: '2%',
-                      fontSize: 18,
-                      color: '#dae1e7',
-                    }}
+                    style={Estilos.iconBotoesArrow}
                     name="arrow-right"
                   />
                 </Button>
@@ -302,52 +162,22 @@ class Cabeca extends Component {
                       'https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849'
                     );
                   }}
-                  style={{
-                    height: 55,
-                    width: '100%',
-                    backgroundColor: '#27496d',
-                    justifyContent: 'flex-start',
-                    borderRadius: 5,
-                    paddingLeft: '6%',
-                    color: '#ffff',
-                  }}
+                  style={Estilos.botoes}
                 >
                   <Icon
-                    style={{ fontSize: 18, color: '#ffff' }}
+                    style={Estilos.iconBotoes}
                     name="exclamation"
                   />
-                  <Text
-                    style={{
-                      color: '#ffff',
-                      fontSize: 18,
-                      width: '75%',
-                      fontFamily: 'Roboto',
-                      fontWeight: '600',
-                      marginLeft: '6%',
-                    }}
-                  >
+                  <Text style={Estilos.textBotoes}>
                     Enviar feedback
                   </Text>
                   <Icon
-                    style={{
-                      paddingLeft: '2%',
-                      fontSize: 18,
-                      color: '#dae1e7',
-                    }}
+                    style={Estilos.iconBotoesArrow}
                     name="arrow-right"
                   />
                 </Button>
               </View>
-              <View
-                style={{
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  position: 'absolute',
-                  bottom: 15,
-                  width: '70%',
-                  color: '#fff',
-                }}
-              >
+              <View  style={Estilos.viewFooter}>
                 <Text width="100%">©2020 Todos direiros reservados.</Text>
               </View>
             </View>
