@@ -157,6 +157,19 @@ const estilo = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  V_Detalhes: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  iconWhatsapp: {
+    color: '#ffffff',
+    fontSize: 30
+  },
+  txtWhatsapp: {
+    color: '#FFFFFF',
+    marginLeft: 15
+  }
 });
 
 export default estilo;

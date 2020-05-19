@@ -29,13 +29,7 @@ class DetalhesCarona extends Component {
     return (
       <ScrollView style={{ paddingBottom: 50 }}>
         {this.state.interesse ? (
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
+          <View style={Estilo.V_modal}>
             <CustomModal
               parametro="Custom"
               titulo="Obrigado pelo interesse"
@@ -44,9 +38,9 @@ class DetalhesCarona extends Component {
             />
           </View>
         ) : (
-          <View />
-        )}
-        <View style={{ marginBottom: '15%' }}>
+            <View />
+          )}
+        <View style={Estilo.V_Margin}>
           <View style={Estilo.header}>
             <TouchableOpacity
               onPress={() => {
@@ -116,13 +110,7 @@ class DetalhesCarona extends Component {
             </View>
           </View>
           <View style={Estilo.ViewButon}>
-            <View
-              style={{
-                width: '80%',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
+            <View style={Estilo.V_Btn}>
               <Button
                 style={Estilo.Botao}
                 onPress={() => {

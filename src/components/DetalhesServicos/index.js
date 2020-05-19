@@ -99,8 +99,8 @@ class DetalhesServicos extends Component {
               );
             }}
           >
-            <Icon name="ios-call" style={{ color: 'rgba(29,161,242,1)' }} />
-            <Text style={{ color: 'rgba(29,161,242,1)' }}>
+            <Icon name="ios-call" style={estilo.contato} />
+            <Text style={estilo.contato}>
               Entrar em Contato
             </Text>
           </Button>

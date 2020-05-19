@@ -79,40 +79,17 @@ class Cartao extends Component {
                 {this.props.leonardo.nomeRepublica}
               </Text>
             </View>
-            <View
-              style={{
-                paddingTop: 10,
-                width: '90%',
-                height: 45,
-                maxHeight: 45,
-              }}
-            >
+            <View style={Estilos.V_obs}>
               <Text numberOfLines={2}>{this.props.leonardo.descricao}</Text>
             </View>
             <View style={Estilos.V_desc}>
-              <View
-                style={{
-                  paddingLeft: '2%',
-                  flexDirection: 'row',
-                  width: '45%',
-                  marginRight: 10,
-                  justifyContent: 'flex-start',
-                  paddingTop: 8,
-                }}
-              >
+              <View style={Estilos.V_valor}>
                 <Icon style={Estilos.txtIcon} name="wallet" />
                 <Text style={Estilos.txtDesc}>
                   R$ {this.props.leonardo.valorAluguel}
                 </Text>
               </View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  width: '55%',
-                  justifyContent: 'flex-start',
-                  paddingTop: 8,
-                }}
-              >
+              <View style={Estilos.V_vagas}>
                 <Icon style={Estilos.txtIcon} name="people" />
                 <Text style={Estilos.txtDesc}>
                   {this.props.leonardo.numVagas} Vagas

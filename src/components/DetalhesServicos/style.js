@@ -70,6 +70,9 @@ const estilo = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  contato: {
+    color: 'rgba(29,161,242,1)'
+  }
 });
 
 export default estilo;

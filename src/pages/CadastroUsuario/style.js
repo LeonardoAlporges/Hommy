@@ -65,6 +65,21 @@ const estilo = StyleSheet.create({
     width: '80%',
     height: 20,
   },
+  imagemStyle: {
+    width: 100,
+    height: 100,
+    marginTop: '10%',
+    borderRadius: 50,
+  },
+  V_Btn: {
+    display: 'flex',
+    marginLeft: '55%',
+    width: '100%',
+    height: 50,
+    alignContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
 });
 
 export default estilo;

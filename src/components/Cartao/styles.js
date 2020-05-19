@@ -74,6 +74,26 @@ const Estilos = StyleSheet.create({
     height: 15,
     width: 15,
   },
+  V_obs: {
+    paddingTop: 10,
+    width: '90%',
+    height: 45,
+    maxHeight: 45,
+  },
+  V_valor: {
+    paddingLeft: '2%',
+    flexDirection: 'row',
+    width: '45%',
+    marginRight: 10,
+    justifyContent: 'flex-start',
+    paddingTop: 8,
+  },
+  V_vagas: {
+    flexDirection: 'row',
+    width: '55%',
+    justifyContent: 'flex-start',
+    paddingTop: 8,
+  }
 });
 
 export default Estilos;

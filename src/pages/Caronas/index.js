@@ -34,6 +34,7 @@ import {
   Input,
   Item,
   Button,
+  Picker
 } from 'native-base';
 
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
@@ -57,10 +58,15 @@ class Caronas extends Component {
       filtroVagas1: false,
       filtroVagas2: false,
       filtroVagas3: false,
+      filtroVagas4: false,
       filtroValorMaior: false,
       filtroValorMenor: false,
+      filtroCidadeD: false,
+      filtroCidadeS: false,
       aluguelMin: '',
       aluguelMax: '',
+      cidadeD: '',
+      cidadeS: '',
     };
   }
 
@@ -109,6 +115,7 @@ class Caronas extends Component {
         filtroVagas1: true,
         filtroVagas2: false,
         filtroVagas3: false,
+        filtroVagas4: false
       });
   };
 
@@ -119,6 +126,7 @@ class Caronas extends Component {
         filtroVagas2: true,
         filtroVagas1: false,
         filtroVagas3: false,
+        filtroVagas4: false
       });
   };
 
@@ -129,6 +137,17 @@ class Caronas extends Component {
         filtroVagas3: true,
         filtroVagas2: false,
         filtroVagas1: false,
+        filtroVagas4: false
+      });
+  };
+  fVagas4 = async checked => {
+    if (this.state.filtroVagas4) await this.setState({ filtroVagas4: false });
+    else
+      await this.setState({
+        filtroVagas4: true,
+        filtroVagas2: false,
+        filtroVagas1: false,
+        filtroVagas3: false,
       });
   };
   valMenor = async text => {
@@ -147,17 +166,54 @@ class Caronas extends Component {
     }
   };
 
+  FCidadeS = value => {
+    if (value != 'null')
+    this.setState({
+      cidadeS: value,
+      filtroCidadeS: true
+    });
+    else{
+      this.setState({
+        cidadeS: value,
+        filtroCidadeS: false
+      });
+    }
+  }
+
+  FCidadeD = value => {
+    if (value != 'null')
+    this.setState({
+      cidadeD: value,
+      filtroCidadeD: true
+    });
+    else{
+      this.setState({
+        cidadeD: value,
+        filtroCidadeD: false
+      });
+    }
+  }
+
   filtro = async () => {
     await this.setState({ listaCaronas: this.state.fullData });
     let listaCaronas = this.state.listaCaronas;
     if (this.state.filtroVagas1 === true) {
-      listaCaronas = _.filter(this.state.listaCaronas, { vagas: '1' });
+      listaCaronas = _.filter(listaCaronas, { vagas: '1' });
     }
     if (this.state.filtroVagas2 === true) {
-      listaCaronas = _.filter(this.state.listaCaronas, { vagas: '2' });
+      listaCaronas = _.filter(listaCaronas, { vagas: '2' });
     }
     if (this.state.filtroVagas3 === true) {
-      listaCaronas = _.filter(this.state.listaCaronas, { vagas: '3' });
+      listaCaronas = _.filter(listaCaronas, { vagas: '3' });
+    }
+    if (this.state.filtroVagas4 === true) {
+      listaCaronas = _.filter(listaCaronas, { vagas: '4' });
+    }
+    if (this.state.filtroCidadeS === true) {
+      listaCaronas = _.filter(listaCaronas, { localSaida: this.state.cidadeS });
+    }
+    if (this.state.filtroCidadeD === true) {
+      listaCaronas = _.filter(listaCaronas, { localChegada: this.state.cidadeD });
     }
     if (this.state.filtroValorMenor === true) {
       listaCaronas = _.filter(
@@ -176,48 +232,22 @@ class Caronas extends Component {
 
   render() {
     return (
-      <View>
+      <View style={Estilo.V_externa}>
         {this.state.loading ? (
-          <View
-            style={{
-              width: '100%',
-              height: '100%',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
+          <View style={Estilo.V_interna1}>
             <Spinner color="#27496d" />
           </View>
         ) : this.state.erro ? (
-          <View
-            style={{
-              height: '100%',
-              width: '100%',
-              justifyContent: 'center',
-              alignItems: 'center',
-              paddingBottom: '10%',
-            }}
-          >
+          <View style={Estilo.V_interna2}>
             <CustomModal parametro="Erro" />
             <Image
-              style={{ height: 200, width: 200 }}
+              style={Estilo.imagemError}
               source={require('../../assets/Img/Empty.png')}
             />
-            <Text
-              style={{ fontSize: 22, fontWeight: 'bold', fontFamily: 'Roboto' }}
-            >
+            <Text style={Estilo.textError}>
               Nenhum Anuncio Disponivel
             </Text>
-            <Text
-              style={{
-                marginTop: 10,
-                textAlign: 'center',
-                fontSize: 18,
-                fontWeight: '400',
-                fontFamily: 'Roboto',
-                width: '80%',
-              }}
-            >
+            <Text style={Estilo.textError2}>
               Aproveite essa oportunidade publique sua oferta de carona agora
               mesmo{' '}
             </Text>
@@ -233,68 +263,38 @@ class Caronas extends Component {
           </ScrollView>
         )}
 
-        <View
-          style={{
-            backgroundColor: '#00000080',
-            flex: 1,
-          }}
-        >
+        <View style={Estilo.V_modalExterno}>
           <Modal
             animationType="fade"
             visible={this.state.modalVisible}
             transparent={true}
           >
-            <View
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: 400,
-                marginTop: 150,
-                marginHorizontal: 50,
-                backgroundColor: 'white',
-                borderRadius: 20,
-                alignItems: 'center',
-                shadowColor: '#000',
-                shadowOffset: {
-                  width: 0,
-                  height: 2,
-                },
-                shadowOpacity: 0.25,
-                shadowRadius: 3.84,
-                elevation: 5,
-              }}
-            >
+            <View style={Estilo} >
               <Text>Valor</Text>
-              <ListItem style={{ alignItems: 'stretch', marginBottom: 10 }}>
-                <Text style={{ alignSelf: 'stretch', paddingHorizontal: 15 }}>
+              <ListItem style={Estilo.listStyle}>
+                <Text style={Estilo.textList}>
                   De
                 </Text>
                 <Item
                   underlined
-                  style={{
-                    width: 100,
-                    borderBottomColor: 'rgba(29,161,242,1)',
-                  }}
+                  style={Estilo.itemStyle}
                 >
                   <Input
-                    style={{ alignSelf: 'stretch' }}
+                    style={Estilo.inputStyle}
                     onChangeText={text => this.valMenor(text)}
                     value={this.state.aluguelMin}
                     keyboardType="numeric"
                   />
                 </Item>
-                <Text style={{ alignSelf: 'stretch', paddingHorizontal: 15 }}>
+                <Text style={Estilo.textList}>
                   Até
                 </Text>
                 <Item
                   underlined
-                  style={{
-                    width: 100,
-                    borderBottomColor: 'rgba(29,161,242,1)',
-                  }}
+                  style={Estilo.itemStyle}
                 >
                   <Input
-                    style={{ alignSelf: 'stretch' }}
+                    style={Estilo.inputStyle}
                     onChangeText={text => this.valMaior(text)}
                     value={this.state.aluguelMax}
                     keyboardType="numeric"
@@ -302,57 +302,112 @@ class Caronas extends Component {
                 </Item>
               </ListItem>
               <Text>Vagas disponíveis</Text>
-              <ListItem style={{ alignItems: 'stretch', marginBottom: 10 }}>
+              <ListItem style={Estilo.listStyle}>
                 <CheckBox
-                  style={{ alignSelf: 'stretch' }}
+                color="#27496d"
+                  style={Estilo.inputStyle}
                   onPress={this.fVagas1}
                   checked={this.state.filtroVagas1}
                 />
-                <Text style={{ alignSelf: 'stretch', paddingHorizontal: 15 }}>
+                <Text style={Estilo.textList}>
                   1
                 </Text>
                 <CheckBox
-                  style={{ alignSelf: 'stretch' }}
+                color="#27496d"
+                  style={Estilo.inputStyle}
                   onPress={this.fVagas2}
                   checked={this.state.filtroVagas2}
                 />
-                <Text style={{ alignSelf: 'stretch', paddingHorizontal: 15 }}>
+                <Text style={Estilo.textList}>
                   2
                 </Text>
                 <CheckBox
-                  style={{ alignSelf: 'stretch' }}
+                color="#27496d"
+                  style={Estilo.inputStyle}
                   onPress={this.fVagas3}
                   checked={this.state.filtroVagas3}
                 />
-                <Text style={{ alignSelf: 'stretch', paddingHorizontal: 15 }}>
+                <Text style={Estilo.textList}>
                   3
                 </Text>
+                <CheckBox
+                color="#27496d"
+                  style={Estilo.inputStyle}
+                  onPress={this.fVagas4}
+                  checked={this.state.filtroVagas4}
+                />
+                <Text style={Estilo.textList}>
+                  4
+                </Text>
               </ListItem>
+              <Text>Saida</Text>
+              <ListItem style={Estilo.listStyle}>
+              <Item picker style={Estilo.pickerStyle}>
+              <Picker
+                mode="dropdown"
+                iosIcon={<Icon name="arrow-down" />}
+                style={{ width: undefined }}
+                placeholder="Destino"
+                placeholderStyle={{ color: "#bfc6ea" }}
+                placeholderIconColor="#007aff"
+                selectedValue={this.state.cidadeS}
+                onValueChange={this.FCidadeS.bind(this)}
+              >
+                <Picker.Item label="Cidades" value= 'null' />
+                <Picker.Item label="Alegre" value="Alegre" />
+                <Picker.Item label="Serra" value="Serra" />
+                <Picker.Item label="Piuma" value="Piuma" />
+                <Picker.Item label="Guarapari" value="Guarapari" />
+                <Picker.Item label="Cachoeiro" value="Cachoeiro" />
+                <Picker.Item label="Vitoria" value="Vitoria" />
+                <Picker.Item label="Vila Velha" value="Vila Velha" />
+                <Picker.Item label="Muniz Freire" value="Muniz Freire" />
+                <Picker.Item label="Guacui" value="Guacui" />
+                <Picker.Item label="Bom Jesus do Norte" value="Bom Jesus do Norte" />
+                <Picker.Item label="Celina" value="Celina" />
+                <Picker.Item label="Rive" value="Rive" />
+              </Picker>
+            </Item>
+              </ListItem>
+              <Text>Destino</Text>
+              <ListItem style={Estilo.listStyle}>
+              <Item picker style={Estilo.pickerStyle}>
+              <Picker
+                mode="dropdown"
+                iosIcon={<Icon name="arrow-down" />}
+                style={{ width: undefined }}
+                placeholder="Destino"
+                placeholderStyle={{ color: "#bfc6ea" }}
+                placeholderIconColor="#007aff"
+                selectedValue={this.state.cidadeD}
+                onValueChange={this.FCidadeD.bind(this)}
+              >
+                <Picker.Item label="Cidades" value= 'null' />
+                <Picker.Item label="Alegre" value="Alegre" />
+                <Picker.Item label="Serra" value="Serra" />
+                <Picker.Item label="Piuma" value="Piuma" />
+                <Picker.Item label="Guarapari" value="Guarapari" />
+                <Picker.Item label="Cachoeiro" value="Cachoeiro" />
+                <Picker.Item label="Vitoria" value="Vitoria" />
+                <Picker.Item label="Vila Velha" value="Vila Velha" />
+                <Picker.Item label="Muniz Freire" value="Muniz Freire" />
+                <Picker.Item label="Guacui" value="Guacui" />
+                <Picker.Item label="Bom Jesus do Norte" value="Bom Jesus do Norte" />
+                <Picker.Item label="Celina" value="Celina" />
+                <Picker.Item label="Rive" value="Rive" />
+              </Picker>
+            </Item>
+              </ListItem>
+              
 
               <TouchableOpacity
-                style={{
-                  alignSelf: 'center',
-                  backgroundColor: '#30C21E',
-                  borderRadius: 20,
-                  padding: 10,
-                  elevation: 2,
-                  justifyContent: 'center',
-                  height: 45,
-                  width: 170,
-                }}
+                style={Estilo.modalBtn}
                 onPress={() => {
                   this.setState({ modalVisible: false });
                   this.filtro();
                 }}
               >
-                <Text
-                  style={{
-                    color: '#ffffff',
-                    fontFamily: 'Roboto',
-                    textAlign: 'center',
-                    fontSize: 20,
-                  }}
-                >
+                <Text style={Estilo.textBtn}>
                   Fechar
                 </Text>
               </TouchableOpacity>
@@ -363,7 +418,7 @@ class Caronas extends Component {
           active={this.state.active}
           direction="up"
           containerStyle={{}}
-          style={{ backgroundColor: '#27496d' }}
+          style={Estilo.FABStyle}
           position="bottomRight"
           onPress={() => {
             this.setState({ active: !this.state.active });
@@ -377,22 +432,20 @@ class Caronas extends Component {
           )}
 
           <Button
-            style={{
-              backgroundColor: '#27496d',
-            }}
+            style={Estilo.FabBTN}
             onPress={() => {
               this.setState({ modalVisible: true });
             }}
           >
-            <Icon name="equalizer" style={{ color: '#ffffff' }} />
+            <Icon name="equalizer" style={Estilo.FabIcon} />
           </Button>
           <Button
-            style={{ backgroundColor: '#27496d' }}
+            style={Estilo.FabBTN}
             onPress={() => {
               this.limparPropsCaronaRedux();
             }}
           >
-            <Icon name="pencil" style={{ color: '#ffffff' }} />
+            <Icon name="pencil" style={Estilo.FabIcon} />
           </Button>
         </Fab>
       </View>

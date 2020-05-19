@@ -80,5 +80,10 @@ const estilo = StyleSheet.create({
     fontSize: 20,
     fontFamily: 'Roboto',
   },
+  icon: {
+    fontSize: 25,
+    marginRight: '2%',
+    color: '#ffffff',
+  }
 });
 export default estilo;

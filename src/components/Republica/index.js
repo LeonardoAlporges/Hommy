@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import { CheckBox, ListItem, Button, Fab, Input, Item } from 'native-base';
 
-import estilosRepublica from './style';
+import Estilos from './style';
 import { Spinner } from 'native-base';
 import Cartao from '../Cartao/index';
 import api from '../../service/api';
@@ -278,49 +278,49 @@ class Republica extends Component {
     let listaRepublicas = this.state.listaRepublicas;
 
     if (this.state.filtroAnimalSim === true) {
-      listaRepublicas = _.filter(this.state.listaRepublicas, { animal: 'Sim' });
+      listaRepublicas = _.filter(listaRepublicas, { animal: 'Sim' });
     }
     if (this.state.filtroAnimalNao === true) {
-      listaRepublicas = _.filter(this.state.listaRepublicas, { animal: 'Nao' });
+      listaRepublicas = _.filter(listaRepublicas, { animal: 'Nao' });
     }
     if (this.state.filtroMasc === true) {
-      listaRepublicas = _.filter(this.state.listaRepublicas, {
+      listaRepublicas = _.filter(listaRepublicas, {
         genero: 'Masculina',
       });
     }
     if (this.state.filtroFem === true) {
-      listaRepublicas = _.filter(this.state.listaRepublicas, {
+      listaRepublicas = _.filter(listaRepublicas, {
         genero: 'Feminina',
       });
     }
     if (this.state.filtroMista === true) {
-      listaRepublicas = _.filter(this.state.listaRepublicas, {
+      listaRepublicas = _.filter(listaRepublicas, {
         genero: 'Mista',
       });
     }
     if (this.state.filtroMoradores2 === true) {
-      listaRepublicas = _.filter(this.state.listaRepublicas, { pessoas: '2' });
+      listaRepublicas = _.filter(listaRepublicas, { pessoas: '2' });
     }
     if (this.state.filtroMoradores3 === true) {
-      listaRepublicas = _.filter(this.state.listaRepublicas, { pessoas: '3' });
+      listaRepublicas = _.filter(listaRepublicas, { pessoas: '3' });
     }
     if (this.state.filtroMoradores4 === true) {
-      listaRepublicas = _.filter(this.state.listaRepublicas, { pessoas: '4' });
+      listaRepublicas = _.filter(listaRepublicas, { pessoas: '4' });
     }
     if (this.state.filtroMoradores5 === true) {
-      listaRepublicas = _.filter(this.state.listaRepublicas, { pessoas: '5' });
+      listaRepublicas = _.filter(listaRepublicas, { pessoas: '5' });
     }
     if (this.state.filtroMoradores6 === true) {
-      listaRepublicas = _.filter(this.state.listaRepublicas, { pessoas: '6+' });
+      listaRepublicas = _.filter(listaRepublicas, { pessoas: '6+' });
     }
     if (this.state.filtroVagas1 === true) {
-      listaRepublicas = _.filter(this.state.listaRepublicas, { numVagas: '1' });
+      listaRepublicas = _.filter(listaRepublicas, { numVagas: '1' });
     }
     if (this.state.filtroVagas2 === true) {
-      listaRepublicas = _.filter(this.state.listaRepublicas, { numVagas: '2' });
+      listaRepublicas = _.filter(listaRepublicas, { numVagas: '2' });
     }
     if (this.state.filtroVagas3 === true) {
-      listaRepublicas = _.filter(this.state.listaRepublicas, { numVagas: '3' });
+      listaRepublicas = _.filter(listaRepublicas, { numVagas: '3' });
     }
     if (this.state.filtroValorMenor === true) {
       listaRepublicas = _.filter(
@@ -338,111 +338,55 @@ class Republica extends Component {
   };
   render() {
     return (
-      <View style={{ width: '100%', height: '100%' }}>
+      <View style={Estilos.V_completa}>
         <View>
           {this.state.loading ? (
-            <View
-              style={{
-                width: '100%',
-                height: '100%',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
+            <View style={Estilos.V_republicas}>
               <Spinner color="#27496d" />
             </View>
           ) : this.state.erro ? (
             <View
-              style={{
-                height: '100%',
-                width: '100%',
-                justifyContent: 'center',
-                alignItems: 'center',
-                paddingBottom: '10%',
-              }}
+              style={Estilos.V_republicas}
             >
               <CustomModal parametro="Erro" />
               <Image
-                style={{ height: 200, width: 200 }}
+                style={Estilos.imageModal}
                 source={require('../../assets/Img/Empty.png')}
               />
-              <Text
-                style={{
-                  fontSize: 22,
-                  fontWeight: 'bold',
-                  fontFamily: 'Roboto',
-                }}
-              >
+              <Text style={Estilos.txtModal}>
                 Nenhum Anuncio Disponivel
               </Text>
-              <Text
-                style={{
-                  marginTop: 10,
-                  textAlign: 'center',
-                  fontSize: 18,
-                  fontWeight: '400',
-                  fontFamily: 'Roboto',
-                  width: '80%',
-                }}
-              >
+              <Text style={Estilos.txtErr}>
                 Aproveite essa oportunidade publique a de vaga da sua republica
                 agora mesmo{' '}
               </Text>
             </View>
           ) : (
-            <ScrollView style={estilosRepublica.card}>
-              <FlatList
-                style={estilosRepublica.flatList}
-                data={this.state.listaRepublicas}
-                renderItem={({ item }) => <Cartao leonardo={item} />}
-                keyExtractor={item => item._id}
-              />
-            </ScrollView>
-          )}
+                <ScrollView style={Estilos.card}>
+                  <FlatList
+                    style={Estilos.flatList}
+                    data={this.state.listaRepublicas}
+                    renderItem={({ item }) => <Cartao leonardo={item} />}
+                    keyExtractor={item => item._id}
+                  />
+                </ScrollView>
+              )}
         </View>
-        <View
-          style={{
-            backgroundColor: '#ffffff',
-            height: '100%',
-            width: '100%',
-          }}
-        >
+        <View style={Estilos.V_filtroExterno}>
           <Modal
             animationType="fade"
             visible={this.state.modalVisible}
             transparent={true}
           >
-            <View
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: 500,
-                marginTop: 125,
-                marginHorizontal: 50,
-                backgroundColor: 'white',
-                borderRadius: 20,
-                alignItems: 'center',
-                shadowColor: '#000',
-                shadowOffset: {
-                  width: 0,
-                  height: 2,
-                },
-                shadowOpacity: 0.25,
-                shadowRadius: 3.84,
-                elevation: 5,
-              }}
-            >
+            <View style={Estilos.V_filtroInterno}>
               <Text>Valor</Text>
-              <ListItem style={{ alignItems: 'stretch', marginBottom: 10 }}>
-                <Text style={{ alignSelf: 'stretch', paddingHorizontal: 15 }}>
+              <ListItem style={Estilos.listStyle}>
+                <Text style={Estilos.textFiltro}>
                   De
                 </Text>
                 <Item
                   underlined
-                  style={{
-                    width: 100,
-                    borderBottomColor: 'rgba(29,161,242,1)',
-                  }}
+                  style={Estilos.itemInput}
                 >
                   <Input
                     style={{ alignSelf: 'stretch' }}
@@ -451,15 +395,12 @@ class Republica extends Component {
                     keyboardType="numeric"
                   />
                 </Item>
-                <Text style={{ alignSelf: 'stretch', paddingHorizontal: 15 }}>
+                <Text style={Estilos.textFiltro}>
                   Até
                 </Text>
                 <Item
                   underlined
-                  style={{
-                    width: 100,
-                    borderBottomColor: 'rgba(29,161,242,1)',
-                  }}
+                  style={Estilos.itemInput}
                 >
                   <Input
                     style={{ alignSelf: 'stretch' }}
@@ -470,163 +411,155 @@ class Republica extends Component {
                 </Item>
               </ListItem>
               <Text>Aceita animais?</Text>
-              <ListItem style={{ alignItems: 'center', marginBottom: 10 }}>
+              <ListItem style={Estilos.listStyle}>
                 <CheckBox
+                  color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fAnimalSim}
                   checked={this.state.filtroAnimalSim}
                 />
-                <Text style={{ alignSelf: 'stretch', paddingHorizontal: 15 }}>
+                <Text style={Estilos.textFiltro}>
                   Sim
                 </Text>
                 <CheckBox
+                  color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fAnimalNao}
                   checked={this.state.filtroAnimalNao}
                 />
-                <Text style={{ alignSelf: 'stretch', paddingHorizontal: 15 }}>
+                <Text style={Estilos.textFiltro}>
                   Não
                 </Text>
               </ListItem>
               <Text> Tipo de república</Text>
-              <ListItem style={{ alignItems: 'center', marginBottom: 10 }}>
+              <ListItem style={Estilos.listStyle}>
                 <CheckBox
+                  color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fMasc}
                   checked={this.state.filtroMasc}
                 />
-                <Text style={{ alignSelf: 'stretch', paddingHorizontal: 15 }}>
+                <Text style={Estilos.textFiltro}>
                   Masculina
                 </Text>
                 <CheckBox
+                  color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fFem}
                   checked={this.state.filtroFem}
                 />
-                <Text style={{ alignSelf: 'stretch', paddingHorizontal: 15 }}>
+                <Text style={Estilos.textFiltro}>
                   Feminina
                 </Text>
                 <CheckBox
+                  color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fMista}
                   checked={this.state.filtroMista}
                 />
-                <Text style={{ alignSelf: 'stretch', paddingHorizontal: 15 }}>
+                <Text style={Estilos.textFiltro}>
                   Mista
                 </Text>
               </ListItem>
               <Text>Capacidade de moradores</Text>
-              <ListItem style={{ alignItems: 'center', marginBottom: 10 }}>
+              <ListItem style={Estilos.listStyle}>
                 <CheckBox
+                  color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fMoradores2}
                   checked={this.state.filtroMoradores2}
                 />
-                <Text style={{ alignSelf: 'stretch', paddingHorizontal: 15 }}>
+                <Text style={Estilos.textFiltro}>
                   2
                 </Text>
                 <CheckBox
+                  color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fMoradores3}
                   checked={this.state.filtroMoradores3}
                 />
-                <Text style={{ alignSelf: 'stretch', paddingHorizontal: 15 }}>
+                <Text style={Estilos.textFiltro}>
                   3
                 </Text>
                 <CheckBox
+                  color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fMoradores4}
                   checked={this.state.filtroMoradores4}
                 />
-                <Text style={{ alignSelf: 'stretch', paddingHorizontal: 15 }}>
+                <Text style={Estilos.textFiltro}>
                   4
                 </Text>
                 <CheckBox
+                  color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fMoradores5}
                   checked={this.state.filtroMoradores5}
                 />
-                <Text style={{ alignSelf: 'stretch', paddingHorizontal: 15 }}>
+                <Text style={Estilos.textFiltro}>
                   5
                 </Text>
                 <CheckBox
+                  color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fMoradores6}
                   checked={this.state.filtroMoradores6}
                 />
-                <Text style={{ alignSelf: 'stretch', paddingHorizontal: 15 }}>
+                <Text style={Estilos.textFiltro}>
                   6+
                 </Text>
               </ListItem>
               <Text>Vagas disponíveis</Text>
-              <ListItem style={{ alignItems: 'stretch', marginBottom: 10 }}>
+              <ListItem style={Estilos.listStyle}>
                 <CheckBox
+                  color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fVagas1}
                   checked={this.state.filtroVagas1}
                 />
-                <Text style={{ alignSelf: 'stretch', paddingHorizontal: 15 }}>
+                <Text style={Estilos.textFiltro}>
                   1
                 </Text>
                 <CheckBox
+                  color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fVagas2}
                   checked={this.state.filtroVagas2}
                 />
-                <Text style={{ alignSelf: 'stretch', paddingHorizontal: 15 }}>
+                <Text style={Estilos.textFiltro}>
                   2
                 </Text>
                 <CheckBox
+                  color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fVagas3}
                   checked={this.state.filtroVagas3}
                 />
-                <Text style={{ alignSelf: 'stretch', paddingHorizontal: 15 }}>
+                <Text style={Estilos.textFiltro}>
                   3
                 </Text>
               </ListItem>
 
               <TouchableOpacity
-                style={{
-                  alignSelf: 'center',
-                  backgroundColor: '#30C21E',
-                  borderRadius: 20,
-                  padding: 10,
-                  elevation: 2,
-                  justifyContent: 'center',
-                  height: 45,
-                  width: 170,
-                }}
+                style={Estilos.botaoModal}
                 onPress={() => {
                   this.setState({ modalVisible: false });
                   this.filtro();
                   console.log(this.state.listaRepublicas);
                 }}
               >
-                <Text
-                  style={{
-                    color: '#ffffff',
-                    fontFamily: 'Roboto',
-                    textAlign: 'center',
-                    fontSize: 20,
-                  }}
-                >
+                <Text style={Estilos.textBotaoModal}>
                   Fechar
                 </Text>
               </TouchableOpacity>
             </View>
           </Modal>
         </View>
-
         <Fab
           active={this.state.active}
           direction="up"
           containerStyle={{}}
-          style={{
-            backgroundColor: '#27496d',
-            position: 'absolute',
-            bottom: 10,
-          }}
+          style={Estilos.S_FAB}
           position="bottomRight"
           onPress={() => {
             this.setState({ active: !this.state.active });
@@ -635,24 +568,24 @@ class Republica extends Component {
           {this.state.active ? (
             <Icon name="arrow-down" />
           ) : (
-            <Icon name="arrow-up" />
-          )}
+              <Icon name="arrow-up" />
+            )}
 
           <Button
-            style={{ backgroundColor: '#27496d' }}
+            style={Estilos.corFAB}
             onPress={() => {
               this.setState({ modalVisible: true });
             }}
           >
-            <Icon name="equalizer" style={{ color: '#ffffff' }} />
+            <Icon name="equalizer" style={Estilos.corIconFab} />
           </Button>
           <Button
-            style={{ backgroundColor: '#27496d' }}
+            style={Estilos.corFAB}
             onPress={() => {
               this.limparPropsRepublicaRedux();
             }}
           >
-            <Icon name="pencil" style={{ color: '#ffffff' }} />
+            <Icon name="pencil" style={Estilos.corIconFab} />
           </Button>
         </Fab>
       </View>
