@@ -166,6 +166,19 @@ const Estilo = StyleSheet.create({
     color: '#ffffff',
     marginHorizontal: 10,
   },
+  V_modal: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  V_Margin: {
+    marginBottom: '15%'
+  },
+  V_Btn:{
+    width: '80%',
+    alignItems: 'center',
+    justifyContent: 'center', 
+  }
 });
 
 export default Estilo;

@@ -79,7 +79,7 @@ class Login extends Component {
                 uri:
                   'https://firebasestorage.googleapis.com/v0/b/republicas.appspot.com/o/leo.png?alt=media&token=82587fae-0527-42f4-8ba1-4f9d1d8e3395',
               }}
-              style={{ width: 100, height: 100, marginTop: '10%' }}
+              style={style.imgStyle}
             />
           </TouchableOpacity>
           <Text style={style.txt_Titulo}>Hoomy</Text>
@@ -130,7 +130,7 @@ class Login extends Component {
                     />
                   </Item>
                   {touched.email && errors.email && (
-                    <Text style={{ fontSize: 10, color: 'red' }}>
+                    <Text style={style.txtError}>
                       {errors.email}
                     </Text>
                   )}
@@ -148,7 +148,7 @@ class Login extends Component {
                     />
                   </Item>
                   {touched.password && errors.password && (
-                    <Text style={{ fontSize: 10, color: 'red' }}>
+                    <Text style={style.txtError}>
                       {errors.password}
                     </Text>
                   )}
@@ -172,7 +172,7 @@ class Login extends Component {
                     disabled={!isValid}
                     title="Leo"
                   >
-                    <Icon style={{ fontSize: 25 }} name="ios-arrow-forward" />
+                    <Icon style={style.iconStyle} name="ios-arrow-forward" />
                   </Button>
                   <Button
                     style={style.botao_login}
@@ -182,7 +182,7 @@ class Login extends Component {
                     disabled={!isValid}
                     title="Leo"
                   >
-                    <Icon style={{ fontSize: 25 }} name="md-person-add" />
+                    <Icon style={style.iconStyle} name="md-person-add" />
                   </Button>
                 </View>
               </Fragment>

@@ -31,13 +31,7 @@ class DetalhesAnuncio extends Component {
     return (
       <ScrollView style={{ marginBottom: 55 }}>
         {this.state.interesse ? (
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
+          <View style={estilo.V_Detalhes}>
             <CustomModal
               parametro="Custom"
               titulo="Obrigado pelo interesse"
@@ -164,8 +158,8 @@ class DetalhesAnuncio extends Component {
               );
             }}
           >
-            <Icon2 name="whatsapp" style={{ color: '#ffffff', fontSize: 30 }} />
-            <Text style={{ color: '#FFFFFF', marginLeft: 15 }}>
+            <Icon2 name="whatsapp" style={estilo.iconWhatsapp} />
+            <Text style={estilo.txtWhatsapp}>
               Tenho Interesse
             </Text>
           </Button>

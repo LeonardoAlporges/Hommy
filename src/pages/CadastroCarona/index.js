@@ -177,26 +177,15 @@ class CadastroCarona extends Component {
                   </View>
 
                   <View style={estilo.V_Conteudo}>
-                    <Text
-                      style={{
-                        fontFamily: 'Roboto',
-                        fontSize: 14,
-                        color: '#687368',
-                        marginBottom: 25,
-                      }}
-                    >
+                    <Text style={estilo.txtCarona}>
                       Nos passe algumas informaçoes basica para fazer o registro
                       de sua Carona
                     </Text>
 
                     <View
-                      style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        marginTop: 15,
-                      }}
+                      style={estilo.rowStyle}
                     >
-                      <View style={{ width: '43%' }}>
+                      <View style={estilo.campoStyle}>
                         <Text style={estilo.txtLabel}>Saida</Text>
                         <Item>
                           <Label fixedLabel />
@@ -207,16 +196,16 @@ class CadastroCarona extends Component {
                             onBlur={() => setFieldTouched('saida')}
                           />
                         </Item>
-                        <View style={{ height: 15 }}>
+                        <View style={estilo.V_erro}>
                           {touched.saida && errors.saida && (
-                            <Text style={{ fontSize: 10, color: 'red' }}>
+                            <Text style={estilo.textError}>
                               {errors.saida}
                             </Text>
                           )}
                         </View>
                       </View>
 
-                      <View style={{ width: '43%' }}>
+                      <View style={estilo.campoStyle}>
                         <Text style={estilo.txtLabel}>Chegada</Text>
                         <Item>
                           <Label fixedLabel />
@@ -227,9 +216,9 @@ class CadastroCarona extends Component {
                             onBlur={() => setFieldTouched('chegada')}
                           />
                         </Item>
-                        <View style={{ height: 15 }}>
+                        <View style={estilo.V_erro}>
                           {touched.chegada && errors.chegada && (
-                            <Text style={{ fontSize: 10, color: 'red' }}>
+                            <Text style={estilo.textError}>
                               {errors.chegada}
                             </Text>
                           )}
@@ -238,13 +227,9 @@ class CadastroCarona extends Component {
                     </View>
 
                     <View
-                      style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        marginTop: 15,
-                      }}
+                      style={estilo.rowStyle}
                     >
-                      <View style={{ width: '43%' }}>
+                      <View style={estilo.campoStyle}>
                         <Text style={estilo.txtLabel}>Data</Text>
                         <Item>
                           <Label fixedLabel />
@@ -265,16 +250,16 @@ class CadastroCarona extends Component {
                             onBlur={() => setFieldTouched('data')}
                           />
                         </Item>
-                        <View style={{ height: 15 }}>
+                        <View style={estilo.V_erro}>
                           {touched.data && errors.data && (
-                            <Text style={{ fontSize: 10, color: 'red' }}>
+                            <Text style={estilo.textError}>
                               {errors.data}
                             </Text>
                           )}
                         </View>
                       </View>
 
-                      <View style={{ width: '43%' }}>
+                      <View style={estilo.campoStyle}>
                         <Text style={estilo.txtLabel}>Valor</Text>
                         <Item>
                           <Label fixedLabel />
@@ -285,9 +270,9 @@ class CadastroCarona extends Component {
                             onBlur={() => setFieldTouched('valor')}
                           />
                         </Item>
-                        <View style={{ height: 15 }}>
+                        <View style={estilo.V_erro}>
                           {touched.valor && errors.valor && (
-                            <Text style={{ fontSize: 10, color: 'red' }}>
+                            <Text style={estilo.textError}>
                               {errors.valor}
                             </Text>
                           )}
@@ -296,13 +281,9 @@ class CadastroCarona extends Component {
                     </View>
 
                     <View
-                      style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        marginTop: 15,
-                      }}
+                      style={estilo.rowStyle}
                     >
-                      <View style={{ width: '43%' }}>
+                      <View style={estilo.campoStyle}>
                         <Text style={estilo.txtLabel}>Horario de saida</Text>
                         <Item>
                           <Label fixedLabel />
@@ -313,16 +294,16 @@ class CadastroCarona extends Component {
                             onBlur={() => setFieldTouched('Hsaida')}
                           />
                         </Item>
-                        <View style={{ height: 15 }}>
+                        <View style={estilo.V_erro}>
                           {touched.Hsaida && errors.Hsaida && (
-                            <Text style={{ fontSize: 10, color: 'red' }}>
+                            <Text style={estilo.textError}>
                               {errors.Hsaida}
                             </Text>
                           )}
                         </View>
                       </View>
 
-                      <View style={{ width: '43%' }}>
+                      <View style={estilo.campoStyle}>
                         <Text style={estilo.txtLabel}>Horario de chegada</Text>
                         <Item>
                           <Label fixedLabel />
@@ -333,9 +314,9 @@ class CadastroCarona extends Component {
                             onBlur={() => setFieldTouched('HChegada')}
                           />
                         </Item>
-                        <View style={{ height: 15 }}>
+                        <View style={estilo.V_erro}>
                           {touched.HChegada && errors.HChegada && (
-                            <Text style={{ fontSize: 10, color: 'red' }}>
+                            <Text style={estilo.textError}>
                               {errors.HChegada}
                             </Text>
                           )}
@@ -354,9 +335,9 @@ class CadastroCarona extends Component {
                         />
                       </Item>
                     </View>
-                    <View style={{ height: 15 }}>
+                    <View style={estilo.V_erro}>
                       {touched.embarque && errors.embarque && (
-                        <Text style={{ fontSize: 10, color: 'red' }}>
+                        <Text style={estilo.textError}>
                           {errors.embarque}
                         </Text>
                       )}
@@ -375,9 +356,9 @@ class CadastroCarona extends Component {
                         />
                       </Item>
                     </View>
-                    <View style={{ height: 15 }}>
+                    <View style={estilo.V_erro}>
                       {touched.desembarque && errors.desembarque && (
-                        <Text style={{ fontSize: 10, color: 'red' }}>
+                        <Text style={estilo.textError}>
                           {errors.desembarque}
                         </Text>
                       )}
@@ -394,22 +375,15 @@ class CadastroCarona extends Component {
                         />
                       </Item>
                     </View>
-                    <View style={{ height: 15 }}>
+                    <View style={estilo.V_erro}>
                       {touched.vagas && errors.vagas && (
-                        <Text style={{ fontSize: 10, color: 'red' }}>
+                        <Text style={estilo.textError}>
                           {errors.vagas}
                         </Text>
                       )}
                     </View>
 
-                    <View
-                      style={{
-                        width: '100%',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        marginTop: '10%',
-                      }}
-                    >
+                    <View style={estilo.V_btn}>
                       <Button style={estilo.btnProximo} onPress={handleSubmit}>
                         <Text>Prosseguir</Text>
                       </Button>

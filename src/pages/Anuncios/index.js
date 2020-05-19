@@ -147,11 +147,7 @@ class Anuncios extends Component {
                       }}
                     >
                       <Icon
-                        style={{
-                          fontSize: 25,
-                          marginRight: '2%',
-                          color: '#ffffff',
-                        }}
+                        style={estilo.icon}
                         name="pencil-outline"
                       />
                       <Text style={estilo.TxtEdit}>Editar</Text>
@@ -183,11 +179,7 @@ class Anuncios extends Component {
                       }}
                     >
                       <Icon
-                        style={{
-                          fontSize: 25,
-                          marginRight: '2%',
-                          color: '#ffffff',
-                        }}
+                        style={estilo.icon}
                         name="pencil-outline"
                       />
                       <Text style={estilo.TxtEdit}>Editar</Text>

@@ -100,35 +100,15 @@ const CadastroUsuario = ({ navigation }) => {
         {upload.loading ? (
           <Image
             source={imageURI}
-            style={{
-              width: 100,
-              height: 100,
-              marginTop: '10%',
-              borderRadius: 50,
-            }}
+            style={estilo.imagemStyle}
           />
         ) : (
           <Image
             source={imageURI}
-            style={{
-              width: 100,
-              height: 100,
-              marginTop: '10%',
-              borderRadius: 50,
-            }}
+            style={estilo.imagemStyle}
           />
         )}
-        <View
-          style={{
-            display: 'flex',
-            marginLeft: '55%',
-            width: '100%',
-            height: 50,
-            alignContent: 'center',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
+        <View style={estilo.V_Btn}>
           <Button style={estilo.botao_send} onPress={uploadFile}>
             {/* //<Icon name="account-outline" style={estilo.icon_send} /> */}
             <Text>Enviar Foto de perfil</Text>

@@ -78,6 +78,18 @@ const style = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: 'rgba(29,161,242,1)',
   },
+  imgStyle: {
+    width: 100,
+    height: 100,
+    marginTop: '10%'
+  },
+  txtError:{
+    fontSize: 10,
+     color: 'red'
+  },
+  iconStyle:{
+    fontSize: 25
+  }
 });
 
 export default style;

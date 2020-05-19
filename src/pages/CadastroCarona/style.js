@@ -86,6 +86,33 @@ const estilo = StyleSheet.create({
     backgroundColor: '#009ddb',
     color: '#009ddb',
   },
+  txtCarona: {
+    fontFamily: 'Roboto',
+    fontSize: 14,
+    color: '#687368',
+    marginBottom: 25,
+  },
+  rowStyle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 15,
+  },
+  campoStyle: {
+    width: '43%'
+  },
+  V_erro: {
+    eight: 15
+  },
+  textError: {
+    fontSize: 10,
+    color: 'red'
+  },
+  V_btn: {
+    idth: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '10%',
+  }
 });
 
 export default estilo;

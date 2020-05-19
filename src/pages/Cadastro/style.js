@@ -99,6 +99,81 @@ const estilo = StyleSheet.create({
     backgroundColor: '#142850',
     color: '#142850',
   },
+  V_modal: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  textRepublica: {
+    fontFamily: 'Roboto',
+    fontSize: 14,
+    color: '#687368',
+    marginBottom: 25,
+  },
+  textError: {
+    fontSize: 10,
+    color: 'red'
+  },
+  V_error: {
+    height: 15
+  },
+  V_ImageLabel: {
+    width: '100%',
+    height: 20,
+    marginBottom: 18,
+    marginTop: 15,
+  },
+  V_ImageEmpty: {
+    justifyContent: 'space-around',
+    width: '100%',
+    height: 100,
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  V_ImageFull: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 100,
+    height: 100,
+    borderWidth: 1,
+    borderRadius: 3,
+    borderColor: '#2e2e2e',
+    padding: 10,
+    opacity: 0.3,
+  },
+  ImageEmpty: {
+    width: 50,
+    height: 50,
+    borderRadius: 3,
+    opacity: 0.7,
+  },
+  ImageFull: {
+    width: 50,
+    height: 50,
+    borderRadius: 3,
+  },
+  V_BotaoImg: {
+    marginTop: '5%',
+    width: '100%',
+    height: 50,
+    alignContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  V_Caracteristicas: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 15,
+  },
+  V_Campos: {
+    width: '43%'
+  },
+  V_btnProx: {
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '8%',
+  }
 });
 
 export default estilo;
