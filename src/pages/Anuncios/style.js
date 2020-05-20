@@ -15,6 +15,13 @@ const estilo = StyleSheet.create({
   campos: {
     marginTop: 20,
   },
+  V_geral: {
+    flexWrap: 'nowrap',
+    marginTop: 100,
+    width: '100%',
+    height: '100%',
+    flex: 1,
+  },
   iconHeader: {
     fontSize: 26,
     color: '#142850',

@@ -141,7 +141,7 @@ class Anuncios extends Component {
           <Text style={estilo.title}>Meus Anuncios</Text>
         </View>
         <ScrollView>
-          <View style={{ width: '100%', height: '100%' }}>
+          <View style={estilo.V_geral}>
             {this.state.listaRepublicas.length != 0 ? (
               <View>
                 <View style={estilo.V_label}>
