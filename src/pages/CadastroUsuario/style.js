@@ -6,22 +6,21 @@ const estilo = StyleSheet.create({
     paddingTop: '5%',
     display: 'flex',
     flexDirection: 'column',
-    flex: 1,
     alignItems: 'center',
     height: '100%',
     justifyContent: 'center',
   },
 
   view_CamposLogin: {
-    height: '8%',
-    width: '80%',
-    marginTop: '8%',
+    height: 40,
+    width: 330,
+    marginTop: 20,
   },
 
   icons_CamposLogin: {
     fontSize: 25,
     margin: 5,
-    color: 'rgba(29,161,242,1)',
+    color: '#27496d',
   },
 
   esqueciSenha: {
@@ -31,29 +30,34 @@ const estilo = StyleSheet.create({
   icon_send: {
     fontSize: 25,
     margin: 5,
-    color: 'rgba(29,161,242,1)',
+    color: '#27496d',
   },
   view_BotaoEntar: {
-    marginTop: '5%',
+    marginTop: '10%',
     height: 60,
-    width: 100,
+    width: 150,
   },
 
   botao_login: {
     justifyContent: 'center',
     alignItems: 'center',
     height: 50,
-    width: 100,
-    backgroundColor: 'rgba(29,161,242,1)',
-    borderRadius: 15,
+    width: 150,
+    backgroundColor: '#27496d',
+    borderRadius: 8,
+  },
+  V_modal: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   botao_send: {
     justifyContent: 'center',
     alignItems: 'center',
     width: 150,
-    height: 40,
+    height: 45,
     borderRadius: 8,
-    backgroundColor: 'rgba(29,161,242,1)',
+    backgroundColor: '#27496d',
   },
   txtErro: {
     fontFamily: 'Roboto-light',
@@ -68,18 +72,21 @@ const estilo = StyleSheet.create({
   imagemStyle: {
     width: 100,
     height: 100,
-    marginTop: '10%',
     borderRadius: 50,
   },
   V_Btn: {
     display: 'flex',
-    marginLeft: '55%',
     width: '100%',
-    height: 50,
+    height: 100,
     alignContent: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-  }
+  },
+  textoLabel: {
+    fontFamily: 'Roboto Bold',
+    fontSize: 13,
+    color: '#ffffff',
+  },
 });
 
 export default estilo;

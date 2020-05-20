@@ -18,6 +18,14 @@ const estilo = StyleSheet.create({
   camposAmb: {
     marginTop: 50,
   },
+  V_carregando: {
+    height: '100%',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingBottom: '10%',
+    // backgroundColor: 'rgba(255, 255, 255, 0.1)',
+  },
   botao_send: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -112,10 +120,10 @@ const estilo = StyleSheet.create({
   },
   textError: {
     fontSize: 10,
-    color: 'red'
+    color: 'red',
   },
   V_error: {
-    height: 15
+    height: 15,
   },
   V_ImageLabel: {
     width: '100%',
@@ -166,14 +174,14 @@ const estilo = StyleSheet.create({
     marginTop: 15,
   },
   V_Campos: {
-    width: '43%'
+    width: '43%',
   },
   V_btnProx: {
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: '8%',
-  }
+  },
 });
 
 export default estilo;

@@ -4,10 +4,10 @@ import { Formik } from 'formik';
 import { connect } from 'react-redux';
 
 import React, { Component, Fragment } from 'react';
-import { View, Image, Text, Alert, ScrollView } from 'react-native';
+import { View, Image, Text, ScrollView } from 'react-native';
 
 import { Icon, Input, Item, Button } from 'native-base';
-
+import CustomModal from '../../components/Alert';
 import { withNavigation } from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
 import api from '../../service/api';
@@ -30,6 +30,8 @@ class Login extends Component {
   static navigationOptions = { header: null };
   state = {
     user: [],
+    erro: false,
+    sucesso: false,
   };
 
   async setToken(dados) {
@@ -58,10 +60,12 @@ class Login extends Component {
         this.props.editLogado(responseJson.data.usuario.nome);
         this.props.editTelefone(responseJson.data.usuario.celular);
         this.props.editFoto(responseJson.data.usuario.fotoPerfil);
+        this.setState({ sucesso: true });
         this.props.navigation.navigate('TabsHeader');
       })
       .catch(error => {
-        console.error('Usuario Não Encontrado');
+        this.setState({ erro: true });
+        //console.error('Usuario Não Encontrado');
       });
   };
 
@@ -72,12 +76,21 @@ class Login extends Component {
   render() {
     return (
       <ScrollView>
+        {this.state.erro ? <CustomModal parametro="Erro" /> : <View />}
+        {this.state.sucesso ? (
+          <View style={style.V_modal}>
+            <CustomModal parametro="Sucesso" />
+          </View>
+        ) : (
+          <View />
+        )}
+
         <View style={style.container}>
           <TouchableOpacity>
             <Image
               source={{
                 uri:
-                  'https://firebasestorage.googleapis.com/v0/b/republicas.appspot.com/o/leo.png?alt=media&token=82587fae-0527-42f4-8ba1-4f9d1d8e3395',
+                  'https://firebsestorage.googleapis.com/v0/b/republicas.appspot.com/o/leo.png?alt=media&token=82587fae-0527-42f4-8ba1-4f9d1d8e3395',
               }}
               style={style.imgStyle}
             />
@@ -130,9 +143,7 @@ class Login extends Component {
                     />
                   </Item>
                   {touched.email && errors.email && (
-                    <Text style={style.txtError}>
-                      {errors.email}
-                    </Text>
+                    <Text style={style.txtError}>{errors.email}</Text>
                   )}
                 </View>
 
@@ -148,9 +159,7 @@ class Login extends Component {
                     />
                   </Item>
                   {touched.password && errors.password && (
-                    <Text style={style.txtError}>
-                      {errors.password}
-                    </Text>
+                    <Text style={style.txtError}>{errors.password}</Text>
                   )}
                 </View>
                 <View style={style.V_cadastrar}>
@@ -172,17 +181,19 @@ class Login extends Component {
                     disabled={!isValid}
                     title="Leo"
                   >
-                    <Icon style={style.iconStyle} name="ios-arrow-forward" />
+                    <Text style={style.labelBotao}>Login</Text>
+                    {/* <Icon style={style.iconStyle} name="ios-arrow-forward" /> */}
                   </Button>
                   <Button
-                    style={style.botao_login}
+                    style={style.botao_cadastro}
                     onPress={() => {
                       this.props.navigation.navigate('CadastroUsuario');
                     }}
                     disabled={!isValid}
                     title="Leo"
                   >
-                    <Icon style={style.iconStyle} name="md-person-add" />
+                    <Text style={style.labelBotao}>Cadastre-se</Text>
+                    {/* <Icon style={style.iconStyle} name="md-person-add" /> */}
                   </Button>
                 </View>
               </Fragment>

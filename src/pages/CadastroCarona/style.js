@@ -20,6 +20,11 @@ const estilo = StyleSheet.create({
     color: '#009ddb',
     marginHorizontal: '5%',
   },
+  V_modal: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   txtLabel: {
     fontFamily: 'Roboto',
     fontSize: 16,
@@ -98,21 +103,21 @@ const estilo = StyleSheet.create({
     marginTop: 15,
   },
   campoStyle: {
-    width: '43%'
+    width: '43%',
   },
   V_erro: {
-    eight: 15
+    height: 15,
   },
   textError: {
     fontSize: 10,
-    color: 'red'
+    color: 'red',
   },
   V_btn: {
-    idth: '100%',
+    width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: '10%',
-  }
+  },
 });
 
 export default estilo;

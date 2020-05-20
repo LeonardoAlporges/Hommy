@@ -8,7 +8,7 @@ const estilo = StyleSheet.create({
     height: 55,
     backgroundColor: '#f8f8f8',
     borderBottomWidth: 2,
-    borderBottomColor: '#68c0e8',
+    borderBottomColor: '#00909e',
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
@@ -17,8 +17,34 @@ const estilo = StyleSheet.create({
   },
   iconHeader: {
     fontSize: 26,
-    color: '#009ddb',
+    color: '#142850',
     marginHorizontal: '5%',
+  },
+  V_interna2: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingBottom: '20%',
+  },
+  imagemError: {
+    height: 200,
+    width: 200,
+  },
+  textError: {
+    textAlign: 'center',
+    fontSize: 22,
+    fontWeight: 'bold',
+    fontFamily: 'Roboto',
+
+    width: '80%',
+  },
+  textError2: {
+    marginTop: 10,
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: '400',
+    fontFamily: 'Roboto',
+    width: '80%',
   },
   txtLabel: {
     fontFamily: 'Roboto',
@@ -30,7 +56,7 @@ const estilo = StyleSheet.create({
     fontSize: 24,
     fontFamily: 'Roboto',
     fontWeight: 'bold',
-    color: '#006fa9',
+    color: '#142850',
   },
   barra: {
     width: '90%',
@@ -84,6 +110,6 @@ const estilo = StyleSheet.create({
     fontSize: 25,
     marginRight: '2%',
     color: '#ffffff',
-  }
+  },
 });
 export default estilo;

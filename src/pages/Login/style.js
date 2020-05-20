@@ -8,9 +8,9 @@ const style = StyleSheet.create({
   },
 
   txt_Titulo: {
-    fontFamily: 'Roboto',
+    fontFamily: 'Roboto Bold',
     fontSize: 35,
-    color: 'rgba(29,161,242,1)',
+    color: '#27496d',
   },
 
   txt_FormaDeLogin: {
@@ -29,7 +29,7 @@ const style = StyleSheet.create({
 
   icons_OutroLogin: {
     fontSize: 40,
-    color: 'rgba(29,161,242,1)',
+    color: '#27496d',
   },
 
   view_CamposLogin: {
@@ -41,7 +41,7 @@ const style = StyleSheet.create({
   icons_CamposLogin: {
     fontSize: 35,
     margin: 5,
-    color: 'rgba(29,161,242,1)',
+    color: '#27496d',
   },
 
   esqueciSenha: {
@@ -51,12 +51,9 @@ const style = StyleSheet.create({
 
   V_botoes: {
     display: 'flex',
-    flexDirection: 'row',
-    marginTop: '30%',
     justifyContent: 'space-around',
     alignItems: 'center',
-    height: '15%',
-    paddingTop: '10%',
+    height: 150,
     width: '60%',
     marginTop: '10%',
     alignItems: 'center',
@@ -69,27 +66,44 @@ const style = StyleSheet.create({
     marginTop: '5%',
   },
   touchTx: {},
-
+  V_modal: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   botao_login: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 70,
-    width: 70,
-    borderRadius: 15,
-    backgroundColor: 'rgba(29,161,242,1)',
+    height: 45,
+    width: 200,
+    borderRadius: 5,
+    backgroundColor: '#27496d',
   },
   imgStyle: {
-    width: 100,
-    height: 100,
-    marginTop: '10%'
+    width: 70,
+    height: 70,
+    marginTop: '5%',
   },
-  txtError:{
+  labelBotao: {
+    fontFamily: 'Roboto Bold',
+    fontSize: 20,
+    color: '#ffffff',
+  },
+  botao_cadastro: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 45,
+    width: 200,
+    borderRadius: 5,
+    backgroundColor: '#00909e',
+  },
+  txtError: {
     fontSize: 10,
-     color: 'red'
+    color: 'red',
   },
-  iconStyle:{
-    fontSize: 25
-  }
+  iconStyle: {
+    fontSize: 25,
+  },
 });
 
 export default style;

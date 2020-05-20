@@ -7,9 +7,10 @@ import ImagePicker from 'react-native-image-picker';
 import { Item, Input, Button } from 'native-base';
 import {
   imagePickerOptions,
-  uploadFileToFireBase,
+  uploadFileToFireBaseUser,
   uploadProgress,
 } from '../../utils';
+import CustomModal from '../../components/Alert';
 import estilo from './style';
 import { View } from 'native-base';
 import api from '../../service/api';
@@ -89,29 +90,17 @@ const CadastroUsuario = ({ navigation }) => {
   return (
     <ScrollView>
       <View style={estilo.container}>
-        {/* <Image
-        source={{
-          uri:
-            'https://firebasestorage.googleapis.com/v0/b/republicas.appspot.com/o/leo.png?alt=media&token=82587fae-0527-42f4-8ba1-4f9d1d8e3395',
-        }}
-        style={{ width: 100, height: 100, marginTop: '10%' }}
-      /> */}
-
         {upload.loading ? (
-          <Image
-            source={imageURI}
-            style={estilo.imagemStyle}
-          />
+          <Image source={imageURI} style={estilo.imagemStyle} />
         ) : (
           <Image
-            source={imageURI}
+            source={require('../../assets/Img/Republica_Send_Pictures.png')}
             style={estilo.imagemStyle}
           />
         )}
         <View style={estilo.V_Btn}>
           <Button style={estilo.botao_send} onPress={uploadFile}>
-            {/* //<Icon name="account-outline" style={estilo.icon_send} /> */}
-            <Text>Enviar Foto de perfil</Text>
+            <Text style={estilo.textoLabel}>Enviar foto de perfil</Text>
           </Button>
         </View>
         <Formik
@@ -152,6 +141,14 @@ const CadastroUsuario = ({ navigation }) => {
             handleSubmit,
           }) => (
             <Fragment>
+              {this.state.erro ? <CustomModal parametro="Erro" /> : <View />}
+              {this.state.sucesso ? (
+                <View style={estilo.V_modal}>
+                  <CustomModal parametro="Sucesso" />
+                </View>
+              ) : (
+                <View />
+              )}
               <View style={estilo.view_CamposLogin}>
                 <Item>
                   <Icon
@@ -242,9 +239,8 @@ const CadastroUsuario = ({ navigation }) => {
                   style={estilo.botao_login}
                   onPress={handleSubmit}
                   disabled={!isValid}
-                  title="Leo"
                 >
-                  <Text>Enviar!</Text>
+                  <Text style={estilo.textoLabel}>Enviar</Text>
                 </Button>
               </View>
             </Fragment>

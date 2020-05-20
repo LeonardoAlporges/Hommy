@@ -6,6 +6,7 @@ import ViewPager from '@react-native-community/viewpager';
 import api from '../../service/api';
 import estilo from './style';
 import { withNavigation } from 'react-navigation';
+import CustomModal from '../../components/Alert';
 import { connect } from 'react-redux';
 import {
   Text,
@@ -41,6 +42,8 @@ class CadastroCarona extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      erro: false,
+      sucesso: false,
       update: this.props.navigation.state.params.update,
     };
     this.verificarParametro(this.props.navigation.state.params.update);
@@ -91,9 +94,11 @@ class CadastroCarona extends Component {
       await api
         .put(`/carona/${'leo@hotmail.com'}`, this.data)
         .then(Response => {
-          console.log('sucesso', this.data);
+          this.setState({ sucesso: true });
+          this.props.navigation.navigate('TabsHeader');
         })
         .catch(e => {
+          this.setState({ erro: true });
           console.log(e);
         });
     } else if (this.state.update == false) {
@@ -101,9 +106,11 @@ class CadastroCarona extends Component {
       await api
         .post('/carona', this.data)
         .then(Response => {
-          console.log('sucesso', this.data);
+          this.setState({ sucesso: true });
+          this.props.navigation.navigate('TabsHeader');
         })
         .catch(e => {
+          this.setState({ erro: true });
           console.log(e);
         });
     }
@@ -161,6 +168,14 @@ class CadastroCarona extends Component {
           handleSubmit,
         }) => (
           <Fragment>
+            {this.state.erro ? <CustomModal parametro="Erro" /> : <View />}
+            {this.state.sucesso ? (
+              <View style={estilo.V_modal}>
+                <CustomModal parametro="Sucesso" />
+              </View>
+            ) : (
+              <View />
+            )}
             <ViewPager style={{ flex: 1 }}>
               <ScrollView>
                 <View key="1">
@@ -182,9 +197,7 @@ class CadastroCarona extends Component {
                       de sua Carona
                     </Text>
 
-                    <View
-                      style={estilo.rowStyle}
-                    >
+                    <View style={estilo.rowStyle}>
                       <View style={estilo.campoStyle}>
                         <Text style={estilo.txtLabel}>Saida</Text>
                         <Item>
@@ -198,9 +211,7 @@ class CadastroCarona extends Component {
                         </Item>
                         <View style={estilo.V_erro}>
                           {touched.saida && errors.saida && (
-                            <Text style={estilo.textError}>
-                              {errors.saida}
-                            </Text>
+                            <Text style={estilo.textError}>{errors.saida}</Text>
                           )}
                         </View>
                       </View>
@@ -226,9 +237,7 @@ class CadastroCarona extends Component {
                       </View>
                     </View>
 
-                    <View
-                      style={estilo.rowStyle}
-                    >
+                    <View style={estilo.rowStyle}>
                       <View style={estilo.campoStyle}>
                         <Text style={estilo.txtLabel}>Data</Text>
                         <Item>
@@ -252,9 +261,7 @@ class CadastroCarona extends Component {
                         </Item>
                         <View style={estilo.V_erro}>
                           {touched.data && errors.data && (
-                            <Text style={estilo.textError}>
-                              {errors.data}
-                            </Text>
+                            <Text style={estilo.textError}>{errors.data}</Text>
                           )}
                         </View>
                       </View>
@@ -272,17 +279,13 @@ class CadastroCarona extends Component {
                         </Item>
                         <View style={estilo.V_erro}>
                           {touched.valor && errors.valor && (
-                            <Text style={estilo.textError}>
-                              {errors.valor}
-                            </Text>
+                            <Text style={estilo.textError}>{errors.valor}</Text>
                           )}
                         </View>
                       </View>
                     </View>
 
-                    <View
-                      style={estilo.rowStyle}
-                    >
+                    <View style={estilo.rowStyle}>
                       <View style={estilo.campoStyle}>
                         <Text style={estilo.txtLabel}>Horario de saida</Text>
                         <Item>
@@ -337,9 +340,7 @@ class CadastroCarona extends Component {
                     </View>
                     <View style={estilo.V_erro}>
                       {touched.embarque && errors.embarque && (
-                        <Text style={estilo.textError}>
-                          {errors.embarque}
-                        </Text>
+                        <Text style={estilo.textError}>{errors.embarque}</Text>
                       )}
                     </View>
 
@@ -377,9 +378,7 @@ class CadastroCarona extends Component {
                     </View>
                     <View style={estilo.V_erro}>
                       {touched.vagas && errors.vagas && (
-                        <Text style={estilo.textError}>
-                          {errors.vagas}
-                        </Text>
+                        <Text style={estilo.textError}>{errors.vagas}</Text>
                       )}
                     </View>
 
