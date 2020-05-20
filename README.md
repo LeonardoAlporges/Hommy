@@ -24,9 +24,9 @@ react-native run-android
 
 ## Colaboradores
 
-Leonardo Alporges Martins
-Robinson Cesar Lima
-Chaina Borges de Moraes
+-Leonardo Alporges Martins
+-Robinson Cesar Lima
+-Chaina Borges de Moraes
 
 ## License
 
