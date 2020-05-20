@@ -21,12 +21,15 @@ Navegue ate a pasta do projeto clonado e execute os seguintes comando pelo termi
 ```bash
 react-native run-android
 ```
-
+## Coordenador  
+  
+-Giuliano Prado de Morais Giglio
+  
 ## Colaboradores
 
--Leonardo Alporges Martins
--Robinson Cesar Lima
--Chaina Borges de Moraes
+-Leonardo Alporges Martins  
+-Robinson Lima Cesar  
+-Lucas Borges de Moraes  
 
 ## License
 
