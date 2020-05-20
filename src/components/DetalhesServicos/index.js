@@ -1,16 +1,7 @@
 import React, { Component } from 'react';
-import {
-  View,
-  ScrollView,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-} from 'react-native';
-import { Button, Card, CardItem, Body, Header, Icon } from 'native-base';
+import { View, ScrollView, Image, Text } from 'react-native';
+import { Button, Icon } from 'native-base';
 import { withNavigation } from 'react-navigation';
-import { connect } from 'react-redux';
-import { selecionarItem } from '../../actions/DetalhesActions';
 import estilo from './style';
 import Cabeca from '../Cabeca';
 
@@ -100,9 +91,7 @@ class DetalhesServicos extends Component {
             }}
           >
             <Icon name="ios-call" style={estilo.contato} />
-            <Text style={estilo.contato}>
-              Entrar em Contato
-            </Text>
+            <Text style={estilo.contato}>Entrar em Contato</Text>
           </Button>
         </ScrollView>
       </View>

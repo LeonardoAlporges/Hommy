@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import {
-  ScrollView,
   FlatList,
   View,
   Modal,
@@ -230,7 +229,6 @@ class Caronas extends Component {
         });
       })
       .catch(error => {
-        console.log('SERVIDOR ESTA DESLIGADO');
         this.setState({ loading: false });
         this.setState({ erro: true });
         this.setState({ refreshing: false });

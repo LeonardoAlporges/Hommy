@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  ScrollView,
   FlatList,
   View,
   Modal,
@@ -114,7 +113,6 @@ class Republica extends Component {
         });
       })
       .catch(error => {
-        console.log('SERVIDOR ESTA DESLIGADO');
         this.setState({ loading: false });
         this.setState({ erro: true });
         this.setState({ refreshing: false });
@@ -511,7 +509,6 @@ class Republica extends Component {
                 onPress={() => {
                   this.setState({ modalVisible: false });
                   this.filtro();
-                  console.log(this.state.listaRepublicas);
                 }}
               >
                 <Text style={Estilos.textBotaoModal}>Fechar</Text>

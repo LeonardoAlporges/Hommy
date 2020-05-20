@@ -31,12 +31,9 @@ class Cabeca extends Component {
   closeToken = async () => {
     await AsyncStorage.removeItem('token')
       .then(value => {
-        console.log('Saiu da conta', value);
         this.props.navigation.navigate('Login');
       })
-      .catch(error => {
-        console.log('Nao Foi possivel');
-      });
+      .catch(error => {});
     //Alert.alert('Conta deslogada com sucesso');
   };
   render() {
@@ -74,10 +71,7 @@ class Cabeca extends Component {
                     this.setState({ isModalVisible: false });
                   }}
                 >
-                  <Icon
-                    style={Estilos.iconModal}
-                    name="arrow-left"
-                  />
+                  <Icon style={Estilos.iconModal} name="arrow-left" />
                 </TouchableOpacity>
               </View>
               {this.props.fotoPerfil != null ? (
@@ -88,19 +82,15 @@ class Cabeca extends Component {
                   style={Estilos.fotoPerfil}
                 />
               ) : (
-                  <Image
-                    source={require('../../assets/Img/ProfilePicture.png')}
-                    style={Estilos.fotoPerfil}
-                  />
-                )}
+                <Image
+                  source={require('../../assets/Img/ProfilePicture.png')}
+                  style={Estilos.fotoPerfil}
+                />
+              )}
 
               <View style={Estilos.viewNome}>
-                <Text style={Estilos.textNome}>
-                  {this.props.nome}
-                </Text>
-                <Text style={Estilos.textCPF}>
-                  {this.props.cpf}
-                </Text>
+                <Text style={Estilos.textNome}>{this.props.nome}</Text>
+                <Text style={Estilos.textCPF}>{this.props.cpf}</Text>
               </View>
               <View style={Estilos.viewDivisor} />
               <View style={Estilos.viewBotoes}>
@@ -111,30 +101,14 @@ class Cabeca extends Component {
                       this.setState({ isModalVisible: false });
                   }}
                 >
-                  <Icon
-                    style={Estilos.iconBotoes}
-                    name="book-open"
-                  />
-                  <Text style={Estilos.textBotoes}>
-                    Meus Anuncios
-                  </Text>
-                  <Icon
-                    style={Estilos.iconBotoesArrow}
-                    name="arrow-right"
-                  />
+                  <Icon style={Estilos.iconBotoes} name="book-open" />
+                  <Text style={Estilos.textBotoes}>Meus Anuncios</Text>
+                  <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
                 </Button>
                 <Button style={Estilos.botoes}>
-                  <Icon
-                    style={Estilos.iconBotoes}
-                    name="pencil"
-                  />
-                  <Text style={Estilos.textBotoes}>
-                    Editar perfil
-                  </Text>
-                  <Icon
-                    style={Estilos.iconBotoesArrow}
-                    name="arrow-right"
-                  />
+                  <Icon style={Estilos.iconBotoes} name="pencil" />
+                  <Text style={Estilos.textBotoes}>Editar perfil</Text>
+                  <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
                 </Button>
                 <Button
                   onPress={() => {
@@ -144,17 +118,9 @@ class Cabeca extends Component {
                   }}
                   style={Estilos.botoes}
                 >
-                  <Icon
-                    style={Estilos.iconBotoes}
-                    name="question"
-                  />
-                  <Text style={Estilos.textBotoes}>
-                    Me ajuda
-                  </Text>
-                  <Icon
-                    style={Estilos.iconBotoesArrow}
-                    name="arrow-right"
-                  />
+                  <Icon style={Estilos.iconBotoes} name="question" />
+                  <Text style={Estilos.textBotoes}>Me ajuda</Text>
+                  <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
                 </Button>
                 <Button
                   onPress={() => {
@@ -164,20 +130,12 @@ class Cabeca extends Component {
                   }}
                   style={Estilos.botoes}
                 >
-                  <Icon
-                    style={Estilos.iconBotoes}
-                    name="exclamation"
-                  />
-                  <Text style={Estilos.textBotoes}>
-                    Enviar feedback
-                  </Text>
-                  <Icon
-                    style={Estilos.iconBotoesArrow}
-                    name="arrow-right"
-                  />
+                  <Icon style={Estilos.iconBotoes} name="exclamation" />
+                  <Text style={Estilos.textBotoes}>Enviar feedback</Text>
+                  <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
                 </Button>
               </View>
-              <View  style={Estilos.viewFooter}>
+              <View style={Estilos.viewFooter}>
                 <Text width="100%">©2020 Todos direiros reservados.</Text>
               </View>
             </View>

@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { View, ScrollView, Alert, TouchableOpacity } from 'react-native';
+import { View, ScrollView, TouchableOpacity } from 'react-native';
 import * as yup from 'yup';
 import { Formik } from 'formik';
 import ViewPager from '@react-native-community/viewpager';
@@ -15,12 +15,7 @@ import {
   Label,
   Button,
   Icon,
-  Picker,
-  CheckBox,
   DatePicker,
-  ListItem,
-  Body,
-  Spinner,
 } from 'native-base';
 import {
   editChegada,
@@ -51,8 +46,6 @@ class CadastroCarona extends Component {
 
   async verificarParametro(parametro) {
     await this.setState({ update: parametro });
-    console.log('VErificar parametro', this.state.update);
-    console.log('valor Parametro ', parametro);
     if (parametro.update == false) {
       this.atualizarPropsRedux();
     }

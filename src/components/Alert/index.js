@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, View, Text, Modal, Image } from 'react-native';
-import { withNavigation } from 'react-navigation';
 import Estilos from './style';
 
 export default class CustomModal extends Component {

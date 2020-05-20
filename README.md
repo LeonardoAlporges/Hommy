@@ -1,19 +1,33 @@
 # Hommy
 
-Projeto de iniciação cientifica
+O objetivo desse projeto de iniciação científica é elaborar um protótipo de uma aplicação móvel para integração social e acadêmico do estudante universitário residente na cidade de Alegre - ES, a ser aplicado e testado na comunidade acadêmica da Universidade Federal do Espírito Santo, com o estudo de tecnologias pioneiras e multiplataformas de construção de aplicações móveis, visando oferecer serviços e compartilhamento de informações que facilitam a integração do aluno em sua ova realidade social, tanto na cidade quanto na instituição de ensino.
 
-\*\*serve running
-react-native run-plataform
+## Instalação
 
-x x x xCorreção de erros possiveis >Unsupported Modules Detected: Compilation is not supported for following modules: --> feche tudo relacionado ao app(principalmente android studio) navegue para pasta Android do projeto e apague a pasta .idea e apague todos arquivos do projeto com extensão .iml , depois volte a abrir o projeto
+Use o gerenciado de pacotes [Yarn](https://yarnpkg.com/) para instalar as dependências do projeto.
 
-    Erro de Versao antiga buildade ( a do cabeçalho azul escuro )
+Rode o seguinte comando no terminal de sua preferencia
 
-\*\*Generate Build Release
+```bash
+yarn install
+```
 
-    -- navegar para -> hommy/android
-    execulte : "./gradlew assembleRelease" ou "gradlew assembleRelease"
+Use também um emulador de sua preferencia ou plug seu celular no computador e lembre-se de colocar-lo em modo depuração USB
 
-Casso de Erro tente
-1° Dentro da pasta Android execute ./gradlew clean ou /gradlew clean e teste novamente o codigo anterior
-//2° Execute React-native run-android ou npm start para mais detalhes do erro
+## Iniciando a aplicação
+
+Navegue ate a pasta do projeto clonado e execute os seguintes comando pelo terminal de sua preferencia
+
+```bash
+react-native run-android
+```
+
+## Colaboradores
+
+Leonardo Alporges Martins
+Robinson Cesar Lima
+Chaina Borges de Moraes
+
+## License
+
+--

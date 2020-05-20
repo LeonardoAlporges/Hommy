@@ -1,8 +1,8 @@
 import * as yup from 'yup';
 import { Formik } from 'formik';
 
-import React, { Component, Fragment, useState } from 'react';
-import { Text, Alert, Image, Modal, ScrollView } from 'react-native';
+import React, { Component, Fragment } from 'react';
+import { Text, Image, ScrollView } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import { Item, Input, Button } from 'native-base';
 import {
@@ -25,18 +25,13 @@ class CadastroUsuario extends Component {
   };
   EnviarCadastro = async value => {
     value.fotoPerfil = imageURI.uri;
-    console.log('Valor de envio', value);
+
     await api
       .post('/usuario', value)
       .then(responseJson => {
-        console.log('Cadastro', responseJson);
         navigation.navigate('Login');
       })
-      .catch(error => {
-        console.log('ero', error);
-        console.log('Usuario Nao cadastrado');
-      });
-    console.log('Acabou ew');
+      .catch(error => {});
   };
 
   monitorFileUpload = task => {
@@ -52,7 +47,6 @@ class CadastroUsuario extends Component {
         case 'success':
           snapshot.ref.getDownloadURL().then(downloadURL => {
             this.setState({ imageURI: downloadURL });
-            console.log('Imagem1', this.state.imageURI);
           });
           break;
         default:
@@ -102,7 +96,7 @@ class CadastroUsuario extends Component {
               fotoPerfil: '',
             }}
             onSubmit={values => {
-              console.log('Handle'), this.EnviarCadastro(values);
+              this.EnviarCadastro(values);
             }}
             validationSchema={yup.object().shape({
               nome: yup.string().required('Insira um Apelido para sua conta'),

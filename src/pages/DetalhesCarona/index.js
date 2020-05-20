@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  ScrollView,
-  Linking,
-  TouchableOpacity,
-} from 'react-native';
+import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
 import Estilo from './style';
@@ -38,8 +31,8 @@ class DetalhesCarona extends Component {
             />
           </View>
         ) : (
-            <View />
-          )}
+          <View />
+        )}
         <View style={Estilo.V_Margin}>
           <View style={Estilo.header}>
             <TouchableOpacity

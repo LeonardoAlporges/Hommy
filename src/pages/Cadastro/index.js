@@ -2,12 +2,11 @@ import * as yup from 'yup';
 import { Formik } from 'formik';
 
 import React, { Component, Fragment } from 'react';
-import { View, ScrollView, Alert, Image, TouchableOpacity } from 'react-native';
+import { View, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import CustomModal from '../../components/Alert';
 import {
   editTipoImovel,
-  editValor,
   editNomeRepublica,
   editBairro,
   editPessoas,
@@ -68,22 +67,17 @@ export class Cadastro extends Component {
       envio: true,
       carregando: false,
     };
-    console.log(this.props.email);
-    console.log(this.props.telefone);
-    console.log(this.props.representante);
     this.verificarParametro(this.props.navigation.state.params.update);
   }
 
   async verificarParametro(parametro) {
     await this.setState({ update: parametro });
-    console.log('VErificar parametro', this.state.update);
-    console.log('valor Parametro ', parametro);
+
     if (parametro.update == false) {
       this.atualizarPropsRedux();
     }
   }
   atualizarPropsRedux(dados) {
-    console.log('Atulizando ');
     this.props.editNomeRepublica('');
     this.props.editValor('');
     this.props.editBairro('');
@@ -116,16 +110,12 @@ export class Cadastro extends Component {
           break;
         case 'success':
           snapshot.ref.getDownloadURL().then(downloadURL => {
-            console.log('COntador', this.state.contadorImagem);
             if (this.state.contadorImagem == 1) {
               this.setState({ imageURI0: downloadURL });
-              console.log('Imagem1', this.state.imageURI0);
             } else if (this.state.contadorImagem == 2) {
               this.setState({ imageURI1: downloadURL });
-              console.log('Imagem1', this.state.imageURI1);
             } else if (this.state.contadorImagem == 3) {
               this.setState({ imageURI2: downloadURL });
-              console.log('Imagem1', this.state.imageURI2);
             } else {
               this.setState({ envio: false });
             }
@@ -175,14 +165,12 @@ export class Cadastro extends Component {
       tipoImovel: values.tipoImovel,
       descricao: values.descricao,
     };
-    console.log('up?', this.state.update);
+
     try {
       if (this.state.update == true) {
-        console.log('Upadte');
         await api
           .put(`/main/${this.props.email}`, this.data)
           .then(Response => {
-            console.log(Response);
             this.setState({ sucesso: true });
             this.props.navigation.navigate('TabsHeader');
           })
@@ -190,7 +178,6 @@ export class Cadastro extends Component {
             this.setState({ erro: true });
           });
       } else if (this.state.update == false) {
-        console.log('Postado');
         await api
           .post('/main', this.data)
           .then(Response => {
@@ -198,13 +185,10 @@ export class Cadastro extends Component {
             this.props.navigation.navigate('TabsHeader');
           })
           .catch(e => {
-            console.log('erro net', e);
             this.setState({ erro: true });
           });
       }
-    } catch (error) {
-      console.log('Erro', error);
-    }
+    } catch (error) {}
   }
   render() {
     return (
@@ -226,7 +210,6 @@ export class Cadastro extends Component {
           descricao: this.props.descricao,
         }}
         onSubmit={values => {
-          console.log('values??');
           this.setState({ carregando: true });
           this.entrar(values);
         }}

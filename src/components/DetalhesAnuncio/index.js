@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Image, Text, Linking } from 'react-native';
-import { Button, Card, CardItem, Body, Header } from 'native-base';
+import { Button } from 'native-base';
 import { withNavigation } from 'react-navigation';
 import CustomModal from '../../components/Alert';
 
@@ -29,7 +29,7 @@ class DetalhesAnuncio extends Component {
 
   render() {
     return (
-      <ScrollView style={{ marginBottom: 55 }}>
+      <ScrollView>
         {this.state.interesse ? (
           <View style={estilo.V_Detalhes}>
             <CustomModal
@@ -159,9 +159,7 @@ class DetalhesAnuncio extends Component {
             }}
           >
             <Icon2 name="whatsapp" style={estilo.iconWhatsapp} />
-            <Text style={estilo.txtWhatsapp}>
-              Tenho Interesse
-            </Text>
+            <Text style={estilo.txtWhatsapp}>Tenho Interesse</Text>
           </Button>
         </View>
       </ScrollView>

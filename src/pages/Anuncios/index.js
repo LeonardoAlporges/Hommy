@@ -63,7 +63,6 @@ class Anuncios extends Component {
     api
       .get(`/userCarona/${'leo@hotmail.com'}`)
       .then(responseJson => {
-        console.log('Caronas', responseJson);
         this.setState({
           //listaCaronas: responseJson.data,
           refreshing: false,
@@ -73,13 +72,11 @@ class Anuncios extends Component {
         this.setState({
           refreshing: false,
         });
-        console.log('Erro no Servidor');
       });
 
     api
       .get(`/userRepublica/${'leo@hotmail.com'}`)
       .then(responseJson => {
-        console.log('leo', responseJson);
         this.setState({
           //listaRepublicas: responseJson.data,
           refreshing: false,
@@ -89,7 +86,6 @@ class Anuncios extends Component {
         this.setState({
           refreshing: false,
         });
-        console.log('Erro no Servidor');
       });
   };
   UNSAFE_componentWillMount() {
@@ -98,7 +94,6 @@ class Anuncios extends Component {
 
   editRepublica(edit) {
     const dados = edit;
-    console.log(dados);
     this.props.editNomeRepublica(dados.nomeRepublica);
     this.props.editValorAluguel(dados.valorAluguel);
     this.props.editBairro(dados.bairro);
@@ -123,7 +118,6 @@ class Anuncios extends Component {
 
   editCaronas(edit) {
     const dados = edit;
-    console.log(dados);
     this.props.editNome(dados.nome);
     this.props.editChegada(dados.localChegada);
     this.props.editData(dados.data);

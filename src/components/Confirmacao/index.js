@@ -1,16 +1,6 @@
 import React, { Component } from 'react';
-import { Image, Text, TouchableHighlight, StyleSheet } from 'react-native';
-import {
-  Card,
-  CardItem,
-  Left,
-  Body,
-  Right,
-  Button,
-  Item,
-  View,
-  Icon,
-} from 'native-base';
+import { Image, Text } from 'react-native';
+import { Button, View } from 'native-base';
 
 import { withNavigation } from 'react-navigation';
 

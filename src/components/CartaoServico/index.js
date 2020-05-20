@@ -1,17 +1,5 @@
 import React, { Component } from 'react';
-import { Image, TouchableHighlight, StyleSheet } from 'react-native';
-import {
-  Card,
-  CardItem,
-  Left,
-  Text,
-  Body,
-  Right,
-  Button,
-  Item,
-  View,
-} from 'native-base';
-import Hr from 'react-native-hr-component';
+import { Image, TouchableHighlight, Text, View } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { selecionarItem } from '../../actions/DetalhesActions';
 import { connect } from 'react-redux';
@@ -27,7 +15,6 @@ class CartaoServico extends Component {
 
   onClickCard = () => {
     const dados = this.props.leonardo;
-    console.log(dados);
     this.props.selecionarItem(dados);
     this.props.navigation.navigate('DetalhesServicos');
   };

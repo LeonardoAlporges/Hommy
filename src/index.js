@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import Reducers from './reducers';
-import Splash from './Splash';
 import Teste from './teste';
 
 const store = createStore(Reducers, applyMiddleware(ReduxThunk));

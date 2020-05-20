@@ -14,7 +14,6 @@ import api from '../../service/api';
 
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import style from './style';
-import { asyncStorage } from 'reactotron-react-native';
 
 import {
   editNome,

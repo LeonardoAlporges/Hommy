@@ -49,52 +49,6 @@ class TabsHeader extends Component {
           >
             <Caronas />
           </Tab>
-          {/* <Tab
-            heading="Eventos"
-            tabStyle={estilo.tabs_style}
-            textStyle={estilo.tabs_TextStyle}
-            activeTabStyle={estilo.tabs_ActiveTabs}
-            activeTextStyle={estilo.tabs_ActiveTextStyle}
-          >
-            <View style={estilo.content}>
-              <View>
-                <View>
-                  <LoginButton
-                    onLoginFinished={(error, result) => {
-                      console.log('leo', result);
-                      if (error) {
-                        console.log('login has error: ' + result.error);
-                      } else if (result.isCancelled) {
-                        console.log('login is cancelled.');
-                      } else {
-                        AccessToken.getCurrentAccessToken().then(data => {
-                          console.log('leo2', data);
-                          console.log(data.accessToken.toString());
-                        });
-                      }
-                    }}
-                    onLogoutFinished={() => console.log('logout.')}
-                  />
-                </View>
-              </View>
-              <View style={estilo.empty}>
-                <Image
-                  source={{
-                    uri:
-                      'https://firebasestorage.googleapis.com/v0/b/republicas.appspot.com/o/Imagens%2Fempty_state.gif?alt=media&token=da0384c2-b981-49f4-9c79-b7e7ab9ad19b',
-                  }}
-                  style={{ width: 200, height: 200 }}
-                />
-                <Text style={estilo.empty_titulo}>
-                  Funcinalidade em produçao
-                </Text>
-                <Text style={estilo.empty_sub}>
-                  Desculpe as pessoas que fariam essa tela estao com Coronga
-                  Virus
-                </Text>
-              </View>
-            </View>
-          </Tab> */}
         </Tabs>
       </Container>
     );

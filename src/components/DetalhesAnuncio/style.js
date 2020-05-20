@@ -141,6 +141,7 @@ const estilo = StyleSheet.create({
   },
   V_botao: {
     marginTop: 20,
+    marginBottom: 20,
     height: 60,
     alignItems: 'center',
     justifyContent: 'center',
@@ -164,12 +165,12 @@ const estilo = StyleSheet.create({
   },
   iconWhatsapp: {
     color: '#ffffff',
-    fontSize: 30
+    fontSize: 30,
   },
   txtWhatsapp: {
     color: '#FFFFFF',
-    marginLeft: 15
-  }
+    marginLeft: 15,
+  },
 });
 
 export default estilo;
