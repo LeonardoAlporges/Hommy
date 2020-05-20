@@ -33,4 +33,4 @@ react-native run-android
 
 ## License
 
---
+Restrita
