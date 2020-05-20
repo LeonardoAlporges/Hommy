@@ -34,7 +34,7 @@ import {
   Input,
   Item,
   Button,
-  Picker
+  Picker,
 } from 'native-base';
 
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
@@ -90,22 +90,7 @@ class Caronas extends Component {
   }
 
   UNSAFE_componentWillMount() {
-    return api
-      .get('/carona')
-      .then(responseJson => {
-        this.setState({ listaCaronas: responseJson.data });
-        this.setState({ loading: false });
-        this.setState({
-          listaCaronas: responseJson.data,
-          fullData: responseJson.data,
-        });
-      })
-      .catch(error => {
-        console.log('SERVIDOR ESTA DESLIGADO');
-        this.setState({ loading: false });
-        this.setState({ erro: true });
-      });
-    this.setState({ loading: false });
+    this.getListCarona();
   }
 
   fVagas1 = async checked => {
@@ -115,7 +100,7 @@ class Caronas extends Component {
         filtroVagas1: true,
         filtroVagas2: false,
         filtroVagas3: false,
-        filtroVagas4: false
+        filtroVagas4: false,
       });
   };
 
@@ -126,7 +111,7 @@ class Caronas extends Component {
         filtroVagas2: true,
         filtroVagas1: false,
         filtroVagas3: false,
-        filtroVagas4: false
+        filtroVagas4: false,
       });
   };
 
@@ -137,7 +122,7 @@ class Caronas extends Component {
         filtroVagas3: true,
         filtroVagas2: false,
         filtroVagas1: false,
-        filtroVagas4: false
+        filtroVagas4: false,
       });
   };
   fVagas4 = async checked => {
@@ -168,31 +153,31 @@ class Caronas extends Component {
 
   FCidadeS = value => {
     if (value != 'null')
-    this.setState({
-      cidadeS: value,
-      filtroCidadeS: true
-    });
-    else{
       this.setState({
         cidadeS: value,
-        filtroCidadeS: false
+        filtroCidadeS: true,
+      });
+    else {
+      this.setState({
+        cidadeS: value,
+        filtroCidadeS: false,
       });
     }
-  }
+  };
 
   FCidadeD = value => {
     if (value != 'null')
-    this.setState({
-      cidadeD: value,
-      filtroCidadeD: true
-    });
-    else{
       this.setState({
         cidadeD: value,
-        filtroCidadeD: false
+        filtroCidadeD: true,
+      });
+    else {
+      this.setState({
+        cidadeD: value,
+        filtroCidadeD: false,
       });
     }
-  }
+  };
 
   filtro = async () => {
     await this.setState({ listaCaronas: this.state.fullData });
@@ -213,7 +198,9 @@ class Caronas extends Component {
       listaCaronas = _.filter(listaCaronas, { localSaida: this.state.cidadeS });
     }
     if (this.state.filtroCidadeD === true) {
-      listaCaronas = _.filter(listaCaronas, { localChegada: this.state.cidadeD });
+      listaCaronas = _.filter(listaCaronas, {
+        localChegada: this.state.cidadeD,
+      });
     }
     if (this.state.filtroValorMenor === true) {
       listaCaronas = _.filter(
@@ -230,6 +217,26 @@ class Caronas extends Component {
     await this.setState({ listaCaronas });
   };
 
+  getListCarona = () => {
+    this.setState({ refreshing: true });
+    return api
+      .get('/carona')
+      .then(responseJson => {
+        this.setState({
+          listaCaronas: responseJson.data,
+          fullData: responseJson.data,
+          loading: false,
+          refreshing: false,
+        });
+      })
+      .catch(error => {
+        console.log('SERVIDOR ESTA DESLIGADO');
+        this.setState({ loading: false });
+        this.setState({ erro: true });
+        this.setState({ refreshing: false });
+      });
+  };
+
   render() {
     return (
       <View style={Estilo.V_externa}>
@@ -244,23 +251,23 @@ class Caronas extends Component {
               style={Estilo.imagemError}
               source={require('../../assets/Img/Empty.png')}
             />
-            <Text style={Estilo.textError}>
-              Nenhum Anuncio Disponivel
-            </Text>
+            <Text style={Estilo.textError}>Nenhum Anuncio Disponivel</Text>
             <Text style={Estilo.textError2}>
               Aproveite essa oportunidade publique sua oferta de carona agora
               mesmo{' '}
             </Text>
           </View>
         ) : (
-          <ScrollView style={Estilo.card}>
+          <View style={Estilo.card}>
             <FlatList
               style={Estilo.flatList}
               data={this.state.listaCaronas}
               renderItem={({ item }) => <CartaoCarona dados={item} />}
               keyExtractor={item => item._id}
+              refreshing={this.state.refreshing}
+              onRefresh={this.getListCarona}
             />
-          </ScrollView>
+          </View>
         )}
 
         <View style={Estilo.V_modalExterno}>
@@ -269,16 +276,11 @@ class Caronas extends Component {
             visible={this.state.modalVisible}
             transparent={true}
           >
-            <View style={Estilo} >
+            <View style={Estilo}>
               <Text>Valor</Text>
               <ListItem style={Estilo.listStyle}>
-                <Text style={Estilo.textList}>
-                  De
-                </Text>
-                <Item
-                  underlined
-                  style={Estilo.itemStyle}
-                >
+                <Text style={Estilo.textList}>De</Text>
+                <Item underlined style={Estilo.itemStyle}>
                   <Input
                     style={Estilo.inputStyle}
                     onChangeText={text => this.valMenor(text)}
@@ -286,13 +288,8 @@ class Caronas extends Component {
                     keyboardType="numeric"
                   />
                 </Item>
-                <Text style={Estilo.textList}>
-                  Até
-                </Text>
-                <Item
-                  underlined
-                  style={Estilo.itemStyle}
-                >
+                <Text style={Estilo.textList}>Até</Text>
+                <Item underlined style={Estilo.itemStyle}>
                   <Input
                     style={Estilo.inputStyle}
                     onChangeText={text => this.valMaior(text)}
@@ -304,101 +301,98 @@ class Caronas extends Component {
               <Text>Vagas disponíveis</Text>
               <ListItem style={Estilo.listStyle}>
                 <CheckBox
-                color="#27496d"
+                  color="#27496d"
                   style={Estilo.inputStyle}
                   onPress={this.fVagas1}
                   checked={this.state.filtroVagas1}
                 />
-                <Text style={Estilo.textList}>
-                  1
-                </Text>
+                <Text style={Estilo.textList}>1</Text>
                 <CheckBox
-                color="#27496d"
+                  color="#27496d"
                   style={Estilo.inputStyle}
                   onPress={this.fVagas2}
                   checked={this.state.filtroVagas2}
                 />
-                <Text style={Estilo.textList}>
-                  2
-                </Text>
+                <Text style={Estilo.textList}>2</Text>
                 <CheckBox
-                color="#27496d"
+                  color="#27496d"
                   style={Estilo.inputStyle}
                   onPress={this.fVagas3}
                   checked={this.state.filtroVagas3}
                 />
-                <Text style={Estilo.textList}>
-                  3
-                </Text>
+                <Text style={Estilo.textList}>3</Text>
                 <CheckBox
-                color="#27496d"
+                  color="#27496d"
                   style={Estilo.inputStyle}
                   onPress={this.fVagas4}
                   checked={this.state.filtroVagas4}
                 />
-                <Text style={Estilo.textList}>
-                  4
-                </Text>
+                <Text style={Estilo.textList}>4</Text>
               </ListItem>
               <Text>Saida</Text>
               <ListItem style={Estilo.listStyle}>
-              <Item picker style={Estilo.pickerStyle}>
-              <Picker
-                mode="dropdown"
-                iosIcon={<Icon name="arrow-down" />}
-                style={{ width: undefined }}
-                placeholder="Destino"
-                placeholderStyle={{ color: "#bfc6ea" }}
-                placeholderIconColor="#007aff"
-                selectedValue={this.state.cidadeS}
-                onValueChange={this.FCidadeS.bind(this)}
-              >
-                <Picker.Item label="Cidades" value= 'null' />
-                <Picker.Item label="Alegre" value="Alegre" />
-                <Picker.Item label="Serra" value="Serra" />
-                <Picker.Item label="Piuma" value="Piuma" />
-                <Picker.Item label="Guarapari" value="Guarapari" />
-                <Picker.Item label="Cachoeiro" value="Cachoeiro" />
-                <Picker.Item label="Vitoria" value="Vitoria" />
-                <Picker.Item label="Vila Velha" value="Vila Velha" />
-                <Picker.Item label="Muniz Freire" value="Muniz Freire" />
-                <Picker.Item label="Guacui" value="Guacui" />
-                <Picker.Item label="Bom Jesus do Norte" value="Bom Jesus do Norte" />
-                <Picker.Item label="Celina" value="Celina" />
-                <Picker.Item label="Rive" value="Rive" />
-              </Picker>
-            </Item>
+                <Item picker style={Estilo.pickerStyle}>
+                  <Picker
+                    mode="dropdown"
+                    iosIcon={<Icon name="arrow-down" />}
+                    style={{ width: undefined }}
+                    placeholder="Destino"
+                    placeholderStyle={{ color: '#bfc6ea' }}
+                    placeholderIconColor="#007aff"
+                    selectedValue={this.state.cidadeS}
+                    onValueChange={this.FCidadeS.bind(this)}
+                  >
+                    <Picker.Item label="Cidades" value="null" />
+                    <Picker.Item label="Alegre" value="Alegre" />
+                    <Picker.Item label="Serra" value="Serra" />
+                    <Picker.Item label="Piuma" value="Piuma" />
+                    <Picker.Item label="Guarapari" value="Guarapari" />
+                    <Picker.Item label="Cachoeiro" value="Cachoeiro" />
+                    <Picker.Item label="Vitoria" value="Vitoria" />
+                    <Picker.Item label="Vila Velha" value="Vila Velha" />
+                    <Picker.Item label="Muniz Freire" value="Muniz Freire" />
+                    <Picker.Item label="Guacui" value="Guacui" />
+                    <Picker.Item
+                      label="Bom Jesus do Norte"
+                      value="Bom Jesus do Norte"
+                    />
+                    <Picker.Item label="Celina" value="Celina" />
+                    <Picker.Item label="Rive" value="Rive" />
+                  </Picker>
+                </Item>
               </ListItem>
               <Text>Destino</Text>
               <ListItem style={Estilo.listStyle}>
-              <Item picker style={Estilo.pickerStyle}>
-              <Picker
-                mode="dropdown"
-                iosIcon={<Icon name="arrow-down" />}
-                style={{ width: undefined }}
-                placeholder="Destino"
-                placeholderStyle={{ color: "#bfc6ea" }}
-                placeholderIconColor="#007aff"
-                selectedValue={this.state.cidadeD}
-                onValueChange={this.FCidadeD.bind(this)}
-              >
-                <Picker.Item label="Cidades" value= 'null' />
-                <Picker.Item label="Alegre" value="Alegre" />
-                <Picker.Item label="Serra" value="Serra" />
-                <Picker.Item label="Piuma" value="Piuma" />
-                <Picker.Item label="Guarapari" value="Guarapari" />
-                <Picker.Item label="Cachoeiro" value="Cachoeiro" />
-                <Picker.Item label="Vitoria" value="Vitoria" />
-                <Picker.Item label="Vila Velha" value="Vila Velha" />
-                <Picker.Item label="Muniz Freire" value="Muniz Freire" />
-                <Picker.Item label="Guacui" value="Guacui" />
-                <Picker.Item label="Bom Jesus do Norte" value="Bom Jesus do Norte" />
-                <Picker.Item label="Celina" value="Celina" />
-                <Picker.Item label="Rive" value="Rive" />
-              </Picker>
-            </Item>
+                <Item picker style={Estilo.pickerStyle}>
+                  <Picker
+                    mode="dropdown"
+                    iosIcon={<Icon name="arrow-down" />}
+                    style={{ width: undefined }}
+                    placeholder="Destino"
+                    placeholderStyle={{ color: '#bfc6ea' }}
+                    placeholderIconColor="#007aff"
+                    selectedValue={this.state.cidadeD}
+                    onValueChange={this.FCidadeD.bind(this)}
+                  >
+                    <Picker.Item label="Cidades" value="null" />
+                    <Picker.Item label="Alegre" value="Alegre" />
+                    <Picker.Item label="Serra" value="Serra" />
+                    <Picker.Item label="Piuma" value="Piuma" />
+                    <Picker.Item label="Guarapari" value="Guarapari" />
+                    <Picker.Item label="Cachoeiro" value="Cachoeiro" />
+                    <Picker.Item label="Vitoria" value="Vitoria" />
+                    <Picker.Item label="Vila Velha" value="Vila Velha" />
+                    <Picker.Item label="Muniz Freire" value="Muniz Freire" />
+                    <Picker.Item label="Guacui" value="Guacui" />
+                    <Picker.Item
+                      label="Bom Jesus do Norte"
+                      value="Bom Jesus do Norte"
+                    />
+                    <Picker.Item label="Celina" value="Celina" />
+                    <Picker.Item label="Rive" value="Rive" />
+                  </Picker>
+                </Item>
               </ListItem>
-              
 
               <TouchableOpacity
                 style={Estilo.modalBtn}
@@ -407,9 +401,7 @@ class Caronas extends Component {
                   this.filtro();
                 }}
               >
-                <Text style={Estilo.textBtn}>
-                  Fechar
-                </Text>
+                <Text style={Estilo.textBtn}>Fechar</Text>
               </TouchableOpacity>
             </View>
           </Modal>

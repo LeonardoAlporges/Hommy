@@ -53,16 +53,26 @@ class Anuncios extends Component {
     listaCaronas: [],
     email: 'leo@hotmail.com',
     dados: [],
+    refreshing: false,
   };
 
-  UNSAFE_componentWillMount() {
+  getlist = () => {
+    this.setState({
+      refreshing: true,
+    });
     api
       .get(`/userCarona/${'leo@hotmail.com'}`)
       .then(responseJson => {
         console.log('Caronas', responseJson);
-        //this.setState({ listaCaronas: responseJson.data });
+        this.setState({
+          //listaCaronas: responseJson.data,
+          refreshing: false,
+        });
       })
       .catch(error => {
+        this.setState({
+          refreshing: false,
+        });
         console.log('Erro no Servidor');
       });
 
@@ -70,11 +80,20 @@ class Anuncios extends Component {
       .get(`/userRepublica/${'leo@hotmail.com'}`)
       .then(responseJson => {
         console.log('leo', responseJson);
-        //this.setState({ listaRepublicas: responseJson.data });
+        this.setState({
+          //listaRepublicas: responseJson.data,
+          refreshing: false,
+        });
       })
       .catch(error => {
+        this.setState({
+          refreshing: false,
+        });
         console.log('Erro no Servidor');
       });
+  };
+  UNSAFE_componentWillMount() {
+    this.getlist();
   }
 
   editRepublica(edit) {
@@ -127,96 +146,100 @@ class Anuncios extends Component {
           <Icon name="arrow-left" style={estilo.iconHeader} />
           <Text style={estilo.title}>Meus Anuncios</Text>
         </View>
-        <View style={{ width: '100%', height: '100%' }}>
-          {this.state.listaRepublicas.length != 0 ? (
-            <View>
-              <View style={estilo.V_label}>
-                <Text style={estilo.label}>Republicas</Text>
-                <View style={estilo.barra} />
-              </View>
+        <ScrollView>
+          <View style={{ width: '100%', height: '100%' }}>
+            {this.state.listaRepublicas.length != 0 ? (
               <View>
-                <ScrollView style={estilo.card}>
-                  <FlatList
-                    style={estilo.flatList}
-                    data={this.state.listaRepublicas}
-                    renderItem={({ item }) => (
-                      <View>
-                        <Cartao leonardo={item} />
-                        <View style={estilo.V_edit}>
-                          <Button
-                            style={estilo.edit}
-                            onPress={() => {
-                              this.editRepublica(item);
-                            }}
-                          >
-                            <Icon style={estilo.icon} name="pencil-outline" />
-                            <Text style={estilo.TxtEdit}>Editar</Text>
-                          </Button>
+                <View style={estilo.V_label}>
+                  <Text style={estilo.label}>Republicas</Text>
+                  <View style={estilo.barra} />
+                </View>
+                <View>
+                  <ScrollView style={estilo.card}>
+                    <FlatList
+                      style={estilo.flatList}
+                      data={this.state.listaRepublicas}
+                      renderItem={({ item }) => (
+                        <View>
+                          <Cartao leonardo={item} />
+                          <View style={estilo.V_edit}>
+                            <Button
+                              style={estilo.edit}
+                              onPress={() => {
+                                this.editRepublica(item);
+                              }}
+                            >
+                              <Icon style={estilo.icon} name="pencil-outline" />
+                              <Text style={estilo.TxtEdit}>Editar</Text>
+                            </Button>
+                          </View>
                         </View>
-                      </View>
-                    )}
-                    keyExtractor={item => item._id}
-                  />
-                </ScrollView>
+                      )}
+                      keyExtractor={item => item._id}
+                      refreshing={this.state.refreshing}
+                      onRefresh={this.getlist}
+                    />
+                  </ScrollView>
+                </View>
               </View>
-            </View>
-          ) : (
-            <View />
-          )}
-          {this.state.listaCaronas.length != 0 ? (
-            <View>
-              <View style={estilo.V_label}>
-                <Text style={estilo.label}>Caronas</Text>
-                <View style={estilo.barra} />
-              </View>
+            ) : (
+              <View />
+            )}
+            {this.state.listaCaronas.length != 0 ? (
               <View>
-                <ScrollView style={estilo.card}>
-                  <FlatList
-                    style={estilo.flatList}
-                    data={this.state.listaCaronas}
-                    renderItem={({ item }) => (
-                      <View>
-                        <CartaoCarona dados={item} />
-                        <View style={estilo.V_edit}>
-                          <Button
-                            style={estilo.edit}
-                            onPress={() => {
-                              this.editCaronas(item);
-                            }}
-                          >
-                            <Icon style={estilo.icon} name="pencil-outline" />
-                            <Text style={estilo.TxtEdit}>Editar</Text>
-                          </Button>
+                <View style={estilo.V_label}>
+                  <Text style={estilo.label}>Caronas</Text>
+                  <View style={estilo.barra} />
+                </View>
+                <View>
+                  <ScrollView style={estilo.card}>
+                    <FlatList
+                      style={estilo.flatList}
+                      data={this.state.listaCaronas}
+                      renderItem={({ item }) => (
+                        <View>
+                          <CartaoCarona dados={item} />
+                          <View style={estilo.V_edit}>
+                            <Button
+                              style={estilo.edit}
+                              onPress={() => {
+                                this.editCaronas(item);
+                              }}
+                            >
+                              <Icon style={estilo.icon} name="pencil-outline" />
+                              <Text style={estilo.TxtEdit}>Editar</Text>
+                            </Button>
+                          </View>
                         </View>
-                      </View>
-                    )}
-                    keyExtractor={item => item._id}
-                  />
-                </ScrollView>
+                      )}
+                      keyExtractor={item => item._id}
+                    />
+                  </ScrollView>
+                </View>
               </View>
-            </View>
-          ) : (
-            <View />
-          )}
-          {this.state.listaCaronas.length == 0 &&
-          this.state.listaRepublicas.length == 0 ? (
-            <View style={estilo.V_interna2}>
-              <Image
-                style={estilo.imagemError}
-                source={require('../../assets/Img/Empty.png')}
-              />
-              <Text style={estilo.textError}>
-                Nenhum Anuncio ou Interesse Disponivel
-              </Text>
-              <Text style={estilo.textError2}>
-                Poste a vaga disponivel na sua republica ou a vaga sobrando no
-                seu carro para aquela viagem.
-              </Text>
-            </View>
-          ) : (
-            <View />
-          )}
-        </View>
+            ) : (
+              <View />
+            )}
+            {this.state.listaCaronas.length == 0 &&
+            this.state.listaRepublicas.length == 0 ? (
+              <View style={estilo.V_interna2}>
+                <Image
+                  style={estilo.imagemError}
+                  source={require('../../assets/Img/Empty.png')}
+                />
+                <Text style={estilo.textError}>
+                  Nenhum Anuncio ou Interesse Disponivel
+                </Text>
+                <Text style={estilo.textError2}>
+                  Poste a vaga disponivel na sua republica ou a vaga sobrando no
+                  seu carro para aquela viagem.
+                </Text>
+              </View>
+            ) : (
+              <View />
+            )}
+          </View>
+        </ScrollView>
       </View>
     );
   }

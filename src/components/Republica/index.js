@@ -71,6 +71,7 @@ class Republica extends Component {
       filtroValorMaior: false,
       aluguelMin: '',
       aluguelMax: '',
+      refreshing: false,
     };
   }
 
@@ -100,25 +101,28 @@ class Republica extends Component {
     });
   }
 
-  UNSAFE_componentWillMount() {
+  getListRepublica = () => {
+    this.setState({ refreshing: true });
     return api
       .get('/main')
       .then(responseJson => {
-        this.setState({ listaRepublicas: responseJson.data });
-        this.setState({ loading: false });
-        console.log(responseJson);
         this.setState({
           listaRepublicas: responseJson.data,
           fullData: responseJson.data,
           loading: false,
+          refreshing: false,
         });
       })
       .catch(error => {
         console.log('SERVIDOR ESTA DESLIGADO');
         this.setState({ loading: false });
         this.setState({ erro: true });
+        this.setState({ refreshing: false });
       });
-    this.setState({ loading: false });
+  };
+
+  componentDidMount() {
+    this.getListRepublica();
   }
 
   fAnimalSim = async checked => {
@@ -345,32 +349,30 @@ class Republica extends Component {
               <Spinner color="#27496d" />
             </View>
           ) : this.state.erro ? (
-            <View
-              style={Estilos.V_republicas}
-            >
+            <View style={Estilos.V_republicas}>
               <CustomModal parametro="Erro" />
               <Image
                 style={Estilos.imageModal}
                 source={require('../../assets/Img/Empty.png')}
               />
-              <Text style={Estilos.txtModal}>
-                Nenhum Anuncio Disponivel
-              </Text>
+              <Text style={Estilos.txtModal}>Nenhum Anuncio Disponivel</Text>
               <Text style={Estilos.txtErr}>
                 Aproveite essa oportunidade publique a de vaga da sua republica
                 agora mesmo{' '}
               </Text>
             </View>
           ) : (
-                <ScrollView style={Estilos.card}>
-                  <FlatList
-                    style={Estilos.flatList}
-                    data={this.state.listaRepublicas}
-                    renderItem={({ item }) => <Cartao leonardo={item} />}
-                    keyExtractor={item => item._id}
-                  />
-                </ScrollView>
-              )}
+            <View style={Estilos.card}>
+              <FlatList
+                style={Estilos.flatList}
+                data={this.state.listaRepublicas}
+                renderItem={({ item }) => <Cartao leonardo={item} />}
+                keyExtractor={item => item._id}
+                refreshing={this.state.refreshing}
+                onRefresh={this.getListRepublica}
+              />
+            </View>
+          )}
         </View>
         <View style={Estilos.V_filtroExterno}>
           <Modal
@@ -381,13 +383,8 @@ class Republica extends Component {
             <View style={Estilos.V_filtroInterno}>
               <Text>Valor</Text>
               <ListItem style={Estilos.listStyle}>
-                <Text style={Estilos.textFiltro}>
-                  De
-                </Text>
-                <Item
-                  underlined
-                  style={Estilos.itemInput}
-                >
+                <Text style={Estilos.textFiltro}>De</Text>
+                <Item underlined style={Estilos.itemInput}>
                   <Input
                     style={{ alignSelf: 'stretch' }}
                     onChangeText={text => this.valMenor(text)}
@@ -395,13 +392,8 @@ class Republica extends Component {
                     keyboardType="numeric"
                   />
                 </Item>
-                <Text style={Estilos.textFiltro}>
-                  Até
-                </Text>
-                <Item
-                  underlined
-                  style={Estilos.itemInput}
-                >
+                <Text style={Estilos.textFiltro}>Até</Text>
+                <Item underlined style={Estilos.itemInput}>
                   <Input
                     style={{ alignSelf: 'stretch' }}
                     onChangeText={text => this.valMaior(text)}
@@ -418,18 +410,14 @@ class Republica extends Component {
                   onPress={this.fAnimalSim}
                   checked={this.state.filtroAnimalSim}
                 />
-                <Text style={Estilos.textFiltro}>
-                  Sim
-                </Text>
+                <Text style={Estilos.textFiltro}>Sim</Text>
                 <CheckBox
                   color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fAnimalNao}
                   checked={this.state.filtroAnimalNao}
                 />
-                <Text style={Estilos.textFiltro}>
-                  Não
-                </Text>
+                <Text style={Estilos.textFiltro}>Não</Text>
               </ListItem>
               <Text> Tipo de república</Text>
               <ListItem style={Estilos.listStyle}>
@@ -439,27 +427,21 @@ class Republica extends Component {
                   onPress={this.fMasc}
                   checked={this.state.filtroMasc}
                 />
-                <Text style={Estilos.textFiltro}>
-                  Masculina
-                </Text>
+                <Text style={Estilos.textFiltro}>Masculina</Text>
                 <CheckBox
                   color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fFem}
                   checked={this.state.filtroFem}
                 />
-                <Text style={Estilos.textFiltro}>
-                  Feminina
-                </Text>
+                <Text style={Estilos.textFiltro}>Feminina</Text>
                 <CheckBox
                   color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fMista}
                   checked={this.state.filtroMista}
                 />
-                <Text style={Estilos.textFiltro}>
-                  Mista
-                </Text>
+                <Text style={Estilos.textFiltro}>Mista</Text>
               </ListItem>
               <Text>Capacidade de moradores</Text>
               <ListItem style={Estilos.listStyle}>
@@ -469,45 +451,35 @@ class Republica extends Component {
                   onPress={this.fMoradores2}
                   checked={this.state.filtroMoradores2}
                 />
-                <Text style={Estilos.textFiltro}>
-                  2
-                </Text>
+                <Text style={Estilos.textFiltro}>2</Text>
                 <CheckBox
                   color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fMoradores3}
                   checked={this.state.filtroMoradores3}
                 />
-                <Text style={Estilos.textFiltro}>
-                  3
-                </Text>
+                <Text style={Estilos.textFiltro}>3</Text>
                 <CheckBox
                   color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fMoradores4}
                   checked={this.state.filtroMoradores4}
                 />
-                <Text style={Estilos.textFiltro}>
-                  4
-                </Text>
+                <Text style={Estilos.textFiltro}>4</Text>
                 <CheckBox
                   color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fMoradores5}
                   checked={this.state.filtroMoradores5}
                 />
-                <Text style={Estilos.textFiltro}>
-                  5
-                </Text>
+                <Text style={Estilos.textFiltro}>5</Text>
                 <CheckBox
                   color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fMoradores6}
                   checked={this.state.filtroMoradores6}
                 />
-                <Text style={Estilos.textFiltro}>
-                  6+
-                </Text>
+                <Text style={Estilos.textFiltro}>6+</Text>
               </ListItem>
               <Text>Vagas disponíveis</Text>
               <ListItem style={Estilos.listStyle}>
@@ -517,27 +489,21 @@ class Republica extends Component {
                   onPress={this.fVagas1}
                   checked={this.state.filtroVagas1}
                 />
-                <Text style={Estilos.textFiltro}>
-                  1
-                </Text>
+                <Text style={Estilos.textFiltro}>1</Text>
                 <CheckBox
                   color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fVagas2}
                   checked={this.state.filtroVagas2}
                 />
-                <Text style={Estilos.textFiltro}>
-                  2
-                </Text>
+                <Text style={Estilos.textFiltro}>2</Text>
                 <CheckBox
                   color="#27496d"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fVagas3}
                   checked={this.state.filtroVagas3}
                 />
-                <Text style={Estilos.textFiltro}>
-                  3
-                </Text>
+                <Text style={Estilos.textFiltro}>3</Text>
               </ListItem>
 
               <TouchableOpacity
@@ -548,9 +514,7 @@ class Republica extends Component {
                   console.log(this.state.listaRepublicas);
                 }}
               >
-                <Text style={Estilos.textBotaoModal}>
-                  Fechar
-                </Text>
+                <Text style={Estilos.textBotaoModal}>Fechar</Text>
               </TouchableOpacity>
             </View>
           </Modal>
@@ -568,8 +532,8 @@ class Republica extends Component {
           {this.state.active ? (
             <Icon name="arrow-down" />
           ) : (
-              <Icon name="arrow-up" />
-            )}
+            <Icon name="arrow-up" />
+          )}
 
           <Button
             style={Estilos.corFAB}

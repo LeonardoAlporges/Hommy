@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 
 const estilo = StyleSheet.create({
   container: {
-    paddingTop: '5%',
+    paddingTop: '10%',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -65,9 +65,9 @@ const estilo = StyleSheet.create({
     color: 'red',
   },
   V_Erro: {
-    marginTop: 5,
+    marginTop: 10,
     width: '80%',
-    height: 20,
+    height: 15,
   },
   imagemStyle: {
     width: 100,

@@ -27,7 +27,6 @@ const Estilos = StyleSheet.create({
   V_ImgNome: {
     flexDirection: 'column',
     height: 118,
-    backgroundColor: 'red',
     justifyContent: 'center',
     alignItems: 'center',
   },
