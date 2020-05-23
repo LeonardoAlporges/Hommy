@@ -77,8 +77,6 @@ class Caronas extends Component {
       this.props.editHChegada(''),
       this.props.editHSaida(''),
       this.props.editImagem(''),
-      this.props.editNome(''),
-      this.props.editNota(''),
       this.props.editSaida(''),
       this.props.editVagas(''),
       this.props.editValor('');
@@ -243,7 +241,7 @@ class Caronas extends Component {
             <Spinner color="#27496d" />
           </View>
         ) : this.state.erro ? (
-          <View style={Estilo.V_interna2}>
+          <View style={Estilo.V_interna1}>
             <CustomModal parametro="Erro" />
             <Image
               style={Estilo.imagemError}

@@ -1,11 +1,12 @@
 const initialState = {
-  nome: '',
+  nome: 'Padrao ?',
   email: '',
   cpf: '',
   idUser: '',
   telefone: '',
   fotoPerfil: '',
   logado: '',
+  notaUser: '5.0',
 };
 
 const UserReducer = (state = [], action) => {
@@ -32,6 +33,9 @@ const UserReducer = (state = [], action) => {
   }
   if (action.type == 'editLogado') {
     return { ...state, logado: action.payload.logado };
+  }
+  if (action.type == 'editNota') {
+    return { ...state, notaUser: action.payload.notaUser };
   }
 
   return state;

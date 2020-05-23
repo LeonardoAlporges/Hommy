@@ -22,6 +22,7 @@ class CadastroUsuario extends Component {
     imageURI: '',
     loading: false,
     upload: false,
+    load: false,
   };
   EnviarCadastro = async value => {
     value.fotoPerfil = imageURI.uri;
@@ -29,9 +30,11 @@ class CadastroUsuario extends Component {
     await api
       .post('/usuario', value)
       .then(responseJson => {
-        navigation.navigate('Login');
+        this.setState({ load: false }), navigation.navigate('Login');
       })
-      .catch(error => {});
+      .catch(error => {
+        this.setState({ load: false });
+      });
   };
 
   monitorFileUpload = task => {
@@ -96,7 +99,7 @@ class CadastroUsuario extends Component {
               fotoPerfil: '',
             }}
             onSubmit={values => {
-              this.EnviarCadastro(values);
+              this.setState({ load: true }), this.EnviarCadastro(values);
             }}
             validationSchema={yup.object().shape({
               nome: yup.string().required('Insira um Apelido para sua conta'),
@@ -221,8 +224,9 @@ class CadastroUsuario extends Component {
                   <Button
                     style={estilo.botao_login}
                     onPress={handleSubmit}
-                    disabled={!isValid}
+                    disabled={!load}
                   >
+                    {this.state.load ? <Spinner color="#27496d" /> : <View />}
                     <Text style={estilo.textoLabel}>Enviar</Text>
                   </Button>
                 </View>

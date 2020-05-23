@@ -1,41 +1,53 @@
 import React, { Component } from 'react';
 import { Spinner } from 'native-base';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
-
+import TabsHeader from './pages/Tabs';
+import Login from './pages/Login';
 import {
   editNome,
   editEmail,
   editCpf,
   editIdUser,
   editLogado,
+  editNota,
   editTelefone,
   editFoto,
 } from './actions/UserAction';
+import SplashScreen from './pages/SplashScreen';
 
 class Teste extends Component {
+  static navigationOptions = { header: null };
   state = {
-    loading: false,
+    load: true,
     logado: true,
+    firtsOpen: false,
   };
 
   async Buscar() {
     try {
-      console.log('Busncado Token');
+      await AsyncStorage.getItem('firtOpen').then(value => {
+        if (value === 'true') {
+          this.setState({ firtsOpen: false });
+        } else {
+          this.setState({ firtsOpen: true });
+          AsyncStorage.setItem('firtOpen', 'true');
+        }
+      });
+
       await AsyncStorage.getItem('token').then(value => {
         if (value != null) {
-          console.log('user ????->', value);
+          console.log('tOKEN SALVO->', value);
           this.setState({ logado: true });
         } else {
-          console.log('User False');
+          console.log('USER NAO LOGADO');
           this.setState({ logado: false });
         }
       });
       console.log('Buscando User');
       await AsyncStorage.getItem('user').then(value => {
         if (value != null) {
-          console.log('oqeu vem ?', value);
           const dados = JSON.parse(value);
           this.props.editNome(dados.nome);
           this.props.editEmail(dados.email);
@@ -44,6 +56,7 @@ class Teste extends Component {
           this.props.editLogado(dados.nome);
           this.props.editTelefone(dados.celular);
           this.props.editFoto(dados.fotoPerfil);
+          this.props.editNota(dados.nota);
           console.log('???', dados);
         }
       });
@@ -51,25 +64,53 @@ class Teste extends Component {
       this.setState({ logado: false });
       console.log('Nao tem nada no Storage');
     }
-    this.setState({ loading: false });
+    setTimeout(() => {
+      this.setState({ load: false });
+    }, 1000);
   }
+
   constructor(props) {
     super(props);
     this.Buscar();
-    console.log(this.props.navigation);
-    console.log('Logado->', this.state.logado);
   }
 
   render() {
     return (
       <View>
-        {this.state.loading ? (
-          <Text>Carregando</Text>
+        {this.state.load ? (
+          <View
+            style={{
+              width: '100%',
+              height: '100%',
+              backgroundColor: '#142850',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Image
+              style={{ width: 200, height: 200 }}
+              source={require('./assets/Img/Splash.png')}
+            />
+            <View
+              style={{
+                width: 80,
+                height: 80,
+                justifyContent: 'center',
+                alignItems: 'center',
+                position: 'absolute',
+                bottom: 30,
+              }}
+            >
+              <Spinner color="#ffffff" />
+            </View>
+          </View>
         ) : (
           <View>
-            {this.state.logado
-              ? this.props.navigation.navigate('TabsHeader')
-              : this.props.navigation.navigate('Login')}
+            {this.state.firtsOpen ? (
+              <SplashScreen />
+            ) : (
+              <View>{this.state.logado ? <TabsHeader /> : <Login />}</View>
+            )}
           </View>
         )}
       </View>
@@ -85,6 +126,7 @@ const TesteConnect = connect(
     editCpf,
     editIdUser,
     editLogado,
+    editNota,
     editTelefone,
     editFoto,
   }

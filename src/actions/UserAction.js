@@ -54,3 +54,11 @@ export const editLogado = newLogado => {
     },
   };
 };
+export const editNota = newNota => {
+  return {
+    type: 'editNota',
+    payload: {
+      notaUser: newNota,
+    },
+  };
+};

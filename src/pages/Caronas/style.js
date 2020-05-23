@@ -12,29 +12,30 @@ const Estilo = StyleSheet.create({
     paddingBottom: 0,
   },
   V_externa: {
-    height: '100%'
+    height: '100%',
+    width: '100%',
   },
   V_interna1: {
     width: '100%',
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+    paddingBottom: '10%',
   },
   V_Interna2: {
     height: '100%',
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingBottom: '10%',
   },
   imagemError: {
     height: 200,
-    width: 200
+    width: 200,
   },
   textError: {
     fontSize: 22,
     fontWeight: 'bold',
-    fontFamily: 'Roboto'
+    fontFamily: 'Roboto',
   },
   textError2: {
     marginTop: 10,
@@ -68,22 +69,22 @@ const Estilo = StyleSheet.create({
   },
   listStyle: {
     alignItems: 'stretch',
-    marginBottom: 10
+    marginBottom: 10,
   },
   textList: {
     alignSelf: 'stretch',
-    paddingHorizontal: 15
+    paddingHorizontal: 15,
   },
   itemStyle: {
     width: 100,
     borderBottomColor: '#27496d',
   },
   inputStyle: {
-    alignSelf: 'stretch'
+    alignSelf: 'stretch',
   },
   pickerStyle: {
     marginLeft: 50,
-    marginRight: 50
+    marginRight: 50,
   },
   modalBtn: {
     alignSelf: 'center',
@@ -103,16 +104,14 @@ const Estilo = StyleSheet.create({
   },
   FABStyle: {
     backgroundColor: '#27496d',
-    position: 'absolute'
+    position: 'absolute',
   },
   FabBTN: {
-    backgroundColor: '#27496d'
+    backgroundColor: '#27496d',
   },
-  FabIcon:{
-    color: '#ffffff'
-  }
-
-
+  FabIcon: {
+    color: '#ffffff',
+  },
 });
 
 export default Estilo;

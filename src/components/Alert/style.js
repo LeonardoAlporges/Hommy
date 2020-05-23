@@ -12,7 +12,7 @@ const Estilos = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: 370,
-    marginHorizontal: 20,
+    marginHorizontal: 30,
     backgroundColor: 'white',
     borderRadius: 10,
     alignItems: 'center',

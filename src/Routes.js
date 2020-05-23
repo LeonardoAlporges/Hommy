@@ -17,6 +17,7 @@ import Caronas from './pages/Caronas';
 import DetalhesCarona from './pages/DetalhesCarona';
 import Teste from './teste';
 import CadastroCaronas from './pages/CadastroCarona';
+import SplashScreen from './pages/SplashScreen';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 
 const Navegação = createAppContainer(
@@ -40,6 +41,7 @@ const Navegação = createAppContainer(
         Servicos: Servicos,
         Cadastro: Cadastro,
         Confirmacao: Confirmacao,
+        SplashScreen,
       }),
     },
     {

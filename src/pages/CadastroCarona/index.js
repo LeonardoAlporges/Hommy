@@ -16,6 +16,7 @@ import {
   Button,
   Icon,
   DatePicker,
+  Spinner,
 } from 'native-base';
 import {
   editChegada,
@@ -25,7 +26,7 @@ import {
   editHChegada,
   editHSaida,
   editImagem,
-  editNome,
+  //editNome,
   editNota,
   editSaida,
   editVagas,
@@ -37,6 +38,7 @@ class CadastroCarona extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      load: false,
       erro: false,
       sucesso: false,
       update: this.props.navigation.state.params.update,
@@ -58,9 +60,6 @@ class CadastroCarona extends Component {
       this.props.editEmbarque(''),
       this.props.editHChegada(''),
       this.props.editHSaida(''),
-      this.props.editImagem(''),
-      this.props.editNome(''),
-      this.props.editNota(''),
       this.props.editSaida(''),
       this.props.editVagas(''),
       this.props.editValor('');
@@ -69,15 +68,19 @@ class CadastroCarona extends Component {
   async entrar(values) {
     console.log('valores', values);
     this.data = {
-      saida: values.saida,
-      chegada: values.chegada,
-      data: values.data,
+      localSaida: values.saida,
+      localChegada: values.chegada,
+      // data: '16/02',
       valor: values.valor,
-      Hsaida: values.Hsaida,
-      HChegada: values.HChegada,
+      horaSaida: values.Hsaida,
+      horaChegada: values.HChegada,
       embarque: values.embarque,
       desembarque: values.desembarque,
       vagas: values.vagas,
+      nome: this.props.nome,
+      imagem: this.props.imagem,
+      userEmail: this.props.email,
+      nota: this.props.nota,
     };
     console.log('Envinado:', this.data);
     console.log('update', this.state.update);
@@ -99,10 +102,12 @@ class CadastroCarona extends Component {
       await api
         .post('/carona', this.data)
         .then(Response => {
+          this.setState({ load: false });
           this.setState({ sucesso: true });
           this.props.navigation.navigate('TabsHeader');
         })
         .catch(e => {
+          this.setState({ load: false });
           this.setState({ erro: true });
           console.log(e);
         });
@@ -130,24 +135,26 @@ class CadastroCarona extends Component {
           saida: yup.string().required('Insira local de saida '),
           chegada: yup.string().required('Insira para onde vai'),
           valor: yup
-            .number()
-            .min(5)
-            .max(200)
-            .required('Valor invalido'),
-          Hsaida: yup.string().required('Quantidade invalida'),
-          HChegada: yup.string().required('Quantidade invalida'),
+            .number('Somente numeros!')
+            .min(5, 'Valor minimo R$ 5,00')
+            .max(200, 'Valor maximo de R$ 200,00')
+            .required('Valor Invalido'),
+          Hsaida: yup.string('Valor invalido').required('Quantidade invalida'),
+          HChegada: yup
+            .string('Valor invalido')
+            .required('Quantidade invalida'),
           embarque: yup
             .string()
             .max(50)
             .required('Insira aonde voce vai pegar os passageiros'),
           desembarque: yup
             .string()
-            .max(50)
-            .required('Insira aonde voce vai deixar os passageiros'),
+            .max(50, '')
+            .required('Insira até aonde voce pode deixar os passageiros'),
           vagas: yup
-            .number()
-            .min(1)
-            .max(10)
+            .number('Somente numeros')
+            .min(1, 'Valor Minimo é de 1 vaga')
+            .max(10, 'Valor Maximo é de 1 vaga')
             .required('insira as vagas'),
         })}
       >
@@ -181,7 +188,7 @@ class CadastroCarona extends Component {
                     >
                       <Icon name="ios-arrow-back" style={estilo.iconHeader} />
                     </TouchableOpacity>
-                    <Text style={estilo.title}>Informações Caronas</Text>
+                    <Text style={estilo.title}>{this.props.nota}</Text>
                   </View>
 
                   <View style={estilo.V_Conteudo}>
@@ -236,17 +243,29 @@ class CadastroCarona extends Component {
                         <Item>
                           <Label fixedLabel />
                           <DatePicker
-                            defaultDate={new Date(2018, 4, 4)}
-                            minimumDate={new Date(2018, 1, 1)}
-                            maximumDate={new Date(2018, 12, 31)}
-                            locale={'en'}
+                            defaultDate={new Date(2018, 5, 22)}
+                            minimumDate={new Date(2020, 5, 22)}
+                            maximumDate={new Date(2021, 1, 1)}
+                            locale={'pt-br'}
                             timeZoneOffsetInMinutes={undefined}
-                            modalTransparent={false}
-                            animationType={'fade'}
-                            androidMode={'default'}
-                            placeHolderText="Select date"
-                            textStyle={{ color: 'green' }}
-                            placeHolderTextStyle={{ color: '#d3d3d3' }}
+                            modalTransparent={true}
+                            animationType={'slide'}
+                            androidMode={'calendar'}
+                            placeHolderText="Selecione a data"
+                            textStyle={{
+                              textAlign: 'right',
+                              paddingTop: 25,
+                              height: 50,
+                              fontSize: 11,
+                              color: '#006fa9',
+                            }}
+                            placeHolderTextStyle={{
+                              textAlign: 'right',
+                              paddingTop: 25,
+                              height: 50,
+                              fontSize: 11,
+                              color: '#989898',
+                            }}
                             onDateChange={handleChange('data')}
                             disabled={false}
                             onBlur={() => setFieldTouched('data')}
@@ -376,7 +395,18 @@ class CadastroCarona extends Component {
                     </View>
 
                     <View style={estilo.V_btn}>
-                      <Button style={estilo.btnProximo} onPress={handleSubmit}>
+                      <Button
+                        disabled={!this.load}
+                        style={estilo.btnProximo}
+                        onPress={() => {
+                          handleSubmit(values);
+                        }}
+                      >
+                        {this.state.load ? (
+                          <Spinner color="#27496d" />
+                        ) : (
+                          <View />
+                        )}
                         <Text>Prosseguir</Text>
                       </Button>
                     </View>
@@ -394,8 +424,7 @@ class CadastroCarona extends Component {
 const mapStateToProps = state => {
   return {
     //para pegar do reducer e State."NOME DO REDUCER"."NOME DA PROPIEDADE"
-    nome: state.carona.nome,
-    nota: state.carona.nota,
+
     saida: state.carona.saida,
     chegada: state.carona.chegada,
     data: state.carona.data,
@@ -405,7 +434,13 @@ const mapStateToProps = state => {
     embarque: state.carona.embarque,
     desembarque: state.carona.desembarque,
     vagas: state.carona.vagas,
-    imagem: state.carona.imagem,
+    imagem: state.user.fotoPerfil,
+    nome: state.user.nome,
+    email: state.user.email,
+    nota: state.user.nota,
+
+    //nota: state.carona.nota,
+
     // Ou seja agora e como se tivessemos duas props dentro do compoennte cadastro
   };
 };
@@ -420,7 +455,7 @@ const CaronaConnect = connect(
     editHChegada,
     editHSaida,
     editImagem,
-    editNome,
+    //editNome,
     editNota,
     editSaida,
     editVagas,

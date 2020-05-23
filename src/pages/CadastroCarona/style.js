@@ -25,6 +25,13 @@ const estilo = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  V_interna1: {
+    width: 50,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(52, 52, 52, 0.1)',
+  },
   txtLabel: {
     fontFamily: 'Roboto',
     fontSize: 16,
