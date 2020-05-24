@@ -4,25 +4,32 @@ import { color } from 'react-native-reanimated';
 const Estilos = StyleSheet.create({
   touch_card: {
     flex: 1,
-    height: 125,
+
     justifyContent: 'center',
-    padding: 3,
-    marginTop: 8,
-    backgroundColor: '#ffff',
-    padding: 0,
-    borderWidth: 1,
-    borderRadius: 10,
-    borderColor: '#CFD3D6',
+    margin: 0,
   },
   V_cartao: {
+    backgroundColor: '#ffffff',
+    padding: 3,
     display: 'flex',
     flexDirection: 'row',
-    paddingTop: '4%',
+    height: '90%',
+    borderRadius: 6,
+    width: '100%',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.32,
+    shadowRadius: 5.46,
+
+    elevation: 9,
   },
   V_imagem: {
     height: 120,
     width: 120,
-    borderRadius: 6,
+    borderRadius: 4,
   },
   V_TituloDesc: {
     paddingLeft: 10,
@@ -84,6 +91,7 @@ const Estilos = StyleSheet.create({
     paddingLeft: '2%',
     flexDirection: 'row',
     width: '45%',
+    height: 40,
     marginRight: 10,
     justifyContent: 'flex-start',
     paddingTop: 8,
@@ -93,7 +101,7 @@ const Estilos = StyleSheet.create({
     width: '55%',
     justifyContent: 'flex-start',
     paddingTop: 8,
-  }
+  },
 });
 
 export default Estilos;

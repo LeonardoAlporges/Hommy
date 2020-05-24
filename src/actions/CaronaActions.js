@@ -1,6 +1,6 @@
-export const editNome = param => {
+export const editNomeOfertante = param => {
   return {
-    type: 'editNome',
+    type: 'editNomeOfertante',
     payload: {
       nome: param,
     },

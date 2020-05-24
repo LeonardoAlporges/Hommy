@@ -10,7 +10,7 @@ import {
   editHChegada,
   editHSaida,
   editImagem,
-  editNome,
+  editNomeOfertante,
   editNota,
   editSaida,
   editVagas,
@@ -25,7 +25,7 @@ class CartaoCarona extends Component {
   Click = () => {
     const dados = this.props.dados;
 
-    this.props.editNome(dados.nome);
+    this.props.editNomeOfertante(dados.nome);
     this.props.editChegada(dados.localChegada);
     this.props.editData(dados.data);
     this.props.editDesembarque(dados.desembarque);
@@ -64,14 +64,18 @@ class CartaoCarona extends Component {
           </View>
           <View style={Estilos.V_local}>
             <View style={Estilos.V_LocLabel}>
-              <Text style={Estilos.txtdeslcSaHora}>08:00</Text>
+              <Text style={Estilos.txtdeslcSaHora}>
+                {this.props.dados.horaSaida}
+              </Text>
               <Icon name="action-redo" style={Estilos.txtIcon} />
               <Text style={Estilos.txtdeslcSa}>
                 {this.props.dados.localSaida}
               </Text>
             </View>
             <View style={Estilos.V_LocLabel}>
-              <Text style={Estilos.txtdeslcCh}>11:00</Text>
+              <Text style={Estilos.txtdeslcCh}>
+                {this.props.dados.horaChegada}
+              </Text>
               <Icon name="flag" style={Estilos.txtIcon} />
               <Text style={Estilos.txtdeslcCh}>
                 {this.props.dados.localChegada}
@@ -81,11 +85,11 @@ class CartaoCarona extends Component {
           <View style={Estilos.V_DataVal}>
             <View style={Estilos.Data}>
               <Icon style={Estilos.txtIcon} name="event" />
-              <Text style={Estilos.txtData}>16/04</Text>
+              <Text style={Estilos.txtData}>{this.props.dados.data}</Text>
             </View>
             <View style={Estilos.Valor}>
               <Icon style={Estilos.txtIcon} name="wallet" />
-              <Text style={Estilos.txtvalor}>{this.props.dados.valor},00</Text>
+              <Text style={Estilos.txtvalor}>R$ {this.props.dados.valor}</Text>
             </View>
           </View>
         </View>
@@ -95,24 +99,7 @@ class CartaoCarona extends Component {
 }
 
 const mapStateToProps = state => {
-  return {
-    //para pegar do reducer e State."NOME DO REDUCER"."NOME DA PROPIEDADE"
-    nomeRepublica: state.auth.nomeRepublica,
-    valorAluguel: state.auth.valorAluguel,
-    bairro: state.auth.bairro,
-    pessoas: state.auth.pessoas1,
-    descricao: state.auth.descricao,
-    animal: state.auth.animal,
-    acomodacaoQuarto: state.auth.acomodacaoQuarto,
-    acomodacaoRepublica: state.auth.acomodacaoRepublica,
-    valorContas: state.auth.valorContas,
-    observacao: state.auth.observacao,
-    imagem1: state.auth.imagem1,
-    imagem2: state.auth.imagem2,
-    imagem3: state.auth.imagem3,
-    numVagas: state.auth.numVagas,
-    // Ou seja agora e como se tivessemos duas props dentro do compoennte cadastro
-  };
+  return {};
 };
 
 const CartaoCaronaConnect = connect(
@@ -125,7 +112,7 @@ const CartaoCaronaConnect = connect(
     editHChegada,
     editHSaida,
     editImagem,
-    editNome,
+    editNomeOfertante,
     editNota,
     editSaida,
     editVagas,

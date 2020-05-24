@@ -4,17 +4,20 @@ const estilosRepublica = StyleSheet.create({
   card: {
     marginTop: 0,
     marginBottom: 0,
-    height: '100%'
+    height: '100%',
+    width: '50%',
   },
   flatList: {
-    backgroundColor: '#F8F8F8F8',
-    padding: 1,
     marginBottom: 0,
     paddingBottom: 0,
+    width: '100%',
+    height: '50%',
+    paddingHorizontal: 0,
   },
   V_completa: {
     width: '100%',
-    height: '100%'
+    height: '100%',
+    alignItems: 'center',
   },
   V_republicas: {
     height: '100%',
@@ -22,11 +25,11 @@ const estilosRepublica = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: '10%',
-    backgroundColor: "#ffffff"
+    backgroundColor: '#ffffff',
   },
   imageModal: {
     height: 200,
-    width: 200
+    width: 200,
   },
   txtModal: {
     fontSize: 22,
@@ -66,11 +69,11 @@ const estilosRepublica = StyleSheet.create({
   },
   listStyle: {
     alignItems: 'stretch',
-    marginBottom: 10
+    marginBottom: 10,
   },
   textFiltro: {
     alignSelf: 'stretch',
-    paddingHorizontal: 15
+    paddingHorizontal: 15,
   },
   itemInput: {
     width: 100,
@@ -92,17 +95,17 @@ const estilosRepublica = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
   },
-  S_FAB:{
+  S_FAB: {
     backgroundColor: '#27496d',
     position: 'absolute',
-    bottom: 10, 
+    bottom: 10,
   },
-  corFAB:{
-    backgroundColor: '#27496d' 
+  corFAB: {
+    backgroundColor: '#27496d',
   },
-  corIconFab:{
-    color: '#ffffff'
-  }
+  corIconFab: {
+    color: '#ffffff',
+  },
 });
 
 export default estilosRepublica;

@@ -1,12 +1,23 @@
 import React, { Component } from 'react';
-import { View, Image, Text, Alert } from 'react-native';
+import { View, Image, Text, Alert, Modal } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import style from './style';
-import { Button } from 'native-base';
+import { Button, Spinner } from 'native-base';
 
 class SplashScreen extends Component {
   constructor(props) {
     super(props);
+  }
+  state = {
+    modalVisible: false,
+  };
+
+  abrir() {
+    this.setState({ modalVisible: true });
+
+    setTimeout(() => {
+      this.setState({ modalVisible: false });
+    }, 10000);
   }
 
   static navigationOptions = { header: null };
@@ -34,11 +45,25 @@ class SplashScreen extends Component {
           <Button
             style={style.botao}
             onPress={() => {
-              this.props.navigation.navigate('Login');
+              //this.props.navigation.navigate('Login');
+              this.abrir();
             }}
           >
             <Text style={style.labelButon}>Prosseguir</Text>
           </Button>
+        </View>
+        <View>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={this.state.modalVisible}
+          >
+            <View style={style.ViewFundo}>
+              <View style={style.ViewModal}>
+                <Spinner color="red" />
+              </View>
+            </View>
+          </Modal>
         </View>
       </View>
     );

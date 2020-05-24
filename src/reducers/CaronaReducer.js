@@ -17,7 +17,7 @@ const CaronaReducer = (state = [], action) => {
   if (state.length == 0) {
     return initialState;
   }
-  if (action.type == 'editNome') {
+  if (action.type == 'editNomeOfertante') {
     return { ...state, nome: action.payload.nome };
   }
   if (action.type == 'editNota') {

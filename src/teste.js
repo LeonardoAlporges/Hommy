@@ -49,14 +49,14 @@ class Teste extends Component {
       await AsyncStorage.getItem('user').then(value => {
         if (value != null) {
           const dados = JSON.parse(value);
-          this.props.editNome(dados.nome);
+          this.props.editNome(dados.usuario);
           this.props.editEmail(dados.email);
           this.props.editCpf(dados.cpf);
-          this.props.editIdUser(dados.nome);
-          this.props.editLogado(dados.nome);
+          this.props.editIdUser(dados.usuario);
+          this.props.editLogado(dados.usuario);
           this.props.editTelefone(dados.celular);
           this.props.editFoto(dados.fotoPerfil);
-          this.props.editNota(dados.nota);
+          this.props.editNota('3.1');
           console.log('???', dados);
         }
       });
@@ -109,7 +109,11 @@ class Teste extends Component {
             {this.state.firtsOpen ? (
               <SplashScreen />
             ) : (
-              <View>{this.state.logado ? <TabsHeader /> : <Login />}</View>
+              <View>
+                {this.state.logado
+                  ? this.props.navigation.navigate('TabsHeader')
+                  : this.props.navigation.navigate('Login')}
+              </View>
             )}
           </View>
         )}

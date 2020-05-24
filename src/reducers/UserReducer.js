@@ -1,5 +1,5 @@
 const initialState = {
-  nome: 'Padrao ?',
+  usuario: 'Padrao ?',
   email: '',
   cpf: '',
   idUser: '',
@@ -14,7 +14,7 @@ const UserReducer = (state = [], action) => {
     return initialState;
   }
   if (action.type == 'editNome') {
-    return { ...state, nome: action.payload.nome };
+    return { ...state, usuario: action.payload.usuario };
   }
   if (action.type == 'editEmail') {
     return { ...state, email: action.payload.email };

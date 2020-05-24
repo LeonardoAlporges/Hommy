@@ -20,7 +20,7 @@ import {
   editNumVagas,
   editRepresentante,
   editRua,
-  editNumero,
+  editNumeroCasa,
   editTipoImovel,
 } from '../../actions/AuthActions';
 
@@ -40,7 +40,7 @@ class Cartao extends Component {
     this.props.editValorAluguel(this.props.leonardo.valorAluguel);
     this.props.editBairro(this.props.leonardo.bairro);
     this.props.editRua(this.props.leonardo.rua);
-    this.props.editNumero(this.props.leonardo.numeroCasa);
+    this.props.editNumeroCasa(this.props.leonardo.numeroCasa);
     this.props.editPessoas(this.props.leonardo.pessoas);
     this.props.editAnimal(this.props.leonardo.animal);
     this.props.editDescricao(this.props.leonardo.descricao);
@@ -145,7 +145,7 @@ const cardConnect = connect(
     editNumVagas,
     editRepresentante,
     editRua,
-    editNumero,
+    editNumeroCasa,
   }
 )(Cartao);
 

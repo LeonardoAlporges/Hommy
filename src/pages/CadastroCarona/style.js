@@ -8,7 +8,7 @@ const estilo = StyleSheet.create({
     height: 55,
     backgroundColor: '#f8f8f8',
     borderBottomWidth: 2,
-    borderBottomColor: '#68c0e8',
+    borderBottomColor: '#142850',
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
@@ -17,7 +17,7 @@ const estilo = StyleSheet.create({
   },
   iconHeader: {
     fontSize: 26,
-    color: '#009ddb',
+    color: '#142850',
     marginHorizontal: '5%',
   },
   V_modal: {
@@ -42,7 +42,7 @@ const estilo = StyleSheet.create({
     fontSize: 24,
     fontFamily: 'Roboto',
     fontWeight: 'bold',
-    color: '#006fa9',
+    color: '#142850',
   },
   V_Conteudo: {
     height: '100%',
@@ -124,6 +124,21 @@ const estilo = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: '10%',
+  },
+  ViewFundo: {
+    height: '100%',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#00000080',
+  },
+  ViewModal: {
+    backgroundColor: 'rgba(52, 52, 52, 0)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 50,
+    marginHorizontal: 30,
+    alignItems: 'center',
   },
 });
 

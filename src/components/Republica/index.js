@@ -37,7 +37,7 @@ import {
   editNumVagas,
   editRepresentante,
   editRua,
-  editNumero,
+  editNumeroCasa,
   editTipoImovel,
 } from '../../actions/AuthActions';
 
@@ -80,7 +80,7 @@ class Republica extends Component {
     this.props.editValorAluguel('');
     this.props.editBairro('');
     this.props.editRua('');
-    this.props.editNumero('');
+    this.props.editNumeroCasa('');
     this.props.editPessoas('');
     this.props.editAnimal('');
     this.props.editDescricao('');
@@ -360,7 +360,7 @@ class Republica extends Component {
               </Text>
             </View>
           ) : (
-            <View style={Estilos.card}>
+            <View>
               <FlatList
                 style={Estilos.flatList}
                 data={this.state.listaRepublicas}
@@ -574,7 +574,7 @@ const RepublicaConnect = connect(
     editNumVagas,
     editRepresentante,
     editRua,
-    editNumero,
+    editNumeroCasa,
     editTipoImovel,
   }
 )(Republica);

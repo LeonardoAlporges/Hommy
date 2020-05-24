@@ -89,8 +89,8 @@ class Cabeca extends Component {
               )}
 
               <View style={Estilos.viewNome}>
-                <Text style={Estilos.textNome}>{this.props.nome}</Text>
-                <Text style={Estilos.textCPF}>{this.props.cpf}</Text>
+                <Text style={Estilos.textNome}>{this.props.usuario}</Text>
+                <Text style={Estilos.textCPF}>{this.props.nota}</Text>
               </View>
               <View style={Estilos.viewDivisor} />
               <View style={Estilos.viewBotoes}>
@@ -148,9 +148,9 @@ class Cabeca extends Component {
 
 const mapsStateToProps = state => {
   return {
-    nome: state.user.nome,
+    usuario: state.user.usuario,
     email: state.user.email,
-    cpf: state.user.cpf,
+    nota: state.user.nota,
     idUser: state.user.idUser,
     telefone: state.user.telefone,
     fotoPerfil: state.user.fotoPerfil,

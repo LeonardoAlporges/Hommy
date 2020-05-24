@@ -8,7 +8,7 @@ const estilo = StyleSheet.create({
     height: 55,
     backgroundColor: '#f8f8f8',
     borderBottomWidth: 2,
-    borderBottomColor: '#00909e',
+    borderBottomColor: '#142850',
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
@@ -17,7 +17,7 @@ const estilo = StyleSheet.create({
   },
   V_geral: {
     flexWrap: 'nowrap',
-    marginTop: 100,
+    marginTop: '3%',
     width: '100%',
     height: '100%',
     flex: 1,
@@ -78,7 +78,7 @@ const estilo = StyleSheet.create({
     fontSize: 16,
   },
   V_label: {
-    marginTop: '3%',
+    marginTop: '0%',
   },
   card: {
     marginTop: 0,
@@ -102,7 +102,7 @@ const estilo = StyleSheet.create({
     borderRadius: 7,
     height: 34,
     width: 100,
-    backgroundColor: '#009ddb',
+    backgroundColor: '#142850',
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',

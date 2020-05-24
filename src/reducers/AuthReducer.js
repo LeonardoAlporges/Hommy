@@ -88,7 +88,7 @@ const AuthReducer = (state = [], action) => {
   if (action.type == 'editRua') {
     return { ...state, rua: action.payload.rua };
   }
-  if (action.type == 'editNumero') {
+  if (action.type == 'editNumeroCasa') {
     return { ...state, numeroCasa: action.payload.numeroCasa };
   }
 

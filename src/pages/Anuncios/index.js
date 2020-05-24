@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, FlatList, Image } from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  FlatList,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import estilo from './style';
 import api from '../../service/api';
@@ -14,7 +21,7 @@ import {
   editHChegada,
   editHSaida,
   editImagem,
-  editNome,
+  editNomeOfertante,
   editNota,
   editSaida,
   editVagas,
@@ -38,7 +45,7 @@ import {
   editNumVagas,
   editRepresentante,
   editRua,
-  editNumero,
+  editNumeroCasa,
 } from '../../actions/AuthActions';
 
 // import { Container } from './styles';
@@ -61,10 +68,10 @@ class Anuncios extends Component {
       refreshing: true,
     });
     api
-      .get(`/userCarona/${'leo@hotmail.com'}`)
+      .get(`/userCarona/${this.props.email}`)
       .then(responseJson => {
         this.setState({
-          //listaCaronas: responseJson.data,
+          listaCaronas: responseJson.data,
           refreshing: false,
         });
       })
@@ -75,10 +82,10 @@ class Anuncios extends Component {
       });
 
     api
-      .get(`/userRepublica/${'leo@hotmail.com'}`)
+      .get(`/userRepublica/${this.props.email}`)
       .then(responseJson => {
         this.setState({
-          //listaRepublicas: responseJson.data,
+          listaRepublicas: responseJson.data,
           refreshing: false,
         });
       })
@@ -98,7 +105,7 @@ class Anuncios extends Component {
     this.props.editValorAluguel(dados.valorAluguel);
     this.props.editBairro(dados.bairro);
     this.props.editRua(dados.rua);
-    this.props.editNumero(dados.numeroCasa);
+    this.props.editNumeroCasa(dados.numeroCasa);
     this.props.editPessoas(dados.pessoas);
     this.props.editAnimal(dados.animal);
     this.props.editDescricao(dados.descricao);
@@ -118,7 +125,7 @@ class Anuncios extends Component {
 
   editCaronas(edit) {
     const dados = edit;
-    this.props.editNome(dados.nome);
+    this.props.editNomeOfertante(dados.nome);
     this.props.editChegada(dados.localChegada);
     this.props.editData(dados.data);
     this.props.editDesembarque(dados.desembarque);
@@ -137,7 +144,14 @@ class Anuncios extends Component {
     return (
       <View>
         <View style={estilo.V_header}>
-          <Icon name="arrow-left" style={estilo.iconHeader} />
+          <TouchableOpacity
+            onPress={() => {
+              this.props.navigation.goBack(null);
+            }}
+          >
+            <Icon name="arrow-left" style={estilo.iconHeader} />
+          </TouchableOpacity>
+
           <Text style={estilo.title}>Meus Anuncios</Text>
         </View>
         <ScrollView>
@@ -238,9 +252,17 @@ class Anuncios extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    //para pegar do reducer e State."NOME DO REDUCER"."NOME DA PROPIEDADE"
+    email: state.user.email,
+    //nota: state.carona.nota,
 
+    // Ou seja agora e como se tivessemos duas props dentro do compoennte cadastro
+  };
+};
 const EditConnect = connect(
-  null,
+  mapStateToProps,
   {
     editValorAluguel,
     editNomeRepublica,
@@ -259,7 +281,7 @@ const EditConnect = connect(
     editNumVagas,
     editRepresentante,
     editRua,
-    editNumero,
+    editNumeroCasa,
     editChegada,
     editData,
     editDesembarque,
@@ -267,7 +289,7 @@ const EditConnect = connect(
     editHChegada,
     editHSaida,
     editImagem,
-    editNome,
+    editNomeOfertante,
     editNota,
     editSaida,
     editVagas,

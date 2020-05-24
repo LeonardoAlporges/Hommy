@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { View, ScrollView, TouchableOpacity } from 'react-native';
+import { View, ScrollView, TouchableOpacity, Modal } from 'react-native';
 import * as yup from 'yup';
 import { Formik } from 'formik';
 import ViewPager from '@react-native-community/viewpager';
@@ -8,6 +8,7 @@ import estilo from './style';
 import { withNavigation } from 'react-navigation';
 import CustomModal from '../../components/Alert';
 import { connect } from 'react-redux';
+import TextInputMask from 'react-native-text-input-mask';
 import {
   Text,
   Item,
@@ -27,7 +28,7 @@ import {
   editHSaida,
   editImagem,
   //editNome,
-  editNota,
+  //editNota,
   editSaida,
   editVagas,
   editValor,
@@ -38,9 +39,11 @@ class CadastroCarona extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      newData: '',
       load: false,
       erro: false,
       sucesso: false,
+      modalLoadVisible: false,
       update: this.props.navigation.state.params.update,
     };
     this.verificarParametro(this.props.navigation.state.params.update);
@@ -64,13 +67,19 @@ class CadastroCarona extends Component {
       this.props.editVagas(''),
       this.props.editValor('');
   }
+  subirDate(date) {
+    this.setState({ newData: new Date(date) });
+    console.log('data', this.state.newData);
+  }
 
   async entrar(values) {
+    this.setState({ modalLoadVisible: true });
     console.log('valores', values);
+    console.log();
     this.data = {
       localSaida: values.saida,
       localChegada: values.chegada,
-      // data: '16/02',
+      data: this.state.newData,
       valor: values.valor,
       horaSaida: values.Hsaida,
       horaChegada: values.HChegada,
@@ -90,11 +99,13 @@ class CadastroCarona extends Component {
       await api
         .put(`/carona/${'leo@hotmail.com'}`, this.data)
         .then(Response => {
+          this.setState({ modalLoadVisible: false });
           this.setState({ sucesso: true });
-          this.props.navigation.navigate('TabsHeader');
+          //this.props.navigation.navigate('TabsHeader');
         })
         .catch(e => {
           this.setState({ erro: true });
+          this.setState({ modalLoadVisible: false });
           console.log(e);
         });
     } else if (this.state.update == false) {
@@ -102,11 +113,13 @@ class CadastroCarona extends Component {
       await api
         .post('/carona', this.data)
         .then(Response => {
+          this.setState({ modalLoadVisible: false });
           this.setState({ load: false });
           this.setState({ sucesso: true });
-          this.props.navigation.navigate('TabsHeader');
+          //this.props.navigation.navigate('TabsHeader');
         })
         .catch(e => {
+          this.setState({ modalLoadVisible: false });
           this.setState({ load: false });
           this.setState({ erro: true });
           console.log(e);
@@ -129,33 +142,32 @@ class CadastroCarona extends Component {
           vagas: this.props.vagas,
         }}
         onSubmit={values => {
+          console.log('chamou?');
           this.entrar(values);
         }}
         validationSchema={yup.object().shape({
           saida: yup.string().required('Insira local de saida '),
           chegada: yup.string().required('Insira para onde vai'),
           valor: yup
-            .number('Somente numeros!')
+            .string('Somente numeros!')
             .min(5, 'Valor minimo R$ 5,00')
             .max(200, 'Valor maximo de R$ 200,00')
             .required('Valor Invalido'),
-          Hsaida: yup.string('Valor invalido').required('Quantidade invalida'),
-          HChegada: yup
-            .string('Valor invalido')
-            .required('Quantidade invalida'),
+          Hsaida: yup.string('Hora invalido').required('Hora invalida'),
+          HChegada: yup.string('Hora invalido').required('Hora invalida'),
           embarque: yup
-            .string()
-            .max(50)
-            .required('Insira aonde voce vai pegar os passageiros'),
+            .string('Somente texto')
+            .max(70, 'Somente 70 caracteres sao permitidos')
+            .required('Informe aonde sera o ponto de embarque'),
           desembarque: yup
             .string()
-            .max(50, '')
-            .required('Insira até aonde voce pode deixar os passageiros'),
+            .max(50)
+            .required('Informe aonde sera o ponto de desembarque'),
           vagas: yup
             .number('Somente numeros')
-            .min(1, 'Valor Minimo é de 1 vaga')
-            .max(10, 'Valor Maximo é de 1 vaga')
-            .required('insira as vagas'),
+            .min(1, 'Minimo é de 1 vaga')
+            .max(10, ' Maximo é de 10 vaga')
+            .required('Insira a quantidade de vagas disponivel'),
         })}
       >
         {({
@@ -170,9 +182,7 @@ class CadastroCarona extends Component {
           <Fragment>
             {this.state.erro ? <CustomModal parametro="Erro" /> : <View />}
             {this.state.sucesso ? (
-              <View style={estilo.V_modal}>
-                <CustomModal parametro="Sucesso" />
-              </View>
+              <CustomModal parametro="Sucesso" />
             ) : (
               <View />
             )}
@@ -188,7 +198,7 @@ class CadastroCarona extends Component {
                     >
                       <Icon name="ios-arrow-back" style={estilo.iconHeader} />
                     </TouchableOpacity>
-                    <Text style={estilo.title}>{this.props.nota}</Text>
+                    <Text style={estilo.title}>Cadastro de Carona</Text>
                   </View>
 
                   <View style={estilo.V_Conteudo}>
@@ -243,8 +253,8 @@ class CadastroCarona extends Component {
                         <Item>
                           <Label fixedLabel />
                           <DatePicker
-                            defaultDate={new Date(2018, 5, 22)}
-                            minimumDate={new Date(2020, 5, 22)}
+                            defaultDate={new Date(2020, 4, 24)}
+                            minimumDate={new Date(2020, 4, 24)}
                             maximumDate={new Date(2021, 1, 1)}
                             locale={'pt-br'}
                             timeZoneOffsetInMinutes={undefined}
@@ -266,9 +276,11 @@ class CadastroCarona extends Component {
                               fontSize: 11,
                               color: '#989898',
                             }}
-                            onDateChange={handleChange('data')}
+                            onDateChange={date => {
+                              this.setState({ newData: new Date(date) });
+                            }}
                             disabled={false}
-                            onBlur={() => setFieldTouched('data')}
+                            //onBlur={() => setFieldTouched('data')}
                           />
                         </Item>
                         <View style={estilo.V_erro}>
@@ -282,7 +294,9 @@ class CadastroCarona extends Component {
                         <Text style={estilo.txtLabel}>Valor</Text>
                         <Item>
                           <Label fixedLabel />
-                          <Input
+                          <TextInputMask
+                            keyboardType="number-pad"
+                            mask={'R$ [0000],00'}
                             value={values.valor}
                             onChangeText={handleChange('valor')}
                             placeholder=""
@@ -302,7 +316,9 @@ class CadastroCarona extends Component {
                         <Text style={estilo.txtLabel}>Horario de saida</Text>
                         <Item>
                           <Label fixedLabel />
-                          <Input
+                          <TextInputMask
+                            keyboardType="number-pad"
+                            mask={'[00]:[00]'}
                             value={values.Hsaida}
                             onChangeText={handleChange('Hsaida')}
                             placeholder=""
@@ -322,7 +338,9 @@ class CadastroCarona extends Component {
                         <Text style={estilo.txtLabel}>Horario de chegada</Text>
                         <Item>
                           <Label fixedLabel />
-                          <Input
+                          <TextInputMask
+                            keyboardType="number-pad"
+                            mask={'[00]:[00]'}
                             value={values.HChegada}
                             onChangeText={handleChange('HChegada')}
                             placeholder=""
@@ -396,7 +414,6 @@ class CadastroCarona extends Component {
 
                     <View style={estilo.V_btn}>
                       <Button
-                        disabled={!this.load}
                         style={estilo.btnProximo}
                         onPress={() => {
                           handleSubmit(values);
@@ -414,6 +431,19 @@ class CadastroCarona extends Component {
                 </View>
               </ScrollView>
             </ViewPager>
+            <View>
+              <Modal
+                animationType="fade"
+                transparent={true}
+                visible={this.state.modalLoadVisible}
+              >
+                <View style={estilo.ViewFundo}>
+                  <View style={estilo.ViewModal}>
+                    <Spinner color="red" />
+                  </View>
+                </View>
+              </Modal>
+            </View>
           </Fragment>
         )}
       </Formik>
@@ -435,9 +465,9 @@ const mapStateToProps = state => {
     desembarque: state.carona.desembarque,
     vagas: state.carona.vagas,
     imagem: state.user.fotoPerfil,
-    nome: state.user.nome,
+    nome: state.user.usuario,
     email: state.user.email,
-    nota: state.user.nota,
+    nota: state.user.notaUser,
 
     //nota: state.carona.nota,
 
@@ -456,7 +486,7 @@ const CaronaConnect = connect(
     editHSaida,
     editImagem,
     //editNome,
-    editNota,
+    //editNota,
     editSaida,
     editVagas,
     editValor,

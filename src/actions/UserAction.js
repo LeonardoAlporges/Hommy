@@ -2,7 +2,7 @@ export const editNome = newNome => {
   return {
     type: 'editNome',
     payload: {
-      nome: newNome,
+      usuario: newNome,
     },
   };
 };

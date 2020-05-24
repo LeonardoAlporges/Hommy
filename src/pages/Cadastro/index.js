@@ -2,7 +2,7 @@ import * as yup from 'yup';
 import { Formik } from 'formik';
 
 import React, { Component, Fragment } from 'react';
-import { View, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { View, ScrollView, Image, TouchableOpacity, Modal } from 'react-native';
 import { connect } from 'react-redux';
 import CustomModal from '../../components/Alert';
 import {
@@ -66,6 +66,7 @@ export class Cadastro extends Component {
       imageURI2: null,
       envio: true,
       carregando: false,
+      modalLoadVisible: false,
     };
     this.verificarParametro(this.props.navigation.state.params.update);
   }
@@ -143,6 +144,7 @@ export class Cadastro extends Component {
   };
 
   async entrar(values) {
+    this.setState({ modalLoadVisible: true });
     this.data = {
       imagem1: this.state.imageURI0,
       imagem2: this.state.imageURI1,
@@ -171,20 +173,24 @@ export class Cadastro extends Component {
         await api
           .put(`/main/${this.props.email}`, this.data)
           .then(Response => {
+            this.setState({ modalLoadVisible: false });
             this.setState({ sucesso: true });
             this.props.navigation.navigate('TabsHeader');
           })
           .catch(e => {
+            this.setState({ modalLoadVisible: false });
             this.setState({ erro: true });
           });
       } else if (this.state.update == false) {
         await api
           .post('/main', this.data)
           .then(Response => {
+            this.setState({ modalLoadVisible: false });
             this.setState({ sucesso: true });
             this.props.navigation.navigate('TabsHeader');
           })
           .catch(e => {
+            this.setState({ modalLoadVisible: false });
             this.setState({ erro: true });
           });
       }
@@ -229,22 +235,22 @@ export class Cadastro extends Component {
             .max(25)
             .required('Insira a rua aonde fica localizada'),
           numero: yup
-            .number()
+            .number('Somente numeros')
             .min(1)
             .max(10000)
             .required('Numero invalido'),
           descricao: yup
             .string('Erro')
-            .min(3)
-            .max(50),
+            .min(3, 'Minimo de 3 caracteres')
+            .max(50, 'Maximo permitido de 50 caracteres'),
           aluguel: yup
-            .number('Erro')
-            .min(2)
-            .max(2000)
+            .number('Somente numeros')
+            .min(0)
+            .max(2000, 'Valor maximo de 2000 reais')
             .required('Valor invalido'),
           contas: yup
-            .number('Erro')
-            .min(2)
+            .number('Somente numero')
+            .min(10)
             .max(600)
             .required('Valor invalido'),
           genero: yup.string('Erro'),
@@ -718,6 +724,19 @@ export class Cadastro extends Component {
                 </ScrollView>
               </View>
             </ViewPager>
+            <View>
+              <Modal
+                animationType="fade"
+                transparent={true}
+                visible={this.state.modalLoadVisible}
+              >
+                <View style={estilo.ViewFundo}>
+                  <View style={estilo.ViewModal}>
+                    <Spinner color="red" />
+                  </View>
+                </View>
+              </Modal>
+            </View>
           </Fragment>
         )}
       </Formik>
@@ -729,7 +748,7 @@ export class Cadastro extends Component {
 //Recomendação do redux, que recebe state do store e retorna um json com props que vao ser acessivel dentro do compoennte
 const mapStateToProps = state => {
   return {
-    representante: state.user.nome,
+    representante: state.user.usuario,
     email: state.user.email,
     telefone: state.user.telefone,
     //para pegar do reducer e State."NOME DO REDUCER"."NOME DA PROPIEDADE"

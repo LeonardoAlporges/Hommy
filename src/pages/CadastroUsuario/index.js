@@ -2,9 +2,9 @@ import * as yup from 'yup';
 import { Formik } from 'formik';
 
 import React, { Component, Fragment } from 'react';
-import { Text, Image, ScrollView } from 'react-native';
+import { Text, Image, ScrollView, Modal } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
-import { Item, Input, Button } from 'native-base';
+import { Item, Input, Button, Spinner } from 'native-base';
 import {
   imagePickerOptions,
   uploadFileToFireBaseUser,
@@ -15,6 +15,7 @@ import estilo from './style';
 import { View } from 'native-base';
 import api from '../../service/api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import TextInputMask from 'react-native-text-input-mask';
 
 class CadastroUsuario extends Component {
   static navigationOptions = { header: null };
@@ -22,18 +23,21 @@ class CadastroUsuario extends Component {
     imageURI: '',
     loading: false,
     upload: false,
-    load: false,
+
+    modalLoadVisible: false,
   };
   EnviarCadastro = async value => {
+    this.setState({ modalLoadVisible: true });
     value.fotoPerfil = imageURI.uri;
 
     await api
       .post('/usuario', value)
       .then(responseJson => {
-        this.setState({ load: false }), navigation.navigate('Login');
+        this.setState({ modalLoadVisible: false });
+        this.navigation.navigate('Login');
       })
       .catch(error => {
-        this.setState({ load: false });
+        this.setState({ modalLoadVisible: false });
       });
   };
 
@@ -99,21 +103,23 @@ class CadastroUsuario extends Component {
               fotoPerfil: '',
             }}
             onSubmit={values => {
-              this.setState({ load: true }), this.EnviarCadastro(values);
+              this.EnviarCadastro(values);
             }}
             validationSchema={yup.object().shape({
-              nome: yup.string().required('Insira um Apelido para sua conta'),
+              nome: yup
+                .string('Somente texto')
+                .required('Insira seu nome completo '),
               email: yup
-                .string()
+                .string('Somente texto')
                 .email('Insira um Email valido')
                 .required('Insira um Email para sua conta'),
               celular: yup
-                .number()
+                .number('Somente numeros')
                 .max(9999999999999)
                 .required(' Insira um celular'),
               password: yup
-                .string()
-                .min(4)
+                .string('Somente texto')
+                .min(8, 'Password is too short - should be 8 chars minimum.')
                 .required('Insira uma senha para sua conta'),
             })}
           >
@@ -185,7 +191,9 @@ class CadastroUsuario extends Component {
                       active
                       name="phone-outline"
                     />
-                    <Input
+                    <TextInputMask
+                      keyboardType="number-pad"
+                      mask={'([00]) [00000]-[0000]'}
                       value={values.celular} //celular
                       onChangeText={handleChange('celular')}
                       placeholder="Telefone"
@@ -221,14 +229,22 @@ class CadastroUsuario extends Component {
                 )}
 
                 <View style={estilo.view_BotaoEntar}>
-                  <Button
-                    style={estilo.botao_login}
-                    onPress={handleSubmit}
-                    disabled={!load}
-                  >
-                    {this.state.load ? <Spinner color="#27496d" /> : <View />}
+                  <Button style={estilo.botao_login} onPress={handleSubmit}>
                     <Text style={estilo.textoLabel}>Enviar</Text>
                   </Button>
+                </View>
+                <View>
+                  <Modal
+                    animationType="fade"
+                    transparent={true}
+                    visible={this.state.modalLoadVisible}
+                  >
+                    <View style={estilo.ViewFundo}>
+                      <View style={estilo.ViewModal}>
+                        <Spinner color="red" />
+                      </View>
+                    </View>
+                  </Modal>
                 </View>
               </Fragment>
             )}

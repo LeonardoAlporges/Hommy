@@ -60,7 +60,7 @@ class Login extends Component {
         this.props.editLogado(responseJson.data.usuario.nome);
         this.props.editTelefone(responseJson.data.usuario.celular);
         this.props.editFoto(responseJson.data.usuario.fotoPerfil);
-        this.props.editNota(responseJson.data.usuario.nota);
+        this.props.editNota('4.1');
         this.setState({ sucesso: true });
         this.props.navigation.navigate('TabsHeader');
       })
