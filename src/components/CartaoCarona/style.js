@@ -26,7 +26,7 @@ const Estilos = StyleSheet.create({
   V_ImgNome: {
     flexDirection: 'column',
     height: '100%',
-    width: 80,
+    width: 85,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -61,7 +61,6 @@ const Estilos = StyleSheet.create({
     alignItems: 'flex-start',
   },
   V_LocLabel: {
-    backgroundColor: 'pink',
     flexDirection: 'row',
     width: '100%',
     height: '50%',
@@ -69,7 +68,6 @@ const Estilos = StyleSheet.create({
     alignItems: 'center',
   },
   V_DataVal: {
-    backgroundColor: 'red',
     width: '24%',
     height: '100%',
   },
