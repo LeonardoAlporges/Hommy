@@ -42,7 +42,7 @@ class CartaoCarona extends Component {
   };
 
   state = {
-    data: moment(this.props.dados.data).format('DD/MM/YYYY')
+    data: moment(this.props.dados.data).format('DD/MM')
   };
 
   render() {
