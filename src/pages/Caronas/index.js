@@ -16,8 +16,6 @@ import {
   editHChegada,
   editHSaida,
   editImagem,
-  editNome,
-  editNota,
   editSaida,
   editVagas,
   editValor,
@@ -410,7 +408,6 @@ class Caronas extends Component {
           position="bottomRight"
           onPress={() => {
             this.setState({ active: !this.state.active });
-            //this.limparPropsCaronaRedux();
           }}
         >
           {this.state.active ? (
@@ -451,8 +448,6 @@ const CaronasConnect = connect(
     editHChegada,
     editHSaida,
     editImagem,
-    editNome,
-    editNota,
     editSaida,
     editVagas,
     editValor,
