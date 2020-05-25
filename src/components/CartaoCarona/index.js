@@ -20,6 +20,7 @@ import {
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import Estilos from './style';
 import { Button } from 'native-base';
+const moment = require('moment');
 
 class CartaoCarona extends Component {
   Click = () => {
@@ -38,6 +39,10 @@ class CartaoCarona extends Component {
     this.props.editVagas(dados.vagas);
     this.props.editValor(dados.valor);
     this.props.navigation.navigate('DetalhesCarona');
+  };
+
+  state = {
+    data: moment(this.props.dados.data).format('DD/MM/YYYY')
   };
 
   render() {
@@ -85,7 +90,7 @@ class CartaoCarona extends Component {
           <View style={Estilos.V_DataVal}>
             <View style={Estilos.Data}>
               <Icon style={Estilos.txtIcon} name="event" />
-              <Text style={Estilos.txtData}>{this.props.dados.data}</Text>
+              <Text style={Estilos.txtData}>{this.state.data}</Text>
             </View>
             <View style={Estilos.Valor}>
               <Icon style={Estilos.txtIcon} name="wallet" />
