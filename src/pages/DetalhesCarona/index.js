@@ -7,15 +7,22 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Button } from 'native-base';
 import CustomModal from '../../components/Alert';
 // import { Container } from './styles';
+const moment = require('moment');
+
+//const data = moment(this.props.data).format('DD/MM/YYYY');
 
 class DetalhesCarona extends Component {
   state = {
     interesse: false,
-  };
+    data: moment(this.props.data).format('DD/MM/YYYY')
 
+  };
+data 
   clickInteresse() {
     this.setState({ interesse: true });
   }
+
+  
 
   static navigationOptions = { header: null };
   render() {
@@ -63,7 +70,7 @@ class DetalhesCarona extends Component {
 
           <View style={Estilo.V_Infor}>
             <View style={Estilo.V_data}>
-              <Text style={Estilo.data}> Ter 07 de Abril</Text>
+              <Text style={Estilo.data}>{this.state.data}</Text>
             </View>
             <View style={Estilo.V_partida}>
               <Text style={Estilo.txtPartida}>Saida</Text>
