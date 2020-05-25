@@ -8,13 +8,15 @@ import { Button } from 'native-base';
 import CustomModal from '../../components/Alert';
 // import { Container } from './styles';
 const moment = require('moment');
-
-//const data = moment(this.props.data).format('DD/MM/YYYY');
+moment.locale('pt', {
+    months : 'Janeiro_Fevereiro_Março_Abril_Maio_Junho_Julho_Agosto_Setembro_Outubro_Novembro_Dezembro'.split('_'),
+    weekdays : 'Domingo_Segunda_Terça_Quarta_Quinta_Sexta_Sabado'.split('_'),
+})
 
 class DetalhesCarona extends Component {
   state = {
     interesse: false,
-    data: moment(this.props.data).format('DD/MM/YYYY'),
+    data: moment(this.props.data).format('dddd DD MMMM')
   };
   data;
   clickInteresse() {
