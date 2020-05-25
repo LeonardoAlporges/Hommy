@@ -43,27 +43,8 @@ class CadastroCarona extends Component {
       modalLoadVisible: false,
       update: this.props.navigation.state.params.update,
     };
-    this.verificarParametro(this.props.navigation.state.params.update);
   }
 
-  async verificarParametro(parametro) {
-    await this.setState({ update: parametro });
-    if (parametro.update == false) {
-      this.atualizarPropsRedux();
-    }
-  }
-
-  atualizarPropsRedux(dados) {
-    this.props.editChegada(''),
-      this.props.editData(''),
-      this.props.editDesembarque(''),
-      this.props.editEmbarque(''),
-      this.props.editHChegada(''),
-      this.props.editHSaida(''),
-      this.props.editSaida(''),
-      this.props.editVagas(''),
-      this.props.editValor('');
-  }
   subirDate(date) {
     this.setState({ newData: new Date(date) });
     console.log('data', this.state.newData);
@@ -204,7 +185,7 @@ class CadastroCarona extends Component {
 
                     <View style={estilo.rowStyle}>
                       <View style={estilo.campoStyle}>
-                        <Text style={estilo.txtLabel}>Saida</Text>
+                        <Text style={estilo.txtLabel}>Local de Saida</Text>
                         <Item>
                           <Label fixedLabel />
                           <Input
@@ -222,7 +203,7 @@ class CadastroCarona extends Component {
                       </View>
 
                       <View style={estilo.campoStyle}>
-                        <Text style={estilo.txtLabel}>Chegada</Text>
+                        <Text style={estilo.txtLabel}>Local de Chegada</Text>
                         <Item>
                           <Label fixedLabel />
                           <Input
@@ -290,6 +271,10 @@ class CadastroCarona extends Component {
                         <Item>
                           <Label fixedLabel />
                           <TextInputMask
+                            style={{
+                              width: '100%',
+                              height: '100%',
+                            }}
                             keyboardType="number-pad"
                             mask={'[0000]'}
                             value={values.valor}
@@ -312,6 +297,10 @@ class CadastroCarona extends Component {
                         <Item>
                           <Label fixedLabel />
                           <TextInputMask
+                            style={{
+                              width: '100%',
+                              height: '100%',
+                            }}
                             keyboardType="number-pad"
                             mask={'[00]:[00]'}
                             value={values.Hsaida}
@@ -334,6 +323,10 @@ class CadastroCarona extends Component {
                         <Item>
                           <Label fixedLabel />
                           <TextInputMask
+                            style={{
+                              width: '100%',
+                              height: '100%',
+                            }}
                             keyboardType="number-pad"
                             mask={'[00]:[00]'}
                             value={values.HChegada}
