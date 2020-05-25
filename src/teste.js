@@ -49,7 +49,7 @@ class Teste extends Component {
       await AsyncStorage.getItem('user').then(value => {
         if (value != null) {
           const dados = JSON.parse(value);
-          this.props.editNome(dados.usuario);
+          this.props.editNome(dados.nome);
           this.props.editEmail(dados.email);
           this.props.editCpf(dados.cpf);
           this.props.editIdUser(dados.usuario);

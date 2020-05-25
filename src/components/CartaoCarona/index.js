@@ -73,7 +73,7 @@ class CartaoCarona extends Component {
               </Text>
             </View>
             <View style={Estilos.V_LocLabel}>
-              <Text style={Estilos.txtdeslcCh}>
+              <Text style={Estilos.txtdeslcChHora}>
                 {this.props.dados.horaChegada}
               </Text>
               <Icon name="flag" style={Estilos.txtIcon} />

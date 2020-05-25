@@ -27,8 +27,6 @@ import {
   editHChegada,
   editHSaida,
   editImagem,
-  //editNome,
-  //editNota,
   editSaida,
   editVagas,
   editValor,
@@ -40,7 +38,6 @@ class CadastroCarona extends Component {
     super(props);
     this.state = {
       newData: '',
-      load: false,
       erro: false,
       sucesso: false,
       modalLoadVisible: false,
@@ -74,8 +71,8 @@ class CadastroCarona extends Component {
 
   async entrar(values) {
     this.setState({ modalLoadVisible: true });
+    const nick = this.props.nome.split(' ');
     console.log('valores', values);
-    console.log();
     this.data = {
       localSaida: values.saida,
       localChegada: values.chegada,
@@ -86,7 +83,7 @@ class CadastroCarona extends Component {
       embarque: values.embarque,
       desembarque: values.desembarque,
       vagas: values.vagas,
-      nome: this.props.nome,
+      nome: nick[0],
       imagem: this.props.imagem,
       userEmail: this.props.email,
       nota: this.props.nota,
@@ -114,17 +111,16 @@ class CadastroCarona extends Component {
         .post('/carona', this.data)
         .then(Response => {
           this.setState({ modalLoadVisible: false });
-          this.setState({ load: false });
           this.setState({ sucesso: true });
           //this.props.navigation.navigate('TabsHeader');
         })
         .catch(e => {
           this.setState({ modalLoadVisible: false });
-          this.setState({ load: false });
           this.setState({ erro: true });
           console.log(e);
         });
     }
+    this.setState({ modalLoadVisible: false });
   }
 
   render() {
@@ -142,14 +138,13 @@ class CadastroCarona extends Component {
           vagas: this.props.vagas,
         }}
         onSubmit={values => {
-          console.log('chamou?');
           this.entrar(values);
         }}
         validationSchema={yup.object().shape({
           saida: yup.string().required('Insira local de saida '),
           chegada: yup.string().required('Insira para onde vai'),
           valor: yup
-            .string('Somente numeros!')
+            .number('Somente numeros!')
             .min(5, 'Valor minimo R$ 5,00')
             .max(200, 'Valor maximo de R$ 200,00')
             .required('Valor Invalido'),
@@ -198,7 +193,7 @@ class CadastroCarona extends Component {
                     >
                       <Icon name="ios-arrow-back" style={estilo.iconHeader} />
                     </TouchableOpacity>
-                    <Text style={estilo.title}>Cadastro de Carona</Text>
+                    <Text style={estilo.title}>{this.props.nota}</Text>
                   </View>
 
                   <View style={estilo.V_Conteudo}>
@@ -296,7 +291,7 @@ class CadastroCarona extends Component {
                           <Label fixedLabel />
                           <TextInputMask
                             keyboardType="number-pad"
-                            mask={'R$ [0000],00'}
+                            mask={'[0000]'}
                             value={values.valor}
                             onChangeText={handleChange('valor')}
                             placeholder=""
@@ -419,11 +414,6 @@ class CadastroCarona extends Component {
                           handleSubmit(values);
                         }}
                       >
-                        {this.state.load ? (
-                          <Spinner color="#27496d" />
-                        ) : (
-                          <View />
-                        )}
                         <Text>Prosseguir</Text>
                       </Button>
                     </View>
@@ -485,8 +475,6 @@ const CaronaConnect = connect(
     editHChegada,
     editHSaida,
     editImagem,
-    //editNome,
-    //editNota,
     editSaida,
     editVagas,
     editValor,
