@@ -25,6 +25,7 @@ import {
 } from '../../actions/AuthActions';
 
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import Icon2 from 'react-native-vector-icons/FontAwesome';
 import Estilos from './styles';
 
 class Cartao extends Component {
@@ -83,7 +84,7 @@ class Cartao extends Component {
             </View>
             <View style={Estilos.V_desc}>
               <View style={Estilos.V_valor}>
-                <Icon style={Estilos.txtIcon} name="wallet" />
+                <Icon2 style={Estilos.txtIcon} name="dollar" />
                 <Text style={Estilos.txtDesc}>
                   R$ {this.props.leonardo.valorAluguel}
                 </Text>
