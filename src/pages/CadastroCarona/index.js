@@ -27,8 +27,6 @@ import {
   editHChegada,
   editHSaida,
   editImagem,
-  //editNome,
-  //editNota,
   editSaida,
   editVagas,
   editValor,
@@ -40,33 +38,13 @@ class CadastroCarona extends Component {
     super(props);
     this.state = {
       newData: '',
-      load: false,
       erro: false,
       sucesso: false,
       modalLoadVisible: false,
       update: this.props.navigation.state.params.update,
     };
-    this.verificarParametro(this.props.navigation.state.params.update);
   }
 
-  async verificarParametro(parametro) {
-    await this.setState({ update: parametro });
-    if (parametro.update == false) {
-      this.atualizarPropsRedux();
-    }
-  }
-
-  atualizarPropsRedux(dados) {
-    this.props.editChegada(''),
-      this.props.editData(''),
-      this.props.editDesembarque(''),
-      this.props.editEmbarque(''),
-      this.props.editHChegada(''),
-      this.props.editHSaida(''),
-      this.props.editSaida(''),
-      this.props.editVagas(''),
-      this.props.editValor('');
-  }
   subirDate(date) {
     this.setState({ newData: new Date(date) });
     console.log('data', this.state.newData);
@@ -74,8 +52,8 @@ class CadastroCarona extends Component {
 
   async entrar(values) {
     this.setState({ modalLoadVisible: true });
+    const nick = this.props.nome.split(' ');
     console.log('valores', values);
-    console.log();
     this.data = {
       localSaida: values.saida,
       localChegada: values.chegada,
@@ -86,7 +64,7 @@ class CadastroCarona extends Component {
       embarque: values.embarque,
       desembarque: values.desembarque,
       vagas: values.vagas,
-      nome: this.props.nome,
+      nome: nick[0],
       imagem: this.props.imagem,
       userEmail: this.props.email,
       nota: this.props.nota,
@@ -97,7 +75,7 @@ class CadastroCarona extends Component {
     if (this.state.update == true) {
       console.log('Faznedo Update:', this.data);
       await api
-        .put(`/carona/${'leo@hotmail.com'}`, this.data)
+        .put(`/carona/${this.props.email}`, this.data)
         .then(Response => {
           this.setState({ modalLoadVisible: false });
           this.setState({ sucesso: true });
@@ -114,17 +92,16 @@ class CadastroCarona extends Component {
         .post('/carona', this.data)
         .then(Response => {
           this.setState({ modalLoadVisible: false });
-          this.setState({ load: false });
           this.setState({ sucesso: true });
           //this.props.navigation.navigate('TabsHeader');
         })
         .catch(e => {
           this.setState({ modalLoadVisible: false });
-          this.setState({ load: false });
           this.setState({ erro: true });
           console.log(e);
         });
     }
+    this.setState({ modalLoadVisible: false });
   }
 
   render() {
@@ -142,14 +119,13 @@ class CadastroCarona extends Component {
           vagas: this.props.vagas,
         }}
         onSubmit={values => {
-          console.log('chamou?');
           this.entrar(values);
         }}
         validationSchema={yup.object().shape({
           saida: yup.string().required('Insira local de saida '),
           chegada: yup.string().required('Insira para onde vai'),
           valor: yup
-            .string('Somente numeros!')
+            .number('Somente numeros!')
             .min(5, 'Valor minimo R$ 5,00')
             .max(200, 'Valor maximo de R$ 200,00')
             .required('Valor Invalido'),
@@ -198,7 +174,7 @@ class CadastroCarona extends Component {
                     >
                       <Icon name="ios-arrow-back" style={estilo.iconHeader} />
                     </TouchableOpacity>
-                    <Text style={estilo.title}>Cadastro de Carona</Text>
+                    <Text style={estilo.title}>{this.props.nota}</Text>
                   </View>
 
                   <View style={estilo.V_Conteudo}>
@@ -209,7 +185,7 @@ class CadastroCarona extends Component {
 
                     <View style={estilo.rowStyle}>
                       <View style={estilo.campoStyle}>
-                        <Text style={estilo.txtLabel}>Saida</Text>
+                        <Text style={estilo.txtLabel}>Local de Saida</Text>
                         <Item>
                           <Label fixedLabel />
                           <Input
@@ -227,7 +203,7 @@ class CadastroCarona extends Component {
                       </View>
 
                       <View style={estilo.campoStyle}>
-                        <Text style={estilo.txtLabel}>Chegada</Text>
+                        <Text style={estilo.txtLabel}>Local de Chegada</Text>
                         <Item>
                           <Label fixedLabel />
                           <Input
@@ -295,8 +271,12 @@ class CadastroCarona extends Component {
                         <Item>
                           <Label fixedLabel />
                           <TextInputMask
+                            style={{
+                              width: '100%',
+                              height: '100%',
+                            }}
                             keyboardType="number-pad"
-                            mask={'R$ [0000],00'}
+                            mask={'[0000]'}
                             value={values.valor}
                             onChangeText={handleChange('valor')}
                             placeholder=""
@@ -317,6 +297,10 @@ class CadastroCarona extends Component {
                         <Item>
                           <Label fixedLabel />
                           <TextInputMask
+                            style={{
+                              width: '100%',
+                              height: '100%',
+                            }}
                             keyboardType="number-pad"
                             mask={'[00]:[00]'}
                             value={values.Hsaida}
@@ -339,6 +323,10 @@ class CadastroCarona extends Component {
                         <Item>
                           <Label fixedLabel />
                           <TextInputMask
+                            style={{
+                              width: '100%',
+                              height: '100%',
+                            }}
                             keyboardType="number-pad"
                             mask={'[00]:[00]'}
                             value={values.HChegada}
@@ -419,11 +407,6 @@ class CadastroCarona extends Component {
                           handleSubmit(values);
                         }}
                       >
-                        {this.state.load ? (
-                          <Spinner color="#27496d" />
-                        ) : (
-                          <View />
-                        )}
                         <Text>Prosseguir</Text>
                       </Button>
                     </View>
@@ -485,8 +468,6 @@ const CaronaConnect = connect(
     editHChegada,
     editHSaida,
     editImagem,
-    //editNome,
-    //editNota,
     editSaida,
     editVagas,
     editValor,

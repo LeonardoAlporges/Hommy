@@ -22,7 +22,7 @@ import {
   editHSaida,
   editImagem,
   editNomeOfertante,
-  editNota,
+  editNotaCarona,
   editSaida,
   editVagas,
   editValor,
@@ -133,7 +133,7 @@ class Anuncios extends Component {
     this.props.editHChegada(dados.horaChegada);
     this.props.editHSaida(dados.horaSaida);
     this.props.editImagem(dados.imagem);
-    this.props.editNota(dados.nota);
+    this.props.editNotaCarona(dados.nota);
     this.props.editSaida(dados.localSaida);
     this.props.editVagas(dados.vagas);
     this.props.editValor(dados.valor);
@@ -290,7 +290,7 @@ const EditConnect = connect(
     editHSaida,
     editImagem,
     editNomeOfertante,
-    editNota,
+    editNotaCarona,
     editSaida,
     editVagas,
     editValor,

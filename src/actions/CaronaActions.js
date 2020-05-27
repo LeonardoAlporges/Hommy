@@ -6,19 +6,20 @@ export const editNomeOfertante = param => {
     },
   };
 };
-export const editNota = param => {
-  return {
-    type: 'editNota',
-    payload: {
-      nota: param,
-    },
-  };
-};
+
 export const editSaida = param => {
   return {
     type: 'editSaida',
     payload: {
       saida: param,
+    },
+  };
+};
+export const editNotaCarona = param => {
+  return {
+    type: 'editNotaCarona',
+    payload: {
+      notaCarona: param,
     },
   };
 };

@@ -11,7 +11,7 @@ import {
   editHSaida,
   editImagem,
   editNomeOfertante,
-  editNota,
+  editNotaCarona,
   editSaida,
   editVagas,
   editValor,
@@ -34,7 +34,7 @@ class CartaoCarona extends Component {
     this.props.editHChegada(dados.horaChegada);
     this.props.editHSaida(dados.horaSaida);
     this.props.editImagem(dados.imagem);
-    this.props.editNota(dados.nota);
+    this.props.editNotaCarona(dados.nota);
     this.props.editSaida(dados.localSaida);
     this.props.editVagas(dados.vagas);
     this.props.editValor(dados.valor);
@@ -78,7 +78,7 @@ class CartaoCarona extends Component {
               </Text>
             </View>
             <View style={Estilos.V_LocLabel}>
-              <Text style={Estilos.txtdeslcCh}>
+              <Text style={Estilos.txtdeslcChHora}>
                 {this.props.dados.horaChegada}
               </Text>
               <Icon name="flag" style={Estilos.txtIcon} />
@@ -118,7 +118,7 @@ const CartaoCaronaConnect = connect(
     editHSaida,
     editImagem,
     editNomeOfertante,
-    editNota,
+    editNotaCarona,
     editSaida,
     editVagas,
     editValor,

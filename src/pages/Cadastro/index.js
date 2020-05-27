@@ -279,13 +279,6 @@ export class Cadastro extends Component {
           handleSubmit,
         }) => (
           <Fragment>
-            {this.state.carregando ? (
-              <View style={estilo.V_carregando}>
-                <Spinner color="#27496d" />
-              </View>
-            ) : (
-              <View />
-            )}
             {this.state.erro ? <CustomModal parametro="Erro" /> : <View />}
             {this.state.sucesso ? (
               <View style={estilo.V_modal}>

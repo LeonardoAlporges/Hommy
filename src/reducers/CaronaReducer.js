@@ -1,6 +1,5 @@
 const initialState = {
   nome: '',
-  nota: '',
   saida: '',
   chegada: '',
   data: '',
@@ -11,6 +10,7 @@ const initialState = {
   desembarque: '',
   vagas: '',
   imagem: '',
+  notaCarona: '',
 };
 
 const CaronaReducer = (state = [], action) => {
@@ -20,9 +20,7 @@ const CaronaReducer = (state = [], action) => {
   if (action.type == 'editNomeOfertante') {
     return { ...state, nome: action.payload.nome };
   }
-  if (action.type == 'editNota') {
-    return { ...state, nota: action.payload.nota };
-  }
+
   if (action.type == 'editSaida') {
     return { ...state, saida: action.payload.saida };
   }
@@ -52,6 +50,9 @@ const CaronaReducer = (state = [], action) => {
   }
   if (action.type == 'editImagem') {
     return { ...state, imagem: action.payload.imagem };
+  }
+  if (action.type == 'editNotaCarona') {
+    return { ...state, notaCarona: action.payload.notaCarona };
   }
 
   return state;

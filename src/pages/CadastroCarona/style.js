@@ -86,7 +86,7 @@ const estilo = StyleSheet.create({
     alignItems: 'center',
     width: '80%',
     height: 50,
-    backgroundColor: '#009ddb',
+    backgroundColor: '#142850',
   },
   iconeBtn: {
     margin: 0,
@@ -95,8 +95,8 @@ const estilo = StyleSheet.create({
   botaoEnv: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#009ddb',
-    color: '#009ddb',
+    backgroundColor: '#142850',
+    color: '#fff',
   },
   txtCarona: {
     fontFamily: 'Roboto',
