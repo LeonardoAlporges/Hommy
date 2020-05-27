@@ -79,7 +79,7 @@ class CadastroCarona extends Component {
         .then(Response => {
           this.setState({ modalLoadVisible: false });
           this.setState({ sucesso: true });
-          //this.props.navigation.navigate('TabsHeader');
+          this.props.navigation.navigate('TabsHeader');
         })
         .catch(e => {
           this.setState({ erro: true });
@@ -93,7 +93,7 @@ class CadastroCarona extends Component {
         .then(Response => {
           this.setState({ modalLoadVisible: false });
           this.setState({ sucesso: true });
-          //this.props.navigation.navigate('TabsHeader');
+          this.props.navigation.navigate('TabsHeader');
         })
         .catch(e => {
           this.setState({ modalLoadVisible: false });

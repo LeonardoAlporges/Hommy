@@ -10,6 +10,7 @@ import {
   uploadFileToFireBaseUser,
   uploadProgress,
 } from '../../utils';
+import { withNavigation } from 'react-navigation';
 import CustomModal from '../../components/Alert';
 import estilo from './style';
 import { View } from 'native-base';
@@ -19,25 +20,28 @@ import TextInputMask from 'react-native-text-input-mask';
 
 class CadastroUsuario extends Component {
   static navigationOptions = { header: null };
+
   state = {
     imageURI: '',
-    loading: false,
     upload: false,
-
     modalLoadVisible: false,
   };
+
   EnviarCadastro = async value => {
-    this.setState({ modalLoadVisible: true });
-    value.fotoPerfil = imageURI.uri;
+    this.setState({ modalLoadVisible: false });
+    value.fotoPerfil = this.state.imageURI;
 
     await api
       .post('/usuario', value)
       .then(responseJson => {
+        console.log(responseJson);
         this.setState({ modalLoadVisible: false });
-        this.navigation.navigate('Login');
+        this.props.navigation.navigate('Login');
       })
       .catch(error => {
+        console.log(error);
         this.setState({ modalLoadVisible: false });
+        this.props.navigation.navigate('Login');
       });
   };
 
@@ -48,12 +52,16 @@ class CadastroUsuario extends Component {
       );
       switch (snapshot.state) {
         case 'running':
-          this.setState({ imageURI: null });
-          this.setState({ loading: true });
+          this.setState({
+            imageURI: null,
+            upload: false,
+          });
+
           break;
         case 'success':
           snapshot.ref.getDownloadURL().then(downloadURL => {
-            this.setState({ imageURI: downloadURL });
+            console.log(downloadURL);
+            this.setState({ imageURI: downloadURL, upload: true });
           });
           break;
         default:
@@ -72,7 +80,6 @@ class CadastroUsuario extends Component {
       } else {
         const uploadTask = uploadFileToFireBaseUser(imagePickerResponse);
         this.monitorFileUpload(uploadTask);
-        this.setState({ upload: true });
       }
     });
   };
@@ -81,7 +88,10 @@ class CadastroUsuario extends Component {
       <ScrollView>
         <View style={estilo.container}>
           {this.state.upload ? (
-            <Image source={imageURI} style={estilo.imagemStyle} />
+            <Image
+              source={{ uri: this.state.imageURI }}
+              style={estilo.imagemStyle}
+            />
           ) : (
             <Image
               source={require('../../assets/Img/Republica_Send_Pictures.png')}
@@ -114,9 +124,9 @@ class CadastroUsuario extends Component {
                 .email('Insira um Email valido')
                 .required('Insira um Email para sua conta'),
               celular: yup
-                .number('Somente numeros')
+                .string('prença corretamente')
                 .max(9999999999999)
-                .required(' Insira um celular'),
+                .required(' Insira um numero de celular'),
               password: yup
                 .string('Somente texto')
                 .min(8, 'Password is too short - should be 8 chars minimum.')
@@ -317,4 +327,4 @@ class CadastroUsuario extends Component {
     );
   }
 }
-export default CadastroUsuario;
+export default withNavigation(CadastroUsuario);

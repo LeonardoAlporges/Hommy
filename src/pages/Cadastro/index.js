@@ -166,6 +166,7 @@ export class Cadastro extends Component {
       representante: this.props.representante,
       tipoImovel: values.tipoImovel,
       descricao: values.descricao,
+      userEmail: this.props.email,
     };
 
     try {
@@ -452,7 +453,9 @@ export class Cadastro extends Component {
                         }}
                       >
                         {/* //<Icon name="account-outline" style={estilo.icon_send} /> */}
-                        <Text>Enviar Fotos (0/3)</Text>
+                        <Text>
+                          Enviar Fotos ({this.state.contadorImagem}/3)
+                        </Text>
                       </Button>
                     </View>
                   </View>

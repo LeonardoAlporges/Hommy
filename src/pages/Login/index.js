@@ -66,7 +66,7 @@ class Login extends Component {
       })
       .catch(error => {
         this.setState({ erro: true });
-        //console.error('Usuario Não Encontrado');
+        console.error('Usuario Não Encontrado', error);
       });
   };
 
