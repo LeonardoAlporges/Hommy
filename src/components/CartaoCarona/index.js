@@ -18,6 +18,7 @@ import {
 } from '../../actions/CaronaActions';
 
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import Icon2 from 'react-native-vector-icons/FontAwesome';
 import Estilos from './style';
 import { Button } from 'native-base';
 const moment = require('moment');
@@ -93,7 +94,7 @@ class CartaoCarona extends Component {
               <Text style={Estilos.txtData}>{this.state.data}</Text>
             </View>
             <View style={Estilos.Valor}>
-              <Icon style={Estilos.txtIcon} name="wallet" />
+              <Icon2 style={Estilos.txtIcon} name="dollar" />
               <Text style={Estilos.txtvalor}>R$ {this.props.dados.valor}</Text>
             </View>
           </View>
