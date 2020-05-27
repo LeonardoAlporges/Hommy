@@ -89,9 +89,7 @@ class Cabeca extends Component {
               )}
 
               <View style={Estilos.viewNome}>
-                <Text style={Estilos.textNome}>
-                  {this.props.usuario} -> {this.props.nota}
-                </Text>
+                <Text style={Estilos.textNome}>{this.props.usuario}</Text>
                 <Text style={Estilos.textCPF}>{this.props.nota}</Text>
               </View>
               <View style={Estilos.viewDivisor} />
