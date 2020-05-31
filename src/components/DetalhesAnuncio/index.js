@@ -90,7 +90,9 @@ class DetalhesAnuncio extends Component {
           </View>
         </View>
         <View style={estilo.V_tipo}>
-          <Text style={estilo.tipo}>Mobília e eletrodomésticos de uso comum</Text>
+          <Text style={estilo.tipo}>
+            Mobília e eletrodomésticos de uso comum
+          </Text>
         </View>
         <View style={estilo.V_caracteristicaAcomodacao}>
           <View style={estilo.itemAcomodacao}>
@@ -137,7 +139,7 @@ class DetalhesAnuncio extends Component {
         <View style={estilo.V_vagas}>
           <View style={estilo.vagas}>
             <Icon name="chart" style={estilo.icone} />
-            <Text style={estilo.txtlabel}>R$ {this.props.valorContas}</Text>
+            <Text style={estilo.txtlabel}>R$ {this.props.valorConta}</Text>
           </View>
         </View>
         <View style={estilo.V_tipo}>
@@ -172,7 +174,7 @@ const mapsStateToProps = state => {
     nomeRepublica: state.auth.nomeRepublica,
     genero: state.auth.genero,
     valor: state.auth.valorAluguel,
-    valorContas: state.auth.valorContas,
+    valorConta: state.auth.valorContas,
     rua: state.auth.rua,
     numeroCasa: state.auth.numeroCasa,
     representante: state.auth.representante,

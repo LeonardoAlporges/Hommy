@@ -48,7 +48,7 @@ class Cartao extends Component {
     this.props.editDescricao(this.props.leonardo.descricao);
     this.props.editAcomodacaoQuarto(this.props.leonardo.acomodacaoQuarto);
     this.props.editAcomodacaoRepublica(this.props.leonardo.acomodacaoRepublica);
-    this.props.editValorConta(this.leonardo.valorContas);
+    this.props.editValorConta(dados.valorContas);
     this.props.editObservacao(this.props.leonardo.observacao);
     this.props.editGenero(this.props.leonardo.genero);
     this.props.editNumVagas(this.props.leonardo.numVagas);

@@ -217,6 +217,7 @@ class Caronas extends Component {
     return api
       .get('/carona')
       .then(responseJson => {
+        console.log(responseJson);
         this.setState({
           listaCaronas: responseJson.data,
           fullData: responseJson.data,

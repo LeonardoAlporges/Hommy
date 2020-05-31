@@ -26,6 +26,7 @@ const moment = require('moment');
 class CartaoCarona extends Component {
   Click = () => {
     const dados = this.props.dados;
+    console.log('?', dados);
     this.props.editNomeOfertante(dados.nome);
     this.props.editChegada(dados.localChegada);
     this.props.editData(dados.data);
@@ -42,7 +43,7 @@ class CartaoCarona extends Component {
   };
 
   state = {
-    data: moment(this.props.dados.data).format('DD/MM')
+    data: moment(this.props.dados.data).format('DD/MM'),
   };
 
   render() {
@@ -65,7 +66,6 @@ class CartaoCarona extends Component {
             <View style={Estilos.V_nota}>
               <Text> {this.props.dados.nota} </Text>
               <Icon name="star" style={Estilos.icon} />
-
             </View>
           </View>
           <View style={Estilos.V_local}>
