@@ -91,6 +91,7 @@ export class Cadastro extends Component {
     this.props.editAcomodacaoRepublica('');
     this.props.editObservacao('');
     this.props.editGenero('');
+    this.props.editValorConta('');
     this.props.editNumVagas('');
     this.props.editRepresentante('');
     this.props.editImg1('');

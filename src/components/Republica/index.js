@@ -105,6 +105,7 @@ class Republica extends Component {
     return api
       .get('/main')
       .then(responseJson => {
+        console.log(responseJson);
         this.setState({
           listaRepublicas: responseJson.data,
           fullData: responseJson.data,
