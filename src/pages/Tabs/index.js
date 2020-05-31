@@ -31,7 +31,7 @@ class TabsHeader extends Component {
           tabContainerStyle={{ height: 45 }}
         >
           <Tab
-            heading="Republica"
+            heading="Repúblicas"
             tabStyle={estilo.tabs_style}
             textStyle={estilo.tabs_TextStyle}
             activeTabStyle={estilo.tabs_ActiveTabs}

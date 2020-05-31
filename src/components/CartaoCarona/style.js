@@ -39,6 +39,7 @@ const Estilos = StyleSheet.create({
   icon: {
     fontSize: 12,
     color: '#00909e',
+    
   },
   V_imagem: {
     height: 70,
@@ -80,13 +81,11 @@ const Estilos = StyleSheet.create({
     alignItems: 'center',
   },
   Valor: {
-    marginHorizontal: 5,
+    flexDirection: 'row',
     width: '100%',
     height: '50%',
     justifyContent: 'flex-start',
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'flex-end',
+    alignItems: 'center',
   },
   txtIcon: {
     padding: 0,

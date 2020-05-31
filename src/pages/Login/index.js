@@ -60,7 +60,7 @@ class Login extends Component {
         this.props.editLogado(responseJson.data.usuario.nome);
         this.props.editTelefone(responseJson.data.usuario.celular);
         this.props.editFoto(responseJson.data.usuario.fotoPerfil);
-        this.props.editNota('4.1');
+        this.props.editNota(responseJson.data.usuario.nota);
         this.setState({ sucesso: true });
         this.props.navigation.navigate('TabsHeader');
       })
@@ -83,8 +83,8 @@ class Login extends Component {
             <CustomModal parametro="Sucesso" />
           </View>
         ) : (
-          <View />
-        )}
+            <View />
+          )}
 
         <View style={style.container}>
           <TouchableOpacity>
@@ -132,74 +132,66 @@ class Login extends Component {
               isValid,
               handleSubmit,
             }) => (
-              <Fragment>
-                <View style={style.view_CamposLogin}>
-                  <Item>
-                    <Icon name="md-person" style={style.icons_CamposLogin} />
-                    <Input
-                      value={values.email}
-                      onChangeText={handleChange('email')}
-                      placeholder="E-mail"
-                      onBlur={() => setFieldTouched('email')}
-                    />
-                  </Item>
-                  {touched.email && errors.email && (
-                    <Text style={style.txtError}>{errors.email}</Text>
-                  )}
-                </View>
+                <Fragment>
+                  <View style={style.view_CamposLogin}>
+                    <Item>
+                      <Icon name="md-person" style={style.icons_CamposLogin} />
+                      <Input
+                        value={values.email}
+                        onChangeText={handleChange('email')}
+                        placeholder="E-mail"
+                        onBlur={() => setFieldTouched('email')}
+                      />
+                    </Item>
+                    {touched.email && errors.email && (
+                      <Text style={style.txtError}>{errors.email}</Text>
+                    )}
+                  </View>
 
-                <View style={style.view_CamposLogin}>
-                  <Item>
-                    <Icon name="md-key" style={style.icons_CamposLogin} />
-                    <Input
-                      value={values.password}
-                      onChangeText={handleChange('password')}
-                      placeholder="Senha"
-                      secureTextEntry={true}
-                      onBlur={() => setFieldTouched('password')}
-                    />
-                  </Item>
-                  {touched.password && errors.password && (
-                    <Text style={style.txtError}>{errors.password}</Text>
-                  )}
-                </View>
-                <View style={style.V_cadastrar}>
-                  <TouchableOpacity>
-                    <Text style={style.touchTx}>Esqueci minha senha!</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={() => {
-                      this.props.navigation.navigate('CadastroUsuario');
-                    }}
-                  >
-                    <Text>Cadastre-se </Text>
-                  </TouchableOpacity>
-                </View>
-                <View style={style.V_botoes}>
-                  <Button
-                    style={style.botao_login}
-                    onPress={handleSubmit}
-                    disabled={!isValid}
-                    title="Leo"
-                  >
-                    <Text style={style.labelBotao}>Login</Text>
-                    {/* <Icon style={style.iconStyle} name="ios-arrow-forward" /> */}
-                  </Button>
-                  <Button
-                    style={style.botao_cadastro}
-                    onPress={() => {
-                      this.props.navigation.navigate('CadastroUsuario');
-                    }}
-                    disabled={!isValid}
-                    title="Leo"
-                  >
-                    <Text style={style.labelBotao}>Cadastre-se</Text>
-                    {/* <Icon style={style.iconStyle} name="md-person-add" /> */}
-                  </Button>
-                </View>
-              </Fragment>
-            )}
+                  <View style={style.view_CamposLogin}>
+                    <Item>
+                      <Icon name="md-key" style={style.icons_CamposLogin} />
+                      <Input
+                        value={values.password}
+                        onChangeText={handleChange('password')}
+                        placeholder="Senha"
+                        secureTextEntry={true}
+                        onBlur={() => setFieldTouched('password')}
+                      />
+                    </Item>
+                    {touched.password && errors.password && (
+                      <Text style={style.txtError}>{errors.password}</Text>
+                    )}
+                  </View>
+                  <View style={style.V_cadastrar}>
+                    <TouchableOpacity>
+                      <Text style={style.touchTx}>Esqueci minha senha!</Text>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={style.V_botoes}>
+                    <Button
+                      style={style.botao_login}
+                      onPress={handleSubmit}
+                      disabled={!isValid}
+                      title="Leo"
+                    >
+                      <Text style={style.labelBotao}>Login</Text>
+                      {/* <Icon style={style.iconStyle} name="ios-arrow-forward" /> */}
+                    </Button>
+                  </View>
+                </Fragment>
+              )}
           </Formik>
+          <Button
+            style={style.botao_cadastro}
+            onPress={() => {
+              this.props.navigation.navigate('CadastroUsuario');
+            }}
+            title="Leo"
+          >
+            <Text style={style.labelBotao}>Cadastre-se</Text>
+            {/* <Icon style={style.iconStyle} name="md-person-add" /> */}
+          </Button>
         </View>
       </ScrollView>
     );

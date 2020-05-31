@@ -28,7 +28,7 @@ const Navegação = createAppContainer(
         CadastroUsuario: CadastroUsuario,
       }),
       App: createStackNavigator({
-        Teste,
+        //Teste,
         TabsHeader: TabsHeader,
         Anuncios,
         CadastroCaronas,

@@ -66,10 +66,7 @@ export default class CustomModal extends Component {
               <Text style={Estilos.descricao}>{this.state.descricao}</Text>
               <TouchableOpacity
                 style={Estilos.botao}
-                onPress={() => {
-                  this.setState({ modalVisible: false });
-                }}
-              >
+                onPress={async () => {this.setState({ modalVisible: false });}}              >
                 <Text style={Estilos.botaoTxt}>{this.state.botao}</Text>
               </TouchableOpacity>
             </View>
