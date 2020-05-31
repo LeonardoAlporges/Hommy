@@ -67,7 +67,7 @@ const Estilos = StyleSheet.create({
     padding: 0,
 
     fontSize: 18,
-    color: '#27496d',
+    color: '#00909e',
   },
   V_notasImg: {
     borderRadius: 10,

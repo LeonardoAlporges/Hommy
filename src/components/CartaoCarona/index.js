@@ -18,7 +18,7 @@ import {
 } from '../../actions/CaronaActions';
 
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
-import Icon2 from 'react-native-vector-icons/FontAwesome';
+import Icon2 from 'react-native-vector-icons/Feather';
 import Estilos from './style';
 import { Button } from 'native-base';
 const moment = require('moment');
@@ -26,7 +26,6 @@ const moment = require('moment');
 class CartaoCarona extends Component {
   Click = () => {
     const dados = this.props.dados;
-
     this.props.editNomeOfertante(dados.nome);
     this.props.editChegada(dados.localChegada);
     this.props.editData(dados.data);
@@ -64,8 +63,9 @@ class CartaoCarona extends Component {
             </View>
             <Text style={Estilos.txtnome}>{this.props.dados.nome}</Text>
             <View style={Estilos.V_nota}>
+              <Text> {this.props.dados.nota} </Text>
               <Icon name="star" style={Estilos.icon} />
-              <Text> {this.props.dados.nota}</Text>
+
             </View>
           </View>
           <View style={Estilos.V_local}>
@@ -94,7 +94,7 @@ class CartaoCarona extends Component {
               <Text style={Estilos.txtData}>{this.state.data}</Text>
             </View>
             <View style={Estilos.Valor}>
-              <Icon2 style={Estilos.txtIcon} name="dollar" />
+              <Icon2 style={Estilos.txtIcon} name="dollar-sign" />
               <Text style={Estilos.txtvalor}>R$ {this.props.dados.valor}</Text>
             </View>
           </View>

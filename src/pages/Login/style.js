@@ -16,11 +16,12 @@ const style = StyleSheet.create({
   txt_FormaDeLogin: {
     fontFamily: 'Roboto Light',
     fontSize: 20,
-    marginTop: '10%',
+    marginTop: '2%',
   },
 
   view_OutrosLogin: {
     height: '8%',
+    marginTop: '2%',
     width: '70%',
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -50,10 +51,8 @@ const style = StyleSheet.create({
   },
 
   V_botoes: {
-    display: 'flex',
-    justifyContent: 'space-around',
     alignItems: 'center',
-    height: 150,
+    height: 50,
     width: '60%',
     marginTop: '10%',
     alignItems: 'center',
@@ -92,7 +91,6 @@ const style = StyleSheet.create({
   botao_cadastro: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 45,
     width: 200,
     borderRadius: 5,
     backgroundColor: '#00909e',

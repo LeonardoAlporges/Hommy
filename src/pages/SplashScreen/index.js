@@ -35,8 +35,8 @@ class SplashScreen extends Component {
             <Text style={style.titulo}>Bem vindo ao Hommy </Text>
 
             <Text style={style.descricao}>
-              Agora voce pode ver anuncios de vagas em republicas, caronas tudo
-              na palma da sua mão
+              Agora voce pode ver e anunciar vagas em republicas e caronas, tudo
+              na palma da sua mão.
             </Text>
           </View>
         </View>
