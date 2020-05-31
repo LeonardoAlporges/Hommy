@@ -16,12 +16,15 @@ moment.locale('pt', {
 class DetalhesCarona extends Component {
   state = {
     interesse: false,
-    data: moment(this.props.data).format('dddd DD MMMM')
+    data: moment(this.props.data).format('dddd, DD MMMM')
+
   };
-  data;
+data 
   clickInteresse() {
     this.setState({ interesse: true });
   }
+
+  
 
   static navigationOptions = { header: null };
   render() {
@@ -132,7 +135,7 @@ const mapStateToProps = state => {
   return {
     //para pegar do reducer e State."NOME DO REDUCER"."NOME DA PROPIEDADE"
     nome: state.carona.nome,
-    nota: state.carona.notaCarona,
+    nota: state.carona.nota,
     saida: state.carona.saida,
     chegada: state.carona.chegada,
     data: state.carona.data,

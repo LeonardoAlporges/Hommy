@@ -302,17 +302,17 @@ export class Cadastro extends Component {
                       <Icon name="ios-arrow-back" style={estilo.iconHeader} />
                     </TouchableOpacity>
 
-                    <Text style={estilo.title}>Informações Basicas</Text>
+                    <Text style={estilo.title}>Informações Básicas</Text>
                   </View>
 
                   <View style={estilo.V_Conteudo}>
                     <Text style={estilo.textRepublica}>
-                      Nos passe algumas informaçoes basica para fazer o registro
-                      de sua republica
+                      Cadastre algumas informações para fazer o registro
+                      de sua república.
                     </Text>
 
                     <View>
-                      <Text style={estilo.txtLabel}>Nome da Republica</Text>
+                      <Text style={estilo.txtLabel}>Nome da República</Text>
                       <Item>
                         <Input
                           value={values.nome}
@@ -384,7 +384,7 @@ export class Cadastro extends Component {
                     </View>
 
                     <View style={estilo.camposAmb} inlineLabel>
-                      <Label style={estilo.txtLabel}>Descricao Ambiente</Label>
+                      <Label style={estilo.txtLabel}>Descrição do Ambiente</Label>
                       <Item>
                         <Input
                           value={values.descricao}
@@ -401,7 +401,7 @@ export class Cadastro extends Component {
                     </View>
                     <View style={estilo.V_ImageLabel}>
                       <Text style={estilo.txtLabel}>
-                        Envie Fotos de Sua Republica
+                        Envie Fotos de Sua República
                       </Text>
                     </View>
                     <View style={estilo.V_ImageEmpty}>
@@ -471,8 +471,8 @@ export class Cadastro extends Component {
                 <ScrollView>
                   <View style={estilo.V_Conteudo}>
                     <Text style={estilo.textRepublica}>
-                      Agora nos passe algumas caracteristicas basica de sua
-                      republica.
+                      Agora descreva algumas características básica de sua
+                      república.
                     </Text>
 
                     <View style={estilo.V_Caracteristicas}>
@@ -497,7 +497,7 @@ export class Cadastro extends Component {
                       </View>
 
                       <View style={estilo.V_Campos}>
-                        <Text style={estilo.txtLabel}>Média de contas</Text>
+                        <Text style={estilo.txtLabel}>Média de Contas</Text>
                         <Item>
                           <Label fixedLabel>R$</Label>
                           <Input
@@ -519,7 +519,7 @@ export class Cadastro extends Component {
 
                     <View style={estilo.V_Caracteristicas}>
                       <View style={estilo.V_Campos}>
-                        <Text style={estilo.txtLabel}>Genero</Text>
+                        <Text style={estilo.txtLabel}>Gênero</Text>
                         <Item picker>
                           <Picker
                             mode="dropdown"
@@ -581,7 +581,7 @@ export class Cadastro extends Component {
 
                     <View style={estilo.V_Caracteristicas}>
                       <View style={estilo.V_Campos}>
-                        <Text style={estilo.txtLabel}>Tipo de Imovel</Text>
+                        <Text style={estilo.txtLabel}>Tipo de Imóvel</Text>
                         <Item picker>
                           <Picker
                             mode="dropdown"
@@ -613,7 +613,7 @@ export class Cadastro extends Component {
                         </View>
                       </View>
                       <View style={estilo.V_Campos}>
-                        <Text style={estilo.txtLabel}>Vagas Disponiveis</Text>
+                        <Text style={estilo.txtLabel}>Vagas Disponíveis</Text>
                         <Item picker>
                           <Picker
                             mode="dropdown"
@@ -646,7 +646,7 @@ export class Cadastro extends Component {
 
                     <View style={estilo.campos} inlineLabel>
                       <Label style={estilo.txtLabel}>
-                        Acomodaçoes do Quarto
+                        Mobília do Quarto
                       </Label>
                       <Item>
                         <Input
@@ -667,7 +667,7 @@ export class Cadastro extends Component {
 
                     <View style={estilo.campos} inlineLabel>
                       <Label style={estilo.txtLabel}>
-                        Acomodaçoes da Republica
+                      Mobília e eletrodomésticos de uso comum
                       </Label>
                       <Item>
                         <Input

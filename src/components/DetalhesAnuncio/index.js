@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import estilo from './style';
 import ViewPager from '@react-native-community/viewpager';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
-import Icon2 from 'react-native-vector-icons/FontAwesome';
+import Icon2 from 'react-native-vector-icons/Feather';
 
 class DetalhesAnuncio extends Component {
   state = {
@@ -35,7 +35,7 @@ class DetalhesAnuncio extends Component {
             <CustomModal
               parametro="Custom"
               titulo="Obrigado pelo interesse"
-              descricao="Você sera adicionado a uma lista de interesse e sera notificado assim que o ofertante confirme sua vaga."
+              descricao="Você será adicionado a lista de interesse e será notificado assim que o ofertante confirmar sua vaga."
               botao="Confirmar"
             />
           </View>
@@ -65,7 +65,7 @@ class DetalhesAnuncio extends Component {
         <View style={estilo.barra} />
 
         <View style={estilo.V_caracteristicaTitle}>
-          <Text style={estilo.caracteristicaTitle}>Caracteristicas</Text>
+          <Text style={estilo.caracteristicaTitle}>Características</Text>
         </View>
         <View style={estilo.V_tipo}>
           <Text style={estilo.tipo}>Tipo</Text>
@@ -81,7 +81,7 @@ class DetalhesAnuncio extends Component {
           </View>
         </View>
         <View style={estilo.V_tipo}>
-          <Text style={estilo.tipo}>Acomodações</Text>
+          <Text style={estilo.tipo}>Mobília do quarto</Text>
         </View>
         <View style={estilo.V_caracteristicaAcomodacao}>
           <View style={estilo.itemAcomodacao}>
@@ -90,7 +90,7 @@ class DetalhesAnuncio extends Component {
           </View>
         </View>
         <View style={estilo.V_tipo}>
-          <Text style={estilo.tipo}>Utensilios</Text>
+          <Text style={estilo.tipo}>Mobília e eletrodomésticos de uso comum</Text>
         </View>
         <View style={estilo.V_caracteristicaAcomodacao}>
           <View style={estilo.itemAcomodacao}>
@@ -107,17 +107,17 @@ class DetalhesAnuncio extends Component {
         <View style={estilo.V_vagas}>
           <View style={estilo.vagas}>
             <Icon name="user-follow" style={estilo.icone} />
-            <Text style={estilo.txtlabel}>{this.props.numVagas} Vagas</Text>
+            <Text style={estilo.txtlabel}>{this.props.numVagas} Vaga(s)</Text>
           </View>
         </View>
         <View style={estilo.V_tipo}>
-          <Text style={estilo.tipo}>Localização</Text>
+          <Text style={estilo.tipo}>Endereço</Text>
         </View>
         <View style={estilo.V_vagas}>
           <View style={estilo.vagas}>
             <Icon name="location-pin" style={estilo.icone} />
             <Text style={estilo.txtlabel}>
-              {this.props.rua},{this.props.bairro}, Nº
+              {this.props.rua}, {this.props.bairro}, Nº
               {this.props.numeroCasa}
             </Text>
           </View>
@@ -137,7 +137,7 @@ class DetalhesAnuncio extends Component {
         <View style={estilo.V_vagas}>
           <View style={estilo.vagas}>
             <Icon name="chart" style={estilo.icone} />
-            <Text style={estilo.txtlabel}>{this.props.valorContas}</Text>
+            <Text style={estilo.txtlabel}>R$ {this.props.valorContas}</Text>
           </View>
         </View>
         <View style={estilo.V_tipo}>
@@ -145,8 +145,8 @@ class DetalhesAnuncio extends Component {
         </View>
         <View style={estilo.V_vagas}>
           <View style={estilo.vagas}>
-            <Icon2 name="dollar" style={estilo.icone} />
-            <Text style={estilo.txtlabel}>{this.props.valor}</Text>
+            <Icon2 name="dollar-sign" style={estilo.icone} />
+            <Text style={estilo.txtlabel}>R$ {this.props.valor}</Text>
           </View>
         </View>
         <View style={estilo.V_botao}>

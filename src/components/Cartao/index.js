@@ -25,7 +25,7 @@ import {
 } from '../../actions/AuthActions';
 
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
-import Icon2 from 'react-native-vector-icons/FontAwesome';
+import Icon2 from 'react-native-vector-icons/Feather';
 import Estilos from './styles';
 
 class Cartao extends Component {
@@ -38,6 +38,7 @@ class Cartao extends Component {
     const dados = this.props.leonardo;
     console.log(dados.valorContas);
     this.props.editNomeRepublica(this.props.leonardo.nomeRepublica);
+    this.props.editValorConta(this.props.leonardo.valorContas);
     this.props.editValorAluguel(this.props.leonardo.valorAluguel);
     this.props.editBairro(this.props.leonardo.bairro);
     this.props.editRua(this.props.leonardo.rua);
@@ -85,7 +86,7 @@ class Cartao extends Component {
             </View>
             <View style={Estilos.V_desc}>
               <View style={Estilos.V_valor}>
-                <Icon2 style={Estilos.txtIcon} name="dollar" />
+                <Icon2 style={Estilos.txtIcon} name="dollar-sign" />
                 <Text style={Estilos.txtDesc}>
                   R$ {this.props.leonardo.valorAluguel}
                 </Text>
@@ -93,7 +94,7 @@ class Cartao extends Component {
               <View style={Estilos.V_vagas}>
                 <Icon style={Estilos.txtIcon} name="people" />
                 <Text style={Estilos.txtDesc}>
-                  {this.props.leonardo.numVagas} Vagas
+                  {this.props.leonardo.numVagas} Vaga(s)
                 </Text>
               </View>
             </View>
