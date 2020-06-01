@@ -270,7 +270,7 @@ class Caronas extends Component {
             visible={this.state.modalVisible}
             transparent={true}
           >
-            <View style={Estilo}>
+            <View style={Estilo.V_modalInterno}>
               <Text>Valor</Text>
               <ListItem style={Estilo.listStyle}>
                 <Text style={Estilo.textList}>De</Text>
@@ -329,7 +329,7 @@ class Caronas extends Component {
                   <Picker
                     mode="dropdown"
                     iosIcon={<Icon name="arrow-down" />}
-                    style={{ width: undefined }}
+                    style={{ width: 140 }}
                     placeholder="Destino"
                     placeholderStyle={{ color: '#bfc6ea' }}
                     placeholderIconColor="#007aff"
@@ -361,7 +361,7 @@ class Caronas extends Component {
                   <Picker
                     mode="dropdown"
                     iosIcon={<Icon name="arrow-down" />}
-                    style={{ width: undefined }}
+                    style={{ width: 140 }}
                     placeholder="Destino"
                     placeholderStyle={{ color: '#bfc6ea' }}
                     placeholderIconColor="#007aff"
