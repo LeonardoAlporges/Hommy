@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, FlatList, Text, TouchableOpacity, Modal } from 'react-native';
 
+import { connect } from 'react-redux';
 import style from './style';
 import { Button } from 'native-base';
 import api from '../../service/api';
@@ -17,6 +18,8 @@ class Viagens extends Component {
       listaCaronas: [],
       modal: false,
       botaoAvaliar: true,
+      emailAvaliado: '',
+      nomeAvaliado: '',
     };
   }
 
@@ -24,14 +27,17 @@ class Viagens extends Component {
     this.getListCarona();
   }
 
-  avaliar = () => {
+  avaliar = item => {
+    console.log(item);
+    this.setState({ emailAvaliado: item.userEmail });
+    this.setState({ nomeAvaliado: item.nome });
     this.setState({ modal: true });
   };
 
   getListCarona = () => {
     this.setState({ refreshing: true });
     return api
-      .get('/carona')
+      .get(`/carona/meusInteresses/${this.props.email}`)
       .then(responseJson => {
         console.log(responseJson);
         this.setState({
@@ -74,7 +80,7 @@ class Viagens extends Component {
                   <Button
                     style={style.botao}
                     onPress={() => {
-                      this.avaliar();
+                      this.avaliar(item);
                     }}
                   >
                     <Icon name="star" style={style.icon} />
@@ -87,11 +93,25 @@ class Viagens extends Component {
         </View>
 
         {this.state.modal && (
-          <ModalAvaliacao retornoModal={() => this.returnModal()} />
+          <ModalAvaliacao
+            nome={this.state.nomeAvaliado}
+            email={this.state.emailAvaliado}
+            retornoModal={() => this.returnModal()}
+          />
         )}
       </View>
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    email: state.user.email,
+  };
+};
 
-export default Viagens;
+const ViagemConnect = connect(
+  mapStateToProps,
+  null
+)(Viagens);
+
+export default ViagemConnect;

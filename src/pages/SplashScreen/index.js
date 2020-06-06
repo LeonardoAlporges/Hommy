@@ -18,6 +18,7 @@ class SplashScreen extends Component {
     setTimeout(() => {
       this.setState({ modalVisible: false });
     }, 10000);
+    this.props.navigation.navigate('Login');
   }
 
   static navigationOptions = { header: null };
@@ -45,7 +46,6 @@ class SplashScreen extends Component {
           <Button
             style={style.botao}
             onPress={() => {
-              //this.props.navigation.navigate('Login');
               this.abrir();
             }}
           >

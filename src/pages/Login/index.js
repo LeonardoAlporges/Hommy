@@ -83,8 +83,8 @@ class Login extends Component {
             <CustomModal parametro="Sucesso" />
           </View>
         ) : (
-            <View />
-          )}
+          <View />
+        )}
 
         <View style={style.container}>
           <TouchableOpacity>
@@ -118,8 +118,8 @@ class Login extends Component {
                 .email('Not a valid e-mail')
                 .required('Insira um Email valido'),
               password: yup
-                .number()
-                .min(6)
+                .string()
+                .min(4)
                 .required('Insira uma senha'),
             })}
           >
@@ -132,55 +132,55 @@ class Login extends Component {
               isValid,
               handleSubmit,
             }) => (
-                <Fragment>
-                  <View style={style.view_CamposLogin}>
-                    <Item>
-                      <Icon name="md-person" style={style.icons_CamposLogin} />
-                      <Input
-                        value={values.email}
-                        onChangeText={handleChange('email')}
-                        placeholder="E-mail"
-                        onBlur={() => setFieldTouched('email')}
-                      />
-                    </Item>
-                    {touched.email && errors.email && (
-                      <Text style={style.txtError}>{errors.email}</Text>
-                    )}
-                  </View>
+              <Fragment>
+                <View style={style.view_CamposLogin}>
+                  <Item>
+                    <Icon name="md-person" style={style.icons_CamposLogin} />
+                    <Input
+                      value={values.email}
+                      onChangeText={handleChange('email')}
+                      placeholder="E-mail"
+                      onBlur={() => setFieldTouched('email')}
+                    />
+                  </Item>
+                  {touched.email && errors.email && (
+                    <Text style={style.txtError}>{errors.email}</Text>
+                  )}
+                </View>
 
-                  <View style={style.view_CamposLogin}>
-                    <Item>
-                      <Icon name="md-key" style={style.icons_CamposLogin} />
-                      <Input
-                        value={values.password}
-                        onChangeText={handleChange('password')}
-                        placeholder="Senha"
-                        secureTextEntry={true}
-                        onBlur={() => setFieldTouched('password')}
-                      />
-                    </Item>
-                    {touched.password && errors.password && (
-                      <Text style={style.txtError}>{errors.password}</Text>
-                    )}
-                  </View>
-                  <View style={style.V_cadastrar}>
-                    <TouchableOpacity>
-                      <Text style={style.touchTx}>Esqueci minha senha!</Text>
-                    </TouchableOpacity>
-                  </View>
-                  <View style={style.V_botoes}>
-                    <Button
-                      style={style.botao_login}
-                      onPress={handleSubmit}
-                      disabled={!isValid}
-                      title="Leo"
-                    >
-                      <Text style={style.labelBotao}>Login</Text>
-                      {/* <Icon style={style.iconStyle} name="ios-arrow-forward" /> */}
-                    </Button>
-                  </View>
-                </Fragment>
-              )}
+                <View style={style.view_CamposLogin}>
+                  <Item>
+                    <Icon name="md-key" style={style.icons_CamposLogin} />
+                    <Input
+                      value={values.password}
+                      onChangeText={handleChange('password')}
+                      placeholder="Senha"
+                      secureTextEntry={true}
+                      onBlur={() => setFieldTouched('password')}
+                    />
+                  </Item>
+                  {touched.password && errors.password && (
+                    <Text style={style.txtError}>{errors.password}</Text>
+                  )}
+                </View>
+                <View style={style.V_cadastrar}>
+                  <TouchableOpacity>
+                    <Text style={style.touchTx}>Esqueci minha senha!</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={style.V_botoes}>
+                  <Button
+                    style={style.botao_login}
+                    onPress={handleSubmit}
+                    disabled={!isValid}
+                    title="Leo"
+                  >
+                    <Text style={style.labelBotao}>Login</Text>
+                    {/* <Icon style={style.iconStyle} name="ios-arrow-forward" /> */}
+                  </Button>
+                </View>
+              </Fragment>
+            )}
           </Formik>
           <Button
             style={style.botao_cadastro}

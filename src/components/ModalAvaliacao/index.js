@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Modal, Text, TouchableOpacity } from 'react-native';
+import api from '../../service/api';
 
 import style from './styles';
 import { Button } from 'native-base';
@@ -23,6 +24,19 @@ class ModalAvaliacao extends Component {
     if (valor == 4) this.setState({ n4: true, valor: valor });
     if (valor == 5) this.setState({ n5: true, valor: valor });
   };
+
+  Avaliar = () => {
+    api
+      .put(`/userNota/${this.props.email}`, { nota: this.state.valor })
+      .then(responseJson => {
+        console.log('NOTA REGISTRADA');
+      })
+      .catch(error => {
+        console.log('Erro:', error);
+      });
+    this.setState({ modalVisible: false }), this.props.retornoModal();
+  };
+
   render() {
     return (
       <Modal
@@ -38,7 +52,7 @@ class ModalAvaliacao extends Component {
       >
         <View style={style.ViewFundo}>
           <View style={style.ViewModal}>
-            <Text style={style.titulo}>Avalie Leonardo</Text>
+            <Text style={style.titulo}>Avalie {this.props.nome}</Text>
             <View style={style.tipoAva}>
               <Text style={style.descricao}> Pessimo</Text>
               <Text style={style.descricao}> Muito bom</Text>
@@ -134,8 +148,7 @@ class ModalAvaliacao extends Component {
             <Button
               style={style.botao}
               onPress={async () => {
-                this.setState({ modalVisible: false }),
-                  this.props.retornoModal();
+                this.Avaliar();
               }}
             >
               <Text style={style.botaoTxt}>Confirmar</Text>
