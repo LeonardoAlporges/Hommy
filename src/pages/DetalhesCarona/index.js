@@ -6,25 +6,33 @@ import Estilo from './style';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Button } from 'native-base';
 import CustomModal from '../../components/Alert';
-// import { Container } from './styles';
+import api from '../../service/api';
+
 const moment = require('moment');
 moment.locale('pt', {
-    months : 'Janeiro_Fevereiro_Março_Abril_Maio_Junho_Julho_Agosto_Setembro_Outubro_Novembro_Dezembro'.split('_'),
-    weekdays : 'Domingo_Segunda_Terça_Quarta_Quinta_Sexta_Sabado'.split('_'),
-})
+  months: 'Janeiro_Fevereiro_Março_Abril_Maio_Junho_Julho_Agosto_Setembro_Outubro_Novembro_Dezembro'.split(
+    '_'
+  ),
+  weekdays: 'Domingo_Segunda_Terça_Quarta_Quinta_Sexta_Sabado'.split('_'),
+});
 
 class DetalhesCarona extends Component {
   state = {
     interesse: false,
-    data: moment(this.props.data).format('dddd, DD MMMM')
-
+    data: moment(this.props.data).format('dddd, DD MMMM'),
   };
-data 
-  clickInteresse() {
-    this.setState({ interesse: true });
-  }
 
-  
+  async clickInteresse() {
+    this.envio = { novoInteresse: this.props.email };
+    await api
+      .put(`/carona/interesse/${this.props.emailOfertante}`, this.envio)
+      .then(Response => {
+        console.log('Foi adicionado a lista de interesse');
+      })
+      .catch(e => {
+        console.log('NAO Foi adicionado a lista de interesse');
+      });
+  }
 
   static navigationOptions = { header: null };
   render() {
@@ -61,7 +69,7 @@ data
               style={Estilo.V_imagem}
             />
             <View style={Estilo.V_Nome}>
-              <Text style={Estilo.Nome}>{this.props.nome}</Text>
+              <Text style={Estilo.Nome}>{this.props.nome} </Text>
               <View style={Estilo.V_nota}>
                 <Text style={Estilo.Nota}>{this.props.nota}</Text>
                 <Icon style={Estilo.iconNota} name="star-outline" />
@@ -134,6 +142,7 @@ data
 const mapStateToProps = state => {
   return {
     //para pegar do reducer e State."NOME DO REDUCER"."NOME DA PROPIEDADE"
+    email: state.user.email,
     nome: state.carona.nome,
     nota: state.carona.nota,
     saida: state.carona.saida,
@@ -146,6 +155,7 @@ const mapStateToProps = state => {
     desembarque: state.carona.desembarque,
     vagas: state.carona.vagas,
     imagem: state.carona.imagem,
+    emailOfertante: state.carona.emailOfertante,
     // Ou seja agora e como se tivessemos duas props dentro do compoennte cadastro
   };
 };

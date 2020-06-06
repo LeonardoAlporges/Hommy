@@ -95,3 +95,11 @@ export const editImagem = param => {
     },
   };
 };
+export const editEmailOfertante = param => {
+  return {
+    type: 'editEmailOfertante',
+    payload: {
+      emailOfertante: param,
+    },
+  };
+};

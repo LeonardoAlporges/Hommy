@@ -1,0 +1,87 @@
+import { StyleSheet } from 'react-native';
+
+const style = StyleSheet.create({
+  ViewFundo: {
+    backgroundColor: '#00000080',
+    height: '100%',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  ViewModal: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 250,
+    marginHorizontal: 30,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  titulo: {
+    marginVertical: '3%',
+    marginBottom: 15,
+    textAlign: 'center',
+    justifyContent: 'center',
+    fontFamily: 'Roboto',
+    fontSize: 22,
+    fontWeight: 'bold',
+  },
+  descricao: {
+    marginBottom: '3%',
+    textAlign: 'center',
+    justifyContent: 'center',
+    fontFamily: 'Roboto',
+    fontSize: 15,
+  },
+  botao: {
+    alignSelf: 'center',
+    backgroundColor: '#142850',
+    borderRadius: 5,
+    padding: 10,
+    elevation: 2,
+    justifyContent: 'center',
+    height: 50,
+    width: '40%',
+  },
+  botaoCancelar: {
+    alignSelf: 'center',
+    backgroundColor: '#ffffff',
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 10,
+    elevation: 2,
+    justifyContent: 'center',
+    height: 50,
+    width: '40%',
+  },
+  botaoTxt: {
+    color: '#ffffff',
+    fontFamily: 'Roboto',
+    textAlign: 'center',
+    fontSize: 20,
+  },
+  botaoTxtCancelar: {
+    color: '#142850',
+    fontFamily: 'Roboto',
+    textAlign: 'center',
+    fontSize: 20,
+  },
+  V_botoes: {
+    marginTop: '5%',
+    flexDirection: 'row',
+    height: 70,
+    width: 300,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+});
+
+export default style;

@@ -105,23 +105,23 @@ class Cabeca extends Component {
                   <Text style={Estilos.textBotoes}>Meus Anuncios</Text>
                   <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
                 </Button>
+                <Button
+                  onPress={() => {
+                    this.props.navigation.navigate('Viagens'),
+                      this.setState({ isModalVisible: false });
+                  }}
+                  style={Estilos.botoes}
+                >
+                  <Icon style={Estilos.iconBotoes} name="question" />
+                  <Text style={Estilos.textBotoes}>Meus interesses</Text>
+                  <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
+                </Button>
                 <Button style={Estilos.botoes}>
                   <Icon style={Estilos.iconBotoes} name="pencil" />
                   <Text style={Estilos.textBotoes}>Editar perfil</Text>
                   <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
                 </Button>
-                <Button
-                  onPress={() => {
-                    Linking.openURL(
-                      'https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849'
-                    );
-                  }}
-                  style={Estilos.botoes}
-                >
-                  <Icon style={Estilos.iconBotoes} name="question" />
-                  <Text style={Estilos.textBotoes}>Me ajuda</Text>
-                  <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
-                </Button>
+
                 <Button
                   onPress={() => {
                     Linking.openURL(

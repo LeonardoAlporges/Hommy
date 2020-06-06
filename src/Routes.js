@@ -18,6 +18,8 @@ import DetalhesCarona from './pages/DetalhesCarona';
 import Teste from './teste';
 import CadastroCaronas from './pages/CadastroCarona';
 import SplashScreen from './pages/SplashScreen';
+import Interessados from './pages/Interessados';
+import Viagens from './pages/Viagens';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 
 const Navegação = createAppContainer(
@@ -28,9 +30,11 @@ const Navegação = createAppContainer(
         CadastroUsuario: CadastroUsuario,
       }),
       App: createStackNavigator({
-        //Teste,
+        Teste,
+        Viagens,
         TabsHeader: TabsHeader,
         Anuncios,
+        Interessados,
         CadastroCaronas,
         DetalhesCarona: DetalhesCarona,
         Caronas: Caronas,

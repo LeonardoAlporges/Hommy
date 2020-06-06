@@ -142,7 +142,7 @@ class Anuncios extends Component {
 
   render() {
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         <View style={estilo.V_header}>
           <TouchableOpacity
             onPress={() => {
@@ -216,6 +216,17 @@ class Anuncios extends Component {
                             >
                               <Icon style={estilo.icon} name="pencil-outline" />
                               <Text style={estilo.TxtEdit}>Editar</Text>
+                            </Button>
+                            <Button
+                              style={estilo.ver}
+                              onPress={() => {
+                                this.props.navigation.navigate('Interessados');
+                              }}
+                            >
+                              <Icon style={estilo.icon} name="pencil-outline" />
+                              <Text style={estilo.TxtEdit}>
+                                Ver interessados{' '}
+                              </Text>
                             </Button>
                           </View>
                         </View>

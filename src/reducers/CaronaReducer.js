@@ -11,6 +11,7 @@ const initialState = {
   vagas: '',
   imagem: '',
   notaCarona: '',
+  emailOfertante: '',
 };
 
 const CaronaReducer = (state = [], action) => {
@@ -53,6 +54,9 @@ const CaronaReducer = (state = [], action) => {
   }
   if (action.type == 'editNotaCarona') {
     return { ...state, notaCarona: action.payload.notaCarona };
+  }
+  if (action.type == 'editEmailOfertante') {
+    return { ...state, emailOfertante: action.payload.emailOfertante };
   }
 
   return state;

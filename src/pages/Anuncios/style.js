@@ -20,7 +20,6 @@ const estilo = StyleSheet.create({
     marginTop: '3%',
     width: '100%',
     height: '100%',
-    flex: 1,
   },
   iconHeader: {
     fontSize: 26,
@@ -94,6 +93,7 @@ const estilo = StyleSheet.create({
   V_edit: {
     marginTop: '0%',
     width: '100%',
+    flexDirection: 'row',
     height: 40,
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
@@ -102,6 +102,17 @@ const estilo = StyleSheet.create({
     borderRadius: 7,
     height: 34,
     width: 100,
+    backgroundColor: '#142850',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    color: '#ffffff',
+  },
+  ver: {
+    borderRadius: 7,
+    height: 34,
+    width: 200,
+    marginLeft: 20,
     backgroundColor: '#142850',
     justifyContent: 'center',
     alignItems: 'center',

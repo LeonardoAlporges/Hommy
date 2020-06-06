@@ -15,6 +15,7 @@ import {
   editSaida,
   editVagas,
   editValor,
+  editEmailOfertante,
 } from '../../actions/CaronaActions';
 
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
@@ -39,6 +40,7 @@ class CartaoCarona extends Component {
     this.props.editSaida(dados.localSaida);
     this.props.editVagas(dados.vagas);
     this.props.editValor(dados.valor);
+    this.props.editEmailOfertante(dados.userEmail);
     this.props.navigation.navigate('DetalhesCarona');
   };
 
@@ -123,6 +125,7 @@ const CartaoCaronaConnect = connect(
     editSaida,
     editVagas,
     editValor,
+    editEmailOfertante,
   }
 )(CartaoCarona);
 
