@@ -6,6 +6,7 @@ import { Text } from 'native-base';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import api from '../../service/api';
 import { connect } from 'react-redux';
+import { withNavigation } from 'react-navigation';
 class CartaoUser extends Component {
   state = {
     modal: false,
@@ -41,14 +42,21 @@ class CartaoUser extends Component {
   render() {
     return (
       <View style={style.card}>
-        <View style={style.V_imagem}>
+        <TouchableOpacity
+          onPress={() => {
+            this.props.navigation.navigate('Perfil', {
+              dados: this.props.dados,
+            });
+          }}
+          style={style.V_imagem}
+        >
           <Image
             style={style.Imagem}
             source={{
               uri: this.props.dados.fotoPerfil,
             }}
           />
-        </View>
+        </TouchableOpacity>
         <View style={style.V_nome}>
           <Text style={style.nome}>{this.props.dados.nome}</Text>
         </View>
@@ -88,4 +96,4 @@ const CartaoUserConnect = connect(
   null
 )(CartaoUser);
 
-export default CartaoUserConnect;
+export default withNavigation(CartaoUserConnect);

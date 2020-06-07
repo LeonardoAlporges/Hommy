@@ -5,12 +5,11 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import Reducers from './reducers';
-import Teste from './teste';
 
 const store = createStore(Reducers, applyMiddleware(ReduxThunk));
 class App extends Component {
   render() {
-    console.disableYellowBox = true;
+    console.disableYellowBox = false;
     return (
       <Provider store={store}>
         <Routes />

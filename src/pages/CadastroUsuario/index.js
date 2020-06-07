@@ -17,6 +17,8 @@ import { View } from 'native-base';
 import api from '../../service/api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import TextInputMask from 'react-native-text-input-mask';
+import HeaderBack from '../../components/CustomHeader';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class CadastroUsuario extends Component {
   static navigationOptions = { header: null };
@@ -25,10 +27,13 @@ class CadastroUsuario extends Component {
     imageURI: '',
     upload: false,
     modalLoadVisible: false,
+    load: false,
+    erro: false,
   };
 
   EnviarCadastro = async value => {
-    this.setState({ modalLoadVisible: false });
+    console.log('OKK', value);
+    this.setState({ modalLoadVisible: true, erro: false });
     value.fotoPerfil = this.state.imageURI;
 
     await api
@@ -36,12 +41,11 @@ class CadastroUsuario extends Component {
       .then(responseJson => {
         console.log(responseJson);
         this.setState({ modalLoadVisible: false });
-        this.props.navigation.navigate('Login');
+        this.props.navigation.navigate('Confirmacao');
       })
       .catch(error => {
         console.log(error);
-        this.setState({ modalLoadVisible: false });
-        this.props.navigation.navigate('Login');
+        this.setState({ modalLoadVisible: false, erro: true });
       });
   };
 
@@ -50,18 +54,20 @@ class CadastroUsuario extends Component {
       const progress = uploadProgress(
         snapshot.bytesTransferred / snapshot.totalBytes
       );
+      console.log(snapshot);
       switch (snapshot.state) {
         case 'running':
           this.setState({
             imageURI: null,
-            upload: false,
+            upload: true,
+            load: true,
           });
 
           break;
         case 'success':
           snapshot.ref.getDownloadURL().then(downloadURL => {
             console.log(downloadURL);
-            this.setState({ imageURI: downloadURL, upload: true });
+            this.setState({ imageURI: downloadURL, upload: true, load: false });
           });
           break;
         default:
@@ -74,24 +80,38 @@ class CadastroUsuario extends Component {
     ImagePicker.launchImageLibrary(imagePickerOptions, imagePickerResponse => {
       const { didCancel, error } = imagePickerResponse;
       if (didCancel) {
-        alert('Post canceled');
+        alert('Envio cancelado');
       } else if (error) {
-        alert('An error occurred: ', error);
+        alert('Ocorreu um erro: ', error);
       } else {
         const uploadTask = uploadFileToFireBaseUser(imagePickerResponse);
         this.monitorFileUpload(uploadTask);
       }
     });
   };
+
+  navegar = () => {
+    this.props.navigation.goBack(null);
+  };
   render() {
     return (
       <ScrollView>
+        <HeaderBack
+          title="Cadastro de usuario"
+          onNavigation={() => this.navegar()}
+        />
         <View style={estilo.container}>
           {this.state.upload ? (
-            <Image
-              source={{ uri: this.state.imageURI }}
-              style={estilo.imagemStyle}
-            />
+            <View>
+              {this.state.load ? (
+                <Spinner color="#27496d" />
+              ) : (
+                <Image
+                  source={{ uri: this.state.imageURI }}
+                  style={estilo.imagemStyle}
+                />
+              )}
+            </View>
           ) : (
             <Image
               source={require('../../assets/Img/Republica_Send_Pictures.png')}
@@ -159,6 +179,9 @@ class CadastroUsuario extends Component {
                       name="account-outline"
                     />
                     <Input
+                      autoFocus={true}
+                      placeholderTextColor="#2e2e2e"
+                      style={estilo.labelInput}
                       value={values.nome} //NOME
                       onChangeText={handleChange('nome')}
                       onBlur={() => setFieldTouched('nome')}
@@ -167,10 +190,12 @@ class CadastroUsuario extends Component {
                   </Item>
                 </View>
 
-                {touched.nome && errors.nome && (
+                {touched.nome && errors.nome ? (
                   <View style={estilo.V_Erro}>
                     <Text style={estilo.txtErro}>{errors.nome}</Text>
                   </View>
+                ) : (
+                  <View style={estilo.V_ErroSem} />
                 )}
 
                 <View style={estilo.view_CamposLogin}>
@@ -181,6 +206,8 @@ class CadastroUsuario extends Component {
                       name="email-outline"
                     />
                     <Input
+                      placeholderTextColor="#2e2e2e"
+                      style={estilo.labelInput}
                       value={values.email} //EMAIL
                       onChangeText={handleChange('email')}
                       placeholder="E-mail"
@@ -188,10 +215,12 @@ class CadastroUsuario extends Component {
                     />
                   </Item>
                 </View>
-                {touched.email && errors.email && (
+                {touched.email && errors.email ? (
                   <View style={estilo.V_Erro}>
                     <Text style={estilo.txtErro}>{errors.email}</Text>
                   </View>
+                ) : (
+                  <View style={estilo.V_ErroSem} />
                 )}
 
                 <View style={estilo.view_CamposLogin}>
@@ -202,6 +231,8 @@ class CadastroUsuario extends Component {
                       name="phone-outline"
                     />
                     <TextInputMask
+                      placeholderTextColor="#2e2e2e"
+                      style={estilo.labelInput}
                       keyboardType="number-pad"
                       mask={'([00]) [00000]-[0000]'}
                       value={values.celular} //celular
@@ -211,10 +242,12 @@ class CadastroUsuario extends Component {
                     />
                   </Item>
                 </View>
-                {touched.celular && errors.celular && (
+                {touched.celular && errors.celular ? (
                   <View style={estilo.V_Erro}>
                     <Text style={estilo.txtErro}>{errors.celular}</Text>
                   </View>
+                ) : (
+                  <View style={estilo.V_ErroSem} />
                 )}
 
                 <View style={estilo.view_CamposLogin}>
@@ -225,6 +258,8 @@ class CadastroUsuario extends Component {
                       name="key-outline"
                     />
                     <Input
+                      placeholderTextColor="#2e2e2e"
+                      style={estilo.labelInput}
                       value={values.password} //Senha
                       onChangeText={handleChange('password')}
                       placeholder="Senha"
@@ -232,96 +267,39 @@ class CadastroUsuario extends Component {
                     />
                   </Item>
                 </View>
-                {touched.password && errors.password && (
+                {touched.password && errors.password ? (
                   <View style={estilo.V_Erro}>
                     <Text style={estilo.txtErro}>{errors.password}</Text>
                   </View>
+                ) : (
+                  <View style={estilo.V_ErroSem} />
                 )}
-
+                {console.log(isValid)}
                 <View style={estilo.view_BotaoEntar}>
-                  <Button style={estilo.botao_login} onPress={handleSubmit}>
+                  <Button
+                    disabled={!isValid}
+                    style={estilo.botao_login}
+                    onPress={() => this.EnviarCadastro(values)}
+                  >
                     <Text style={estilo.textoLabel}>Enviar</Text>
                   </Button>
-                </View>
-                <View>
-                  <Modal
-                    animationType="fade"
-                    transparent={true}
-                    visible={this.state.modalLoadVisible}
-                  >
-                    <View style={estilo.ViewFundo}>
-                      <View style={estilo.ViewModal}>
-                        <Spinner color="red" />
-                      </View>
-                    </View>
-                  </Modal>
                 </View>
               </Fragment>
             )}
           </Formik>
-          {/* <Modal transparent={true} visible={this.state.isModalVisible}>
-          <View
-            style={{
-              backgroundColor: 'rgba(0,0,0,0.7)',
-              flex: 1,
-            }}
+        </View>
+        <View>
+          <Modal
+            animationType="fade"
+            transparent={true}
+            visible={this.state.modalLoadVisible}
           >
-            <View
-              style={{
-                backgroundColor: '#ffff',
-  
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginVertical: '55%',
-                marginHorizontal: '10%',
-                padding: 40,
-                borderRadius: 10,
-                height: 100,
-                flex: 1,
-              }}
-            >
-              <Image
-                source={{
-                  uri:
-                    'https://firebasestorage.googleapis.com/v0/b/republicas.appspot.com/o/Pictures%20Ilustrations%2FBug.png?alt=media&token=23b94406-dab1-4f51-9082-6c9429a27e07',
-                }}
-                style={{ width: 175, height: 175, marginTop: '80%' }}
-              />
-              <Text
-                style={{
-                  width: 200,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginTop: '5%',
-                  fontSize: 20,
-                  fontWeight: '600',
-                  fontFamily: 'Roboto',
-                  color: '#000',
-                }}
-              >
-                Nome de Usuario ou Email ja cadastrados
-              </Text>
-  
-              <Button
-                style={{
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  position: 'absolute',
-  
-                  bottom: 25,
-                  width: '70%',
-                  backgroundColor: 'rgba(29,161,242,1)',
-                  color: '#fff',
-                }}
-                onPress={() => {
-                  this.setState({ isModalVisible: false });
-                }}
-              >
-                <Text>Voltar</Text>
-              </Button>
+            <View style={estilo.ViewFundo}>
+              <View style={estilo.ViewModal}>
+                <Spinner color="red" />
+              </View>
             </View>
-          </View>
-        </Modal> */}
+          </Modal>
         </View>
       </ScrollView>
     );

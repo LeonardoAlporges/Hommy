@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import AsyncStorage from '@react-native-community/async-storage';
 
 import PageAnuncio from './pages/PageAnuncio';
 import Cadastro from './pages/Cadastro/index';
@@ -15,11 +14,13 @@ import Confirmacao from './components/Confirmacao';
 import Anuncios from './pages/Anuncios';
 import Caronas from './pages/Caronas';
 import DetalhesCarona from './pages/DetalhesCarona';
-import Teste from './teste';
+import RenderApp from './pages/RenderApp/RenderApp';
 import CadastroCaronas from './pages/CadastroCarona';
 import SplashScreen from './pages/SplashScreen';
 import Interessados from './pages/Interessados';
 import Viagens from './pages/Viagens';
+import Perfil from './pages/Perfil';
+import EsqueciSenha from './pages/EsqueciSenha';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 
 const Navegação = createAppContainer(
@@ -30,21 +31,24 @@ const Navegação = createAppContainer(
         CadastroUsuario: CadastroUsuario,
       }),
       App: createStackNavigator({
-        Teste,
+        RenderApp,
+        Confirmacao,
+        EsqueciSenha,
+        Perfil,
         Viagens,
-        TabsHeader: TabsHeader,
+        TabsHeader,
         Anuncios,
         Interessados,
         CadastroCaronas,
-        DetalhesCarona: DetalhesCarona,
-        Caronas: Caronas,
-        Anuncios: Anuncios,
+        DetalhesCarona,
+        Caronas,
+        Anuncios,
         Detalhes: PageAnuncio,
-        DetalhesServicos: DetalhesServicos,
-        Republica: Republica,
-        Servicos: Servicos,
-        Cadastro: Cadastro,
-        Confirmacao: Confirmacao,
+        DetalhesServicos,
+        Republica,
+        Servicos,
+        Cadastro,
+        Confirmacao,
         SplashScreen,
       }),
     },
@@ -56,6 +60,14 @@ const Navegação = createAppContainer(
       },
     }
   )
+  // createDrawerNavigator(
+  //   {
+  //     TabsHeader,
+  //   },
+  //   {
+  //     initialRouteName: 'TabsHeader',
+  //   }
+  // )
 );
 
 export default Navegação;

@@ -1,20 +1,20 @@
-import react from 'react';
 import { StyleSheet } from 'react-native';
 
 const estilo = StyleSheet.create({
   container: {
-    paddingTop: '10%',
+    width: '100%',
+    height: '100%',
+
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    height: '100%',
+
     justifyContent: 'center',
   },
 
   view_CamposLogin: {
     height: 40,
     width: 330,
-    marginTop: 20,
   },
 
   icons_CamposLogin: {
@@ -34,6 +34,7 @@ const estilo = StyleSheet.create({
   },
   view_BotaoEntar: {
     marginTop: '10%',
+    marginBottom: '5%',
     height: 60,
     width: 150,
   },
@@ -64,8 +65,11 @@ const estilo = StyleSheet.create({
     fontSize: 10,
     color: 'red',
   },
+  V_ErroSem: {
+    height: 15,
+  },
   V_Erro: {
-    marginTop: 10,
+    marginBottom: 20,
     width: '80%',
     height: 15,
   },
@@ -75,10 +79,9 @@ const estilo = StyleSheet.create({
     borderRadius: 50,
   },
   V_Btn: {
-    display: 'flex',
     width: '100%',
+    paddingLeft: '32%',
     height: 100,
-    alignContent: 'center',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -101,6 +104,14 @@ const estilo = StyleSheet.create({
     height: 50,
     marginHorizontal: 30,
     alignItems: 'center',
+  },
+  labelInput: {
+    fontSize: 16,
+    fontFamily: 'Roboto',
+    marginLeft: '2%',
+    width: '88%',
+    height: 40,
+    color: '#142850',
   },
 });
 

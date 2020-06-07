@@ -13,6 +13,13 @@ export default class CustomModal extends Component {
   constructor(props) {
     super(props);
   }
+
+  navegar = props => {
+    this.setState({ modalVisible: false });
+    if (this.props.onAction != null) {
+      this.props.onAction();
+    }
+  };
   UNSAFE_componentWillMount() {
     if (this.props.parametro == 'Custom') {
       this.setState({
@@ -66,7 +73,10 @@ export default class CustomModal extends Component {
               <Text style={Estilos.descricao}>{this.state.descricao}</Text>
               <TouchableOpacity
                 style={Estilos.botao}
-                onPress={async () => {this.setState({ modalVisible: false });}}              >
+                onPress={async () => {
+                  this.navegar();
+                }}
+              >
                 <Text style={Estilos.botaoTxt}>{this.state.botao}</Text>
               </TouchableOpacity>
             </View>

@@ -6,12 +6,12 @@ import { Button, View, Item, Input } from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import TextInputMask from 'react-native-text-input-mask';
 import { withNavigation } from 'react-navigation';
-import CustomModal from '../Alert';
+import CustomModal from '../../components/Alert';
 
-import estilo from './style';
-import HeaderBack from '../CustomHeader';
+import estilo from './styles';
+import HeaderBack from '../../components/CustomHeader';
 
-class Confirmacao extends Component {
+class EsqueciSenha extends Component {
   static navigationOptions = { header: null };
   state = {
     erro: false,
@@ -118,4 +118,4 @@ class Confirmacao extends Component {
   }
 }
 
-export default withNavigation(Confirmacao);
+export default withNavigation(EsqueciSenha);

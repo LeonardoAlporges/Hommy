@@ -19,8 +19,8 @@ class ModalConfirmacao extends Component {
           <View style={style.ViewModal}>
             <Text style={style.titulo}>Deseja Aceitar ?</Text>
             <Text style={style.descricao}>
-              Leoanardo sera notificado e voce recebera o telefone de contato do
-              mesmo
+              Leoanardo sera notificado que foi aceito e terá acesso ao seu
+              numero de telefone para entrar em contato caso nessesario
             </Text>
             <View style={style.V_botoes}>
               <Button

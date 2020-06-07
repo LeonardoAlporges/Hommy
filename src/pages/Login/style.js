@@ -52,9 +52,10 @@ const style = StyleSheet.create({
 
   V_botoes: {
     alignItems: 'center',
-    height: 50,
-    width: '60%',
-    marginTop: '10%',
+    justifyContent: 'space-evenly',
+    height: 150,
+    width: '50%',
+    marginTop: 30,
     alignItems: 'center',
   },
   V_cadastrar: {
@@ -101,6 +102,21 @@ const style = StyleSheet.create({
   },
   iconStyle: {
     fontSize: 25,
+  },
+  ViewFundo: {
+    height: '100%',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#00000080',
+  },
+  ViewModal: {
+    backgroundColor: 'rgba(52, 52, 52, 0)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 50,
+    marginHorizontal: 30,
+    alignItems: 'center',
   },
 });
 

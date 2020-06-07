@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Spinner } from 'native-base';
-import { View, Text, Image } from 'react-native';
+import { View, Image } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
-import TabsHeader from './pages/Tabs';
-import Login from './pages/Login';
 import {
   editNome,
   editEmail,
@@ -14,10 +12,11 @@ import {
   editNota,
   editTelefone,
   editFoto,
-} from './actions/UserAction';
-import SplashScreen from './pages/SplashScreen';
+} from '../../actions/UserAction';
+import SplashScreen from '../SplashScreen';
+import style from './styles';
 
-class Teste extends Component {
+class RenderApp extends Component {
   static navigationOptions = { header: null };
   state = {
     load: true,
@@ -38,14 +37,11 @@ class Teste extends Component {
 
       await AsyncStorage.getItem('token').then(value => {
         if (value != null) {
-          console.log('tOKEN SALVO->', value);
           this.setState({ logado: true });
         } else {
-          console.log('USER NAO LOGADO');
           this.setState({ logado: false });
         }
       });
-      console.log('Buscando User');
       await AsyncStorage.getItem('user').then(value => {
         if (value != null) {
           const dados = JSON.parse(value);
@@ -56,13 +52,11 @@ class Teste extends Component {
           this.props.editLogado(dados.usuario);
           this.props.editTelefone(dados.celular);
           this.props.editFoto(dados.fotoPerfil);
-          this.props.editNota('3.1');
-          console.log('???', dados);
+          this.props.editNota(dados.nota);
         }
       });
     } catch (erro) {
       this.setState({ logado: false });
-      console.log('Nao tem nada no Storage');
     }
     setTimeout(() => {
       this.setState({ load: false });
@@ -78,29 +72,12 @@ class Teste extends Component {
     return (
       <View>
         {this.state.load ? (
-          <View
-            style={{
-              width: '100%',
-              height: '100%',
-              backgroundColor: '#142850',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
+          <View style={style.load}>
             <Image
-              style={{ width: 200, height: 200 }}
-              source={require('./assets/Img/Splash.png')}
+              style={style.imagem}
+              source={require('../../assets/Img/Splash.png')}
             />
-            <View
-              style={{
-                width: 80,
-                height: 80,
-                justifyContent: 'center',
-                alignItems: 'center',
-                position: 'absolute',
-                bottom: 30,
-              }}
-            >
+            <View style={style.V_spinner}>
               <Spinner color="#ffffff" />
             </View>
           </View>
@@ -134,6 +111,6 @@ const TesteConnect = connect(
     editTelefone,
     editFoto,
   }
-)(Teste);
+)(RenderApp);
 
 export default TesteConnect;

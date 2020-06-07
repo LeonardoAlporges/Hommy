@@ -39,6 +39,7 @@ const style = StyleSheet.create({
     bottom: 30,
   },
   botao: {
+    borderRadius: 6,
     width: '100%',
     height: 50,
     justifyContent: 'center',
