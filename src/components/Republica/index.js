@@ -10,7 +10,7 @@ import {
 
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import { connect } from 'react-redux';
-import { withNavigation } from 'react-navigation';
+import { withNavigation, NavigationEvents } from 'react-navigation';
 import { CheckBox, ListItem, Button, Fab, Input, Item } from 'native-base';
 
 import Estilos from './style';
@@ -342,6 +342,9 @@ class Republica extends Component {
   render() {
     return (
       <View style={Estilos.V_completa}>
+        <NavigationEvents
+          onDidFocus={this.getListRepublica}
+        />
         <View>
           {this.state.loading ? (
             <View style={Estilos.V_republicas}>
@@ -361,17 +364,17 @@ class Republica extends Component {
               </Text>
             </View>
           ) : (
-            <View>
-              <FlatList
-                style={Estilos.flatList}
-                data={this.state.listaRepublicas}
-                renderItem={({ item }) => <Cartao leonardo={item} />}
-                keyExtractor={item => item._id}
-                refreshing={this.state.refreshing}
-                onRefresh={this.getListRepublica}
-              />
-            </View>
-          )}
+                <View>
+                  <FlatList
+                    style={Estilos.flatList}
+                    data={this.state.listaRepublicas}
+                    renderItem={({ item }) => <Cartao leonardo={item} />}
+                    keyExtractor={item => item._id}
+                    refreshing={this.state.refreshing}
+                    onRefresh={this.getListRepublica}
+                  />
+                </View>
+              )}
         </View>
         <View style={Estilos.V_filtroExterno}>
           <Modal
@@ -530,8 +533,8 @@ class Republica extends Component {
           {this.state.active ? (
             <Icon name="arrow-down" />
           ) : (
-            <Icon name="arrow-up" />
-          )}
+              <Icon name="arrow-up" />
+            )}
 
           <Button
             style={Estilos.corFAB}

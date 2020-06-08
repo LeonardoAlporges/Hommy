@@ -21,7 +21,7 @@ import {
   editValor,
 } from '../../actions/CaronaActions';
 import { connect } from 'react-redux';
-import { withNavigation } from 'react-navigation';
+import { withNavigation, NavigationEvents } from 'react-navigation';
 
 import {
   CheckBox,
@@ -235,6 +235,9 @@ class Caronas extends Component {
   render() {
     return (
       <View style={Estilo.V_externa}>
+         <NavigationEvents
+          onDidFocus={this.getListCarona}
+        />
         {this.state.loading ? (
           <View style={Estilo.V_interna1}>
             <Spinner color="#27496d" />
@@ -271,7 +274,7 @@ class Caronas extends Component {
             visible={this.state.modalVisible}
             transparent={true}
           >
-            <View style={Estilo}>
+            <View style={Estilo.V_modalInterno}>
               <Text>Valor</Text>
               <ListItem style={Estilo.listStyle}>
                 <Text style={Estilo.textList}>De</Text>
@@ -330,7 +333,7 @@ class Caronas extends Component {
                   <Picker
                     mode="dropdown"
                     iosIcon={<Icon name="arrow-down" />}
-                    style={{ width: undefined }}
+                    style={{ width: 140 }}
                     placeholder="Destino"
                     placeholderStyle={{ color: '#bfc6ea' }}
                     placeholderIconColor="#007aff"
@@ -362,7 +365,7 @@ class Caronas extends Component {
                   <Picker
                     mode="dropdown"
                     iosIcon={<Icon name="arrow-down" />}
-                    style={{ width: undefined }}
+                    style={{ width: 140 }}
                     placeholder="Destino"
                     placeholderStyle={{ color: '#bfc6ea' }}
                     placeholderIconColor="#007aff"
