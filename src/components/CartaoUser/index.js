@@ -10,6 +10,9 @@ import { withNavigation } from 'react-navigation';
 class CartaoUser extends Component {
   state = {
     modal: false,
+    mensagem: '',
+    confirmar: false,
+    rejeitar: false,
   };
 
   mudarStatusInteressado = number => {
@@ -28,15 +31,16 @@ class CartaoUser extends Component {
     } else if (number === 0) {
       api
         .put(`/carona/rejeitar/${this.props.email}`, {
-          UsuarioConfirmado: this.props.dados.email,
+          UsuarioRejeitado: this.props.dados.email,
         })
         .then(responseJson => {
-          console.log('USUARIO ACEITO', responseJson);
+          console.log('USUARIO Rejeitado', responseJson);
         })
         .catch(error => {
           console.log('erro:', error);
         });
     }
+    this.props.callback();
   };
 
   render() {
@@ -46,6 +50,7 @@ class CartaoUser extends Component {
           onPress={() => {
             this.props.navigation.navigate('Perfil', {
               dados: this.props.dados,
+              update: false,
             });
           }}
           style={style.V_imagem}
@@ -67,17 +72,33 @@ class CartaoUser extends Component {
         <View style={style.V_Icon}>
           <TouchableOpacity
             onPress={() => {
-              this.setState({ modal: true });
+              this.setState({
+                mensagem: 'Confirmar',
+                rejeitar: true,
+                modal: true,
+              });
             }}
           >
             <Icon name="check" style={style.iconAceite} />
           </TouchableOpacity>
-
-          <Icon name="close" style={style.iconRejeite} />
+          <TouchableOpacity
+            onPress={() => {
+              this.setState({
+                mensagem: 'Rejeitar',
+                confirmar: true,
+                modal: true,
+              });
+            }}
+          >
+            <Icon name="close" style={style.iconRejeite} />
+          </TouchableOpacity>
         </View>
         {this.state.modal && (
           <ModalConfirmacao
             retornoModal={valor => this.mudarStatusInteressado(valor)}
+            mensagem={this.state.mensagem}
+            rejeitar={this.state.rejeitar}
+            confirmar={this.state.confirmar}
           />
         )}
       </View>

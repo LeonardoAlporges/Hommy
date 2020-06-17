@@ -9,21 +9,10 @@ class ModalConfirmacao extends Component {
     super(props);
     this.state = {
       modalVisible: true,
-      mensagem: this.props.mensagem,
-      confirmar: this.props.confirmar,
-      rejeitar: this.props.rejeitar,
     };
   }
 
-  mudarEstado = () => {
-    if (this.state.confirmar == true) {
-      this.props.retornoModal(1);
-      console.log('Confirmado');
-    } else if (this.state.rejeitar == true) {
-      this.props.retornoModal(0);
-      console.log('rejeitado');
-    }
-  };
+  mudarEstado = () => {};
   render() {
     return (
       <Modal
@@ -33,18 +22,9 @@ class ModalConfirmacao extends Component {
       >
         <View style={style.ViewFundo}>
           <View style={style.ViewModal}>
-            <Text style={style.titulo}>Deseja Aceitar ?</Text>
+            <Text style={style.titulo}>{this.state.titulo}</Text>
             <Text style={style.descricao}>{this.state.mensagem}</Text>
             <View style={style.V_botoes}>
-              <Button
-                style={style.botaoCancelar}
-                onPress={async () => {
-                  this.mudarEstado();
-                  this.setState({ modalVisible: false });
-                }}
-              >
-                <Text style={style.botaoTxtCancelar}>Cancelar</Text>
-              </Button>
               <Button
                 style={style.botao}
                 onPress={async () => {
@@ -52,7 +32,7 @@ class ModalConfirmacao extends Component {
                   this.setState({ modalVisible: false });
                 }}
               >
-                <Text style={style.botaoTxt}>Confirmar</Text>
+                <Text style={style.botaoTxt}>{'Ok'}</Text>
               </Button>
             </View>
           </View>

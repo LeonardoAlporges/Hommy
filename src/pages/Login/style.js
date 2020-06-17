@@ -10,7 +10,7 @@ const style = StyleSheet.create({
   txt_Titulo: {
     fontFamily: 'Roboto Bold',
     fontSize: 35,
-    color: '#27496d',
+    color: '#142850',
   },
 
   txt_FormaDeLogin: {
@@ -30,7 +30,7 @@ const style = StyleSheet.create({
 
   icons_OutroLogin: {
     fontSize: 40,
-    color: '#27496d',
+    color: '#142850',
   },
 
   view_CamposLogin: {
@@ -42,7 +42,7 @@ const style = StyleSheet.create({
   icons_CamposLogin: {
     fontSize: 35,
     margin: 5,
-    color: '#27496d',
+    color: '#142850',
   },
 
   esqueciSenha: {
@@ -77,7 +77,7 @@ const style = StyleSheet.create({
     height: 45,
     width: 200,
     borderRadius: 5,
-    backgroundColor: '#27496d',
+    backgroundColor: '#142850',
   },
   imgStyle: {
     width: 70,

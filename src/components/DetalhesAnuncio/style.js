@@ -14,7 +14,7 @@ const estilo = StyleSheet.create({
   titulo: {
     color: '#142850',
     fontFamily: 'Roboto-bold',
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: 'bold',
   },
   V_descricao: {
@@ -25,7 +25,7 @@ const estilo = StyleSheet.create({
     marginRight: '6%',
   },
   descricao: {
-    color: '#27496d',
+    color: '#142850',
     fontFamily: 'Roboto',
     fontSize: 18,
   },
@@ -88,7 +88,7 @@ const estilo = StyleSheet.create({
     justifyContent: 'flex-start',
     fontSize: 28,
     fontFamily: 'Roboto',
-    color: '#27496d',
+    color: '#142850',
     marginRight: 5,
     fontWeight: '600',
   },

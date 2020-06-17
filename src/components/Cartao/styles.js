@@ -43,10 +43,10 @@ const Estilos = StyleSheet.create({
     paddingTop: 5,
   },
   txtTitulo: {
-    fontSize: 26,
-    fontFamily: 'Roboto-Bold',
+    fontSize: 22,
+    fontFamily: 'Roboto Light',
     fontWeight: 'bold',
-    color: '#27496d',
+    color: '#142850',
   },
   V_desc: {
     width: '100%',
@@ -60,7 +60,7 @@ const Estilos = StyleSheet.create({
     marginHorizontal: 5,
     fontSize: 16,
     fontFamily: 'Roboto',
-    color: '#27496d',
+    color: '#142850',
     fontWeight: '500',
   },
   txtIcon: {
@@ -99,7 +99,7 @@ const Estilos = StyleSheet.create({
   V_vagas: {
     flexDirection: 'row',
     width: '55%',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     paddingTop: 8,
   },
 });

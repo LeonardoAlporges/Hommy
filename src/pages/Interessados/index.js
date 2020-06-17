@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Text, FlatList } from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  FlatList,
+  ScrollView,
+} from 'react-native';
 import { Icon } from 'native-base';
 import style from './style';
 import api from '../../service/api';
 import CartaoUser from '../../components/CartaoUser';
 import ModalConfirmacao from '../../components/ModalConfirmacao';
 import { connect } from 'react-redux';
+import HeaderBack from '../../components/CustomHeader';
 
 class Interessados extends Component {
   static navigationOptions = { header: null };
@@ -13,6 +20,7 @@ class Interessados extends Component {
     user: [],
     userConfirmado: [],
     modal: false,
+    refreshing: false,
   };
 
   UNSAFE_componentWillMount() {
@@ -20,14 +28,16 @@ class Interessados extends Component {
   }
 
   getlist = () => {
+    this.setState({ refreshing: true });
     api
       .get(`/carona/retornaInteresse/${this.props.email}`)
       .then(responseJson => {
         this.setState({
           user: responseJson.data,
-        }).catch(error => {
-          console.log(e);
         });
+      })
+      .catch(error => {
+        console.log('erro:', error);
       });
 
     api
@@ -38,6 +48,13 @@ class Interessados extends Component {
       .catch(error => {
         console.log('erro:', error);
       });
+    this.setState({ refreshing: false });
+  };
+  navegar = () => {
+    this.props.navigation.goBack(null);
+  };
+  onRefreshPage = () => {
+    this.getlist;
   };
 
   render() {
@@ -45,44 +62,53 @@ class Interessados extends Component {
       <View
         style={{ backgroundColor: '#ffffff', width: '100%', height: '100%' }}
       >
-        <View style={style.V_header}>
-          <TouchableOpacity
-            style={{ marginLeft: '5%' }}
-            onPress={() => {
-              this.props.navigation.goBack(null);
-            }}
-          >
-            <Icon name="ios-arrow-back" style={style.iconHeader} />
-          </TouchableOpacity>
-          <Text style={style.title}>Lista de interessados</Text>
-        </View>
-        <View style={style.Listas}>
-          <FlatList
-            style={style.flatList}
-            data={this.state.user}
-            renderItem={({ item }) => <CartaoUser dados={item} />}
-            keyExtractor={item => item._id}
-          />
-        </View>
+        <HeaderBack
+          title="Lista de interessados"
+          onNavigation={() => this.navegar()}
+        />
+        <ScrollView>
+          <View style={style.Listas}>
+            <FlatList
+              style={style.flatList}
+              data={this.state.user}
+              renderItem={({ item }) => (
+                <CartaoUser
+                  callback={() => this.onRefreshPage()}
+                  dados={item}
+                />
+              )}
+              refreshing={this.state.refreshing}
+              onRefresh={this.getlist}
+              keyExtractor={item => item._id}
+            />
+          </View>
 
-        <View style={style.V_title}>
-          <Text style={style.titleCategoria}>Confirmados</Text>
-          <View style={style.barra} />
-        </View>
+          <View style={style.V_title}>
+            <Text style={style.titleCategoria}>Confirmados</Text>
+            <View style={style.barra} />
+          </View>
 
-        <View style={style.Listas}>
-          <FlatList
-            style={style.flatList}
-            data={this.state.userConfirmado}
-            renderItem={({ item }) => <CartaoUser dados={item} />}
-            keyExtractor={item => item._id}
-          />
-        </View>
-        {this.state.modal && (
+          <View style={style.Listas}>
+            <FlatList
+              style={style.flatList}
+              data={this.state.userConfirmado}
+              renderItem={({ item }) => (
+                <CartaoUser
+                  callback={() => this.onRefreshPage()}
+                  dados={item}
+                />
+              )}
+              refreshing={this.state.refreshing}
+              onRefresh={this.getlist}
+              keyExtractor={item => item._id}
+            />
+          </View>
+        </ScrollView>
+        {/* {this.state.modal && (
           <ModalConfirmacao
             retornoModal={valor => mudarStatusInteressado(valor)}
           />
-        )}
+        )} */}
       </View>
     );
   }

@@ -13,18 +13,36 @@ import HeaderBack from '../CustomHeader';
 
 class Confirmacao extends Component {
   static navigationOptions = { header: null };
-  state = {
-    erro: false,
-    sucesso: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      erro: false,
+      sucesso: false,
+      //update: this.props.navigation.state.params.update,
+      titleBotao: '',
+      confirmacao: true,
+    };
+  }
+
   onClickCard = () => {
     this.props.navigation.navigate('Detalhes');
+  };
+
+  navegar = () => {
+    this.props.navigation.goBack(null);
+  };
+
+  ValidarCodigo = values => {
+    this.setState({ confirmacao: false });
   };
 
   render() {
     return (
       <View style={estilo.container}>
-        <HeaderBack title={'Confirmar Email'} />
+        <HeaderBack
+          title={'Confirmar Email'}
+          onNavigation={() => this.navegar()}
+        />
 
         <View style={estilo.V_img}>
           <Image
@@ -43,11 +61,16 @@ class Confirmacao extends Component {
         <Formik
           initialValues={{
             codigo: '',
+            password: '',
           }}
           validationSchema={yup.object().shape({
             codigo: yup
               .string('Somente texto')
               .required('Insira seu nome completo '),
+            password: yup
+              .string('Insira sua senha')
+              .min(4, 'Senha minima é de 4 digitos')
+              .required('Insira uma senha'),
           })}
         >
           {({
@@ -62,45 +85,80 @@ class Confirmacao extends Component {
             <Fragment>
               {this.state.erro ? <CustomModal parametro="Erro" /> : <View />}
 
-              <View style={estilo.view_CamposLogin}>
-                <Item>
-                  <Icon
-                    style={estilo.icons_CamposLogin}
-                    active
-                    name="key-outline"
-                  />
-                  <TextInputMask
-                    mask={'[0]-[0]-[0]-[0]-[0]-[0]'}
-                    placeholderTextColor="#2e2e2e"
-                    style={estilo.labelInput}
-                    value={values.codigo} //NOME
-                    onChangeText={handleChange('codigo')}
-                    onBlur={() => setFieldTouched('codigo')}
-                    placeholder="Nome"
-                  />
-                </Item>
-              </View>
+              {this.state.confirmacao ? (
+                <View>
+                  <View style={estilo.view_CamposLogin}>
+                    <Item>
+                      <Icon
+                        style={estilo.icons_CamposLogin}
+                        active
+                        name="key-outline"
+                      />
+                      <TextInputMask
+                        mask={'[0]-[0]-[0]-[0]-[0]-[0]'}
+                        placeholderTextColor="#2e2e2e"
+                        style={estilo.labelInput}
+                        value={values.codigo} //NOME
+                        onChangeText={handleChange('codigo')}
+                        onBlur={() => setFieldTouched('codigo')}
+                        placeholder="0-0-0-0-0-0"
+                      />
+                    </Item>
+                  </View>
+                  <View>
+                    {touched.codigo && errors.codigo ? (
+                      <View style={estilo.V_Erro}>
+                        <Text style={estilo.txtErro}>{errors.codigo}</Text>
+                      </View>
+                    ) : (
+                      <View style={estilo.V_ErroSem} />
+                    )}
+                  </View>
 
-              {touched.codigo && errors.codigo ? (
-                <View style={estilo.V_Erro}>
-                  <Text style={estilo.txtErro}>{errors.codigo}</Text>
+                  <View style={estilo.V_botao}>
+                    <Button
+                      style={estilo.botao}
+                      onPress={() => {
+                        this.ValidarCodigo(values);
+                      }}
+                    >
+                      <Text style={estilo.txtbtn}>Confirmar</Text>
+                    </Button>
+                  </View>
                 </View>
               ) : (
-                <View style={estilo.V_ErroSem} />
+                <View style={estilo.view_CamposLogin}>
+                  <Item>
+                    <Icon name="key-outline" style={estilo.icons_CamposLogin} />
+                    <Input
+                      value={values.password}
+                      onChangeText={handleChange('password')}
+                      placeholder="Nova senha"
+                      secureTextEntry={true}
+                      onBlur={() => setFieldTouched('password')}
+                    />
+                  </Item>
+                  {touched.password && errors.password && (
+                    <View style={estilo.V_Erro}>
+                      <Text style={estilo.txtErro}>{errors.password}</Text>
+                    </View>
+                  )}
+                  <View style={estilo.V_botao}>
+                    <Button
+                      style={estilo.botao}
+                      onPress={() => {
+                        this.ValidarCodigo(values);
+                      }}
+                    >
+                      <Text style={estilo.txtbtn}>Confirmar</Text>
+                    </Button>
+                  </View>
+                </View>
               )}
             </Fragment>
           )}
         </Formik>
-        <View style={estilo.V_botao}>
-          <Button
-            style={estilo.botao}
-            onPress={() => {
-              this.setState({ sucesso: true });
-            }}
-          >
-            <Text style={estilo.txtbtn}>Confirmar</Text>
-          </Button>
-        </View>
+
         {this.state.sucesso ? (
           <View style={estilo.V_modal}>
             <CustomModal

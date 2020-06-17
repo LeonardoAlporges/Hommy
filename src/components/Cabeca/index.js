@@ -22,6 +22,7 @@ class Cabeca extends Component {
   state = {
     isModalVisible: false,
     erro: false,
+    dados: this.props,
   };
   AbrirUrl = () => {
     Linking.openUrl(
@@ -52,10 +53,14 @@ class Cabeca extends Component {
           <Text style={Estilos.txt}> HOMMY </Text>
         </View>
         <TouchableOpacity
-          style={{ marginHorizontal: 20 }}
+          style={{
+            marginHorizontal: 20,
+            width: 20,
+            height: 20,
+          }}
           onPress={this.closeToken}
         >
-          <Icon style={Estilos.icon2} name="settings" />
+          {/* //<Icon style={Estilos.icon2} name="settings" /> */}
         </TouchableOpacity>
 
         <Modal
@@ -74,22 +79,22 @@ class Cabeca extends Component {
                   <Icon style={Estilos.iconModal} name="arrow-left" />
                 </TouchableOpacity>
               </View>
-              {this.props.fotoPerfil != null ? (
-                <Image
-                  source={{
-                    uri: this.props.fotoPerfil,
-                  }}
-                  style={Estilos.fotoPerfil}
-                />
-              ) : (
-                <Image
-                  source={require('../../assets/Img/ProfilePicture.png')}
-                  style={Estilos.fotoPerfil}
-                />
+              {this.props.fotoPerfil != null && (
+                <View style={Estilos.fotodeperfil}>
+                  <Image
+                    source={{
+                      uri: this.props.fotoPerfil,
+                    }}
+                    style={Estilos.fotoPerfil}
+                  />
+                  <TouchableOpacity style={Estilos.editFoto}>
+                    <Icon style={Estilos.iconBotoesArrow} name="pencil" />
+                  </TouchableOpacity>
+                </View>
               )}
 
               <View style={Estilos.viewNome}>
-                <Text style={Estilos.textNome}>{this.props.usuario}</Text>
+                <Text style={Estilos.textNome}>{this.props.nome}</Text>
                 <Text style={Estilos.textCPF}>{this.props.nota}</Text>
               </View>
               <View style={Estilos.viewDivisor} />
@@ -116,9 +121,18 @@ class Cabeca extends Component {
                   <Text style={Estilos.textBotoes}>Meus interesses</Text>
                   <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
                 </Button>
-                <Button style={Estilos.botoes}>
+                <Button
+                  style={Estilos.botoes}
+                  onPress={() => {
+                    this.props.navigation.navigate('Perfil', {
+                      dados: this.state.dados,
+                      update: true,
+                    });
+                    this.setState({ isModalVisible: false });
+                  }}
+                >
                   <Icon style={Estilos.iconBotoes} name="pencil" />
-                  <Text style={Estilos.textBotoes}>Editar perfil</Text>
+                  <Text style={Estilos.textBotoes}>Meu perfil</Text>
                   <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
                 </Button>
 
@@ -148,7 +162,7 @@ class Cabeca extends Component {
 
 const mapsStateToProps = state => {
   return {
-    usuario: state.user.usuario,
+    nome: state.user.usuario,
     email: state.user.email,
     nota: state.user.notaUser,
     idUser: state.user.idUser,

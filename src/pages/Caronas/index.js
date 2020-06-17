@@ -235,12 +235,10 @@ class Caronas extends Component {
   render() {
     return (
       <View style={Estilo.V_externa}>
-         <NavigationEvents
-          onDidFocus={this.getListCarona}
-        />
+        <NavigationEvents onDidFocus={this.getListCarona} />
         {this.state.loading ? (
           <View style={Estilo.V_interna1}>
-            <Spinner color="#27496d" />
+            <Spinner color="#142850" />
           </View>
         ) : this.state.erro ? (
           <View style={Estilo.V_interna1}>
@@ -299,28 +297,28 @@ class Caronas extends Component {
               <Text>Vagas disponíveis</Text>
               <ListItem style={Estilo.listStyle}>
                 <CheckBox
-                  color="#27496d"
+                  color="#142850"
                   style={Estilo.inputStyle}
                   onPress={this.fVagas1}
                   checked={this.state.filtroVagas1}
                 />
                 <Text style={Estilo.textList}>1</Text>
                 <CheckBox
-                  color="#27496d"
+                  color="#142850"
                   style={Estilo.inputStyle}
                   onPress={this.fVagas2}
                   checked={this.state.filtroVagas2}
                 />
                 <Text style={Estilo.textList}>2</Text>
                 <CheckBox
-                  color="#27496d"
+                  color="#142850"
                   style={Estilo.inputStyle}
                   onPress={this.fVagas3}
                   checked={this.state.filtroVagas3}
                 />
                 <Text style={Estilo.textList}>3</Text>
                 <CheckBox
-                  color="#27496d"
+                  color="#142850"
                   style={Estilo.inputStyle}
                   onPress={this.fVagas4}
                   checked={this.state.filtroVagas4}

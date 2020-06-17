@@ -13,7 +13,7 @@ import Republica from '../../components/Republica';
 import Caronas from '../Caronas';
 
 class TabsHeader extends Component {
-  static navigationOptions = { header: null };
+  static navigationOptions = { header: null, headerLeft: null };
 
   state = {
     loading: true,
@@ -22,12 +22,12 @@ class TabsHeader extends Component {
   render() {
     return (
       <Container>
-        <StatusBar barStyle="light-content" backgroundColor="#000" />
+        <StatusBar barStyle="dark-content" backgroundColor="#fff" />
         <Cabeca />
 
         <Tabs
           initialPage={0}
-          tabBarUnderlineStyle={{ backgroundColor: '#27496d', height: 3 }}
+          tabBarUnderlineStyle={{ backgroundColor: '#142850', height: 3 }}
           tabContainerStyle={{ height: 45 }}
         >
           <Tab

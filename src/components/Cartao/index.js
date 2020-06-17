@@ -22,6 +22,7 @@ import {
   editRua,
   editNumeroCasa,
   editTipoImovel,
+  edituserEmail,
 } from '../../actions/AuthActions';
 
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
@@ -35,28 +36,29 @@ class Cartao extends Component {
   }
 
   onClickCard = () => {
-    const dados = this.props.leonardo;
+    const dados = this.props.data;
     console.log(dados.valorContas);
-    this.props.editNomeRepublica(this.props.leonardo.nomeRepublica);
-    this.props.editValorConta(this.props.leonardo.valorContas);
-    this.props.editValorAluguel(this.props.leonardo.valorAluguel);
-    this.props.editBairro(this.props.leonardo.bairro);
-    this.props.editRua(this.props.leonardo.rua);
-    this.props.editNumeroCasa(this.props.leonardo.numeroCasa);
-    this.props.editPessoas(this.props.leonardo.pessoas);
-    this.props.editAnimal(this.props.leonardo.animal);
-    this.props.editDescricao(this.props.leonardo.descricao);
-    this.props.editAcomodacaoQuarto(this.props.leonardo.acomodacaoQuarto);
-    this.props.editAcomodacaoRepublica(this.props.leonardo.acomodacaoRepublica);
+    this.props.editNomeRepublica(dados.nomeRepublica);
     this.props.editValorConta(dados.valorContas);
-    this.props.editObservacao(this.props.leonardo.observacao);
-    this.props.editGenero(this.props.leonardo.genero);
-    this.props.editNumVagas(this.props.leonardo.numVagas);
-    this.props.editRepresentante(this.props.leonardo.representante);
-    this.props.editTipoImovel(this.props.leonardo.tipoImovel);
-    this.props.editImg1(this.props.leonardo.imagem1);
-    this.props.editImg2(this.props.leonardo.imagem2);
-    this.props.editImg3(this.props.leonardo.imagem3);
+    this.props.editValorAluguel(dados.valorAluguel);
+    this.props.editBairro(dados.bairro);
+    this.props.editRua(dados.rua);
+    this.props.editNumeroCasa(dados.numeroCasa);
+    this.props.editPessoas(dados.pessoas);
+    this.props.editAnimal(dados.animal);
+    this.props.editDescricao(dados.descricao);
+    this.props.editAcomodacaoQuarto(dados.acomodacaoQuarto);
+    this.props.editAcomodacaoRepublica(dados.acomodacaoRepublica);
+    this.props.editValorConta(dados.valorContas);
+    this.props.editObservacao(dados.observacao);
+    this.props.editGenero(dados.genero);
+    this.props.editNumVagas(dados.numVagas);
+    this.props.editRepresentante(dados.representante);
+    this.props.editTipoImovel(dados.tipoImovel);
+    this.props.editImg1(dados.imagem1);
+    this.props.editImg2(dados.imagem2);
+    this.props.editImg3(dados.imagem3);
+    this.props.edituserEmail(dados.userEmail);
 
     this.props.navigation.navigate('Detalhes');
   };
@@ -71,30 +73,30 @@ class Cartao extends Component {
         <View style={Estilos.V_cartao}>
           <View style={Estilos.V_imagem}>
             <Image
-              source={{ uri: this.props.leonardo.imagem1 }}
+              source={{ uri: this.props.data.imagem1 }}
               style={Estilos.V_imagem}
             />
           </View>
           <View style={Estilos.V_TituloDesc}>
             <View style={Estilos.V_titulo}>
               <Text style={Estilos.txtTitulo}>
-                {this.props.leonardo.nomeRepublica}
+                {this.props.data.nomeRepublica}
               </Text>
             </View>
             <View style={Estilos.V_obs}>
-              <Text numberOfLines={2}>{this.props.leonardo.descricao}</Text>
+              <Text numberOfLines={2}>{this.props.data.descricao}</Text>
             </View>
             <View style={Estilos.V_desc}>
               <View style={Estilos.V_valor}>
                 <Icon2 style={Estilos.txtIcon} name="dollar-sign" />
                 <Text style={Estilos.txtDesc}>
-                  R$ {this.props.leonardo.valorAluguel}
+                  R$ {this.props.data.valorAluguel}
                 </Text>
               </View>
               <View style={Estilos.V_vagas}>
                 <Icon style={Estilos.txtIcon} name="people" />
                 <Text style={Estilos.txtDesc}>
-                  {this.props.leonardo.numVagas} Vaga(s)
+                  {this.props.data.numVagas} Vaga(s)
                 </Text>
               </View>
             </View>
@@ -107,7 +109,6 @@ class Cartao extends Component {
 
 const mapStateToProps = state => {
   return {
-    //para pegar do reducer e State."NOME DO REDUCER"."NOME DA PROPIEDADE"
     nomeRepublica: state.auth.nomeRepublica,
     valorAluguel: state.auth.valorAluguel,
     bairro: state.auth.bairro,
@@ -123,7 +124,6 @@ const mapStateToProps = state => {
     imagem3: state.auth.imagem3,
     numVagas: state.auth.numVagas,
     numeroCasa: state.auth.numeroCasa,
-    // Ou seja agora e como se tivessemos duas props dentro do compoennte cadastro
   };
 };
 
@@ -149,6 +149,7 @@ const cardConnect = connect(
     editRepresentante,
     editRua,
     editNumeroCasa,
+    edituserEmail,
   }
 )(Cartao);
 

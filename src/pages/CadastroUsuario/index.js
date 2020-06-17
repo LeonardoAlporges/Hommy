@@ -32,10 +32,12 @@ class CadastroUsuario extends Component {
   };
 
   EnviarCadastro = async value => {
-    console.log('OKK', value);
     this.setState({ modalLoadVisible: true, erro: false });
     value.fotoPerfil = this.state.imageURI;
-
+    if (value.fotoPerfil == '') {
+      value.fotoPerfil =
+        'https://firebasestorage.googleapis.com/v0/b/hommy-d0890.appspot.com/o/pictures%2Fuser%2Fuser.png?alt=media&token=513a85e9-f020-468a-a3a2-74d83423a10d';
+    }
     await api
       .post('/usuario', value)
       .then(responseJson => {
@@ -104,7 +106,7 @@ class CadastroUsuario extends Component {
           {this.state.upload ? (
             <View>
               {this.state.load ? (
-                <Spinner color="#27496d" />
+                <Spinner color="#142850" />
               ) : (
                 <Image
                   source={{ uri: this.state.imageURI }}

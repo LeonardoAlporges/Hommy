@@ -12,19 +12,35 @@ import estilo from './styles';
 import HeaderBack from '../../components/CustomHeader';
 
 class EsqueciSenha extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      erro: false,
+      sucesso: false,
+    };
+  }
   static navigationOptions = { header: null };
-  state = {
-    erro: false,
-    sucesso: false,
-  };
+  state = {};
   onClickCard = () => {
     this.props.navigation.navigate('Detalhes');
+  };
+
+  EnviarCodigo = values => {
+    console.log('Enviando', values);
+    this.setState({ sucesso: true });
+  };
+
+  navegar = () => {
+    this.props.navigation.navigate('Login');
   };
 
   render() {
     return (
       <View style={estilo.container}>
-        <HeaderBack title={'Confirmar Email'} />
+        <HeaderBack
+          title={'Confirmar Email'}
+          onNavigation={() => this.navegar()}
+        />
 
         <View style={estilo.V_img}>
           <Image
@@ -35,19 +51,16 @@ class EsqueciSenha extends Component {
 
         <View style={estilo.V_title}>
           <Text style={estilo.title}>
-            Enviamos um codigo de 6 digitos para seu email, insira ele abaixo
-            para confirmar seu E-mail!
+            Digite o E-mail da conta que você deseja recuperar
           </Text>
         </View>
 
         <Formik
           initialValues={{
-            codigo: '',
+            email: '',
           }}
           validationSchema={yup.object().shape({
-            codigo: yup
-              .string('Somente texto')
-              .required('Insira seu nome completo '),
+            email: yup.string('Somente texto').required('E-mail invalido'),
           })}
         >
           {({
@@ -67,46 +80,46 @@ class EsqueciSenha extends Component {
                   <Icon
                     style={estilo.icons_CamposLogin}
                     active
-                    name="key-outline"
+                    name="email-outline"
                   />
-                  <TextInputMask
-                    mask={'[0]-[0]-[0]-[0]-[0]-[0]'}
+                  <Input
                     placeholderTextColor="#2e2e2e"
                     style={estilo.labelInput}
-                    value={values.codigo} //NOME
-                    onChangeText={handleChange('codigo')}
-                    onBlur={() => setFieldTouched('codigo')}
-                    placeholder="Nome"
+                    value={values.email} //NOME
+                    onChangeText={handleChange('email')}
+                    onBlur={() => setFieldTouched('email')}
+                    placeholder="E-mail"
                   />
                 </Item>
               </View>
 
-              {touched.codigo && errors.codigo ? (
+              {touched.email && errors.email ? (
                 <View style={estilo.V_Erro}>
-                  <Text style={estilo.txtErro}>{errors.codigo}</Text>
+                  <Text style={estilo.txtErro}>{errors.email}</Text>
                 </View>
               ) : (
                 <View style={estilo.V_ErroSem} />
               )}
+              <View style={estilo.V_botao}>
+                <Button
+                  style={estilo.botao}
+                  onPress={() => {
+                    this.EnviarCodigo(values);
+                  }}
+                >
+                  <Text style={estilo.txtbtn}>Solicitar codigo</Text>
+                </Button>
+              </View>
             </Fragment>
           )}
         </Formik>
-        <View style={estilo.V_botao}>
-          <Button
-            style={estilo.botao}
-            onPress={() => {
-              this.setState({ sucesso: true });
-            }}
-          >
-            <Text style={estilo.txtbtn}>Confirmar</Text>
-          </Button>
-        </View>
+
         {this.state.sucesso ? (
           <View style={estilo.V_modal}>
             <CustomModal
               parametro="Sucesso"
               onAction={() => {
-                this.props.navigation.navigate('Login');
+                this.props.navigation.navigate('Confirmacao', { update: true });
               }}
             />
           </View>

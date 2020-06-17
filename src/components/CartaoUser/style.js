@@ -53,9 +53,9 @@ const style = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'Roboto',
   },
-  icon: { fontSize: 14, color: '#27496d' },
+  icon: { fontSize: 14, color: '#142850' },
   iconAceite: {
-    backgroundColor: '#27496d',
+    backgroundColor: '#142850',
     color: '#ffffff',
     padding: 5,
     fontSize: 22,
@@ -68,7 +68,7 @@ const style = StyleSheet.create({
   },
   iconRejeite: {
     backgroundColor: '#f2f2f2',
-    color: '#27496d',
+    color: '#142850',
     padding: 5,
     fontSize: 22,
     textAlign: 'center',

@@ -102,7 +102,7 @@ const estilo = StyleSheet.create({
     fontFamily: 'Roboto',
     fontSize: 14,
     color: '#687368',
-    marginBottom: 25,
+    marginHorizontal: 20,
   },
   rowStyle: {
     flexDirection: 'row',

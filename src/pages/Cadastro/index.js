@@ -146,6 +146,17 @@ export class Cadastro extends Component {
 
   async entrar(values) {
     this.setState({ modalLoadVisible: true });
+    console.log;
+    if (
+      this.state.imageURI0 == null &&
+      this.state.imageURI1 == null &&
+      this.state.imageURI2 == null
+    ) {
+      this.setState({
+        imageURI0:
+          'https://firebasestorage.googleapis.com/v0/b/hommy-d0890.appspot.com/o/pictures%2Fuser%2Fsemimagem.jpg?alt=media&token=dbb11e1c-9664-46d6-b65a-be4169810291',
+      });
+    }
     this.data = {
       imagem1: this.state.imageURI0,
       imagem2: this.state.imageURI1,
@@ -307,8 +318,8 @@ export class Cadastro extends Component {
 
                   <View style={estilo.V_Conteudo}>
                     <Text style={estilo.textRepublica}>
-                      Cadastre algumas informações para fazer o registro
-                      de sua república.
+                      Cadastre algumas informações para fazer o registro de sua
+                      república.
                     </Text>
 
                     <View>
@@ -384,7 +395,9 @@ export class Cadastro extends Component {
                     </View>
 
                     <View style={estilo.camposAmb} inlineLabel>
-                      <Label style={estilo.txtLabel}>Descrição do Ambiente</Label>
+                      <Label style={estilo.txtLabel}>
+                        Descrição do Ambiente
+                      </Label>
                       <Item>
                         <Input
                           value={values.descricao}
@@ -645,9 +658,7 @@ export class Cadastro extends Component {
                     </View>
 
                     <View style={estilo.campos} inlineLabel>
-                      <Label style={estilo.txtLabel}>
-                        Mobília do Quarto
-                      </Label>
+                      <Label style={estilo.txtLabel}>Mobília do Quarto</Label>
                       <Item>
                         <Input
                           style={estilo.place}
@@ -667,7 +678,7 @@ export class Cadastro extends Component {
 
                     <View style={estilo.campos} inlineLabel>
                       <Label style={estilo.txtLabel}>
-                      Mobília e eletrodomésticos de uso comum
+                        Mobília e eletrodomésticos de uso comum
                       </Label>
                       <Item>
                         <Input

@@ -47,13 +47,38 @@ const Estilos = StyleSheet.create({
   iconModal: {
     marginTop: 8,
     fontSize: 20,
-    color: '#27496d'
+    color: '#142850',
+  },
+  fotodeperfil: {
+    width: 120,
+    height: 130,
   },
   fotoPerfil: {
     width: 120,
     height: 120,
     borderRadius: 100,
     marginBottom: '2%',
+  },
+  editFoto: {
+    position: 'absolute',
+    borderRadius: 10,
+    top: 90,
+    left: 85,
+    width: 30,
+    height: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#142850',
+
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 12,
+    },
+    shadowOpacity: 0.58,
+    shadowRadius: 16.0,
+
+    elevation: 24,
   },
   viewNome: {
     width: 300,
@@ -64,7 +89,7 @@ const Estilos = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     fontFamily: 'Roboto',
-    color: '#27496d',
+    color: '#142850',
   },
   textCPF: {
     fontSize: 14,
@@ -77,10 +102,10 @@ const Estilos = StyleSheet.create({
     marginLeft: '6%',
     marginRight: '6%',
     borderBottomWidth: 1,
-    borderBottomColor: '#27496d',
+    borderBottomColor: '#142850',
   },
   viewBotoes: {
-    color: '#27496d',
+    color: '#142850',
     width: '100%',
     paddingHorizontal: '10%',
     justifyContent: 'space-between',
@@ -90,20 +115,29 @@ const Estilos = StyleSheet.create({
   botoes: {
     width: '100%',
     height: 55,
-    backgroundColor: '#27496d',
+    backgroundColor: '#142850',
     justifyContent: 'flex-start',
     borderRadius: 5,
     paddingLeft: '6%',
     color: '#dae1e7',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
+    shadowOpacity: 0.51,
+    shadowRadius: 13.16,
+
+    elevation: 20,
   },
   iconBotoes: {
     fontSize: 18,
-    color: '#dae1e7'
+    color: '#dae1e7',
   },
   iconBotoesArrow: {
     paddingLeft: '2%',
     fontSize: 18,
-    color: '#dae1e7'
+    color: '#dae1e7',
   },
   textBotoes: {
     width: '75%',
@@ -120,7 +154,7 @@ const Estilos = StyleSheet.create({
     bottom: 15,
     width: '70%',
     color: '#fff',
-  }
+  },
 });
 
 export default Estilos;

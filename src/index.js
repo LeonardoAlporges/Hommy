@@ -9,7 +9,7 @@ import Reducers from './reducers';
 const store = createStore(Reducers, applyMiddleware(ReduxThunk));
 class App extends Component {
   render() {
-    console.disableYellowBox = false;
+    console.disableYellowBox = true;
     return (
       <Provider store={store}>
         <Routes />

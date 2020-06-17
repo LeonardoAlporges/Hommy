@@ -77,7 +77,7 @@ const estilosRepublica = StyleSheet.create({
   },
   itemInput: {
     width: 100,
-    borderBottomColor: '#27496d',
+    borderBottomColor: '#142850',
   },
   botaoModal: {
     alignSelf: 'center',
@@ -96,12 +96,12 @@ const estilosRepublica = StyleSheet.create({
     fontSize: 20,
   },
   S_FAB: {
-    backgroundColor: '#27496d',
+    backgroundColor: '#142850',
     position: 'absolute',
     bottom: 10,
   },
   corFAB: {
-    backgroundColor: '#27496d',
+    backgroundColor: '#142850',
   },
   corIconFab: {
     color: '#ffffff',

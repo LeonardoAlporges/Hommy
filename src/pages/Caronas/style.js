@@ -77,7 +77,7 @@ const Estilo = StyleSheet.create({
   },
   itemStyle: {
     width: 100,
-    borderBottomColor: '#27496d',
+    borderBottomColor: '#142850',
   },
   inputStyle: {
     alignSelf: 'stretch',
@@ -103,11 +103,11 @@ const Estilo = StyleSheet.create({
     fontSize: 20,
   },
   FABStyle: {
-    backgroundColor: '#27496d',
+    backgroundColor: '#142850',
     position: 'absolute',
   },
   FabBTN: {
-    backgroundColor: '#27496d',
+    backgroundColor: '#142850',
   },
   FabIcon: {
     color: '#ffffff',

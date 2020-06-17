@@ -38,7 +38,7 @@ const estilo = StyleSheet.create({
   },
   V_botao: {
     marginTop: '30%',
-    marginLeft: '20%',
+    marginLeft: '10%',
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
@@ -53,7 +53,6 @@ const estilo = StyleSheet.create({
     borderRadius: 10,
   },
   txtbtn: {
-    textAlign: 'center',
     fontFamily: 'Roboto',
     fontSize: 20,
     color: '#ffff',
@@ -73,7 +72,7 @@ const estilo = StyleSheet.create({
   icons_CamposLogin: {
     fontSize: 25,
     margin: 5,
-    color: '#27496d',
+    color: '#142850',
   },
   labelInput: {
     fontSize: 26,

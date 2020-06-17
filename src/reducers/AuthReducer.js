@@ -18,6 +18,7 @@ const initialState = {
   imagem2: '',
   imagem3: '',
   tipoImovel: '',
+  userEmail: '',
 };
 
 const AuthReducer = (state = [], action) => {
@@ -90,6 +91,10 @@ const AuthReducer = (state = [], action) => {
   }
   if (action.type == 'editNumeroCasa') {
     return { ...state, numeroCasa: action.payload.numeroCasa };
+  }
+  if (action.type == 'edituserEmail') {
+    return { ...state, userEmail: action.payload.userEmail };
+    // . . .State pega as informaçoes do state e substitui por aquilo que esta depois da virgula
   }
 
   return state;

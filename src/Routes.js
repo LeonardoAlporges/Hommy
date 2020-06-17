@@ -21,6 +21,9 @@ import Interessados from './pages/Interessados';
 import Viagens from './pages/Viagens';
 import Perfil from './pages/Perfil';
 import EsqueciSenha from './pages/EsqueciSenha';
+import Agendar from './pages/Agendar';
+import Agendamentos from './pages/Agendamentos';
+
 import { createDrawerNavigator } from 'react-navigation-drawer';
 
 const Navegação = createAppContainer(
@@ -32,6 +35,8 @@ const Navegação = createAppContainer(
       }),
       App: createStackNavigator({
         RenderApp,
+        Agendamentos,
+        Agendar,
         Confirmacao,
         EsqueciSenha,
         Perfil,

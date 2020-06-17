@@ -20,10 +20,11 @@ export default class CustomModal extends Component {
       this.props.onAction();
     }
   };
+
   UNSAFE_componentWillMount() {
     if (this.props.parametro == 'Custom') {
       this.setState({
-        icon: require('../../assets/Img/Question.png'),
+        icon: require('../../assets/Img/Succes.png'),
         titulo: this.props.titulo,
         descricao: this.props.descricao,
         botao: this.props.botao,

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Spinner } from 'native-base';
-import { View, Image } from 'react-native';
+import { View, Image, StatusBar } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
 import {
@@ -71,6 +71,7 @@ class RenderApp extends Component {
   render() {
     return (
       <View>
+        <StatusBar barStyle="light-content" backgroundColor="#142850" />
         {this.state.load ? (
           <View style={style.load}>
             <Image

@@ -91,7 +91,7 @@ const estilo = StyleSheet.create({
     paddingBottom: 0,
   },
   V_edit: {
-    marginTop: '0%',
+    marginTop: 10,
     width: '100%',
     flexDirection: 'row',
     height: 40,
@@ -99,7 +99,7 @@ const estilo = StyleSheet.create({
     alignItems: 'flex-end',
   },
   edit: {
-    borderRadius: 7,
+    borderRadius: 6,
     height: 34,
     width: 100,
     backgroundColor: '#142850',
@@ -109,7 +109,7 @@ const estilo = StyleSheet.create({
     color: '#ffffff',
   },
   ver: {
-    borderRadius: 7,
+    borderRadius: 6,
     height: 34,
     width: 200,
     marginLeft: 20,
@@ -121,12 +121,12 @@ const estilo = StyleSheet.create({
   },
   TxtEdit: {
     color: '#ffffff',
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: 'Roboto',
   },
   icon: {
-    fontSize: 25,
-    marginRight: '2%',
+    fontSize: 16,
+    marginRight: 10,
     color: '#ffffff',
   },
 });

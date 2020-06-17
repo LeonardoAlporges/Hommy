@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, ScrollView, Image, Text, Linking } from 'react-native';
 import { Button } from 'native-base';
 import { withNavigation } from 'react-navigation';
-import CustomModal from '../../components/Alert';
 
 import { connect } from 'react-redux';
 
@@ -23,34 +22,25 @@ class DetalhesAnuncio extends Component {
     );
   };
 
-  clickInteresse() {
-    this.setState({ interesse: true });
-  }
+  clickInteresse = () => {
+    console.log('?');
+    this.props.navigation.navigate('Agendar', {
+      data: this.props,
+    });
+  };
 
   render() {
     return (
       <ScrollView>
-        {this.state.interesse ? (
-          <View style={estilo.V_Detalhes}>
-            <CustomModal
-              parametro="Custom"
-              titulo="Obrigado pelo interesse"
-              descricao="Você será adicionado a lista de interesse e será notificado assim que o ofertante confirmar sua vaga."
-              botao="Confirmar"
-            />
-          </View>
-        ) : (
-          <View />
-        )}
-        <ViewPager style={estilo.image} showPageIndicator="true">
-          <View key="1" showPageIndicator={true}>
+        <ViewPager style={estilo.image}>
+          <View key="1">
             <Image source={{ uri: this.props.imagem1 }} style={estilo.image} />
           </View>
 
-          <View key="2" showPageIndicator={true}>
+          <View key="2">
             <Image source={{ uri: this.props.imagem2 }} style={estilo.image} />
           </View>
-          <View key="4" showPageIndicator={true}>
+          <View key="4">
             <Image source={{ uri: this.props.imagem3 }} style={estilo.image} />
           </View>
         </ViewPager>
@@ -90,9 +80,7 @@ class DetalhesAnuncio extends Component {
           </View>
         </View>
         <View style={estilo.V_tipo}>
-          <Text style={estilo.tipo}>
-            Mobília e eletrodomésticos de uso comum
-          </Text>
+          <Text style={estilo.tipo}>Mobília e eletrodomésticos</Text>
         </View>
         <View style={estilo.V_caracteristicaAcomodacao}>
           <View style={estilo.itemAcomodacao}>
@@ -155,13 +143,12 @@ class DetalhesAnuncio extends Component {
           <Button
             style={estilo.botao}
             onPress={() => {
-              Linking.openURL(
-                'https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849'
-              );
+              this.clickInteresse();
             }}
           >
-            <Icon2 name="whatsapp" style={estilo.iconWhatsapp} />
-            <Text style={estilo.txtWhatsapp}>Tenho Interesse</Text>
+            <Icon name="minus" style={estilo.iconWhatsapp} />
+            <Icon2 name="alert-circle" style={estilo.iconWhatsapp} />
+            <Text style={estilo.txtWhatsapp}>Agendar uma visita</Text>
           </Button>
         </View>
       </ScrollView>
@@ -189,6 +176,7 @@ const mapsStateToProps = state => {
     imagem2: state.auth.imagem2,
     imagem3: state.auth.imagem3,
     numVagas: state.auth.numVagas,
+    userEmail: state.auth.userEmail,
   };
 };
 

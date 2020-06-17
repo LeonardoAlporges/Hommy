@@ -20,7 +20,7 @@ const estilo = StyleSheet.create({
   icons_CamposLogin: {
     fontSize: 25,
     margin: 5,
-    color: '#27496d',
+    color: '#142850',
   },
 
   esqueciSenha: {
@@ -30,7 +30,7 @@ const estilo = StyleSheet.create({
   icon_send: {
     fontSize: 25,
     margin: 5,
-    color: '#27496d',
+    color: '#142850',
   },
   view_BotaoEntar: {
     marginTop: '10%',
@@ -44,7 +44,7 @@ const estilo = StyleSheet.create({
     alignItems: 'center',
     height: 50,
     width: 150,
-    backgroundColor: '#27496d',
+    backgroundColor: '#142850',
     borderRadius: 8,
   },
   V_modal: {
@@ -58,7 +58,7 @@ const estilo = StyleSheet.create({
     width: 150,
     height: 45,
     borderRadius: 8,
-    backgroundColor: '#27496d',
+    backgroundColor: '#142850',
   },
   txtErro: {
     fontFamily: 'Roboto-light',

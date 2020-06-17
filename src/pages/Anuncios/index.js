@@ -7,7 +7,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import estilo from './style';
 import api from '../../service/api';
 import Cartao from '../../components/Cartao';
@@ -47,7 +47,7 @@ import {
   editRua,
   editNumeroCasa,
 } from '../../actions/AuthActions';
-
+import HeaderBack from '../../components/CustomHeader';
 // import { Container } from './styles';
 
 import { connect } from 'react-redux';
@@ -70,6 +70,7 @@ class Anuncios extends Component {
     api
       .get(`/userCarona/${this.props.email}`)
       .then(responseJson => {
+        console.log(responseJson);
         this.setState({
           listaCaronas: responseJson.data,
           refreshing: false,
@@ -84,6 +85,7 @@ class Anuncios extends Component {
     api
       .get(`/userRepublica/${this.props.email}`)
       .then(responseJson => {
+        console.log(responseJson);
         this.setState({
           listaRepublicas: responseJson.data,
           refreshing: false,
@@ -139,21 +141,13 @@ class Anuncios extends Component {
     this.props.editValor(dados.valor);
     this.props.navigation.navigate('CadastroCaronas', { update: true });
   }
-
+  navegar = () => {
+    this.props.navigation.goBack(null);
+  };
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <View style={estilo.V_header}>
-          <TouchableOpacity
-            onPress={() => {
-              this.props.navigation.goBack(null);
-            }}
-          >
-            <Icon name="arrow-left" style={estilo.iconHeader} />
-          </TouchableOpacity>
-
-          <Text style={estilo.title}>Meus Anuncios</Text>
-        </View>
+        <HeaderBack title="Meus Anuncios" onNavigation={() => this.navegar()} />
         <ScrollView>
           <View style={estilo.V_geral}>
             {this.state.listaRepublicas.length != 0 ? (
@@ -169,7 +163,7 @@ class Anuncios extends Component {
                       data={this.state.listaRepublicas}
                       renderItem={({ item }) => (
                         <View>
-                          <Cartao leonardo={item} />
+                          <Cartao data={item} />
                           <View style={estilo.V_edit}>
                             <Button
                               style={estilo.edit}
@@ -177,7 +171,7 @@ class Anuncios extends Component {
                                 this.editRepublica(item);
                               }}
                             >
-                              <Icon style={estilo.icon} name="pencil-outline" />
+                              <Icon style={estilo.icon} name="pencil" />
                               <Text style={estilo.TxtEdit}>Editar</Text>
                             </Button>
                           </View>
@@ -214,7 +208,7 @@ class Anuncios extends Component {
                                 this.editCaronas(item);
                               }}
                             >
-                              <Icon style={estilo.icon} name="pencil-outline" />
+                              <Icon style={estilo.icon} name="pencil" />
                               <Text style={estilo.TxtEdit}>Editar</Text>
                             </Button>
                             <Button
@@ -223,9 +217,9 @@ class Anuncios extends Component {
                                 this.props.navigation.navigate('Interessados');
                               }}
                             >
-                              <Icon style={estilo.icon} name="pencil-outline" />
+                              <Icon style={estilo.icon} name="list" />
                               <Text style={estilo.TxtEdit}>
-                                Ver interessados{' '}
+                                Ver interessados
                               </Text>
                             </Button>
                           </View>

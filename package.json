@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.9.0",
+    "@react-native-community/datetimepicker": "^2.4.2",
     "@react-native-community/viewpager": "^3.3.0",
     "@react-native-firebase/app": "^6.7.1",
     "@react-native-firebase/storage": "^6.7.1",
@@ -26,6 +27,7 @@
     "react-native-image-picker": "^2.3.1",
     "react-native-maps": "0.25.0",
     "react-native-modal": "^11.5.6",
+    "react-native-modal-datetime-picker": "^8.7.1",
     "react-native-reanimated": "^1.8.0",
     "react-native-screens": "^2.0.0-beta.2",
     "react-native-text-input-mask": "^2.0.0",

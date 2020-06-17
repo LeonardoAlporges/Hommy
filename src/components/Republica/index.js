@@ -42,7 +42,7 @@ import {
 } from '../../actions/AuthActions';
 
 class Republica extends Component {
-  static navigationOptions = { header: null };
+  static navigationOptions = { header: null, headerLeft: null };
   constructor(props) {
     super(props);
     this.state = {
@@ -342,13 +342,11 @@ class Republica extends Component {
   render() {
     return (
       <View style={Estilos.V_completa}>
-        <NavigationEvents
-          onDidFocus={this.getListRepublica}
-        />
+        <NavigationEvents onDidFocus={this.getListRepublica} />
         <View>
           {this.state.loading ? (
             <View style={Estilos.V_republicas}>
-              <Spinner color="#27496d" />
+              <Spinner color="#142850" />
             </View>
           ) : this.state.erro ? (
             <View style={Estilos.V_republicas}>
@@ -364,17 +362,17 @@ class Republica extends Component {
               </Text>
             </View>
           ) : (
-                <View>
-                  <FlatList
-                    style={Estilos.flatList}
-                    data={this.state.listaRepublicas}
-                    renderItem={({ item }) => <Cartao leonardo={item} />}
-                    keyExtractor={item => item._id}
-                    refreshing={this.state.refreshing}
-                    onRefresh={this.getListRepublica}
-                  />
-                </View>
-              )}
+            <View>
+              <FlatList
+                style={Estilos.flatList}
+                data={this.state.listaRepublicas}
+                renderItem={({ item }) => <Cartao data={item} />}
+                keyExtractor={item => item._id}
+                refreshing={this.state.refreshing}
+                onRefresh={this.getListRepublica}
+              />
+            </View>
+          )}
         </View>
         <View style={Estilos.V_filtroExterno}>
           <Modal
@@ -407,14 +405,14 @@ class Republica extends Component {
               <Text>Aceita animais?</Text>
               <ListItem style={Estilos.listStyle}>
                 <CheckBox
-                  color="#27496d"
+                  color="#142850"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fAnimalSim}
                   checked={this.state.filtroAnimalSim}
                 />
                 <Text style={Estilos.textFiltro}>Sim</Text>
                 <CheckBox
-                  color="#27496d"
+                  color="#142850"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fAnimalNao}
                   checked={this.state.filtroAnimalNao}
@@ -424,21 +422,21 @@ class Republica extends Component {
               <Text> Tipo de república</Text>
               <ListItem style={Estilos.listStyle}>
                 <CheckBox
-                  color="#27496d"
+                  color="#142850"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fMasc}
                   checked={this.state.filtroMasc}
                 />
                 <Text style={Estilos.textFiltro}>Masculina</Text>
                 <CheckBox
-                  color="#27496d"
+                  color="#142850"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fFem}
                   checked={this.state.filtroFem}
                 />
                 <Text style={Estilos.textFiltro}>Feminina</Text>
                 <CheckBox
-                  color="#27496d"
+                  color="#142850"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fMista}
                   checked={this.state.filtroMista}
@@ -448,35 +446,35 @@ class Republica extends Component {
               <Text>Capacidade de moradores</Text>
               <ListItem style={Estilos.listStyle}>
                 <CheckBox
-                  color="#27496d"
+                  color="#142850"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fMoradores2}
                   checked={this.state.filtroMoradores2}
                 />
                 <Text style={Estilos.textFiltro}>2</Text>
                 <CheckBox
-                  color="#27496d"
+                  color="#142850"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fMoradores3}
                   checked={this.state.filtroMoradores3}
                 />
                 <Text style={Estilos.textFiltro}>3</Text>
                 <CheckBox
-                  color="#27496d"
+                  color="#142850"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fMoradores4}
                   checked={this.state.filtroMoradores4}
                 />
                 <Text style={Estilos.textFiltro}>4</Text>
                 <CheckBox
-                  color="#27496d"
+                  color="#142850"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fMoradores5}
                   checked={this.state.filtroMoradores5}
                 />
                 <Text style={Estilos.textFiltro}>5</Text>
                 <CheckBox
-                  color="#27496d"
+                  color="#142850"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fMoradores6}
                   checked={this.state.filtroMoradores6}
@@ -486,21 +484,21 @@ class Republica extends Component {
               <Text>Vagas disponíveis</Text>
               <ListItem style={Estilos.listStyle}>
                 <CheckBox
-                  color="#27496d"
+                  color="#142850"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fVagas1}
                   checked={this.state.filtroVagas1}
                 />
                 <Text style={Estilos.textFiltro}>1</Text>
                 <CheckBox
-                  color="#27496d"
+                  color="#142850"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fVagas2}
                   checked={this.state.filtroVagas2}
                 />
                 <Text style={Estilos.textFiltro}>2</Text>
                 <CheckBox
-                  color="#27496d"
+                  color="#142850"
                   style={{ alignSelf: 'stretch' }}
                   onPress={this.fVagas3}
                   checked={this.state.filtroVagas3}
@@ -533,8 +531,8 @@ class Republica extends Component {
           {this.state.active ? (
             <Icon name="arrow-down" />
           ) : (
-              <Icon name="arrow-up" />
-            )}
+            <Icon name="arrow-up" />
+          )}
 
           <Button
             style={Estilos.corFAB}

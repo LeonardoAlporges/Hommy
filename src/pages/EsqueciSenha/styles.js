@@ -67,16 +67,16 @@ const estilo = StyleSheet.create({
   view_CamposLogin: {
     marginTop: '10%',
     height: 40,
-    width: 200,
+    width: 330,
   },
 
   icons_CamposLogin: {
     fontSize: 25,
     margin: 5,
-    color: '#27496d',
+    color: '#142850',
   },
   labelInput: {
-    fontSize: 26,
+    fontSize: 20,
     fontFamily: 'Roboto',
     marginLeft: '2%',
     width: '88%',

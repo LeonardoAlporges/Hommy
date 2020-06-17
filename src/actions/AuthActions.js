@@ -195,3 +195,12 @@ export const editNumeroCasa = newNumhouse => {
     },
   };
 };
+export const edituserEmail = newLogado => {
+  return {
+    type: 'edituserEmail', //nome da açao
+    payload: {
+      //Aqui é as informaçoes que vc ta enviando no caso aqui é so email
+      userEmail: newLogado,
+    },
+  };
+};

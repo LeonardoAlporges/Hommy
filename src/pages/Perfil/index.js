@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Image, Linking } from 'react-native';
 import style from './styles';
 import { Icon, Button } from 'native-base';
+import HeaderBack from '../../components/CustomHeader';
 
 export default class Perfil extends Component {
   static navigationOptions = { header: null };
@@ -9,21 +10,21 @@ export default class Perfil extends Component {
     super(props);
     this.state = {
       dados: this.props.navigation.state.params.dados,
+      update: this.props.navigation.state.params.update,
     };
   }
+  navegar = () => {
+    this.props.navigation.goBack(null);
+  };
 
   render() {
     return (
       <View style={{ width: '100%', height: '100%' }}>
         <View style={style.V_header}>
-          <TouchableOpacity
-            style={{ marginLeft: '5%' }}
-            onPress={() => {
-              this.props.navigation.goBack(null);
-            }}
-          >
-            <Icon name="ios-arrow-back" style={style.iconHeader} />
-          </TouchableOpacity>
+          <HeaderBack
+            title="Meus Anuncios"
+            onNavigation={() => this.navegar()}
+          />
           <Text style={style.title}>Perfil</Text>
         </View>
         <View style={style.V_profile}>
@@ -41,7 +42,7 @@ export default class Perfil extends Component {
             <Text style={style.nome}>{this.state.dados.nome}</Text>
           </View>
           <View style={style.V_nota}>
-            <Icon name="ios-arrow-back" style={style.iconHeader} />
+            <Icon name="star" style={style.iconHeader} />
             <Text style={style.nota}>{this.state.dados.nota}</Text>
           </View>
         </View>
@@ -63,6 +64,13 @@ export default class Perfil extends Component {
             <Text style={style.labelbotao}>Enviar mensagem</Text>
           </Button>
         </View>
+        {this.state.update && (
+          <View style={style.V_botaoEditar}>
+            <Button style={style.botoes}>
+              <Text style={style.labelbotao}>Editar perfil</Text>
+            </Button>
+          </View>
+        )}
       </View>
     );
   }

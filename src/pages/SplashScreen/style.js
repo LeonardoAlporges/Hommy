@@ -24,7 +24,7 @@ const style = StyleSheet.create({
   descricao: {
     textAlign: 'center',
     fontFamily: 'Roboto',
-    color: '#27496d',
+    color: '#142850',
     fontSize: 18,
   },
   titulo: {
