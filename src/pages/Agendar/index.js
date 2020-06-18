@@ -19,8 +19,10 @@ class Agendar extends Component {
     aviso: false,
     dados: this.props.navigation.state.params.data,
     time: '00:00',
+    sendTime: '',
     isDatePickerVisible: false,
   };
+
   navegar = () => {
     this.props.navigation.goBack(null);
   };
@@ -29,7 +31,7 @@ class Agendar extends Component {
     const agendamento = {
       email: this.state.dados.userEmail,
       data: this.state.newData,
-      hora: this.state.time,
+      hora: this.state.sendTime,
     };
     console.log(agendamento);
 
@@ -56,7 +58,7 @@ class Agendar extends Component {
   handleConfirm = date => {
     console.log('A date has been picked: ', date);
     const markedDate = moment(new Date(date)).format('h:mm');
-    console.log('leo', markedDate);
+    this.setState({ sendTime: date });
     this.setState({ time: markedDate });
     this.hideDatePicker();
   };
@@ -175,8 +177,8 @@ class Agendar extends Component {
               titulo="Visita agendada"
               descricao="O representante da republica ira analisar o dia de seu agendamento em até 24 Hrs."
               botao="Confirmar"
-              onAction={() => {
-                this.props.navigation.navigate('Agendamentos');
+              callback={() => {
+                this.props.navigation.navigate('AgendamentoUser');
               }}
             />
           </View>

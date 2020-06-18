@@ -14,8 +14,13 @@ export default class CustomModal extends Component {
     super(props);
   }
 
+  callback = () => {
+    this.props.callback();
+  };
+
   navegar = props => {
     this.setState({ modalVisible: false });
+    this.callback();
     if (this.props.onAction != null) {
       this.props.onAction();
     }

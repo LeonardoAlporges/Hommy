@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, ScrollView, Image, Text, Linking } from 'react-native';
 import { Button } from 'native-base';
 import { withNavigation } from 'react-navigation';
+import HeaderBack from '../../components/CustomHeader';
 
 import { connect } from 'react-redux';
 
@@ -12,7 +13,7 @@ import Icon2 from 'react-native-vector-icons/Feather';
 
 class DetalhesAnuncio extends Component {
   state = {
-    interesse: false,
+    interesse: this.props.navigation.state.params.interessado,
   };
 
   static navigationOptions = { header: null };
@@ -20,6 +21,10 @@ class DetalhesAnuncio extends Component {
     Linking.openUrl(
       'https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849'
     );
+  };
+
+  navegar = () => {
+    this.props.navigation.goBack(null);
   };
 
   clickInteresse = () => {
@@ -32,6 +37,12 @@ class DetalhesAnuncio extends Component {
   render() {
     return (
       <ScrollView>
+        <HeaderBack
+          ajuda
+          title={this.props.nomeRepublica}
+          onNavigation={() => this.navegar()}
+        />
+
         <ViewPager style={estilo.image}>
           <View key="1">
             <Image source={{ uri: this.props.imagem1 }} style={estilo.image} />
@@ -139,18 +150,27 @@ class DetalhesAnuncio extends Component {
             <Text style={estilo.txtlabel}>R$ {this.props.valor}</Text>
           </View>
         </View>
-        <View style={estilo.V_botao}>
-          <Button
-            style={estilo.botao}
-            onPress={() => {
-              this.clickInteresse();
-            }}
-          >
-            <Icon name="minus" style={estilo.iconWhatsapp} />
-            <Icon2 name="alert-circle" style={estilo.iconWhatsapp} />
-            <Text style={estilo.txtWhatsapp}>Agendar uma visita</Text>
-          </Button>
-        </View>
+        {!this.state.interesse ? (
+          <View style={estilo.V_botao}>
+            <Button
+              style={estilo.botao}
+              onPress={() => {
+                this.clickInteresse();
+              }}
+            >
+              <Icon name="minus" style={estilo.iconWhatsapp} />
+              <Icon2 name="alert-circle" style={estilo.iconWhatsapp} />
+              <Text style={estilo.txtWhatsapp}>Agendar uma visita</Text>
+            </Button>
+          </View>
+        ) : (
+          <View style={estilo.V_botao}>
+            <Button style={estilo.botao}>
+              <Icon2 name="alert-circle" style={estilo.iconWhatsapp} />
+              <Text style={estilo.txtWhatsapp}>Você já esta agendado</Text>
+            </Button>
+          </View>
+        )}
       </ScrollView>
     );
   }

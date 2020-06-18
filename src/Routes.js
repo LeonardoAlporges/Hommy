@@ -23,6 +23,7 @@ import Perfil from './pages/Perfil';
 import EsqueciSenha from './pages/EsqueciSenha';
 import Agendar from './pages/Agendar';
 import Agendamentos from './pages/Agendamentos';
+import AgendamentoUser from './pages/AgendamentosUser';
 
 import { createDrawerNavigator } from 'react-navigation-drawer';
 
@@ -35,6 +36,7 @@ const Navegação = createAppContainer(
       }),
       App: createStackNavigator({
         RenderApp,
+        AgendamentoUser,
         Agendamentos,
         Agendar,
         Confirmacao,

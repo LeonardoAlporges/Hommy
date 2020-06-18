@@ -174,6 +174,17 @@ class Anuncios extends Component {
                               <Icon style={estilo.icon} name="pencil" />
                               <Text style={estilo.TxtEdit}>Editar</Text>
                             </Button>
+                            <Button
+                              style={estilo.ver}
+                              onPress={() => {
+                                this.props.navigation.navigate('Agendamentos');
+                              }}
+                            >
+                              <Icon style={estilo.icon} name="list" />
+                              <Text style={estilo.TxtEdit}>
+                                Ver interessados
+                              </Text>
+                            </Button>
                           </View>
                         </View>
                       )}

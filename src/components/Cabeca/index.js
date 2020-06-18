@@ -111,6 +111,19 @@ class Cabeca extends Component {
                   <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
                 </Button>
                 <Button
+                  style={Estilos.botoes}
+                  onPress={() => {
+                    this.props.navigation.navigate('AgendamentoUser', {
+                      usuario: true,
+                    }),
+                      this.setState({ isModalVisible: false });
+                  }}
+                >
+                  <Icon style={Estilos.iconBotoes} name="list" />
+                  <Text style={Estilos.textBotoes}>Meus Agendamentos</Text>
+                  <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
+                </Button>
+                <Button
                   onPress={() => {
                     this.props.navigation.navigate('Viagens'),
                       this.setState({ isModalVisible: false });

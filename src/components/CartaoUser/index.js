@@ -15,31 +15,38 @@ class CartaoUser extends Component {
     rejeitar: false,
   };
 
+  retorno = number => {
+    console.log('CARDTO', this.props.dados.email);
+    this.props.retorno(number, this.props.dados.email);
+  };
+
   mudarStatusInteressado = number => {
+    this.retorno(number);
     console.log(number);
-    if (number === 1) {
-      api
-        .put(`/carona/confirmar/${this.props.email}`, {
-          UsuarioConfirmado: this.props.dados.email,
-        })
-        .then(responseJson => {
-          console.log('USUARIO ACEITO', responseJson);
-        })
-        .catch(error => {
-          console.log('erro:', error);
-        });
-    } else if (number === 0) {
-      api
-        .put(`/carona/rejeitar/${this.props.email}`, {
-          UsuarioRejeitado: this.props.dados.email,
-        })
-        .then(responseJson => {
-          console.log('USUARIO Rejeitado', responseJson);
-        })
-        .catch(error => {
-          console.log('erro:', error);
-        });
-    }
+
+    // if (number === 1) {
+    //   api
+    //     .put(`/carona/confirmar/${this.props.email}`, {
+    //       UsuarioConfirmado: this.props.dados.email,
+    //     })
+    //     .then(responseJson => {
+    //       console.log('USUARIO ACEITO', responseJson);
+    //     })
+    //     .catch(error => {
+    //       console.log('erro:', error);
+    //     });
+    // } else if (number === 0) {
+    //   api
+    //     .put(`/carona/rejeitar/${this.props.email}`, {
+    //       UsuarioRejeitado: this.props.dados.email,
+    //     })
+    //     .then(responseJson => {
+    //       console.log('USUARIO Rejeitado', responseJson);
+    //     })
+    //     .catch(error => {
+    //       console.log('erro:', error);
+    //     });
+    // }
     this.props.callback();
   };
 
@@ -70,22 +77,27 @@ class CartaoUser extends Component {
           <Text style={style.nota}>{this.props.dados.nota}</Text>
         </View>
         <View style={style.V_Icon}>
-          <TouchableOpacity
-            onPress={() => {
-              this.setState({
-                mensagem: 'Confirmar',
-                rejeitar: true,
-                modal: true,
-              });
-            }}
-          >
-            <Icon name="check" style={style.iconAceite} />
-          </TouchableOpacity>
+          {this.props.dadosGerais.status != 'Confirmado' ? (
+            <TouchableOpacity
+              onPress={() => {
+                this.setState({
+                  mensagem: 'Confirmar',
+
+                  confirmar: true,
+                  modal: true,
+                });
+              }}
+            >
+              <Icon name="check" style={style.iconAceite} />
+            </TouchableOpacity>
+          ) : (
+            <View />
+          )}
           <TouchableOpacity
             onPress={() => {
               this.setState({
                 mensagem: 'Rejeitar',
-                confirmar: true,
+                rejeitar: true,
                 modal: true,
               });
             }}
@@ -93,6 +105,7 @@ class CartaoUser extends Component {
             <Icon name="close" style={style.iconRejeite} />
           </TouchableOpacity>
         </View>
+
         {this.state.modal && (
           <ModalConfirmacao
             retornoModal={valor => this.mudarStatusInteressado(valor)}

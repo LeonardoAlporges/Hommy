@@ -15,7 +15,8 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import { number } from 'yup';
 import EmptyState from '../../components/EmptyState';
 import Loading from '../../components/Loading';
-class Agendamentos extends Component {
+
+class AgendamentoUser extends Component {
   static navigationOptions = { header: null };
   state = {
     listaAgendamento: [],
@@ -34,7 +35,7 @@ class Agendamentos extends Component {
 
   Agendar = () => {
     api
-      .get(`/confirmAgendamento/${this.props.email}`)
+      .get(`/agendamento/${this.props.email}`)
       .then(responseJson => {
         console.log(responseJson);
         this.setState({ listaAgendamento: responseJson.data, Load: false });
@@ -44,31 +45,12 @@ class Agendamentos extends Component {
         this.setState({ Load: false });
       });
   };
-  // ${this.props.email}
-  enviarReq = (tipoSocilitacao, usuario) => {
-    console.log('VOLTOU NO AGENDAMENTO ?', tipoSocilitacao, usuario);
-    const data = {
-      email: usuario,
-      status: 'Confirmado',
-    };
-    if (tipoSocilitacao == 1) {
-      api
-        .put(`/confirmAgendamento/${this.props.email}`, data)
-        .then(responseJson => {
-          console.log(responseJson);
-          this.setState({ listaAgendamento: [] });
-          this.Agendar();
-        })
-        .catch(error => {});
-    } else if (tipoSocilitacao == 0) {
-    }
-  };
 
   render() {
     return (
       <View style={style.Container}>
         <HeaderBack
-          title="Agendamentos de visita"
+          title=" Meus agendamentos de visita"
           onNavigation={() => this.navegar()}
         />
         {this.state.Load && <Loading />}
@@ -80,7 +62,7 @@ class Agendamentos extends Component {
         )}
 
         <View style={style.V_label}>
-          <Text style={style.label}>Lista de agendamento de visita</Text>
+          <Text style={style.label}>Sua lista de agendamento</Text>
           <View style={style.barra} />
         </View>
 
@@ -88,12 +70,7 @@ class Agendamentos extends Component {
           data={this.state.listaAgendamento}
           renderItem={({ item }) => (
             <View>
-              <CartaoUser
-                callback={() => this.onRefreshPage()}
-                retorno={(number, user) => this.enviarReq(number, user)}
-                dados={item.user}
-                dadosGerais={item}
-              />
+              <Cartao data={item.republica} interessado />
               <View style={style.viewData}>
                 <View
                   style={{
@@ -154,9 +131,9 @@ const mapStateToProps = state => {
   };
 };
 
-const AgendamentoConnect = connect(
+const AgendamentoUserConnect = connect(
   mapStateToProps,
   null
-)(Agendamentos);
+)(AgendamentoUser);
 
-export default AgendamentoConnect;
+export default AgendamentoUserConnect;

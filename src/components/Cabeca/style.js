@@ -37,7 +37,7 @@ const Estilos = StyleSheet.create({
     flex: 1,
   },
   voltar: {
-    height: 55,
+    height: 30,
     width: '100%',
     marginTop: '3%',
     paddingHorizontal: '3%',
@@ -97,7 +97,7 @@ const Estilos = StyleSheet.create({
     color: '#00909e',
   },
   viewDivisor: {
-    marginTop: '8%',
+    marginTop: '2%',
     width: '88%',
     marginLeft: '6%',
     marginRight: '6%',
@@ -109,12 +109,12 @@ const Estilos = StyleSheet.create({
     width: '100%',
     paddingHorizontal: '10%',
     justifyContent: 'space-between',
-    height: 325,
+    height: 375,
     marginTop: '10%',
   },
   botoes: {
     width: '100%',
-    height: 55,
+    height: 50,
     backgroundColor: '#142850',
     justifyContent: 'flex-start',
     borderRadius: 5,

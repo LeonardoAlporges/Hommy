@@ -38,4 +38,22 @@ export const HeaderBack = props => {
   );
 };
 
+export const HeaderBackTrasp = props => {
+  return (
+    <View style={style.V_headerBackTranp}>
+      <TouchableOpacity
+        style={style.Touch}
+        onPress={async () => {
+          props.onNavigation();
+        }}
+      >
+        <Icon name="ios-arrow-back" style={style.iconHeader} />
+      </TouchableOpacity>
+      <View style={style.V_Title}>
+        <Text style={style.txt_title}>{props.title}</Text>
+      </View>
+    </View>
+  );
+};
+
 export default HeaderBack;

@@ -33,6 +33,10 @@ class Cartao extends Component {
   constructor(props) {
     super(props);
     this.onClickCard = this.onClickCard.bind(this);
+
+    this.state = {
+      interessado: this.props.interessado,
+    };
   }
 
   onClickCard = () => {
@@ -60,7 +64,9 @@ class Cartao extends Component {
     this.props.editImg3(dados.imagem3);
     this.props.edituserEmail(dados.userEmail);
 
-    this.props.navigation.navigate('Detalhes');
+    this.props.navigation.navigate('Detalhes', {
+      interessado: this.state.interessado,
+    });
   };
 
   render() {
