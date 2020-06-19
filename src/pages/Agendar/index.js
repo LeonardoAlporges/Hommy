@@ -29,14 +29,14 @@ class Agendar extends Component {
 
   Agendar = () => {
     const agendamento = {
-      email: this.state.dados.userEmail,
+      email: this.props.email,
       data: this.state.newData,
       hora: this.state.sendTime,
     };
     console.log(agendamento);
 
     api
-      .get(`/agendamento/${this.props.email}`, agendamento)
+      .put(`/agendamento/${this.state.dados.userEmail}`, agendamento)
       .then(responseJson => {
         console.log(responseJson);
         this.setState({ aviso: true });
@@ -178,7 +178,9 @@ class Agendar extends Component {
               descricao="O representante da republica ira analisar o dia de seu agendamento em até 24 Hrs."
               botao="Confirmar"
               callback={() => {
-                this.props.navigation.navigate('AgendamentoUser');
+                this.props.navigation.navigate('AgendamentoUser', {
+                  usuario: true,
+                });
               }}
             />
           </View>

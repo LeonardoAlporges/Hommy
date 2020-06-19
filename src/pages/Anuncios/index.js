@@ -177,7 +177,9 @@ class Anuncios extends Component {
                             <Button
                               style={estilo.ver}
                               onPress={() => {
-                                this.props.navigation.navigate('Agendamentos');
+                                this.props.navigation.navigate('Agendamentos', {
+                                  usario: false,
+                                });
                               }}
                             >
                               <Icon style={estilo.icon} name="list" />

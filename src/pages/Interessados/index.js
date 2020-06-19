@@ -13,6 +13,7 @@ import CartaoUser from '../../components/CartaoUser';
 import ModalConfirmacao from '../../components/ModalConfirmacao';
 import { connect } from 'react-redux';
 import HeaderBack from '../../components/CustomHeader';
+import EmptyState from '../../components/EmptyState';
 
 class Interessados extends Component {
   static navigationOptions = { header: null };
@@ -66,6 +67,13 @@ class Interessados extends Component {
           title="Lista de interessados"
           onNavigation={() => this.navegar()}
         />
+        {(this.state.user.length == 0 ||
+          this.state.useuserConfirmador.length == 0) && (
+          <EmptyState
+            titulo="Sem interessados"
+            mensagem="Aguarde logo aparecerár alguem para preencher esse vazio :("
+          />
+        )}
         <ScrollView>
           <View style={style.Listas}>
             <FlatList
@@ -104,11 +112,6 @@ class Interessados extends Component {
             />
           </View>
         </ScrollView>
-        {/* {this.state.modal && (
-          <ModalConfirmacao
-            retornoModal={valor => mudarStatusInteressado(valor)}
-          />
-        )} */}
       </View>
     );
   }
