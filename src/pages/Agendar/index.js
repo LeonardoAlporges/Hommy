@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { DatePicker, Item, Label, Text, Button } from 'native-base';
+import { DatePicker, Text, Button } from 'native-base';
 import Cartao from '../../components/Cartao';
 import style from './styles';
-import { extend } from 'lodash';
 import HeaderBack from '../../components/CustomHeader';
 import { connect } from 'react-redux';
 import api from '../../service/api';
 import CustomModal from '../../components/Alert';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import Loading from '../../components/Loading';
+
 class Agendar extends Component {
   static navigationOptions = { header: null };
   state = {
+    Erro: false,
+    Load: true,
+    Sucsess: false,
     newData: '',
-    aviso: false,
+
     dados: this.props.navigation.state.params.data,
     time: '00:00',
     sendTime: '',
@@ -35,28 +38,31 @@ class Agendar extends Component {
     };
     console.log(agendamento);
 
+    if ((agendamento.data || agendamento.hora) == '') {
+      this.setState({ Erro: true });
+      return 0;
+    }
+
     api
       .put(`/agendamento/${this.state.dados.userEmail}`, agendamento)
       .then(responseJson => {
         console.log(responseJson);
-        this.setState({ aviso: true });
-        this.props.onAction();
+        this.setState({ Sucsess: true, Load: true });
       })
       .catch(error => {
         console.log(error);
+        this.setState({ Load: true, Erro: true });
       });
   };
 
   showDatePicker = () => {
     this.setState({ isDatePickerVisible: !this.state.isDatePickerVisible });
   };
-
   hideDatePicker = () => {
     this.setState({ isDatePickerVisible: !this.state.isDatePickerVisible });
   };
 
   handleConfirm = date => {
-    console.log('A date has been picked: ', date);
     const markedDate = moment(new Date(date)).format('h:mm');
     this.setState({ sendTime: date });
     this.setState({ time: markedDate });
@@ -70,7 +76,7 @@ class Agendar extends Component {
           title="Agendar visita"
           onNavigation={() => this.navegar()}
         />
-
+        {!this.state.Load && <Loading />}
         <View style={{ width: '100%', height: 140 }}>
           <Cartao data={this.state.dados} />
         </View>
@@ -84,13 +90,7 @@ class Agendar extends Component {
         </View>
 
         <View style={style.V_Inputs}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
+          <View style={style.ViewDate}>
             <Icon name="calendar" style={style.IconCaledarA} />
             <DatePicker
               defaultDate={new Date(2020, 4, 24)}
@@ -102,48 +102,16 @@ class Agendar extends Component {
               animationType={'slide'}
               androidMode={'default'}
               placeHolderText="Selecione a data"
-              textStyle={{
-                paddingTop: 15,
-                textAlign: 'center',
-                height: 50,
-                fontSize: 16,
-                color: '#142850',
-                fontWeight: 'bold',
-                fontFamily: 'Roboto',
-              }}
-              placeHolderTextStyle={{
-                paddingTop: 15,
-                textAlign: 'center',
-                height: 50,
-                fontSize: 16,
-                color: '#989898',
-                fontWeight: 'bold',
-                fontFamily: 'Roboto',
-              }}
+              textStyle={style.textStyledate}
+              placeHolderTextStyle={style.placeHolder}
               onDateChange={date => {
                 this.setState({ newData: new Date(date) });
               }}
               disabled={false}
             />
           </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <Text
-              style={{
-                fontFamily: 'Roboto',
-                fontWeight: 'bold',
-                fontSize: 16,
-                color: '#142850',
-                marginRight: 10,
-              }}
-            >
-              {this.state.time}
-            </Text>
+          <View style={style.ViewClock}>
+            <Text style={style.textClock}>{this.state.time}</Text>
             <View style={style.V_botaoCalendar}>
               <Button style={style.botaoCalendar} onPress={this.showDatePicker}>
                 <Icon name="clock" style={style.IconCaledar} />
@@ -170,7 +138,7 @@ class Agendar extends Component {
           </Button>
         </View>
 
-        {this.state.aviso ? (
+        {this.state.Sucsess && (
           <View style={style.V_Detalhes}>
             <CustomModal
               parametro="Custom"
@@ -184,8 +152,16 @@ class Agendar extends Component {
               }}
             />
           </View>
-        ) : (
-          <View />
+        )}
+        {this.state.Erro && (
+          <View style={style.V_Detalhes}>
+            <CustomModal
+              parametro="Erro"
+              callback={() => {
+                this.setState({ Erro: false });
+              }}
+            />
+          </View>
         )}
       </View>
     );

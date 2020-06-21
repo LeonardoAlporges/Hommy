@@ -12,6 +12,29 @@ const estilo = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
+  tabs_TextStyle: {
+    color: '#142850',
+    fontFamily: 'Roboto',
+    fontSize: 15,
+  },
+  tabs_ActiveTextStyle: {
+    color: '#142850',
+    fontFamily: 'Roboto',
+    fontWeight: '700',
+    fontSize: 18,
+  },
+  tabs_ActiveTabs: {
+    backgroundColor: '#fff',
+  },
+  tabs_style: {
+    backgroundColor: '#fff',
+  },
+  textoValue: {
+    color: '#2e2e2e',
+    fontFamily: 'Roboto',
+    fontWeight: '600',
+    fontSize: 14,
+  },
   campos: {
     marginTop: 20,
   },
@@ -139,6 +162,7 @@ const estilo = StyleSheet.create({
     flexDirection: 'row',
   },
   V_ImageFull: {
+    marginHorizontal: 10,
     justifyContent: 'center',
     alignItems: 'center',
     width: 100,
@@ -156,8 +180,8 @@ const estilo = StyleSheet.create({
     opacity: 0.7,
   },
   ImageFull: {
-    width: 50,
-    height: 50,
+    width: 100,
+    height: 100,
     borderRadius: 3,
   },
   V_BotaoImg: {

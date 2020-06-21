@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import { connect } from 'react-redux';
 import { withNavigation, NavigationEvents } from 'react-navigation';
 import { CheckBox, ListItem, Button, Fab, Input, Item } from 'native-base';
+import EmptyState from '../../components/EmptyState';
 
 import Estilos from './style';
 import { Spinner } from 'native-base';
@@ -350,18 +351,14 @@ class Republica extends Component {
             </View>
           ) : this.state.erro ? (
             <View style={Estilos.V_republicas}>
-              <CustomModal parametro="Erro" />
-              <Image
-                style={Estilos.imageModal}
-                source={require('../../assets/Img/Empty.png')}
+              <CustomModal
+                parametro="Erro"
+                callback={() => {
+                  this.setState({ erro: false });
+                }}
               />
-              <Text style={Estilos.txtModal}>Nenhum Anuncio Disponivel</Text>
-              <Text style={Estilos.txtErr}>
-                Aproveite essa oportunidade publique a de vaga da sua republica
-                agora mesmo{' '}
-              </Text>
             </View>
-          ) : (
+          ) : this.state.listaRepublicas.length != 0 ? (
             <View>
               <FlatList
                 style={Estilos.flatList}
@@ -372,6 +369,11 @@ class Republica extends Component {
                 onRefresh={this.getListRepublica}
               />
             </View>
+          ) : (
+            <EmptyState
+              titulo="Sem Anuncios Disponivel "
+              mensagem="Aguarde logo aparecerár alguem para preencher esse vazio :("
+            />
           )}
         </View>
         <View style={Estilos.V_filtroExterno}>

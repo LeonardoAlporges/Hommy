@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { DatePicker, Item, Label, Text, Button } from 'native-base';
-import Cartao from '../../components/Cartao';
+import { Text } from 'native-base';
 import style from './styles';
-import { extend } from 'lodash';
+
 import HeaderBack from '../../components/CustomHeader';
 import { connect } from 'react-redux';
 import api from '../../service/api';
 import CustomModal from '../../components/Alert';
 import { FlatList } from 'react-native-gesture-handler';
 import CartaoUser from '../../components/CartaoUser';
+
 import moment from 'moment';
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
-import { number } from 'yup';
 import EmptyState from '../../components/EmptyState';
 import Loading from '../../components/Loading';
+
 class Agendamentos extends Component {
   static navigationOptions = { header: null };
   state = {
     listaAgendamento: [],
     Load: true,
+    Erro: false,
     Usuario: this.props.navigation.state.params.usuario,
   };
 
@@ -33,6 +33,7 @@ class Agendamentos extends Component {
   onRefreshPage = () => {};
 
   Agendar = () => {
+    this.setState({ Load: true });
     api
       .get(`/confirmAgendamento/${this.props.email}`)
       .then(responseJson => {
@@ -41,17 +42,18 @@ class Agendamentos extends Component {
       })
       .catch(error => {
         console.log(error);
-        this.setState({ Load: false });
+        this.setState({ Load: false, Erro: true });
+        this.setState({});
       });
   };
-  // ${this.props.email}
+
   enviarReq = (tipoSocilitacao, usuario) => {
-    console.log('VOLTOU NO AGENDAMENTO ?', tipoSocilitacao, usuario);
-    const data = {
-      email: usuario,
-      status: 'Confirmado',
-    };
     if (tipoSocilitacao == 1) {
+      const data = {
+        email: usuario,
+        status: 'Confirmado',
+      };
+
       api
         .put(`/confirmAgendamento/${this.props.email}`, data)
         .then(responseJson => {
@@ -59,8 +61,14 @@ class Agendamentos extends Component {
           this.setState({ listaAgendamento: [] });
           this.Agendar();
         })
-        .catch(error => {});
+        .catch(error => {
+          this.setState({ Erro: true });
+        });
     } else if (tipoSocilitacao == 0) {
+      const data = {
+        email: usuario,
+        status: 'Recusado',
+      };
     }
   };
 
@@ -93,17 +101,10 @@ class Agendamentos extends Component {
                 retorno={(number, user) => this.enviarReq(number, user)}
                 dados={item.user}
                 dadosGerais={item}
+                tipoRetorno="Republica"
               />
               <View style={style.viewData}>
-                <View
-                  style={{
-                    justifyContent: 'space-evenly',
-                    flexDirection: 'row',
-                    width: '45%',
-                    borderRadius: 50,
-                    backgroundColor: '#f8f8f8',
-                  }}
-                >
+                <View style={style.viewData2}>
                   <Text style={style.data}>
                     {moment(new Date(item.data)).format('L')}
                   </Text>
@@ -113,28 +114,12 @@ class Agendamentos extends Component {
                   </Text>
                 </View>
                 {item.status == 'Análise' && (
-                  <View
-                    style={{
-                      width: '30%',
-                      borderRadius: 20,
-                      backgroundColor: 'yellow',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}
-                  >
+                  <View style={style.Analise}>
                     <Text style={style.data}>{item.status}</Text>
                   </View>
                 )}
                 {item.status == 'Confirmado' && (
-                  <View
-                    style={{
-                      width: '30%',
-                      borderRadius: 20,
-                      backgroundColor: 'green',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}
-                  >
+                  <View style={style.Confirmado}>
                     <Text style={style.dataConf}>{item.status}</Text>
                   </View>
                 )}
@@ -143,6 +128,16 @@ class Agendamentos extends Component {
           )}
           keyExtractor={item => item._id}
         />
+        {this.state.Erro && (
+          <View style={style.V_Detalhes}>
+            <CustomModal
+              parametro="Erro"
+              callback={() => {
+                this.setState({ Erro: false });
+              }}
+            />
+          </View>
+        )}
       </View>
     );
   }

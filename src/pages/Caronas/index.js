@@ -40,6 +40,7 @@ import CustomModal from '../../components/Alert';
 import CartaoCarona from '../../components/CartaoCarona';
 import api from '../../service/api';
 import _ from 'lodash';
+import EmptyState from '../../components/EmptyState';
 
 class Caronas extends Component {
   static navigationOptions = { header: null };
@@ -236,24 +237,23 @@ class Caronas extends Component {
     return (
       <View style={Estilo.V_externa}>
         <NavigationEvents onDidFocus={this.getListCarona} />
-        {this.state.loading ? (
+        {this.state.loading && (
           <View style={Estilo.V_interna1}>
             <Spinner color="#142850" />
           </View>
-        ) : this.state.erro ? (
+        )}
+        {this.state.erro && (
           <View style={Estilo.V_interna1}>
-            <CustomModal parametro="Erro" />
-            <Image
-              style={Estilo.imagemError}
-              source={require('../../assets/Img/Empty.png')}
+            <CustomModal
+              parametro="Erro"
+              callback={() => {
+                this.setState({ erro: false });
+              }}
             />
-            <Text style={Estilo.textError}>Nenhum Anuncio Disponivel</Text>
-            <Text style={Estilo.textError2}>
-              Aproveite essa oportunidade publique sua oferta de carona agora
-              mesmo{' '}
-            </Text>
           </View>
-        ) : (
+        )}
+
+        {this.state.listaCaronas.length != 0 ? (
           <View style={Estilo.card}>
             <FlatList
               style={Estilo.flatList}
@@ -264,8 +264,12 @@ class Caronas extends Component {
               onRefresh={this.getListCarona}
             />
           </View>
+        ) : (
+          <EmptyState
+            titulo="Sem Anuncios"
+            mensagem="Aguarde logo aparecerár alguem para preencher esse vazio :("
+          />
         )}
-
         <View style={Estilo.V_modalExterno}>
           <Modal
             animationType="fade"

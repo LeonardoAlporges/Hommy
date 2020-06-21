@@ -74,5 +74,31 @@ const style = StyleSheet.create({
     width: '100%',
     marginVertical: 10,
   },
+  V_Detalhes: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  viewData2: {
+    justifyContent: 'space-evenly',
+    flexDirection: 'row',
+    width: '45%',
+    borderRadius: 50,
+    backgroundColor: '#f8f8f8',
+  },
+  Analise: {
+    width: '30%',
+    borderRadius: 20,
+    backgroundColor: 'yellow',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  Confirmado: {
+    width: '30%',
+    borderRadius: 20,
+    backgroundColor: 'green',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 export default style;

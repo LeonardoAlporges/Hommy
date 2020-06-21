@@ -27,7 +27,7 @@ import {
 
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import Icon2 from 'react-native-vector-icons/Feather';
-import Estilos from './styles';
+import styles from './styles';
 
 class Cartao extends Component {
   constructor(props) {
@@ -74,34 +74,34 @@ class Cartao extends Component {
       <TouchableHighlight
         underlayColor="#fff"
         onPress={this.onClickCard}
-        style={Estilos.touch_card}
+        style={styles.touch_card}
       >
-        <View style={Estilos.V_cartao}>
-          <View style={Estilos.V_imagem}>
+        <View style={styles.V_cartao}>
+          <View style={styles.V_imagem}>
             <Image
               source={{ uri: this.props.data.imagem1 }}
-              style={Estilos.V_imagem}
+              style={styles.V_imagem}
             />
           </View>
-          <View style={Estilos.V_TituloDesc}>
-            <View style={Estilos.V_titulo}>
-              <Text style={Estilos.txtTitulo}>
+          <View style={styles.V_TituloDesc}>
+            <View style={styles.V_titulo}>
+              <Text style={styles.txtTitulo}>
                 {this.props.data.nomeRepublica}
               </Text>
             </View>
-            <View style={Estilos.V_obs}>
+            <View style={styles.V_obs}>
               <Text numberOfLines={2}>{this.props.data.descricao}</Text>
             </View>
-            <View style={Estilos.V_desc}>
-              <View style={Estilos.V_valor}>
-                <Icon2 style={Estilos.txtIcon} name="dollar-sign" />
-                <Text style={Estilos.txtDesc}>
+            <View style={styles.V_desc}>
+              <View style={styles.V_valor}>
+                <Icon2 style={styles.txtIcon} name="dollar-sign" />
+                <Text style={styles.txtDesc}>
                   R$ {this.props.data.valorAluguel}
                 </Text>
               </View>
-              <View style={Estilos.V_vagas}>
-                <Icon style={Estilos.txtIcon} name="people" />
-                <Text style={Estilos.txtDesc}>
+              <View style={styles.V_vagas}>
+                <Icon style={styles.txtIcon} name="people" />
+                <Text style={styles.txtDesc}>
                   {this.props.data.numVagas} Vaga(s)
                 </Text>
               </View>

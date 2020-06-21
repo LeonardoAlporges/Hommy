@@ -44,6 +44,7 @@ import {
   Tabs,
   Tab,
 } from 'native-base';
+import Loading from '../../components/Loading';
 import ViewPager from '@react-native-community/viewpager';
 import api from '../../service/api';
 import estilo from './style';
@@ -62,11 +63,14 @@ export class Cadastro extends Component {
       update: this.props.navigation.state.params.update,
       genero: '',
       animal: '',
+      Load: false,
       erro: false,
       sucesso: false,
       imageURI0: null,
       imageURI1: null,
       imageURI2: null,
+      imageURI3: null,
+      imageURI4: null,
       envio: true,
       carregando: false,
       modalLoadVisible: false,
@@ -74,6 +78,9 @@ export class Cadastro extends Component {
     this.verificarParametro(this.props.navigation.state.params.update);
   }
 
+  navegar() {
+    this.props.navigation.goBack(null);
+  }
   async verificarParametro(parametro) {
     await this.setState({ update: parametro });
 
@@ -104,16 +111,20 @@ export class Cadastro extends Component {
   }
 
   monitorFileUpload = task => {
+    this.setState({ contadorImagem: this.state.contadorImagem + 1 });
     task.on('state_changed', snapshot => {
       const progress = uploadProgress(
         snapshot.bytesTransferred / snapshot.totalBytes
       );
+      console.log(snapshot);
       switch (snapshot.state) {
         case 'running':
           this.setState({ imageURI: null });
           this.setState({ loading: true });
           break;
         case 'success':
+          console.log('conta', this.state.contadorImagem);
+
           snapshot.ref.getDownloadURL().then(downloadURL => {
             if (this.state.contadorImagem == 1) {
               this.setState({ imageURI0: downloadURL });
@@ -124,9 +135,9 @@ export class Cadastro extends Component {
             } else {
               this.setState({ envio: false });
             }
-            this.setState({ contadorImagem: this.state.contadorImagem + 1 });
           });
           break;
+
         default:
           break;
       }
@@ -137,9 +148,9 @@ export class Cadastro extends Component {
     ImagePicker.launchImageLibrary(imagePickerOptions, imagePickerResponse => {
       const { didCancel, error } = imagePickerResponse;
       if (didCancel) {
-        alert('Post canceled');
+        alert('Envio cancelado');
       } else if (error) {
-        alert('An error occurred: ', error);
+        alert('Ocorreu algum erro: ', error);
       } else {
         const uploadTask = uploadFileToFireBaseRepublica(imagePickerResponse);
         this.monitorFileUpload(uploadTask);
@@ -147,8 +158,12 @@ export class Cadastro extends Component {
     });
   };
 
+  goToHome() {
+    this.props.navigation.navigate('TabsHeader');
+  }
+
   async entrar(values) {
-    this.setState({ modalLoadVisible: true });
+    this.setState({ Load: true });
     console.log;
     if (
       this.state.imageURI0 == null &&
@@ -189,24 +204,23 @@ export class Cadastro extends Component {
         await api
           .put(`/main/${this.props.email}`, this.data)
           .then(Response => {
-            this.setState({ modalLoadVisible: false });
+            this.setState({ Load: false });
             this.setState({ sucesso: true });
-            this.props.navigation.navigate('TabsHeader');
           })
           .catch(e => {
-            this.setState({ modalLoadVisible: false });
+            this.setState({ Load: false });
             this.setState({ erro: true });
           });
       } else if (this.state.update == false) {
         await api
           .post('/main', this.data)
           .then(Response => {
-            this.setState({ modalLoadVisible: false });
+            console.log(Response);
+            this.setState({ Load: false });
             this.setState({ sucesso: true });
-            this.props.navigation.navigate('TabsHeader');
           })
           .catch(e => {
-            this.setState({ modalLoadVisible: false });
+            this.setState({ Load: false });
             this.setState({ erro: true });
           });
       }
@@ -233,6 +247,7 @@ export class Cadastro extends Component {
         }}
         onSubmit={values => {
           this.setState({ carregando: true });
+          console.log(values);
           this.entrar(values);
         }}
         validationSchema={yup.object().shape({
@@ -295,24 +310,32 @@ export class Cadastro extends Component {
           handleSubmit,
         }) => (
           <Fragment>
-            {this.state.erro ? <CustomModal parametro="Erro" /> : <View />}
-            {this.state.sucesso ? (
-              <View style={estilo.V_modal}>
-                <CustomModal parametro="Sucesso" />
-              </View>
-            ) : (
-              <View />
+            {this.state.erro && <CustomModal parametro="Erro" />}
+            {this.state.sucesso && (
+              <CustomModal
+                parametro="Sucesso"
+                callback={() => {
+                  this.goToHome();
+                }}
+              />
             )}
+            {this.state.Load && <Loading />}
             <HeaderBack
               title="Cadastre sua republica"
               onNavigation={() => this.navegar()}
             />
             <Tabs
               initialPage={0}
-              tabBarUnderlineStyle={{ backgroundColor: '#f8f8f8', height: 3 }}
+              tabBarUnderlineStyle={{ backgroundColor: '#142850', height: 3 }}
               tabContainerStyle={{ height: 45 }}
             >
-              <Tab heading="Informaçoes">
+              <Tab
+                heading="Informaçoes"
+                tabStyle={estilo.tabs_style}
+                textStyle={estilo.tabs_TextStyle}
+                activeTabStyle={estilo.tabs_ActiveTabs}
+                activeTextStyle={estilo.tabs_ActiveTextStyle}
+              >
                 <ScrollView>
                   <View style={estilo.V_Conteudo}>
                     <Text style={estilo.textRepublica}>
@@ -400,7 +423,9 @@ export class Cadastro extends Component {
                         <Input
                           value={values.descricao}
                           onChangeText={handleChange('descricao')}
-                          placeholder=""
+                          placeholderTextColor="#2e2e2e"
+                          //style={estilo.textoValue}
+                          placeholder="EX: Perto da UFES, local para estudo..."
                           onBlur={() => setFieldTouched('descricao')}
                         />
                       </Item>
@@ -416,49 +441,88 @@ export class Cadastro extends Component {
                       </Text>
                     </View>
                     <View style={estilo.V_ImageEmpty}>
-                      {this.state.imageURI0 == null ? (
-                        <View style={estilo.V_ImageFull}>
-                          <Image
-                            source={require('../../assets/Img/Republica_Send_Pictures.png')}
-                            style={estilo.ImageEmpty}
-                          />
-                        </View>
-                      ) : (
-                        <Image
-                          source={{ uri: this.state.imageURI0 }}
-                          style={estilo.ImageFull}
-                        />
-                      )}
-                      {this.state.imageURI1 == null ? (
-                        <View style={estilo.V_ImageFull}>
-                          <Image
-                            source={require('../../assets/Img/Republica_Send_Pictures.png')}
-                            style={estilo.ImageEmpty}
-                          />
-                        </View>
-                      ) : (
-                        <Image
-                          source={{ uri: this.state.imageURI1 }}
-                          style={estilo.ImageFull}
-                        />
-                      )}
-                      {this.state.imageURI2 == null ? (
-                        <View style={estilo.V_ImageFull}>
-                          <Image
-                            source={require('../../assets/Img/Republica_Send_Pictures.png')}
-                            style={estilo.ImageEmpty}
-                          />
-                        </View>
-                      ) : (
-                        <Image
-                          source={{ uri: this.state.imageURI2 }}
-                          style={estilo.ImageFull}
-                        />
-                      )}
+                      <ScrollView horizontal={true}>
+                        {this.state.imageURI0 == null ? (
+                          <View style={estilo.V_ImageFull}>
+                            <Image
+                              source={require('../../assets/Img/Republica_Send_Pictures.png')}
+                              style={estilo.ImageEmpty}
+                            />
+                          </View>
+                        ) : (
+                          <View style={estilo.V_ImageFull}>
+                            <Image
+                              source={{ uri: this.state.imageURI0 }}
+                              style={estilo.ImageFull}
+                            />
+                          </View>
+                        )}
+                        {this.state.imageURI1 == null ? (
+                          <View style={estilo.V_ImageFull}>
+                            <Image
+                              source={require('../../assets/Img/Republica_Send_Pictures.png')}
+                              style={estilo.ImageEmpty}
+                            />
+                          </View>
+                        ) : (
+                          <View style={estilo.V_ImageFull}>
+                            <Image
+                              source={{ uri: this.state.imageURI1 }}
+                              style={estilo.ImageFull}
+                            />
+                          </View>
+                        )}
+                        {this.state.imageURI2 == null ? (
+                          <View style={estilo.V_ImageFull}>
+                            <Image
+                              source={require('../../assets/Img/Republica_Send_Pictures.png')}
+                              style={estilo.ImageEmpty}
+                            />
+                          </View>
+                        ) : (
+                          <View style={estilo.V_ImageFull}>
+                            <Image
+                              source={{ uri: this.state.imageURI2 }}
+                              style={estilo.ImageFull}
+                            />
+                          </View>
+                        )}
+                        {this.state.imageURI3 == null ? (
+                          <View style={estilo.V_ImageFull}>
+                            <Image
+                              source={require('../../assets/Img/Republica_Send_Pictures.png')}
+                              style={estilo.ImageEmpty}
+                            />
+                          </View>
+                        ) : (
+                          <View style={estilo.V_ImageFull}>
+                            <Image
+                              source={{ uri: this.state.imageURI3 }}
+                              style={estilo.ImageFull}
+                            />
+                          </View>
+                        )}
+                        {this.state.imageURI4 == null ? (
+                          <View style={estilo.V_ImageFull}>
+                            <Image
+                              source={require('../../assets/Img/Republica_Send_Pictures.png')}
+                              style={estilo.ImageEmpty}
+                            />
+                          </View>
+                        ) : (
+                          <View style={estilo.V_ImageFull}>
+                            <Image
+                              source={{ uri: this.state.imageURI4 }}
+                              style={estilo.ImageFull}
+                            />
+                          </View>
+                        )}
+                      </ScrollView>
                     </View>
 
                     <View style={estilo.V_BotaoImg}>
                       <Button
+                        disabled={this.state.contadorImagem == 3}
                         style={estilo.botao_send}
                         onPress={() => {
                           this.uploadFile();
@@ -473,7 +537,13 @@ export class Cadastro extends Component {
                   </View>
                 </ScrollView>
               </Tab>
-              <Tab heading="Detalhes">
+              <Tab
+                heading="Detalhes"
+                tabStyle={estilo.tabs_style}
+                textStyle={estilo.tabs_TextStyle}
+                activeTabStyle={estilo.tabs_ActiveTabs}
+                activeTextStyle={estilo.tabs_ActiveTextStyle}
+              >
                 <View key="2">
                   <ScrollView>
                     <View style={estilo.V_Conteudo}>
@@ -490,7 +560,6 @@ export class Cadastro extends Component {
                             <Input
                               value={values.aluguel}
                               onChangeText={handleChange('aluguel')}
-                              placeholder=""
                               onBlur={() => setFieldTouched('aluguel')}
                             />
                           </Item>
@@ -542,6 +611,7 @@ export class Cadastro extends Component {
                               placeholder=""
                               onBlur={() => setFieldTouched('genero')}
                             >
+                              <Picker.Item label=" " value="Não informado" />
                               <Picker.Item label="Feminina" value="Feminina" />
                               <Picker.Item
                                 label="Masculina"
@@ -575,6 +645,7 @@ export class Cadastro extends Component {
                               placeholder=""
                               onBlur={() => setFieldTouched('animais')}
                             >
+                              <Picker.Item label=" " value="Não informado" />
                               <Picker.Item label="Sim" value="sim" />
                               <Picker.Item label="Não" value="nao" />
                             </Picker>
@@ -607,6 +678,7 @@ export class Cadastro extends Component {
                               placeholder=""
                               onBlur={() => setFieldTouched('tipoImovel')}
                             >
+                              <Picker.Item label=" " value="Não informado" />
                               <Picker.Item label="Casa" value="Casa" />
                               <Picker.Item
                                 label="Apartamento"
@@ -636,9 +708,10 @@ export class Cadastro extends Component {
                               onValueChange={handleChange('numeroVagas')}
                               value={values.numeroVagas}
                               //onChangeText={handleChange('numeroVagas')}
-                              placeholder=""
+                              placeholder="Não Informado"
                               onBlur={() => setFieldTouched('numeroVagas')}
                             >
+                              <Picker.Item label="" value="Não informado" />
                               <Picker.Item label="1" value="1" />
                               <Picker.Item label="2" value="2" />
                               <Picker.Item label="3+" value="3+" />
@@ -663,7 +736,7 @@ export class Cadastro extends Component {
                             onChangeText={handleChange('aQuarto')}
                             placeholder=""
                             onBlur={() => setFieldTouched('aQuarto')}
-                            placeholder=""
+                            placeholder="EX: Cama, Ventilador, Janela"
                           />
                         </Item>
                       </View>
@@ -733,20 +806,6 @@ export class Cadastro extends Component {
                 </View>
               </Tab>
             </Tabs>
-
-            <View>
-              <Modal
-                animationType="fade"
-                transparent={true}
-                visible={this.state.modalLoadVisible}
-              >
-                <View style={estilo.ViewFundo}>
-                  <View style={estilo.ViewModal}>
-                    <Spinner color="red" />
-                  </View>
-                </View>
-              </Modal>
-            </View>
           </Fragment>
         )}
       </Formik>

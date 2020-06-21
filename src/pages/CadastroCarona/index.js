@@ -9,6 +9,8 @@ import { withNavigation } from 'react-navigation';
 import CustomModal from '../../components/Alert';
 import { connect } from 'react-redux';
 import TextInputMask from 'react-native-text-input-mask';
+import HeaderBack from '../../components/CustomHeader';
+import Loading from '../../components/Loading';
 import {
   Text,
   Item,
@@ -43,6 +45,9 @@ class CadastroCarona extends Component {
       modalLoadVisible: false,
       update: this.props.navigation.state.params.update,
     };
+  }
+  goToHome() {
+    this.props.navigation.navigate('TabsHeader');
   }
 
   subirDate(date) {
@@ -79,7 +84,6 @@ class CadastroCarona extends Component {
         .then(Response => {
           this.setState({ modalLoadVisible: false });
           this.setState({ sucesso: true });
-          this.props.navigation.navigate('TabsHeader');
         })
         .catch(e => {
           this.setState({ erro: true });
@@ -91,9 +95,9 @@ class CadastroCarona extends Component {
       await api
         .post('/carona', this.data)
         .then(Response => {
+          console.log('RESO');
           this.setState({ modalLoadVisible: false });
           this.setState({ sucesso: true });
-          this.props.navigation.navigate('TabsHeader');
         })
         .catch(e => {
           this.setState({ modalLoadVisible: false });
@@ -102,6 +106,9 @@ class CadastroCarona extends Component {
         });
     }
     this.setState({ modalLoadVisible: false });
+  }
+  navegar() {
+    this.props.navigation.goBack(null);
   }
 
   render() {
@@ -156,26 +163,22 @@ class CadastroCarona extends Component {
           handleSubmit,
         }) => (
           <Fragment>
-            {this.state.erro ? <CustomModal parametro="Erro" /> : <View />}
-            {this.state.sucesso ? (
-              <CustomModal parametro="Sucesso" />
-            ) : (
-              <View />
+            {this.state.erro && <CustomModal parametro="Erro" />}
+            {this.state.sucesso && (
+              <CustomModal
+                parametro="Sucesso"
+                callback={() => {
+                  this.goToHome();
+                }}
+              />
             )}
             <ViewPager style={{ flex: 1 }}>
               <ScrollView>
                 <View key="1">
-                  <View style={estilo.V_header}>
-                    <TouchableOpacity
-                      style={{ marginLeft: '5%' }}
-                      onPress={() => {
-                        this.props.navigation.goBack(null);
-                      }}
-                    >
-                      <Icon name="ios-arrow-back" style={estilo.iconHeader} />
-                    </TouchableOpacity>
-                    <Text style={estilo.title}>{this.props.nota}</Text>
-                  </View>
+                  <HeaderBack
+                    title="Cadastro de carona"
+                    onNavigation={() => this.navegar()}
+                  />
 
                   <View style={estilo.V_Conteudo}>
                     <Text style={estilo.txtCarona}>
@@ -239,7 +242,7 @@ class CadastroCarona extends Component {
                             androidMode={'calendar'}
                             placeHolderText="Selecione a data"
                             textStyle={{
-                              textAlign: 'right',
+                              textAlign: 'left',
                               paddingTop: 25,
                               height: 50,
                               fontSize: 11,
@@ -247,10 +250,11 @@ class CadastroCarona extends Component {
                             }}
                             placeHolderTextStyle={{
                               textAlign: 'right',
-                              paddingTop: 25,
+                              paddingTop: 28,
+
                               height: 50,
                               fontSize: 11,
-                              color: '#989898',
+                              color: '#2e2e2e',
                             }}
                             onDateChange={date => {
                               this.setState({ newData: new Date(date) });
@@ -436,8 +440,6 @@ class CadastroCarona extends Component {
 
 const mapStateToProps = state => {
   return {
-    //para pegar do reducer e State."NOME DO REDUCER"."NOME DA PROPIEDADE"
-
     saida: state.carona.saida,
     chegada: state.carona.chegada,
     data: state.carona.data,
@@ -451,10 +453,6 @@ const mapStateToProps = state => {
     nome: state.user.usuario,
     email: state.user.email,
     nota: state.user.notaUser,
-
-    //nota: state.carona.nota,
-
-    // Ou seja agora e como se tivessemos duas props dentro do compoennte cadastro
   };
 };
 

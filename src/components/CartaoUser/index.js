@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import api from '../../service/api';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
+
 class CartaoUser extends Component {
   state = {
     modal: false,
@@ -20,34 +21,19 @@ class CartaoUser extends Component {
     this.props.retorno(number, this.props.dados.email);
   };
 
-  mudarStatusInteressado = number => {
-    this.retorno(number);
-    console.log(number);
+  retornoCarona = number => {
+    this.props.callback(number, this.props.dados.email);
+  };
 
-    // if (number === 1) {
-    //   api
-    //     .put(`/carona/confirmar/${this.props.email}`, {
-    //       UsuarioConfirmado: this.props.dados.email,
-    //     })
-    //     .then(responseJson => {
-    //       console.log('USUARIO ACEITO', responseJson);
-    //     })
-    //     .catch(error => {
-    //       console.log('erro:', error);
-    //     });
-    // } else if (number === 0) {
-    //   api
-    //     .put(`/carona/rejeitar/${this.props.email}`, {
-    //       UsuarioRejeitado: this.props.dados.email,
-    //     })
-    //     .then(responseJson => {
-    //       console.log('USUARIO Rejeitado', responseJson);
-    //     })
-    //     .catch(error => {
-    //       console.log('erro:', error);
-    //     });
-    // }
-    this.props.callback();
+  mudarStatusInteressado = number => {
+    if (this.props.tipoRetorno == 'Republica') {
+      this.retorno(number);
+      this.props.callback();
+      console.log(number);
+    } else if (this.props.tipoRetorno == 'Carona') {
+      console.log('retorna para carona', number);
+      this.retornoCarona(number);
+    }
   };
 
   render() {
@@ -82,7 +68,6 @@ class CartaoUser extends Component {
               onPress={() => {
                 this.setState({
                   mensagem: 'Confirmar',
-
                   confirmar: true,
                   modal: true,
                 });

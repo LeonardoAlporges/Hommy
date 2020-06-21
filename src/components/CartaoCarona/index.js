@@ -106,10 +106,6 @@ class CartaoCarona extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {};
-};
-
 const CartaoCaronaConnect = connect(
   null,
   {

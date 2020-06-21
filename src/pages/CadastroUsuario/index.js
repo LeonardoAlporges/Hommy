@@ -43,7 +43,7 @@ class CadastroUsuario extends Component {
       .then(responseJson => {
         console.log(responseJson);
         this.setState({ modalLoadVisible: false });
-        this.props.navigation.navigate('Confirmacao');
+        this.props.navigation.navigate('Login');
       })
       .catch(error => {
         console.log(error);

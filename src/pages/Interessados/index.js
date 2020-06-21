@@ -14,10 +14,14 @@ import ModalConfirmacao from '../../components/ModalConfirmacao';
 import { connect } from 'react-redux';
 import HeaderBack from '../../components/CustomHeader';
 import EmptyState from '../../components/EmptyState';
+import Loading from '../../components/Loading';
+import CustomModal from '../../components/Alert';
 
 class Interessados extends Component {
   static navigationOptions = { header: null };
   state = {
+    Erro: false,
+    Load: true,
     user: [],
     userConfirmado: [],
     modal: false,
@@ -29,33 +33,63 @@ class Interessados extends Component {
   }
 
   getlist = () => {
-    this.setState({ refreshing: true });
-    api
-      .get(`/carona/retornaInteresse/${this.props.email}`)
-      .then(responseJson => {
-        this.setState({
-          user: responseJson.data,
-        });
-      })
-      .catch(error => {
-        console.log('erro:', error);
-      });
-
     api
       .get(`/carona/confirmar/${this.props.email}`)
       .then(responseJson => {
-        this.setState({ userConfirmado: responseJson.data });
+        this.setState({
+          user: responseJson.data,
+          Load: false,
+        });
       })
       .catch(error => {
+        this.setState({ Erro: true, Load: false });
         console.log('erro:', error);
       });
-    this.setState({ refreshing: false });
   };
+
+  SendStatus = (number, user) => {
+    this.setState({ Load: true });
+    if (number === 1) {
+      console.log('entrou no if');
+      const data = {
+        email: user,
+        status: 'Confirmado',
+      };
+      api
+        .put(`/carona/confirmar/${this.props.email}`, data)
+        .then(responseJson => {
+          this.setState({ Load: false });
+          this.onRefreshPage();
+          console.log('USUARIO ACEITO', responseJson);
+        })
+        .catch(error => {
+          this.setState({ Erro: true, Load: false });
+          console.log('erro:', error);
+        });
+    } else if (number === 0) {
+      const data = {
+        email: user,
+        status: 'Rejeitado',
+      };
+      api
+        .put(`/carona/rejeitar/${this.props.email}`, data)
+        .then(responseJson => {
+          this.setState({ Load: false });
+          console.log('USUARIO Rejeitado', responseJson);
+        })
+        .catch(error => {
+          this.setState({ Erro: true, Load: false });
+          console.log('Deu Erro no Inte:', error);
+        });
+    }
+  };
+
   navegar = () => {
     this.props.navigation.goBack(null);
   };
   onRefreshPage = () => {
-    this.getlist;
+    this.setState({ user: [] });
+    this.getlist();
   };
 
   render() {
@@ -67,8 +101,8 @@ class Interessados extends Component {
           title="Lista de interessados"
           onNavigation={() => this.navegar()}
         />
-        {(this.state.user.length == 0 ||
-          this.state.useuserConfirmador.length == 0) && (
+        {this.state.Load && <Loading />}
+        {this.state.user.length == 0 && (
           <EmptyState
             titulo="Sem interessados"
             mensagem="Aguarde logo aparecerár alguem para preencher esse vazio :("
@@ -80,38 +114,38 @@ class Interessados extends Component {
               style={style.flatList}
               data={this.state.user}
               renderItem={({ item }) => (
-                <CartaoUser
-                  callback={() => this.onRefreshPage()}
-                  dados={item}
-                />
-              )}
-              refreshing={this.state.refreshing}
-              onRefresh={this.getlist}
-              keyExtractor={item => item._id}
-            />
-          </View>
+                <View>
+                  <CartaoUser
+                    callback={(number, user) => this.SendStatus(number, user)}
+                    dados={item.user}
+                    dadosGerais={item}
+                    tipoRetorno="Carona"
+                  />
 
-          <View style={style.V_title}>
-            <Text style={style.titleCategoria}>Confirmados</Text>
-            <View style={style.barra} />
-          </View>
-
-          <View style={style.Listas}>
-            <FlatList
-              style={style.flatList}
-              data={this.state.userConfirmado}
-              renderItem={({ item }) => (
-                <CartaoUser
-                  callback={() => this.onRefreshPage()}
-                  dados={item}
-                />
+                  {item.status == 'Confirmado' && (
+                    <View style={style.botaoStatusConf}>
+                      <Text style={style.textStatusConf}>{item.status}</Text>
+                    </View>
+                  )}
+                  {item.status == 'Analise' && (
+                    <View style={style.botaoStatusAna}>
+                      <Text style={style.textStatusAna}>{item.status}</Text>
+                    </View>
+                  )}
+                </View>
               )}
-              refreshing={this.state.refreshing}
-              onRefresh={this.getlist}
               keyExtractor={item => item._id}
             />
           </View>
         </ScrollView>
+        {this.state.Erro && (
+          <CustomModal
+            parametro="Erro"
+            callback={() => {
+              this.setState({ Erro: false });
+            }}
+          />
+        )}
       </View>
     );
   }

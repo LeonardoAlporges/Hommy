@@ -158,7 +158,6 @@ class DetalhesAnuncio extends Component {
                 this.clickInteresse();
               }}
             >
-              <Icon name="minus" style={estilo.iconWhatsapp} />
               <Icon2 name="alert-circle" style={estilo.iconWhatsapp} />
               <Text style={estilo.txtWhatsapp}>Agendar uma visita</Text>
             </Button>

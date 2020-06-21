@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { color } from 'react-native-reanimated';
 
-const Estilos = StyleSheet.create({
+const styles = StyleSheet.create({
   touch_card: {
     flex: 1,
 
@@ -104,4 +104,4 @@ const Estilos = StyleSheet.create({
   },
 });
 
-export default Estilos;
+export default styles;

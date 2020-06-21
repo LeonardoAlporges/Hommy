@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { DatePicker, Item, Label, Text, Button } from 'native-base';
+import { Text } from 'native-base';
 import Cartao from '../../components/Cartao';
 import style from './styles';
-import { extend } from 'lodash';
+
 import HeaderBack from '../../components/CustomHeader';
 import { connect } from 'react-redux';
 import api from '../../service/api';
 import CustomModal from '../../components/Alert';
 import { FlatList } from 'react-native-gesture-handler';
-import CartaoUser from '../../components/CartaoUser';
+
 import moment from 'moment';
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
-import { number } from 'yup';
 import EmptyState from '../../components/EmptyState';
 import Loading from '../../components/Loading';
 
@@ -21,6 +19,7 @@ class AgendamentoUser extends Component {
   state = {
     listaAgendamento: [],
     Load: true,
+    Erro: false,
     Usuario: this.props.navigation.state.params.usuario,
   };
 
@@ -42,7 +41,7 @@ class AgendamentoUser extends Component {
       })
       .catch(error => {
         console.log(error);
-        this.setState({ Load: false });
+        this.setState({ Load: false, Erro: true });
       });
   };
 
@@ -72,15 +71,7 @@ class AgendamentoUser extends Component {
             <View>
               <Cartao data={item.republica} interessado />
               <View style={style.viewData}>
-                <View
-                  style={{
-                    justifyContent: 'space-evenly',
-                    flexDirection: 'row',
-                    width: '45%',
-                    borderRadius: 50,
-                    backgroundColor: '#f8f8f8',
-                  }}
-                >
+                <View style={style.viewData2}>
                   <Text style={style.data}>
                     {moment(new Date(item.data)).format('L')}
                   </Text>
@@ -90,28 +81,12 @@ class AgendamentoUser extends Component {
                   </Text>
                 </View>
                 {item.status == 'Análise' && (
-                  <View
-                    style={{
-                      width: '30%',
-                      borderRadius: 20,
-                      backgroundColor: 'yellow',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}
-                  >
+                  <View style={style.ViewAnalise}>
                     <Text style={style.data}>{item.status}</Text>
                   </View>
                 )}
                 {item.status == 'Confirmado' && (
-                  <View
-                    style={{
-                      width: '30%',
-                      borderRadius: 20,
-                      backgroundColor: 'green',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}
-                  >
+                  <View style={style.View_Confirmado}>
                     <Text style={style.dataConf}>{item.status}</Text>
                   </View>
                 )}
@@ -120,6 +95,16 @@ class AgendamentoUser extends Component {
           )}
           keyExtractor={item => item._id}
         />
+        {this.state.Erro && (
+          <View style={style.V_Detalhes}>
+            <CustomModal
+              parametro="Erro"
+              callback={() => {
+                this.setState({ Erro: false });
+              }}
+            />
+          </View>
+        )}
       </View>
     );
   }

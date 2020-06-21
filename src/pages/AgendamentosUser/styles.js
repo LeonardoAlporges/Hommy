@@ -14,6 +14,11 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
+  V_Detalhes: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   botao: {
     backgroundColor: '#142850',
     display: 'flex',
@@ -73,6 +78,29 @@ const style = StyleSheet.create({
   V_label: {
     width: '100%',
     marginVertical: 10,
+  },
+  View_Confirmado: {
+    width: '30%',
+    height: 30,
+    borderRadius: 6,
+    backgroundColor: 'green',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  ViewAnalise: {
+    width: '30%',
+    height: 30,
+    borderRadius: 6,
+    backgroundColor: 'yellow',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  viewData2: {
+    justifyContent: 'space-evenly',
+    flexDirection: 'row',
+    width: '45%',
+    borderRadius: 50,
+    backgroundColor: '#f8f8f8',
   },
 });
 export default style;

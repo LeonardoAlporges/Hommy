@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Button } from 'native-base';
 import CustomModal from '../../components/Alert';
 import api from '../../service/api';
+import Loading from '../../components/Loading';
 
 const moment = require('moment');
 moment.locale('pt', {
@@ -19,18 +20,24 @@ moment.locale('pt', {
 class DetalhesCarona extends Component {
   state = {
     interesse: false,
+    Erro: false,
+    Load: false,
     data: moment(this.props.data).format('dddd, DD MMMM'),
   };
 
   async clickInteresse() {
-    this.envio = { novoInteresse: this.props.email };
+    this.setState({ load: true });
+    this.envio = { email: this.props.email };
     await api
-      .put(`/carona/interesse/${this.props.emailOfertante}`, this.envio)
+      .put(`/carona/meusInteresses/${this.props.emailOfertante}`, this.envio)
       .then(Response => {
+        console.log(Response);
         console.log('Foi adicionado a lista de interesse');
+        this.setState({ interesse: true, load: false });
       })
       .catch(e => {
         console.log('NAO Foi adicionado a lista de interesse');
+        this.setState({ Erro: true, load: false });
       });
   }
 
@@ -38,17 +45,20 @@ class DetalhesCarona extends Component {
   render() {
     return (
       <ScrollView style={{ paddingBottom: 50 }}>
-        {this.state.interesse ? (
+        {this.state.Load && <Loading />}
+
+        {this.state.interesse && (
           <View style={Estilo.V_modal}>
             <CustomModal
               parametro="Custom"
               titulo="Obrigado pelo interesse"
-              descricao="Você sera adicionado a uma lista de interesse e sera notificado assim que o ofertante confirme sua vaga."
+              descricao="Você sera adicionado a uma lista de interesse e sera notificado assim que o ofertante confirma sua vaga."
               botao="Confirmar"
+              callback={() => {
+                this.props.navigation.navigate('Viagens');
+              }}
             />
           </View>
-        ) : (
-          <View />
         )}
         <View style={Estilo.V_Margin}>
           <View style={Estilo.header}>
