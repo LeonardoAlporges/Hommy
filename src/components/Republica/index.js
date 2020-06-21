@@ -359,20 +359,18 @@ class Republica extends Component {
               />
             </View>
           ) : this.state.listaRepublicas.length != 0 ? (
-            <View>
-              <FlatList
-                style={Estilos.flatList}
-                data={this.state.listaRepublicas}
-                renderItem={({ item }) => <Cartao data={item} />}
-                keyExtractor={item => item._id}
-                refreshing={this.state.refreshing}
-                onRefresh={this.getListRepublica}
-              />
-            </View>
+            <FlatList
+              style={Estilos.flatList}
+              data={this.state.listaRepublicas}
+              renderItem={({ item }) => <Cartao data={item} />}
+              keyExtractor={item => item._id}
+              refreshing={this.state.refreshing}
+              onRefresh={this.getListRepublica}
+            />
           ) : (
             <EmptyState
               titulo="Sem Anuncios Disponivel "
-              mensagem="Aguarde logo aparecerár alguem para preencher esse vazio :("
+              mensagem="Começe publicando um agora mesmo"
             />
           )}
         </View>

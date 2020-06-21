@@ -267,7 +267,7 @@ class Caronas extends Component {
         ) : (
           <EmptyState
             titulo="Sem Anuncios"
-            mensagem="Aguarde logo aparecerár alguem para preencher esse vazio :("
+            mensagem="Começe publicando um agora mesmo"
           />
         )}
         <View style={Estilo.V_modalExterno}>
