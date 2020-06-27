@@ -95,8 +95,17 @@ const estilo = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     height: 40,
-    justifyContent: 'flex-end',
+    justifyContent: 'space-evenly',
     alignItems: 'flex-end',
+  },
+  delete: {
+    borderRadius: 6,
+    height: 34,
+    width: 34,
+    backgroundColor: '#142850',
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: '#ffffff',
   },
   edit: {
     borderRadius: 6,
@@ -112,7 +121,6 @@ const estilo = StyleSheet.create({
     borderRadius: 6,
     height: 34,
     width: 200,
-    marginLeft: 20,
     backgroundColor: '#142850',
     justifyContent: 'center',
     alignItems: 'center',
@@ -123,6 +131,11 @@ const estilo = StyleSheet.create({
     color: '#ffffff',
     fontSize: 18,
     fontFamily: 'Roboto',
+  },
+
+  iconDel: {
+    fontSize: 16,
+    color: '#ffffff',
   },
   icon: {
     fontSize: 16,

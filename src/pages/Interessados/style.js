@@ -85,6 +85,21 @@ const style = StyleSheet.create({
     fontFamily: 'Roboto',
     color: '#000',
   },
+  botaoStatusRej: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 16,
+    width: 100,
+    backgroundColor: 'red',
+    height: 30,
+    borderRadius: 5,
+  },
+  textStatusRej: {
+    fontSize: 16,
+    fontFamily: 'Roboto',
+    color: '#fff',
+  },
+
   flatList: {
     padding: 0,
   },

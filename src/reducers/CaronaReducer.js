@@ -1,4 +1,5 @@
 const initialState = {
+  idCarona: '',
   nome: '',
   saida: '',
   chegada: '',
@@ -17,6 +18,9 @@ const initialState = {
 const CaronaReducer = (state = [], action) => {
   if (state.length == 0) {
     return initialState;
+  }
+  if (action.type == 'editIdCarona') {
+    return { ...state, idCarona: action.payload.idCarona };
   }
   if (action.type == 'editNomeOfertante') {
     return { ...state, nome: action.payload.nome };

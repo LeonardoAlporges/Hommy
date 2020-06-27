@@ -6,7 +6,7 @@ const Estilo = StyleSheet.create({
     marginBottom: 0,
   },
   flatList: {
-    backgroundColor: '#f2f2f2f2',
+    backgroundColor: '#f2f2f2',
     padding: 1,
     marginBottom: 0,
     paddingBottom: 0,
@@ -14,6 +14,7 @@ const Estilo = StyleSheet.create({
   V_externa: {
     height: '100%',
     width: '100%',
+    backgroundColor: '#f2f2f2',
   },
   V_interna1: {
     width: '100%',

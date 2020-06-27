@@ -45,6 +45,22 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  Rejeitado: {
+    marginLeft: 16,
+    marginTop: 8,
+    width: '30%',
+    height: 30,
+    borderRadius: 10,
+    backgroundColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  dataRej: {
+    fontSize: 16,
+    fontFamily: 'Roboto',
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+  },
   data: {
     fontSize: 16,
     fontFamily: 'Roboto',
@@ -89,6 +105,21 @@ const style = StyleSheet.create({
     fontFamily: 'Roboto',
     fontWeight: 'bold',
     color: '#142850',
+  },
+  ViewBotaoClose: {
+    marginLeft: 200,
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  iconeClose: {
+    fontSize: 20,
+  },
+  ViewStatus: {
+    width: '100%',
+    flexDirection: 'row',
+    height: 45,
   },
 });
 

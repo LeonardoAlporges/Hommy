@@ -40,6 +40,7 @@ import {
   editRua,
   editNumeroCasa,
   editTipoImovel,
+  editIdRepublica,
 } from '../../actions/AuthActions';
 
 class Republica extends Component {
@@ -368,10 +369,12 @@ class Republica extends Component {
               onRefresh={this.getListRepublica}
             />
           ) : (
-            <EmptyState
-              titulo="Sem Anuncios Disponivel "
-              mensagem="Começe publicando um agora mesmo"
-            />
+            <View style={{ flex: 1, backgroundColor: '#fff' }}>
+              <EmptyState
+                titulo="Sem Anuncios Disponivel "
+                mensagem="Comece publicando um agora mesmo"
+              />
+            </View>
           )}
         </View>
         <View style={Estilos.V_filtroExterno}>
@@ -578,6 +581,7 @@ const RepublicaConnect = connect(
     editRua,
     editNumeroCasa,
     editTipoImovel,
+    editIdRepublica,
   }
 )(Republica);
 

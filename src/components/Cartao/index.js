@@ -23,6 +23,7 @@ import {
   editNumeroCasa,
   editTipoImovel,
   edituserEmail,
+  editIdRepublica,
 } from '../../actions/AuthActions';
 
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
@@ -41,7 +42,7 @@ class Cartao extends Component {
 
   onClickCard = () => {
     const dados = this.props.data;
-    console.log(dados.valorContas);
+    console.log(dados._id);
     this.props.editNomeRepublica(dados.nomeRepublica);
     this.props.editValorConta(dados.valorContas);
     this.props.editValorAluguel(dados.valorAluguel);
@@ -63,6 +64,7 @@ class Cartao extends Component {
     this.props.editImg2(dados.imagem2);
     this.props.editImg3(dados.imagem3);
     this.props.edituserEmail(dados.userEmail);
+    this.props.editIdRepublica(dados._id);
 
     this.props.navigation.navigate('Detalhes', {
       interessado: this.state.interessado,
@@ -130,12 +132,14 @@ const mapStateToProps = state => {
     imagem3: state.auth.imagem3,
     numVagas: state.auth.numVagas,
     numeroCasa: state.auth.numeroCasa,
+    idRepublica: state.auth.idRepublica,
   };
 };
 
 const cardConnect = connect(
   mapStateToProps,
   {
+    editIdRepublica,
     editTipoImovel,
     editNomeRepublica,
     editValorAluguel,

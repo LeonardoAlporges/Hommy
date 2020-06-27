@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import TextInputMask from 'react-native-text-input-mask';
 import { withNavigation } from 'react-navigation';
 import CustomModal from '../../components/Alert';
+import api from '../../service/api';
 
 import estilo from './styles';
 import HeaderBack from '../../components/CustomHeader';
@@ -21,13 +22,24 @@ class EsqueciSenha extends Component {
   }
   static navigationOptions = { header: null };
   state = {};
+
   onClickCard = () => {
     this.props.navigation.navigate('Detalhes');
   };
 
   EnviarCodigo = values => {
-    console.log('Enviando', values);
-    this.setState({ sucesso: true });
+    api
+      .put('/alterar/cod/', values)
+      .then(responseJson => {
+        console.log(responseJson);
+        console.log('Enviando', values);
+        this.setState({ sucesso: true });
+        this.props.navigation.navigate('ValidarCodigo');
+      })
+      .catch(error => {
+        this.setState({ Erro: true });
+        console.log(error);
+      });
   };
 
   navegar = () => {

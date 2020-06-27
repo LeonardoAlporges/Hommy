@@ -26,19 +26,20 @@ class DetalhesCarona extends Component {
   };
 
   async clickInteresse() {
-    this.setState({ load: true });
+    //this.setState({ Load: true });
     this.envio = { email: this.props.email };
     await api
-      .put(`/carona/meusInteresses/${this.props.emailOfertante}`, this.envio)
+      .put(`/carona/meusInteresses/${this.props.id}`, this.envio)
       .then(Response => {
         console.log(Response);
         console.log('Foi adicionado a lista de interesse');
-        this.setState({ interesse: true, load: false });
+        this.setState({ interesse: true, Load: false });
       })
       .catch(e => {
         console.log('NAO Foi adicionado a lista de interesse');
-        this.setState({ Erro: true, load: false });
+        this.setState({ Erro: true, Load: false });
       });
+    this.setState({ Load: false });
   }
 
   static navigationOptions = { header: null };
@@ -152,6 +153,7 @@ class DetalhesCarona extends Component {
 const mapStateToProps = state => {
   return {
     //para pegar do reducer e State."NOME DO REDUCER"."NOME DA PROPIEDADE"
+    id: state.carona.idCarona,
     email: state.user.email,
     nome: state.carona.nome,
     nota: state.carona.nota,

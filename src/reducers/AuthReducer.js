@@ -1,4 +1,5 @@
 const initialState = {
+  idRepublica: '',
   nomeRepublica: 'Republica lan house',
   valorAluguel: '270,00',
   genero: 'Mista',
@@ -24,6 +25,10 @@ const initialState = {
 const AuthReducer = (state = [], action) => {
   if (state.length == 0) {
     return initialState;
+  }
+  if (action.type == 'editIdRepublica') {
+    return { ...state, idRepublica: action.payload.idRepublica };
+    // . . .State pega as informaçoes do state e substitui por aquilo que esta depois da virgula
   }
   if (action.type == 'editLogado') {
     return { ...state, logado: action.payload.logado };

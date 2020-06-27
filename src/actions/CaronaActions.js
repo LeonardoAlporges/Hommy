@@ -1,3 +1,11 @@
+export const editIdCarona = param => {
+  return {
+    type: 'editIdCarona',
+    payload: {
+      idCarona: param,
+    },
+  };
+};
 export const editNomeOfertante = param => {
   return {
     type: 'editNomeOfertante',

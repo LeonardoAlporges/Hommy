@@ -265,147 +265,151 @@ class Caronas extends Component {
             />
           </View>
         ) : (
-          <EmptyState
-            titulo="Sem Anuncios"
-            mensagem="Começe publicando um agora mesmo"
-          />
+          <View style={{ flex: 1, backgroundColor: '#fff' }}>
+            <EmptyState
+              titulo="Sem Anuncios"
+              mensagem="Começe publicando um agora mesmo"
+            />
+          </View>
         )}
-        <View style={Estilo.V_modalExterno}>
-          <Modal
-            animationType="fade"
-            visible={this.state.modalVisible}
-            transparent={true}
-          >
-            <View style={Estilo.V_modalInterno}>
-              <Text>Valor</Text>
-              <ListItem style={Estilo.listStyle}>
-                <Text style={Estilo.textList}>De</Text>
-                <Item underlined style={Estilo.itemStyle}>
-                  <Input
-                    style={Estilo.inputStyle}
-                    onChangeText={text => this.valMenor(text)}
-                    value={this.state.aluguelMin}
-                    keyboardType="numeric"
-                  />
-                </Item>
-                <Text style={Estilo.textList}>Até</Text>
-                <Item underlined style={Estilo.itemStyle}>
-                  <Input
-                    style={Estilo.inputStyle}
-                    onChangeText={text => this.valMaior(text)}
-                    value={this.state.aluguelMax}
-                    keyboardType="numeric"
-                  />
-                </Item>
-              </ListItem>
-              <Text>Vagas disponíveis</Text>
-              <ListItem style={Estilo.listStyle}>
-                <CheckBox
-                  color="#142850"
-                  style={Estilo.inputStyle}
-                  onPress={this.fVagas1}
-                  checked={this.state.filtroVagas1}
-                />
-                <Text style={Estilo.textList}>1</Text>
-                <CheckBox
-                  color="#142850"
-                  style={Estilo.inputStyle}
-                  onPress={this.fVagas2}
-                  checked={this.state.filtroVagas2}
-                />
-                <Text style={Estilo.textList}>2</Text>
-                <CheckBox
-                  color="#142850"
-                  style={Estilo.inputStyle}
-                  onPress={this.fVagas3}
-                  checked={this.state.filtroVagas3}
-                />
-                <Text style={Estilo.textList}>3</Text>
-                <CheckBox
-                  color="#142850"
-                  style={Estilo.inputStyle}
-                  onPress={this.fVagas4}
-                  checked={this.state.filtroVagas4}
-                />
-                <Text style={Estilo.textList}>4</Text>
-              </ListItem>
-              <Text>Saida</Text>
-              <ListItem style={Estilo.listStyle}>
-                <Item picker style={Estilo.pickerStyle}>
-                  <Picker
-                    mode="dropdown"
-                    iosIcon={<Icon name="arrow-down" />}
-                    style={{ width: 140 }}
-                    placeholder="Destino"
-                    placeholderStyle={{ color: '#bfc6ea' }}
-                    placeholderIconColor="#007aff"
-                    selectedValue={this.state.cidadeS}
-                    onValueChange={this.FCidadeS.bind(this)}
-                  >
-                    <Picker.Item label="Cidades" value="null" />
-                    <Picker.Item label="Alegre" value="Alegre" />
-                    <Picker.Item label="Serra" value="Serra" />
-                    <Picker.Item label="Piuma" value="Piuma" />
-                    <Picker.Item label="Guarapari" value="Guarapari" />
-                    <Picker.Item label="Cachoeiro" value="Cachoeiro" />
-                    <Picker.Item label="Vitoria" value="Vitoria" />
-                    <Picker.Item label="Vila Velha" value="Vila Velha" />
-                    <Picker.Item label="Muniz Freire" value="Muniz Freire" />
-                    <Picker.Item label="Guacui" value="Guacui" />
-                    <Picker.Item
-                      label="Bom Jesus do Norte"
-                      value="Bom Jesus do Norte"
+        {this.state.modalVisible && (
+          <View style={Estilo.V_modalExterno}>
+            <Modal
+              animationType="fade"
+              visible={this.state.modalVisible}
+              transparent={true}
+            >
+              <View style={Estilo.V_modalInterno}>
+                <Text>Valor</Text>
+                <ListItem style={Estilo.listStyle}>
+                  <Text style={Estilo.textList}>De</Text>
+                  <Item underlined style={Estilo.itemStyle}>
+                    <Input
+                      style={Estilo.inputStyle}
+                      onChangeText={text => this.valMenor(text)}
+                      value={this.state.aluguelMin}
+                      keyboardType="numeric"
                     />
-                    <Picker.Item label="Celina" value="Celina" />
-                    <Picker.Item label="Rive" value="Rive" />
-                  </Picker>
-                </Item>
-              </ListItem>
-              <Text>Destino</Text>
-              <ListItem style={Estilo.listStyle}>
-                <Item picker style={Estilo.pickerStyle}>
-                  <Picker
-                    mode="dropdown"
-                    iosIcon={<Icon name="arrow-down" />}
-                    style={{ width: 140 }}
-                    placeholder="Destino"
-                    placeholderStyle={{ color: '#bfc6ea' }}
-                    placeholderIconColor="#007aff"
-                    selectedValue={this.state.cidadeD}
-                    onValueChange={this.FCidadeD.bind(this)}
-                  >
-                    <Picker.Item label="Cidades" value="null" />
-                    <Picker.Item label="Alegre" value="Alegre" />
-                    <Picker.Item label="Serra" value="Serra" />
-                    <Picker.Item label="Piuma" value="Piuma" />
-                    <Picker.Item label="Guarapari" value="Guarapari" />
-                    <Picker.Item label="Cachoeiro" value="Cachoeiro" />
-                    <Picker.Item label="Vitoria" value="Vitoria" />
-                    <Picker.Item label="Vila Velha" value="Vila Velha" />
-                    <Picker.Item label="Muniz Freire" value="Muniz Freire" />
-                    <Picker.Item label="Guacui" value="Guacui" />
-                    <Picker.Item
-                      label="Bom Jesus do Norte"
-                      value="Bom Jesus do Norte"
+                  </Item>
+                  <Text style={Estilo.textList}>Até</Text>
+                  <Item underlined style={Estilo.itemStyle}>
+                    <Input
+                      style={Estilo.inputStyle}
+                      onChangeText={text => this.valMaior(text)}
+                      value={this.state.aluguelMax}
+                      keyboardType="numeric"
                     />
-                    <Picker.Item label="Celina" value="Celina" />
-                    <Picker.Item label="Rive" value="Rive" />
-                  </Picker>
-                </Item>
-              </ListItem>
+                  </Item>
+                </ListItem>
+                <Text>Vagas disponíveis</Text>
+                <ListItem style={Estilo.listStyle}>
+                  <CheckBox
+                    color="#142850"
+                    style={Estilo.inputStyle}
+                    onPress={this.fVagas1}
+                    checked={this.state.filtroVagas1}
+                  />
+                  <Text style={Estilo.textList}>1</Text>
+                  <CheckBox
+                    color="#142850"
+                    style={Estilo.inputStyle}
+                    onPress={this.fVagas2}
+                    checked={this.state.filtroVagas2}
+                  />
+                  <Text style={Estilo.textList}>2</Text>
+                  <CheckBox
+                    color="#142850"
+                    style={Estilo.inputStyle}
+                    onPress={this.fVagas3}
+                    checked={this.state.filtroVagas3}
+                  />
+                  <Text style={Estilo.textList}>3</Text>
+                  <CheckBox
+                    color="#142850"
+                    style={Estilo.inputStyle}
+                    onPress={this.fVagas4}
+                    checked={this.state.filtroVagas4}
+                  />
+                  <Text style={Estilo.textList}>4</Text>
+                </ListItem>
+                <Text>Saida</Text>
+                <ListItem style={Estilo.listStyle}>
+                  <Item picker style={Estilo.pickerStyle}>
+                    <Picker
+                      mode="dropdown"
+                      iosIcon={<Icon name="arrow-down" />}
+                      style={{ width: 140 }}
+                      placeholder="Destino"
+                      placeholderStyle={{ color: '#bfc6ea' }}
+                      placeholderIconColor="#007aff"
+                      selectedValue={this.state.cidadeS}
+                      onValueChange={this.FCidadeS.bind(this)}
+                    >
+                      <Picker.Item label="Cidades" value="null" />
+                      <Picker.Item label="Alegre" value="Alegre" />
+                      <Picker.Item label="Serra" value="Serra" />
+                      <Picker.Item label="Piuma" value="Piuma" />
+                      <Picker.Item label="Guarapari" value="Guarapari" />
+                      <Picker.Item label="Cachoeiro" value="Cachoeiro" />
+                      <Picker.Item label="Vitoria" value="Vitoria" />
+                      <Picker.Item label="Vila Velha" value="Vila Velha" />
+                      <Picker.Item label="Muniz Freire" value="Muniz Freire" />
+                      <Picker.Item label="Guacui" value="Guacui" />
+                      <Picker.Item
+                        label="Bom Jesus do Norte"
+                        value="Bom Jesus do Norte"
+                      />
+                      <Picker.Item label="Celina" value="Celina" />
+                      <Picker.Item label="Rive" value="Rive" />
+                    </Picker>
+                  </Item>
+                </ListItem>
+                <Text>Destino</Text>
+                <ListItem style={Estilo.listStyle}>
+                  <Item picker style={Estilo.pickerStyle}>
+                    <Picker
+                      mode="dropdown"
+                      iosIcon={<Icon name="arrow-down" />}
+                      style={{ width: 140 }}
+                      placeholder="Destino"
+                      placeholderStyle={{ color: '#bfc6ea' }}
+                      placeholderIconColor="#007aff"
+                      selectedValue={this.state.cidadeD}
+                      onValueChange={this.FCidadeD.bind(this)}
+                    >
+                      <Picker.Item label="Cidades" value="null" />
+                      <Picker.Item label="Alegre" value="Alegre" />
+                      <Picker.Item label="Serra" value="Serra" />
+                      <Picker.Item label="Piuma" value="Piuma" />
+                      <Picker.Item label="Guarapari" value="Guarapari" />
+                      <Picker.Item label="Cachoeiro" value="Cachoeiro" />
+                      <Picker.Item label="Vitoria" value="Vitoria" />
+                      <Picker.Item label="Vila Velha" value="Vila Velha" />
+                      <Picker.Item label="Muniz Freire" value="Muniz Freire" />
+                      <Picker.Item label="Guacui" value="Guacui" />
+                      <Picker.Item
+                        label="Bom Jesus do Norte"
+                        value="Bom Jesus do Norte"
+                      />
+                      <Picker.Item label="Celina" value="Celina" />
+                      <Picker.Item label="Rive" value="Rive" />
+                    </Picker>
+                  </Item>
+                </ListItem>
 
-              <TouchableOpacity
-                style={Estilo.modalBtn}
-                onPress={() => {
-                  this.setState({ modalVisible: false });
-                  this.filtro();
-                }}
-              >
-                <Text style={Estilo.textBtn}>Fechar</Text>
-              </TouchableOpacity>
-            </View>
-          </Modal>
-        </View>
+                <TouchableOpacity
+                  style={Estilo.modalBtn}
+                  onPress={() => {
+                    this.setState({ modalVisible: false });
+                    this.filtro();
+                  }}
+                >
+                  <Text style={Estilo.textBtn}>Fechar</Text>
+                </TouchableOpacity>
+              </View>
+            </Modal>
+          </View>
+        )}
         <Fab
           active={this.state.active}
           direction="up"

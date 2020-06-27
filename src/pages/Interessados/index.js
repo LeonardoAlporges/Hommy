@@ -26,6 +26,7 @@ class Interessados extends Component {
     userConfirmado: [],
     modal: false,
     refreshing: false,
+    idCarona: this.props.navigation.state.params.idCarona,
   };
 
   UNSAFE_componentWillMount() {
@@ -36,10 +37,12 @@ class Interessados extends Component {
     api
       .get(`/carona/confirmar/${this.props.email}`)
       .then(responseJson => {
+        console.log('interesses', responseJson);
         this.setState({
           user: responseJson.data,
           Load: false,
         });
+        console.log('Lista', responseJson.data);
       })
       .catch(error => {
         this.setState({ Erro: true, Load: false });
@@ -50,13 +53,13 @@ class Interessados extends Component {
   SendStatus = (number, user) => {
     this.setState({ Load: true });
     if (number === 1) {
-      console.log('entrou no if');
+      console.log('entrou no if SendStatus', number, user, this.state.idCarona);
       const data = {
         email: user,
         status: 'Confirmado',
       };
       api
-        .put(`/carona/confirmar/${this.props.email}`, data)
+        .put(`/carona/confirmar/${this.state.idCarona}`, data)
         .then(responseJson => {
           this.setState({ Load: false });
           this.onRefreshPage();
@@ -72,16 +75,18 @@ class Interessados extends Component {
         status: 'Rejeitado',
       };
       api
-        .put(`/carona/rejeitar/${this.props.email}`, data)
+        .put(`/carona/confirmar/${this.state.idCarona}`, data)
         .then(responseJson => {
           this.setState({ Load: false });
           console.log('USUARIO Rejeitado', responseJson);
+          this.onRefreshPage();
         })
         .catch(error => {
           this.setState({ Erro: true, Load: false });
           console.log('Deu Erro no Inte:', error);
         });
     }
+    this.setState({ Load: false });
   };
 
   navegar = () => {
@@ -102,7 +107,7 @@ class Interessados extends Component {
           onNavigation={() => this.navegar()}
         />
         {this.state.Load && <Loading />}
-        {this.state.user.length == 0 && (
+        {this.state.user == 0 && (
           <EmptyState
             titulo="Sem interessados"
             mensagem="Aguarde logo aparecerár alguem para preencher esse vazio :("
@@ -116,25 +121,30 @@ class Interessados extends Component {
               renderItem={({ item }) => (
                 <View>
                   <CartaoUser
+                    status={item[0].status}
                     callback={(number, user) => this.SendStatus(number, user)}
-                    dados={item.user}
+                    dados={item[0].user}
                     dadosGerais={item}
                     tipoRetorno="Carona"
                   />
-
-                  {item.status == 'Confirmado' && (
+                  {item[0].status == 'Confirmado' && (
                     <View style={style.botaoStatusConf}>
-                      <Text style={style.textStatusConf}>{item.status}</Text>
+                      <Text style={style.textStatusConf}>{item[0].status}</Text>
                     </View>
                   )}
-                  {item.status == 'Analise' && (
+                  {item[0].status == 'Análise' && (
                     <View style={style.botaoStatusAna}>
-                      <Text style={style.textStatusAna}>{item.status}</Text>
+                      <Text style={style.textStatusAna}>{item[0].status}</Text>
+                    </View>
+                  )}
+                  {item[0].status == 'Rejeitado' && (
+                    <View style={style.botaoStatusRej}>
+                      <Text style={style.textStatusRej}>{item[0].status}</Text>
                     </View>
                   )}
                 </View>
               )}
-              keyExtractor={item => item._id}
+              keyExtractor={item => item[0]._id}
             />
           </View>
         </ScrollView>

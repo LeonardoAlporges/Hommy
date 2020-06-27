@@ -48,8 +48,9 @@ import {
   editNumeroCasa,
 } from '../../actions/AuthActions';
 import HeaderBack from '../../components/CustomHeader';
-// import { Container } from './styles';
-
+import CustomModal from '../../components/Alert';
+import Loading from '../../components/Loading';
+import ModalConfirmacao from '../../components/ModalConfirmacao';
 import { connect } from 'react-redux';
 import CartaoCarona from '../../components/CartaoCarona';
 
@@ -58,9 +59,48 @@ class Anuncios extends Component {
   state = {
     listaRepublicas: [],
     listaCaronas: [],
-    email: 'leo@hotmail.com',
     dados: [],
+    Load: true,
+    Erro: false,
     refreshing: false,
+    MConfirmacao: false,
+    item: '',
+  };
+
+  DeleteAnuncio = (valor, item, tipo) => {
+    if (valor == 0) {
+      return null;
+    }
+    if (tipo == 'Republica' && valor == 1) {
+      api
+        .delete(`/main/${item._id}`)
+        .then(responseJson => {
+          console.log(responseJson);
+          this.setState({
+            listaRepublicas: [],
+            Load: false,
+          });
+          this.getlist();
+        })
+        .catch(error => {
+          console.log(error);
+          this.setState({ Load: false, Erro: true });
+        });
+    } else if (tipo == 'Carona' && valor == 1) {
+      api
+        .delete(`/carona/${item._id}`)
+        .then(responseJson => {
+          console.log(responseJson);
+          this.setState({
+            listaCaronas: [],
+          });
+        })
+        .catch(error => {
+          this.setState({
+            refreshing: false,
+          });
+        });
+    }
   };
 
   getlist = () => {
@@ -73,12 +113,12 @@ class Anuncios extends Component {
         console.log(responseJson);
         this.setState({
           listaCaronas: responseJson.data,
-          refreshing: false,
+          Load: false,
         });
       })
       .catch(error => {
         this.setState({
-          refreshing: false,
+          Load: false,
         });
       });
 
@@ -147,6 +187,18 @@ class Anuncios extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
+        {this.state.Load && <Loading />}
+
+        {this.state.MConfirmacao && (
+          <ModalConfirmacao
+            retornoModal={valor => {
+              this.DeleteAnuncio(valor, this.state.item, this.state.tipo);
+              this.setState({ MConfirmacao: false });
+            }}
+            mensagem="Deseja deletar esse anuncio ?"
+            confirmar={true}
+          />
+        )}
         <HeaderBack title="Meus Anuncios" onNavigation={() => this.navegar()} />
         <ScrollView>
           <View style={estilo.V_geral}>
@@ -166,6 +218,19 @@ class Anuncios extends Component {
                           <Cartao data={item} />
                           <View style={estilo.V_edit}>
                             <Button
+                              style={estilo.delete}
+                              onPress={() => {
+                                this.setState({
+                                  item: item,
+                                  tipo: 'Republica',
+                                  MConfirmacao: true,
+                                });
+                              }}
+                            >
+                              <Icon style={estilo.iconDel} name="close" />
+                            </Button>
+
+                            <Button
                               style={estilo.edit}
                               onPress={() => {
                                 this.editRepublica(item);
@@ -179,6 +244,7 @@ class Anuncios extends Component {
                               onPress={() => {
                                 this.props.navigation.navigate('Agendamentos', {
                                   usario: false,
+                                  idRepublica: item._id,
                                 });
                               }}
                             >
@@ -216,6 +282,18 @@ class Anuncios extends Component {
                           <CartaoCarona dados={item} />
                           <View style={estilo.V_edit}>
                             <Button
+                              style={estilo.delete}
+                              onPress={() => {
+                                this.setState({
+                                  item: item,
+                                  tipo: 'Carona',
+                                  MConfirmacao: true,
+                                });
+                              }}
+                            >
+                              <Icon style={estilo.iconDel} name="close" />
+                            </Button>
+                            <Button
                               style={estilo.edit}
                               onPress={() => {
                                 this.editCaronas(item);
@@ -227,7 +305,10 @@ class Anuncios extends Component {
                             <Button
                               style={estilo.ver}
                               onPress={() => {
-                                this.props.navigation.navigate('Interessados');
+                                this.props.navigation.navigate('Interessados', {
+                                  usario: false,
+                                  idCarona: item._id,
+                                });
                               }}
                             >
                               <Icon style={estilo.icon} name="list" />

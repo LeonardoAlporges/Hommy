@@ -29,6 +29,7 @@ class DetalhesAnuncio extends Component {
 
   clickInteresse = () => {
     console.log('?');
+    console.log('??', this.props);
     this.props.navigation.navigate('Agendar', {
       data: this.props,
     });
@@ -196,6 +197,7 @@ const mapsStateToProps = state => {
     imagem3: state.auth.imagem3,
     numVagas: state.auth.numVagas,
     userEmail: state.auth.userEmail,
+    idRepublica: state.auth.idRepublica,
   };
 };
 

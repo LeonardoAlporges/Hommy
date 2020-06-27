@@ -30,6 +30,7 @@ import {
   editNota,
   editTelefone,
   editFoto,
+  editId,
 } from '../../actions/UserAction';
 
 class Login extends Component {
@@ -44,6 +45,7 @@ class Login extends Component {
     try {
       await AsyncStorage.setItem('token', JSON.stringify(dados.token));
       await AsyncStorage.setItem('user', JSON.stringify(dados.usuario));
+      console.log(dados);
     } catch (error) {
       console.log('Erro :', error);
     }
@@ -61,6 +63,7 @@ class Login extends Component {
         console.log('Data', responseJson.data);
         this.setToken(responseJson.data);
         this.setState({ user: responseJson.data.usuario });
+        this.props.editId(responseJson.data.usuario.id);
         this.props.editNome(responseJson.data.usuario.nome);
         this.props.editEmail(responseJson.data.usuario.email);
         this.props.editCpf(responseJson.data.usuario.cpf);
@@ -204,6 +207,7 @@ class Login extends Component {
 const loginConnect = connect(
   null,
   {
+    editId,
     editNome,
     editEmail,
     editCpf,

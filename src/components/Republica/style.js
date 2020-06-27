@@ -25,7 +25,7 @@ const estilosRepublica = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: '10%',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#f8f8f8',
   },
   imageModal: {
     height: 200,

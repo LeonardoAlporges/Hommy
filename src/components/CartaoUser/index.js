@@ -17,11 +17,14 @@ class CartaoUser extends Component {
   };
 
   retorno = number => {
-    console.log('CARDTO', this.props.dados.email);
+    console.log('CARDTO', this.props.dados.email, number);
+
     this.props.retorno(number, this.props.dados.email);
   };
 
   retornoCarona = number => {
+    console.log('Dados gerais', this.props.dadosGerais.status);
+    console.log('Dados', this.props.dados);
     this.props.callback(number, this.props.dados.email);
   };
 
@@ -38,67 +41,70 @@ class CartaoUser extends Component {
 
   render() {
     return (
-      <View style={style.card}>
-        <TouchableOpacity
-          onPress={() => {
-            this.props.navigation.navigate('Perfil', {
-              dados: this.props.dados,
-              update: false,
-            });
-          }}
-          style={style.V_imagem}
-        >
-          <Image
-            style={style.Imagem}
-            source={{
-              uri: this.props.dados.fotoPerfil,
-            }}
-          />
-        </TouchableOpacity>
-        <View style={style.V_nome}>
-          <Text style={style.nome}>{this.props.dados.nome}</Text>
-        </View>
-        <View style={style.V_nota}>
-          <Icon name="star" style={style.icon} />
-          <Text style={style.nota}>{this.props.dados.nota}</Text>
-        </View>
-        <View style={style.V_Icon}>
-          {this.props.dadosGerais.status != 'Confirmado' ? (
-            <TouchableOpacity
-              onPress={() => {
-                this.setState({
-                  mensagem: 'Confirmar',
-                  confirmar: true,
-                  modal: true,
-                });
-              }}
-            >
-              <Icon name="check" style={style.iconAceite} />
-            </TouchableOpacity>
-          ) : (
-            <View />
-          )}
+      <View style={{ width: '100%' }}>
+        <View style={style.card}>
           <TouchableOpacity
             onPress={() => {
-              this.setState({
-                mensagem: 'Rejeitar',
-                rejeitar: true,
-                modal: true,
+              this.props.navigation.navigate('Perfil', {
+                dados: this.props.dados,
+                update: false,
               });
             }}
+            style={style.V_imagem}
           >
-            <Icon name="close" style={style.iconRejeite} />
+            <Image
+              style={style.Imagem}
+              source={{
+                uri: this.props.dados.fotoPerfil,
+              }}
+            />
           </TouchableOpacity>
-        </View>
+          <View style={style.V_nome}>
+            <Text style={style.nome}>{this.props.dados.nome}</Text>
+          </View>
+          <View style={style.V_nota}>
+            <Icon name="star" style={style.icon} />
+            <Text style={style.nota}>{this.props.dados.nota}</Text>
+          </View>
+          <View style={style.V_Icon}>
+            {this.props.status != 'Confirmado' &&
+              this.props.status != 'Rejeitado' && (
+                <TouchableOpacity
+                  onPress={() => {
+                    this.setState({
+                      mensagem: 'Confirmar',
+                      confirmar: true,
+                      modal: true,
+                    });
+                  }}
+                >
+                  <Icon name="check" style={style.iconAceite} />
+                </TouchableOpacity>
+              )}
+            {this.props.status != 'Rejeitado' && (
+              <TouchableOpacity
+                onPress={() => {
+                  this.setState({
+                    mensagem: 'Rejeitar ELE',
+                    rejeitar: true,
+                    modal: true,
+                  });
+                }}
+              >
+                <Icon name="close" style={style.iconRejeite} />
+              </TouchableOpacity>
+            )}
+          </View>
 
-        {this.state.modal && (
-          <ModalConfirmacao
-            retornoModal={valor => this.mudarStatusInteressado(valor)}
-            mensagem={this.state.mensagem}
-            rejeitar={this.state.rejeitar}
-            confirmar={this.state.confirmar}
-          />
-        )}
+          {this.state.modal && (
+            <ModalConfirmacao
+              retornoModal={valor => this.mudarStatusInteressado(valor)}
+              mensagem={this.state.mensagem}
+              rejeitar={this.state.rejeitar}
+              confirmar={this.state.confirmar}
+            />
+          )}
+        </View>
       </View>
     );
   }

@@ -16,7 +16,7 @@ class Agendar extends Component {
   static navigationOptions = { header: null };
   state = {
     Erro: false,
-    Load: true,
+    Load: false,
     Sucsess: false,
     newData: '',
 
@@ -31,6 +31,7 @@ class Agendar extends Component {
   };
 
   Agendar = () => {
+    this.setState({ Load: true });
     const agendamento = {
       email: this.props.email,
       data: this.state.newData,
@@ -44,14 +45,14 @@ class Agendar extends Component {
     }
 
     api
-      .put(`/agendamento/${this.state.dados.userEmail}`, agendamento)
+      .put(`/agendamento/${this.props.idRepublica}`, agendamento)
       .then(responseJson => {
         console.log(responseJson);
-        this.setState({ Sucsess: true, Load: true });
+        this.setState({ Sucsess: true, Load: false });
       })
       .catch(error => {
         console.log(error);
-        this.setState({ Load: true, Erro: true });
+        this.setState({ Load: false, Erro: true });
       });
   };
 
@@ -76,7 +77,8 @@ class Agendar extends Component {
           title="Agendar visita"
           onNavigation={() => this.navegar()}
         />
-        {!this.state.Load && <Loading />}
+        <Text>{this.props.idRepublica}</Text>
+        {this.state.Load && <Loading />}
         <View style={{ width: '100%', height: 140 }}>
           <Cartao data={this.state.dados} />
         </View>
@@ -171,6 +173,7 @@ class Agendar extends Component {
 const mapStateToProps = state => {
   return {
     email: state.user.email,
+    idRepublica: state.auth.idRepublica,
   };
 };
 

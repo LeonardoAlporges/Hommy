@@ -95,7 +95,10 @@ class Cabeca extends Component {
 
               <View style={Estilos.viewNome}>
                 <Text style={Estilos.textNome}>{this.props.nome}</Text>
-                <Text style={Estilos.textCPF}>{this.props.nota}</Text>
+                <Text style={Estilos.textCPF}>
+                  {this.props.nota}
+                  <Icon name="star" />
+                </Text>
               </View>
               <View style={Estilos.viewDivisor} />
               <View style={Estilos.viewBotoes}>

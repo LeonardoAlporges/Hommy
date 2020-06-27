@@ -21,6 +21,7 @@ class Agendamentos extends Component {
     Load: true,
     Erro: false,
     Usuario: this.props.navigation.state.params.usuario,
+    idRepublica: this.props.navigation.state.params.idRepublica,
   };
 
   UNSAFE_componentWillMount() {
@@ -48,14 +49,16 @@ class Agendamentos extends Component {
   };
 
   enviarReq = (tipoSocilitacao, usuario) => {
+    console.log('???');
+    console.log(this.state.idRepublica);
+
     if (tipoSocilitacao == 1) {
       const data = {
         email: usuario,
         status: 'Confirmado',
       };
-
       api
-        .put(`/confirmAgendamento/${this.props.email}`, data)
+        .put(`/confirmAgendamento/${this.state.idRepublica}`, data)
         .then(responseJson => {
           console.log(responseJson);
           this.setState({ listaAgendamento: [] });
@@ -67,8 +70,18 @@ class Agendamentos extends Component {
     } else if (tipoSocilitacao == 0) {
       const data = {
         email: usuario,
-        status: 'Recusado',
+        status: 'Rejeitado',
       };
+      api
+        .put(`/confirmAgendamento/${this.state.idRepublica}`, data)
+        .then(responseJson => {
+          console.log(responseJson);
+          this.setState({ listaAgendamento: [] });
+          this.Agendar();
+        })
+        .catch(error => {
+          this.setState({ Erro: true });
+        });
     }
   };
 
@@ -97,6 +110,7 @@ class Agendamentos extends Component {
           renderItem={({ item }) => (
             <View>
               <CartaoUser
+                status={item.status}
                 callback={() => this.onRefreshPage()}
                 retorno={(number, user) => this.enviarReq(number, user)}
                 dados={item.user}
@@ -121,6 +135,11 @@ class Agendamentos extends Component {
                 {item.status == 'Confirmado' && (
                   <View style={style.Confirmado}>
                     <Text style={style.dataConf}>{item.status}</Text>
+                  </View>
+                )}
+                {item.status == 'Rejeitado' && (
+                  <View style={style.Rejeitado}>
+                    <Text style={style.dataRej}>{item.status}</Text>
                   </View>
                 )}
               </View>

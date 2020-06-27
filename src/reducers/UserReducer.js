@@ -7,11 +7,15 @@ const initialState = {
   fotoPerfil: '',
   logado: '',
   notaUser: '5.0',
+  idUser: '',
 };
 
 const UserReducer = (state = [], action) => {
   if (state.length == 0) {
     return initialState;
+  }
+  if (action.type == 'idUser') {
+    return { ...state, idUser: action.payload.idUser };
   }
   if (action.type == 'editNome') {
     return { ...state, usuario: action.payload.usuario };

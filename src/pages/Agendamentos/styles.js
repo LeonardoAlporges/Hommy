@@ -100,5 +100,18 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  Rejeitado: {
+    width: '30%',
+    borderRadius: 20,
+    backgroundColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  dataRej: {
+    fontSize: 16,
+    fontFamily: 'Roboto',
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+  },
 });
 export default style;

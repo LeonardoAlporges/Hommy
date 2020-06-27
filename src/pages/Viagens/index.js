@@ -9,7 +9,7 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import EmptyState from '../../components/EmptyState';
 import Loading from '../../components/Loading';
 import HeaderBack from '../../components/CustomHeader';
-
+import ModalConfirmacao from '../../components/ModalConfirmacao';
 import CartaoCarona from '../../components/CartaoCarona';
 import ModalAvaliacao from '../../components/ModalAvaliacao';
 
@@ -24,6 +24,8 @@ class Viagens extends Component {
       botaoAvaliar: true,
       emailAvaliado: '',
       nomeAvaliado: '',
+      MConfirmacao: false,
+      item: '',
     };
   }
 
@@ -38,10 +40,35 @@ class Viagens extends Component {
     this.setState({ modal: true });
   };
 
+  deletar(valor, idCarona) {
+    if (valor == 0) {
+      return null;
+    }
+    this.setState({ Load: true });
+    console.log(idCarona);
+    return api
+      .delete(`/carona/meusInteresses/${idCarona}`, {
+        data: { email: this.props.email },
+      })
+      .then(responseJson => {
+        this.setState({
+          listaCaronas: [],
+          Load: false,
+        });
+        this.getListCarona();
+        console.log('Deletado', responseJson);
+      })
+      .catch(error => {
+        this.setState({ Load: false });
+        console.log(error);
+      });
+  }
+
   getListCarona = () => {
     return api
       .get(`/carona/meusInteresses/${this.props.email}`)
       .then(responseJson => {
+        console.log('MEUS INTERESSES:', responseJson);
         this.setState({
           listaCaronas: responseJson.data,
           Load: false,
@@ -69,12 +96,25 @@ class Viagens extends Component {
           title="Meus interesses"
           onNavigation={() => this.navegar()}
         />
+
+        {this.state.MConfirmacao && (
+          <ModalConfirmacao
+            retornoModal={valor => {
+              this.deletar(valor, this.state.item);
+              this.setState({ MConfirmacao: false });
+            }}
+            mensagem="Deseja deletar esse anuncio ?"
+            confirmar={true}
+          />
+        )}
         {this.state.Load && <Loading />}
         {this.state.listaCaronas.length == 0 && (
-          <EmptyState
-            titulo="Sem Interesses"
-            mensagem="Busque caronas que lhe favoreça viajar :("
-          />
+          <View style={{ flex: 1, backgroundColor: '#fff' }}>
+            <EmptyState
+              titulo="Sem Interesses"
+              mensagem="Busque caronas que lhe favoreça viajar :("
+            />
+          </View>
         )}
         <View style={style.card}>
           <FlatList
@@ -83,30 +123,49 @@ class Viagens extends Component {
             renderItem={({ item }) => (
               <View>
                 <CartaoCarona dados={item.carona} />
-                {item.status == 'Análise' && (
-                  <View style={style.Analise}>
-                    <Text style={style.data}>{item.status}</Text>
-                  </View>
-                )}
-                {item.status == 'Confirmado' && (
-                  <View style={style.Confirmado}>
-                    <Text style={style.dataConf}>{item.status}</Text>
-                  </View>
-                )}
-                {item.status == 'Realizada' && (
-                  <View style={style.V_Botao}>
-                    <Button
-                      disabled={!this.state.botaoAvaliar}
-                      style={style.botao}
-                      onPress={() => {
-                        this.avaliar(item);
-                      }}
-                    >
-                      <Icon name="star" style={style.icon} />
-                      <Text style={style.title}>Avaliar carona</Text>
-                    </Button>
-                  </View>
-                )}
+                <View style={style.ViewStatus}>
+                  {item.status == 'Análise' && (
+                    <View style={style.Analise}>
+                      <Text style={style.data}>{item.status}</Text>
+                    </View>
+                  )}
+                  {item.status == 'Confirmado' && (
+                    <View style={style.Confirmado}>
+                      <Text style={style.dataConf}>{item.status}</Text>
+                    </View>
+                  )}
+                  {item.status == 'Rejeitado' && (
+                    <View style={style.Rejeitado}>
+                      <Text style={style.dataRej}>{item.status}</Text>
+                    </View>
+                  )}
+                  {item.status == 'Realizada' && (
+                    <View style={style.V_Botao}>
+                      <Button
+                        disabled={!this.state.botaoAvaliar}
+                        style={style.botao}
+                        onPress={() => {
+                          this.avaliar(item);
+                        }}
+                      >
+                        <Icon name="star" style={style.icon} />
+                        <Text style={style.title}>Avaliar carona</Text>
+                      </Button>
+                    </View>
+                  )}
+                  <TouchableOpacity
+                    style={style.ViewBotaoClose}
+                    onPress={() => {
+                      console.log(item);
+                      this.setState({
+                        MConfirmacao: true,
+                        item: item.carona._id,
+                      });
+                    }}
+                  >
+                    <Icon style={style.iconeClose} name="close" />
+                  </TouchableOpacity>
+                </View>
               </View>
             )}
           />

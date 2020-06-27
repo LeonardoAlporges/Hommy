@@ -19,6 +19,9 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  iconDel: {
+    fontSize: 20,
+  },
   botao: {
     backgroundColor: '#142850',
     display: 'flex',
@@ -101,6 +104,20 @@ const style = StyleSheet.create({
     width: '45%',
     borderRadius: 50,
     backgroundColor: '#f8f8f8',
+  },
+  View_Rejeitado: {
+    width: '30%',
+    height: 30,
+    borderRadius: 6,
+    backgroundColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  dataRej: {
+    fontSize: 16,
+    fontFamily: 'Roboto',
+    color: '#FFFFFF',
+    fontWeight: 'bold',
   },
 });
 export default style;

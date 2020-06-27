@@ -1,3 +1,11 @@
+export const editId = newNome => {
+  return {
+    type: 'editId',
+    payload: {
+      idUser: newNome,
+    },
+  };
+};
 export const editNome = newNome => {
   return {
     type: 'editNome',

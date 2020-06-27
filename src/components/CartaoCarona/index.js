@@ -3,6 +3,7 @@ import { Image, Text, View, Alert } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
 import {
+  editIdCarona,
   editChegada,
   editData,
   editDesembarque,
@@ -28,6 +29,7 @@ class CartaoCarona extends Component {
   Click = () => {
     const dados = this.props.dados;
     console.log('?', dados);
+    this.props.editIdCarona(dados._id);
     this.props.editNomeOfertante(dados.nome);
     this.props.editChegada(dados.localChegada);
     this.props.editData(dados.data);
@@ -109,6 +111,7 @@ class CartaoCarona extends Component {
 const CartaoCaronaConnect = connect(
   null,
   {
+    editIdCarona,
     editChegada,
     editData,
     editDesembarque,

@@ -1,3 +1,12 @@
+export const editIdRepublica = newLogado => {
+  return {
+    type: 'editIdRepublica', //nome da açao
+    payload: {
+      //Aqui é as informaçoes que vc ta enviando no caso aqui é so email
+      idRepublica: newLogado,
+    },
+  };
+};
 export const editLogado = newLogado => {
   return {
     type: 'editLogado', //nome da açao
