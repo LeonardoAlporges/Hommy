@@ -8,6 +8,7 @@ import TextInputMask from 'react-native-text-input-mask';
 import { withNavigation } from 'react-navigation';
 import CustomModal from '../../components/Alert';
 import api from '../../service/api';
+import Loading from '../../components/Loading';
 
 import estilo from './styles';
 import HeaderBack from '../../components/CustomHeader';
@@ -16,8 +17,9 @@ class EsqueciSenha extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      erro: false,
+      Erro: false,
       sucesso: false,
+      Load: false,
     };
   }
   static navigationOptions = { header: null };
@@ -28,16 +30,17 @@ class EsqueciSenha extends Component {
   };
 
   EnviarCodigo = values => {
+    this.setState({ Load: true });
     api
       .put('/alterar/cod/', values)
       .then(responseJson => {
         console.log(responseJson);
         console.log('Enviando', values);
-        this.setState({ sucesso: true });
-        this.props.navigation.navigate('ValidarCodigo');
+        this.setState({ sucesso: true, Load: false });
+        this.props.navigation.navigate('ValidarCodigo', { email: values });
       })
       .catch(error => {
-        this.setState({ Erro: true });
+        this.setState({ Erro: true, Load: false });
         console.log(error);
       });
   };
@@ -85,8 +88,6 @@ class EsqueciSenha extends Component {
             handleSubmit,
           }) => (
             <Fragment>
-              {this.state.erro ? <CustomModal parametro="Erro" /> : <View />}
-
               <View style={estilo.view_CamposLogin}>
                 <Item>
                   <Icon
@@ -125,19 +126,8 @@ class EsqueciSenha extends Component {
             </Fragment>
           )}
         </Formik>
-
-        {this.state.sucesso ? (
-          <View style={estilo.V_modal}>
-            <CustomModal
-              parametro="Sucesso"
-              onAction={() => {
-                this.props.navigation.navigate('Confirmacao', { update: true });
-              }}
-            />
-          </View>
-        ) : (
-          <View />
-        )}
+        {this.state.Erro && <CustomModal parametro="Erro" />}
+        {this.state.Load && <Loading />}
       </View>
     );
   }

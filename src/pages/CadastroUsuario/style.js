@@ -80,7 +80,7 @@ const estilo = StyleSheet.create({
   },
   V_Btn: {
     width: '100%',
-    paddingLeft: '32%',
+
     height: 100,
     alignItems: 'center',
     justifyContent: 'center',

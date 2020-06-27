@@ -38,7 +38,7 @@ const estilo = StyleSheet.create({
   },
   V_botao: {
     marginTop: '30%',
-    marginLeft: '20%',
+
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',

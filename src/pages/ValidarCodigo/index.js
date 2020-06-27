@@ -11,6 +11,7 @@ import api from '../../service/api';
 
 import estilo from './styles';
 import HeaderBack from '../../components/CustomHeader';
+import { values } from 'lodash';
 
 class ValidarCodigo extends Component {
   constructor(props) {
@@ -18,30 +19,53 @@ class ValidarCodigo extends Component {
     this.state = {
       erro: false,
       sucesso: false,
-      codigoValidado: true,
+      codigoValidado: false,
+      email: this.props.navigation.state.params.email,
     };
   }
   static navigationOptions = { header: null };
-  state = {};
 
   onClickCard = () => {
     this.props.navigation.navigate('Detalhes');
   };
 
-  EnviarCodigo = values => {
-    this.setState({ codigoValidado: !this.state.codigoValidado });
-    // api
-    //   .put('/alterar/cod/', values.codigo)
-    //   .then(responseJson => {
-    //     console.log(responseJson);
-    //     console.log('Enviando', values);
-    //     this.setState({ sucesso: true });
-    //     this.props.navigation.navigate('');
-    //   })
-    //   .catch(error => {
-    //     this.setState({ Erro: true });
-    //     console.log(error);
-    //   });
+  VerificarCodigo = values => {
+    const data = {
+      email: this.state.email.email,
+      numConfirm: values,
+    };
+    console.log('?', data);
+    api
+      .put('/alterar/confirm', data)
+      .then(responseJson => {
+        console.log('Resposta', responseJson);
+        console.log('Enviado', data);
+        this.setState({ codigoValidado: true });
+      })
+      .catch(error => {
+        this.setState({ Erro: true });
+        console.log(error);
+      });
+  };
+
+  EnviarNovaSenha = values => {
+    const data = {
+      email: this.state.email.email,
+      pass: values.novaSenha,
+    };
+
+    console.log('Senha:', data);
+    api
+      .put('/alterar/senha', data)
+      .then(responseJson => {
+        console.log('Resposta', responseJson);
+        console.log('Enviado', data);
+        this.setState({ sucesso: true });
+      })
+      .catch(error => {
+        this.setState({ Erro: true });
+        console.log(error);
+      });
   };
 
   navegar = () => {
@@ -64,16 +88,30 @@ class ValidarCodigo extends Component {
         </View>
 
         <View style={estilo.V_title}>
-          <Text style={estilo.title}>
-            Digite o E-mail da conta que você deseja recuperar
-          </Text>
+          {this.state.codigoValidado ? (
+            <Text style={estilo.title}>
+              Agora digite uma nova senha para sua conta que voce ache segura
+            </Text>
+          ) : (
+            <Text style={estilo.title}>
+              Digite o codigo de verificação enviado para seu E-mail
+            </Text>
+          )}
         </View>
 
         <Formik
           initialValues={{
-            codigo: '',
-            novaSenha: '',
-            confirmacaoSenha: '',
+            codigo: yup
+              .string()
+              .min(6, 'Digite os 6 numeros ')
+              .max(6, 'Somente os 6 numeros permitido'),
+            novaSenha: yup
+              .string('')
+              .min(8, 'Password is too short - should be 8 chars minimum.')
+              .required('Insira uma senha para sua conta'),
+          }}
+          onSubmit={values => {
+            console.log(values);
           }}
           validationSchema={yup.object().shape({
             codigo: yup.string().required(),
@@ -91,7 +129,7 @@ class ValidarCodigo extends Component {
             handleSubmit,
           }) => (
             <Fragment>
-              {this.state.erro && <CustomModal parametro="Erro" />}
+              {this.state.Erro && <CustomModal parametro="Erro" />}
               {!this.state.codigoValidado && (
                 <View style={estilo.view_CamposLogin}>
                   <Item>
@@ -100,14 +138,13 @@ class ValidarCodigo extends Component {
                       active
                       name="key-outline"
                     />
-                    <TextInputMask
-                      mask={'[0]-[0]-[0]-[0]-[0]-[0]'}
+                    <Input
                       placeholderTextColor="#2e2e2e"
                       style={estilo.labelInput}
                       value={values.codigo} //NOME
                       onChangeText={handleChange('codigo')}
                       onBlur={() => setFieldTouched('codigo')}
-                      placeholder="0-0-0-0-0-0"
+                      placeholder="000000"
                     />
                   </Item>
                 </View>
@@ -126,7 +163,7 @@ class ValidarCodigo extends Component {
                   <Button
                     style={estilo.botao}
                     onPress={() => {
-                      this.EnviarCodigo(values);
+                      this.VerificarCodigo(values.codigo);
                     }}
                   >
                     <Text style={estilo.txtbtn}>Verificar código</Text>
@@ -145,7 +182,7 @@ class ValidarCodigo extends Component {
                     <Input
                       placeholderTextColor="#2e2e2e"
                       style={estilo.labelInput}
-                      value={values.codigo} //NOME
+                      value={values.novaSenha} //NOME
                       onChangeText={handleChange('novaSenha')}
                       onBlur={() => setFieldTouched('novaSenha')}
                       placeholder="Nova senha"
@@ -164,45 +201,14 @@ class ValidarCodigo extends Component {
               </View>
 
               {this.state.codigoValidado && (
-                <View style={estilo.view_CamposLoginSenha}>
-                  <Item>
-                    <Icon
-                      style={estilo.icons_CamposLogin}
-                      active
-                      name="key-outline"
-                    />
-                    <Input
-                      placeholderTextColor="#2e2e2e"
-                      style={estilo.labelInput}
-                      value={values.codigo}
-                      onChangeText={handleChange('confirmacaoSenha')}
-                      onBlur={() => setFieldTouched('confirmacaoSenha')}
-                      placeholder="Confirmação Senha"
-                    />
-                  </Item>
-                </View>
-              )}
-              <View>
-                {touched.confirmacaoSenha && errors.confirmacaoSenha ? (
-                  <View style={estilo.V_Erro}>
-                    <Text style={estilo.txtErro}>
-                      {errors.confirmacaoSenha}
-                    </Text>
-                  </View>
-                ) : (
-                  <View style={estilo.V_ErroSem} />
-                )}
-              </View>
-
-              {this.state.codigoValidado && (
                 <View style={estilo.V_botao}>
                   <Button
                     style={estilo.botao}
                     onPress={() => {
-                      this.EnviarCodigo(values);
+                      this.EnviarNovaSenha(values);
                     }}
                   >
-                    <Text style={estilo.txtbtn}>Verificar código</Text>
+                    <Text style={estilo.txtbtn}>Enviar nova senha</Text>
                   </Button>
                 </View>
               )}
@@ -214,8 +220,9 @@ class ValidarCodigo extends Component {
           <View style={estilo.V_modal}>
             <CustomModal
               parametro="Sucesso"
-              onAction={() => {
-                this.props.navigation.navigate('Confirmacao', { update: true });
+              callback={() => {
+                this.props.navigation.navigate('Login');
+                this.setState({ sucesso: false });
               }}
             />
           </View>
