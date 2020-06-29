@@ -28,8 +28,6 @@ class DetalhesAnuncio extends Component {
   };
 
   clickInteresse = () => {
-    console.log('?');
-    console.log('??', this.props);
     this.props.navigation.navigate('Agendar', {
       data: this.props,
     });

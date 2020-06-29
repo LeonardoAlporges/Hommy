@@ -34,12 +34,12 @@ class ValidarCodigo extends Component {
       email: this.state.email.email,
       numConfirm: values,
     };
-    console.log('?', data);
+
     api
       .put('/alterar/confirm', data)
       .then(responseJson => {
-        console.log('Resposta', responseJson);
-        console.log('Enviado', data);
+        console.log(responseJson);
+
         this.setState({ codigoValidado: true });
       })
       .catch(error => {
@@ -53,13 +53,10 @@ class ValidarCodigo extends Component {
       email: this.state.email.email,
       pass: values.novaSenha,
     };
-
-    console.log('Senha:', data);
     api
       .put('/alterar/senha', data)
       .then(responseJson => {
-        console.log('Resposta', responseJson);
-        console.log('Enviado', data);
+        console.log(responseJson);
         this.setState({ sucesso: true });
       })
       .catch(error => {
@@ -110,9 +107,7 @@ class ValidarCodigo extends Component {
               .min(8, 'Password is too short - should be 8 chars minimum.')
               .required('Insira uma senha para sua conta'),
           }}
-          onSubmit={values => {
-            console.log(values);
-          }}
+          onSubmit={values => {}}
           validationSchema={yup.object().shape({
             codigo: yup.string().required(),
             novaSenha: yup.string().required(),
@@ -129,7 +124,14 @@ class ValidarCodigo extends Component {
             handleSubmit,
           }) => (
             <Fragment>
-              {this.state.Erro && <CustomModal parametro="Erro" />}
+              {this.state.Erro && (
+                <CustomModal
+                  parametro="Erro"
+                  callback={() => {
+                    this.setState({ Erro: false });
+                  }}
+                />
+              )}
               {!this.state.codigoValidado && (
                 <View style={estilo.view_CamposLogin}>
                   <Item>
@@ -216,18 +218,15 @@ class ValidarCodigo extends Component {
           )}
         </Formik>
 
-        {this.state.sucesso ? (
+        {this.state.sucesso && (
           <View style={estilo.V_modal}>
             <CustomModal
               parametro="Sucesso"
               callback={() => {
                 this.props.navigation.navigate('Login');
-                this.setState({ sucesso: false });
               }}
             />
           </View>
-        ) : (
-          <View />
         )}
       </View>
     );

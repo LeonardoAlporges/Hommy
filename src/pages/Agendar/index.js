@@ -37,7 +37,6 @@ class Agendar extends Component {
       data: this.state.newData,
       hora: this.state.sendTime,
     };
-    console.log(agendamento);
 
     if ((agendamento.data || agendamento.hora) == '') {
       this.setState({ Erro: true });
@@ -144,8 +143,8 @@ class Agendar extends Component {
           <View style={style.V_Detalhes}>
             <CustomModal
               parametro="Custom"
-              titulo="Visita agendada"
-              descricao="O representante da republica ira analisar o dia de seu agendamento em até 24 Hrs."
+              titulo="Visita agendada :)"
+              descricao="O representante da republica ira analisar o dia de seu agendamento em até 48 Hrs."
               botao="Confirmar"
               callback={() => {
                 this.props.navigation.navigate('AgendamentoUser', {

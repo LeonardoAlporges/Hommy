@@ -116,15 +116,13 @@ export class Cadastro extends Component {
       const progress = uploadProgress(
         snapshot.bytesTransferred / snapshot.totalBytes
       );
-      console.log(snapshot);
+
       switch (snapshot.state) {
         case 'running':
           this.setState({ imageURI: null });
           this.setState({ loading: true });
           break;
         case 'success':
-          console.log('conta', this.state.contadorImagem);
-
           snapshot.ref.getDownloadURL().then(downloadURL => {
             if (this.state.contadorImagem == 1) {
               this.setState({ imageURI0: downloadURL });
@@ -214,8 +212,8 @@ export class Cadastro extends Component {
       } else if (this.state.update == false) {
         await api
           .post('/main', this.data)
-          .then(Response => {
-            console.log(Response);
+          .then(ResponseJson => {
+            console.log(ResponseJson);
             this.setState({ Load: false });
             this.setState({ sucesso: true });
           })
@@ -247,7 +245,6 @@ export class Cadastro extends Component {
         }}
         onSubmit={values => {
           this.setState({ carregando: true });
-          console.log(values);
           this.entrar(values);
         }}
         validationSchema={yup.object().shape({
@@ -313,7 +310,9 @@ export class Cadastro extends Component {
             {this.state.erro && <CustomModal parametro="Erro" />}
             {this.state.sucesso && (
               <CustomModal
-                parametro="Sucesso"
+                parametro="Custom"
+                titulo="Tudo certo!"
+                descricao="Seu anuncio já estar no ar, fique atento com os agendamentos"
                 callback={() => {
                   this.goToHome();
                 }}

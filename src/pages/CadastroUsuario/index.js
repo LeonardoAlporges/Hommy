@@ -36,7 +36,7 @@ class CadastroUsuario extends Component {
     value.fotoPerfil = this.state.imageURI;
     if (value.fotoPerfil == '') {
       value.fotoPerfil =
-        'https://firebasestorage.googleapis.com/v0/b/hommy-d0890.appspot.com/o/pictures%2Fuser%2Fuser.png?alt=media&token=513a85e9-f020-468a-a3a2-74d83423a10d';
+        'https://firebasestorage.googleapis.com/v0/b/hommy-d0890.appspot.com/o/pictures%2Fuser%2Funnamed.png?alt=media&token=fa5dad7d-3792-49ec-9545-4d65a2fa1498';
     }
     await api
       .post('/usuario', value)
@@ -56,7 +56,7 @@ class CadastroUsuario extends Component {
       const progress = uploadProgress(
         snapshot.bytesTransferred / snapshot.totalBytes
       );
-      console.log(snapshot);
+
       switch (snapshot.state) {
         case 'running':
           this.setState({
@@ -68,7 +68,6 @@ class CadastroUsuario extends Component {
           break;
         case 'success':
           snapshot.ref.getDownloadURL().then(downloadURL => {
-            console.log(downloadURL);
             this.setState({ imageURI: downloadURL, upload: true, load: false });
           });
           break;
@@ -165,10 +164,22 @@ class CadastroUsuario extends Component {
               handleSubmit,
             }) => (
               <Fragment>
-                {this.state.erro ? <CustomModal parametro="Erro" /> : <View />}
+                {this.state.erro && (
+                  <CustomModal
+                    parametro="Erro"
+                    callback={() => {
+                      this.setState({ erro: false });
+                    }}
+                  />
+                )}
                 {this.state.sucesso ? (
                   <View style={estilo.V_modal}>
-                    <CustomModal parametro="Sucesso" />
+                    <CustomModal
+                      parametro="Custom"
+                      titulo="Tudo certo!"
+                      descricao="Seu anuncio já estar no ar, fique atento com os agendamentos"
+                      callback={() => {}}
+                    />
                   </View>
                 ) : (
                   <View />
@@ -276,7 +287,7 @@ class CadastroUsuario extends Component {
                 ) : (
                   <View style={estilo.V_ErroSem} />
                 )}
-                {console.log(isValid)}
+
                 <View style={estilo.view_BotaoEntar}>
                   <Button
                     disabled={!isValid}

@@ -37,23 +37,21 @@ class Interessados extends Component {
     api
       .get(`/carona/confirmar/${this.props.email}`)
       .then(responseJson => {
-        console.log('interesses', responseJson);
+        console.log(responseJson);
         this.setState({
           user: responseJson.data,
           Load: false,
         });
-        console.log('Lista', responseJson.data);
       })
       .catch(error => {
         this.setState({ Erro: true, Load: false });
-        console.log('erro:', error);
+        console.log(error);
       });
   };
 
   SendStatus = (number, user) => {
     this.setState({ Load: true });
     if (number === 1) {
-      console.log('entrou no if SendStatus', number, user, this.state.idCarona);
       const data = {
         email: user,
         status: 'Confirmado',
@@ -63,11 +61,10 @@ class Interessados extends Component {
         .then(responseJson => {
           this.setState({ Load: false });
           this.onRefreshPage();
-          console.log('USUARIO ACEITO', responseJson);
         })
         .catch(error => {
           this.setState({ Erro: true, Load: false });
-          console.log('erro:', error);
+          console.log(error);
         });
     } else if (number === 0) {
       const data = {
@@ -78,12 +75,11 @@ class Interessados extends Component {
         .put(`/carona/confirmar/${this.state.idCarona}`, data)
         .then(responseJson => {
           this.setState({ Load: false });
-          console.log('USUARIO Rejeitado', responseJson);
+
           this.onRefreshPage();
         })
         .catch(error => {
           this.setState({ Erro: true, Load: false });
-          console.log('Deu Erro no Inte:', error);
         });
     }
     this.setState({ Load: false });

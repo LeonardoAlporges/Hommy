@@ -3,15 +3,15 @@ import { TouchableOpacity, View, Text, Modal, Image } from 'react-native';
 import Estilos from './style';
 
 export default class CustomModal extends Component {
-  state = {
-    modalVisible: true,
-    icon: '',
-    titulo: '',
-    descricao: '',
-    botao: '',
-  };
   constructor(props) {
     super(props);
+    this.state = {
+      modalVisible: true,
+      icon: '',
+      titulo: '',
+      descricao: '',
+      botao: '',
+    };
   }
 
   callback = () => {
@@ -39,8 +39,8 @@ export default class CustomModal extends Component {
     if (this.props.parametro == 'Sucesso') {
       this.setState({
         icon: require('../../assets/Img/Succes.png'),
-        titulo: 'Socilitação concluida com sucesso!',
-        descricao: 'Confirmar',
+        titulo: 'Sucesso!',
+        descricao: 'Sua solicitação foi recebida com sucesso',
         botao: 'Confirmar',
       });
     }
@@ -55,7 +55,7 @@ export default class CustomModal extends Component {
     if (this.props.parametro == 'Erro') {
       this.setState({
         icon: require('../../assets/Img/Fail_Connection.png'),
-        titulo: 'Erro de conexao',
+        titulo: 'OOPS!',
         descricao:
           'Nao foi possivel completar sua requisição, verifique sua conexao com a internet',
         botao: 'Voltar',

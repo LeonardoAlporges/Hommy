@@ -34,7 +34,6 @@ class Viagens extends Component {
   }
 
   avaliar = item => {
-    console.log(item);
     this.setState({ emailAvaliado: item.userEmail });
     this.setState({ nomeAvaliado: item.nome });
     this.setState({ modal: true });
@@ -45,7 +44,7 @@ class Viagens extends Component {
       return null;
     }
     this.setState({ Load: true });
-    console.log(idCarona);
+
     return api
       .delete(`/carona/meusInteresses/${idCarona}`, {
         data: { email: this.props.email },
@@ -56,7 +55,7 @@ class Viagens extends Component {
           Load: false,
         });
         this.getListCarona();
-        console.log('Deletado', responseJson);
+        console.log(responseJson);
       })
       .catch(error => {
         this.setState({ Load: false });
@@ -68,7 +67,7 @@ class Viagens extends Component {
     return api
       .get(`/carona/meusInteresses/${this.props.email}`)
       .then(responseJson => {
-        console.log('MEUS INTERESSES:', responseJson);
+        console.log(responseJson);
         this.setState({
           listaCaronas: responseJson.data,
           Load: false,
@@ -156,7 +155,6 @@ class Viagens extends Component {
                   <TouchableOpacity
                     style={style.ViewBotaoClose}
                     onPress={() => {
-                      console.log(item);
                       this.setState({
                         MConfirmacao: true,
                         item: item.carona._id,

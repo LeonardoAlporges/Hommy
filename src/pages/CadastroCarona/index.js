@@ -52,13 +52,12 @@ class CadastroCarona extends Component {
 
   subirDate(date) {
     this.setState({ newData: new Date(date) });
-    console.log('data', this.state.newData);
   }
 
   async entrar(values) {
     this.setState({ modalLoadVisible: true });
     const nick = this.props.nome.split(' ');
-    console.log('valores', values);
+
     this.data = {
       localSaida: values.saida,
       localChegada: values.chegada,
@@ -74,35 +73,31 @@ class CadastroCarona extends Component {
       userEmail: this.props.email,
       nota: this.props.nota,
     };
-    console.log('Envinado:', this.data);
-    console.log('update', this.state.update);
 
     if (this.state.update == true) {
-      console.log('Faznedo Update:', this.data);
       await api
         .put(`/carona/${this.props.email}`, this.data)
         .then(Response => {
           this.setState({ modalLoadVisible: false });
           this.setState({ sucesso: true });
         })
-        .catch(e => {
+        .catch(error => {
           this.setState({ erro: true });
           this.setState({ modalLoadVisible: false });
-          console.log(e);
+          console.log(error);
         });
     } else if (this.state.update == false) {
-      console.log('Criando Anuncio:', this.data);
       await api
         .post('/carona', this.data)
         .then(Response => {
-          console.log('RESO');
+          console.log('Response');
           this.setState({ modalLoadVisible: false });
           this.setState({ sucesso: true });
         })
-        .catch(e => {
+        .catch(error => {
           this.setState({ modalLoadVisible: false });
           this.setState({ erro: true });
-          console.log(e);
+          console.log(error);
         });
     }
     this.setState({ modalLoadVisible: false });
@@ -163,10 +158,19 @@ class CadastroCarona extends Component {
           handleSubmit,
         }) => (
           <Fragment>
-            {this.state.erro && <CustomModal parametro="Erro" />}
+            {this.state.erro && (
+              <CustomModal
+                parametro="Erro"
+                callback={() => {
+                  this.setState({ erro: false });
+                }}
+              />
+            )}
             {this.state.sucesso && (
               <CustomModal
-                parametro="Sucesso"
+                parametro="Custom"
+                titulo="Tudo certo!"
+                descricao="Seu anuncio já estar no ar, fique atento com os agendamentos"
                 callback={() => {
                   this.goToHome();
                 }}

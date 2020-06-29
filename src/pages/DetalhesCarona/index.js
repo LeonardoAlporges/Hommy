@@ -32,11 +32,10 @@ class DetalhesCarona extends Component {
       .put(`/carona/meusInteresses/${this.props.id}`, this.envio)
       .then(Response => {
         console.log(Response);
-        console.log('Foi adicionado a lista de interesse');
+
         this.setState({ interesse: true, Load: false });
       })
       .catch(e => {
-        console.log('NAO Foi adicionado a lista de interesse');
         this.setState({ Erro: true, Load: false });
       });
     this.setState({ Load: false });

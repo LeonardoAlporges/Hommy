@@ -28,7 +28,6 @@ const moment = require('moment');
 class CartaoCarona extends Component {
   Click = () => {
     const dados = this.props.dados;
-    console.log('?', dados);
     this.props.editIdCarona(dados._id);
     this.props.editNomeOfertante(dados.nome);
     this.props.editChegada(dados.localChegada);

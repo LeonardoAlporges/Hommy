@@ -28,12 +28,8 @@ class ModalAvaliacao extends Component {
   Avaliar = () => {
     api
       .put(`/userNota/${this.props.email}`, { nota: this.state.valor })
-      .then(responseJson => {
-        console.log('NOTA REGISTRADA');
-      })
-      .catch(error => {
-        console.log('Erro:', error);
-      });
+      .then(responseJson => {})
+      .catch(error => {});
     this.setState({ modalVisible: false }), this.props.retornoModal();
   };
 

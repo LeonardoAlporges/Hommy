@@ -9,7 +9,6 @@ import {
   Image,
   Linking,
 } from 'react-native';
-import CustomModal from '../Alert';
 import { connect } from 'react-redux';
 import { Button } from 'native-base';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
@@ -21,9 +20,9 @@ class Cabeca extends Component {
   static navigationOptions = { header: null };
   state = {
     isModalVisible: false,
-    erro: false,
     dados: this.props,
   };
+
   AbrirUrl = () => {
     Linking.openUrl(
       'https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849'
@@ -35,7 +34,6 @@ class Cabeca extends Component {
         this.props.navigation.navigate('Login');
       })
       .catch(error => {});
-    //Alert.alert('Conta deslogada com sucesso');
   };
   render() {
     return (
@@ -46,7 +44,6 @@ class Cabeca extends Component {
             this.setState({ isModalVisible: true });
           }}
         >
-          {this.state.erro ? <CustomModal parametro="Sucesso" /> : <View />}
           <Icon style={Estilos.icon2} name="user" />
         </TouchableOpacity>
         <View style={Estilos.Titulo}>

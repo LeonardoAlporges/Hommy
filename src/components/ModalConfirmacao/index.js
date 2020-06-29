@@ -18,10 +18,8 @@ class ModalConfirmacao extends Component {
   mudarEstado = () => {
     if (this.state.confirmar == true) {
       this.props.retornoModal(1);
-      console.log('Confirmado');
     } else if (this.state.rejeitar == true) {
       this.props.retornoModal(0);
-      console.log('rejeitado');
     }
   };
   render() {

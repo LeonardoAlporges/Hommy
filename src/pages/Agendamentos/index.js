@@ -49,9 +49,6 @@ class Agendamentos extends Component {
   };
 
   enviarReq = (tipoSocilitacao, usuario) => {
-    console.log('???');
-    console.log(this.state.idRepublica);
-
     if (tipoSocilitacao == 1) {
       const data = {
         email: usuario,

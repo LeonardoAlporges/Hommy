@@ -17,14 +17,10 @@ class CartaoUser extends Component {
   };
 
   retorno = number => {
-    console.log('CARDTO', this.props.dados.email, number);
-
     this.props.retorno(number, this.props.dados.email);
   };
 
   retornoCarona = number => {
-    console.log('Dados gerais', this.props.dadosGerais.status);
-    console.log('Dados', this.props.dados);
     this.props.callback(number, this.props.dados.email);
   };
 
@@ -32,9 +28,7 @@ class CartaoUser extends Component {
     if (this.props.tipoRetorno == 'Republica') {
       this.retorno(number);
       this.props.callback();
-      console.log(number);
     } else if (this.props.tipoRetorno == 'Carona') {
-      console.log('retorna para carona', number);
       this.retornoCarona(number);
     }
   };

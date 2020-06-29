@@ -42,7 +42,6 @@ class Cartao extends Component {
 
   onClickCard = () => {
     const dados = this.props.data;
-    console.log(dados._id);
     this.props.editNomeRepublica(dados.nomeRepublica);
     this.props.editValorConta(dados.valorContas);
     this.props.editValorAluguel(dados.valorAluguel);

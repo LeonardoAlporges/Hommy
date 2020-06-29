@@ -184,11 +184,19 @@ class Anuncios extends Component {
   navegar = () => {
     this.props.navigation.goBack(null);
   };
+
   render() {
     return (
       <View style={{ flex: 1 }}>
         {this.state.Load && <Loading />}
-
+        {this.state.Erro && (
+          <CustomModal
+            parametro="Erro"
+            callback={() => {
+              this.setState({ Erro: false });
+            }}
+          />
+        )}
         {this.state.MConfirmacao && (
           <ModalConfirmacao
             retornoModal={valor => {

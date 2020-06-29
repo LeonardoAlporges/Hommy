@@ -45,9 +45,8 @@ class Login extends Component {
     try {
       await AsyncStorage.setItem('token', JSON.stringify(dados.token));
       await AsyncStorage.setItem('user', JSON.stringify(dados.usuario));
-      console.log(dados);
     } catch (error) {
-      console.log('Erro :', error);
+      console.log(error);
     }
   }
 
@@ -60,7 +59,6 @@ class Login extends Component {
     await api
       .post('/session', value)
       .then(responseJson => {
-        console.log('Data', responseJson.data);
         this.setToken(responseJson.data);
         this.setState({ user: responseJson.data.usuario });
         this.props.editId(responseJson.data.usuario.id);
@@ -79,14 +77,21 @@ class Login extends Component {
       .catch(error => {
         this.setState({ load: false });
         this.setState({ erro: true });
-        console.log('Usuario Não Encontrado', error);
+        console.log(error);
       });
   };
 
   render() {
     return (
       <ScrollView>
-        {this.state.erro && <CustomModal parametro="Erro" />}
+        {this.state.erro && (
+          <CustomModal
+            parametro="Erro"
+            callback={() => {
+              this.setState({ erro: false });
+            }}
+          />
+        )}
         <View style={style.container}>
           <TouchableOpacity>
             <Image

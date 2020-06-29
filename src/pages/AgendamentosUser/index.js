@@ -34,7 +34,6 @@ class AgendamentoUser extends Component {
     if (valor == 0) {
       return null;
     }
-    console.log(item);
     return api
       .delete(`/agendamento/${item}`, {
         data: { email: this.props.email },

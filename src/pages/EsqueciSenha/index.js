@@ -126,7 +126,14 @@ class EsqueciSenha extends Component {
             </Fragment>
           )}
         </Formik>
-        {this.state.Erro && <CustomModal parametro="Erro" />}
+        {this.state.Erro && (
+          <CustomModal
+            parametro="Erro"
+            callback={() => {
+              this.setState({ Erro: false });
+            }}
+          />
+        )}
         {this.state.Load && <Loading />}
       </View>
     );
