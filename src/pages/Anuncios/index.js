@@ -93,11 +93,14 @@ class Anuncios extends Component {
           console.log(responseJson);
           this.setState({
             listaCaronas: [],
+            Load: false,
           });
+          this.getlist();
         })
         .catch(error => {
           this.setState({
             refreshing: false,
+            Load: false,
           });
         });
     }

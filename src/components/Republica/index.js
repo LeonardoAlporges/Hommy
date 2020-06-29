@@ -103,7 +103,7 @@ class Republica extends Component {
   }
 
   getListRepublica = () => {
-    this.setState({ refreshing: true });
+    this.setState({ refreshing: true, listaRepublicas: [] });
     return api
       .get('/main')
       .then(responseJson => {

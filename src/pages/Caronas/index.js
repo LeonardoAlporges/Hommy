@@ -214,7 +214,7 @@ class Caronas extends Component {
   };
 
   getListCarona = () => {
-    this.setState({ refreshing: true });
+    this.setState({ refreshing: true, listaCaronas: [] });
     return api
       .get('/carona')
       .then(responseJson => {
