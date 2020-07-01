@@ -13,6 +13,7 @@ import CartaoUser from '../../components/CartaoUser';
 import moment from 'moment';
 import EmptyState from '../../components/EmptyState';
 import Loading from '../../components/Loading';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 class Agendamentos extends Component {
   static navigationOptions = { header: null };
@@ -44,8 +45,14 @@ class Agendamentos extends Component {
       .catch(error => {
         console.log(error);
         this.setState({ Load: false, Erro: true });
-        this.setState({});
       });
+  };
+
+  enviarSujestao = () => {
+    const data = {
+      status: 'Sujetao',
+      data: this.state.data,
+    };
   };
 
   enviarReq = (tipoSocilitacao, usuario) => {
@@ -115,6 +122,7 @@ class Agendamentos extends Component {
                 tipoRetorno="Republica"
               />
               <View style={style.viewData}>
+                <Icon name="close" />
                 <View style={style.viewData2}>
                   <Text style={style.data}>
                     {moment(new Date(item.data)).format('L')}

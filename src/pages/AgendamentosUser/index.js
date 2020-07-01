@@ -23,7 +23,8 @@ class AgendamentoUser extends Component {
     Load: true,
     Erro: false,
     Usuario: this.props.navigation.state.params.usuario,
-    MConfirmacao: false,
+    MConfirmacaoDelete: false,
+    MConfirmacaoAgendar: false,
     item: '',
   };
 
@@ -48,6 +49,33 @@ class AgendamentoUser extends Component {
         this.setState({ Load: false, Erro: true });
       });
   };
+
+  NovoAgendamento = (valor, item) => {
+    if (valor == 0) {
+      return null;
+    }
+    this.setState({ Load: true });
+    const agendamento = {
+      email: this.props.email,
+      data: item.data,
+      hora: item.hora,
+    };
+    api
+      .put(`/agendamento/${item.republica._id}`, agendamento)
+      .then(responseJson => {
+        this.setState({ listaAgendamento: [], Load: false });
+        this.Agendar();
+        console.log(responseJson);
+        this.setState({ Sucesso: true, Load: false });
+      })
+      .catch(error => {
+        console.log(error);
+        this.setState({ Load: false, Erro: true });
+      });
+
+    console.log('Modal falando que ele vai ser colocado em analise dnv');
+  };
+
   navegar = () => {
     this.props.navigation.goBack(null);
   };
@@ -76,13 +104,23 @@ class AgendamentoUser extends Component {
         />
         {this.state.Load && <Loading />}
 
-        {this.state.MConfirmacao && (
+        {this.state.MConfirmacaoDelete && (
           <ModalConfirmacao
             retornoModal={valor => {
               this.Deletar(valor, this.state.item);
-              this.setState({ MConfirmacao: false });
+              this.setState({ MConfirmacaoDelete: false });
             }}
-            mensagem="Deseja deletar esse anuncio ?"
+            mensagem="Deseja deletar esse Agendamento ?"
+            confirmar={true}
+          />
+        )}
+        {this.state.MConfirmacaoAgendar && (
+          <ModalConfirmacao
+            retornoModal={valor => {
+              this.NovoAgendamento(valor, this.state.item);
+              this.setState({ MConfirmacaoAgendar: false });
+            }}
+            mensagem="Deseja re-fazer o agendamento para Republica ?"
             confirmar={true}
           />
         )}
@@ -103,43 +141,86 @@ class AgendamentoUser extends Component {
           renderItem={({ item }) => (
             <View>
               <Cartao data={item.republica} interessado />
-              <View style={style.viewData}>
-                <TouchableOpacity
-                  style={{ width: 30, height: 30, justifyContent: 'center' }}
-                  onPress={() => {
-                    this.setState({
-                      MConfirmacao: true,
-                      item: item.republica._id,
-                    });
-                  }}
-                >
-                  <Icon name="close" style={style.iconDel} />
-                </TouchableOpacity>
-                <View style={style.viewData2}>
-                  <Text style={style.data}>
-                    {moment(new Date(item.data)).format('L')}
-                  </Text>
-                  <Text>As</Text>
-                  <Text style={style.data}>
-                    {moment(new Date(item.hora)).format('hh:mm')}
-                  </Text>
+              {item.status == 'NovaSugestao' ? (
+                <View style={style.viewData}>
+                  <TouchableOpacity
+                    style={{ width: 30, height: 30, justifyContent: 'center' }}
+                    onPress={() => {
+                      this.setState({
+                        MConfirmacaoDelete: true,
+                        item: item.republica._id,
+                      });
+                    }}
+                  >
+                    <Icon name="close" style={style.iconDel} />
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={{ width: 30, height: 30, justifyContent: 'center' }}
+                    onPress={() => {
+                      this.setState({
+                        MConfirmacaoAgendar: true,
+                        item: item,
+                      });
+                    }}
+                  >
+                    <Icon name="check" style={style.iconDel} />
+                  </TouchableOpacity>
+
+                  <View style={style.viewData2}>
+                    <Text style={style.data}>
+                      {moment(new Date(item.data)).format('L')}
+                    </Text>
+                    <Text>As</Text>
+                    <Text style={style.data}>
+                      {moment(new Date(item.hora)).format('hh:mm')}
+                    </Text>
+                  </View>
+                  {item.status == 'NovaSugestao' && (
+                    <View style={style.ViewAnalise}>
+                      <Text style={style.data}>{item.status}</Text>
+                    </View>
+                  )}
                 </View>
-                {item.status == 'Análise' && (
-                  <View style={style.ViewAnalise}>
-                    <Text style={style.data}>{item.status}</Text>
+              ) : (
+                <View style={style.viewData}>
+                  <TouchableOpacity
+                    style={{ width: 30, height: 30, justifyContent: 'center' }}
+                    onPress={() => {
+                      this.setState({
+                        MConfirmacao: true,
+                        item: item.republica._id,
+                      });
+                    }}
+                  >
+                    <Icon name="close" style={style.iconDel} />
+                  </TouchableOpacity>
+
+                  <View style={style.viewData2}>
+                    <Text style={style.data}>
+                      {moment(new Date(item.data)).format('L')}
+                    </Text>
+                    <Text>As</Text>
+                    <Text style={style.data}>
+                      {moment(new Date(item.hora)).format('hh:mm')}
+                    </Text>
                   </View>
-                )}
-                {item.status == 'Confirmado' && (
-                  <View style={style.View_Confirmado}>
-                    <Text style={style.dataConf}>{item.status}</Text>
-                  </View>
-                )}
-                {item.status == 'Rejeitado' && (
-                  <View style={style.View_Rejeitado}>
-                    <Text style={style.dataRej}>{item.status}</Text>
-                  </View>
-                )}
-              </View>
+                  {item.status == 'Análise' && (
+                    <View style={style.ViewAnalise}>
+                      <Text style={style.data}>{item.status}</Text>
+                    </View>
+                  )}
+                  {item.status == 'Confirmado' && (
+                    <View style={style.View_Confirmado}>
+                      <Text style={style.dataConf}>{item.status}</Text>
+                    </View>
+                  )}
+                  {item.status == 'Rejeitado' && (
+                    <View style={style.View_Rejeitado}>
+                      <Text style={style.dataRej}>{item.status}</Text>
+                    </View>
+                  )}
+                </View>
+              )}
             </View>
           )}
           keyExtractor={item => item._id}

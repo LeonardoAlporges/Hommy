@@ -237,41 +237,49 @@ class Caronas extends Component {
     return (
       <View style={Estilo.V_externa}>
         <NavigationEvents onDidFocus={this.getListCarona} />
-        {this.state.loading && (
-          <View style={Estilo.V_interna1}>
+        {this.state.loading ? (
+          <View style={Estilo.V_internaLoad}>
             <Spinner color="#142850" />
           </View>
-        )}
-        {this.state.erro && (
-          <View style={Estilo.V_interna1}>
-            <CustomModal
-              parametro="Erro"
-              callback={() => {
-                this.setState({ erro: false });
-              }}
-            />
+        ) : (
+          <View>
+            {this.state.erro ? (
+              <View style={Estilo.V_interna1}>
+                <CustomModal
+                  parametro="Erro"
+                  callback={() => {
+                    this.setState({ erro: false });
+                  }}
+                />
+              </View>
+            ) : (
+              <View>
+                {this.state.listaCaronas.length !== 0 ? (
+                  <View style={Estilo.card}>
+                    <FlatList
+                      style={Estilo.flatList}
+                      data={this.state.listaCaronas}
+                      renderItem={({ item }) => <CartaoCarona dados={item} />}
+                      keyExtractor={item => item._id}
+                      refreshing={this.state.refreshing}
+                      onRefresh={this.getListCarona}
+                    />
+                  </View>
+                ) : (
+                  <View style={Estilo.V_internaLoad}>
+                    {this.state.listaCaronas.length == 0 && (
+                      <EmptyState
+                        titulo="Sem Anuncios"
+                        mensagem="Começe publicando um agora mesmo"
+                      />
+                    )}
+                  </View>
+                )}
+              </View>
+            )}
           </View>
         )}
 
-        {this.state.listaCaronas.length != 0 ? (
-          <View style={Estilo.card}>
-            <FlatList
-              style={Estilo.flatList}
-              data={this.state.listaCaronas}
-              renderItem={({ item }) => <CartaoCarona dados={item} />}
-              keyExtractor={item => item._id}
-              refreshing={this.state.refreshing}
-              onRefresh={this.getListCarona}
-            />
-          </View>
-        ) : (
-          <View style={{ flex: 1, backgroundColor: '#fff' }}>
-            <EmptyState
-              titulo="Sem Anuncios"
-              mensagem="Começe publicando um agora mesmo"
-            />
-          </View>
-        )}
         {this.state.modalVisible && (
           <View style={Estilo.V_modalExterno}>
             <Modal
@@ -413,7 +421,6 @@ class Caronas extends Component {
         <Fab
           active={this.state.active}
           direction="up"
-          containerStyle={{}}
           style={Estilo.FABStyle}
           position="bottomRight"
           onPress={() => {

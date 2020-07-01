@@ -18,21 +18,26 @@ moment.locale('pt', {
 });
 
 class DetalhesCarona extends Component {
-  state = {
-    interesse: false,
-    Erro: false,
-    Load: false,
-    data: moment(this.props.data).format('dddd, DD MMMM'),
-  };
+  constructor(props) {
+    super(props);
+    console.log('?', this.props);
+    this.state = {
+      interesse: false,
+      Erro: false,
+      Load: false,
+      data: moment(this.props.data).format('dddd, DD MMMM'),
+      horaSaida: moment(new Date(this.props.Hsaida)).format('HH:mm'),
+      horaChegada: moment(new Date(this.props.HChegada)).format('HH:mm'),
+    };
+  }
 
   async clickInteresse() {
-    //this.setState({ Load: true });
+    this.setState({ Load: true });
     this.envio = { email: this.props.email };
     await api
       .put(`/carona/meusInteresses/${this.props.id}`, this.envio)
       .then(Response => {
         console.log(Response);
-
         this.setState({ interesse: true, Load: false });
       })
       .catch(e => {
@@ -97,7 +102,7 @@ class DetalhesCarona extends Component {
             </View>
             <View style={Estilo.V_Hora}>
               <Text style={Estilo.Txthora}>
-                {this.props.Hsaida} - {this.props.saida}
+                {this.state.horaSaida} - {this.props.saida}
               </Text>
             </View>
             <View style={Estilo.V_partida}>
@@ -105,7 +110,7 @@ class DetalhesCarona extends Component {
             </View>
             <View style={Estilo.V_Hora}>
               <Text style={Estilo.Txthora}>
-                {this.props.HChegada} - {this.props.chegada}
+                {this.state.horaChegada} - {this.props.chegada}
               </Text>
             </View>
 

@@ -19,11 +19,11 @@ class Agendar extends Component {
     Load: false,
     Sucsess: false,
     newData: '',
-
     dados: this.props.navigation.state.params.data,
     time: '00:00',
     sendTime: '',
     isDatePickerVisible: false,
+    date: new Date(),
   };
 
   navegar = () => {
@@ -56,14 +56,15 @@ class Agendar extends Component {
   };
 
   showDatePicker = () => {
-    this.setState({ isDatePickerVisible: !this.state.isDatePickerVisible });
+    console.log('DADOS:', this.state.dados);
+    this.setState({ isDatePickerVisible: true });
   };
   hideDatePicker = () => {
-    this.setState({ isDatePickerVisible: !this.state.isDatePickerVisible });
+    this.setState({ isDatePickerVisible: false });
   };
 
   handleConfirm = date => {
-    const markedDate = moment(new Date(date)).format('h:mm');
+    const markedDate = moment(new Date(date)).format('HH:mm');
     this.setState({ sendTime: date });
     this.setState({ time: markedDate });
     this.hideDatePicker();
@@ -76,7 +77,6 @@ class Agendar extends Component {
           title="Agendar visita"
           onNavigation={() => this.navegar()}
         />
-        <Text>{this.props.idRepublica}</Text>
         {this.state.Load && <Loading />}
         <View style={{ width: '100%', height: 140 }}>
           <Cartao data={this.state.dados} />
@@ -94,9 +94,8 @@ class Agendar extends Component {
           <View style={style.ViewDate}>
             <Icon name="calendar" style={style.IconCaledarA} />
             <DatePicker
-              defaultDate={new Date(2020, 4, 24)}
-              minimumDate={new Date(2020, 4, 24)}
-              maximumDate={new Date(2021, 1, 1)}
+              defaultDate={new Date()}
+              minimumDate={new Date()}
               locale={'pt-br'}
               timeZoneOffsetInMinutes={undefined}
               modalTransparent={true}
@@ -126,6 +125,9 @@ class Agendar extends Component {
           mode="time"
           onConfirm={this.handleConfirm}
           onCancel={this.hideDatePicker}
+          date={new Date()}
+          locale="pt_BR"
+          is24Hour={true}
         />
 
         <View style={style.V_botao}>

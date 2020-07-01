@@ -140,6 +140,12 @@ const estilo = StyleSheet.create({
     marginHorizontal: 30,
     alignItems: 'center',
   },
+  InputHora: {
+    width: 130,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 export default estilo;

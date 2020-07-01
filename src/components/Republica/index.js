@@ -11,7 +11,15 @@ import {
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import { connect } from 'react-redux';
 import { withNavigation, NavigationEvents } from 'react-navigation';
-import { CheckBox, ListItem, Button, Fab, Input, Item } from 'native-base';
+import {
+  CheckBox,
+  ListItem,
+  Button,
+  Fab,
+  Input,
+  Item,
+  Label,
+} from 'native-base';
 import EmptyState from '../../components/EmptyState';
 
 import Estilos from './style';
@@ -103,7 +111,7 @@ class Republica extends Component {
   }
 
   getListRepublica = () => {
-    this.setState({ refreshing: true, listaRepublicas: [] });
+    this.setState({ refreshing: true });
     return api
       .get('/main')
       .then(responseJson => {
@@ -347,8 +355,8 @@ class Republica extends Component {
         <NavigationEvents onDidFocus={this.getListRepublica} />
         <View>
           {this.state.loading ? (
-            <View style={Estilos.V_republicas}>
-              <Spinner color="#142850" />
+            <View style={Estilos.V_Load}>
+              <Spinner style={{}} color="#142850" />
             </View>
           ) : this.state.erro ? (
             <View style={Estilos.V_republicas}>
@@ -369,12 +377,10 @@ class Republica extends Component {
               onRefresh={this.getListRepublica}
             />
           ) : (
-            <View style={{ flex: 1, backgroundColor: '#fff' }}>
-              <EmptyState
-                titulo="Sem Anuncios Disponivel "
-                mensagem="Comece publicando um agora mesmo"
-              />
-            </View>
+            <EmptyState
+              titulo="Sem Anuncios Disponivel "
+              mensagem="Seja o primeiro a ter seu anuncio no ar"
+            />
           )}
         </View>
         <View style={Estilos.V_filtroExterno}>
@@ -531,11 +537,7 @@ class Republica extends Component {
             this.setState({ active: !this.state.active });
           }}
         >
-          {this.state.active ? (
-            <Icon name="arrow-down" />
-          ) : (
-            <Icon name="arrow-up" />
-          )}
+          {this.state.active ? <Icon name="minus" /> : <Icon name="plus" />}
 
           <Button
             style={Estilos.corFAB}
@@ -543,7 +545,7 @@ class Republica extends Component {
               this.setState({ modalVisible: true });
             }}
           >
-            <Icon name="equalizer" style={Estilos.corIconFab} />
+            <Icon name="magnifier" style={Estilos.corIconFab} />
           </Button>
           <Button
             style={Estilos.corFAB}
@@ -551,7 +553,7 @@ class Republica extends Component {
               this.limparPropsRepublicaRedux();
             }}
           >
-            <Icon name="pencil" style={Estilos.corIconFab} />
+            <Icon name="note" style={Estilos.corIconFab} />
           </Button>
         </Fab>
       </View>

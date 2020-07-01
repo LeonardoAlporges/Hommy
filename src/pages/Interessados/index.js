@@ -75,7 +75,6 @@ class Interessados extends Component {
         .put(`/carona/confirmar/${this.state.idCarona}`, data)
         .then(responseJson => {
           this.setState({ Load: false });
-
           this.onRefreshPage();
         })
         .catch(error => {

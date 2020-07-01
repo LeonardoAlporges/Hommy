@@ -11,6 +11,8 @@ import { connect } from 'react-redux';
 import TextInputMask from 'react-native-text-input-mask';
 import HeaderBack from '../../components/CustomHeader';
 import Loading from '../../components/Loading';
+import moment from 'moment';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {
   Text,
   Item,
@@ -44,6 +46,12 @@ class CadastroCarona extends Component {
       sucesso: false,
       modalLoadVisible: false,
       update: this.props.navigation.state.params.update,
+      isDatePickerVisibleSaida: false,
+      isDatePickerVisible: false,
+      sendTimeChegada: '00:00',
+      timeChegada: '00:00',
+      sendTimeSaida: '00:00',
+      timeSaida: '00:00',
     };
   }
   goToHome() {
@@ -63,8 +71,8 @@ class CadastroCarona extends Component {
       localChegada: values.chegada,
       data: this.state.newData,
       valor: values.valor,
-      horaSaida: values.Hsaida,
-      horaChegada: values.HChegada,
+      horaSaida: this.state.sendTimeSaida,
+      horaChegada: this.state.sendTimeChegada,
       embarque: values.embarque,
       desembarque: values.desembarque,
       vagas: values.vagas,
@@ -73,6 +81,7 @@ class CadastroCarona extends Component {
       userEmail: this.props.email,
       nota: this.props.nota,
     };
+    console.log(this.data);
 
     if (this.state.update == true) {
       await api
@@ -106,6 +115,35 @@ class CadastroCarona extends Component {
     this.props.navigation.goBack(null);
   }
 
+  Confirmar = (date, tipo) => {
+    if (tipo == 'Saida') {
+      const saida = moment(new Date(date)).format('hh:mm');
+      this.setState({
+        sendTimeSaida: date,
+        timeSaida: saida,
+        isDatePickerVisibleSaida: false,
+      });
+    } else {
+      const chegada = moment(new Date(date)).format('hh:mm');
+      this.setState({
+        sendTimeChegada: date,
+        timeChegada: chegada,
+        isDatePickerVisible: false,
+      });
+    }
+  };
+  FecharPicker = (date, tipo) => {
+    if (tipo == 'Saida') {
+      this.setState({
+        isDatePickerVisibleSaida: false,
+      });
+    } else {
+      this.setState({
+        isDatePickerVisible: false,
+      });
+    }
+  };
+
   render() {
     return (
       <Formik
@@ -131,8 +169,8 @@ class CadastroCarona extends Component {
             .min(5, 'Valor minimo R$ 5,00')
             .max(200, 'Valor maximo de R$ 200,00')
             .required('Valor Invalido'),
-          Hsaida: yup.string('Hora invalido').required('Hora invalida'),
-          HChegada: yup.string('Hora invalido').required('Hora invalida'),
+          // Hsaida: yup.string('Hora invalido').required('Hora invalida'),
+          // HChegada: yup.string('Hora invalido').required('Hora invalida'),
           embarque: yup
             .string('Somente texto')
             .max(70, 'Somente 70 caracteres sao permitidos')
@@ -171,6 +209,7 @@ class CadastroCarona extends Component {
                 parametro="Custom"
                 titulo="Tudo certo!"
                 descricao="Seu anuncio já estar no ar, fique atento com os agendamentos"
+                botao="Confirmar"
                 callback={() => {
                   this.goToHome();
                 }}
@@ -236,9 +275,7 @@ class CadastroCarona extends Component {
                         <Item>
                           <Label fixedLabel />
                           <DatePicker
-                            defaultDate={new Date(2020, 4, 24)}
-                            minimumDate={new Date(2020, 4, 24)}
-                            maximumDate={new Date(2021, 1, 1)}
+                            minimumDate={new Date()}
                             locale={'pt-br'}
                             timeZoneOffsetInMinutes={undefined}
                             modalTransparent={true}
@@ -303,19 +340,27 @@ class CadastroCarona extends Component {
                       <View style={estilo.campoStyle}>
                         <Text style={estilo.txtLabel}>Horario de saida</Text>
                         <Item>
-                          <Label fixedLabel />
-                          <TextInputMask
-                            style={{
-                              width: '100%',
-                              height: '100%',
+                          <TouchableOpacity
+                            onPress={() => {
+                              this.setState({
+                                isDatePickerVisibleSaida: true,
+                              });
                             }}
-                            keyboardType="number-pad"
-                            mask={'[00]:[00]'}
-                            value={values.Hsaida}
-                            onChangeText={handleChange('Hsaida')}
-                            placeholder=""
-                            onBlur={() => setFieldTouched('Hsaida')}
-                          />
+                            style={estilo.InputHora}
+                          >
+                            <Label>{this.state.timeSaida}</Label>
+                            <DateTimePickerModal
+                              isVisible={this.state.isDatePickerVisibleSaida}
+                              mode="time"
+                              onConfirm={date => this.Confirmar(date, 'Saida')}
+                              onCancel={date =>
+                                this.FecharPicker(date, 'Saida')
+                              }
+                              date={new Date()}
+                              locale={'pt-br'}
+                              is24Hour={true}
+                            />
+                          </TouchableOpacity>
                         </Item>
                         <View style={estilo.V_erro}>
                           {touched.Hsaida && errors.Hsaida && (
@@ -329,19 +374,29 @@ class CadastroCarona extends Component {
                       <View style={estilo.campoStyle}>
                         <Text style={estilo.txtLabel}>Horario de chegada</Text>
                         <Item>
-                          <Label fixedLabel />
-                          <TextInputMask
-                            style={{
-                              width: '100%',
-                              height: '100%',
+                          <TouchableOpacity
+                            onPress={() => {
+                              this.setState({
+                                isDatePickerVisible: true,
+                              });
                             }}
-                            keyboardType="number-pad"
-                            mask={'[00]:[00]'}
-                            value={values.HChegada}
-                            onChangeText={handleChange('HChegada')}
-                            placeholder=""
-                            onBlur={() => setFieldTouched('HChegada')}
-                          />
+                            style={estilo.InputHora}
+                          >
+                            <Label>{this.state.timeChegada}</Label>
+                            <DateTimePickerModal
+                              isVisible={this.state.isDatePickerVisible}
+                              onConfirm={date =>
+                                this.Confirmar(date, 'Chegada')
+                              }
+                              onCancel={date =>
+                                this.FecharPicker(date, 'Chegada')
+                              }
+                              mode="time"
+                              date={new Date()}
+                              locale={'pt-br'}
+                              is24Hour={true}
+                            />
+                          </TouchableOpacity>
                         </Item>
                         <View style={estilo.V_erro}>
                           {touched.HChegada && errors.HChegada && (
@@ -395,6 +450,7 @@ class CadastroCarona extends Component {
                       <Label style={estilo.txtLabel}>Vagas no carro</Label>
                       <Item>
                         <Input
+                          keyboardType="number-pad"
                           value={values.vagas}
                           onChangeText={handleChange('vagas')}
                           placeholder=""

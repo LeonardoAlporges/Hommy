@@ -16,6 +16,14 @@ const Estilo = StyleSheet.create({
     width: '100%',
     backgroundColor: '#f2f2f2',
   },
+  V_internaLoad: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingBottom: '10%',
+    backgroundColor: '#fff',
+  },
   V_interna1: {
     width: '100%',
     height: '100%',

@@ -19,6 +19,12 @@ const estilosRepublica = StyleSheet.create({
     height: '100%',
     alignItems: 'center',
   },
+  V_Load: {
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   V_republicas: {
     height: '100%',
     width: '100%',

@@ -29,6 +29,7 @@ class CadastroUsuario extends Component {
     modalLoadVisible: false,
     load: false,
     erro: false,
+    Sucesso: false,
   };
 
   EnviarCadastro = async value => {
@@ -42,8 +43,7 @@ class CadastroUsuario extends Component {
       .post('/usuario', value)
       .then(responseJson => {
         console.log(responseJson);
-        this.setState({ modalLoadVisible: false });
-        this.props.navigation.navigate('Login');
+        this.setState({ modalLoadVisible: false, Sucesso: true });
       })
       .catch(error => {
         console.log(error);
@@ -172,13 +172,16 @@ class CadastroUsuario extends Component {
                     }}
                   />
                 )}
-                {this.state.sucesso ? (
+                {this.state.Sucesso ? (
                   <View style={estilo.V_modal}>
                     <CustomModal
                       parametro="Custom"
-                      titulo="Tudo certo!"
-                      descricao="Seu anuncio já estar no ar, fique atento com os agendamentos"
-                      callback={() => {}}
+                      titulo="Cadastro Realizado :)"
+                      descricao="Seu cadastro no aplicativofoi realizado com sucesso, voce sera redirecionado para fazer login."
+                      botao="Confirmar"
+                      callback={() => {
+                        this.props.navigation.navigate('Login');
+                      }}
                     />
                   </View>
                 ) : (
@@ -301,6 +304,7 @@ class CadastroUsuario extends Component {
             )}
           </Formik>
         </View>
+
         <View>
           <Modal
             animationType="fade"

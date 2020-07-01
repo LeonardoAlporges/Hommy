@@ -84,9 +84,9 @@ class Cabeca extends Component {
                     }}
                     style={Estilos.fotoPerfil}
                   />
-                  <TouchableOpacity style={Estilos.editFoto}>
+                  {/* <TouchableOpacity style={Estilos.editFoto}>
                     <Icon style={Estilos.iconBotoesArrow} name="pencil" />
-                  </TouchableOpacity>
+                  </TouchableOpacity> */}
                 </View>
               )}
 

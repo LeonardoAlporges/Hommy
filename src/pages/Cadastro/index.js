@@ -398,6 +398,7 @@ export class Cadastro extends Component {
                         <Label style={estilo.txtLabel}>N°</Label>
                         <Item>
                           <Input
+                            keyboardType="number-pad"
                             value={values.numero}
                             onChangeText={handleChange('numero')}
                             placeholder=""
@@ -557,6 +558,7 @@ export class Cadastro extends Component {
                           <Item>
                             <Label fixedLabel>R$</Label>
                             <Input
+                              keyboardType="number-pad"
                               value={values.aluguel}
                               onChangeText={handleChange('aluguel')}
                               onBlur={() => setFieldTouched('aluguel')}
@@ -576,6 +578,7 @@ export class Cadastro extends Component {
                           <Item>
                             <Label fixedLabel>R$</Label>
                             <Input
+                              keyboardType="number-pad"
                               value={values.contas}
                               onChangeText={handleChange('contas')}
                               placeholder=""

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Image, Text, View, Alert } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
+import 'moment/locale/br';
 import {
   editIdCarona,
   editChegada,
@@ -18,14 +19,24 @@ import {
   editValor,
   editEmailOfertante,
 } from '../../actions/CaronaActions';
-
+import moment from 'moment';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import Icon2 from 'react-native-vector-icons/Feather';
 import Estilos from './style';
 import { Button } from 'native-base';
-const moment = require('moment');
 
 class CartaoCarona extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: moment(this.props.dados.data).format('DD/MM'),
+      horaSaida: moment(new Date(this.props.dados.horaSaida)).format('HH:mm'),
+      horaChegada: moment(new Date(this.props.dados.horaChegada)).format(
+        'HH:mm'
+      ),
+    };
+  }
+
   Click = () => {
     const dados = this.props.dados;
     this.props.editIdCarona(dados._id);
@@ -43,10 +54,6 @@ class CartaoCarona extends Component {
     this.props.editValor(dados.valor);
     this.props.editEmailOfertante(dados.userEmail);
     this.props.navigation.navigate('DetalhesCarona');
-  };
-
-  state = {
-    data: moment(this.props.dados.data).format('DD/MM'),
   };
 
   render() {
@@ -73,9 +80,7 @@ class CartaoCarona extends Component {
           </View>
           <View style={Estilos.V_local}>
             <View style={Estilos.V_LocLabel}>
-              <Text style={Estilos.txtdeslcSaHora}>
-                {this.props.dados.horaSaida}
-              </Text>
+              <Text style={Estilos.txtdeslcSaHora}>{this.state.horaSaida}</Text>
               <Icon name="action-redo" style={Estilos.txtIcon} />
               <Text style={Estilos.txtdeslcSa}>
                 {this.props.dados.localSaida}
@@ -83,7 +88,7 @@ class CartaoCarona extends Component {
             </View>
             <View style={Estilos.V_LocLabel}>
               <Text style={Estilos.txtdeslcChHora}>
-                {this.props.dados.horaChegada}
+                {this.state.horaChegada}
               </Text>
               <Icon name="flag" style={Estilos.txtIcon} />
               <Text style={Estilos.txtdeslcCh}>
