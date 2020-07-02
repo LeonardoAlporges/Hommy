@@ -34,7 +34,7 @@ import {
   Picker,
 } from 'native-base';
 
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Estilo from './style';
 import CustomModal from '../../components/Alert';
 import CartaoCarona from '../../components/CartaoCarona';
@@ -427,11 +427,7 @@ class Caronas extends Component {
             this.setState({ active: !this.state.active });
           }}
         >
-          {this.state.active ? (
-            <Icon name="arrow-down" />
-          ) : (
-            <Icon name="arrow-up" />
-          )}
+          {this.state.active ? <Icon name="minus" /> : <Icon name="plus" />}
 
           <Button
             style={Estilo.FabBTN}
@@ -439,7 +435,7 @@ class Caronas extends Component {
               this.setState({ modalVisible: true });
             }}
           >
-            <Icon name="equalizer" style={Estilo.FabIcon} />
+            <Icon name="filter-outline" style={Estilo.FabIcon} />
           </Button>
           <Button
             style={Estilo.FabBTN}
@@ -447,7 +443,7 @@ class Caronas extends Component {
               this.limparPropsCaronaRedux();
             }}
           >
-            <Icon name="pencil" style={Estilo.FabIcon} />
+            <Icon name="plus" style={Estilo.FabIcon} />
           </Button>
         </Fab>
       </View>

@@ -117,14 +117,14 @@ class CadastroCarona extends Component {
 
   Confirmar = (date, tipo) => {
     if (tipo == 'Saida') {
-      const saida = moment(new Date(date)).format('hh:mm');
+      const saida = moment(new Date(date)).format('HH:mm');
       this.setState({
         sendTimeSaida: date,
         timeSaida: saida,
         isDatePickerVisibleSaida: false,
       });
     } else {
-      const chegada = moment(new Date(date)).format('hh:mm');
+      const chegada = moment(new Date(date)).format('HH:mm');
       this.setState({
         sendTimeChegada: date,
         timeChegada: chegada,
@@ -314,7 +314,7 @@ class CadastroCarona extends Component {
                       <View style={estilo.campoStyle}>
                         <Text style={estilo.txtLabel}>Valor</Text>
                         <Item>
-                          <Label fixedLabel />
+                          <Label fixedLabel>R$</Label>
                           <TextInputMask
                             style={{
                               width: '100%',

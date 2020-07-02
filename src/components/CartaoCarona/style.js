@@ -39,7 +39,6 @@ const Estilos = StyleSheet.create({
   icon: {
     fontSize: 12,
     color: '#00909e',
-    
   },
   V_imagem: {
     height: 70,
@@ -117,12 +116,14 @@ const Estilos = StyleSheet.create({
     fontWeight: 'bold',
     color: '#142850',
   },
-  txtdeslcSa: {
-    paddingTop: 13,
-    fontSize: 18,
+  V_TxtSaida: {
+    justifyContent: 'center',
     marginLeft: '2%',
-    width: '80%',
+    width: '65%',
     height: '100%',
+  },
+  txtdeslcSa: {
+    fontSize: 18,
     fontFamily: 'Roboto',
     fontWeight: 'bold',
     color: '#142850',

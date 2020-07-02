@@ -278,7 +278,7 @@ class Anuncios extends Component {
               <View />
             )}
             {this.state.listaCaronas.length != 0 ? (
-              <View>
+              <View style={{ marginTop: 30 }}>
                 <View style={estilo.V_label}>
                   <Text style={estilo.label}>Caronas</Text>
                   <View style={estilo.barra} />

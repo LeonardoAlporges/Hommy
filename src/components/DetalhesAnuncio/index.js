@@ -99,7 +99,7 @@ class DetalhesAnuncio extends Component {
           </View>
           <View style={estilo.item}>
             <Icon name="people" style={estilo.icone} />
-            <Text style={estilo.txtlabel}>{this.props.genero}</Text>
+            <Text style={estilo.txtlabelGenero}>{this.props.genero}</Text>
           </View>
         </View>
         <View style={estilo.V_tipo}>
@@ -179,14 +179,12 @@ class DetalhesAnuncio extends Component {
                 this.clickInteresse();
               }}
             >
-              <Icon2 name="alert-circle" style={estilo.iconWhatsapp} />
               <Text style={estilo.txtWhatsapp}>Agendar uma visita</Text>
             </Button>
           </View>
         ) : (
           <View style={estilo.V_botao}>
             <Button style={estilo.botao}>
-              <Icon2 name="alert-circle" style={estilo.iconWhatsapp} />
               <Text style={estilo.txtWhatsapp}>Você já esta agendado</Text>
             </Button>
           </View>

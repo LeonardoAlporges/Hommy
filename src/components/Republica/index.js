@@ -8,7 +8,7 @@ import {
   Image,
 } from 'react-native';
 
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
 import { withNavigation, NavigationEvents } from 'react-navigation';
 import {
@@ -545,7 +545,7 @@ class Republica extends Component {
               this.setState({ modalVisible: true });
             }}
           >
-            <Icon name="magnifier" style={Estilos.corIconFab} />
+            <Icon name="filter-outline" style={Estilos.corIconFab} />
           </Button>
           <Button
             style={Estilos.corFAB}
@@ -553,7 +553,7 @@ class Republica extends Component {
               this.limparPropsRepublicaRedux();
             }}
           >
-            <Icon name="note" style={Estilos.corIconFab} />
+            <Icon name="plus" style={Estilos.corIconFab} />
           </Button>
         </Fab>
       </View>

@@ -59,15 +59,12 @@ class Agendar extends Component {
     console.log('DADOS:', this.state.dados);
     this.setState({ isDatePickerVisible: true });
   };
-  hideDatePicker = () => {
-    this.setState({ isDatePickerVisible: false });
-  };
 
   handleConfirm = date => {
     const markedDate = moment(new Date(date)).format('HH:mm');
     this.setState({ sendTime: date });
     this.setState({ time: markedDate });
-    this.hideDatePicker();
+    this.setState({ isDatePickerVisible: false });
   };
 
   render() {
@@ -123,8 +120,10 @@ class Agendar extends Component {
         <DateTimePickerModal
           isVisible={this.state.isDatePickerVisible}
           mode="time"
-          onConfirm={this.handleConfirm}
-          onCancel={this.hideDatePicker}
+          onConfirm={data => this.handleConfirm(data)}
+          onCancel={() => {
+            this.setState({ isDatePickerVisible: false });
+          }}
           date={new Date()}
           locale="pt_BR"
           is24Hour={true}

@@ -84,6 +84,13 @@ const estilo = StyleSheet.create({
     fontFamily: 'Roboto',
     fontWeight: '600',
   },
+  txtlabelGenero: {
+    paddingLeft: 5,
+    color: '#00909e',
+    fontSize: 16,
+    fontFamily: 'Roboto',
+    fontWeight: '600',
+  },
   icone: {
     justifyContent: 'flex-start',
     fontSize: 28,

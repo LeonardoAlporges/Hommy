@@ -76,9 +76,9 @@ class AgendamentoUser extends Component {
     console.log('Modal falando que ele vai ser colocado em analise dnv');
   };
 
-  navegar = () => {
-    this.props.navigation.goBack(null);
-  };
+  async navegar() {
+    await this.props.navigation.goBack(null);
+  }
 
   onRefreshPage = () => {};
 
