@@ -149,9 +149,9 @@ class CadastroUsuario extends Component {
                 .max(9999999999999)
                 .required(' Insira um numero de celular'),
               password: yup
-                .string('Somente texto')
-                .min(8, 'Password is too short - should be 8 chars minimum.')
-                .required('Insira uma senha para sua conta'),
+                .string('Insira sua senha')
+                .min(8, 'Senha minima é de 8 digitos')
+                .required('Insira uma senha'),
             })}
           >
             {({
@@ -280,6 +280,7 @@ class CadastroUsuario extends Component {
                       onChangeText={handleChange('password')}
                       placeholder="Senha"
                       secureTextEntry={true}
+                      onBlur={() => setFieldTouched('password')}
                     />
                   </Item>
                 </View>

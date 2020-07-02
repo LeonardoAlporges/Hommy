@@ -10,10 +10,20 @@ import estilo from './style';
 import ViewPager from '@react-native-community/viewpager';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import Icon2 from 'react-native-vector-icons/Feather';
+import Icon3 from 'react-native-vector-icons/Entypo';
+import {
+  PagerTabIndicator,
+  IndicatorViewPager,
+  PagerTitleIndicator,
+  PagerDotIndicator,
+} from 'rn-viewpager';
 
 class DetalhesAnuncio extends Component {
   state = {
     interesse: this.props.navigation.state.params.interessado,
+    page1: false,
+    page2: false,
+    page3: false,
   };
 
   static navigationOptions = { header: null };
@@ -33,6 +43,16 @@ class DetalhesAnuncio extends Component {
     });
   };
 
+  _renderDotIndicator() {
+    return (
+      <PagerDotIndicator
+        dotStyle={{ width: 10, height: 10, borderRadius: 10 }}
+        selectedDotStyle={{ width: 10, height: 10, borderRadius: 10 }}
+        pageCount={3}
+      />
+    );
+  }
+
   render() {
     return (
       <ScrollView>
@@ -41,8 +61,10 @@ class DetalhesAnuncio extends Component {
           title={this.props.nomeRepublica}
           onNavigation={() => this.navegar()}
         />
-
-        <ViewPager style={estilo.image}>
+        <IndicatorViewPager
+          style={{ height: 300 }}
+          indicator={this._renderDotIndicator()}
+        >
           <View key="1">
             <Image source={{ uri: this.props.imagem1 }} style={estilo.image} />
           </View>
@@ -53,7 +75,7 @@ class DetalhesAnuncio extends Component {
           <View key="4">
             <Image source={{ uri: this.props.imagem3 }} style={estilo.image} />
           </View>
-        </ViewPager>
+        </IndicatorViewPager>
 
         <View style={estilo.V_titulo}>
           <Text style={estilo.titulo}>{this.props.nomeRepublica}</Text>

@@ -1,6 +1,15 @@
 import { StyleSheet } from 'react-native';
 
 const estilo = StyleSheet.create({
+  indicatorView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    color: '#fff',
+    fontSize: 30,
+  },
   container: {
     width: '100%',
     height: '100%',
