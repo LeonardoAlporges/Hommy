@@ -53,6 +53,7 @@ class CadastroCarona extends Component {
       timeChegada: '00:00',
       sendTimeSaida: '00:00',
       timeSaida: '00:00',
+      botaoEnviar: false,
     };
   }
   resetNavigation(Rota) {
@@ -170,6 +171,8 @@ class CadastroCarona extends Component {
         }}
         onSubmit={values => {
           this.entrar(values);
+
+          console.log('botao TRUE');
         }}
         validationSchema={yup.object().shape({
           saida: yup.string().required('Insira local de saida '),
@@ -181,6 +184,7 @@ class CadastroCarona extends Component {
             .required('Valor Invalido'),
           // Hsaida: yup.string('Hora invalido').required('Hora invalida'),
           // HChegada: yup.string('Hora invalido').required('Hora invalida'),
+          data: yup.string().required('errp'),
           embarque: yup
             .string('Somente texto')
             .max(70, 'Somente 70 caracteres sao permitidos')
@@ -304,7 +308,6 @@ class CadastroCarona extends Component {
                             onValueChange={handleChange('chegada')}
                             value={values.chegada}
                             onChangeText={handleChange('chegada')}
-                            placeholder=""
                             onBlur={() => setFieldTouched('chegada')}
                           >
                             <Picker.Item label="Cidades" value="null" />
@@ -374,13 +377,20 @@ class CadastroCarona extends Component {
                               this.setState({ newData: new Date(date) });
                             }}
                             disabled={false}
-                            //onBlur={() => setFieldTouched('data')}
+                            selectedValue={values.data}
+                            onValueChange={handleChange('data')}
+                            value={values.data}
+                            onChangeText={handleChange('data')}
+                            onBlur={() => setFieldTouched('data')}
                           />
                         </Item>
                         <View style={estilo.V_erro}>
-                          {touched.data && errors.data && (
-                            <Text style={estilo.textError}>{errors.data}</Text>
-                          )}
+                          {this.state.newData == '' &&
+                            this.state.botaoEnviar && (
+                              <Text style={estilo.textError}>
+                                Insira uma data
+                              </Text>
+                            )}
                         </View>
                       </View>
 
@@ -436,11 +446,12 @@ class CadastroCarona extends Component {
                           </TouchableOpacity>
                         </Item>
                         <View style={estilo.V_erro}>
-                          {touched.Hsaida && errors.Hsaida && (
-                            <Text style={estilo.textError}>
-                              {errors.Hsaida}
-                            </Text>
-                          )}
+                          {this.state.timeSaida == '00:00' &&
+                            this.state.botaoEnviar && (
+                              <Text style={estilo.textError}>
+                                Insira o horario de saida
+                              </Text>
+                            )}
                         </View>
                       </View>
 
@@ -472,11 +483,12 @@ class CadastroCarona extends Component {
                           </TouchableOpacity>
                         </Item>
                         <View style={estilo.V_erro}>
-                          {touched.HChegada && errors.HChegada && (
-                            <Text style={estilo.textError}>
-                              {errors.HChegada}
-                            </Text>
-                          )}
+                          {this.state.timeChegada == '00:00' &&
+                            this.state.botaoEnviar && (
+                              <Text style={estilo.textError}>
+                                Insira o horario de saida
+                              </Text>
+                            )}
                         </View>
                       </View>
                     </View>
@@ -542,6 +554,7 @@ class CadastroCarona extends Component {
                         style={estilo.btnProximo}
                         onPress={() => {
                           handleSubmit(values);
+                          //this.setState({ botaoEnviar: true });
                         }}
                       >
                         <Text>Prosseguir</Text>
