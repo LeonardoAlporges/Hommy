@@ -266,7 +266,7 @@ class Caronas extends Component {
                     />
                   </View>
                 ) : (
-                  <View style={Estilo.V_internaLoad}>
+                  <View style={{ backgroundColor: '#ffffff' }}>
                     {this.state.listaCaronas.length == 0 && (
                       <EmptyState
                         titulo="Sem Anuncios"

@@ -56,6 +56,7 @@ export class Cadastro extends Component {
 
   constructor(props) {
     super(props);
+    console.log('PROPS,', this.props.valorAluguel);
     this.entrar = this.entrar.bind(this);
     this.state = {
       contadorImagem: 0,
@@ -228,7 +229,7 @@ export class Cadastro extends Component {
     return (
       <Formik
         initialValues={{
-          nome: this.props.nome,
+          nome: this.props.titulo,
           bairro: this.props.bairro,
           rua: this.props.rua,
           numero: this.props.numeroCasa,
@@ -348,7 +349,7 @@ export class Cadastro extends Component {
                         <Input
                           value={values.nome}
                           onChangeText={handleChange('nome')}
-                          placeholder={this.props.titulo}
+                          placeholder=""
                           onBlur={() => setFieldTouched('nome')}
                         />
                       </Item>
@@ -561,6 +562,7 @@ export class Cadastro extends Component {
                               keyboardType="number-pad"
                               value={values.aluguel}
                               onChangeText={handleChange('aluguel')}
+                              placeholder=""
                               onBlur={() => setFieldTouched('aluguel')}
                             />
                           </Item>
@@ -825,6 +827,7 @@ const mapStateToProps = state => {
     //para pegar do reducer e State."NOME DO REDUCER"."NOME DA PROPIEDADE"
     titulo: state.auth.nomeRepublica,
     valorAluguel: state.auth.valorAluguel,
+    valorContas: state.auth.valorContas,
     genero: state.auth.genero,
     numeroVagas: state.auth.numVagas,
     bairro: state.auth.bairro,
@@ -835,7 +838,6 @@ const mapStateToProps = state => {
     animal: state.auth.animal,
     acomodacaoQuarto: state.auth.acomodacaoQuarto,
     acomodacaoRepublica: state.auth.acomodacaoRepublica,
-    valorContas: state.auth.valorContas,
     observacao: state.auth.observacao,
     imagem1: state.auth.imagem1,
     imagem2: state.auth.imagem2,

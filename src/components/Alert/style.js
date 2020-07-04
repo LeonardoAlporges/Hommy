@@ -11,6 +11,7 @@ const Estilos = StyleSheet.create({
   ViewModal: {
     justifyContent: 'center',
     alignItems: 'center',
+
     height: 370,
     marginHorizontal: 30,
     backgroundColor: 'white',
@@ -41,6 +42,7 @@ const Estilos = StyleSheet.create({
     fontWeight: 'bold',
   },
   descricao: {
+    marginHorizontal: 30,
     marginBottom: '3%',
     textAlign: 'center',
     justifyContent: 'center',
@@ -48,7 +50,7 @@ const Estilos = StyleSheet.create({
     fontSize: 15,
   },
   botao: {
-    marginTop: '10%',
+    marginTop: '5%',
     alignSelf: 'center',
     backgroundColor: '#142850',
     borderRadius: 5,

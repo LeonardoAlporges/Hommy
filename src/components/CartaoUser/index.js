@@ -35,7 +35,13 @@ class CartaoUser extends Component {
 
   render() {
     return (
-      <View style={{ width: '100%' }}>
+      <View
+        style={{
+          width: '100%',
+
+          paddingHorizontal: 16,
+        }}
+      >
         <View style={style.card}>
           <TouchableOpacity
             onPress={() => {
@@ -54,7 +60,9 @@ class CartaoUser extends Component {
             />
           </TouchableOpacity>
           <View style={style.V_nome}>
-            <Text style={style.nome}>{this.props.dados.nome}</Text>
+            <Text numberOfLines={2} style={style.nome}>
+              {this.props.dados.nome}
+            </Text>
           </View>
           <View style={style.V_nota}>
             <Icon name="star" style={style.icon} />

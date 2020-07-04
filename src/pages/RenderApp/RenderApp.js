@@ -15,6 +15,9 @@ import {
 } from '../../actions/UserAction';
 import SplashScreen from '../SplashScreen';
 import style from './styles';
+import Notificacao from '../TesteNot/index';
+import { fmcService } from '../../Firebase/FMCService';
+import { localNotificationService } from '../../Firebase/LocalSendNotification';
 
 class RenderApp extends Component {
   static navigationOptions = { header: null };
@@ -24,7 +27,44 @@ class RenderApp extends Component {
     firtsOpen: false,
   };
 
+  registrarNotificacao() {
+    fmcService.registerAppWithFMC();
+    fmcService.register(onRegister, onNotification, onOpenNotification);
+    localNotificationService.configure(onOpenNotification);
+
+    function onRegister(token) {
+      console.log('[APP] onRegister:', token);
+    }
+
+    function onNotification(notify) {
+      console.log('[APP] onNotification:', notify);
+      const option = {
+        soundName: 'default',
+        playSound: true,
+      };
+      localNotificationService.showNotification(
+        0,
+        notify.title,
+        notify.body,
+        notify,
+        option
+      );
+    }
+
+    function onOpenNotification(notify) {
+      console.log('[APP] OnOPENNOTIFICAÇAO:', notify);
+      alert('Open Notificação: ' + notify.body);
+    }
+
+    return () => {
+      console.log('[App] Unregsitre');
+      fmcService.unRegister();
+      localNotificationService.unRegister();
+    };
+  }
+
   async Buscar() {
+    this.registrarNotificacao();
     try {
       await AsyncStorage.getItem('firtOpen').then(value => {
         if (value === 'true') {

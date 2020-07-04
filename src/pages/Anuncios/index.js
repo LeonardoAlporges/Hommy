@@ -146,6 +146,7 @@ class Anuncios extends Component {
 
   editRepublica(edit) {
     const dados = edit;
+    console.log('DA', edit);
     this.props.editNomeRepublica(dados.nomeRepublica);
     this.props.editValorAluguel(dados.valorAluguel);
     this.props.editBairro(dados.bairro);

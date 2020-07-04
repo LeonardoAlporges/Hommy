@@ -122,7 +122,6 @@ class Agendamentos extends Component {
                 tipoRetorno="Republica"
               />
               <View style={style.viewData}>
-                <Icon name="close" />
                 <View style={style.viewData2}>
                   <Text style={style.data}>
                     {moment(new Date(item.data)).format('L')}

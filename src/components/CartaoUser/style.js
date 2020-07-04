@@ -2,9 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const style = StyleSheet.create({
   card: {
-    marginHorizontal: '2%',
-    marginVertical: '2%',
-    width: '96%',
+    width: '100%',
     height: 60,
     backgroundColor: '#f2f2f2',
     borderRadius: 4,
@@ -22,7 +20,7 @@ const style = StyleSheet.create({
   },
   V_imagem: {
     marginLeft: 5,
-    width: 60,
+    width: '15%',
     height: 50,
   },
   Imagem: {
@@ -31,7 +29,7 @@ const style = StyleSheet.create({
     borderRadius: 30,
   },
   V_nome: {
-    width: 160,
+    width: '40%',
     height: 50,
     justifyContent: 'center',
     alignItems: 'flex-start',
@@ -43,7 +41,7 @@ const style = StyleSheet.create({
   },
   V_nota: {
     flexDirection: 'row',
-    width: 50,
+    width: '15%',
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
@@ -80,11 +78,10 @@ const style = StyleSheet.create({
     borderColor: '#2e2e2e',
   },
   V_Icon: {
-    marginLeft: 20,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    width: 80,
+    width: '25%',
     height: 50,
   },
 });

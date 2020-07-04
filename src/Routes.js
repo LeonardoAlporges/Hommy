@@ -25,6 +25,7 @@ import Agendar from './pages/Agendar';
 import Agendamentos from './pages/Agendamentos';
 import AgendamentoUser from './pages/AgendamentosUser';
 import ValidarCodigo from './pages/ValidarCodigo';
+import Notificacao from './pages/TesteNot';
 
 import { createDrawerNavigator } from 'react-navigation-drawer';
 
