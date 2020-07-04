@@ -67,9 +67,8 @@ class Cabeca extends Component {
         <TouchableOpacity
           style={{
             marginHorizontal: 20,
-            width: 20,
-            height: 20,
-            backgroundColor: 'red',
+            width: 30,
+            height: 30,
           }}
           onPress={this.closeToken}
         >
