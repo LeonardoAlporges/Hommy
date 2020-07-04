@@ -28,7 +28,7 @@ class SplashScreen extends Component {
       this.setState({ modalVisible: false });
     }, 1000);
 
-    resetNavigation('Login');
+    this.resetNavigation('Login');
   }
 
   render() {

@@ -73,7 +73,7 @@ class ValidarCodigo extends Component {
   };
 
   navegar = () => {
-    resetNavigation('Login');
+    this.resetNavigation('Login');
   };
 
   render() {
@@ -230,7 +230,7 @@ class ValidarCodigo extends Component {
             <CustomModal
               parametro="Sucesso"
               callback={() => {
-                resetNavigation('Login');
+                this.resetNavigation('Login');
               }}
             />
           </View>

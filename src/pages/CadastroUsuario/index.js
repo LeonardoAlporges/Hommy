@@ -189,7 +189,7 @@ class CadastroUsuario extends Component {
                       descricao="Seu cadastro no aplicativofoi realizado com sucesso, voce sera redirecionado para fazer login."
                       botao="Confirmar"
                       callback={() => {
-                        resetNavigation('Login');
+                        this.resetNavigation('Login');
                       }}
                     />
                   </View>

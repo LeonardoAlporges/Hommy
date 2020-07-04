@@ -49,7 +49,7 @@ class EsqueciSenha extends Component {
     this.props.navigation.dispatch(resetAction);
   }
   navegar = () => {
-    resetNavigation('Login');
+    this.resetNavigation('Login');
   };
 
   render() {

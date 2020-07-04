@@ -32,6 +32,7 @@ class Cabeca extends Component {
   };
 
   resetNavigation(Rota) {
+    console.log('pe');
     const resetAction = StackActions.reset({
       index: 0,
       actions: [NavigationActions.navigate({ routeName: Rota })],
@@ -43,7 +44,8 @@ class Cabeca extends Component {
   closeToken = async () => {
     await AsyncStorage.removeItem('token')
       .then(value => {
-        resetNavigation('Login');
+        console.log('?');
+        this.resetNavigation('Login');
       })
       .catch(error => {});
   };
@@ -67,6 +69,7 @@ class Cabeca extends Component {
             marginHorizontal: 20,
             width: 20,
             height: 20,
+            backgroundColor: 'red',
           }}
           onPress={this.closeToken}
         >

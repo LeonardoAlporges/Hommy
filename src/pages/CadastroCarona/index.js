@@ -36,7 +36,7 @@ import {
   editVagas,
   editValor,
 } from '../../actions/CaronaActions';
-
+import { NavigationActions, StackActions } from 'react-navigation';
 class CadastroCarona extends Component {
   static navigationOptions = { header: null };
   constructor(props) {
@@ -55,8 +55,17 @@ class CadastroCarona extends Component {
       timeSaida: '00:00',
     };
   }
+  resetNavigation(Rota) {
+    const resetAction = StackActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: Rota })],
+    });
+
+    this.props.navigation.dispatch(resetAction);
+  }
+
   goToHome() {
-    this.props.navigation.navigate('TabsHeader');
+    this.resetNavigation('TabsHeader');
   }
 
   subirDate(date) {

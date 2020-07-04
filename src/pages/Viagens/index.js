@@ -12,6 +12,7 @@ import HeaderBack from '../../components/CustomHeader';
 import ModalConfirmacao from '../../components/ModalConfirmacao';
 import CartaoCarona from '../../components/CartaoCarona';
 import ModalAvaliacao from '../../components/ModalAvaliacao';
+import { NavigationActions, StackActions } from 'react-navigation';
 
 class Viagens extends Component {
   static navigationOptions = { header: null };
@@ -83,9 +84,17 @@ class Viagens extends Component {
     this.setState({ modal: false });
     this.setState({ botaoAvaliar: false });
   }
+  resetNavigation(Rota) {
+    const resetAction = StackActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: Rota })],
+    });
+
+    this.props.navigation.dispatch(resetAction);
+  }
 
   navegar() {
-    this.props.navigation.navigate('TabsHeader');
+    this.resetNavigation('TabsHeader');
   }
 
   render() {

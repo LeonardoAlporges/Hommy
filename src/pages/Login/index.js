@@ -32,7 +32,7 @@ import {
   editFoto,
   editId,
 } from '../../actions/UserAction';
-
+import { NavigationActions, StackActions } from 'react-navigation';
 class Login extends Component {
   static navigationOptions = { header: null };
   state = {
@@ -49,7 +49,14 @@ class Login extends Component {
       console.log(error);
     }
   }
+  resetNavigation(Rota) {
+    const resetAction = StackActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: Rota })],
+    });
 
+    this.props.navigation.dispatch(resetAction);
+  }
   navegar = () => {
     this.props.navigation.goBack(null);
   };
@@ -71,8 +78,7 @@ class Login extends Component {
         this.props.editFoto(responseJson.data.usuario.fotoPerfil);
         this.props.editNota(responseJson.data.usuario.nota);
 
-        this.setState({ load: false }),
-          this.props.navigation.navigate('TabsHeader');
+        this.setState({ load: false }), this.resetNavigation('TabsHeader');
       })
       .catch(error => {
         this.setState({ load: false });

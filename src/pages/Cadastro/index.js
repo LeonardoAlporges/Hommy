@@ -48,7 +48,7 @@ import Loading from '../../components/Loading';
 import ViewPager from '@react-native-community/viewpager';
 import api from '../../service/api';
 import estilo from './style';
-
+import { NavigationActions, StackActions } from 'react-navigation';
 export class Cadastro extends Component {
   static navigationOptions = { header: null };
 
@@ -156,9 +156,17 @@ export class Cadastro extends Component {
       }
     });
   };
+  resetNavigation(Rota) {
+    const resetAction = StackActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: Rota })],
+    });
+
+    this.props.navigation.dispatch(resetAction);
+  }
 
   goToHome() {
-    this.props.navigation.navigate('TabsHeader');
+    this.resetNavigation('TabsHeader');
   }
 
   async entrar(values) {
