@@ -1,3 +1,11 @@
+export const editTokenNotificacao = newNome => {
+  return {
+    type: 'editTokenNotificacao',
+    payload: {
+      tokenUser: newNome,
+    },
+  };
+};
 export const editId = newNome => {
   return {
     type: 'editId',

@@ -12,6 +12,7 @@ import {
   editNota,
   editTelefone,
   editFoto,
+  editTokenNotificacao,
 } from '../../actions/UserAction';
 import SplashScreen from '../SplashScreen';
 import style from './styles';
@@ -19,7 +20,7 @@ import Notificacao from '../TesteNot/index';
 import { fmcService } from '../../Firebase/FMCService';
 import { localNotificationService } from '../../Firebase/LocalSendNotification';
 import { NavigationActions, StackActions } from 'react-navigation';
-
+import messaging from '@react-native-firebase/messaging';
 class RenderApp extends Component {
   static navigationOptions = { header: null };
   state = {
@@ -28,6 +29,22 @@ class RenderApp extends Component {
     firtsOpen: false,
   };
 
+  pegarToken() {
+    messaging()
+      .getToken()
+      .then(fmcToken => {
+        if (fmcToken) {
+          console.log('?', fmcToken);
+          this.props.editTokenNotificacao(fmcToken);
+        } else {
+          console.log('[FMCService] User does not have a device token');
+        }
+      })
+      .catch(erro => {
+        console.log('[FMCService] getToken rejeitado ', erro);
+      });
+  }
+
   registrarNotificacao() {
     fmcService.registerAppWithFMC();
     fmcService.register(onRegister, onNotification, onOpenNotification);
@@ -35,6 +52,7 @@ class RenderApp extends Component {
 
     function onRegister(token) {
       console.log('[APP] onRegister:', token);
+      return token;
     }
 
     function onNotification(notify) {
@@ -66,6 +84,7 @@ class RenderApp extends Component {
 
   async Buscar() {
     this.registrarNotificacao();
+    this.pegarToken();
     try {
       await AsyncStorage.getItem('firtOpen').then(value => {
         if (value === 'true') {
@@ -161,6 +180,7 @@ const TesteConnect = connect(
     editNota,
     editTelefone,
     editFoto,
+    editTokenNotificacao,
   }
 )(RenderApp);
 

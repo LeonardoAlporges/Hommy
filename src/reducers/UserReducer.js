@@ -41,6 +41,9 @@ const UserReducer = (state = [], action) => {
   if (action.type == 'editNota') {
     return { ...state, notaUser: action.payload.notaUser };
   }
+  if (action.type == 'editTokenNotificacao') {
+    return { ...state, tokenUser: action.payload.tokenUser };
+  }
 
   return state;
 };

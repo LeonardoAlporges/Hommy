@@ -63,6 +63,12 @@ class Login extends Component {
 
   enviarlogin = async value => {
     this.setState({ load: true });
+    this.data = {
+      email: value.email,
+      password: value.password,
+      token: this.props.tokenUser,
+    };
+    console.log('Token', this.props.tokenUser);
     await api
       .post('/session', value)
       .then(responseJson => {
@@ -215,8 +221,18 @@ class Login extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    //para pegar do reducer e State."NOME DO REDUCER"."NOME DA PROPIEDADE"
+    tokenUser: state.user.tokenUser,
+    //nota: state.carona.nota,
+
+    // Ou seja agora e como se tivessemos duas props dentro do compoennte cadastro
+  };
+};
+
 const loginConnect = connect(
-  null,
+  mapStateToProps,
   {
     editId,
     editNome,
