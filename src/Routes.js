@@ -29,55 +29,51 @@ import Notificacao from './pages/TesteNot';
 
 import { createDrawerNavigator } from 'react-navigation-drawer';
 
-const Navegação = createAppContainer(
-  createStackNavigator(
-    {
-      Login: createStackNavigator({
-        Login: Login,
-        CadastroUsuario: CadastroUsuario,
-      }),
-      App: createStackNavigator({
-        RenderApp,
-        ValidarCodigo,
-        AgendamentoUser,
-        Agendamentos,
-        Agendar,
-        Confirmacao,
-        EsqueciSenha,
-        Perfil,
-        Viagens,
-        TabsHeader,
-        Anuncios,
-        Interessados,
-        CadastroCaronas,
-        DetalhesCarona,
-        Caronas,
-        Anuncios,
-        Detalhes: PageAnuncio,
-        DetalhesServicos,
-        Republica,
-        Servicos,
-        Cadastro,
-        Confirmacao,
-        SplashScreen,
-      }),
-    },
-    {
-      initialRouteName: 'App',
-      headerMode: 'none',
+const Navegação = createStackNavigator(
+  {
+    RenderApp: {
+      screen: RenderApp,
       navigationOptions: {
-        headerVisible: false,
+        headerLeft: null,
       },
-    }
-  )
-  // createDrawerNavigator(
-  //   {
-  //     TabsHeader,
-  //   },
-  //   {
-  //     initialRouteName: 'TabsHeader',
-  //   }
-  // )
+    },
+    TabsHeader: {
+      screen: TabsHeader,
+      navigationOptions: {
+        headerLeft: null,
+      },
+    },
+    Login: Login,
+    CadastroUsuario: CadastroUsuario,
+    ValidarCodigo,
+    AgendamentoUser,
+    Agendamentos,
+    Agendar,
+    Confirmacao,
+    EsqueciSenha,
+    Perfil,
+    Viagens,
+    Anuncios,
+    Interessados,
+    CadastroCaronas,
+    DetalhesCarona,
+    Caronas,
+    Anuncios,
+    Detalhes: PageAnuncio,
+    DetalhesServicos,
+    Republica,
+    Servicos,
+    Cadastro,
+    Confirmacao,
+    SplashScreen,
+  },
+  {
+    initialRouteName: 'RenderApp',
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: false,
+    },
+  }
 );
 
-export default Navegação;
+export default createAppContainer(Navegação);

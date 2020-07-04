@@ -19,7 +19,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import TextInputMask from 'react-native-text-input-mask';
 import HeaderBack from '../../components/CustomHeader';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
+import { NavigationActions, StackActions } from 'react-navigation';
 class CadastroUsuario extends Component {
   static navigationOptions = { header: null };
 
@@ -31,6 +31,15 @@ class CadastroUsuario extends Component {
     erro: false,
     Sucesso: false,
   };
+
+  resetNavigation(Rota) {
+    const resetAction = StackActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: Rota })],
+    });
+
+    this.props.navigation.dispatch(resetAction);
+  }
 
   EnviarCadastro = async value => {
     this.setState({ modalLoadVisible: true, erro: false });
@@ -180,7 +189,7 @@ class CadastroUsuario extends Component {
                       descricao="Seu cadastro no aplicativofoi realizado com sucesso, voce sera redirecionado para fazer login."
                       botao="Confirmar"
                       callback={() => {
-                        this.props.navigation.navigate('Login');
+                        resetNavigation('Login');
                       }}
                     />
                   </View>

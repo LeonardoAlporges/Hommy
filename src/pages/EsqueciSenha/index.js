@@ -12,6 +12,7 @@ import Loading from '../../components/Loading';
 
 import estilo from './styles';
 import HeaderBack from '../../components/CustomHeader';
+import { NavigationActions, StackActions } from 'react-navigation';
 
 class EsqueciSenha extends Component {
   constructor(props) {
@@ -23,11 +24,6 @@ class EsqueciSenha extends Component {
     };
   }
   static navigationOptions = { header: null };
-  state = {};
-
-  onClickCard = () => {
-    this.props.navigation.navigate('Detalhes');
-  };
 
   EnviarCodigo = values => {
     this.setState({ Load: true });
@@ -44,9 +40,16 @@ class EsqueciSenha extends Component {
         console.log(error);
       });
   };
+  resetNavigation(Rota) {
+    const resetAction = StackActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: Rota })],
+    });
 
+    this.props.navigation.dispatch(resetAction);
+  }
   navegar = () => {
-    this.props.navigation.navigate('Login');
+    resetNavigation('Login');
   };
 
   render() {

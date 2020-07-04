@@ -18,6 +18,7 @@ import style from './styles';
 import Notificacao from '../TesteNot/index';
 import { fmcService } from '../../Firebase/FMCService';
 import { localNotificationService } from '../../Firebase/LocalSendNotification';
+import { NavigationActions, StackActions } from 'react-navigation';
 
 class RenderApp extends Component {
   static navigationOptions = { header: null };
@@ -108,6 +109,15 @@ class RenderApp extends Component {
     this.Buscar();
   }
 
+  reset(Rota) {
+    const resetAction = StackActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: Rota })],
+    });
+
+    this.props.navigation.dispatch(resetAction);
+  }
+
   render() {
     return (
       <View>
@@ -129,8 +139,8 @@ class RenderApp extends Component {
             ) : (
               <View>
                 {this.state.logado
-                  ? this.props.navigation.navigate('TabsHeader')
-                  : this.props.navigation.navigate('Login')}
+                  ? this.reset('TabsHeader')
+                  : this.reset('Login')}
               </View>
             )}
           </View>

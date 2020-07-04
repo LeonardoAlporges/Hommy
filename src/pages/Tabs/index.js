@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, StatusBar } from 'react-native';
+import { View, Text, StatusBar, BackHandler, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { Fab, Button, Container, Spinner, Tabs, Tab } from 'native-base';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
-
 import { withNavigation } from 'react-navigation';
 
 import estilo from './style';
@@ -15,10 +14,15 @@ import Caronas from '../Caronas';
 class TabsHeader extends Component {
   static navigationOptions = { header: null, headerLeft: null };
 
-  state = {
-    loading: true,
-    active: false,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loading: true,
+      active: false,
+    };
+  }
+
   render() {
     return (
       <Container>

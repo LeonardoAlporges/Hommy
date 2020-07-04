@@ -3,6 +3,7 @@ import { View, Image, Text, Modal } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import style from './style';
 import { Button, Spinner } from 'native-base';
+import { NavigationActions, StackActions } from 'react-navigation';
 
 class SplashScreen extends Component {
   static navigationOptions = { header: null };
@@ -12,14 +13,22 @@ class SplashScreen extends Component {
   state = {
     modalVisible: false,
   };
+  resetNavigation(Rota) {
+    const resetAction = StackActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: Rota })],
+    });
 
+    this.props.navigation.dispatch(resetAction);
+  }
   abrirLoad() {
     this.setState({ modalVisible: true });
 
     setTimeout(() => {
       this.setState({ modalVisible: false });
     }, 1000);
-    this.props.navigation.navigate('Login');
+
+    resetNavigation('Login');
   }
 
   render() {

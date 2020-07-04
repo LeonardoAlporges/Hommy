@@ -22,6 +22,7 @@ import {
   Icon,
   DatePicker,
   Spinner,
+  Picker,
 } from 'native-base';
 import {
   editChegada,
@@ -232,15 +233,47 @@ class CadastroCarona extends Component {
                     <View style={estilo.rowStyle}>
                       <View style={estilo.campoStyle}>
                         <Text style={estilo.txtLabel}>Local de Saida</Text>
-                        <Item>
-                          <Label fixedLabel />
-                          <Input
+
+                        <Item picker>
+                          <Picker
+                            mode="dropdown"
+                            iosIcon={<Icon name="arrow-down" />}
+                            style={{ width: undefined }}
+                            placeholder=""
+                            placeholderStyle={{ color: '#bfc6ea' }}
+                            placeholderIconColor="#007aff"
+                            selectedValue={values.saida}
+                            onValueChange={handleChange('saida')}
                             value={values.saida}
                             onChangeText={handleChange('saida')}
                             placeholder=""
                             onBlur={() => setFieldTouched('saida')}
-                          />
+                          >
+                            <Picker.Item label="Cidades" value="null" />
+                            <Picker.Item label="Alegre" value="Alegre" />
+                            <Picker.Item label="Serra" value="Serra" />
+                            <Picker.Item label="Piuma" value="Piuma" />
+                            <Picker.Item label="Guarapari" value="Guarapari" />
+                            <Picker.Item label="Cachoeiro" value="Cachoeiro" />
+                            <Picker.Item label="Vitoria" value="Vitoria" />
+                            <Picker.Item
+                              label="Vila Velha"
+                              value="Vila Velha"
+                            />
+                            <Picker.Item
+                              label="Muniz Freire"
+                              value="Muniz Freire"
+                            />
+                            <Picker.Item label="Guacui" value="Guacui" />
+                            <Picker.Item
+                              label="Bom Jesus do Norte"
+                              value="Bom Jesus do Norte"
+                            />
+                            <Picker.Item label="Celina" value="Celina" />
+                            <Picker.Item label="Rive" value="Rive" />
+                          </Picker>
                         </Item>
+
                         <View style={estilo.V_erro}>
                           {touched.saida && errors.saida && (
                             <Text style={estilo.textError}>{errors.saida}</Text>
@@ -250,15 +283,46 @@ class CadastroCarona extends Component {
 
                       <View style={estilo.campoStyle}>
                         <Text style={estilo.txtLabel}>Local de Chegada</Text>
-                        <Item>
-                          <Label fixedLabel />
-                          <Input
+                        <Item picker>
+                          <Picker
+                            mode="dropdown"
+                            iosIcon={<Icon name="arrow-down" />}
+                            style={{ width: undefined }}
+                            placeholder=""
+                            placeholderStyle={{ color: '#bfc6ea' }}
+                            placeholderIconColor="#007aff"
+                            selectedValue={values.chegada}
+                            onValueChange={handleChange('chegada')}
                             value={values.chegada}
                             onChangeText={handleChange('chegada')}
                             placeholder=""
                             onBlur={() => setFieldTouched('chegada')}
-                          />
+                          >
+                            <Picker.Item label="Cidades" value="null" />
+                            <Picker.Item label="Alegre" value="Alegre" />
+                            <Picker.Item label="Serra" value="Serra" />
+                            <Picker.Item label="Piuma" value="Piuma" />
+                            <Picker.Item label="Guarapari" value="Guarapari" />
+                            <Picker.Item label="Cachoeiro" value="Cachoeiro" />
+                            <Picker.Item label="Vitoria" value="Vitoria" />
+                            <Picker.Item
+                              label="Vila Velha"
+                              value="Vila Velha"
+                            />
+                            <Picker.Item
+                              label="Muniz Freire"
+                              value="Muniz Freire"
+                            />
+                            <Picker.Item label="Guacui" value="Guacui" />
+                            <Picker.Item
+                              label="Bom Jesus do Norte"
+                              value="Bom Jesus do Norte"
+                            />
+                            <Picker.Item label="Celina" value="Celina" />
+                            <Picker.Item label="Rive" value="Rive" />
+                          </Picker>
                         </Item>
+
                         <View style={estilo.V_erro}>
                           {touched.chegada && errors.chegada && (
                             <Text style={estilo.textError}>

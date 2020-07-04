@@ -8,7 +8,7 @@ import TextInputMask from 'react-native-text-input-mask';
 import { withNavigation } from 'react-navigation';
 import CustomModal from '../../components/Alert';
 import api from '../../service/api';
-
+import { NavigationActions, StackActions } from 'react-navigation';
 import estilo from './styles';
 import HeaderBack from '../../components/CustomHeader';
 import { values } from 'lodash';
@@ -47,7 +47,14 @@ class ValidarCodigo extends Component {
         console.log(error);
       });
   };
+  resetNavigation(Rota) {
+    const resetAction = StackActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: Rota })],
+    });
 
+    this.props.navigation.dispatch(resetAction);
+  }
   EnviarNovaSenha = values => {
     const data = {
       email: this.state.email.email,
@@ -66,7 +73,7 @@ class ValidarCodigo extends Component {
   };
 
   navegar = () => {
-    this.props.navigation.navigate('Login');
+    resetNavigation('Login');
   };
 
   render() {
@@ -223,7 +230,7 @@ class ValidarCodigo extends Component {
             <CustomModal
               parametro="Sucesso"
               callback={() => {
-                this.props.navigation.navigate('Login');
+                resetNavigation('Login');
               }}
             />
           </View>

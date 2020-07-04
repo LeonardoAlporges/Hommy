@@ -10,6 +10,8 @@ import {
   Linking,
 } from 'react-native';
 import { connect } from 'react-redux';
+import { NavigationActions, StackActions } from 'react-navigation';
+
 import { Button } from 'native-base';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -17,7 +19,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Estilos from './style';
 
 class Cabeca extends Component {
-  static navigationOptions = { header: null };
+  static navigationOptions = { header: null, left: null };
   state = {
     isModalVisible: false,
     dados: this.props,
@@ -28,13 +30,24 @@ class Cabeca extends Component {
       'https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849'
     );
   };
+
+  resetNavigation(Rota) {
+    const resetAction = StackActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: Rota })],
+    });
+
+    this.props.navigation.dispatch(resetAction);
+  }
+
   closeToken = async () => {
     await AsyncStorage.removeItem('token')
       .then(value => {
-        this.props.navigation.navigate('Login');
+        resetNavigation('Login');
       })
       .catch(error => {});
   };
+
   render() {
     return (
       <View style={Estilos.ViewCabeca}>
