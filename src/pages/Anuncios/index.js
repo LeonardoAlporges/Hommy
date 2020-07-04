@@ -13,6 +13,7 @@ import api from '../../service/api';
 import Cartao from '../../components/Cartao';
 import { Button } from 'native-base';
 import { withNavigation } from 'react-navigation';
+import EmptyState from '../../components/EmptyState';
 import {
   editChegada,
   editData,
@@ -339,26 +340,25 @@ class Anuncios extends Component {
             ) : (
               <View />
             )}
-            {this.state.listaCaronas.length == 0 &&
-            this.state.listaRepublicas.length == 0 ? (
-              <View style={estilo.V_interna2}>
-                <Image
-                  style={estilo.imagemError}
-                  source={require('../../assets/Img/Empty.png')}
-                />
-                <Text style={estilo.textError}>
-                  Nenhum Anuncio ou Interesse Disponivel
-                </Text>
-                <Text style={estilo.textError2}>
-                  Poste a vaga disponivel na sua republica ou a vaga sobrando no
-                  seu carro para aquela viagem.
-                </Text>
-              </View>
-            ) : (
-              <View />
-            )}
           </View>
         </ScrollView>
+        {this.state.listaCaronas.length == 0 &&
+        this.state.listaRepublicas.length == 0 ? (
+          <View
+            style={{
+              width: '100%',
+              height: '100%',
+              alignItems: 'center',
+            }}
+          >
+            <EmptyState
+              titulo="Sem Publicações feitas"
+              mensagem="Voce pode começar fazendo uma publicação agora mesmo"
+            />
+          </View>
+        ) : (
+          <View />
+        )}
       </View>
     );
   }
