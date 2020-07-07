@@ -171,8 +171,6 @@ class CadastroCarona extends Component {
         }}
         onSubmit={values => {
           this.entrar(values);
-
-          console.log('botao TRUE');
         }}
         validationSchema={yup.object().shape({
           saida: yup.string().required('Insira local de saida '),
@@ -184,7 +182,7 @@ class CadastroCarona extends Component {
             .required('Valor Invalido'),
           // Hsaida: yup.string('Hora invalido').required('Hora invalida'),
           // HChegada: yup.string('Hora invalido').required('Hora invalida'),
-          data: yup.string().required('errp'),
+          //data: yup.string().required('errp'),
           embarque: yup
             .string('Somente texto')
             .max(70, 'Somente 70 caracteres sao permitidos')
@@ -553,8 +551,8 @@ class CadastroCarona extends Component {
                       <Button
                         style={estilo.btnProximo}
                         onPress={() => {
+                          console.log(values);
                           handleSubmit(values);
-                          //this.setState({ botaoEnviar: true });
                         }}
                       >
                         <Text>Prosseguir</Text>

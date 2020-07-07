@@ -63,15 +63,17 @@ class Login extends Component {
 
   enviarlogin = async value => {
     this.setState({ load: true });
+    console.log('22', value);
     this.data = {
       email: value.email,
       password: value.password,
-      token: this.props.tokenUser,
+      tokenD: this.props.tokenUser,
     };
     console.log('Token', this.props.tokenUser);
     await api
-      .post('/session', value)
+      .post('/session', this.data)
       .then(responseJson => {
+        console.log(responseJson);
         this.setToken(responseJson.data);
         this.setState({ user: responseJson.data.usuario });
         this.props.editId(responseJson.data.usuario.id);

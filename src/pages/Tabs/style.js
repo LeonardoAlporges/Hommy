@@ -17,7 +17,7 @@ const estilo = StyleSheet.create({
     color: '#142850',
     fontFamily: 'Roboto',
     fontWeight: '700',
-    fontSize: 18,
+    fontSize: 16,
   },
   tabs_ActiveTabs: {
     backgroundColor: '#fff',

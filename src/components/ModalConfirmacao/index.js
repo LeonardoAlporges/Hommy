@@ -3,6 +3,7 @@ import { View, Modal, Text } from 'react-native';
 
 import style from './styles';
 import { Button } from 'native-base';
+import { number } from 'yup';
 
 class ModalConfirmacao extends Component {
   constructor(props) {
@@ -14,6 +15,9 @@ class ModalConfirmacao extends Component {
       rejeitar: this.props.rejeitar,
     };
   }
+  onDimiss = number => {
+    this.props.retornoModal(3);
+  };
 
   mudarEstado = () => {
     if (this.state.confirmar == true) {
@@ -37,7 +41,7 @@ class ModalConfirmacao extends Component {
               <Button
                 style={style.botaoCancelar}
                 onPress={async () => {
-                  this.mudarEstado();
+                  this.onDimiss();
                   this.setState({ modalVisible: false });
                 }}
               >

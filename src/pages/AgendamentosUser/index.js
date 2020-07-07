@@ -141,86 +141,44 @@ class AgendamentoUser extends Component {
           renderItem={({ item }) => (
             <View>
               <Cartao data={item.republica} interessado />
-              {item.status == 'NovaSugestao' ? (
-                <View style={style.viewData}>
-                  <TouchableOpacity
-                    style={{ width: 30, height: 30, justifyContent: 'center' }}
-                    onPress={() => {
-                      this.setState({
-                        MConfirmacaoDelete: true,
-                        item: item.republica._id,
-                      });
-                    }}
-                  >
-                    <Icon name="close" style={style.iconDel} />
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={{ width: 30, height: 30, justifyContent: 'center' }}
-                    onPress={() => {
-                      this.setState({
-                        MConfirmacaoAgendar: true,
-                        item: item,
-                      });
-                    }}
-                  >
-                    <Icon name="check" style={style.iconDel} />
-                  </TouchableOpacity>
+              <View style={style.viewData}>
+                <TouchableOpacity
+                  style={{ width: 30, height: 30, justifyContent: 'center' }}
+                  onPress={() => {
+                    this.setState({
+                      MConfirmacaoDelete: true,
+                      item: item.republica._id,
+                    });
+                  }}
+                >
+                  <Icon name="close" style={style.iconDel} />
+                </TouchableOpacity>
 
-                  <View style={style.viewData2}>
-                    <Text style={style.data}>
-                      {moment(new Date(item.data)).format('L')}
-                    </Text>
-                    <Text>As</Text>
-                    <Text style={style.data}>
-                      {moment(new Date(item.hora)).format('hh:mm')}
-                    </Text>
-                  </View>
-                  {item.status == 'NovaSugestao' && (
-                    <View style={style.ViewAnalise}>
-                      <Text style={style.data}>{item.status}</Text>
-                    </View>
-                  )}
+                <View style={style.viewData2}>
+                  <Text style={style.data}>
+                    {moment(new Date(item.data)).format('L')}
+                  </Text>
+                  <Text>As</Text>
+                  <Text style={style.data}>
+                    {moment(new Date(item.hora)).format('hh:mm')}
+                  </Text>
                 </View>
-              ) : (
-                <View style={style.viewData}>
-                  <TouchableOpacity
-                    style={{ width: 30, height: 30, justifyContent: 'center' }}
-                    onPress={() => {
-                      this.setState({
-                        MConfirmacao: true,
-                        item: item.republica._id,
-                      });
-                    }}
-                  >
-                    <Icon name="close" style={style.iconDel} />
-                  </TouchableOpacity>
-
-                  <View style={style.viewData2}>
-                    <Text style={style.data}>
-                      {moment(new Date(item.data)).format('L')}
-                    </Text>
-                    <Text>As</Text>
-                    <Text style={style.data}>
-                      {moment(new Date(item.hora)).format('hh:mm')}
-                    </Text>
+                {item.status == 'Análise' && (
+                  <View style={style.ViewAnalise}>
+                    <Text style={style.data}>{item.status}</Text>
                   </View>
-                  {item.status == 'Análise' && (
-                    <View style={style.ViewAnalise}>
-                      <Text style={style.data}>{item.status}</Text>
-                    </View>
-                  )}
-                  {item.status == 'Confirmado' && (
-                    <View style={style.View_Confirmado}>
-                      <Text style={style.dataConf}>{item.status}</Text>
-                    </View>
-                  )}
-                  {item.status == 'Rejeitado' && (
-                    <View style={style.View_Rejeitado}>
-                      <Text style={style.dataRej}>{item.status}</Text>
-                    </View>
-                  )}
-                </View>
-              )}
+                )}
+                {item.status == 'Confirmado' && (
+                  <View style={style.View_Confirmado}>
+                    <Text style={style.dataConf}>{item.status}</Text>
+                  </View>
+                )}
+                {item.status == 'Rejeitado' && (
+                  <View style={style.View_Rejeitado}>
+                    <Text style={style.dataRej}>{item.status}</Text>
+                  </View>
+                )}
+              </View>
             </View>
           )}
           keyExtractor={item => item._id}

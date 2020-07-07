@@ -10,6 +10,8 @@ import CustomModal from '../../components/Alert';
 import Cabeca from '../../components/Cabeca';
 import Republica from '../../components/Republica';
 import Caronas from '../Caronas';
+import Servicos from '../Servicos';
+import Divulgacao from '../Divulgacao';
 
 class TabsHeader extends Component {
   static navigationOptions = { header: null, headerLeft: null };
@@ -53,6 +55,26 @@ class TabsHeader extends Component {
           >
             <Caronas />
           </Tab>
+          {/* <Tab
+            heading="Serviços"
+            initialPage="2"
+            tabStyle={estilo.tabs_style}
+            textStyle={estilo.tabs_TextStyle}
+            activeTabStyle={estilo.tabs_ActiveTabs}
+            activeTextStyle={estilo.tabs_ActiveTextStyle}
+          >
+            <Servicos />
+          </Tab>
+          <Tab
+            heading="Promoção"
+            initialPage="2"
+            tabStyle={estilo.tabs_style}
+            textStyle={estilo.tabs_TextStyle}
+            activeTabStyle={estilo.tabs_ActiveTabs}
+            activeTextStyle={estilo.tabs_ActiveTextStyle}
+          >
+            <Divulgacao />
+          </Tab> */}
         </Tabs>
       </Container>
     );

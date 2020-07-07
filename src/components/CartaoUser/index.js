@@ -25,6 +25,9 @@ class CartaoUser extends Component {
   };
 
   mudarStatusInteressado = number => {
+    if (number == 3) {
+      this.setState({ modal: false });
+    }
     if (this.props.tipoRetorno == 'Republica') {
       this.retorno(number);
       this.props.callback();

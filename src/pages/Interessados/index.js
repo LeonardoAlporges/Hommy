@@ -49,8 +49,9 @@ class Interessados extends Component {
       });
   };
 
-  SendStatus = (number, user) => {
+  SendStatus = (number, user, tipo) => {
     this.setState({ Load: true });
+
     if (number === 1) {
       const data = {
         email: user,
@@ -117,7 +118,9 @@ class Interessados extends Component {
                 <View>
                   <CartaoUser
                     status={item[0].status}
-                    callback={(number, user) => this.SendStatus(number, user)}
+                    callback={(number, user) =>
+                      this.SendStatus(number, user, tipo)
+                    }
                     dados={item[0].user}
                     dadosGerais={item}
                     tipoRetorno="Carona"

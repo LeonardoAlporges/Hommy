@@ -55,16 +55,13 @@ class Agendar extends Component {
       });
   };
 
-  showDatePicker = () => {
-    console.log('DADOS:', this.state.dados);
-    this.setState({ isDatePickerVisible: true });
-  };
-
   handleConfirm = date => {
     const markedDate = moment(new Date(date)).format('HH:mm');
-    this.setState({ sendTime: date });
-    this.setState({ time: markedDate });
-    this.setState({ isDatePickerVisible: false });
+    this.setState({
+      sendTime: date,
+      time: markedDate,
+      isDatePickerVisible: false,
+    });
   };
 
   render() {
@@ -110,7 +107,14 @@ class Agendar extends Component {
           <View style={style.ViewClock}>
             <Text style={style.textClock}>{this.state.time}</Text>
             <View style={style.V_botaoCalendar}>
-              <Button style={style.botaoCalendar} onPress={this.showDatePicker}>
+              <Button
+                style={style.botaoCalendar}
+                onPress={() => {
+                  this.setState({
+                    isDatePickerVisible: true,
+                  });
+                }}
+              >
                 <Icon name="clock" style={style.IconCaledar} />
               </Button>
             </View>
