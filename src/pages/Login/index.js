@@ -4,14 +4,7 @@ import { Formik } from 'formik';
 import { connect } from 'react-redux';
 
 import React, { Component, Fragment } from 'react';
-import {
-  View,
-  Image,
-  Text,
-  ScrollView,
-  Modal,
-  TouchableOpacity,
-} from 'react-native';
+import { View, Image, Text, ScrollView, Modal, TouchableOpacity } from 'react-native';
 
 import { Icon, Input, Item, Button, Spinner } from 'native-base';
 import CustomModal from '../../components/Alert';
@@ -63,7 +56,6 @@ class Login extends Component {
 
   enviarlogin = async value => {
     this.setState({ load: true });
-    console.log('22', value);
     this.data = {
       email: value.email,
       password: value.password,
@@ -117,9 +109,7 @@ class Login extends Component {
             />
           </TouchableOpacity>
           <Text style={style.txt_Titulo}>Hoomy</Text>
-          <Text style={style.txt_FormaDeLogin}>
-            Faça login com sua rede social
-          </Text>
+          <Text style={style.txt_FormaDeLogin}>Faça login com sua rede social</Text>
           <View style={style.view_OutrosLogin}>
             <Icon style={style.icons_OutroLogin} name="logo-facebook" />
             <Icon style={style.icons_OutroLogin} name="logo-twitter" />
@@ -142,14 +132,7 @@ class Login extends Component {
                 .required('Insira uma senha'),
             })}
           >
-            {({
-              values,
-              handleChange,
-              errors,
-              setFieldTouched,
-              touched,
-              handleSubmit,
-            }) => (
+            {({ values, handleChange, errors, setFieldTouched, touched, handleSubmit }) => (
               <Fragment>
                 <View style={style.view_CamposLogin}>
                   <Item>
@@ -161,9 +144,7 @@ class Login extends Component {
                       onBlur={() => setFieldTouched('email')}
                     />
                   </Item>
-                  {touched.email && errors.email && (
-                    <Text style={style.txtError}>{errors.email}</Text>
-                  )}
+                  {touched.email && errors.email && <Text style={style.txtError}>{errors.email}</Text>}
                 </View>
 
                 <View style={style.view_CamposLogin}>
@@ -177,9 +158,7 @@ class Login extends Component {
                       onBlur={() => setFieldTouched('password')}
                     />
                   </Item>
-                  {touched.password && errors.password && (
-                    <Text style={style.txtError}>{errors.password}</Text>
-                  )}
+                  {touched.password && errors.password && <Text style={style.txtError}>{errors.password}</Text>}
                 </View>
                 <View style={style.V_cadastrar}>
                   <TouchableOpacity
@@ -207,11 +186,7 @@ class Login extends Component {
             )}
           </Formik>
         </View>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={this.state.load}
-        >
+        <Modal animationType="slide" transparent={true} visible={this.state.load}>
           <View style={style.ViewFundo}>
             <View style={style.ViewModal}>
               <Spinner color="#142850" />
@@ -225,11 +200,7 @@ class Login extends Component {
 
 const mapStateToProps = state => {
   return {
-    //para pegar do reducer e State."NOME DO REDUCER"."NOME DA PROPIEDADE"
     tokenUser: state.user.tokenUser,
-    //nota: state.carona.nota,
-
-    // Ou seja agora e como se tivessemos duas props dentro do compoennte cadastro
   };
 };
 

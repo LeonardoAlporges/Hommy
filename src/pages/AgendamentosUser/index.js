@@ -98,10 +98,7 @@ class AgendamentoUser extends Component {
   render() {
     return (
       <View style={style.Container}>
-        <HeaderBack
-          title=" Meus agendamentos de visita"
-          onNavigation={() => this.navegar()}
-        />
+        <HeaderBack title=" Meus agendamentos de visita" onNavigation={() => this.navegar()} />
         {this.state.Load && <Loading />}
 
         {this.state.MConfirmacaoDelete && (
@@ -155,13 +152,9 @@ class AgendamentoUser extends Component {
                 </TouchableOpacity>
 
                 <View style={style.viewData2}>
-                  <Text style={style.data}>
-                    {moment(new Date(item.data)).format('L')}
-                  </Text>
+                  <Text style={style.data}>{moment(new Date(item.data)).format('L')}</Text>
                   <Text>As</Text>
-                  <Text style={style.data}>
-                    {moment(new Date(item.hora)).format('hh:mm')}
-                  </Text>
+                  <Text style={style.data}>{moment(new Date(item.hora)).format('hh:mm')}</Text>
                 </View>
                 {item.status == 'Análise' && (
                   <View style={style.ViewAnalise}>

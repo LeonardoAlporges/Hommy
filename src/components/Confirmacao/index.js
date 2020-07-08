@@ -39,22 +39,15 @@ class Confirmacao extends Component {
   render() {
     return (
       <View style={estilo.container}>
-        <HeaderBack
-          title={'Confirmar Email'}
-          onNavigation={() => this.navegar()}
-        />
+        <HeaderBack title={'Confirmar Email'} onNavigation={() => this.navegar()} />
 
         <View style={estilo.V_img}>
-          <Image
-            style={estilo.V_img}
-            source={require('../../assets/Img/Send_email.png')}
-          />
+          <Image style={estilo.V_img} source={require('../../assets/Img/Send_email.png')} />
         </View>
 
         <View style={estilo.V_title}>
           <Text style={estilo.title}>
-            Enviamos um codigo de 6 digitos para seu email, insira ele abaixo
-            para confirmar seu E-mail!
+            Enviamos um codigo de 6 digitos para seu email, insira ele abaixo para confirmar seu E-mail!
           </Text>
         </View>
 
@@ -64,36 +57,29 @@ class Confirmacao extends Component {
             password: '',
           }}
           validationSchema={yup.object().shape({
-            codigo: yup
-              .string('Somente texto')
-              .required('Insira seu nome completo '),
+            codigo: yup.string('Somente texto').required('Insira seu nome completo '),
             password: yup
               .string('Insira sua senha')
               .min(4, 'Senha minima é de 4 digitos')
               .required('Insira uma senha'),
           })}
         >
-          {({
-            values,
-            handleChange,
-            errors,
-            setFieldTouched,
-            touched,
-            isValid,
-            handleSubmit,
-          }) => (
+          {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
             <Fragment>
-              {this.state.erro ? <CustomModal parametro="Erro" /> : <View />}
+              {this.state.erro && (
+                <CustomModal
+                  parametro="Erro"
+                  callback={() => {
+                    this.setState({ erro: false });
+                  }}
+                />
+              )}
 
               {this.state.confirmacao ? (
                 <View>
                   <View style={estilo.view_CamposLogin}>
                     <Item>
-                      <Icon
-                        style={estilo.icons_CamposLogin}
-                        active
-                        name="key-outline"
-                      />
+                      <Icon style={estilo.icons_CamposLogin} active name="key-outline" />
                       <TextInputMask
                         mask={'[0]-[0]-[0]-[0]-[0]-[0]'}
                         placeholderTextColor="#2e2e2e"

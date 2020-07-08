@@ -26,24 +26,9 @@ import {
   editRua,
   editNumeroCasa,
 } from '../../actions/AuthActions';
-import {
-  imagePickerOptions,
-  uploadFileToFireBaseRepublica,
-  uploadProgress,
-} from '../../utils';
+import { imagePickerOptions, uploadFileToFireBaseRepublica, uploadProgress } from '../../utils';
 import ImagePicker from 'react-native-image-picker';
-import {
-  Text,
-  Item,
-  Input,
-  Label,
-  Button,
-  Icon,
-  Picker,
-  Spinner,
-  Tabs,
-  Tab,
-} from 'native-base';
+import { Text, Item, Input, Label, Button, Icon, Picker, Spinner, Tabs, Tab } from 'native-base';
 import Loading from '../../components/Loading';
 import ViewPager from '@react-native-community/viewpager';
 import api from '../../service/api';
@@ -114,9 +99,7 @@ export class Cadastro extends Component {
   monitorFileUpload = task => {
     this.setState({ contadorImagem: this.state.contadorImagem + 1 });
     task.on('state_changed', snapshot => {
-      const progress = uploadProgress(
-        snapshot.bytesTransferred / snapshot.totalBytes
-      );
+      const progress = uploadProgress(snapshot.bytesTransferred / snapshot.totalBytes);
 
       switch (snapshot.state) {
         case 'running':
@@ -172,11 +155,7 @@ export class Cadastro extends Component {
   async entrar(values) {
     this.setState({ Load: true });
     console.log;
-    if (
-      this.state.imageURI0 == null &&
-      this.state.imageURI1 == null &&
-      this.state.imageURI2 == null
-    ) {
+    if (this.state.imageURI0 == null && this.state.imageURI1 == null && this.state.imageURI2 == null) {
       this.setState({
         imageURI0:
           'https://firebasestorage.googleapis.com/v0/b/hommy-d0890.appspot.com/o/pictures%2Fuser%2Fsemimagem.jpg?alt=media&token=dbb11e1c-9664-46d6-b65a-be4169810291',
@@ -306,32 +285,29 @@ export class Cadastro extends Component {
             .required('Insira as acomodações da repúblicaaqui'),
         })}
       >
-        {({
-          values,
-          handleChange,
-          errors,
-          setFieldTouched,
-          touched,
-          isValid,
-          handleSubmit,
-        }) => (
+        {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
           <Fragment>
-            {this.state.erro && <CustomModal parametro="Erro" />}
+            {this.state.erro && (
+              <CustomModal
+                parametro="Erro"
+                callback={() => {
+                  this.setState({ erro: false });
+                }}
+              />
+            )}
             {this.state.sucesso && (
               <CustomModal
                 parametro="Custom"
                 titulo="Tudo certo!"
                 descricao="Seu anuncio já estar no ar, fique atento com os agendamentos"
+                botao="Entendido"
                 callback={() => {
                   this.goToHome();
                 }}
               />
             )}
             {this.state.Load && <Loading />}
-            <HeaderBack
-              title="Cadastre sua republica"
-              onNavigation={() => this.navegar()}
-            />
+            <HeaderBack title="Cadastre sua republica" onNavigation={() => this.navegar()} />
             <Tabs
               initialPage={0}
               tabBarUnderlineStyle={{ backgroundColor: '#142850', height: 3 }}
@@ -347,8 +323,7 @@ export class Cadastro extends Component {
                 <ScrollView>
                   <View style={estilo.V_Conteudo}>
                     <Text style={estilo.textRepublica}>
-                      Cadastre algumas informações para fazer o registro de sua
-                      república.
+                      Cadastre algumas informações para fazer o registro de sua república.
                     </Text>
 
                     <View>
@@ -363,9 +338,7 @@ export class Cadastro extends Component {
                       </Item>
                     </View>
                     <View style={estilo.V_error}>
-                      {touched.nome && errors.nome && (
-                        <Text style={estilo.textError}>{errors.nome}</Text>
-                      )}
+                      {touched.nome && errors.nome && <Text style={estilo.textError}>{errors.nome}</Text>}
                     </View>
 
                     <View style={estilo.campos} inlineLabel>
@@ -380,9 +353,7 @@ export class Cadastro extends Component {
                       </Item>
                     </View>
                     <View style={estilo.V_error}>
-                      {touched.bairro && errors.bairro && (
-                        <Text style={estilo.textError}>{errors.bairro}</Text>
-                      )}
+                      {touched.bairro && errors.bairro && <Text style={estilo.textError}>{errors.bairro}</Text>}
                     </View>
 
                     <View style={estilo.ruaNum}>
@@ -397,9 +368,7 @@ export class Cadastro extends Component {
                           />
                         </Item>
                         <View style={estilo.V_error}>
-                          {touched.rua && errors.rua && (
-                            <Text style={estilo.textError}>{errors.rua}</Text>
-                          )}
+                          {touched.rua && errors.rua && <Text style={estilo.textError}>{errors.rua}</Text>}
                         </View>
                       </View>
 
@@ -415,19 +384,13 @@ export class Cadastro extends Component {
                           />
                         </Item>
                         <View style={estilo.V_error}>
-                          {touched.numero && errors.numero && (
-                            <Text style={estilo.textError}>
-                              {errors.numero}
-                            </Text>
-                          )}
+                          {touched.numero && errors.numero && <Text style={estilo.textError}>{errors.numero}</Text>}
                         </View>
                       </View>
                     </View>
 
                     <View style={estilo.camposAmb} inlineLabel>
-                      <Label style={estilo.txtLabel}>
-                        Descrição do Ambiente
-                      </Label>
+                      <Label style={estilo.txtLabel}>Descrição do Ambiente</Label>
                       <Item>
                         <Input
                           value={values.descricao}
@@ -445,9 +408,7 @@ export class Cadastro extends Component {
                       )}
                     </View>
                     <View style={estilo.V_ImageLabel}>
-                      <Text style={estilo.txtLabel}>
-                        Envie Fotos de Sua República
-                      </Text>
+                      <Text style={estilo.txtLabel}>Envie Fotos de Sua República</Text>
                     </View>
                     <View style={estilo.V_ImageEmpty}>
                       <ScrollView horizontal={true}>
@@ -460,10 +421,7 @@ export class Cadastro extends Component {
                           </View>
                         ) : (
                           <View style={estilo.V_ImageFull}>
-                            <Image
-                              source={{ uri: this.state.imageURI0 }}
-                              style={estilo.ImageFull}
-                            />
+                            <Image source={{ uri: this.state.imageURI0 }} style={estilo.ImageFull} />
                           </View>
                         )}
                         {this.state.imageURI1 == null ? (
@@ -475,10 +433,7 @@ export class Cadastro extends Component {
                           </View>
                         ) : (
                           <View style={estilo.V_ImageFull}>
-                            <Image
-                              source={{ uri: this.state.imageURI1 }}
-                              style={estilo.ImageFull}
-                            />
+                            <Image source={{ uri: this.state.imageURI1 }} style={estilo.ImageFull} />
                           </View>
                         )}
                         {this.state.imageURI2 == null ? (
@@ -490,10 +445,7 @@ export class Cadastro extends Component {
                           </View>
                         ) : (
                           <View style={estilo.V_ImageFull}>
-                            <Image
-                              source={{ uri: this.state.imageURI2 }}
-                              style={estilo.ImageFull}
-                            />
+                            <Image source={{ uri: this.state.imageURI2 }} style={estilo.ImageFull} />
                           </View>
                         )}
                         {this.state.imageURI3 == null ? (
@@ -505,10 +457,7 @@ export class Cadastro extends Component {
                           </View>
                         ) : (
                           <View style={estilo.V_ImageFull}>
-                            <Image
-                              source={{ uri: this.state.imageURI3 }}
-                              style={estilo.ImageFull}
-                            />
+                            <Image source={{ uri: this.state.imageURI3 }} style={estilo.ImageFull} />
                           </View>
                         )}
                         {this.state.imageURI4 == null ? (
@@ -520,10 +469,7 @@ export class Cadastro extends Component {
                           </View>
                         ) : (
                           <View style={estilo.V_ImageFull}>
-                            <Image
-                              source={{ uri: this.state.imageURI4 }}
-                              style={estilo.ImageFull}
-                            />
+                            <Image source={{ uri: this.state.imageURI4 }} style={estilo.ImageFull} />
                           </View>
                         )}
                       </ScrollView>
@@ -538,9 +484,7 @@ export class Cadastro extends Component {
                         }}
                       >
                         {/* //<Icon name="account-outline" style={estilo.icon_send} /> */}
-                        <Text>
-                          Enviar Fotos ({this.state.contadorImagem}/3)
-                        </Text>
+                        <Text>Enviar Fotos ({this.state.contadorImagem}/3)</Text>
                       </Button>
                     </View>
                   </View>
@@ -557,8 +501,7 @@ export class Cadastro extends Component {
                   <ScrollView>
                     <View style={estilo.V_Conteudo}>
                       <Text style={estilo.textRepublica}>
-                        Agora descreva algumas características básica de sua
-                        república.
+                        Agora descreva algumas características básica de sua república.
                       </Text>
 
                       <View style={estilo.V_Caracteristicas}>
@@ -576,9 +519,7 @@ export class Cadastro extends Component {
                           </Item>
                           <View style={estilo.V_error}>
                             {touched.aluguel && errors.aluguel && (
-                              <Text style={estilo.textError}>
-                                {errors.aluguel}
-                              </Text>
+                              <Text style={estilo.textError}>{errors.aluguel}</Text>
                             )}
                           </View>
                         </View>
@@ -596,11 +537,7 @@ export class Cadastro extends Component {
                             />
                           </Item>
                           <View style={estilo.V_error}>
-                            {touched.contas && errors.contas && (
-                              <Text style={estilo.textError}>
-                                {errors.contas}
-                              </Text>
-                            )}
+                            {touched.contas && errors.contas && <Text style={estilo.textError}>{errors.contas}</Text>}
                           </View>
                         </View>
                       </View>
@@ -625,19 +562,12 @@ export class Cadastro extends Component {
                             >
                               <Picker.Item label=" " value="Não informado" />
                               <Picker.Item label="Feminina" value="Feminina" />
-                              <Picker.Item
-                                label="Masculina"
-                                value="Masculina"
-                              />
+                              <Picker.Item label="Masculina" value="Masculina" />
                               <Picker.Item label="Mista" value="Mista" />
                             </Picker>
                           </Item>
                           <View style={estilo.V_error}>
-                            {touched.genero && errors.genero && (
-                              <Text style={estilo.textError}>
-                                {errors.genero}
-                              </Text>
-                            )}
+                            {touched.genero && errors.genero && <Text style={estilo.textError}>{errors.genero}</Text>}
                           </View>
                         </View>
                         <View style={estilo.V_Campos}>
@@ -664,9 +594,7 @@ export class Cadastro extends Component {
                           </Item>
                           <View style={estilo.V_error}>
                             {touched.animais && errors.animais && (
-                              <Text style={estilo.textError}>
-                                {errors.animais}
-                              </Text>
+                              <Text style={estilo.textError}>{errors.animais}</Text>
                             )}
                           </View>
                         </View>
@@ -692,17 +620,12 @@ export class Cadastro extends Component {
                             >
                               <Picker.Item label=" " value="Não informado" />
                               <Picker.Item label="Casa" value="Casa" />
-                              <Picker.Item
-                                label="Apartamento"
-                                value="Apartamento"
-                              />
+                              <Picker.Item label="Apartamento" value="Apartamento" />
                             </Picker>
                           </Item>
                           <View style={estilo.V_error}>
                             {touched.tipoImovel && errors.tipoImovel && (
-                              <Text style={estilo.textError}>
-                                {errors.tipoImovel}
-                              </Text>
+                              <Text style={estilo.textError}>{errors.tipoImovel}</Text>
                             )}
                           </View>
                         </View>
@@ -731,9 +654,7 @@ export class Cadastro extends Component {
                           </Item>
                           <View style={estilo.V_error}>
                             {touched.numeroVagas && errors.numeroVagas && (
-                              <Text style={estilo.textError}>
-                                {errors.numeroVagas}
-                              </Text>
+                              <Text style={estilo.textError}>{errors.numeroVagas}</Text>
                             )}
                           </View>
                         </View>
@@ -753,15 +674,11 @@ export class Cadastro extends Component {
                         </Item>
                       </View>
                       <View style={estilo.V_error}>
-                        {touched.aQuarto && errors.aQuarto && (
-                          <Text style={estilo.textError}>{errors.aQuarto}</Text>
-                        )}
+                        {touched.aQuarto && errors.aQuarto && <Text style={estilo.textError}>{errors.aQuarto}</Text>}
                       </View>
 
                       <View style={estilo.campos} inlineLabel>
-                        <Label style={estilo.txtLabel}>
-                          Mobília e eletrodomésticos de uso comum
-                        </Label>
+                        <Label style={estilo.txtLabel}>Mobília e eletrodomésticos de uso comum</Label>
                         <Item>
                           <Input
                             style={estilo.place}
@@ -775,22 +692,14 @@ export class Cadastro extends Component {
                       </View>
                       <View style={estilo.V_error}>
                         {touched.aRepublica && errors.aRepublica && (
-                          <Text style={estilo.textError}>
-                            {errors.aRepublica}
-                          </Text>
+                          <Text style={estilo.textError}>{errors.aRepublica}</Text>
                         )}
                       </View>
 
                       <View style={estilo.V_btnProx}>
-                        <Button
-                          style={estilo.btnProximo}
-                          onPress={handleSubmit}
-                        >
+                        <Button style={estilo.btnProximo} onPress={handleSubmit}>
                           <Text>Publicar</Text>
-                          <Icon
-                            name="ios-checkmark-circle"
-                            style={estilo.iconeBtn}
-                          />
+                          <Icon name="ios-checkmark-circle" style={estilo.iconeBtn} />
                         </Button>
                         <View>
                           <Text>
