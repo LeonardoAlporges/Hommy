@@ -16,7 +16,7 @@ const Estilos = StyleSheet.create({
     marginRight: 30,
   },
   txt: {
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans-Thin',
     fontSize: 23,
     fontWeight: '600',
     color: '#142850',

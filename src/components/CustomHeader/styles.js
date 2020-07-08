@@ -18,7 +18,7 @@ const style = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontWeight: 'bold',
     color: '#142850',
   },
@@ -45,8 +45,8 @@ const style = StyleSheet.create({
   },
   txt_title: {
     fontSize: 16,
-    fontFamily: 'Roboto',
-    fontWeight: 'bold',
+    fontFamily: 'WorkSans-Thin',
+    //fontWeight: 'bold',
     color: '#142850',
   },
 });
