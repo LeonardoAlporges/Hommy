@@ -55,21 +55,15 @@ class EsqueciSenha extends Component {
   render() {
     return (
       <View style={estilo.container}>
-        <HeaderBack
-          title={'Confirmar Email'}
-          onNavigation={() => this.navegar()}
-        />
+        <HeaderBack title="Esquece a senha ?" onNavigation={() => this.navegar()} />
 
         <View style={estilo.V_img}>
-          <Image
-            style={estilo.V_img}
-            source={require('../../assets/Img/Send_email.png')}
-          />
+          <Image style={estilo.V_img} source={require('../../assets/Img/Send_email.png')} />
         </View>
 
         <View style={estilo.V_title}>
           <Text style={estilo.title}>
-            Digite o E-mail da conta que você deseja recuperar
+            Informe seu e-mail cadastrado no aplicativo para que possamos lhe enviar um codigo de recuperação.
           </Text>
         </View>
 
@@ -78,26 +72,17 @@ class EsqueciSenha extends Component {
             email: '',
           }}
           validationSchema={yup.object().shape({
-            email: yup.string('Somente texto').required('E-mail invalido'),
+            email: yup
+              .string('')
+              .email('E-mail inválido ou incorreto')
+              .required('Campo obrigatório'),
           })}
         >
-          {({
-            values,
-            handleChange,
-            errors,
-            setFieldTouched,
-            touched,
-            isValid,
-            handleSubmit,
-          }) => (
+          {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
             <Fragment>
               <View style={estilo.view_CamposLogin}>
                 <Item>
-                  <Icon
-                    style={estilo.icons_CamposLogin}
-                    active
-                    name="email-outline"
-                  />
+                  <Icon style={estilo.icons_CamposLogin} active name="email-outline" />
                   <Input
                     placeholderTextColor="#2e2e2e"
                     style={estilo.labelInput}
@@ -123,7 +108,7 @@ class EsqueciSenha extends Component {
                     this.EnviarCodigo(values);
                   }}
                 >
-                  <Text style={estilo.txtbtn}>Solicitar codigo</Text>
+                  <Text style={estilo.txtbtn}>Recuperar senha</Text>
                 </Button>
               </View>
             </Fragment>

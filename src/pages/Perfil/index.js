@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, Image, Linking } from 'react-native';
 import style from './styles';
 import { Icon, Button } from 'native-base';
 import HeaderBack from '../../components/CustomHeader';
+import CustomModal from '../../components/Alert';
 
 export default class Perfil extends Component {
   static navigationOptions = { header: null };
@@ -11,6 +12,7 @@ export default class Perfil extends Component {
     this.state = {
       dados: this.props.navigation.state.params.dados,
       update: this.props.navigation.state.params.update,
+      modal: false,
     };
   }
   navegar = () => {
@@ -21,10 +23,7 @@ export default class Perfil extends Component {
     return (
       <View style={{ width: '100%', height: '100%' }}>
         <View style={style.V_header}>
-          <HeaderBack
-            title="Meus Anuncios"
-            onNavigation={() => this.navegar()}
-          />
+          <HeaderBack title="Meus Anuncios" onNavigation={() => this.navegar()} />
           <Text style={style.title}>Perfil</Text>
         </View>
         <View style={style.V_profile}>
@@ -56,9 +55,7 @@ export default class Perfil extends Component {
           <Button
             style={style.botoes}
             onPress={() => {
-              Linking.openURL(
-                'https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849'
-              );
+              this.setState({ modal: true });
             }}
           >
             <Text style={style.labelbotao}>Enviar mensagem</Text>
@@ -70,6 +67,17 @@ export default class Perfil extends Component {
               <Text style={style.labelbotao}>Editar perfil</Text>
             </Button>
           </View>
+        )}
+        {this.state.modal && (
+          <CustomModal
+            parametro="Custom"
+            titulo="Código incorreto"
+            descricao="Por favor, insira o código válido"
+            botao="Voltar"
+            callback={() => {
+              this.setState({ modal: false });
+            }}
+          />
         )}
       </View>
     );

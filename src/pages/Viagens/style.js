@@ -4,6 +4,7 @@ const style = StyleSheet.create({
   card: {
     marginTop: 0,
     marginBottom: 0,
+    paddingHorizontal: 10,
   },
   flatList: {
     backgroundColor: '#f2f2f2f2',
@@ -11,10 +12,32 @@ const style = StyleSheet.create({
     marginBottom: 0,
     paddingBottom: 0,
   },
+  subtitulo: {
+    fontSize: 14,
+    fontFamily: 'Roboto',
+    color: '#2e2e2e',
+  },
   V_Botao: {
     padding: 5,
     alignItems: 'flex-end',
     width: '100%',
+  },
+  barra: {
+    width: '90%',
+    marginLeft: '5%',
+    marginRight: '5%',
+    borderBottomWidth: 1,
+    borderBottomColor: '#adadad',
+  },
+  label: {
+    marginLeft: '6%',
+    fontFamily: 'Roboto Bold',
+    fontSize: 16,
+    color: '#142850',
+  },
+  V_label: {
+    width: '100%',
+    marginVertical: 10,
   },
   botao: {
     flexDirection: 'row',

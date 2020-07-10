@@ -27,9 +27,29 @@ const style = StyleSheet.create({
     fontWeight: 'bold',
     color: '#142850',
   },
+  subtitulo: {
+    fontSize: 14,
+    fontFamily: 'Roboto',
+  },
+  barra: {
+    width: '90%',
+    marginLeft: '5%',
+    marginRight: '5%',
+    borderBottomWidth: 1,
+    borderBottomColor: '#adadad',
+  },
+  label: {
+    marginLeft: '6%',
+    fontFamily: 'Roboto Bold',
+    fontSize: 16,
+    color: '#142850',
+  },
+  V_label: {
+    width: '100%',
+    marginVertical: 8,
+  },
   Lista: {
-    backgroundColor: '#f9f9f9',
-    padding: 6,
+    backgroundColor: 'green',
   },
   Analise: {
     width: '30%',

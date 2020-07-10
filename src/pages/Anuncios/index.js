@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  FlatList,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
+import { View, Text, ScrollView, FlatList, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import estilo from './style';
 import api from '../../service/api';
@@ -208,17 +201,20 @@ class Anuncios extends Component {
               this.DeleteAnuncio(valor, this.state.item, this.state.tipo);
               this.setState({ MConfirmacao: false });
             }}
-            mensagem="Deseja deletar esse anuncio ?"
+            titulo="Excluir anúncio?"
+            mensagem="Sua publicação será apagada e mais ninguém poderá vê-la."
+            botaoCancel="Cancelar"
+            botaoConfirmar="Excluir"
             confirmar={true}
           />
         )}
-        <HeaderBack title="Meus Anuncios" onNavigation={() => this.navegar()} />
+        <HeaderBack title="Meus anúncios" onNavigation={() => this.navegar()} />
         <ScrollView>
           <View style={estilo.V_geral}>
             {this.state.listaRepublicas.length != 0 ? (
               <View>
                 <View style={estilo.V_label}>
-                  <Text style={estilo.label}>Republicas</Text>
+                  <Text style={estilo.label}>Suas Repúblicas</Text>
                   <View style={estilo.barra} />
                 </View>
                 <View>
@@ -262,9 +258,7 @@ class Anuncios extends Component {
                               }}
                             >
                               <Icon style={estilo.icon} name="list" />
-                              <Text style={estilo.TxtEdit}>
-                                Ver interessados
-                              </Text>
+                              <Text style={estilo.TxtEdit}>Ver interessados</Text>
                             </Button>
                           </View>
                         </View>
@@ -282,7 +276,7 @@ class Anuncios extends Component {
             {this.state.listaCaronas.length != 0 ? (
               <View style={{ marginTop: 30 }}>
                 <View style={estilo.V_label}>
-                  <Text style={estilo.label}>Caronas</Text>
+                  <Text style={estilo.label}> Suas Caronas</Text>
                   <View style={estilo.barra} />
                 </View>
                 <View>
@@ -325,9 +319,7 @@ class Anuncios extends Component {
                               }}
                             >
                               <Icon style={estilo.icon} name="list" />
-                              <Text style={estilo.TxtEdit}>
-                                Ver interessados
-                              </Text>
+                              <Text style={estilo.TxtEdit}>Ver interessados</Text>
                             </Button>
                           </View>
                         </View>
@@ -342,8 +334,7 @@ class Anuncios extends Component {
             )}
           </View>
         </ScrollView>
-        {this.state.listaCaronas.length == 0 &&
-        this.state.listaRepublicas.length == 0 ? (
+        {this.state.listaCaronas.length == 0 && this.state.listaRepublicas.length == 0 ? (
           <View
             style={{
               width: '100%',
@@ -352,8 +343,8 @@ class Anuncios extends Component {
             }}
           >
             <EmptyState
-              titulo="Sem Publicações feitas"
-              mensagem="Voce pode começar fazendo uma publicação agora mesmo"
+              titulo="Sem anúncios"
+              mensagem="Você ainda não anunciou nada. Nós diga quando houver vagas em sua república ou ofereça uma carona."
             />
           </View>
         ) : (

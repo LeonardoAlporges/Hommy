@@ -29,6 +29,12 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  subtitulo: {
+    fontFamily: 'Roboto',
+    fontSize: 14,
+    color: '#687368',
+    marginHorizontal: 20,
+  },
   iconWhatsapp: {
     color: '#ffffff',
     fontSize: 30,

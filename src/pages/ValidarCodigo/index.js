@@ -44,7 +44,7 @@ class ValidarCodigo extends Component {
       })
       .catch(error => {
         this.setState({ Erro: true });
-        console.log(error);
+        console.log(error, error.status);
       });
   };
   resetNavigation(Rota) {
@@ -79,26 +79,21 @@ class ValidarCodigo extends Component {
   render() {
     return (
       <View style={estilo.container}>
-        <HeaderBack
-          title={'Validar codigo'}
-          onNavigation={() => this.navegar()}
-        />
+        <HeaderBack title={'Recuperação de senha'} onNavigation={() => this.navegar()} />
 
         <View style={estilo.V_img}>
-          <Image
-            style={estilo.V_img}
-            source={require('../../assets/Img/Send_email.png')}
-          />
+          <Image style={estilo.V_img} source={require('../../assets/Img/Send_email.png')} />
         </View>
 
         <View style={estilo.V_title}>
           {this.state.codigoValidado ? (
             <Text style={estilo.title}>
-              Agora digite uma nova senha para sua conta que voce ache segura
+              Cadastre uma nova senha de acesso. Sua senha antiga será apagada, crie uma nova para se conectar ao
+              aplicativo.
             </Text>
           ) : (
             <Text style={estilo.title}>
-              Digite o codigo de verificação enviado para seu E-mail
+              Um código para prosseguir foi enviado ao seu e-mail. Por favor, informe-o no campo abaixo.
             </Text>
           )}
         </View>
@@ -107,11 +102,11 @@ class ValidarCodigo extends Component {
           initialValues={{
             codigo: yup
               .string()
-              .min(6, 'Digite os 6 numeros ')
-              .max(6, 'Somente os 6 numeros permitido'),
+              .min(6, 'Mínimo 6 dígitos necessários')
+              .max(6, 'Somente 6 dígitos são permitido'),
             novaSenha: yup
               .string('')
-              .min(8, 'Password is too short - should be 8 chars minimum.')
+              .min(8, 'Mínimo 8 dígitos necessários')
               .required('Insira uma senha para sua conta'),
           }}
           onSubmit={values => {}}
@@ -121,19 +116,11 @@ class ValidarCodigo extends Component {
             confirmacaoSenha: yup.string().required(),
           })}
         >
-          {({
-            values,
-            handleChange,
-            errors,
-            setFieldTouched,
-            touched,
-            isValid,
-            handleSubmit,
-          }) => (
+          {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
             <Fragment>
               {this.state.Erro && (
                 <CustomModal
-                  parametro="Erro"
+                  parametro="Erro "
                   callback={() => {
                     this.setState({ Erro: false });
                   }}
@@ -142,11 +129,7 @@ class ValidarCodigo extends Component {
               {!this.state.codigoValidado && (
                 <View style={estilo.view_CamposLogin}>
                   <Item>
-                    <Icon
-                      style={estilo.icons_CamposLogin}
-                      active
-                      name="key-outline"
-                    />
+                    <Icon style={estilo.icons_CamposLogin} active name="key-outline" />
                     <Input
                       placeholderTextColor="#2e2e2e"
                       style={estilo.labelInput}
@@ -175,7 +158,7 @@ class ValidarCodigo extends Component {
                       this.VerificarCodigo(values.codigo);
                     }}
                   >
-                    <Text style={estilo.txtbtn}>Verificar código</Text>
+                    <Text style={estilo.txtbtn}>Prosseguir</Text>
                   </Button>
                 </View>
               )}
@@ -183,11 +166,7 @@ class ValidarCodigo extends Component {
               {this.state.codigoValidado && (
                 <View style={estilo.view_CamposLoginSenha}>
                   <Item>
-                    <Icon
-                      style={estilo.icons_CamposLogin}
-                      active
-                      name="key-outline"
-                    />
+                    <Icon style={estilo.icons_CamposLogin} active name="key-outline" />
                     <Input
                       placeholderTextColor="#2e2e2e"
                       style={estilo.labelInput}
@@ -228,7 +207,10 @@ class ValidarCodigo extends Component {
         {this.state.sucesso && (
           <View style={estilo.V_modal}>
             <CustomModal
-              parametro="Sucesso"
+              parametro="Custom"
+              titulo="Senha cadastrada com sucesso."
+              descricao="Sua senha foi redefinida. Você já pode voltar a navegar pelo nosso aplicativo!"
+              botao="Ok, concluir."
               callback={() => {
                 this.resetNavigation('Login');
               }}

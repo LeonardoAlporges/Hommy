@@ -36,17 +36,13 @@ class SplashScreen extends Component {
       <View style={style.container}>
         <View style={style.posicao}>
           <View style={style.imagem}>
-            <Image
-              style={style.img}
-              source={require('../../assets/Img/Wellcome.png')}
-            />
+            <Image style={style.img} source={require('../../assets/Img/Wellcome.png')} />
           </View>
           <View style={style.texto}>
             <Text style={style.titulo}>Bem vindo ao Hommy </Text>
 
             <Text style={style.descricao}>
-              Agora voce pode ver e anunciar vagas em republicas e caronas, tudo
-              na palma da sua mão.
+              Realize e acompanhe anúncios! Descubra a república ideal e economize tempo pedindo uma carona
             </Text>
           </View>
         </View>
@@ -58,15 +54,11 @@ class SplashScreen extends Component {
               this.abrirLoad();
             }}
           >
-            <Text style={style.labelButon}>Prosseguir</Text>
+            <Text style={style.labelButon}>Acessar minha conta</Text>
           </Button>
         </View>
         <View>
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={this.state.modalVisible}
-          >
+          <Modal animationType="slide" transparent={true} visible={this.state.modalVisible}>
             <View style={style.ViewFundo}>
               <View style={style.ViewModal}>
                 <Spinner color="#142850" />

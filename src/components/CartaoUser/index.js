@@ -21,6 +21,7 @@ class CartaoUser extends Component {
   };
 
   retornoCarona = number => {
+    console.log('numero', number, 'user', this.props.dados.email);
     this.props.callback(number, this.props.dados.email);
   };
 
@@ -72,25 +73,24 @@ class CartaoUser extends Component {
             <Text style={style.nota}>{this.props.dados.nota}</Text>
           </View>
           <View style={style.V_Icon}>
-            {this.props.status != 'Confirmado' &&
-              this.props.status != 'Rejeitado' && (
-                <TouchableOpacity
-                  onPress={() => {
-                    this.setState({
-                      mensagem: 'Confirmar',
-                      confirmar: true,
-                      modal: true,
-                    });
-                  }}
-                >
-                  <Icon name="check" style={style.iconAceite} />
-                </TouchableOpacity>
-              )}
+            {this.props.status != 'Confirmado' && this.props.status != 'Rejeitado' && (
+              <TouchableOpacity
+                onPress={() => {
+                  this.setState({
+                    mensagem: 'Deseja confirmar ?',
+                    confirmar: true,
+                    modal: true,
+                  });
+                }}
+              >
+                <Icon name="check" style={style.iconAceite} />
+              </TouchableOpacity>
+            )}
             {this.props.status != 'Rejeitado' && (
               <TouchableOpacity
                 onPress={() => {
                   this.setState({
-                    mensagem: 'Rejeitar ELE',
+                    mensagem: 'Deseja rejeitar ?',
                     rejeitar: true,
                     modal: true,
                   });
@@ -104,7 +104,9 @@ class CartaoUser extends Component {
           {this.state.modal && (
             <ModalConfirmacao
               retornoModal={valor => this.mudarStatusInteressado(valor)}
-              mensagem={this.state.mensagem}
+              titulo={this.state.mensagem}
+              botaoCancel="Cancelar"
+              botaoConfirmar="Sim"
               rejeitar={this.state.rejeitar}
               confirmar={this.state.confirmar}
             />

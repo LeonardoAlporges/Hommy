@@ -65,7 +65,7 @@ class Login extends Component {
     await api
       .post('/session', this.data)
       .then(responseJson => {
-        console.log(responseJson);
+        console.log('ok', responseJson);
         this.setToken(responseJson.data);
         this.setState({ user: responseJson.data.usuario });
         this.props.editId(responseJson.data.usuario.id);
@@ -83,7 +83,7 @@ class Login extends Component {
       .catch(error => {
         this.setState({ load: false });
         this.setState({ erro: true });
-        console.log(error);
+        console.log('erro', error, error.response.status);
       });
   };
 
@@ -123,13 +123,13 @@ class Login extends Component {
             }}
             validationSchema={yup.object().shape({
               email: yup
-                .string('Insira seu email')
-                .email('Este não é um E-mail valido')
-                .required('Insira um E-mail valido'),
+                .string('')
+                .email('E-mail inválido ou incorreto')
+                .required('Campo obrigatório'),
               password: yup
-                .string('Insira sua senha')
-                .min(4, 'Senha minima é de 4 digitos')
-                .required('Insira uma senha'),
+                .string('')
+                .min(8, 'Mínimo 8 dígitos necessários')
+                .required('Campo obrigatório'),
             })}
           >
             {({ values, handleChange, errors, setFieldTouched, touched, handleSubmit }) => (

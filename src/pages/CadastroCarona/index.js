@@ -13,17 +13,7 @@ import HeaderBack from '../../components/CustomHeader';
 import Loading from '../../components/Loading';
 import moment from 'moment';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import {
-  Text,
-  Item,
-  Input,
-  Label,
-  Button,
-  Icon,
-  DatePicker,
-  Spinner,
-  Picker,
-} from 'native-base';
+import { Text, Item, Input, Label, Button, Icon, DatePicker, Spinner, Picker } from 'native-base';
 import {
   editChegada,
   editData,
@@ -39,6 +29,7 @@ import {
 import { NavigationActions, StackActions } from 'react-navigation';
 class CadastroCarona extends Component {
   static navigationOptions = { header: null };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -198,15 +189,7 @@ class CadastroCarona extends Component {
             .required('Insira a quantidade de vagas disponivel'),
         })}
       >
-        {({
-          values,
-          handleChange,
-          errors,
-          setFieldTouched,
-          touched,
-          isValid,
-          handleSubmit,
-        }) => (
+        {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
           <Fragment>
             {this.state.erro && (
               <CustomModal
@@ -230,15 +213,11 @@ class CadastroCarona extends Component {
             <ViewPager style={{ flex: 1 }}>
               <ScrollView>
                 <View key="1">
-                  <HeaderBack
-                    title="Cadastro de carona"
-                    onNavigation={() => this.navegar()}
-                  />
+                  <HeaderBack title="Cadastre sua viagem" onNavigation={() => this.navegar()} />
 
                   <View style={estilo.V_Conteudo}>
                     <Text style={estilo.txtCarona}>
-                      Nos passe algumas informaçoes basica para fazer o registro
-                      de sua Carona
+                      Preencha os campos abaixo com as informações necessárias para registrar sua carona.
                     </Text>
 
                     <View style={estilo.rowStyle}>
@@ -267,28 +246,17 @@ class CadastroCarona extends Component {
                             <Picker.Item label="Guarapari" value="Guarapari" />
                             <Picker.Item label="Cachoeiro" value="Cachoeiro" />
                             <Picker.Item label="Vitoria" value="Vitoria" />
-                            <Picker.Item
-                              label="Vila Velha"
-                              value="Vila Velha"
-                            />
-                            <Picker.Item
-                              label="Muniz Freire"
-                              value="Muniz Freire"
-                            />
+                            <Picker.Item label="Vila Velha" value="Vila Velha" />
+                            <Picker.Item label="Muniz Freire" value="Muniz Freire" />
                             <Picker.Item label="Guacui" value="Guacui" />
-                            <Picker.Item
-                              label="Bom Jesus do Norte"
-                              value="Bom Jesus do Norte"
-                            />
+                            <Picker.Item label="Bom Jesus do Norte" value="Bom Jesus do Norte" />
                             <Picker.Item label="Celina" value="Celina" />
                             <Picker.Item label="Rive" value="Rive" />
                           </Picker>
                         </Item>
 
                         <View style={estilo.V_erro}>
-                          {touched.saida && errors.saida && (
-                            <Text style={estilo.textError}>{errors.saida}</Text>
-                          )}
+                          {touched.saida && errors.saida && <Text style={estilo.textError}>{errors.saida}</Text>}
                         </View>
                       </View>
 
@@ -315,30 +283,17 @@ class CadastroCarona extends Component {
                             <Picker.Item label="Guarapari" value="Guarapari" />
                             <Picker.Item label="Cachoeiro" value="Cachoeiro" />
                             <Picker.Item label="Vitoria" value="Vitoria" />
-                            <Picker.Item
-                              label="Vila Velha"
-                              value="Vila Velha"
-                            />
-                            <Picker.Item
-                              label="Muniz Freire"
-                              value="Muniz Freire"
-                            />
+                            <Picker.Item label="Vila Velha" value="Vila Velha" />
+                            <Picker.Item label="Muniz Freire" value="Muniz Freire" />
                             <Picker.Item label="Guacui" value="Guacui" />
-                            <Picker.Item
-                              label="Bom Jesus do Norte"
-                              value="Bom Jesus do Norte"
-                            />
+                            <Picker.Item label="Bom Jesus do Norte" value="Bom Jesus do Norte" />
                             <Picker.Item label="Celina" value="Celina" />
                             <Picker.Item label="Rive" value="Rive" />
                           </Picker>
                         </Item>
 
                         <View style={estilo.V_erro}>
-                          {touched.chegada && errors.chegada && (
-                            <Text style={estilo.textError}>
-                              {errors.chegada}
-                            </Text>
-                          )}
+                          {touched.chegada && errors.chegada && <Text style={estilo.textError}>{errors.chegada}</Text>}
                         </View>
                       </View>
                     </View>
@@ -383,12 +338,9 @@ class CadastroCarona extends Component {
                           />
                         </Item>
                         <View style={estilo.V_erro}>
-                          {this.state.newData == '' &&
-                            this.state.botaoEnviar && (
-                              <Text style={estilo.textError}>
-                                Insira uma data
-                              </Text>
-                            )}
+                          {this.state.newData == '' && this.state.botaoEnviar && (
+                            <Text style={estilo.textError}>Insira uma data</Text>
+                          )}
                         </View>
                       </View>
 
@@ -410,9 +362,7 @@ class CadastroCarona extends Component {
                           />
                         </Item>
                         <View style={estilo.V_erro}>
-                          {touched.valor && errors.valor && (
-                            <Text style={estilo.textError}>{errors.valor}</Text>
-                          )}
+                          {touched.valor && errors.valor && <Text style={estilo.textError}>{errors.valor}</Text>}
                         </View>
                       </View>
                     </View>
@@ -434,9 +384,7 @@ class CadastroCarona extends Component {
                               isVisible={this.state.isDatePickerVisibleSaida}
                               mode="time"
                               onConfirm={date => this.Confirmar(date, 'Saida')}
-                              onCancel={date =>
-                                this.FecharPicker(date, 'Saida')
-                              }
+                              onCancel={date => this.FecharPicker(date, 'Saida')}
                               date={new Date()}
                               locale={'pt-br'}
                               is24Hour={true}
@@ -444,12 +392,9 @@ class CadastroCarona extends Component {
                           </TouchableOpacity>
                         </Item>
                         <View style={estilo.V_erro}>
-                          {this.state.timeSaida == '00:00' &&
-                            this.state.botaoEnviar && (
-                              <Text style={estilo.textError}>
-                                Insira o horario de saida
-                              </Text>
-                            )}
+                          {this.state.timeSaida == '00:00' && this.state.botaoEnviar && (
+                            <Text style={estilo.textError}>Insira o horario de saida</Text>
+                          )}
                         </View>
                       </View>
 
@@ -467,12 +412,8 @@ class CadastroCarona extends Component {
                             <Label>{this.state.timeChegada}</Label>
                             <DateTimePickerModal
                               isVisible={this.state.isDatePickerVisible}
-                              onConfirm={date =>
-                                this.Confirmar(date, 'Chegada')
-                              }
-                              onCancel={date =>
-                                this.FecharPicker(date, 'Chegada')
-                              }
+                              onConfirm={date => this.Confirmar(date, 'Chegada')}
+                              onCancel={date => this.FecharPicker(date, 'Chegada')}
                               mode="time"
                               date={new Date()}
                               locale={'pt-br'}
@@ -481,12 +422,9 @@ class CadastroCarona extends Component {
                           </TouchableOpacity>
                         </Item>
                         <View style={estilo.V_erro}>
-                          {this.state.timeChegada == '00:00' &&
-                            this.state.botaoEnviar && (
-                              <Text style={estilo.textError}>
-                                Insira o horario de saida
-                              </Text>
-                            )}
+                          {this.state.timeChegada == '00:00' && this.state.botaoEnviar && (
+                            <Text style={estilo.textError}>Insira o horario de saida</Text>
+                          )}
                         </View>
                       </View>
                     </View>
@@ -503,15 +441,11 @@ class CadastroCarona extends Component {
                       </Item>
                     </View>
                     <View style={estilo.V_erro}>
-                      {touched.embarque && errors.embarque && (
-                        <Text style={estilo.textError}>{errors.embarque}</Text>
-                      )}
+                      {touched.embarque && errors.embarque && <Text style={estilo.textError}>{errors.embarque}</Text>}
                     </View>
 
                     <View style={estilo.campos} inlineLabel>
-                      <Label style={estilo.txtLabel}>
-                        Ponto final de Desembarque
-                      </Label>
+                      <Label style={estilo.txtLabel}>Ponto final de Desembarque</Label>
                       <Item>
                         <Input
                           value={values.desembarque}
@@ -523,9 +457,7 @@ class CadastroCarona extends Component {
                     </View>
                     <View style={estilo.V_erro}>
                       {touched.desembarque && errors.desembarque && (
-                        <Text style={estilo.textError}>
-                          {errors.desembarque}
-                        </Text>
+                        <Text style={estilo.textError}>{errors.desembarque}</Text>
                       )}
                     </View>
 
@@ -542,9 +474,7 @@ class CadastroCarona extends Component {
                       </Item>
                     </View>
                     <View style={estilo.V_erro}>
-                      {touched.vagas && errors.vagas && (
-                        <Text style={estilo.textError}>{errors.vagas}</Text>
-                      )}
+                      {touched.vagas && errors.vagas && <Text style={estilo.textError}>{errors.vagas}</Text>}
                     </View>
 
                     <View style={estilo.V_btn}>
@@ -555,7 +485,7 @@ class CadastroCarona extends Component {
                           handleSubmit(values);
                         }}
                       >
-                        <Text>Prosseguir</Text>
+                        <Text>Publicar carona</Text>
                       </Button>
                     </View>
                   </View>
@@ -563,11 +493,7 @@ class CadastroCarona extends Component {
               </ScrollView>
             </ViewPager>
             <View>
-              <Modal
-                animationType="fade"
-                transparent={true}
-                visible={this.state.modalLoadVisible}
-              >
+              <Modal animationType="fade" transparent={true} visible={this.state.modalLoadVisible}>
                 <View style={estilo.ViewFundo}>
                   <View style={estilo.ViewModal}>
                     <Spinner color="red" />

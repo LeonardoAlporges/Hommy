@@ -1,25 +1,10 @@
 import React, { Component } from 'react';
-import {
-  FlatList,
-  View,
-  Modal,
-  Text,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
+import { FlatList, View, Modal, Text, TouchableOpacity, Image } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
 import { withNavigation, NavigationEvents } from 'react-navigation';
-import {
-  CheckBox,
-  ListItem,
-  Button,
-  Fab,
-  Input,
-  Item,
-  Label,
-} from 'native-base';
+import { CheckBox, ListItem, Button, Fab, Input, Item, Label } from 'native-base';
 import EmptyState from '../../components/EmptyState';
 
 import Estilos from './style';
@@ -135,13 +120,11 @@ class Republica extends Component {
   }
 
   fAnimalSim = async checked => {
-    if (this.state.filtroAnimalSim)
-      await this.setState({ filtroAnimalSim: false });
+    if (this.state.filtroAnimalSim) await this.setState({ filtroAnimalSim: false });
     else await this.setState({ filtroAnimalSim: true, filtroAnimalNao: false });
   };
   fAnimalNao = async checked => {
-    if (this.state.filtroAnimalNao)
-      await this.setState({ filtroAnimalNao: false });
+    if (this.state.filtroAnimalNao) await this.setState({ filtroAnimalNao: false });
     else await this.setState({ filtroAnimalNao: true, filtroAnimalSim: false });
   };
 
@@ -176,8 +159,7 @@ class Republica extends Component {
   };
 
   fMoradores2 = async checked => {
-    if (this.state.filtroMoradores2)
-      await this.setState({ filtroMoradores2: false });
+    if (this.state.filtroMoradores2) await this.setState({ filtroMoradores2: false });
     else
       await this.setState({
         filtroMoradores2: true,
@@ -189,8 +171,7 @@ class Republica extends Component {
   };
 
   fMoradores3 = async checked => {
-    if (this.state.filtroMoradores3)
-      await this.setState({ filtroMoradores3: false });
+    if (this.state.filtroMoradores3) await this.setState({ filtroMoradores3: false });
     else
       await this.setState({
         filtroMoradores3: true,
@@ -202,8 +183,7 @@ class Republica extends Component {
   };
 
   fMoradores4 = async checked => {
-    if (this.state.filtroMoradores4)
-      await this.setState({ filtroMoradores4: false });
+    if (this.state.filtroMoradores4) await this.setState({ filtroMoradores4: false });
     else
       await this.setState({
         filtroMoradores4: true,
@@ -215,8 +195,7 @@ class Republica extends Component {
   };
 
   fMoradores5 = async checked => {
-    if (this.state.filtroMoradores5)
-      await this.setState({ filtroMoradores5: false });
+    if (this.state.filtroMoradores5) await this.setState({ filtroMoradores5: false });
     else
       await this.setState({
         filtroMoradores5: true,
@@ -228,8 +207,7 @@ class Republica extends Component {
   };
 
   fMoradores6 = async checked => {
-    if (this.state.filtroMoradores6)
-      await this.setState({ filtroMoradores6: false });
+    if (this.state.filtroMoradores6) await this.setState({ filtroMoradores6: false });
     else
       await this.setState({
         filtroMoradores6: true,
@@ -336,16 +314,10 @@ class Republica extends Component {
       listaRepublicas = _.filter(listaRepublicas, { numVagas: '3' });
     }
     if (this.state.filtroValorMenor === true) {
-      listaRepublicas = _.filter(
-        listaRepublicas,
-        ({ valorAluguel }) => valorAluguel >= this.state.aluguelMin
-      );
+      listaRepublicas = _.filter(listaRepublicas, ({ valorAluguel }) => valorAluguel >= this.state.aluguelMin);
     }
     if (this.state.filtroValorMaior === true) {
-      listaRepublicas = _.filter(
-        listaRepublicas,
-        ({ valorAluguel }) => valorAluguel <= this.state.aluguelMax
-      );
+      listaRepublicas = _.filter(listaRepublicas, ({ valorAluguel }) => valorAluguel <= this.state.aluguelMax);
     }
     await this.setState({ listaRepublicas });
   };
@@ -378,17 +350,13 @@ class Republica extends Component {
             />
           ) : (
             <EmptyState
-              titulo="Sem Anuncios Disponivel "
-              mensagem="Seja o primeiro a ter seu anuncio no ar"
+              titulo="Tudo tão vazio por aqui... "
+              mensagem="Parece que não há publicações no momento. Mas não desanime, logo logo novas vagas surgirão. "
             />
           )}
         </View>
         <View style={Estilos.V_filtroExterno}>
-          <Modal
-            animationType="fade"
-            visible={this.state.modalVisible}
-            transparent={true}
-          >
+          <Modal animationType="fade" visible={this.state.modalVisible} transparent={true}>
             <View style={Estilos.V_filtroInterno}>
               <Text>Valor</Text>
               <ListItem style={Estilos.listStyle}>

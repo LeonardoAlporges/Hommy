@@ -307,7 +307,7 @@ export class Cadastro extends Component {
               />
             )}
             {this.state.Load && <Loading />}
-            <HeaderBack title="Cadastre sua republica" onNavigation={() => this.navegar()} />
+            <HeaderBack title=" Cadastre sua repúblicaa" onNavigation={() => this.navegar()} />
             <Tabs
               initialPage={0}
               tabBarUnderlineStyle={{ backgroundColor: '#142850', height: 3 }}
@@ -323,7 +323,7 @@ export class Cadastro extends Component {
                 <ScrollView>
                   <View style={estilo.V_Conteudo}>
                     <Text style={estilo.textRepublica}>
-                      Cadastre algumas informações para fazer o registro de sua república.
+                      Insira as informações necessárias para registrar uma nova república.
                     </Text>
 
                     <View>
@@ -500,9 +500,7 @@ export class Cadastro extends Component {
                 <View key="2">
                   <ScrollView>
                     <View style={estilo.V_Conteudo}>
-                      <Text style={estilo.textRepublica}>
-                        Agora descreva algumas características básica de sua república.
-                      </Text>
+                      <Text style={estilo.textRepublica}>Nos campos abaixo preencha os detalhes de sua república.</Text>
 
                       <View style={estilo.V_Caracteristicas}>
                         <View style={estilo.V_Campos}>
@@ -698,7 +696,7 @@ export class Cadastro extends Component {
 
                       <View style={estilo.V_btnProx}>
                         <Button style={estilo.btnProximo} onPress={handleSubmit}>
-                          <Text>Publicar</Text>
+                          <Text>Publicar república!</Text>
                           <Icon name="ios-checkmark-circle" style={estilo.iconeBtn} />
                         </Button>
                         <View>

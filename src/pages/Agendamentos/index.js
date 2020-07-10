@@ -92,20 +92,21 @@ class Agendamentos extends Component {
   render() {
     return (
       <View style={style.Container}>
-        <HeaderBack
-          title="Agendamentos de visita"
-          onNavigation={() => this.navegar()}
-        />
+        <HeaderBack title="Agendamentos" onNavigation={() => this.navegar()} />
         {this.state.Load && <Loading />}
         {this.state.listaAgendamento.length == 0 && (
           <EmptyState
             titulo="Sem Agendamentos"
-            mensagem="Aguarde logo aparecerár alguem para preencher esse vazio :("
+            mensagem="Ninguém agendou uma visita a sua república. Aguarde, logo aparecerá alguém para preencher esse vazio"
           />
         )}
-
+        <View style={{ width: '100%', paddingHorizontal: 5, height: 40 }}>
+          <Text style={style.subtitulo}>
+            Abaixo estão listadas as pessoas que solicitaram uma visita a sua república.
+          </Text>
+        </View>
         <View style={style.V_label}>
-          <Text style={style.label}>Lista de agendamento de visita</Text>
+          <Text style={style.label}>Interessados</Text>
           <View style={style.barra} />
         </View>
 
@@ -123,27 +124,23 @@ class Agendamentos extends Component {
               />
               <View style={style.viewData}>
                 <View style={style.viewData2}>
-                  <Text style={style.data}>
-                    {moment(new Date(item.data)).format('L')}
-                  </Text>
+                  <Text style={style.data}>{moment(new Date(item.data)).format('L')}</Text>
                   <Text>As</Text>
-                  <Text style={style.data}>
-                    {moment(new Date(item.hora)).format('hh:mm')}
-                  </Text>
+                  <Text style={style.data}>{moment(new Date(item.hora)).format('hh:mm')}</Text>
                 </View>
                 {item.status == 'Análise' && (
                   <View style={style.Analise}>
-                    <Text style={style.data}>{item.status}</Text>
+                    <Text style={style.data}>Em análise</Text>
                   </View>
                 )}
                 {item.status == 'Confirmado' && (
                   <View style={style.Confirmado}>
-                    <Text style={style.dataConf}>{item.status}</Text>
+                    <Text style={style.dataConf}>Confirmada</Text>
                   </View>
                 )}
                 {item.status == 'Rejeitado' && (
                   <View style={style.Rejeitado}>
-                    <Text style={style.dataRej}>{item.status}</Text>
+                    <Text style={style.dataRej}>Rejeitada</Text>
                   </View>
                 )}
               </View>

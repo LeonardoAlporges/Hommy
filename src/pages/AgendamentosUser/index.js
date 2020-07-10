@@ -32,7 +32,7 @@ class AgendamentoUser extends Component {
     this.Agendar();
   }
   Deletar = (valor, item) => {
-    if (valor == 0) {
+    if (valor == 3) {
       return null;
     }
     return api
@@ -98,7 +98,7 @@ class AgendamentoUser extends Component {
   render() {
     return (
       <View style={style.Container}>
-        <HeaderBack title=" Meus agendamentos de visita" onNavigation={() => this.navegar()} />
+        <HeaderBack title="Meus agendamentos" onNavigation={() => this.navegar()} />
         {this.state.Load && <Loading />}
 
         {this.state.MConfirmacaoDelete && (
@@ -107,6 +107,11 @@ class AgendamentoUser extends Component {
               this.Deletar(valor, this.state.item);
               this.setState({ MConfirmacaoDelete: false });
             }}
+            titulo="Cancelar visita?"
+            mensagem="A pessoa responsável pela república será notificada da sua desistência.
+            "
+            botaoCancel="Não"
+            botaoConfirmar="Sim"
             mensagem="Deseja deletar esse Agendamento ?"
             confirmar={true}
           />
@@ -123,13 +128,15 @@ class AgendamentoUser extends Component {
         )}
         {this.state.listaAgendamento.length == 0 && (
           <EmptyState
-            titulo="Sem Agendamentos"
-            mensagem="Aguarde logo aparecerár alguem para preencher esse vazio :("
+            titulo="Você não possui visitas agendadas."
+            mensagem="O que está esperando? Navegue pelo aplicativo e encontre uma vaga na república ideal. "
           />
         )}
-
+        <View style={{ widht: '100%', height: 20, paddingHorizontal: 20 }}>
+          <Text style={style.subtitulo}>Gerencie as repúblicas nas quais você solicitou uma visita.</Text>
+        </View>
         <View style={style.V_label}>
-          <Text style={style.label}>Sua lista de agendamento</Text>
+          <Text style={style.label}>Agendamentos</Text>
           <View style={style.barra} />
         </View>
 

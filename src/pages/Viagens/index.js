@@ -100,27 +100,33 @@ class Viagens extends Component {
   render() {
     return (
       <View style={{ backgroundColor: '#f2f2f2', flex: 1 }}>
-        <HeaderBack
-          title="Meus interesses"
-          onNavigation={() => this.navegar()}
-        />
-
+        <HeaderBack title="Meus interesses" onNavigation={() => this.navegar()} />
+        <View style={{ widht: '100%', marginTop: 10, height: 20, paddingHorizontal: 20 }}>
+          <Text style={style.subtitulo}>Gerencie as repúblicas nas quais você solicitou uma visita.</Text>
+        </View>
+        <View style={style.V_label}>
+          <Text style={style.label}>Seus interesses</Text>
+          <View style={style.barra} />
+        </View>
         {this.state.MConfirmacao && (
           <ModalConfirmacao
             retornoModal={valor => {
               this.deletar(valor, this.state.item);
               this.setState({ MConfirmacao: false });
             }}
-            mensagem="Deseja deletar esse anuncio ?"
-            confirmar={true}
+            titulo=" Cancelar carona?"
+            mensagem="O motorista será notificado de que você não possui mais interesse em viajar com ele."
+            botaoConfirmar="Sim"
+            botaoCancel="Não"
+            onfirmar={true}
           />
         )}
         {this.state.Load && <Loading />}
         {this.state.listaCaronas.length == 0 && (
           <View style={{ flex: 1, backgroundColor: '#fff' }}>
             <EmptyState
-              titulo="Sem Interesses"
-              mensagem="Busque caronas que lhe favoreça viajar :("
+              titulo="Você não demonstrou interesse em caronas recentemente."
+              mensagem="Vamos nessa! Navegue pelo aplicativo e encontre alguém com quem possa viajar."
             />
           </View>
         )}
@@ -134,17 +140,17 @@ class Viagens extends Component {
                 <View style={style.ViewStatus}>
                   {item.status == 'Análise' && (
                     <View style={style.Analise}>
-                      <Text style={style.data}>{item.status}</Text>
+                      <Text style={style.data}>Em análise</Text>
                     </View>
                   )}
                   {item.status == 'Confirmado' && (
                     <View style={style.Confirmado}>
-                      <Text style={style.dataConf}>{item.status}</Text>
+                      <Text style={style.dataConf}>Confirmada</Text>
                     </View>
                   )}
                   {item.status == 'Rejeitado' && (
                     <View style={style.Rejeitado}>
-                      <Text style={style.dataRej}>{item.status}</Text>
+                      <Text style={style.dataRej}>Rejeitada </Text>
                     </View>
                   )}
                   {item.status == 'Realizada' && (

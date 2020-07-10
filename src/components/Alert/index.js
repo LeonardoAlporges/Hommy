@@ -39,9 +39,9 @@ export default class CustomModal extends Component {
     if (this.props.parametro == 'Sucesso') {
       this.setState({
         icon: require('../../assets/Img/Succes.png'),
-        titulo: 'Sucesso!',
-        descricao: 'Sua solicitação foi recebida com sucesso',
-        botao: 'Confirmar',
+        titulo: 'Tudo certo!',
+        descricao: 'Concluído com sucesso',
+        botao: 'Ok',
       });
     }
     if (this.props.parametro == 'Aviso') {
@@ -56,8 +56,7 @@ export default class CustomModal extends Component {
       this.setState({
         icon: require('../../assets/Img/Fail_Connection.png'),
         titulo: 'OOPS!',
-        descricao:
-          'Nao foi possivel completar sua requisição, verifique sua conexao com a internet',
+        descricao: 'Alguma coisa deu errado. Por favor, verifique sua conexão com a internet.',
         botao: 'Voltar',
       });
     }
@@ -66,11 +65,7 @@ export default class CustomModal extends Component {
   render() {
     return (
       <View>
-        <Modal
-          animationType="fade"
-          visible={this.state.modalVisible}
-          transparent={true}
-        >
+        <Modal animationType="fade" visible={this.state.modalVisible} transparent={true}>
           <View style={Estilos.ViewFundo}>
             <View style={Estilos.ViewModal}>
               <Image style={Estilos.Imagem} source={this.state.icon} />

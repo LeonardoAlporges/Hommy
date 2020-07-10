@@ -28,15 +28,11 @@ class ModalConfirmacao extends Component {
   };
   render() {
     return (
-      <Modal
-        animationType="fade"
-        visible={this.state.modalVisible}
-        transparent={true}
-      >
+      <Modal animationType="fade" visible={this.state.modalVisible} transparent={true}>
         <View style={style.ViewFundo}>
           <View style={style.ViewModal}>
-            <Text style={style.titulo}>Deseja Aceitar ?</Text>
-            <Text style={style.descricao}>{this.state.mensagem}</Text>
+            <Text style={style.titulo}>{this.props.titulo}</Text>
+            {this.props.mensagem != '' && <Text style={style.descricao}>{this.state.mensagem}</Text>}
             <View style={style.V_botoes}>
               <Button
                 style={style.botaoCancelar}
@@ -45,7 +41,7 @@ class ModalConfirmacao extends Component {
                   this.setState({ modalVisible: false });
                 }}
               >
-                <Text style={style.botaoTxtCancelar}>Cancelar</Text>
+                <Text style={style.botaoTxtCancelar}>{this.props.botaoCancel}</Text>
               </Button>
               <Button
                 style={style.botao}
@@ -54,7 +50,7 @@ class ModalConfirmacao extends Component {
                   this.setState({ modalVisible: false });
                 }}
               >
-                <Text style={style.botaoTxt}>Confirmar</Text>
+                <Text style={style.botaoTxt}>{this.props.botaoConfirmar}</Text>
               </Button>
             </View>
           </View>

@@ -5,11 +5,7 @@ import React, { Component, Fragment } from 'react';
 import { Text, Image, ScrollView, Modal } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import { Item, Input, Button, Spinner } from 'native-base';
-import {
-  imagePickerOptions,
-  uploadFileToFireBaseUser,
-  uploadProgress,
-} from '../../utils';
+import { imagePickerOptions, uploadFileToFireBaseUser, uploadProgress } from '../../utils';
 import { withNavigation } from 'react-navigation';
 import CustomModal from '../../components/Alert';
 import estilo from './style';
@@ -62,9 +58,7 @@ class CadastroUsuario extends Component {
 
   monitorFileUpload = task => {
     task.on('state_changed', snapshot => {
-      const progress = uploadProgress(
-        snapshot.bytesTransferred / snapshot.totalBytes
-      );
+      const progress = uploadProgress(snapshot.bytesTransferred / snapshot.totalBytes);
 
       switch (snapshot.state) {
         case 'running':
@@ -106,27 +100,18 @@ class CadastroUsuario extends Component {
   render() {
     return (
       <ScrollView>
-        <HeaderBack
-          title="Cadastro de usuario"
-          onNavigation={() => this.navegar()}
-        />
+        <HeaderBack title="Cadastro de usuário" onNavigation={() => this.navegar()} />
         <View style={estilo.container}>
           {this.state.upload ? (
             <View>
               {this.state.load ? (
                 <Spinner color="#142850" />
               ) : (
-                <Image
-                  source={{ uri: this.state.imageURI }}
-                  style={estilo.imagemStyle}
-                />
+                <Image source={{ uri: this.state.imageURI }} style={estilo.imagemStyle} />
               )}
             </View>
           ) : (
-            <Image
-              source={require('../../assets/Img/Republica_Send_Pictures.png')}
-              style={estilo.imagemStyle}
-            />
+            <Image source={require('../../assets/Img/Republica_Send_Pictures.png')} style={estilo.imagemStyle} />
           )}
           <View style={estilo.V_Btn}>
             <Button style={estilo.botao_send} onPress={this.uploadFile}>
@@ -146,32 +131,22 @@ class CadastroUsuario extends Component {
               this.EnviarCadastro(values);
             }}
             validationSchema={yup.object().shape({
-              nome: yup
-                .string('Somente texto')
-                .required('Insira seu nome completo '),
+              nome: yup.string().required('Insira seu nome completo '),
               email: yup
-                .string('Somente texto')
-                .email('Insira um Email valido')
-                .required('Insira um Email para sua conta'),
+                .string()
+                .email('E-mail inválido ou incorreto')
+                .required('Campo obrigatório'),
               celular: yup
-                .string('prença corretamente')
+                .string()
                 .max(9999999999999)
-                .required(' Insira um numero de celular'),
+                .required(' Campo obrigatórior'),
               password: yup
-                .string('Insira sua senha')
-                .min(8, 'Senha minima é de 8 digitos')
-                .required('Insira uma senha'),
+                .string()
+                .min(8, 'Mínimo 8 dígitos necessários')
+                .required('Campo obrigatório'),
             })}
           >
-            {({
-              values,
-              handleChange,
-              errors,
-              setFieldTouched,
-              touched,
-              isValid,
-              handleSubmit,
-            }) => (
+            {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
               <Fragment>
                 {this.state.erro && (
                   <CustomModal
@@ -198,11 +173,7 @@ class CadastroUsuario extends Component {
                 )}
                 <View style={estilo.view_CamposLogin}>
                   <Item>
-                    <Icon
-                      style={estilo.icons_CamposLogin}
-                      active
-                      name="account-outline"
-                    />
+                    <Icon style={estilo.icons_CamposLogin} active name="account-outline" />
                     <Input
                       autoFocus={true}
                       placeholderTextColor="#2e2e2e"
@@ -225,11 +196,7 @@ class CadastroUsuario extends Component {
 
                 <View style={estilo.view_CamposLogin}>
                   <Item>
-                    <Icon
-                      style={estilo.icons_CamposLogin}
-                      active
-                      name="email-outline"
-                    />
+                    <Icon style={estilo.icons_CamposLogin} active name="email-outline" />
                     <Input
                       placeholderTextColor="#2e2e2e"
                       style={estilo.labelInput}
@@ -250,11 +217,7 @@ class CadastroUsuario extends Component {
 
                 <View style={estilo.view_CamposLogin}>
                   <Item>
-                    <Icon
-                      style={estilo.icons_CamposLogin}
-                      active
-                      name="phone-outline"
-                    />
+                    <Icon style={estilo.icons_CamposLogin} active name="phone-outline" />
                     <TextInputMask
                       placeholderTextColor="#2e2e2e"
                       style={estilo.labelInput}
@@ -277,11 +240,7 @@ class CadastroUsuario extends Component {
 
                 <View style={estilo.view_CamposLogin}>
                   <Item>
-                    <Icon
-                      style={estilo.icons_CamposLogin}
-                      active
-                      name="key-outline"
-                    />
+                    <Icon style={estilo.icons_CamposLogin} active name="key-outline" />
                     <Input
                       placeholderTextColor="#2e2e2e"
                       style={estilo.labelInput}
@@ -302,11 +261,7 @@ class CadastroUsuario extends Component {
                 )}
 
                 <View style={estilo.view_BotaoEntar}>
-                  <Button
-                    disabled={!isValid}
-                    style={estilo.botao_login}
-                    onPress={() => this.EnviarCadastro(values)}
-                  >
+                  <Button disabled={!isValid} style={estilo.botao_login} onPress={() => this.EnviarCadastro(values)}>
                     <Text style={estilo.textoLabel}>Enviar</Text>
                   </Button>
                 </View>
@@ -316,11 +271,7 @@ class CadastroUsuario extends Component {
         </View>
 
         <View>
-          <Modal
-            animationType="fade"
-            transparent={true}
-            visible={this.state.modalLoadVisible}
-          >
+          <Modal animationType="fade" transparent={true} visible={this.state.modalLoadVisible}>
             <View style={estilo.ViewFundo}>
               <View style={estilo.ViewModal}>
                 <Spinner color="red" />

@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
 
-import {
-  FlatList,
-  View,
-  Modal,
-  Text,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
+import { FlatList, View, Modal, Text, TouchableOpacity, Image } from 'react-native';
 import {
   editChegada,
   editData,
@@ -23,16 +16,7 @@ import {
 import { connect } from 'react-redux';
 import { withNavigation, NavigationEvents } from 'react-navigation';
 
-import {
-  CheckBox,
-  Spinner,
-  ListItem,
-  Fab,
-  Input,
-  Item,
-  Button,
-  Picker,
-} from 'native-base';
+import { CheckBox, Spinner, ListItem, Fab, Input, Item, Button, Picker } from 'native-base';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Estilo from './style';
@@ -199,16 +183,10 @@ class Caronas extends Component {
       });
     }
     if (this.state.filtroValorMenor === true) {
-      listaCaronas = _.filter(
-        listaCaronas,
-        ({ valor }) => valor >= this.state.aluguelMin
-      );
+      listaCaronas = _.filter(listaCaronas, ({ valor }) => valor >= this.state.aluguelMin);
     }
     if (this.state.filtroValorMaior === true) {
-      listaCaronas = _.filter(
-        listaCaronas,
-        ({ valor }) => valor <= this.state.aluguelMax
-      );
+      listaCaronas = _.filter(listaCaronas, ({ valor }) => valor <= this.state.aluguelMax);
     }
     await this.setState({ listaCaronas });
   };
@@ -269,8 +247,8 @@ class Caronas extends Component {
                   <View style={{ backgroundColor: '#ffffff' }}>
                     {this.state.listaCaronas.length == 0 && (
                       <EmptyState
-                        titulo="Sem Anuncios"
-                        mensagem="Começe publicando um agora mesmo"
+                        titulo="Nada por aqui!"
+                        mensagem="Por enquanto ninguém está oferecendo carona. Tente novamente mais tarde. "
                       />
                     )}
                   </View>
@@ -282,11 +260,7 @@ class Caronas extends Component {
 
         {this.state.modalVisible && (
           <View style={Estilo.V_modalExterno}>
-            <Modal
-              animationType="fade"
-              visible={this.state.modalVisible}
-              transparent={true}
-            >
+            <Modal animationType="fade" visible={this.state.modalVisible} transparent={true}>
               <View style={Estilo.V_modalInterno}>
                 <Text>Valor</Text>
                 <ListItem style={Estilo.listStyle}>
@@ -363,10 +337,7 @@ class Caronas extends Component {
                       <Picker.Item label="Vila Velha" value="Vila Velha" />
                       <Picker.Item label="Muniz Freire" value="Muniz Freire" />
                       <Picker.Item label="Guacui" value="Guacui" />
-                      <Picker.Item
-                        label="Bom Jesus do Norte"
-                        value="Bom Jesus do Norte"
-                      />
+                      <Picker.Item label="Bom Jesus do Norte" value="Bom Jesus do Norte" />
                       <Picker.Item label="Celina" value="Celina" />
                       <Picker.Item label="Rive" value="Rive" />
                     </Picker>
@@ -395,10 +366,7 @@ class Caronas extends Component {
                       <Picker.Item label="Vila Velha" value="Vila Velha" />
                       <Picker.Item label="Muniz Freire" value="Muniz Freire" />
                       <Picker.Item label="Guacui" value="Guacui" />
-                      <Picker.Item
-                        label="Bom Jesus do Norte"
-                        value="Bom Jesus do Norte"
-                      />
+                      <Picker.Item label="Bom Jesus do Norte" value="Bom Jesus do Norte" />
                       <Picker.Item label="Celina" value="Celina" />
                       <Picker.Item label="Rive" value="Rive" />
                     </Picker>

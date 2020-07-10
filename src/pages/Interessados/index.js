@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
-import {
-  View,
-  TouchableOpacity,
-  Text,
-  FlatList,
-  ScrollView,
-} from 'react-native';
+import { View, TouchableOpacity, Text, FlatList, ScrollView } from 'react-native';
 import { Icon } from 'native-base';
 import style from './style';
 import api from '../../service/api';
@@ -49,10 +43,11 @@ class Interessados extends Component {
       });
   };
 
-  SendStatus = (number, user, tipo) => {
+  SendStatus = (number, user) => {
     this.setState({ Load: true });
-
+    console.log('SENDE', number, user);
     if (number === 1) {
+      console.log('User');
       const data = {
         email: user,
         status: 'Confirmado',
@@ -95,21 +90,25 @@ class Interessados extends Component {
 
   render() {
     return (
-      <View
-        style={{ backgroundColor: '#ffffff', width: '100%', height: '100%' }}
-      >
-        <HeaderBack
-          title="Lista de interessados"
-          onNavigation={() => this.navegar()}
-        />
+      <View style={{ backgroundColor: '#ffffff', width: '100%', height: '100%' }}>
+        <HeaderBack title="Solicitações" onNavigation={() => this.navegar()} />
         {this.state.Load && <Loading />}
         {this.state.user == 0 && (
           <EmptyState
-            titulo="Sem interessados"
-            mensagem="Aguarde logo aparecerár alguem para preencher esse vazio :("
+            titulo="Ah não! "
+            mensagem="Sua carona ainda não foi solicitada por nenhum usuário. Aguarde, logo você encontrará um parceiro para sua viagem."
           />
         )}
         <ScrollView>
+          <View style={{ widht: '100%', height: 40, paddingHorizontal: 20 }}>
+            <Text style={style.subtitulo}>
+              Logo abaixo estão listadas as pessoas que demonstraram interesse em viajar com você.
+            </Text>
+          </View>
+          <View style={style.V_label}>
+            <Text style={style.label}>Interessados</Text>
+            <View style={style.barra} />
+          </View>
           <View style={style.Listas}>
             <FlatList
               style={style.flatList}
@@ -118,28 +117,28 @@ class Interessados extends Component {
                 <View>
                   <CartaoUser
                     status={item[0].status}
-                    callback={(number, user) =>
-                      this.SendStatus(number, user, tipo)
-                    }
+                    callback={(number, user) => this.SendStatus(number, user)}
                     dados={item[0].user}
                     dadosGerais={item}
                     tipoRetorno="Carona"
                   />
-                  {item[0].status == 'Confirmado' && (
-                    <View style={style.botaoStatusConf}>
-                      <Text style={style.textStatusConf}>{item[0].status}</Text>
-                    </View>
-                  )}
-                  {item[0].status == 'Análise' && (
-                    <View style={style.botaoStatusAna}>
-                      <Text style={style.textStatusAna}>{item[0].status}</Text>
-                    </View>
-                  )}
-                  {item[0].status == 'Rejeitado' && (
-                    <View style={style.botaoStatusRej}>
-                      <Text style={style.textStatusRej}>{item[0].status}</Text>
-                    </View>
-                  )}
+                  <View style={{ marginTop: 10 }}>
+                    {item[0].status == 'Confirmado' && (
+                      <View style={style.botaoStatusConf}>
+                        <Text style={style.textStatusConf}>Confirmada</Text>
+                      </View>
+                    )}
+                    {item[0].status == 'Análise' && (
+                      <View style={style.botaoStatusAna}>
+                        <Text style={style.textStatusAna}>Em análise</Text>
+                      </View>
+                    )}
+                    {item[0].status == 'Rejeitado' && (
+                      <View style={style.botaoStatusRej}>
+                        <Text style={style.textStatusRej}>Rejeitada </Text>
+                      </View>
+                    )}
+                  </View>
                 </View>
               )}
               keyExtractor={item => item[0]._id}

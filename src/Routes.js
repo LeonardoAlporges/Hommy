@@ -26,6 +26,7 @@ import Agendamentos from './pages/Agendamentos';
 import AgendamentoUser from './pages/AgendamentosUser';
 import ValidarCodigo from './pages/ValidarCodigo';
 import Notificacao from './pages/TesteNot';
+import TelefoneUteis from './pages/TelefoneUteis';
 
 import { createDrawerNavigator } from 'react-navigation-drawer';
 
@@ -46,6 +47,7 @@ const Navegação = createStackNavigator(
     Login: Login,
     CadastroUsuario: CadastroUsuario,
     ValidarCodigo,
+    TelefoneUteis,
     AgendamentoUser,
     Agendamentos,
     Agendar,

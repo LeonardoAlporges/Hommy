@@ -1,14 +1,6 @@
 import React, { Component } from 'react';
 import { withNavigation } from 'react-navigation';
-import {
-  TouchableOpacity,
-  View,
-  Text,
-  Alert,
-  Modal,
-  Image,
-  Linking,
-} from 'react-native';
+import { TouchableOpacity, View, Text, Alert, Modal, Image, Linking } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions, StackActions } from 'react-navigation';
 
@@ -26,9 +18,8 @@ class Cabeca extends Component {
   };
 
   AbrirUrl = () => {
-    Linking.openUrl(
-      'https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849'
-    );
+    Linking.openURL(`tel:27997488849`)
+    //Linking.openUrl('https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849');
   };
 
   resetNavigation(Rota) {
@@ -75,11 +66,7 @@ class Cabeca extends Component {
           {/* //<Icon style={Estilos.icon2} name="settings" /> */}
         </TouchableOpacity>
 
-        <Modal
-          transparent={true}
-          animationType="slide"
-          visible={this.state.isModalVisible}
-        >
+        <Modal transparent={true} animationType="slide" visible={this.state.isModalVisible}>
           <View style={Estilos.bgModal}>
             <View style={Estilos.modal}>
               <View style={Estilos.voltar}>
@@ -117,8 +104,7 @@ class Cabeca extends Component {
                 <Button
                   style={Estilos.botoes}
                   onPress={() => {
-                    this.props.navigation.navigate('Anuncios'),
-                      this.setState({ isModalVisible: false });
+                    this.props.navigation.navigate('Anuncios'), this.setState({ isModalVisible: false });
                   }}
                 >
                   <Icon style={Estilos.iconBotoes} name="book-open" />
@@ -140,8 +126,7 @@ class Cabeca extends Component {
                 </Button>
                 <Button
                   onPress={() => {
-                    this.props.navigation.navigate('Viagens'),
-                      this.setState({ isModalVisible: false });
+                    this.props.navigation.navigate('Viagens'), this.setState({ isModalVisible: false });
                   }}
                   style={Estilos.botoes}
                 >
@@ -152,23 +137,18 @@ class Cabeca extends Component {
                 <Button
                   style={Estilos.botoes}
                   onPress={() => {
-                    this.props.navigation.navigate('Perfil', {
-                      dados: this.state.dados,
-                      update: true,
-                    });
+                    this.props.navigation.navigate('TelefoneUteis');
                     this.setState({ isModalVisible: false });
                   }}
                 >
-                  <Icon style={Estilos.iconBotoes} name="pencil" />
-                  <Text style={Estilos.textBotoes}>Meu perfil</Text>
+                  <Icon style={Estilos.iconBotoes} name="phone" />
+                  <Text style={Estilos.textBotoes}>Telefones Uteis</Text>
                   <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
                 </Button>
 
                 <Button
                   onPress={() => {
-                    Linking.openURL(
-                      'https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849'
-                    );
+                    Linking.openURL('https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849');
                   }}
                   style={Estilos.botoes}
                 >

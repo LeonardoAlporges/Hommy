@@ -22,6 +22,11 @@ const style = StyleSheet.create({
   iconDel: {
     fontSize: 20,
   },
+  subtitulo: {
+    fontSize: 14,
+    color: '#2e2e2e',
+    fontFamily: 'Roboto',
+  },
   botao: {
     backgroundColor: '#142850',
     display: 'flex',
