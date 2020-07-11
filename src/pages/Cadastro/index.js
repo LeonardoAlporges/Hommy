@@ -165,7 +165,7 @@ export class Cadastro extends Component {
       //     'https://firebasestorage.googleapis.com/v0/b/hommy-d0890.appspot.com/o/pictures%2Fuser%2Fsemimagem.jpg?alt=media&token=dbb11e1c-9664-46d6-b65a-be4169810291',
       // });
     }
-    this.data = {
+    const data = {
       imagem1: this.state.imageURI0,
       imagem2: this.state.imageURI1,
       imagem3: this.state.imageURI2,
@@ -192,7 +192,7 @@ export class Cadastro extends Component {
     try {
       if (this.state.update == true) {
         await api
-          .put(`/main/${this.props.email}`, this.data)
+          .put(`/main/${this.props.email}`, data)
           .then(Response => {
             this.setState({ Load: false });
             this.setState({ sucesso: true });
@@ -222,6 +222,7 @@ export class Cadastro extends Component {
       }
     } catch (error) {}
   }
+
   render() {
     return (
       <Formik
@@ -247,52 +248,53 @@ export class Cadastro extends Component {
         }}
         validationSchema={yup.object().shape({
           nome: yup
-            .string('Erro')
-            .min(3)
-            .required('Insira o nome da sua republica'),
+            .string('')
+            .min(3, 'Minimo de 3 caracteres')
+            .max(30, 'Maximo permitido de 30 caracteres')
+            .required('Campo obrigatório'),
           bairro: yup
-            .string('Erro')
-            .min(3)
-            .max(15)
-            .required('Insira o bairro aonde fica localizada'),
+            .string('')
+            .min(3, 'Minimo de 3 caracteres')
+            .max(25, 'Maximo permitido de 25 caracteres')
+            .required('Campo obrigatório'),
           rua: yup
-            .string('erroo')
-            .min(3)
-            .max(25)
-            .required('Insira a rua aonde fica localizada'),
+            .string('')
+            .min(3, 'Minimo de 3 caracteres')
+            .max(25, 'Maximo permitido de 25 caracteres')
+            .required('Campo obrigatório'),
           numero: yup
             .number('Somente numeros')
-            .min(1)
-            .max(10000)
-            .required('Numero invalido'),
+            .min(1, 'Valor minimo 1')
+            .max(10000, 'Valor maximo ')
+            .required('Campo obrigatório'),
           descricao: yup
-            .string('Erro')
+            .string('')
             .min(3, 'Minimo de 3 caracteres')
             .max(50, 'Maximo permitido de 50 caracteres'),
           aluguel: yup
             .number('Somente numeros')
-            .min(0)
-            .max(2000, 'Valor maximo de 2000 reais')
-            .required('Valor invalido'),
+            .min(10, 'Valor minimo R$ 10')
+            .max(2000, 'Valor máximo de R$ 2000')
+            .required('Campo obrigatório'),
           contas: yup
             .number('Somente numero')
-            .min(10)
-            .max(600)
-            .required('Valor invalido'),
-          genero: yup.string('Erro'),
-          animais: yup.string('Erro'),
-          tipoImovel: yup.string('Erro'),
-          numeroVagas: yup.string('Erro'),
+            .min(10, 'Valor minimo R$ 10')
+            .max(600, 'Valor maximo R$ 600')
+            .required('Campo obrigatório'),
+          genero: yup.string('').required('Campo obrigatório'),
+          animais: yup.string('').required('Campo obrigatório'),
+          tipoImovel: yup.string('').required('Campo obrigatório'),
+          numeroVagas: yup.string('').required('Campo obrigatório'),
           aQuarto: yup
-            .string('Erro')
+            .string('')
             .min(3)
             .max(40)
-            .required('Insira as acomodações do quarto'),
+            .required('Campo obrigatório'),
           aRepublica: yup
-            .string('Erro')
+            .string('')
             .min(3)
             .max(40)
-            .required('Insira as acomodações da repúblicaaqui'),
+            .required('Campo obrigatório'),
         })}
       >
         {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
@@ -360,7 +362,85 @@ export class Cadastro extends Component {
                     <Text style={estilo.textRepublica}>
                       Insira as informações necessárias para registrar uma nova república.
                     </Text>
-
+                    <View style={estilo.V_ImageLabel}>
+                      <Text style={estilo.txtLabel}>Envie Fotos de Sua República</Text>
+                    </View>
+                    <View style={estilo.V_ImageEmpty}>
+                      <ScrollView horizontal={true}>
+                        {this.state.imageURI0 == null ? (
+                          <View style={estilo.V_ImageFull}>
+                            <Image
+                              source={require('../../assets/Img/Republica_Send_Pictures.png')}
+                              style={estilo.ImageEmpty}
+                            />
+                          </View>
+                        ) : (
+                          <View style={estilo.V_ImageFull}>
+                            <Image source={{ uri: this.state.imageURI0 }} style={estilo.ImageFull} />
+                          </View>
+                        )}
+                        {this.state.imageURI1 == null ? (
+                          <View style={estilo.V_ImageFull}>
+                            <Image
+                              source={require('../../assets/Img/Republica_Send_Pictures.png')}
+                              style={estilo.ImageEmpty}
+                            />
+                          </View>
+                        ) : (
+                          <View style={estilo.V_ImageFull}>
+                            <Image source={{ uri: this.state.imageURI1 }} style={estilo.ImageFull} />
+                          </View>
+                        )}
+                        {this.state.imageURI2 == null ? (
+                          <View style={estilo.V_ImageFull}>
+                            <Image
+                              source={require('../../assets/Img/Republica_Send_Pictures.png')}
+                              style={estilo.ImageEmpty}
+                            />
+                          </View>
+                        ) : (
+                          <View style={estilo.V_ImageFull}>
+                            <Image source={{ uri: this.state.imageURI2 }} style={estilo.ImageFull} />
+                          </View>
+                        )}
+                        {this.state.imageURI3 == null ? (
+                          <View style={estilo.V_ImageFull}>
+                            <Image
+                              source={require('../../assets/Img/Republica_Send_Pictures.png')}
+                              style={estilo.ImageEmpty}
+                            />
+                          </View>
+                        ) : (
+                          <View style={estilo.V_ImageFull}>
+                            <Image source={{ uri: this.state.imageURI3 }} style={estilo.ImageFull} />
+                          </View>
+                        )}
+                        {this.state.imageURI4 == null ? (
+                          <View style={estilo.V_ImageFull}>
+                            <Image
+                              source={require('../../assets/Img/Republica_Send_Pictures.png')}
+                              style={estilo.ImageEmpty}
+                            />
+                          </View>
+                        ) : (
+                          <View style={estilo.V_ImageFull}>
+                            <Image source={{ uri: this.state.imageURI4 }} style={estilo.ImageFull} />
+                          </View>
+                        )}
+                      </ScrollView>
+                    </View>
+                    <View style={estilo.V_BotaoImg}>
+                      <Button
+                        disabled={this.state.contadorImagem == 3}
+                        style={estilo.botao_send}
+                        onPress={() => {
+                          this.uploadFile();
+                        }}
+                      >
+                        {/* //<Icon name="account-outline" style={estilo.icon_send} /> */}
+                        <Text>Enviar Fotos ({this.state.contadorImagem}/3)</Text>
+                      </Button>
+                    </View>
                     <View>
                       <Text style={estilo.txtLabel}>Nome da República</Text>
                       <Item>
@@ -432,7 +512,8 @@ export class Cadastro extends Component {
                           onChangeText={handleChange('descricao')}
                           placeholderTextColor="#2e2e2e"
                           //style={estilo.textoValue}
-                          placeholder="EX: Perto da UFES, local para estudo..."
+                          placeholderTextColor="#989898"
+                          placeholder="...Perto da UFES, local para estudo..."
                           onBlur={() => setFieldTouched('descricao')}
                         />
                       </Item>
@@ -441,73 +522,6 @@ export class Cadastro extends Component {
                       {touched.descricao && errors.descricao && (
                         <Text style={estilo.textError}>{errors.descricao}</Text>
                       )}
-                    </View>
-                    <View style={estilo.V_ImageLabel}>
-                      <Text style={estilo.txtLabel}>Envie Fotos de Sua República</Text>
-                    </View>
-                    <View style={estilo.V_ImageEmpty}>
-                      <ScrollView horizontal={true}>
-                        {this.state.imageURI0 == null ? (
-                          <View style={estilo.V_ImageFull}>
-                            <Image
-                              source={require('../../assets/Img/Republica_Send_Pictures.png')}
-                              style={estilo.ImageEmpty}
-                            />
-                          </View>
-                        ) : (
-                          <View style={estilo.V_ImageFull}>
-                            <Image source={{ uri: this.state.imageURI0 }} style={estilo.ImageFull} />
-                          </View>
-                        )}
-                        {this.state.imageURI1 == null ? (
-                          <View style={estilo.V_ImageFull}>
-                            <Image
-                              source={require('../../assets/Img/Republica_Send_Pictures.png')}
-                              style={estilo.ImageEmpty}
-                            />
-                          </View>
-                        ) : (
-                          <View style={estilo.V_ImageFull}>
-                            <Image source={{ uri: this.state.imageURI1 }} style={estilo.ImageFull} />
-                          </View>
-                        )}
-                        {this.state.imageURI2 == null ? (
-                          <View style={estilo.V_ImageFull}>
-                            <Image
-                              source={require('../../assets/Img/Republica_Send_Pictures.png')}
-                              style={estilo.ImageEmpty}
-                            />
-                          </View>
-                        ) : (
-                          <View style={estilo.V_ImageFull}>
-                            <Image source={{ uri: this.state.imageURI2 }} style={estilo.ImageFull} />
-                          </View>
-                        )}
-                        {this.state.imageURI3 == null ? (
-                          <View style={estilo.V_ImageFull}>
-                            <Image
-                              source={require('../../assets/Img/Republica_Send_Pictures.png')}
-                              style={estilo.ImageEmpty}
-                            />
-                          </View>
-                        ) : (
-                          <View style={estilo.V_ImageFull}>
-                            <Image source={{ uri: this.state.imageURI3 }} style={estilo.ImageFull} />
-                          </View>
-                        )}
-                        {this.state.imageURI4 == null ? (
-                          <View style={estilo.V_ImageFull}>
-                            <Image
-                              source={require('../../assets/Img/Republica_Send_Pictures.png')}
-                              style={estilo.ImageEmpty}
-                            />
-                          </View>
-                        ) : (
-                          <View style={estilo.V_ImageFull}>
-                            <Image source={{ uri: this.state.imageURI4 }} style={estilo.ImageFull} />
-                          </View>
-                        )}
-                      </ScrollView>
                     </View>
 
                     <View style={estilo.V_BotaoImg}>
@@ -700,9 +714,9 @@ export class Cadastro extends Component {
                             style={estilo.place}
                             value={values.aQuarto}
                             onChangeText={handleChange('aQuarto')}
-                            placeholder=""
                             onBlur={() => setFieldTouched('aQuarto')}
-                            placeholder="EX: Cama, Ventilador, Janela"
+                            placeholder="...Cama, Ventilador, Janela"
+                            placeholderTextColor="#989898"
                           />
                         </Item>
                       </View>
@@ -717,9 +731,9 @@ export class Cadastro extends Component {
                             style={estilo.place}
                             value={values.aRepublica}
                             onChangeText={handleChange('aRepublica')}
-                            placeholder=""
                             onBlur={() => setFieldTouched('aRepublica')}
-                            placeholder="EX: Wifi, Maquina de Lavar, Fogao"
+                            placeholderTextColor="#989898"
+                            placeholder="...Wifi, Maquina de Lavar, Fogao"
                           />
                         </Item>
                       </View>
@@ -727,33 +741,6 @@ export class Cadastro extends Component {
                         {touched.aRepublica && errors.aRepublica && (
                           <Text style={estilo.textError}>{errors.aRepublica}</Text>
                         )}
-                      </View>
-
-                      <View style={estilo.V_btnProx}>
-                        <Button style={estilo.btnProximo} onPress={handleSubmit}>
-                          <Text>Publicar república!</Text>
-                          <Icon name="ios-checkmark-circle" style={estilo.iconeBtn} />
-                        </Button>
-                        <View>
-                          <Text>
-                            {
-                              (errors.nome,
-                              errors.bairro,
-                              errors.rua,
-                              errors.numero,
-                              errors.aluguel,
-                              errors.contas,
-                              errors.moradores,
-                              errors.genero,
-                              errors.animais,
-                              errors.aQuarto,
-                              errors.aRepublica,
-                              errors.numeroVagas,
-                              errors.tipoImovel,
-                              errors.descricao)
-                            }
-                          </Text>
-                        </View>
                       </View>
                     </View>
                   </ScrollView>

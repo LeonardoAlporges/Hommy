@@ -58,9 +58,9 @@ const estilosRepublica = StyleSheet.create({
   V_filtroInterno: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 500,
+    height: 480,
     width: 350,
-    marginTop: 125,
+    marginTop: 120,
     marginHorizontal: 30,
     backgroundColor: 'white',
     borderRadius: 20,
@@ -78,9 +78,27 @@ const estilosRepublica = StyleSheet.create({
     alignItems: 'stretch',
     marginBottom: 10,
   },
+  listStyleInput: {
+    alignItems: 'stretch',
+    marginBottom: 10,
+
+    height: 60,
+  },
   textFiltro: {
     alignSelf: 'stretch',
     paddingHorizontal: 15,
+    textAlign: 'center',
+  },
+  textFiltroValor: {
+    color: '#2e2e2e',
+    fontFamily: 'Roboto',
+    textAlign: 'center',
+    fontSize: 16,
+  },
+  ViewLabel: {
+    width: 50,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
   },
   itemInput: {
     width: 100,

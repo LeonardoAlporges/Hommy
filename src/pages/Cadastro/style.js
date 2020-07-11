@@ -103,7 +103,7 @@ const estilo = StyleSheet.create({
   place: {
     fontFamily: 'Roboto',
     fontSize: 14,
-    color: '#989898',
+    color: '#000000',
   },
   enviar: {
     alignItems: 'center',
@@ -152,7 +152,6 @@ const estilo = StyleSheet.create({
     width: '100%',
     height: 20,
     marginBottom: 18,
-    marginTop: 15,
   },
   V_ImageEmpty: {
     justifyContent: 'space-around',
