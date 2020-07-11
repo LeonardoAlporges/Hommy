@@ -25,11 +25,27 @@ export default class CustomModal extends Component {
       this.props.onAction();
     }
   };
+  verificarImagem = () => {
+    if (this.props.imagem == '') {
+      this.setState({ icon: require('../../assets/Img/Succes.png') });
+    } else if (this.props.imagem == 'NaoEncontrado') {
+      this.setState({ icon: require('../../assets/Img/Nao_Encontrado.png') });
+    } else if (this.props.imagem == 'EnvieImagem') {
+      this.setState({ icon: require('../../assets/Img/Enviar_Foto.png') });
+    } else if (this.props.imagem == 'Email') {
+      this.setState({ icon: require('../../assets/Img/Nao_Encontrado.png') });
+    } else if (this.props.imagem == 'Teste') {
+      this.setState({ icon: require('../../assets/Img/Nao_Encontrado.png') });
+    }
+  };
 
   UNSAFE_componentWillMount() {
+    this.verificarImagem();
     if (this.props.parametro == 'Custom') {
+      if (this.props.imagem == '' || !this.props.imagem) {
+        this.setState({ icon: require('../../assets/Img/Succes.png') });
+      }
       this.setState({
-        icon: require('../../assets/Img/Succes.png'),
         titulo: this.props.titulo,
         descricao: this.props.descricao,
         botao: this.props.botao,
@@ -42,14 +58,6 @@ export default class CustomModal extends Component {
         titulo: 'Tudo certo!',
         descricao: 'Concluído com sucesso',
         botao: 'Ok',
-      });
-    }
-    if (this.props.parametro == 'Aviso') {
-      this.setState({
-        icon: require('../../assets/Img/Question.png'),
-        titulo: 'Fique atento ',
-        descricao: 'Voçe pode ter inserido algum dado errado',
-        botao: 'Confirmar',
       });
     }
     if (this.props.parametro == 'Erro') {

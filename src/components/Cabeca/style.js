@@ -4,16 +4,22 @@ const Estilos = StyleSheet.create({
   ViewCabeca: {
     flexDirection: 'row',
     alignItems: 'center',
+    width: '100%',
     height: 50,
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     backgroundColor: '#ffffff',
   },
   touch_Icon: {
-    marginLeft: 10,
-    marginRight: 40,
+    position: 'absolute',
+    left: 10,
+  },
+  touch_Fake: {
+    position: 'absolute',
+    right: 10,
   },
   Titulo: {
-    marginRight: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   txt: {
     fontFamily: 'WorkSans-Thin',

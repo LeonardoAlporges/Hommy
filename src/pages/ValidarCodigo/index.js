@@ -21,6 +21,7 @@ class ValidarCodigo extends Component {
       sucesso: false,
       codigoValidado: false,
       email: this.props.navigation.state.params.email,
+      ErroCodigo: false,
     };
   }
   static navigationOptions = { header: null };
@@ -43,8 +44,12 @@ class ValidarCodigo extends Component {
         this.setState({ codigoValidado: true });
       })
       .catch(error => {
-        this.setState({ Erro: true });
         console.log(error, error.status);
+        if (error.response.status == 401 || error.response.status == 404) {
+          this.setState({ ErroCodigo: true });
+        } else {
+          this.setState({ Erro: true });
+        }
       });
   };
   resetNavigation(Rota) {
@@ -68,7 +73,6 @@ class ValidarCodigo extends Component {
       })
       .catch(error => {
         this.setState({ Erro: true });
-        console.log(error);
       });
   };
 
@@ -126,6 +130,20 @@ class ValidarCodigo extends Component {
                   }}
                 />
               )}
+
+              {this.state.ErroCodigo && (
+                <CustomModal
+                  parametro="Custom"
+                  imagem="NaoEncontrado"
+                  titulo="Código incorreto"
+                  descricao="Verifique se digitou tudo certo. Não foi possível continuar a recuperação de sua senha com este código."
+                  botao="Verificar"
+                  callback={() => {
+                    this.setState({ ErroCodigo: false });
+                  }}
+                />
+              )}
+
               {!this.state.codigoValidado && (
                 <View style={estilo.view_CamposLogin}>
                   <Item>

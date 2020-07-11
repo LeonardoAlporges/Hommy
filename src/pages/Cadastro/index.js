@@ -60,6 +60,8 @@ export class Cadastro extends Component {
       envio: true,
       carregando: false,
       modalLoadVisible: false,
+      existeRepublica: false,
+      semFoto: false,
     };
     this.verificarParametro(this.props.navigation.state.params.update);
   }
@@ -156,10 +158,12 @@ export class Cadastro extends Component {
     this.setState({ Load: true });
     console.log;
     if (this.state.imageURI0 == null && this.state.imageURI1 == null && this.state.imageURI2 == null) {
-      this.setState({
-        imageURI0:
-          'https://firebasestorage.googleapis.com/v0/b/hommy-d0890.appspot.com/o/pictures%2Fuser%2Fsemimagem.jpg?alt=media&token=dbb11e1c-9664-46d6-b65a-be4169810291',
-      });
+      this.setState({ semFoto: true, Load: false });
+      return;
+      // this.setState({
+      //   imageURI0:
+      //     'https://firebasestorage.googleapis.com/v0/b/hommy-d0890.appspot.com/o/pictures%2Fuser%2Fsemimagem.jpg?alt=media&token=dbb11e1c-9664-46d6-b65a-be4169810291',
+      // });
     }
     this.data = {
       imagem1: this.state.imageURI0,
@@ -205,7 +209,13 @@ export class Cadastro extends Component {
             this.setState({ Load: false });
             this.setState({ sucesso: true });
           })
-          .catch(e => {
+          .catch(error => {
+            if (error.response.status == 401 || error.response.status == 404) {
+              this.setState({ existeRepublica: true });
+            } else {
+              this.setState({ erro: true });
+            }
+
             this.setState({ Load: false });
             this.setState({ erro: true });
           });
@@ -287,6 +297,31 @@ export class Cadastro extends Component {
       >
         {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
           <Fragment>
+            {this.state.semFoto && (
+              <CustomModal
+                parametro="Custom"
+                imagem="EnvieImagem"
+                titulo="Não ta esquecendo nada ?"
+                descricao="Uma boa imagem é a alma de qualquer anuncio. Que tal adicionar pelo menos 1?"
+                botao="Ok"
+                callback={() => {
+                  this.setState({ semFoto: false });
+                }}
+              />
+            )}
+            {this.state.existeRepublica && (
+              <CustomModal
+                parametro="Custom"
+                imagem="NaoEncontrado"
+                titulo="Algo deu errado"
+                descricao="Verifique se você ja possui republica cadastradas em seu email"
+                botao="Entendido"
+                callback={() => {
+                  this.setState({ existeRepublica: false });
+                }}
+              />
+            )}
+
             {this.state.erro && (
               <CustomModal
                 parametro="Erro"

@@ -44,6 +44,7 @@
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "rn-viewpager": "^1.2.9",
+    "styled-components": "^5.1.1",
     "yup": "^0.28.3"
   },
   "devDependencies": {

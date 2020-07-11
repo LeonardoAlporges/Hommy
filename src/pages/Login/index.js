@@ -32,6 +32,7 @@ class Login extends Component {
     user: [],
     erro: false,
     load: false,
+    erroLogin: false,
   };
 
   async setToken(dados) {
@@ -82,14 +83,29 @@ class Login extends Component {
       })
       .catch(error => {
         this.setState({ load: false });
-        this.setState({ erro: true });
-        console.log('erro', error, error.response.status);
+        if (error.response.status == 401 || error.response.status == 404) {
+          this.setState({ erroLogin: true });
+        } else {
+          this.setState({ erro: true });
+        }
       });
   };
 
   render() {
     return (
       <ScrollView>
+        {this.state.erroLogin && (
+          <CustomModal
+            parametro="Custom"
+            imagem="NaoEncontrado"
+            titulo="E-mail não encontrado."
+            descricao="Por favor verifique as informações inseridas e tente novamente."
+            botao="Voltar"
+            callback={() => {
+              this.setState({ erroLogin: false });
+            }}
+          />
+        )}
         {this.state.erro && (
           <CustomModal
             parametro="Erro"

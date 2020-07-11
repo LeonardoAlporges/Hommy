@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withNavigation } from 'react-navigation';
-import { TouchableOpacity, View, Text, Alert, Modal, Image, Linking } from 'react-native';
+import { TouchableOpacity, View, Text, BackHandler, Modal, Image, Linking } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions, StackActions } from 'react-navigation';
 
@@ -18,7 +18,7 @@ class Cabeca extends Component {
   };
 
   AbrirUrl = () => {
-    Linking.openURL(`tel:27997488849`)
+    Linking.openURL(`tel:27997488849`);
     //Linking.openUrl('https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849');
   };
 
@@ -32,10 +32,29 @@ class Cabeca extends Component {
     this.props.navigation.dispatch(resetAction);
   }
 
+  // componentWillMount() {
+  //   BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+  // }
+
+  // componentWillUnmount() {
+  //   BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
+  // }
+
+  // handleBackButtonClick = () => {
+  //   console.log('???');
+  //   if (this.state.isModalVisible) {
+  //     this.setState({
+  //       isModalVisible: false,
+  //     });
+  //     this.props.navigation.goBack(null);
+  //     return true;
+  //   }
+  //   return false;
+  // };
+
   closeToken = async () => {
     await AsyncStorage.removeItem('token')
       .then(value => {
-        console.log('?');
         this.resetNavigation('Login');
       })
       .catch(error => {});
@@ -55,16 +74,7 @@ class Cabeca extends Component {
         <View style={Estilos.Titulo}>
           <Text style={Estilos.txt}> HOMMY </Text>
         </View>
-        <TouchableOpacity
-          style={{
-            marginHorizontal: 20,
-            width: 30,
-            height: 30,
-          }}
-          onPress={this.closeToken}
-        >
-          {/* //<Icon style={Estilos.icon2} name="settings" /> */}
-        </TouchableOpacity>
+        <View style={Estilos.touch_Fake}>{/* <Icon style={Estilos.icon2} name="user" /> */}</View>
 
         <Modal transparent={true} animationType="slide" visible={this.state.isModalVisible}>
           <View style={Estilos.bgModal}>
@@ -76,6 +86,9 @@ class Cabeca extends Component {
                   }}
                 >
                   <Icon style={Estilos.iconModal} name="arrow-left" />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={this.closeToken}>
+                  <Icon style={Estilos.iconModal} name="login" />
                 </TouchableOpacity>
               </View>
               {this.props.fotoPerfil != null && (
