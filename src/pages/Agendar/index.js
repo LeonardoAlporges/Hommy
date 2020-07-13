@@ -14,17 +14,22 @@ import Loading from '../../components/Loading';
 
 class Agendar extends Component {
   static navigationOptions = { header: null };
-  state = {
-    Erro: false,
-    Load: false,
-    Sucsess: false,
-    newData: '',
-    dados: this.props.navigation.state.params.data,
-    time: '00:00',
-    sendTime: '',
-    isDatePickerVisible: false,
-    date: new Date(),
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      Erro: false,
+      Load: false,
+      Sucsess: false,
+      newData: '',
+      dados: this.props.navigation.state.params.data,
+      time: '00:00',
+      sendTime: '',
+      isDatePickerVisible: false,
+      date: new Date(),
+      Aviso: false,
+    };
+    console.log('Leo', this.state.dados);
+  }
 
   navegar = () => {
     this.props.navigation.goBack(null);
@@ -39,19 +44,17 @@ class Agendar extends Component {
     };
 
     if ((agendamento.data || agendamento.hora) == '') {
-      this.setState({ Erro: true });
+      this.setState({ Aviso: true, Load: false });
       return 0;
     }
 
     api
       .put(`/agendamento/${this.props.idRepublica}`, agendamento)
       .then(responseJson => {
-        console.log(responseJson);
         this.setState({ Sucsess: true, Load: false });
       })
       .catch(error => {
-        console.log(error);
-        this.setState({ Load: false, Erro: true });
+        this.setState({ Erro: true, Load: false });
       });
   };
 
@@ -67,20 +70,15 @@ class Agendar extends Component {
   render() {
     return (
       <View style={style.Container}>
-        <HeaderBack
-          title="Agendar visita"
-          onNavigation={() => this.navegar()}
-        />
+        <HeaderBack title="Agendar visita" onNavigation={() => this.navegar()} />
         {this.state.Load && <Loading />}
-        <View style={{ width: '100%', height: 140 }}>
-          <Cartao data={this.state.dados} />
+        <View style={{ width: '100%', height: 140, marginTop: 20 }}>
+          <Cartao mostraBotao={true} data={this.state.dados} />
         </View>
         <View style={style.V_descr}>
           <Text style={style.textDescrição}>
-            Escolha um dia e horario para fazer uma visita há republica
-            {this.state.dados.nomeRepublica} lembrando que depois de sua visita
-            aprova o nao comparecimento ao local na hora marcada podera lher
-            trazer más avaliações
+            Escolha um dia e horario para fazer uma visita na republica, lembrando que depois de sua visita aprova o nao
+            comparecimento ao local na hora marcada podera lher trazer más avaliações
           </Text>
         </View>
 
@@ -99,7 +97,7 @@ class Agendar extends Component {
               textStyle={style.textStyledate}
               placeHolderTextStyle={style.placeHolder}
               onDateChange={date => {
-                this.setState({ newData: new Date(date) });
+                this.setState({ newData: moment(date).format('DD/MM') });
               }}
               disabled={false}
             />
@@ -155,6 +153,20 @@ class Agendar extends Component {
                 this.props.navigation.navigate('AgendamentoUser', {
                   usuario: true,
                 });
+              }}
+            />
+          </View>
+        )}
+        {this.state.Aviso && (
+          <View style={style.V_Detalhes}>
+            <CustomModal
+              parametro="Custom"
+              imagem="Faltando"
+              titulo="Não está esquecendo nada nao ?"
+              descricao="Para uma agendamento é essencial que tenha uma data e um horario "
+              botao="Entendido"
+              callback={() => {
+                this.setState({ Aviso: false });
               }}
             />
           </View>

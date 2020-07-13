@@ -34,13 +34,16 @@ class Cartao extends Component {
   constructor(props) {
     super(props);
     this.onClickCard = this.onClickCard.bind(this);
-
+    console.log('??', this.props.data);
     this.state = {
       interessado: this.props.interessado,
     };
   }
 
   onClickCard = () => {
+    if (this.props.mostraBotao) {
+      return;
+    }
     const dados = this.props.data;
     this.props.editNomeRepublica(dados.nomeRepublica);
     this.props.editValorConta(dados.valorContas);
@@ -74,21 +77,17 @@ class Cartao extends Component {
     return (
       <TouchableHighlight
         underlayColor="#fff"
+        disabled={this.props.mostraBotao}
         onPress={this.onClickCard}
         style={styles.touch_card}
       >
         <View style={styles.V_cartao}>
           <View style={styles.V_imagem}>
-            <Image
-              source={{ uri: this.props.data.imagem1 }}
-              style={styles.V_imagem}
-            />
+            <Image source={{ uri: this.props.data.imagem1 }} style={styles.V_imagem} />
           </View>
           <View style={styles.V_TituloDesc}>
             <View style={styles.V_titulo}>
-              <Text style={styles.txtTitulo}>
-                {this.props.data.nomeRepublica}
-              </Text>
+              <Text style={styles.txtTitulo}>{this.props.data.nomeRepublica}</Text>
             </View>
             <View style={styles.V_obs}>
               <Text numberOfLines={2}>{this.props.data.descricao}</Text>
@@ -96,15 +95,11 @@ class Cartao extends Component {
             <View style={styles.V_desc}>
               <View style={styles.V_valor}>
                 <Icon2 style={styles.txtIcon} name="dollar-sign" />
-                <Text style={styles.txtDesc}>
-                  R$ {this.props.data.valorAluguel}
-                </Text>
+                <Text style={styles.txtDesc}>R$ {this.props.data.valorAluguel}</Text>
               </View>
               <View style={styles.V_vagas}>
                 <Icon style={styles.txtIcon} name="people" />
-                <Text style={styles.txtDesc}>
-                  {this.props.data.numVagas} Vaga(s)
-                </Text>
+                <Text style={styles.txtDesc}>{this.props.data.numVagas} Vaga(s)</Text>
               </View>
             </View>
           </View>

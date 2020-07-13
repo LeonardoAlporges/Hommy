@@ -132,8 +132,10 @@ class AgendamentoUser extends Component {
             mensagem="O que está esperando? Navegue pelo aplicativo e encontre uma vaga na república ideal. "
           />
         )}
-        <View style={{ widht: '100%', height: 20, paddingHorizontal: 20 }}>
-          <Text style={style.subtitulo}>Gerencie as repúblicas nas quais você solicitou uma visita.</Text>
+        <View style={{ widht: '100%', height: 20, paddingHorizontal: 20, marginBottom: 10 }}>
+          <Text style={style.subtitulo}>
+            Fique atento no status das repúblicas nas quais você solicitou uma visita.
+          </Text>
         </View>
         <View style={style.V_label}>
           <Text style={style.label}>Agendamentos</Text>
@@ -159,7 +161,7 @@ class AgendamentoUser extends Component {
                 </TouchableOpacity>
 
                 <View style={style.viewData2}>
-                  <Text style={style.data}>{moment(new Date(item.data)).format('L')}</Text>
+                  <Text style={style.data}>{moment(new Date(item.data)).format('DD/MM/YY')}</Text>
                   <Text>As</Text>
                   <Text style={style.data}>{moment(new Date(item.hora)).format('hh:mm')}</Text>
                 </View>

@@ -77,6 +77,7 @@ const style = StyleSheet.create({
     width: '100%',
     height: 100,
     paddingHorizontal: 20,
+    marginTop: 10,
   },
   textDescrição: {
     fontFamily: 'Roboto',

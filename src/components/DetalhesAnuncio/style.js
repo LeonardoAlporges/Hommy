@@ -18,11 +18,11 @@ const estilo = StyleSheet.create({
     fontWeight: 'bold',
   },
   V_descricao: {
-    height: 60,
     marginTop: '4%',
     width: '88%',
     marginLeft: '6%',
     marginRight: '6%',
+    marginBottom: 10,
   },
   descricao: {
     color: '#142850',

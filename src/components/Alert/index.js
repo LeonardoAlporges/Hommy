@@ -32,8 +32,8 @@ export default class CustomModal extends Component {
       this.setState({ icon: require('../../assets/Img/Nao_Encontrado.png') });
     } else if (this.props.imagem == 'EnvieImagem') {
       this.setState({ icon: require('../../assets/Img/Enviar_Foto.png') });
-    } else if (this.props.imagem == 'Email') {
-      this.setState({ icon: require('../../assets/Img/Nao_Encontrado.png') });
+    } else if (this.props.imagem == 'Faltando') {
+      this.setState({ icon: require('../../assets/Img/Vazio.png') });
     } else if (this.props.imagem == 'Teste') {
       this.setState({ icon: require('../../assets/Img/Nao_Encontrado.png') });
     }

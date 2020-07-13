@@ -523,19 +523,6 @@ export class Cadastro extends Component {
                         <Text style={estilo.textError}>{errors.descricao}</Text>
                       )}
                     </View>
-
-                    <View style={estilo.V_BotaoImg}>
-                      <Button
-                        disabled={this.state.contadorImagem == 3}
-                        style={estilo.botao_send}
-                        onPress={() => {
-                          this.uploadFile();
-                        }}
-                      >
-                        {/* //<Icon name="account-outline" style={estilo.icon_send} /> */}
-                        <Text>Enviar Fotos ({this.state.contadorImagem}/3)</Text>
-                      </Button>
-                    </View>
                   </View>
                 </ScrollView>
               </Tab>
@@ -741,6 +728,12 @@ export class Cadastro extends Component {
                         {touched.aRepublica && errors.aRepublica && (
                           <Text style={estilo.textError}>{errors.aRepublica}</Text>
                         )}
+                      </View>
+                      <View style={estilo.V_BotaoImg}>
+                        <Button style={estilo.botao_send} onPress={handleSubmit}>
+                          {/* //<Icon name="account-outline" style={estilo.icon_send} /> */}
+                          <Text>Publica republica</Text>
+                        </Button>
                       </View>
                     </View>
                   </ScrollView>

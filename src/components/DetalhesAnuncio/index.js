@@ -11,12 +11,7 @@ import ViewPager from '@react-native-community/viewpager';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import Icon2 from 'react-native-vector-icons/Feather';
 import Icon3 from 'react-native-vector-icons/Entypo';
-import {
-  PagerTabIndicator,
-  IndicatorViewPager,
-  PagerTitleIndicator,
-  PagerDotIndicator,
-} from 'rn-viewpager';
+import { PagerTabIndicator, IndicatorViewPager, PagerTitleIndicator, PagerDotIndicator } from 'rn-viewpager';
 
 class DetalhesAnuncio extends Component {
   state = {
@@ -28,9 +23,7 @@ class DetalhesAnuncio extends Component {
 
   static navigationOptions = { header: null };
   AbrirUrl = () => {
-    Linking.openUrl(
-      'https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849'
-    );
+    Linking.openUrl('https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849');
   };
 
   navegar = () => {
@@ -56,15 +49,8 @@ class DetalhesAnuncio extends Component {
   render() {
     return (
       <ScrollView>
-        <HeaderBack
-          ajuda
-          title={this.props.nomeRepublica}
-          onNavigation={() => this.navegar()}
-        />
-        <IndicatorViewPager
-          style={{ height: 300 }}
-          indicator={this._renderDotIndicator()}
-        >
+        <HeaderBack ajuda title={this.props.nomeRepublica} onNavigation={() => this.navegar()} />
+        <IndicatorViewPager style={{ height: 300 }} indicator={this._renderDotIndicator()}>
           <View key="1">
             <Image source={{ uri: this.props.imagem1 }} style={estilo.image} />
           </View>
@@ -117,9 +103,7 @@ class DetalhesAnuncio extends Component {
         <View style={estilo.V_caracteristicaAcomodacao}>
           <View style={estilo.itemAcomodacao}>
             <Icon name="screen-desktop" style={estilo.icone} />
-            <Text style={estilo.txtlabel}>
-              {this.props.acomodacaoRepublica}
-            </Text>
+            <Text style={estilo.txtlabel}>{this.props.acomodacaoRepublica}</Text>
           </View>
         </View>
 
@@ -168,7 +152,7 @@ class DetalhesAnuncio extends Component {
         <View style={estilo.V_vagas}>
           <View style={estilo.vagas}>
             <Icon2 name="dollar-sign" style={estilo.icone} />
-            <Text style={estilo.txtlabel}>R$ {this.props.valor}</Text>
+            <Text style={estilo.txtlabel}>R$ {this.props.valorAluguel}</Text>
           </View>
         </View>
         {!this.state.interesse ? (
@@ -198,7 +182,7 @@ const mapsStateToProps = state => {
   return {
     nomeRepublica: state.auth.nomeRepublica,
     genero: state.auth.genero,
-    valor: state.auth.valorAluguel,
+    valorAluguel: state.auth.valorAluguel,
     valorConta: state.auth.valorContas,
     rua: state.auth.rua,
     numeroCasa: state.auth.numeroCasa,

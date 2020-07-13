@@ -11,9 +11,7 @@ import Loading from '../../components/Loading';
 
 const moment = require('moment');
 moment.locale('pt', {
-  months: 'Janeiro_Fevereiro_Março_Abril_Maio_Junho_Julho_Agosto_Setembro_Outubro_Novembro_Dezembro'.split(
-    '_'
-  ),
+  months: 'Janeiro_Fevereiro_Março_Abril_Maio_Junho_Julho_Agosto_Setembro_Outubro_Novembro_Dezembro'.split('_'),
   weekdays: 'Domingo_Segunda_Terça_Quarta_Quinta_Sexta_Sabado'.split('_'),
 });
 
@@ -33,9 +31,9 @@ class DetalhesCarona extends Component {
 
   async clickInteresse() {
     this.setState({ Load: true });
-    this.envio = { email: this.props.email };
+    const envio = { email: this.props.email };
     await api
-      .put(`/carona/meusInteresses/${this.props.id}`, this.envio)
+      .put(`/carona/meusInteresses/${this.props.id}`, envio)
       .then(Response => {
         console.log(Response);
         this.setState({ interesse: true, Load: false });

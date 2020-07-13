@@ -124,7 +124,7 @@ class Agendamentos extends Component {
               />
               <View style={style.viewData}>
                 <View style={style.viewData2}>
-                  <Text style={style.data}>{moment(new Date(item.data)).format('L')}</Text>
+                  <Text style={style.data}>{moment(new Date(item.data)).format('DD/MM/YY')}</Text>
                   <Text>As</Text>
                   <Text style={style.data}>{moment(new Date(item.hora)).format('hh:mm')}</Text>
                 </View>
