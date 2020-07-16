@@ -40,6 +40,7 @@ const Estilo = StyleSheet.create({
   iconNota: {
     fontSize: 20,
     color: '#FFFFFF',
+    marginHorizontal: 3,
   },
   Nome: {
     color: '#ffff',
@@ -172,13 +173,13 @@ const Estilo = StyleSheet.create({
     alignItems: 'center',
   },
   V_Margin: {
-    marginBottom: '15%'
+    marginBottom: '15%',
   },
-  V_Btn:{
+  V_Btn: {
     width: '80%',
     alignItems: 'center',
-    justifyContent: 'center', 
-  }
+    justifyContent: 'center',
+  },
 });
 
 export default Estilo;

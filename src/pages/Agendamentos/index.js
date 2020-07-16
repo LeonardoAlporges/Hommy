@@ -43,7 +43,7 @@ class Agendamentos extends Component {
         this.setState({ listaAgendamento: responseJson.data, Load: false });
       })
       .catch(error => {
-        console.log(error);
+        console.log(error.response.data);
         this.setState({ Load: false, Erro: true });
       });
   };
@@ -69,6 +69,7 @@ class Agendamentos extends Component {
           this.Agendar();
         })
         .catch(error => {
+          console.log(error.response.data);
           this.setState({ Erro: true });
         });
     } else if (tipoSocilitacao == 0) {
@@ -100,16 +101,19 @@ class Agendamentos extends Component {
             mensagem="Ninguém agendou uma visita a sua república. Aguarde, logo aparecerá alguém para preencher esse vazio"
           />
         )}
-        <View style={{ width: '100%', paddingHorizontal: 5, height: 40 }}>
-          <Text style={style.subtitulo}>
-            Abaixo estão listadas as pessoas que solicitaram uma visita a sua república.
-          </Text>
-        </View>
-        <View style={style.V_label}>
-          <Text style={style.label}>Interessados</Text>
-          <View style={style.barra} />
-        </View>
-
+        {this.state.listaAgendamento.length != 0 && (
+          <View>
+            <View style={{ width: '100%', paddingHorizontal: 5, height: 40 }}>
+              <Text style={style.subtitulo}>
+                Abaixo estão listadas as pessoas que solicitaram uma visita a sua república.
+              </Text>
+            </View>
+            <View style={style.V_label}>
+              <Text style={style.label}>Interessados</Text>
+              <View style={style.barra} />
+            </View>
+          </View>
+        )}
         <FlatList
           data={this.state.listaAgendamento}
           renderItem={({ item }) => (

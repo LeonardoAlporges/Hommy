@@ -122,7 +122,9 @@ const estilo = StyleSheet.create({
   V_btn: {
     width: '100%',
     justifyContent: 'center',
-    alignItems: 'center',
+    display: 'flex',
+    alignContent: 'center',
+    paddingLeft: '20%',
     marginTop: '10%',
   },
   ViewFundo: {

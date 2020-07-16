@@ -47,7 +47,7 @@ class Agendar extends Component {
       this.setState({ Aviso: true, Load: false });
       return 0;
     }
-
+    console.log(agendamento.data);
     api
       .put(`/agendamento/${this.props.idRepublica}`, agendamento)
       .then(responseJson => {
@@ -77,8 +77,8 @@ class Agendar extends Component {
         </View>
         <View style={style.V_descr}>
           <Text style={style.textDescrição}>
-            Escolha um dia e horario para fazer uma visita na republica, lembrando que depois de sua visita aprova o nao
-            comparecimento ao local na hora marcada podera lher trazer más avaliações
+            Escolha um dia e horario para fazer uma visita na republica, lembrando que depois de sua visita aprovada o
+            nao comparecimento ao local na hora marcada podera lher trazer más avaliações.
           </Text>
         </View>
 
@@ -97,13 +97,18 @@ class Agendar extends Component {
               textStyle={style.textStyledate}
               placeHolderTextStyle={style.placeHolder}
               onDateChange={date => {
-                this.setState({ newData: moment(date).format('DD/MM') });
+                this.setState({ newData: date });
               }}
               disabled={false}
             />
           </View>
           <View style={style.ViewClock}>
-            <Text style={style.textClock}>{this.state.time}</Text>
+            {this.state.time == '00:00' ? (
+              <Text style={style.textClockPlace}>{this.state.time}</Text>
+            ) : (
+              <Text style={style.textClock}>{this.state.time}</Text>
+            )}
+
             <View style={style.V_botaoCalendar}>
               <Button
                 style={style.botaoCalendar}

@@ -164,6 +164,7 @@ class Anuncios extends Component {
   }
 
   editCaronas(edit) {
+    console.log(edit);
     const dados = edit;
     this.props.editNomeOfertante(dados.nome);
     this.props.editChegada(dados.localChegada);

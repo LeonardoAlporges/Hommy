@@ -83,6 +83,7 @@ class Login extends Component {
       })
       .catch(error => {
         this.setState({ load: false });
+        console.log('ERRO:', error.response);
         if (error.response.status == 401 || error.response.status == 404) {
           this.setState({ erroLogin: true });
         } else {

@@ -34,7 +34,6 @@ class Cartao extends Component {
   constructor(props) {
     super(props);
     this.onClickCard = this.onClickCard.bind(this);
-    console.log('??', this.props.data);
     this.state = {
       interessado: this.props.interessado,
     };
@@ -45,6 +44,7 @@ class Cartao extends Component {
       return;
     }
     const dados = this.props.data;
+    console.log('DADOS', dados);
     this.props.editNomeRepublica(dados.nomeRepublica);
     this.props.editValorConta(dados.valorContas);
     this.props.editValorAluguel(dados.valorAluguel);
@@ -61,7 +61,7 @@ class Cartao extends Component {
     this.props.editGenero(dados.genero);
     this.props.editNumVagas(dados.numVagas);
     this.props.editRepresentante(dados.representante);
-    this.props.editTipoImovel(dados.tipoImovel);
+    this.props.editTipoImovel(dados.imovel);
     this.props.editImg1(dados.imagem1);
     this.props.editImg2(dados.imagem2);
     this.props.editImg3(dados.imagem3);

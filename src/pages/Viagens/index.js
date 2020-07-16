@@ -101,13 +101,26 @@ class Viagens extends Component {
     return (
       <View style={{ backgroundColor: '#f2f2f2', flex: 1 }}>
         <HeaderBack title="Meus interesses" onNavigation={() => this.navegar()} />
-        <View style={{ widht: '100%', marginTop: 10, height: 20, paddingHorizontal: 20 }}>
-          <Text style={style.subtitulo}>Gerencie as repúblicas nas quais você solicitou uma visita.</Text>
-        </View>
-        <View style={style.V_label}>
-          <Text style={style.label}>Seus interesses</Text>
-          <View style={style.barra} />
-        </View>
+        {this.state.Load && <Loading />}
+        {this.state.listaCaronas.length == 0 && (
+          <View style={{ flex: 1, backgroundColor: '#fff' }}>
+            <EmptyState
+              titulo="Você não demonstrou interesse em caronas recentemente."
+              mensagem="Vamos nessa! Navegue pelo aplicativo e encontre alguém com quem possa viajar."
+            />
+          </View>
+        )}
+        {this.state.listaCaronas.length != 0 && (
+          <View>
+            <View style={{ widht: '100%', marginTop: 10, marginBottom: 10, height: 20, paddingHorizontal: 20 }}>
+              <Text style={style.subtitulo}>Gerencie as caronas nas quais você solicitou uma visita.</Text>
+            </View>
+            <View style={style.V_label}>
+              <Text style={style.label}>Seus interesses</Text>
+              <View style={style.barra} />
+            </View>
+          </View>
+        )}
         {this.state.MConfirmacao && (
           <ModalConfirmacao
             retornoModal={valor => {
@@ -118,18 +131,10 @@ class Viagens extends Component {
             mensagem="O motorista será notificado de que você não possui mais interesse em viajar com ele."
             botaoConfirmar="Sim"
             botaoCancel="Não"
-            onfirmar={true}
+            confirmar={true}
           />
         )}
-        {this.state.Load && <Loading />}
-        {this.state.listaCaronas.length == 0 && (
-          <View style={{ flex: 1, backgroundColor: '#fff' }}>
-            <EmptyState
-              titulo="Você não demonstrou interesse em caronas recentemente."
-              mensagem="Vamos nessa! Navegue pelo aplicativo e encontre alguém com quem possa viajar."
-            />
-          </View>
-        )}
+
         <View style={style.card}>
           <FlatList
             style={style.flatList}

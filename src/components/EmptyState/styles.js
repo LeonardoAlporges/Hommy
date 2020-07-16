@@ -12,17 +12,30 @@ const styles = StyleSheet.create({
     height: 200,
     width: 200,
   },
+  V_Titutlo: {
+    width: '100%',
+
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  V_mensagem: {
+    width: '100%',
+
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   titulo: {
-    width: '55%',
+    width: '80%',
     textAlign: 'center',
     fontFamily: 'Roboto',
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: 'bold',
     color: '#142850',
+
     marginBottom: 10,
   },
   mensage: {
-    width: '70%',
+    width: 300,
     textAlign: 'center',
     color: '#1458',
     fontFamily: 'Roboto',

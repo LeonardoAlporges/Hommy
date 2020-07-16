@@ -36,12 +36,23 @@ class DetalhesAnuncio extends Component {
     });
   };
 
-  _renderDotIndicator() {
+  renderDotIndicator() {
+    this.contadorImagem = 0;
+    if (this.props.imagem1 != null) {
+      this.contadorImagem = this.contadorImagem + 1;
+    }
+    if (this.props.imagem2 != null) {
+      this.contadorImagem = this.contadorImagem + 1;
+    }
+    if (this.props.imagem3 != null) {
+      this.contadorImagem = this.contadorImagem + 1;
+    }
+
     return (
       <PagerDotIndicator
         dotStyle={{ width: 10, height: 10, borderRadius: 10 }}
         selectedDotStyle={{ width: 10, height: 10, borderRadius: 10 }}
-        pageCount={3}
+        pageCount={this.contadorImagem}
       />
     );
   }
@@ -50,17 +61,22 @@ class DetalhesAnuncio extends Component {
     return (
       <ScrollView>
         <HeaderBack ajuda title={this.props.nomeRepublica} onNavigation={() => this.navegar()} />
-        <IndicatorViewPager style={{ height: 300 }} indicator={this._renderDotIndicator()}>
-          <View key="1">
-            <Image source={{ uri: this.props.imagem1 }} style={estilo.image} />
-          </View>
-
-          <View key="2">
-            <Image source={{ uri: this.props.imagem2 }} style={estilo.image} />
-          </View>
-          <View key="4">
-            <Image source={{ uri: this.props.imagem3 }} style={estilo.image} />
-          </View>
+        <IndicatorViewPager style={{ height: 300 }} indicator={this.renderDotIndicator()}>
+          {this.props.imagem1 != null && (
+            <View key="1">
+              <Image source={{ uri: this.props.imagem1 }} style={estilo.image} />
+            </View>
+          )}
+          {this.props.imagem2 != null && (
+            <View key="2">
+              <Image source={{ uri: this.props.imagem2 }} style={estilo.image} />
+            </View>
+          )}
+          {this.props.imagem3 != null && (
+            <View key="3">
+              <Image source={{ uri: this.props.imagem3 }} style={estilo.image} />
+            </View>
+          )}
         </IndicatorViewPager>
 
         <View style={estilo.V_titulo}>
@@ -81,9 +97,9 @@ class DetalhesAnuncio extends Component {
         <View style={estilo.V_caracteristicaItens}>
           <View style={estilo.item}>
             <Icon name="home" style={estilo.icone} />
-            <Text style={estilo.txtlabel}>Apartamento</Text>
+            <Text style={estilo.txtlabel4}>{this.props.imovel}</Text>
           </View>
-          <View style={estilo.item}>
+          <View style={estilo.item2}>
             <Icon name="people" style={estilo.icone} />
             <Text style={estilo.txtlabelGenero}>{this.props.genero}</Text>
           </View>
@@ -200,6 +216,7 @@ const mapsStateToProps = state => {
     numVagas: state.auth.numVagas,
     userEmail: state.auth.userEmail,
     idRepublica: state.auth.idRepublica,
+    imovel: state.auth.tipoImovel,
   };
 };
 

@@ -61,7 +61,7 @@ const estilo = StyleSheet.create({
   V_caracteristicaItens: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'flex-start',
     height: 40,
     marginTop: '2%',
     width: '85%',
@@ -76,10 +76,26 @@ const estilo = StyleSheet.create({
     height: 40,
     width: '38%',
   },
-
+  item2: {
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    display: 'flex',
+    flexDirection: 'row',
+    height: 40,
+    marginLeft: '10%',
+    width: '38%',
+  },
   txtlabel: {
     paddingLeft: 20,
     color: '#00909e',
+    textAlign: 'left',
+    fontSize: 16,
+    fontFamily: 'Roboto',
+    fontWeight: '600',
+  },
+  txtlabel4: {
+    color: '#00909e',
+    textAlign: 'left',
     fontSize: 16,
     fontFamily: 'Roboto',
     fontWeight: '600',

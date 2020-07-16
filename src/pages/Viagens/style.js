@@ -16,6 +16,7 @@ const style = StyleSheet.create({
     fontSize: 14,
     fontFamily: 'Roboto',
     color: '#2e2e2e',
+    marginBottom: 10,
   },
   V_Botao: {
     padding: 5,

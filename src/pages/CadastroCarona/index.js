@@ -83,7 +83,7 @@ class CadastroCarona extends Component {
       userEmail: this.props.email,
       nota: this.props.nota,
     };
-    console.log(this.data);
+    console.log('?', this.data);
 
     if (this.state.update == true) {
       await api
@@ -161,32 +161,36 @@ class CadastroCarona extends Component {
           vagas: this.props.vagas,
         }}
         onSubmit={values => {
+          console.log('?');
+
           this.entrar(values);
+          this.setState({ botaoEnviar: true });
+          console.log('???', this.state.botaoEnviar);
         }}
         validationSchema={yup.object().shape({
-          saida: yup.string().required('Insira local de saida '),
-          chegada: yup.string().required('Insira para onde vai'),
+          saida: yup.string().required('Campo obrigatório'),
+          chegada: yup.string().required('Campo obrigatório'),
           valor: yup
             .number('Somente numeros!')
             .min(5, 'Valor minimo R$ 5,00')
             .max(200, 'Valor maximo de R$ 200,00')
-            .required('Valor Invalido'),
-          // Hsaida: yup.string('Hora invalido').required('Hora invalida'),
-          // HChegada: yup.string('Hora invalido').required('Hora invalida'),
-          //data: yup.string().required('errp'),
+            .required('Campo obrigatório'),
+          //Hsaida: yup.string('Hora invalido').required('Campo obrigatóyyyrio'),
+          //HChegada: yup.string().required('Campo obrigatório'),
+          //data: yup.string().required('Campo obrigatório'),
           embarque: yup
             .string('Somente texto')
             .max(70, 'Somente 70 caracteres sao permitidos')
-            .required('Informe aonde sera o ponto de embarque'),
+            .required('Campo obrigatório'),
           desembarque: yup
             .string()
             .max(50)
-            .required('Informe aonde sera o ponto de desembarque'),
+            .required('Campo obrigatório'),
           vagas: yup
             .number('Somente numeros')
             .min(1, 'Minimo é de 1 vaga')
             .max(10, ' Maximo é de 10 vaga')
-            .required('Insira a quantidade de vagas disponivel'),
+            .required('Campo obrigatório'),
         })}
       >
         {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
@@ -339,7 +343,7 @@ class CadastroCarona extends Component {
                         </Item>
                         <View style={estilo.V_erro}>
                           {this.state.newData == '' && this.state.botaoEnviar && (
-                            <Text style={estilo.textError}>Insira uma data</Text>
+                            <Text style={estilo.textError}>Campo obrigatório</Text>
                           )}
                         </View>
                       </View>
@@ -388,12 +392,15 @@ class CadastroCarona extends Component {
                               date={new Date()}
                               locale={'pt-br'}
                               is24Hour={true}
+                              onDateChange={handleChange('HSaida')}
+                              on
                             />
                           </TouchableOpacity>
                         </Item>
+
                         <View style={estilo.V_erro}>
                           {this.state.timeSaida == '00:00' && this.state.botaoEnviar && (
-                            <Text style={estilo.textError}>Insira o horario de saida</Text>
+                            <Text style={estilo.textError}>Campo obrigatório</Text>
                           )}
                         </View>
                       </View>
@@ -418,12 +425,14 @@ class CadastroCarona extends Component {
                               date={new Date()}
                               locale={'pt-br'}
                               is24Hour={true}
+                              onChange={handleChange('Chegada')}
                             />
                           </TouchableOpacity>
                         </Item>
+
                         <View style={estilo.V_erro}>
                           {this.state.timeChegada == '00:00' && this.state.botaoEnviar && (
-                            <Text style={estilo.textError}>Insira o horario de saida</Text>
+                            <Text style={estilo.textError}>Campo obrigatório</Text>
                           )}
                         </View>
                       </View>
@@ -481,6 +490,7 @@ class CadastroCarona extends Component {
                       <Button
                         style={estilo.btnProximo}
                         onPress={() => {
+                          this.setState({ botaoEnviar: true });
                           console.log(values);
                           handleSubmit(values);
                         }}
@@ -518,7 +528,7 @@ const mapStateToProps = state => {
     HChegada: state.carona.HChegada,
     embarque: state.carona.embarque,
     desembarque: state.carona.desembarque,
-    vagas: state.carona.vagas,
+    vagas: state.carona.numVagas,
     imagem: state.user.fotoPerfil,
     nome: state.user.usuario,
     email: state.user.email,

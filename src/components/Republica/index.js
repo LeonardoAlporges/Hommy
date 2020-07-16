@@ -349,10 +349,12 @@ class Republica extends Component {
               onRefresh={this.getListRepublica}
             />
           ) : (
-            <EmptyState
-              titulo="Tudo tão vazio por aqui... "
-              mensagem="Parece que não há publicações no momento. Mas não desanime, logo logo novas vagas surgirão. "
-            />
+            <View style={{ flex: 1 }}>
+              <EmptyState
+                titulo="Tudo tão vazio por aqui... "
+                mensagem="Parece que não há publicações no momento. Mas não desanime, logo logo novas vagas surgirão. "
+              />
+            </View>
           )}
         </View>
         <View style={Estilos.V_filtroExterno}>

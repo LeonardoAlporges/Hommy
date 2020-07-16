@@ -156,16 +156,11 @@ export class Cadastro extends Component {
 
   async entrar(values) {
     this.setState({ Load: true });
-    console.log;
     if (this.state.imageURI0 == null && this.state.imageURI1 == null && this.state.imageURI2 == null) {
       this.setState({ semFoto: true, Load: false });
       return;
-      // this.setState({
-      //   imageURI0:
-      //     'https://firebasestorage.googleapis.com/v0/b/hommy-d0890.appspot.com/o/pictures%2Fuser%2Fsemimagem.jpg?alt=media&token=dbb11e1c-9664-46d6-b65a-be4169810291',
-      // });
     }
-    const data = {
+    this.data = {
       imagem1: this.state.imageURI0,
       imagem2: this.state.imageURI1,
       imagem3: this.state.imageURI2,
@@ -184,7 +179,7 @@ export class Cadastro extends Component {
       numVagas: values.numeroVagas,
       telefone: this.props.telefone,
       representante: this.props.representante,
-      tipoImovel: values.tipoImovel,
+      imovel: values.tipoImovel,
       descricao: values.descricao,
       userEmail: this.props.email,
     };
@@ -192,8 +187,9 @@ export class Cadastro extends Component {
     try {
       if (this.state.update == true) {
         await api
-          .put(`/main/${this.props.email}`, data)
+          .put(`/main/${this.props.email}`, this.data)
           .then(Response => {
+            console.log(Response);
             this.setState({ Load: false });
             this.setState({ sucesso: true });
           })

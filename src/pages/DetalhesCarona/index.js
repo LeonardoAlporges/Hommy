@@ -84,8 +84,8 @@ class DetalhesCarona extends Component {
             <View style={Estilo.V_Nome}>
               <Text style={Estilo.Nome}>{this.props.nome} </Text>
               <View style={Estilo.V_nota}>
-                <Text style={Estilo.Nota}>{this.props.nota}</Text>
                 <Icon style={Estilo.iconNota} name="star-outline" />
+                <Text style={Estilo.Nota}>{this.props.nota}</Text>
               </View>
             </View>
             <View />
@@ -158,7 +158,7 @@ const mapStateToProps = state => {
     id: state.carona.idCarona,
     email: state.user.email,
     nome: state.carona.nome,
-    nota: state.carona.nota,
+    nota: state.user.notaUser,
     saida: state.carona.saida,
     chegada: state.carona.chegada,
     data: state.carona.data,

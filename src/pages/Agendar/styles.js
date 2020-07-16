@@ -65,6 +65,13 @@ const style = StyleSheet.create({
     color: '#142850',
     marginRight: 10,
   },
+  textClockPlace: {
+    fontFamily: 'Roboto',
+    fontWeight: 'bold',
+    fontSize: 16,
+    color: '#989898',
+    marginRight: 10,
+  },
   iconWhatsapp: {
     color: '#ffffff',
     fontSize: 30,
