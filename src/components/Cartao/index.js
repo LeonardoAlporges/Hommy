@@ -68,8 +68,13 @@ class Cartao extends Component {
     this.props.edituserEmail(dados.userEmail);
     this.props.editIdRepublica(dados._id);
 
+    var desativarBotaoAgenda = false;
+    if (dados.userEmail == this.props.email) {
+      desativarBotaoAgenda = true;
+    }
     this.props.navigation.navigate('Detalhes', {
       interessado: this.state.interessado,
+      desativarBotaoAgenda,
     });
   };
 
@@ -111,6 +116,7 @@ class Cartao extends Component {
 
 const mapStateToProps = state => {
   return {
+    email: state.user.email,
     nomeRepublica: state.auth.nomeRepublica,
     valorAluguel: state.auth.valorAluguel,
     bairro: state.auth.bairro,

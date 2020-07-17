@@ -33,6 +33,7 @@ class Login extends Component {
     erro: false,
     load: false,
     erroLogin: false,
+    erroSenha: false,
   };
 
   async setToken(dados) {
@@ -66,7 +67,6 @@ class Login extends Component {
     await api
       .post('/session', this.data)
       .then(responseJson => {
-        console.log('ok', responseJson);
         this.setToken(responseJson.data);
         this.setState({ user: responseJson.data.usuario });
         this.props.editId(responseJson.data.usuario.id);
@@ -84,10 +84,10 @@ class Login extends Component {
       .catch(error => {
         this.setState({ load: false });
         console.log('ERRO:', error.response);
-        if (error.response.status == 401 || error.response.status == 404) {
+        if (error.response.data.code == 206) {
+          this.setState({ erroSenha: true });
+        } else if (error.response.data.code == 203) {
           this.setState({ erroLogin: true });
-        } else {
-          this.setState({ erro: true });
         }
       });
   };
@@ -104,6 +104,18 @@ class Login extends Component {
             botao="Voltar"
             callback={() => {
               this.setState({ erroLogin: false });
+            }}
+          />
+        )}
+        {this.state.erroSenha && (
+          <CustomModal
+            parametro="Custom"
+            imagem="NaoEncontrado"
+            titulo="Senha invalida."
+            descricao="Por favor verifique as informações inseridas e tente novamente."
+            botao="Voltar"
+            callback={() => {
+              this.setState({ erroSenha: false });
             }}
           />
         )}

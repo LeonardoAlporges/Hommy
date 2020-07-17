@@ -170,6 +170,18 @@ const estilo = StyleSheet.create({
     borderRadius: 3,
     borderColor: '#2e2e2e',
     padding: 10,
+    opacity: 1,
+  },
+  V_ImageFullEmpty: {
+    marginHorizontal: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 100,
+    height: 100,
+    borderWidth: 1,
+    borderRadius: 3,
+    borderColor: '#2e2e2e',
+    padding: 10,
     opacity: 0.3,
   },
   ImageEmpty: {

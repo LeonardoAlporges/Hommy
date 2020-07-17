@@ -31,9 +31,7 @@ class CartaoCarona extends Component {
     this.state = {
       data: moment(this.props.dados.data).format('DD/MM'),
       horaSaida: moment(new Date(this.props.dados.horaSaida)).format('HH:mm'),
-      horaChegada: moment(new Date(this.props.dados.horaChegada)).format(
-        'HH:mm'
-      ),
+      horaChegada: moment(new Date(this.props.dados.horaChegada)).format('HH:mm'),
     };
   }
 
@@ -53,24 +51,21 @@ class CartaoCarona extends Component {
     this.props.editVagas(dados.vagas);
     this.props.editValor(dados.valor);
     this.props.editEmailOfertante(dados.userEmail);
-    this.props.navigation.navigate('DetalhesCarona');
+    var desativarBotaoInteresse = false;
+
+    if (dados.userEmail == this.props.email) {
+      desativarBotaoInteresse = true;
+    }
+    this.props.navigation.navigate('DetalhesCarona', { desativarBotaoInteresse });
   };
 
   render() {
     return (
-      <Button
-        transparent
-        underlayColor="#fff"
-        onPress={this.Click}
-        style={Estilos.touch_card}
-      >
+      <Button transparent underlayColor="#fff" onPress={this.Click} style={Estilos.touch_card}>
         <View style={Estilos.V_cartao}>
           <View style={Estilos.V_ImgNome}>
             <View style={Estilos.V_imagem}>
-              <Image
-                source={{ uri: this.props.dados.imagem }}
-                style={Estilos.imagem}
-              />
+              <Image source={{ uri: this.props.dados.imagem }} style={Estilos.imagem} />
             </View>
             <Text style={Estilos.txtnome}>{this.props.dados.nome}</Text>
             <View style={Estilos.V_nota}>
@@ -89,13 +84,9 @@ class CartaoCarona extends Component {
               </View>
             </View>
             <View style={Estilos.V_LocLabel}>
-              <Text style={Estilos.txtdeslcChHora}>
-                {this.state.horaChegada}
-              </Text>
+              <Text style={Estilos.txtdeslcChHora}>{this.state.horaChegada}</Text>
               <Icon name="flag" style={Estilos.txtIcon} />
-              <Text style={Estilos.txtdeslcCh}>
-                {this.props.dados.localChegada}
-              </Text>
+              <Text style={Estilos.txtdeslcCh}>{this.props.dados.localChegada}</Text>
             </View>
           </View>
           <View style={Estilos.V_DataVal}>
@@ -113,9 +104,13 @@ class CartaoCarona extends Component {
     );
   }
 }
-
+const mapStateToProps = state => {
+  return {
+    email: state.user.email,
+  };
+};
 const CartaoCaronaConnect = connect(
-  null,
+  mapStateToProps,
   {
     editIdCarona,
     editChegada,

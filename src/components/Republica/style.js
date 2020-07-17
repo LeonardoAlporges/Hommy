@@ -102,7 +102,11 @@ const estilosRepublica = StyleSheet.create({
   },
   itemInput: {
     width: 100,
+    backgroundColor: 'red',
     borderBottomColor: '#142850',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingBottom: 10,
   },
   botaoModal: {
     alignSelf: 'center',

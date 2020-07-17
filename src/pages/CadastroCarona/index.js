@@ -233,7 +233,7 @@ class CadastroCarona extends Component {
                             mode="dropdown"
                             iosIcon={<Icon name="arrow-down" />}
                             style={{ width: undefined }}
-                            placeholder=""
+                            placeholder="Cidades"
                             placeholderStyle={{ color: '#bfc6ea' }}
                             placeholderIconColor="#007aff"
                             selectedValue={values.saida}
@@ -243,7 +243,7 @@ class CadastroCarona extends Component {
                             placeholder=""
                             onBlur={() => setFieldTouched('saida')}
                           >
-                            <Picker.Item label="Cidades" value="null" />
+                            <Picker.Item label="" value="null" />
                             <Picker.Item label="Alegre" value="Alegre" />
                             <Picker.Item label="Serra" value="Serra" />
                             <Picker.Item label="Piuma" value="Piuma" />
@@ -271,7 +271,7 @@ class CadastroCarona extends Component {
                             mode="dropdown"
                             iosIcon={<Icon name="arrow-down" />}
                             style={{ width: undefined }}
-                            placeholder=""
+                            placeholder="Cidades"
                             placeholderStyle={{ color: '#bfc6ea' }}
                             placeholderIconColor="#007aff"
                             selectedValue={values.chegada}
@@ -280,7 +280,7 @@ class CadastroCarona extends Component {
                             onChangeText={handleChange('chegada')}
                             onBlur={() => setFieldTouched('chegada')}
                           >
-                            <Picker.Item label="Cidades" value="null" />
+                            <Picker.Item label="" value="null" />
                             <Picker.Item label="Alegre" value="Alegre" />
                             <Picker.Item label="Serra" value="Serra" />
                             <Picker.Item label="Piuma" value="Piuma" />

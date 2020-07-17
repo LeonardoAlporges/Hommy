@@ -19,6 +19,7 @@ class DetalhesAnuncio extends Component {
     page1: false,
     page2: false,
     page3: false,
+    desativarBotaoAgenda: this.props.navigation.state.params.desativarBotaoAgenda,
   };
 
   static navigationOptions = { header: null };
@@ -171,7 +172,7 @@ class DetalhesAnuncio extends Component {
             <Text style={estilo.txtlabel}>R$ {this.props.valorAluguel}</Text>
           </View>
         </View>
-        {!this.state.interesse ? (
+        {!this.state.interesse && !this.state.desativarBotaoAgenda ? (
           <View style={estilo.V_botao}>
             <Button
               style={estilo.botao}
@@ -183,11 +184,7 @@ class DetalhesAnuncio extends Component {
             </Button>
           </View>
         ) : (
-          <View style={estilo.V_botao}>
-            <Button style={estilo.botao}>
-              <Text style={estilo.txtWhatsapp}>Você já esta agendado</Text>
-            </Button>
-          </View>
+          <View style={{ height: 30 }} />
         )}
       </ScrollView>
     );

@@ -26,6 +26,7 @@ class DetalhesCarona extends Component {
       data: moment(this.props.data).format('dddd, DD MMMM'),
       horaSaida: moment(new Date(this.props.Hsaida)).format('HH:mm'),
       horaChegada: moment(new Date(this.props.HChegada)).format('HH:mm'),
+      desativarBotaoInteresse: this.props.navigation.state.params.desativarBotaoInteresse,
     };
   }
 
@@ -132,20 +133,22 @@ class DetalhesCarona extends Component {
               <Text style={Estilo.T_label}>•{this.props.desembarque}</Text>
             </View>
           </View>
-          <View style={Estilo.ViewButon}>
-            <View style={Estilo.V_Btn}>
-              <Button
-                style={Estilo.Botao}
-                onPress={() => {
-                  this.clickInteresse();
-                }}
-                title="Leo"
-              >
-                <Icon style={Estilo.iconBtn} name="whatsapp" />
-                <Text style={Estilo.txtBotao}>Tenho Interesse</Text>
-              </Button>
+          {!this.state.desativarBotaoInteresse ? (
+            <View style={Estilo.ViewButon}>
+              <View style={Estilo.V_Btn}>
+                <Button
+                  style={Estilo.Botao}
+                  onPress={() => {
+                    this.clickInteresse();
+                  }}
+                >
+                  <Text style={Estilo.txtBotao}>Tenho Interesse</Text>
+                </Button>
+              </View>
             </View>
-          </View>
+          ) : (
+            <View style={{ height: 40 }} />
+          )}
         </View>
       </ScrollView>
     );

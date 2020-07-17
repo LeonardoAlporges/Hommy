@@ -364,7 +364,7 @@ export class Cadastro extends Component {
                     <View style={estilo.V_ImageEmpty}>
                       <ScrollView horizontal={true}>
                         {this.state.imageURI0 == null ? (
-                          <View style={estilo.V_ImageFull}>
+                          <View style={estilo.V_ImageFullEmpty}>
                             <Image
                               source={require('../../assets/Img/Republica_Send_Pictures.png')}
                               style={estilo.ImageEmpty}
@@ -376,7 +376,7 @@ export class Cadastro extends Component {
                           </View>
                         )}
                         {this.state.imageURI1 == null ? (
-                          <View style={estilo.V_ImageFull}>
+                          <View style={estilo.V_ImageFullEmpty}>
                             <Image
                               source={require('../../assets/Img/Republica_Send_Pictures.png')}
                               style={estilo.ImageEmpty}
@@ -388,7 +388,7 @@ export class Cadastro extends Component {
                           </View>
                         )}
                         {this.state.imageURI2 == null ? (
-                          <View style={estilo.V_ImageFull}>
+                          <View style={estilo.V_ImageFullEmpty}>
                             <Image
                               source={require('../../assets/Img/Republica_Send_Pictures.png')}
                               style={estilo.ImageEmpty}
@@ -397,30 +397,6 @@ export class Cadastro extends Component {
                         ) : (
                           <View style={estilo.V_ImageFull}>
                             <Image source={{ uri: this.state.imageURI2 }} style={estilo.ImageFull} />
-                          </View>
-                        )}
-                        {this.state.imageURI3 == null ? (
-                          <View style={estilo.V_ImageFull}>
-                            <Image
-                              source={require('../../assets/Img/Republica_Send_Pictures.png')}
-                              style={estilo.ImageEmpty}
-                            />
-                          </View>
-                        ) : (
-                          <View style={estilo.V_ImageFull}>
-                            <Image source={{ uri: this.state.imageURI3 }} style={estilo.ImageFull} />
-                          </View>
-                        )}
-                        {this.state.imageURI4 == null ? (
-                          <View style={estilo.V_ImageFull}>
-                            <Image
-                              source={require('../../assets/Img/Republica_Send_Pictures.png')}
-                              style={estilo.ImageEmpty}
-                            />
-                          </View>
-                        ) : (
-                          <View style={estilo.V_ImageFull}>
-                            <Image source={{ uri: this.state.imageURI4 }} style={estilo.ImageFull} />
                           </View>
                         )}
                       </ScrollView>
