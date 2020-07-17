@@ -61,13 +61,7 @@ class RenderApp extends Component {
         soundName: 'default',
         playSound: true,
       };
-      localNotificationService.showNotification(
-        0,
-        notify.title,
-        notify.body,
-        notify,
-        option
-      );
+      localNotificationService.showNotification(0, notify.title, notify.body, notify, option);
     }
 
     function onOpenNotification(notify) {
@@ -143,10 +137,7 @@ class RenderApp extends Component {
         <StatusBar barStyle="light-content" backgroundColor="#142850" />
         {this.state.load ? (
           <View style={style.load}>
-            <Image
-              style={style.imagem}
-              source={require('../../assets/Img/Splash.png')}
-            />
+            <Image style={style.imagem} source={require('../../assets/Img/Splash.png')} />
             <View style={style.V_spinner}>
               <Spinner color="#ffffff" />
             </View>
@@ -156,11 +147,7 @@ class RenderApp extends Component {
             {this.state.firtsOpen ? (
               <SplashScreen />
             ) : (
-              <View>
-                {this.state.logado
-                  ? this.reset('TabsHeader')
-                  : this.reset('Login')}
-              </View>
+              <View>{this.state.logado ? this.reset('TabsHeader') : this.reset('Login')}</View>
             )}
           </View>
         )}

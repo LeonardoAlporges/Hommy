@@ -4,11 +4,7 @@ import { Plataform } from 'react-native';
 class FMCService {
   register = (onRegister, onNotification, onOpenNotification) => {
     this.checkPermission(onRegister);
-    this.createNotificationListerners(
-      onRegister,
-      onNotification,
-      onOpenNotification
-    );
+    this.createNotificationListerners(onRegister, onNotification, onOpenNotification);
   };
   registerAppWithFMC = async () => {
     if (Plataform === 'ios') {
@@ -33,7 +29,7 @@ class FMCService {
         console.log('[FMCService] Permissão rejeitada', erro);
       });
   };
-
+  //Pegando o Token
   getToken = onRegister => {
     messaging()
       .getToken()
@@ -69,12 +65,10 @@ class FMCService {
       });
   };
 
-  createNotificationListerners = () => {
+  createNotificationListerners = (onRegister, onNotification, onOpenNotification) => {
     //When the application is running, but in the backgroud
     messaging().onNotificationOpenedApp(remoteMessages => {
-      console.log(
-        '[FMC] onNotificationOpenedApp Notification caused app to open'
-      );
+      console.log('[FMC] onNotificationOpenedApp Notification caused app to open');
       if (remoteMessages) {
         const notification = remoteMessages.notification;
         onOpenNotification(notification);
@@ -95,7 +89,7 @@ class FMCService {
       });
 
     this.messageListerner = messaging().onMessage(async remoteMessages => {
-      console.log('[FMC] Novo FMC mensagem arrived');
+      console.log('[FMC] Novo FMC mensagem recebida');
       if (remoteMessages) {
         let notification = null;
         if (Plataform.OS === 'ios') {
