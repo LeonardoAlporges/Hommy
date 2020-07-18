@@ -269,10 +269,10 @@ class Republica extends Component {
     let listaRepublicas = this.state.listaRepublicas;
 
     if (this.state.filtroAnimalSim === true) {
-      listaRepublicas = _.filter(listaRepublicas, { animal: 'Sim' });
+      listaRepublicas = _.filter(listaRepublicas, { animal: 'sim' });
     }
     if (this.state.filtroAnimalNao === true) {
-      listaRepublicas = _.filter(listaRepublicas, { animal: 'Nao' });
+      listaRepublicas = _.filter(listaRepublicas, { animal: 'nao' });
     }
     if (this.state.filtroMasc === true) {
       listaRepublicas = _.filter(listaRepublicas, {
@@ -305,13 +305,13 @@ class Republica extends Component {
       listaRepublicas = _.filter(listaRepublicas, { pessoas: '6+' });
     }
     if (this.state.filtroVagas1 === true) {
-      listaRepublicas = _.filter(listaRepublicas, { numVagas: '1' });
+      listaRepublicas = _.filter(listaRepublicas, ({ numVagas }) => numVagas >= 1);
     }
     if (this.state.filtroVagas2 === true) {
-      listaRepublicas = _.filter(listaRepublicas, { numVagas: '2' });
+      listaRepublicas = _.filter(listaRepublicas, ({ numVagas }) => numVagas >= 2);
     }
     if (this.state.filtroVagas3 === true) {
-      listaRepublicas = _.filter(listaRepublicas, { numVagas: '3' });
+      listaRepublicas = _.filter(listaRepublicas, ({ numVagas }) => numVagas >= 3);
     }
     if (this.state.filtroValorMenor === true) {
       listaRepublicas = _.filter(listaRepublicas, ({ valorAluguel }) => valorAluguel >= this.state.aluguelMin);
