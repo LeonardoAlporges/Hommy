@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import Estilos from './style';
+import { ScrollView } from 'react-native-gesture-handler';
 
 class Cabeca extends Component {
   static navigationOptions = { header: null, left: null };
@@ -113,66 +114,68 @@ class Cabeca extends Component {
                 </Text>
               </View>
               <View style={Estilos.viewDivisor} />
-              <View style={Estilos.viewBotoes}>
-                <Button
-                  style={Estilos.botoes}
-                  onPress={() => {
-                    this.props.navigation.navigate('Anuncios'), this.setState({ isModalVisible: false });
-                  }}
-                >
-                  <Icon style={Estilos.iconBotoes} name="book-open" />
-                  <Text style={Estilos.textBotoes}>Meus Anuncios</Text>
-                  <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
-                </Button>
-                <Button
-                  style={Estilos.botoes}
-                  onPress={() => {
-                    this.props.navigation.navigate('AgendamentoUser', {
-                      usuario: true,
-                    }),
+              <ScrollView>
+                <View style={Estilos.viewBotoes}>
+                  <Button
+                    style={Estilos.botoes}
+                    onPress={() => {
+                      this.props.navigation.navigate('Anuncios'), this.setState({ isModalVisible: false });
+                    }}
+                  >
+                    <Icon style={Estilos.iconBotoes} name="book-open" />
+                    <Text style={Estilos.textBotoes}>Meus Anuncios</Text>
+                    <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
+                  </Button>
+                  <Button
+                    style={Estilos.botoes}
+                    onPress={() => {
+                      this.props.navigation.navigate('AgendamentoUser', {
+                        usuario: true,
+                      }),
+                        this.setState({ isModalVisible: false });
+                    }}
+                  >
+                    <Icon style={Estilos.iconBotoes} name="list" />
+                    <Text style={Estilos.textBotoes}>Meus Agendamentos</Text>
+                    <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
+                  </Button>
+                  <Button
+                    onPress={() => {
+                      this.props.navigation.navigate('Viagens'), this.setState({ isModalVisible: false });
+                    }}
+                    style={Estilos.botoes}
+                  >
+                    <Icon style={Estilos.iconBotoes} name="question" />
+                    <Text style={Estilos.textBotoes}>Meus interesses</Text>
+                    <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
+                  </Button>
+                  <Button
+                    style={Estilos.botoes}
+                    onPress={() => {
+                      this.props.navigation.navigate('TelefoneUteis');
                       this.setState({ isModalVisible: false });
-                  }}
-                >
-                  <Icon style={Estilos.iconBotoes} name="list" />
-                  <Text style={Estilos.textBotoes}>Meus Agendamentos</Text>
-                  <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
-                </Button>
-                <Button
-                  onPress={() => {
-                    this.props.navigation.navigate('Viagens'), this.setState({ isModalVisible: false });
-                  }}
-                  style={Estilos.botoes}
-                >
-                  <Icon style={Estilos.iconBotoes} name="question" />
-                  <Text style={Estilos.textBotoes}>Meus interesses</Text>
-                  <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
-                </Button>
-                <Button
-                  style={Estilos.botoes}
-                  onPress={() => {
-                    this.props.navigation.navigate('TelefoneUteis');
-                    this.setState({ isModalVisible: false });
-                  }}
-                >
-                  <Icon style={Estilos.iconBotoes} name="phone" />
-                  <Text style={Estilos.textBotoes}>Telefones Uteis</Text>
-                  <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
-                </Button>
+                    }}
+                  >
+                    <Icon style={Estilos.iconBotoes} name="phone" />
+                    <Text style={Estilos.textBotoes}>Telefones Uteis</Text>
+                    <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
+                  </Button>
 
-                <Button
-                  onPress={() => {
-                    Linking.openURL('https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849');
-                  }}
-                  style={Estilos.botoes}
-                >
-                  <Icon style={Estilos.iconBotoes} name="exclamation" />
-                  <Text style={Estilos.textBotoes}>Enviar feedback</Text>
-                  <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
-                </Button>
-              </View>
-              <View style={Estilos.viewFooter}>
+                  <Button
+                    onPress={() => {
+                      Linking.openURL('https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849');
+                    }}
+                    style={Estilos.botoes}
+                  >
+                    <Icon style={Estilos.iconBotoes} name="exclamation" />
+                    <Text style={Estilos.textBotoes}>Enviar feedback</Text>
+                    <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
+                  </Button>
+                </View>
+              </ScrollView>
+              {/* <View style={Estilos.viewFooter}>
                 <Text width="100%">©2020 Todos direiros reservados.</Text>
-              </View>
+              </View> */}
             </View>
           </View>
         </Modal>

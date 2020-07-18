@@ -4,7 +4,7 @@ const style = StyleSheet.create({
   card: {
     marginTop: 0,
     marginBottom: 0,
-    paddingHorizontal: 10,
+    paddingHorizontal: 5,
   },
   flatList: {
     backgroundColor: '#f2f2f2f2',
@@ -131,17 +131,18 @@ const style = StyleSheet.create({
     color: '#142850',
   },
   ViewBotaoClose: {
-    marginLeft: 200,
+    marginLeft: '50%',
     width: 40,
     height: 40,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-end',
   },
   iconeClose: {
     fontSize: 20,
   },
   ViewStatus: {
     width: '100%',
+    paddingHorizontal: 5,
     flexDirection: 'row',
     height: 45,
   },

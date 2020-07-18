@@ -51,7 +51,6 @@ const estilosRepublica = StyleSheet.create({
     width: '80%',
   },
   V_filtroExterno: {
-    backgroundColor: '#ffffff',
     height: '100%',
     width: '100%',
     justifyContent: 'center',
@@ -60,8 +59,8 @@ const estilosRepublica = StyleSheet.create({
   V_filtroInterno: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 480,
-    marginTop: 120,
+    height: 450,
+    marginTop: 100,
     marginHorizontal: 40,
     backgroundColor: 'white',
     borderRadius: 20,
@@ -87,7 +86,7 @@ const estilosRepublica = StyleSheet.create({
   },
   textFiltro: {
     alignSelf: 'stretch',
-    paddingHorizontal: 15,
+    paddingHorizontal: 8,
     textAlign: 'center',
   },
   textFiltroValor: {
@@ -95,7 +94,7 @@ const estilosRepublica = StyleSheet.create({
     fontFamily: 'Roboto',
     textAlign: 'center',
     fontSize: 16,
-    paddingBottom:8
+    paddingBottom: 8,
   },
   ViewLabel: {
     width: 50,
@@ -103,10 +102,11 @@ const estilosRepublica = StyleSheet.create({
     alignItems: 'center',
   },
   itemInput: {
-    width: 100,
+    width: 50,
     borderBottomColor: '#142850',
     justifyContent: 'center',
     alignItems: 'center',
+    marginHorizontal: 20,
   },
   botaoModal: {
     alignSelf: 'center',

@@ -53,8 +53,7 @@ const Estilos = StyleSheet.create({
     width: 60,
   },
   V_local: {
-    width: '53%',
-
+    width: '50%',
     height: '100%',
     paddingLeft: 0,
     justifyContent: 'flex-start',
@@ -109,7 +108,7 @@ const Estilos = StyleSheet.create({
   txtdeslcSaHora: {
     paddingTop: 13,
     fontSize: 18,
-    width: '25%',
+    width: '28%',
     justifyContent: 'center',
     height: '100%',
     fontFamily: 'Roboto',
@@ -130,7 +129,7 @@ const Estilos = StyleSheet.create({
   },
 
   txtdeslcChHora: {
-    width: '26%',
+    width: '28%',
     height: '100%',
     paddingTop: 13,
 
