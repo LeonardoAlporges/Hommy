@@ -95,7 +95,8 @@ const Estilos = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'Roboto',
     fontWeight: 'bold',
-    color: '#142850',
+    color: '#142850',    
+    backgroundColor: "blue"
   },
   iconDesCh: {
     fontSize: 12,
@@ -140,14 +141,14 @@ const Estilos = StyleSheet.create({
   },
 
   txtdeslcCh: {
-    width: '90%',
+    width: '60%',
     height: '100%',
     paddingTop: 13,
     marginLeft: '2%',
     fontSize: 18,
     fontFamily: 'Roboto',
     fontWeight: '400',
-    color: '#142850',
+    color: '#142850',  
   },
   txtData: {
     marginLeft: 5,
