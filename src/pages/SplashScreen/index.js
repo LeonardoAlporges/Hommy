@@ -1,36 +1,79 @@
-import React, { Component } from 'react';
-import { View, Image, Text, Modal } from 'react-native';
+import React, { Component, useState } from 'react';
+import { View, Modal } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import style from './style';
-import { Button, Spinner } from 'native-base';
-import { NavigationActions, StackActions } from 'react-navigation';
 
-class SplashScreen extends Component {
-  static navigationOptions = { header: null };
-  constructor(props) {
-    super(props);
-  }
-  state = {
-    modalVisible: false,
-  };
-  resetNavigation(Rota) {
+import { Spinner } from 'native-base';
+import { NavigationActions, StackActions } from 'react-navigation';
+import {
+  Container,
+  Conteudo,
+  Logo,
+  Imagem,
+  Label,
+  Titulo,
+  Descricao,
+  Botoes,
+  Botao,
+  TituloBotao,
+  Spin,
+  FundoModal,
+} from './styles';
+
+function SplashScreen(props) {
+  const [exibirModal, setExibirModal] = useState(false);
+
+  function resetNavigation(rota) {
     const resetAction = StackActions.reset({
       index: 0,
-      actions: [NavigationActions.navigate({ routeName: Rota })],
+      actions: [NavigationActions.navigate({ routeName: rota })],
     });
-
-    this.props.navigation.dispatch(resetAction);
+    props.navigation.dispatch(resetAction);
   }
-  abrirLoad() {
-    this.setState({ modalVisible: true });
+
+  function abrirLoad() {
+    setExibirModal(true);
 
     setTimeout(() => {
-      this.setState({ modalVisible: false });
+      setExibirModal(false);
     }, 1000);
 
-    this.resetNavigation('Login');
+    resetNavigation('Login');
   }
 
+  return (
+    <Container>
+      <Conteudo>
+        <Logo>
+          <Imagem source={require('../../assets/Img/Wellcome.png')} />
+        </Logo>
+        <Label>
+          <Titulo>Bem vindo ao Hommy </Titulo>
+
+          <Descricao>
+            Realize e acompanhe anúncios! Descubra a república ideal e economize tempo pedindo uma carona
+          </Descricao>
+        </Label>
+      </Conteudo>
+
+      <Botoes>
+        <Botao onPress={() => abrirLoad()}>
+          <TituloBotao>Acessar minha conta</TituloBotao>
+        </Botao>
+      </Botoes>
+      {setExibirModal && (
+        <Modal animationType="slide" transparent={true} visible={exibirModal}>
+          <FundoModal>
+            <Spin>
+              <Spinner color="#142850" />
+            </Spin>
+          </FundoModal>
+        </Modal>
+      )}
+    </Container>
+  );
+}
+
+class SplashScreen extends Component {
   render() {
     return (
       <View style={style.container}>
