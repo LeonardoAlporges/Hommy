@@ -41,7 +41,7 @@ class Viagens extends Component {
   };
 
   deletar(valor, idCarona) {
-    if (valor == 0) {
+    if (valor == 0 || valor == 3) {
       return null;
     }
     this.setState({ Load: true });

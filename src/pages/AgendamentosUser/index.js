@@ -148,23 +148,6 @@ class AgendamentoUser extends Component {
             <View>
               <Cartao data={item.republica} interessado />
               <View style={style.viewData}>
-                <TouchableOpacity
-                  style={{ width: 30, height: 30, justifyContent: 'center' }}
-                  onPress={() => {
-                    this.setState({
-                      MConfirmacaoDelete: true,
-                      item: item.republica._id,
-                    });
-                  }}
-                >
-                  <Icon name="close" style={style.iconDel} />
-                </TouchableOpacity>
-
-                <View style={style.viewData2}>
-                  <Text style={style.data}>{moment(new Date(item.data)).format('DD/MM/YY')}</Text>
-                  <Text>As</Text>
-                  <Text style={style.data}>{moment(new Date(item.hora)).format('hh:mm')}</Text>
-                </View>
                 {item.status == 'Análise' && (
                   <View style={style.ViewAnalise}>
                     <Text style={style.data}>{item.status}</Text>
@@ -180,6 +163,24 @@ class AgendamentoUser extends Component {
                     <Text style={style.dataRej}>{item.status}</Text>
                   </View>
                 )}
+
+                <View style={style.viewData2}>
+                  <Text style={style.data}>{moment(new Date(item.data)).format('DD/MM/YY')}</Text>
+                  <Text>As</Text>
+                  <Text style={style.data}>{moment(new Date(item.hora)).format('hh:mm')}</Text>
+                </View>
+
+                <TouchableOpacity
+                  style={{ width: 30, height: 30, justifyContent: 'center' }}
+                  onPress={() => {
+                    this.setState({
+                      MConfirmacaoDelete: true,
+                      item: item.republica._id,
+                    });
+                  }}
+                >
+                  <Icon name="close" style={style.iconDel} />
+                </TouchableOpacity>
               </View>
             </View>
           )}
