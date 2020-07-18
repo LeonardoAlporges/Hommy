@@ -333,8 +333,9 @@ class Caronas extends Component {
                   />
                   <Text style={Estilo.textList}>4+</Text>
                 </ListItem>
-                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Saida</Text>
-                <ListItem style={Estilo.listStyle}>
+                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Saida</Text>  
+                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 12}}>Cidades</Text>     
+                <ListItem style={Estilo.listStyle2}>                
                   <Item picker style={Estilo.pickerStyle}>
                     <Picker
                       mode="dropdown"
@@ -346,24 +347,26 @@ class Caronas extends Component {
                       selectedValue={this.state.cidadeS}
                       onValueChange={this.FCidadeS.bind(this)}
                     >
-                      <Picker.Item label="Cidades" value="null" />
+                      <Picker.Item label=" " value="null" />
                       <Picker.Item label="Alegre" value="Alegre" />
-                      <Picker.Item label="Serra" value="Serra" />
-                      <Picker.Item label="Piuma" value="Piuma" />
-                      <Picker.Item label="Guarapari" value="Guarapari" />
-                      <Picker.Item label="Cachoeiro" value="Cachoeiro" />
-                      <Picker.Item label="Vitoria" value="Vitoria" />
-                      <Picker.Item label="Vila Velha" value="Vila Velha" />
-                      <Picker.Item label="Muniz Freire" value="Muniz Freire" />
-                      <Picker.Item label="Guacui" value="Guacui" />
                       <Picker.Item label="Bom Jesus do Norte" value="Bom Jesus do Norte" />
+                      <Picker.Item label="Cachoeiro" value="Cachoeiro" />
                       <Picker.Item label="Celina" value="Celina" />
+                      <Picker.Item label="Guacui" value="Guacui" />
+                      <Picker.Item label="Guarapari" value="Guarapari" />
+                      <Picker.Item label="Muniz Freire" value="Muniz Freire" />
+                      <Picker.Item label="Piuma" value="Piuma" />
                       <Picker.Item label="Rive" value="Rive" />
+                      <Picker.Item label="Serra" value="Serra" />
+                      <Picker.Item label="Vila Velha" value="Vila Velha" />  
+                      <Picker.Item label="Vitoria" value="Vitoria" />
                     </Picker>
                   </Item>
                 </ListItem>
-                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Destino</Text>
-                <ListItem style={Estilo.listStyle}>
+                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Destino</Text>    
+                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 12}}>Cidades</Text>            
+                <ListItem style={Estilo.listStyle2}>
+                
                   <Item picker style={Estilo.pickerStyle}>
                     <Picker
                       mode="dropdown"
@@ -375,19 +378,19 @@ class Caronas extends Component {
                       selectedValue={this.state.cidadeD}
                       onValueChange={this.FCidadeD.bind(this)}
                     >
-                      <Picker.Item label="Cidades" value="null" />
+                         <Picker.Item label=" " value="null" />
                       <Picker.Item label="Alegre" value="Alegre" />
-                      <Picker.Item label="Serra" value="Serra" />
-                      <Picker.Item label="Piuma" value="Piuma" />
-                      <Picker.Item label="Guarapari" value="Guarapari" />
-                      <Picker.Item label="Cachoeiro" value="Cachoeiro" />
-                      <Picker.Item label="Vitoria" value="Vitoria" />
-                      <Picker.Item label="Vila Velha" value="Vila Velha" />
-                      <Picker.Item label="Muniz Freire" value="Muniz Freire" />
-                      <Picker.Item label="Guacui" value="Guacui" />
                       <Picker.Item label="Bom Jesus do Norte" value="Bom Jesus do Norte" />
+                      <Picker.Item label="Cachoeiro" value="Cachoeiro" />
                       <Picker.Item label="Celina" value="Celina" />
+                      <Picker.Item label="Guacui" value="Guacui" />
+                      <Picker.Item label="Guarapari" value="Guarapari" />
+                      <Picker.Item label="Muniz Freire" value="Muniz Freire" />
+                      <Picker.Item label="Piuma" value="Piuma" />
                       <Picker.Item label="Rive" value="Rive" />
+                      <Picker.Item label="Serra" value="Serra" />
+                      <Picker.Item label="Vila Velha" value="Vila Velha" />  
+                      <Picker.Item label="Vitoria" value="Vitoria" />
                     </Picker>
                   </Item>
                 </ListItem>

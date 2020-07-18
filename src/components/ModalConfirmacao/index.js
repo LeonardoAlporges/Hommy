@@ -46,6 +46,7 @@ class ModalConfirmacao extends Component {
               <Button
                 style={style.botao}
                 onPress={async () => {
+                  this.mudarEstado();
                   this.setState({ modalVisible: false });
                 }}
               >
