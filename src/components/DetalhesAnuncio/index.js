@@ -11,6 +11,7 @@ import ViewPager from '@react-native-community/viewpager';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import Icon2 from 'react-native-vector-icons/Feather';
 import Icon3 from 'react-native-vector-icons/Entypo';
+import Icon4 from 'react-native-vector-icons/Ionicons';
 import { PagerTabIndicator, IndicatorViewPager, PagerTitleIndicator, PagerDotIndicator } from 'rn-viewpager';
 
 class DetalhesAnuncio extends Component {
@@ -170,6 +171,15 @@ class DetalhesAnuncio extends Component {
           <View style={estilo.vagas}>
             <Icon2 name="dollar-sign" style={estilo.icone} />
             <Text style={estilo.txtlabel}>R$ {this.props.valorAluguel}</Text>
+          </View>
+        </View>
+        <View style={estilo.V_tipo}>
+          <Text style={estilo.tipo}>Aceita animais?</Text>
+        </View>
+        <View style={estilo.V_vagas}>
+          <View style={estilo.vagas}>
+            <Icon4 name="md-paw" style={estilo.icone} />
+            <Text style={estilo.txtlabel}>{this.props.animal}</Text>
           </View>
         </View>
         {!this.state.interesse && !this.state.desativarBotaoAgenda ? (
