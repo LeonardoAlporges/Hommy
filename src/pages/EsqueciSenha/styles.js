@@ -51,6 +51,7 @@ const estilo = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#142850',
     borderRadius: 10,
+    flexDirection: "row"
   },
   txtbtn: {
     textAlign: 'center',

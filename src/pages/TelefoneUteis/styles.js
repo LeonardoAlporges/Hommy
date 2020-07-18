@@ -4,9 +4,13 @@ const style = StyleSheet.create({
   Divisao: {
     paddingHorizontal: 16,
     marginHorizontal: 20,
-
+    fontSize: 10,
     width: '80%',
     borderBottomWidth: 1,
+  },
+  Text: {
+    paddingBottom: 10,
+    fontSize: 20
   },
   Cards: {
     marginVertical: 5,

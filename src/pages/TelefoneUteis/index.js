@@ -23,7 +23,7 @@ export default class TelefoneUteis extends Component {
       <View>
         <HeaderBack title="Telefone Uteis" onNavigation={() => this.navegar()} />
         <View style={style.Divisao}>
-          <Text>Emergencia</Text>
+          <Text style={style.Text}>Emergencia</Text>
         </View>
         <View style={{ paddingHorizontal: 20, marginVertical: 10 }}>
           <View style={style.Cards}>
@@ -55,7 +55,7 @@ export default class TelefoneUteis extends Component {
           </View>
         </View>
         <View style={style.Divisao}>
-          <Text>Uteis</Text>
+          <Text style={style.Text}>Uteis</Text>
         </View>
         <View style={{ paddingHorizontal: 20, marginVertical: 10 }}>
           <View style={style.Cards}>

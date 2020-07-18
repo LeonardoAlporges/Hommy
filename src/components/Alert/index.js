@@ -64,9 +64,14 @@ export default class CustomModal extends Component {
       this.setState({
         icon: require('../../assets/Img/Fail_Connection.png'),
         titulo: 'OOPS!',
-        descricao: 'Alguma coisa deu errado. Por favor, verifique sua conexão com a internet.',
+        descricao: this.props.descricao,
         botao: 'Voltar',
       });
+      if (!this.props.descricao) {
+        this.setState({
+          descricao: 'Alguma coisa deu errado. Por favor, verifique sua conexão com a internet.'
+        });
+      }
     }
   }
 

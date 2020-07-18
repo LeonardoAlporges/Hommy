@@ -68,6 +68,7 @@ const estilo = StyleSheet.create({
     height: 45,
     borderRadius: 8,
     backgroundColor: '#142850',
+    flexDirection: "row"
   },
   txtErro: {
     fontFamily: 'Roboto-light',
@@ -89,10 +90,10 @@ const estilo = StyleSheet.create({
   },
   V_Btn: {
     width: '100%',
-
     height: 100,
     alignItems: 'center',
     justifyContent: 'center',
+    flexDirection: "row"
   },
   textoLabel: {
     fontFamily: 'Roboto Bold',

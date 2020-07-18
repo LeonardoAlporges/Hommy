@@ -55,7 +55,7 @@ class EsqueciSenha extends Component {
   render() {
     return (
       <View style={estilo.container}>
-        <HeaderBack title="Esquece a senha ?" onNavigation={() => this.navegar()} />
+        <HeaderBack title="Esqueceu a senha ?" onNavigation={() => this.navegar()} />
 
         <View style={estilo.V_img}>
           <Image style={estilo.V_img} source={require('../../assets/Img/Send_email.png')} />

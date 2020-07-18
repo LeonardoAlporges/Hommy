@@ -151,6 +151,9 @@ class CadastroUsuario extends Component {
                 {this.state.erro && (
                   <CustomModal
                     parametro="Erro"
+                    titulo="OOPS!"
+                      descricao="Seu email já está cadastrado no aplicativo."
+                      botao="Voltar"
                     callback={() => {
                       this.setState({ erro: false });
                     }}
