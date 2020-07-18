@@ -62,6 +62,7 @@ class Anuncios extends Component {
   };
 
   DeleteAnuncio = (valor, item, tipo) => {
+    console.log(item._id);
     if (valor == 0) {
       return null;
     }

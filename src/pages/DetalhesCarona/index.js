@@ -50,7 +50,6 @@ class DetalhesCarona extends Component {
     return (
       <ScrollView style={{ paddingBottom: 50 }}>
         {this.state.Load && <Loading />}
-
         {this.state.interesse && (
           <View style={Estilo.V_modal}>
             <CustomModal
@@ -60,6 +59,17 @@ class DetalhesCarona extends Component {
               botao="Confirmar"
               callback={() => {
                 this.props.navigation.navigate('Viagens');
+              }}
+            />
+          </View>
+        )}
+        {this.state.Erro && (
+          <View style={Estilo.V_modal}>
+            <CustomModal
+              parametro="Erro"
+              descricao="Você já tem um agendamento cadastrado nessa república."
+              callback={() => {
+                this.setState({ Erro: false });
               }}
             />
           </View>

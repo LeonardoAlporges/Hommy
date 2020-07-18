@@ -180,6 +180,7 @@ class Agendar extends Component {
           <View style={style.V_Detalhes}>
             <CustomModal
               parametro="Erro"
+              descricao="Você já tem um agendamento cadastrado nessa república."
               callback={() => {
                 this.setState({ Erro: false });
               }}
