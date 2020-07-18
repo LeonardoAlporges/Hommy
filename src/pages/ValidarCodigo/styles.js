@@ -42,6 +42,7 @@ const estilo = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     height: 50,
+    flexDirection: "row"
   },
   botao: {
     width: '80%',
@@ -50,6 +51,7 @@ const estilo = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#142850',
     borderRadius: 10,
+    flexDirection: "row"
   },
   txtbtn: {
     textAlign: 'center',

@@ -380,23 +380,20 @@ class Republica extends Component {
               <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Valor</Text>
               <ListItem style={Estilos.listStyleInput}>
                 <View style={Estilos.ViewLabel}>
-                  <Text style={Estilos.textFiltroValor}>De</Text>
+                  <Text style={Estilos.textFiltroValor}>De R$</Text>
                 </View>
-
                 <Item underlined style={Estilos.itemInput}>
                   <Input
-                    style={{ alignSelf: 'stretch' }}
                     onChangeText={text => this.valMenor(text)}
                     value={this.state.aluguelMin}
                     keyboardType="numeric"
                   />
                 </Item>
                 <View style={Estilos.ViewLabel}>
-                  <Text style={Estilos.textFiltroValor}>Até</Text>
+                  <Text style={Estilos.textFiltroValor}>Até R$</Text>
                 </View>
                 <Item underlined style={Estilos.itemInput}>
                   <Input
-                    style={{ alignSelf: 'stretch' }}
                     onChangeText={text => this.valMaior(text)}
                     value={this.state.aluguelMax}
                     keyboardType="numeric"

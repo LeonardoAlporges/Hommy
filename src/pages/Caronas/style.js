@@ -62,9 +62,8 @@ const Estilo = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: 500,
-    width: 350,
     marginTop: 120,
-    marginHorizontal: 30,
+    marginHorizontal: 40,
     backgroundColor: 'white',
     borderRadius: 20,
     alignItems: 'center',
@@ -85,9 +84,25 @@ const Estilo = StyleSheet.create({
     alignSelf: 'stretch',
     paddingHorizontal: 15,
   },
-  itemStyle: {
+  textValor:{
+    color: '#2e2e2e',
+    fontFamily: 'Roboto',
+    textAlign: 'center',
+    fontSize: 16,
+    width: 50,
+    paddingBottom:8
+  },
+  ViewLabel:{
+    width: 50,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  itemStyle: {  
     width: 100,
+    height: 30,
     borderBottomColor: '#142850',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   inputStyle: {
     alignSelf: 'stretch',

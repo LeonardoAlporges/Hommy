@@ -54,14 +54,15 @@ const estilosRepublica = StyleSheet.create({
     backgroundColor: '#ffffff',
     height: '100%',
     width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   V_filtroInterno: {
     justifyContent: 'center',
     alignItems: 'center',
     height: 480,
-    width: 350,
     marginTop: 120,
-    marginHorizontal: 30,
+    marginHorizontal: 40,
     backgroundColor: 'white',
     borderRadius: 20,
     alignItems: 'center',
@@ -94,6 +95,7 @@ const estilosRepublica = StyleSheet.create({
     fontFamily: 'Roboto',
     textAlign: 'center',
     fontSize: 16,
+    paddingBottom:8
   },
   ViewLabel: {
     width: 50,
@@ -102,11 +104,9 @@ const estilosRepublica = StyleSheet.create({
   },
   itemInput: {
     width: 100,
-    backgroundColor: 'red',
     borderBottomColor: '#142850',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingBottom: 10,
   },
   botaoModal: {
     alignSelf: 'center',

@@ -220,70 +220,89 @@ class Caronas extends Component {
             <Spinner color="#142850" />
           </View>
         ) : (
-          <View>
-            {this.state.erro ? (
-              <View style={Estilo.V_interna1}>
-                <CustomModal
-                  parametro="Erro"
-                  callback={() => {
-                    this.setState({ erro: false });
-                  }}
-                />
-              </View>
-            ) : (
-              <View>
-                {this.state.listaCaronas.length !== 0 ? (
-                  <View style={Estilo.card}>
-                    <FlatList
-                      style={Estilo.flatList}
-                      data={this.state.listaCaronas}
-                      renderItem={({ item }) => <CartaoCarona dados={item} />}
-                      keyExtractor={item => item._id}
-                      refreshing={this.state.refreshing}
-                      onRefresh={this.getListCarona}
-                    />
-                  </View>
-                ) : (
-                  <View style={{ backgroundColor: '#ffffff' }}>
-                    {this.state.listaCaronas.length == 0 && (
-                      <EmptyState
-                        titulo="Nada por aqui!"
-                        mensagem="Por enquanto ninguém está oferecendo carona. Tente novamente mais tarde. "
-                      />
-                    )}
+            <View>
+              {this.state.erro ? (
+                <View style={Estilo.V_interna1}>
+                  <CustomModal
+                    parametro="Erro"
+                    callback={() => {
+                      this.setState({ erro: false });
+                    }}
+                  />
+                </View>
+              ) : (
+                  <View>
+                    {this.state.listaCaronas.length !== 0 ? (
+                      <View style={Estilo.card}>
+                        <FlatList
+                          style={Estilo.flatList}
+                          data={this.state.listaCaronas}
+                          renderItem={({ item }) => <CartaoCarona dados={item} />}
+                          keyExtractor={item => item._id}
+                          refreshing={this.state.refreshing}
+                          onRefresh={this.getListCarona}
+                        />
+                      </View>
+                    ) : (
+                        <View style={{ backgroundColor: '#ffffff' }}>
+                          {this.state.listaCaronas.length == 0 && (
+                            <EmptyState
+                              titulo="Nada por aqui!"
+                              mensagem="Por enquanto ninguém está oferecendo carona. Tente novamente mais tarde. "
+                            />
+                          )}
+                        </View>
+                      )}
                   </View>
                 )}
-              </View>
-            )}
-          </View>
-        )}
+            </View>
+          )}
 
         {this.state.modalVisible && (
           <View style={Estilo.V_modalExterno}>
             <Modal animationType="fade" visible={this.state.modalVisible} transparent={true}>
               <View style={Estilo.V_modalInterno}>
-                <Text>Valor</Text>
+              <View
+                style={{
+                  width: '100%',
+                  height: 30,
+                  justifyContent: 'center',
+                  alignItems: 'flex-end',
+                }}
+              >
+                <TouchableOpacity
+                  style={{ marginRight: 20, marginBottom: 10 }}
+                  onPress={() => {
+                    this.setState({ modalVisible: false });
+                  }}
+                >
+                  <Icon style={{ fontSize: 22 }} name="close" />
+                </TouchableOpacity>
+              </View>
+                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Valor</Text>
                 <ListItem style={Estilo.listStyle}>
-                  <Text style={Estilo.textList}>De</Text>
+                  <View style={Estilo.ViewLabel}>
+                    <Text style={Estilo.textValor}>De R$</Text>
+                  </View>
                   <Item underlined style={Estilo.itemStyle}>
                     <Input
-                      style={Estilo.inputStyle}
                       onChangeText={text => this.valMenor(text)}
                       value={this.state.aluguelMin}
                       keyboardType="numeric"
                     />
                   </Item>
-                  <Text style={Estilo.textList}>Até</Text>
+                  <View style={Estilo.ViewLabel}>
+                    <Text style={Estilo.textValor}>Até R$</Text>
+                  </View>
                   <Item underlined style={Estilo.itemStyle}>
                     <Input
-                      style={Estilo.inputStyle}
                       onChangeText={text => this.valMaior(text)}
                       value={this.state.aluguelMax}
                       keyboardType="numeric"
                     />
                   </Item>
                 </ListItem>
-                <Text>Vagas disponíveis</Text>
+                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Vagas disponíveis</Text>
                 <ListItem style={Estilo.listStyle}>
                   <CheckBox
                     color="#142850"
@@ -314,7 +333,7 @@ class Caronas extends Component {
                   />
                   <Text style={Estilo.textList}>4</Text>
                 </ListItem>
-                <Text>Saida</Text>
+                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Saida</Text>
                 <ListItem style={Estilo.listStyle}>
                   <Item picker style={Estilo.pickerStyle}>
                     <Picker
@@ -343,7 +362,7 @@ class Caronas extends Component {
                     </Picker>
                   </Item>
                 </ListItem>
-                <Text>Destino</Text>
+                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Destino</Text>
                 <ListItem style={Estilo.listStyle}>
                   <Item picker style={Estilo.pickerStyle}>
                     <Picker
@@ -380,7 +399,7 @@ class Caronas extends Component {
                     this.filtro();
                   }}
                 >
-                  <Text style={Estilo.textBtn}>Fechar</Text>
+                  <Text style={Estilo.textBtn}>Aplicar</Text>
                 </TouchableOpacity>
               </View>
             </Modal>
