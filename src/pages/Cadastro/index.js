@@ -655,7 +655,8 @@ export class Cadastro extends Component {
                               <Picker.Item label="" value="Não informado" />
                               <Picker.Item label="1" value="1" />
                               <Picker.Item label="2" value="2" />
-                              <Picker.Item label="3+" value="3+" />
+                              <Picker.Item label="3" value="3" />
+                              <Picker.Item label="4" value="4" />
                             </Picker>
                           </Item>
                           <View style={estilo.V_error}>
