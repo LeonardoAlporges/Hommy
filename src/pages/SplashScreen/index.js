@@ -1,74 +1,76 @@
-import React, { Component } from 'react';
-import { View, Image, Text, Modal } from 'react-native';
+import React, { Component, useState } from 'react';
+import { View, Modal } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import style from './style';
-import { Button, Spinner } from 'native-base';
-import { NavigationActions, StackActions } from 'react-navigation';
 
-class SplashScreen extends Component {
-  static navigationOptions = { header: null };
-  constructor(props) {
-    super(props);
-  }
-  state = {
-    modalVisible: false,
-  };
-  resetNavigation(Rota) {
+import { Spinner } from 'native-base';
+import { NavigationActions, StackActions } from 'react-navigation';
+import {
+  Container,
+  Conteudo,
+  Logo,
+  Imagem,
+  Label,
+  Titulo,
+  Descricao,
+  Botoes,
+  Botao,
+  TituloBotao,
+  Spin,
+  FundoModal,
+} from './styles';
+
+function SplashScreen(props) {
+  const [exibirModal, setExibirModal] = useState(false);
+
+  function resetNavigation(rota) {
     const resetAction = StackActions.reset({
       index: 0,
-      actions: [NavigationActions.navigate({ routeName: Rota })],
+      actions: [NavigationActions.navigate({ routeName: rota })],
     });
-
-    this.props.navigation.dispatch(resetAction);
+    props.navigation.dispatch(resetAction);
   }
-  abrirLoad() {
-    this.setState({ modalVisible: true });
+
+  function abrirLoad() {
+    setExibirModal(true);
 
     setTimeout(() => {
-      this.setState({ modalVisible: false });
+      setExibirModal(false);
     }, 1000);
 
-    this.resetNavigation('Login');
+    resetNavigation('Login');
   }
 
-  render() {
-    return (
-      <View style={style.container}>
-        <View style={style.posicao}>
-          <View style={style.imagem}>
-            <Image style={style.img} source={require('../../assets/Img/Wellcome.png')} />
-          </View>
-          <View style={style.texto}>
-            <Text style={style.titulo}>Bem vindo ao Hommy </Text>
+  return (
+    <Container>
+      <Conteudo>
+        <Logo>
+          <Imagem source={require('../../assets/Img/Wellcome.png')} />
+        </Logo>
+        <Label>
+          <Titulo>Bem vindo ao Hommy </Titulo>
 
-            <Text style={style.descricao}>
-              Realize e acompanhe anúncios! Descubra a república ideal e economize tempo pedindo uma TESTE
-            </Text>
-          </View>
-        </View>
+          <Descricao>
+            Realize e acompanhe anúncios! Descubra a república ideal e economize tempo pedindo uma carona
+          </Descricao>
+        </Label>
+      </Conteudo>
 
-        <View style={style.V_Botoes}>
-          <Button
-            style={style.botao}
-            onPress={() => {
-              this.abrirLoad();
-            }}
-          >
-            <Text style={style.labelButon}>Acessar minha conta</Text>
-          </Button>
-        </View>
-        <View>
-          <Modal animationType="slide" transparent={true} visible={this.state.modalVisible}>
-            <View style={style.ViewFundo}>
-              <View style={style.ViewModal}>
-                <Spinner color="#142850" />
-              </View>
-            </View>
-          </Modal>
-        </View>
-      </View>
-    );
-  }
+      <Botoes>
+        <Botao onPress={() => abrirLoad()}>
+          <TituloBotao>Acessar minha conta</TituloBotao>
+        </Botao>
+      </Botoes>
+      {setExibirModal && (
+        <Modal animationType="slide" transparent={true} visible={exibirModal}>
+          <FundoModal>
+            <Spin>
+              <Spinner color="#142850" />
+            </Spin>
+          </FundoModal>
+        </Modal>
+      )}
+    </Container>
+  );
 }
 
 export default withNavigation(SplashScreen);

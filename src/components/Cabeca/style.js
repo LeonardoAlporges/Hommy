@@ -115,8 +115,9 @@ const Estilos = StyleSheet.create({
     width: '100%',
     paddingHorizontal: '10%',
     justifyContent: 'space-between',
-    height: 375,
+    height: 350,
     marginTop: '10%',
+    paddingBottom: '10%',
   },
   botoes: {
     width: '100%',

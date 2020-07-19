@@ -53,8 +53,7 @@ const Estilos = StyleSheet.create({
     width: 60,
   },
   V_local: {
-    width: '53%',
-
+    width: '50%',
     height: '100%',
     paddingLeft: 0,
     justifyContent: 'flex-start',
@@ -96,7 +95,8 @@ const Estilos = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'Roboto',
     fontWeight: 'bold',
-    color: '#142850',
+    color: '#142850',    
+    backgroundColor: "blue"
   },
   iconDesCh: {
     fontSize: 12,
@@ -109,7 +109,7 @@ const Estilos = StyleSheet.create({
   txtdeslcSaHora: {
     paddingTop: 13,
     fontSize: 18,
-    width: '25%',
+    width: '28%',
     justifyContent: 'center',
     height: '100%',
     fontFamily: 'Roboto',
@@ -130,7 +130,7 @@ const Estilos = StyleSheet.create({
   },
 
   txtdeslcChHora: {
-    width: '26%',
+    width: '28%',
     height: '100%',
     paddingTop: 13,
 
@@ -141,14 +141,14 @@ const Estilos = StyleSheet.create({
   },
 
   txtdeslcCh: {
-    width: '90%',
+    width: '60%',
     height: '100%',
     paddingTop: 13,
     marginLeft: '2%',
     fontSize: 18,
     fontFamily: 'Roboto',
     fontWeight: '400',
-    color: '#142850',
+    color: '#142850',  
   },
   txtData: {
     marginLeft: 5,

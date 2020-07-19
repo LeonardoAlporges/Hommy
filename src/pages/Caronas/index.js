@@ -163,16 +163,16 @@ class Caronas extends Component {
     await this.setState({ listaCaronas: this.state.fullData });
     let listaCaronas = this.state.listaCaronas;
     if (this.state.filtroVagas1 === true) {
-      listaCaronas = _.filter(listaCaronas, { vagas: '1' });
+      listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas >= 1);
     }
     if (this.state.filtroVagas2 === true) {
-      listaCaronas = _.filter(listaCaronas, { vagas: '2' });
+      listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas >= 2);
     }
     if (this.state.filtroVagas3 === true) {
-      listaCaronas = _.filter(listaCaronas, { vagas: '3' });
+      listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas >= 3);
     }
     if (this.state.filtroVagas4 === true) {
-      listaCaronas = _.filter(listaCaronas, { vagas: '4' });
+      listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas >= 4);
     }
     if (this.state.filtroCidadeS === true) {
       listaCaronas = _.filter(listaCaronas, { localSaida: this.state.cidadeS });
@@ -331,10 +331,11 @@ class Caronas extends Component {
                     onPress={this.fVagas4}
                     checked={this.state.filtroVagas4}
                   />
-                  <Text style={Estilo.textList}>4</Text>
+                  <Text style={Estilo.textList}>4+</Text>
                 </ListItem>
-                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Saida</Text>
-                <ListItem style={Estilo.listStyle}>
+                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Saida</Text>  
+                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 12}}>Cidades</Text>     
+                <ListItem style={Estilo.listStyle2}>                
                   <Item picker style={Estilo.pickerStyle}>
                     <Picker
                       mode="dropdown"
@@ -346,24 +347,26 @@ class Caronas extends Component {
                       selectedValue={this.state.cidadeS}
                       onValueChange={this.FCidadeS.bind(this)}
                     >
-                      <Picker.Item label="Cidades" value="null" />
+                      <Picker.Item label=" " value="null" />
                       <Picker.Item label="Alegre" value="Alegre" />
-                      <Picker.Item label="Serra" value="Serra" />
-                      <Picker.Item label="Piuma" value="Piuma" />
-                      <Picker.Item label="Guarapari" value="Guarapari" />
-                      <Picker.Item label="Cachoeiro" value="Cachoeiro" />
-                      <Picker.Item label="Vitoria" value="Vitoria" />
-                      <Picker.Item label="Vila Velha" value="Vila Velha" />
-                      <Picker.Item label="Muniz Freire" value="Muniz Freire" />
-                      <Picker.Item label="Guacui" value="Guacui" />
                       <Picker.Item label="Bom Jesus do Norte" value="Bom Jesus do Norte" />
+                      <Picker.Item label="Cachoeiro" value="Cachoeiro" />
                       <Picker.Item label="Celina" value="Celina" />
+                      <Picker.Item label="Guacui" value="Guacui" />
+                      <Picker.Item label="Guarapari" value="Guarapari" />
+                      <Picker.Item label="Muniz Freire" value="Muniz Freire" />
+                      <Picker.Item label="Piuma" value="Piuma" />
                       <Picker.Item label="Rive" value="Rive" />
+                      <Picker.Item label="Serra" value="Serra" />
+                      <Picker.Item label="Vila Velha" value="Vila Velha" />  
+                      <Picker.Item label="Vitoria" value="Vitoria" />
                     </Picker>
                   </Item>
                 </ListItem>
-                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Destino</Text>
-                <ListItem style={Estilo.listStyle}>
+                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Destino</Text>    
+                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 12}}>Cidades</Text>            
+                <ListItem style={Estilo.listStyle2}>
+                
                   <Item picker style={Estilo.pickerStyle}>
                     <Picker
                       mode="dropdown"
@@ -375,19 +378,19 @@ class Caronas extends Component {
                       selectedValue={this.state.cidadeD}
                       onValueChange={this.FCidadeD.bind(this)}
                     >
-                      <Picker.Item label="Cidades" value="null" />
+                         <Picker.Item label=" " value="null" />
                       <Picker.Item label="Alegre" value="Alegre" />
-                      <Picker.Item label="Serra" value="Serra" />
-                      <Picker.Item label="Piuma" value="Piuma" />
-                      <Picker.Item label="Guarapari" value="Guarapari" />
-                      <Picker.Item label="Cachoeiro" value="Cachoeiro" />
-                      <Picker.Item label="Vitoria" value="Vitoria" />
-                      <Picker.Item label="Vila Velha" value="Vila Velha" />
-                      <Picker.Item label="Muniz Freire" value="Muniz Freire" />
-                      <Picker.Item label="Guacui" value="Guacui" />
                       <Picker.Item label="Bom Jesus do Norte" value="Bom Jesus do Norte" />
+                      <Picker.Item label="Cachoeiro" value="Cachoeiro" />
                       <Picker.Item label="Celina" value="Celina" />
+                      <Picker.Item label="Guacui" value="Guacui" />
+                      <Picker.Item label="Guarapari" value="Guarapari" />
+                      <Picker.Item label="Muniz Freire" value="Muniz Freire" />
+                      <Picker.Item label="Piuma" value="Piuma" />
                       <Picker.Item label="Rive" value="Rive" />
+                      <Picker.Item label="Serra" value="Serra" />
+                      <Picker.Item label="Vila Velha" value="Vila Velha" />  
+                      <Picker.Item label="Vitoria" value="Vitoria" />
                     </Picker>
                   </Item>
                 </ListItem>

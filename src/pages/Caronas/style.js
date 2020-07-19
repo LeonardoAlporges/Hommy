@@ -80,6 +80,13 @@ const Estilo = StyleSheet.create({
     alignItems: 'stretch',
     marginBottom: 10,
   },
+  listStyle: {
+    alignItems: 'stretch',
+    marginBottom: 10,
+  },
+  listStyle2: {
+    alignItems: 'stretch',
+  },
   textList: {
     alignSelf: 'stretch',
     paddingHorizontal: 15,
