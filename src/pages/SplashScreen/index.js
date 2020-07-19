@@ -49,9 +49,7 @@ function SplashScreen(props) {
         <Label>
           <Titulo>Bem vindo ao Hommy </Titulo>
 
-          <Descricao>
-            Realize e acompanhe anúncios! Descubra a república ideal e economize tempo pedindo uma carona
-          </Descricao>
+          <Descricao>Realize e acompanhe anúncios! Descubra a república ideal e economize tempo pedindo uma</Descricao>
         </Label>
       </Conteudo>
 
