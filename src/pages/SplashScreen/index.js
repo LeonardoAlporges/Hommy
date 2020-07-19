@@ -42,7 +42,7 @@ class SplashScreen extends Component {
             <Text style={style.titulo}>Bem vindo ao Hommy </Text>
 
             <Text style={style.descricao}>
-              Realize e acompanhe anúncios! Descubra a república ideal e economize tempo pedindo uma carona
+              Realize e acompanhe anúncios! Descubra a república ideal e economize tempo pedindo uma caronaa
             </Text>
           </View>
         </View>
