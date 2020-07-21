@@ -4,14 +4,15 @@ import { color } from 'react-native-reanimated';
 const Estilos = StyleSheet.create({
   touch_card: {
     flex: 1,
-    height: 120,
+    height: 125,
     padding: 3,
-    marginTop: 8,
+    marginTop: 4,
     backgroundColor: '#ffff',
     padding: 0,
     borderWidth: 1,
     borderRadius: 10,
     borderColor: '#CFD3D6',
+    marginBottom: 8
   },
   V_cartao: {
     display: 'flex',

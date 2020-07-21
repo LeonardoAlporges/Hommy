@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { Text } from 'native-base';
 import style from './styles';
 
@@ -117,7 +117,7 @@ class Agendamentos extends Component {
         <FlatList
           data={this.state.listaAgendamento}
           renderItem={({ item }) => (
-            <View>
+            <ScrollView>
               <CartaoUser
                 status={item.status}
                 callback={() => this.onRefreshPage()}
@@ -148,7 +148,7 @@ class Agendamentos extends Component {
                   </View>
                 )}
               </View>
-            </View>
+            </ScrollView>
           )}
           keyExtractor={item => item._id}
         />

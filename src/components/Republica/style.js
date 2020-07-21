@@ -59,7 +59,7 @@ const estilosRepublica = StyleSheet.create({
   V_filtroInterno: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 450,
+    height: 525,
     marginTop: 100,
     marginHorizontal: 40,
     backgroundColor: 'white',

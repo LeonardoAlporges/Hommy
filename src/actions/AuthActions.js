@@ -27,12 +27,12 @@ export const editNomeRepublica = newNomeRepublica => {
   };
 };
 
-export const editTipoImovel = newValorAluguel => {
+export const editTipoImovel = newTipoImovel => {
   return {
     type: 'editTipoImovel', //nome da açao
     payload: {
       //Aqui é as informaçoes que vc ta enviando no caso aqui é so email
-      tipoImovel: newValorAluguel,
+      tipoImovel: newTipoImovel,
     },
   };
 };

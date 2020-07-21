@@ -40,6 +40,7 @@ import {
   editRepresentante,
   editRua,
   editNumeroCasa,
+  editTipoImovel,
 } from '../../actions/AuthActions';
 import HeaderBack from '../../components/CustomHeader';
 import CustomModal from '../../components/Alert';
@@ -161,6 +162,7 @@ class Anuncios extends Component {
     this.props.editImg3(dados.imagem3);
     this.props.editValor(dados.valor);
     this.props.editValorConta(dados.valorContas);
+    this.props.editTipoImovel(dados.imovel);
     this.props.navigation.navigate('Cadastro', { update: true });
   }
 
@@ -377,6 +379,7 @@ const EditConnect = connect(
     editAcomodacaoQuarto,
     editAcomodacaoRepublica,
     editValorConta,
+    editTipoImovel,
     editObservacao,
     editImg1,
     editImg2,
