@@ -163,13 +163,13 @@ class Caronas extends Component {
     await this.setState({ listaCaronas: this.state.fullData });
     let listaCaronas = this.state.listaCaronas;
     if (this.state.filtroVagas1 === true) {
-      listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas >= 1);
+      listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas = 1);
     }
     if (this.state.filtroVagas2 === true) {
-      listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas >= 2);
+      listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas = 2);
     }
     if (this.state.filtroVagas3 === true) {
-      listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas >= 3);
+      listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas = 3);
     }
     if (this.state.filtroVagas4 === true) {
       listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas >= 4);
@@ -333,9 +333,8 @@ class Caronas extends Component {
                   />
                   <Text style={Estilo.textList}>4+</Text>
                 </ListItem>
-                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Saida</Text>  
-                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 12}}>Cidades</Text>     
-                <ListItem style={Estilo.listStyle2}>                
+                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Saida</Text>      
+                <ListItem style={Estilo.listStyle}>                
                   <Item picker style={Estilo.pickerStyle}>
                     <Picker
                       mode="dropdown"
@@ -363,9 +362,8 @@ class Caronas extends Component {
                     </Picker>
                   </Item>
                 </ListItem>
-                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Destino</Text>    
-                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 12}}>Cidades</Text>            
-                <ListItem style={Estilo.listStyle2}>
+                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Destino</Text>           
+                <ListItem style={Estilo.listStyle}>
                 
                   <Item picker style={Estilo.pickerStyle}>
                     <Picker

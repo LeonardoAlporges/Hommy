@@ -67,7 +67,7 @@ class DetalhesCarona extends Component {
           <View style={Estilo.V_modal}>
             <CustomModal
               parametro="Erro"
-              descricao="Você já tem um agendamento cadastrado nessa república."
+              descricao="Você já tem um agendamento cadastrado nessa carona."
               callback={() => {
                 this.setState({ Erro: false });
               }}

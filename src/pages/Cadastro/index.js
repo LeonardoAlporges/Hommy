@@ -74,6 +74,12 @@ export class Cadastro extends Component {
 
     if (parametro.update == false) {
       this.atualizarPropsRedux();
+    } else {
+      await this.setState({
+        imageURI0: this.props.imagem1,
+        imageURI1: this.props.imagem2,
+        imageURI2:this.props.imagem3,
+      });
     }
   }
   atualizarPropsRedux(dados) {
@@ -216,7 +222,7 @@ export class Cadastro extends Component {
             this.setState({ erro: true });
           });
       }
-    } catch (error) {}
+    } catch (error) { }
   }
 
   render() {
@@ -227,8 +233,8 @@ export class Cadastro extends Component {
           bairro: this.props.bairro,
           rua: this.props.rua,
           numero: this.props.numeroCasa,
-          aluguel: this.props.valorAluguel,
-          contas: this.props.valorContas,
+          aluguel: (this.props.valorAluguel).toString(10),
+          contas: (this.props.valorContas).toString(10),
           moradores: this.props.pessoas,
           genero: this.props.genero,
           animais: this.props.animal,
@@ -266,7 +272,7 @@ export class Cadastro extends Component {
           descricao: yup
             .string('')
             .min(3, 'Minimo de 3 caracteres')
-            .max(50, 'Maximo permitido de 50 caracteres'),
+            .max(70, 'No máximo 70 caracteres'),
           aluguel: yup
             .number('Somente numeros')
             .min(10, 'Valor minimo R$ 10')
@@ -284,12 +290,12 @@ export class Cadastro extends Component {
           aQuarto: yup
             .string('')
             .min(3)
-            .max(40)
+            .max(70, 'No máximo 70 caracteres')
             .required('Campo obrigatório'),
           aRepublica: yup
             .string('')
             .min(3)
-            .max(40)
+            .max(70, 'No máximo 70 caracteres')
             .required('Campo obrigatório'),
         })}
       >
@@ -371,10 +377,10 @@ export class Cadastro extends Component {
                             />
                           </View>
                         ) : (
-                          <View style={estilo.V_ImageFull}>
-                            <Image source={{ uri: this.state.imageURI0 }} style={estilo.ImageFull} />
-                          </View>
-                        )}
+                            <View style={estilo.V_ImageFull}>
+                              <Image source={{ uri: this.state.imageURI0 }} style={estilo.ImageFull} />
+                            </View>
+                          )}
                         {this.state.imageURI1 == null ? (
                           <View style={estilo.V_ImageFullEmpty}>
                             <Image
@@ -383,10 +389,10 @@ export class Cadastro extends Component {
                             />
                           </View>
                         ) : (
-                          <View style={estilo.V_ImageFull}>
-                            <Image source={{ uri: this.state.imageURI1 }} style={estilo.ImageFull} />
-                          </View>
-                        )}
+                            <View style={estilo.V_ImageFull}>
+                              <Image source={{ uri: this.state.imageURI1 }} style={estilo.ImageFull} />
+                            </View>
+                          )}
                         {this.state.imageURI2 == null ? (
                           <View style={estilo.V_ImageFullEmpty}>
                             <Image
@@ -395,10 +401,10 @@ export class Cadastro extends Component {
                             />
                           </View>
                         ) : (
-                          <View style={estilo.V_ImageFull}>
-                            <Image source={{ uri: this.state.imageURI2 }} style={estilo.ImageFull} />
-                          </View>
-                        )}
+                            <View style={estilo.V_ImageFull}>
+                              <Image source={{ uri: this.state.imageURI2 }} style={estilo.ImageFull} />
+                            </View>
+                          )}
                       </ScrollView>
                     </View>
                     <View style={estilo.V_BotaoImg}>
@@ -745,6 +751,7 @@ const mapStateToProps = state => {
     imagem1: state.auth.imagem1,
     imagem2: state.auth.imagem2,
     imagem3: state.auth.imagem3,
+    tipoImovel: state.auth.tipoImovel,
     // Ou seja agora e como se tivessemos duas props dentro do compoennte cadastro
   };
 };
