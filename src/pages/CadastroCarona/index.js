@@ -46,9 +46,9 @@ class CadastroCarona extends Component {
       sendTimeSaida: '00:00',
       timeSaida: '00:00',
       botaoEnviar: false,
-      dataLabel: "Selecione a data"
+      dataLabel: 'Selecione a data',
     };
-  };
+  }
 
   resetNavigation(Rota) {
     const resetAction = StackActions.reset({
@@ -117,7 +117,7 @@ class CadastroCarona extends Component {
           });
       }
       this.setState({ modalLoadVisible: false });
-    }catch (error) { }
+    } catch (error) {}
   }
   navegar() {
     this.props.navigation.goBack(null);
@@ -164,7 +164,7 @@ class CadastroCarona extends Component {
           HChegada: this.props.HChegada,
           embarque: this.props.embarque,
           desembarque: this.props.desembarque,
-          vagas: (this.props.vagas).toString(10),
+          vagas: this.props.vagas.toString(10),
         }}
         onSubmit={values => {
           console.log('?');
@@ -213,7 +213,7 @@ class CadastroCarona extends Component {
               <CustomModal
                 parametro="Custom"
                 titulo="Tudo certo!"
-                descricao="Seu anuncio já estar no ar, fique atento com os agendamentos"
+                descricao="Seu anúncio já estar no ar, fique atento com os interesses"
                 botao="Confirmar"
                 callback={() => {
                   this.goToHome();
@@ -232,7 +232,7 @@ class CadastroCarona extends Component {
 
                     <View style={estilo.rowStyle}>
                       <View style={estilo.campoStyle}>
-                        <Text style={estilo.txtLabel}>Local de Saida</Text>
+                        <Text style={estilo.txtLabel}>Local de Saída</Text>
 
                         <Item picker>
                           <Picker
@@ -379,7 +379,7 @@ class CadastroCarona extends Component {
 
                     <View style={estilo.rowStyle}>
                       <View style={estilo.campoStyle}>
-                        <Text style={estilo.txtLabel}>Horario de saida</Text>
+                        <Text style={estilo.txtLabel}>Horário de saida</Text>
                         <Item>
                           <TouchableOpacity
                             onPress={() => {
@@ -539,7 +539,7 @@ const mapStateToProps = state => {
     nome: state.user.usuario,
     email: state.user.email,
     nota: state.user.notaUser,
-    idCarona: state.carona.idCarona
+    idCarona: state.carona.idCarona,
   };
 };
 
@@ -556,7 +556,7 @@ const CaronaConnect = connect(
     editSaida,
     editVagas,
     editValor,
-    editIdCarona
+    editIdCarona,
   }
 )(CadastroCarona);
 
