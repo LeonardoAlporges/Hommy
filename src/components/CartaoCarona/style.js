@@ -4,7 +4,7 @@ import { color } from 'react-native-reanimated';
 const Estilos = StyleSheet.create({
   touch_card: {
     flex: 1,
-    height: 125,
+    height: 132,
     padding: 3,
     marginTop: 4,
     backgroundColor: '#ffff',
@@ -108,7 +108,7 @@ const Estilos = StyleSheet.create({
     marginHorizontal: 6,
   },
   txtdeslcSaHora: {
-    paddingTop: 13,
+    paddingTop: 20,
     fontSize: 18,
     width: '28%',
     justifyContent: 'center',
@@ -128,12 +128,13 @@ const Estilos = StyleSheet.create({
     fontFamily: 'Roboto',
     fontWeight: 'bold',
     color: '#142850',
+    width: "80%",
   },
 
   txtdeslcChHora: {
     width: '28%',
     height: '100%',
-    paddingTop: 13,
+    paddingTop: 15,
 
     fontSize: 18,
     fontFamily: 'Roboto',

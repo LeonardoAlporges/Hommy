@@ -20,6 +20,7 @@ import {
   editSaida,
   editVagas,
   editValor,
+  editIdCarona
 } from '../../actions/CaronaActions';
 import {
   editValorAluguel,
@@ -181,6 +182,7 @@ class Anuncios extends Component {
     this.props.editSaida(dados.localSaida);
     this.props.editVagas(dados.vagas);
     this.props.editValor(dados.valor);
+    this.props.editIdCarona(dados._id);
     this.props.navigation.navigate('CadastroCaronas', { update: true });
   }
   navegar = () => {
@@ -401,6 +403,7 @@ const EditConnect = connect(
     editSaida,
     editVagas,
     editValor,
+    editIdCarona,
   }
 )(Anuncios);
 

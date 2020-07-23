@@ -289,12 +289,12 @@ export class Cadastro extends Component {
           numeroVagas: yup.string('').required('Campo obrigatório'),
           aQuarto: yup
             .string('')
-            .min(3)
+            .min(3, 'No mínimo 3 caracteres')
             .max(70, 'No máximo 70 caracteres')
             .required('Campo obrigatório'),
           aRepublica: yup
             .string('')
-            .min(3)
+            .min(3, 'No mínimo 3 caracteres')
             .max(70, 'No máximo 70 caracteres')
             .required('Campo obrigatório'),
         })}
@@ -369,7 +369,7 @@ export class Cadastro extends Component {
                     </View>
                     <View style={estilo.V_ImageEmpty}>
                       <ScrollView horizontal={true}>
-                        {this.state.imageURI0 == null ? (
+                        {this.state.imageURI0 == '' ? (
                           <View style={estilo.V_ImageFullEmpty}>
                             <Image
                               source={require('../../assets/Img/Republica_Send_Pictures.png')}
@@ -381,7 +381,7 @@ export class Cadastro extends Component {
                               <Image source={{ uri: this.state.imageURI0 }} style={estilo.ImageFull} />
                             </View>
                           )}
-                        {this.state.imageURI1 == null ? (
+                        {this.state.imageURI1 == '' ? (
                           <View style={estilo.V_ImageFullEmpty}>
                             <Image
                               source={require('../../assets/Img/Republica_Send_Pictures.png')}
@@ -393,7 +393,7 @@ export class Cadastro extends Component {
                               <Image source={{ uri: this.state.imageURI1 }} style={estilo.ImageFull} />
                             </View>
                           )}
-                        {this.state.imageURI2 == null ? (
+                        {this.state.imageURI2 == '' ? (
                           <View style={estilo.V_ImageFullEmpty}>
                             <Image
                               source={require('../../assets/Img/Republica_Send_Pictures.png')}

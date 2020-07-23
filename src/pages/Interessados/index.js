@@ -29,7 +29,7 @@ class Interessados extends Component {
 
   getlist = () => {
     api
-      .get(`/carona/confirmar/${this.props.email}`)
+      .get(`/carona/confirmar/${this.state.idCarona}`)
       .then(responseJson => {
         console.log(responseJson);
         this.setState({
@@ -93,7 +93,7 @@ class Interessados extends Component {
       <View style={{ backgroundColor: '#ffffff', width: '100%', height: '100%' }}>
         <HeaderBack title="Solicitações" onNavigation={() => this.navegar()} />
         {this.state.Load && <Loading />}
-        {this.state.user == 0 && (
+        {this.state.user.length == 0 && (
           <EmptyState
             titulo="Ah não! "
             mensagem="Sua carona ainda não foi solicitada por nenhum usuário. Aguarde, logo você encontrará um parceiro para sua viagem."
