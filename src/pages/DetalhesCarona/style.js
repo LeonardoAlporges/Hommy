@@ -135,6 +135,7 @@ const Estilo = StyleSheet.create({
     width: '100%',
     height: 22,
     paddingLeft: 30,
+    marginBottom: '2%'
   },
   T_label: {
     color: '#142850',

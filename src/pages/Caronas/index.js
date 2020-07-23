@@ -163,13 +163,13 @@ class Caronas extends Component {
     await this.setState({ listaCaronas: this.state.fullData });
     let listaCaronas = this.state.listaCaronas;
     if (this.state.filtroVagas1 === true) {
-      listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas = 1);
+      listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas == 1);
     }
     if (this.state.filtroVagas2 === true) {
-      listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas = 2);
+      listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas == 2);
     }
     if (this.state.filtroVagas3 === true) {
-      listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas = 3);
+      listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas == 3);
     }
     if (this.state.filtroVagas4 === true) {
       listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas >= 4);

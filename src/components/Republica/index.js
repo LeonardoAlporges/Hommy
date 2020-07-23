@@ -305,10 +305,10 @@ class Republica extends Component {
       listaRepublicas = _.filter(listaRepublicas,({ pessoas }) => pessoas >= 6);
     }
     if (this.state.filtroVagas1 === true) {
-      listaRepublicas = _.filter(listaRepublicas, ({ numVagas }) => numVagas = 1);
+      listaRepublicas = _.filter(listaRepublicas, ({ numVagas }) => numVagas == 1);
     }
     if (this.state.filtroVagas2 === true) {
-      listaRepublicas = _.filter(listaRepublicas, ({ numVagas }) => numVagas = 2);
+      listaRepublicas = _.filter(listaRepublicas, ({ numVagas }) => numVagas == 2);
     }
     if (this.state.filtroVagas3 === true) {
       listaRepublicas = _.filter(listaRepublicas, ({ numVagas }) => numVagas >= 3);
@@ -466,45 +466,6 @@ class Republica extends Component {
                 />
                 <Text style={Estilos.textFiltro}>3+</Text>
               </ListItem>
-              <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Total de moradores</Text>
-              <ListItem style={Estilos.listStyle}>
-                <CheckBox
-                  color="#142850"
-                  style={{ alignSelf: 'stretch' }}
-                  onPress={this.fMoradores2}
-                  checked={this.state.filtroMoradores2}
-                />
-                <Text style={Estilos.textFiltro}>2</Text>
-                <CheckBox
-                  color="#142850"
-                  style={{ alignSelf: 'stretch' }}
-                  onPress={this.fMoradores3}
-                  checked={this.state.filtroMoradores3}
-                />
-                <Text style={Estilos.textFiltro}>3</Text>
-                <CheckBox
-                  color="#142850"
-                  style={{ alignSelf: 'stretch' }}
-                  onPress={this.fMoradores4}
-                  checked={this.state.filtroMoradores4}
-                />
-                <Text style={Estilos.textFiltro}>4</Text>
-                <CheckBox
-                  color="#142850"
-                  style={{ alignSelf: 'stretch' }}
-                  onPress={this.fMoradores5}
-                  checked={this.state.filtroMoradores5}
-                />
-                <Text style={Estilos.textFiltro}>5</Text>
-                <CheckBox
-                  color="#142850"
-                  style={{ alignSelf: 'stretch' }}
-                  onPress={this.fMoradores6}
-                  checked={this.state.filtroMoradores6}
-                />
-                <Text style={Estilos.textFiltro}>6+</Text>
-              </ListItem>
-
               <TouchableOpacity
                 style={Estilos.botaoModal}
                 onPress={() => {
