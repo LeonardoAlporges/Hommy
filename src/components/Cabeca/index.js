@@ -157,7 +157,7 @@ class Cabeca extends Component {
                     }}
                   >
                     <Icon style={Estilos.iconBotoes} name="phone" />
-                    <Text style={Estilos.textBotoes}>Telefones Uteis</Text>
+                    <Text style={Estilos.textBotoes}>Telefones Úteis</Text>
                     <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
                   </Button>
 

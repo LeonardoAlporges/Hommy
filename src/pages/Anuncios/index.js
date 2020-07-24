@@ -20,7 +20,7 @@ import {
   editSaida,
   editVagas,
   editValor,
-  editIdCarona
+  editIdCarona,
 } from '../../actions/CaronaActions';
 import {
   editValorAluguel,
@@ -350,7 +350,7 @@ class Anuncios extends Component {
           >
             <EmptyState
               titulo="Sem anúncios"
-              mensagem="Você ainda não anunciou nada. Nós diga quando houver vagas em sua república ou ofereça uma carona."
+              mensagem="Você ainda não anunciou nada. Nos diga quando houver vagas em sua república ou ofereça uma carona."
             />
           </View>
         ) : (

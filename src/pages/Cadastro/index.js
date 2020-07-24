@@ -78,7 +78,7 @@ export class Cadastro extends Component {
       await this.setState({
         imageURI0: this.props.imagem1,
         imageURI1: this.props.imagem2,
-        imageURI2:this.props.imagem3,
+        imageURI2: this.props.imagem3,
       });
     }
   }
@@ -222,7 +222,7 @@ export class Cadastro extends Component {
             this.setState({ erro: true });
           });
       }
-    } catch (error) { }
+    } catch (error) {}
   }
 
   render() {
@@ -233,8 +233,8 @@ export class Cadastro extends Component {
           bairro: this.props.bairro,
           rua: this.props.rua,
           numero: this.props.numeroCasa,
-          aluguel: (this.props.valorAluguel).toString(10),
-          contas: (this.props.valorContas).toString(10),
+          aluguel: this.props.valorAluguel.toString(10),
+          contas: this.props.valorContas.toString(10),
           moradores: this.props.pessoas,
           genero: this.props.genero,
           animais: this.props.animal,
@@ -338,7 +338,7 @@ export class Cadastro extends Component {
               <CustomModal
                 parametro="Custom"
                 titulo="Tudo certo!"
-                descricao="Seu anuncio já estar no ar, fique atento com os agendamentos"
+                descricao="Seu anuncio já está no ar, fique atento com os agendamentos"
                 botao="Entendido"
                 callback={() => {
                   this.goToHome();
@@ -346,14 +346,14 @@ export class Cadastro extends Component {
               />
             )}
             {this.state.Load && <Loading />}
-            <HeaderBack title=" Cadastre sua repúblicaa" onNavigation={() => this.navegar()} />
+            <HeaderBack title=" Cadastre sua república" onNavigation={() => this.navegar()} />
             <Tabs
               initialPage={0}
               tabBarUnderlineStyle={{ backgroundColor: '#142850', height: 3 }}
               tabContainerStyle={{ height: 45 }}
             >
               <Tab
-                heading="Informaçoes"
+                heading="Informações"
                 tabStyle={estilo.tabs_style}
                 textStyle={estilo.tabs_TextStyle}
                 activeTabStyle={estilo.tabs_ActiveTabs}
@@ -377,10 +377,10 @@ export class Cadastro extends Component {
                             />
                           </View>
                         ) : (
-                            <View style={estilo.V_ImageFull}>
-                              <Image source={{ uri: this.state.imageURI0 }} style={estilo.ImageFull} />
-                            </View>
-                          )}
+                          <View style={estilo.V_ImageFull}>
+                            <Image source={{ uri: this.state.imageURI0 }} style={estilo.ImageFull} />
+                          </View>
+                        )}
                         {this.state.imageURI1 == '' ? (
                           <View style={estilo.V_ImageFullEmpty}>
                             <Image
@@ -389,10 +389,10 @@ export class Cadastro extends Component {
                             />
                           </View>
                         ) : (
-                            <View style={estilo.V_ImageFull}>
-                              <Image source={{ uri: this.state.imageURI1 }} style={estilo.ImageFull} />
-                            </View>
-                          )}
+                          <View style={estilo.V_ImageFull}>
+                            <Image source={{ uri: this.state.imageURI1 }} style={estilo.ImageFull} />
+                          </View>
+                        )}
                         {this.state.imageURI2 == '' ? (
                           <View style={estilo.V_ImageFullEmpty}>
                             <Image
@@ -401,10 +401,10 @@ export class Cadastro extends Component {
                             />
                           </View>
                         ) : (
-                            <View style={estilo.V_ImageFull}>
-                              <Image source={{ uri: this.state.imageURI2 }} style={estilo.ImageFull} />
-                            </View>
-                          )}
+                          <View style={estilo.V_ImageFull}>
+                            <Image source={{ uri: this.state.imageURI2 }} style={estilo.ImageFull} />
+                          </View>
+                        )}
                       </ScrollView>
                     </View>
                     <View style={estilo.V_BotaoImg}>
@@ -711,7 +711,7 @@ export class Cadastro extends Component {
                       <View style={estilo.V_BotaoImg}>
                         <Button style={estilo.botao_send} onPress={handleSubmit}>
                           {/* //<Icon name="account-outline" style={estilo.icon_send} /> */}
-                          <Text>Publica republica</Text>
+                          <Text>Publicar sua republica</Text>
                         </Button>
                       </View>
                     </View>
