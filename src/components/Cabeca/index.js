@@ -77,7 +77,7 @@ class Cabeca extends Component {
         </View>
         <View style={Estilos.touch_Fake}>{/* <Icon style={Estilos.icon2} name="user" /> */}</View>
 
-        <Modal transparent={true} animationType="slide" visible={this.state.isModalVisible}>
+        <Modal transparent={true} animationType="slide" visible={this.state.isModalVisible} onRequestClose={() => this.setState({ isModalVisible: false })}>
           <View style={Estilos.bgModal}>
             <View style={Estilos.modal}>
               <View style={Estilos.voltar}>

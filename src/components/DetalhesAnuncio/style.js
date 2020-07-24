@@ -99,9 +99,9 @@ const estilo = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'Roboto',
     fontWeight: '600',
+    paddingRight: 5
   },
   txtlabelGenero: {
-    paddingLeft: 5,
     color: '#00909e',
     fontSize: 16,
     fontFamily: 'Roboto',
@@ -112,7 +112,7 @@ const estilo = StyleSheet.create({
     fontSize: 28,
     fontFamily: 'Roboto',
     color: '#142850',
-    marginRight: 5,
+    marginRight: '5%',
     fontWeight: '600',
   },
   itemAcomodacao: {

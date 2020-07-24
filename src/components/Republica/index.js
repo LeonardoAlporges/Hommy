@@ -264,6 +264,29 @@ class Republica extends Component {
     }
   };
 
+  padrao = async () => {
+    await this.setState({ filtroVagas1: false,
+      filtroAnimalSim: false,
+      filtroAnimalNao: false,
+      filtroMQuarto: false,
+      filtroMasc: false,
+      filtroFem: false,
+      filtroMista: false,
+      filtroMoradores2: false,
+      filtroMoradores3: false,
+      filtroMoradores4: false,
+      filtroMoradores5: false,
+      filtroMoradores6: false,
+      filtroVagas1: false,
+      filtroVagas2: false,
+      filtroVagas3: false,
+      filtroValorMenor: false,
+      filtroValorMaior: false,
+      aluguelMin: '',
+      aluguelMax: ''})
+      this.filtro();
+  }
+
   filtro = async () => {
     await this.setState({ listaRepublicas: this.state.fullData });
     let listaRepublicas = this.state.listaRepublicas;
@@ -466,6 +489,15 @@ class Republica extends Component {
                 />
                 <Text style={Estilos.textFiltro}>3+</Text>
               </ListItem>
+              <TouchableOpacity
+                style={Estilos.botaoModal}
+                onPress={() => {
+                  this.setState({ modalVisible: false });
+                  this.padrao();
+                }}
+              >
+                <Text style={Estilos.textBotaoModal}>Voltar ao padrão</Text>
+              </TouchableOpacity>
               <TouchableOpacity
                 style={Estilos.botaoModal}
                 onPress={() => {
