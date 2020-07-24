@@ -1,4 +1,4 @@
-package com.hommy;
+package br.com.hommy;
 
 import com.facebook.react.ReactActivity;
 
