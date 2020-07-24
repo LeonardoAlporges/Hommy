@@ -55,7 +55,7 @@ class TabsHeader extends Component {
           >
             <Caronas />
           </Tab>
-          {/* <Tab
+          <Tab
             heading="Serviços"
             initialPage="2"
             tabStyle={estilo.tabs_style}
@@ -66,7 +66,7 @@ class TabsHeader extends Component {
             <Servicos />
           </Tab>
           <Tab
-            heading="Promoção"
+            heading="Promoções"
             initialPage="2"
             tabStyle={estilo.tabs_style}
             textStyle={estilo.tabs_TextStyle}
@@ -74,7 +74,7 @@ class TabsHeader extends Component {
             activeTextStyle={estilo.tabs_ActiveTextStyle}
           >
             <Divulgacao />
-          </Tab> */}
+          </Tab>
         </Tabs>
       </Container>
     );

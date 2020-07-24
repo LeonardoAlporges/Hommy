@@ -65,7 +65,7 @@ const estilo = StyleSheet.create({
     height: 40,
     marginTop: '2%',
     width: '85%',
-    marginHorizontal: '5%',
+    marginLeft: '10%',
   },
   item: {
     alignItems: 'center',
@@ -75,7 +75,6 @@ const estilo = StyleSheet.create({
     height: 40,
     width: '38%',
     paddingHorizontal: '5%',
-    
   },
   item2: {
     alignItems: 'center',
@@ -83,8 +82,8 @@ const estilo = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     height: 40,
-    width: '38%',    
-    paddingLeft: '5%',
+    width: '38%',
+    paddingLeft: '2%',
   },
   txtlabel: {
     paddingLeft: 20,
@@ -105,7 +104,8 @@ const estilo = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'Roboto',
     fontWeight: '600',
-    marginLeft: "20%"
+    marginLeft: 30,
+    width: 100,
   },
   icone: {
     justifyContent: 'flex-start',
