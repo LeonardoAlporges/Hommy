@@ -82,6 +82,7 @@ const estilo = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   btnProximo: {
+    borderRadius: 7,
     justifyContent: 'center',
     alignItems: 'center',
     width: '80%',

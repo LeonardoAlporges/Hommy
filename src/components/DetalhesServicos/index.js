@@ -5,15 +5,23 @@ import { withNavigation } from 'react-navigation';
 import estilo from './style';
 import Cabeca from '../Cabeca';
 import EmptyState from '../EmptyState';
+import HeaderBack from '../CustomHeader';
 
 class DetalhesServicos extends Component {
   static navigationOptions = { header: null };
+  navegar = () => {
+    this.props.navigation.goBack(null);
+  };
   render() {
     return (
-      <EmptyState
-        titulo="Nada por aqui ... "
-        mensagem="Essa pagina ainda esta em construção, em breve voce poderá ter acesso a ela."
-      />
+      <View>
+        <HeaderBack title={'Detalhes do serviço'} onNavigation={() => this.navegar()} />
+        <EmptyState
+          titulo="Nada por aqui ... "
+          mensagem="Essa pagina ainda esta em construção, em breve voce poderá ter acesso a ela."
+        />
+      </View>
+
       // <View style={{ flex: 1 }}>
       //   <Cabeca />
       //   <ScrollView>

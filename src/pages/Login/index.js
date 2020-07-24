@@ -138,7 +138,7 @@ class Login extends Component {
             />
           </TouchableOpacity>
           <Text style={style.txt_Titulo}>Hommy</Text>
-        {/* <Text style={style.txt_FormaDeLogin}>Faça login com sua rede social</Text>
+          {/* <Text style={style.txt_FormaDeLogin}>Faça login com sua rede social</Text>
 
           <View style={style.view_OutrosLogin}>
             <Icon style={style.icons_OutroLogin} name="logo-facebook" />
@@ -188,7 +188,9 @@ class Login extends Component {
                       onBlur={() => setFieldTouched('password')}
                     />
                   </Item>
-                  {touched.password && errors.password && <Text style={style.txtError}>{errors.password}</Text>}
+                  <View style={{ marginVertical: 10, height: 30 }}>
+                    {touched.password && errors.password && <Text style={style.txtError}>{errors.password}</Text>}
+                  </View>
                 </View>
                 <View style={style.V_cadastrar}>
                   <TouchableOpacity

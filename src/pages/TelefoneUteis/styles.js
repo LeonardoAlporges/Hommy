@@ -2,15 +2,17 @@ import { StyleSheet } from 'react-native';
 
 const style = StyleSheet.create({
   Divisao: {
+    marginTop: 10,
     paddingHorizontal: 16,
     marginHorizontal: 20,
     fontSize: 10,
     width: '80%',
+    marginBottom: 10,
     borderBottomWidth: 1,
   },
   Text: {
     paddingBottom: 10,
-    fontSize: 20
+    fontSize: 20,
   },
   Cards: {
     marginVertical: 5,
@@ -18,15 +20,8 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 5,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 7,
-    },
-    paddingVertical: 10,
-    shadowOpacity: 0.43,
-    shadowRadius: 9.51,
-    elevation: 15,
+    width: '100%',
+    height: 50,
   },
   Nome: { paddingLeft: 10, width: '50%', fontFamily: 'Roboto', fontSize: 16 },
   Numero: {

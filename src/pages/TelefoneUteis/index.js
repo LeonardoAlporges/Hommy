@@ -48,7 +48,7 @@ export default class TelefoneUteis extends Component {
           numeros2: responseJson.data[2].numeros,
           numeros3: responseJson.data[3].numeros,
         });
-        console.log(this.state.telefones)
+        console.log(this.state.telefones);
       })
       .catch(error => {
         this.setState({ loading: false });
@@ -60,7 +60,7 @@ export default class TelefoneUteis extends Component {
     await this.getListTelefone();
     await console.log(this.state.telefones[0]);
   }
-  AbrirUrl = (tel) => {
+  AbrirUrl = tel => {
     Linking.openURL(`tel:${tel}`);
   };
 
@@ -68,10 +68,9 @@ export default class TelefoneUteis extends Component {
     this.props.navigation.goBack(null);
   };
 
-
   render() {
     return (
-      <View style={{ height: "100%" }}>
+      <View style={{ height: '100%', backgroundColor: '#f8f8f8' }}>
         <HeaderBack title="Telefone Uteis" onNavigation={() => this.navegar()} />
         {this.state.loading ? (
           <View style={style.V_Load}>
@@ -93,24 +92,23 @@ export default class TelefoneUteis extends Component {
             </View>
             <FlatList
               data={this.state.numeros3}
-              renderItem={({ item }) =>
+              renderItem={({ item }) => (
                 <View style={{ paddingHorizontal: 20, marginBottom: 2 }}>
                   <TouchableOpacity
                     onPress={() => {
                       this.AbrirUrl(item.telefone);
-                    }}>
+                    }}
+                  >
                     <View style={style.Cards}>
-                      <Text style={style.Nome} >{item.nome}</Text>
-                      <Text style={style.Numero} >{item.telefone}</Text>
-                      <View
-                        style={style.Botao}
-                      >
+                      <Text style={style.Nome}>{item.nome}</Text>
+                      <Text style={style.Numero}>{item.telefone}</Text>
+                      <View style={style.Botao}>
                         <Icon style={style.Icone} name="arrow-right" />
                       </View>
                     </View>
                   </TouchableOpacity>
                 </View>
-              }
+              )}
               keyExtractor={item => item._id}
               refreshing={this.state.refreshing}
               onRefresh={this.getListTelefone}
@@ -120,24 +118,23 @@ export default class TelefoneUteis extends Component {
             </View>
             <FlatList
               data={this.state.numeros0}
-              renderItem={({ item }) =>
+              renderItem={({ item }) => (
                 <View style={{ paddingHorizontal: 20, marginBottom: 2 }}>
                   <TouchableOpacity
                     onPress={() => {
                       this.AbrirUrl(item.telefone);
-                    }}>
+                    }}
+                  >
                     <View style={style.Cards}>
-                      <Text style={style.Nome} >{item.nome}</Text>
-                      <Text style={style.Numero} >{item.telefone}</Text>
-                      <View
-                        style={style.Botao}
-                      >
+                      <Text style={style.Nome}>{item.nome}</Text>
+                      <Text style={style.Numero}>{item.telefone}</Text>
+                      <View style={style.Botao}>
                         <Icon style={style.Icone} name="arrow-right" />
                       </View>
                     </View>
                   </TouchableOpacity>
                 </View>
-              }
+              )}
               keyExtractor={item => item._id}
               refreshing={this.state.refreshing}
               onRefresh={this.getListTelefone}
@@ -147,24 +144,23 @@ export default class TelefoneUteis extends Component {
             </View>
             <FlatList
               data={this.state.numeros1}
-              renderItem={({ item }) =>
+              renderItem={({ item }) => (
                 <View style={{ paddingHorizontal: 20, marginBottom: 2 }}>
                   <TouchableOpacity
                     onPress={() => {
                       this.AbrirUrl(item.telefone);
-                    }}>
+                    }}
+                  >
                     <View style={style.Cards}>
-                      <Text style={style.Nome} >{item.nome}</Text>
-                      <Text style={style.Numero} >{item.telefone}</Text>
-                      <View
-                        style={style.Botao}
-                      >
+                      <Text style={style.Nome}>{item.nome}</Text>
+                      <Text style={style.Numero}>{item.telefone}</Text>
+                      <View style={style.Botao}>
                         <Icon style={style.Icone} name="arrow-right" />
                       </View>
                     </View>
                   </TouchableOpacity>
                 </View>
-              }
+              )}
               keyExtractor={item => item._id}
               refreshing={this.state.refreshing}
               onRefresh={this.getListTelefone}
@@ -174,36 +170,36 @@ export default class TelefoneUteis extends Component {
             </View>
             <FlatList
               data={this.state.numeros2}
-              renderItem={({ item }) =>
-                <View style={{ paddingHorizontal: 20, marginBottom: 2,}}>
+              renderItem={({ item }) => (
+                <View style={{ paddingHorizontal: 20, marginBottom: 2 }}>
                   <TouchableOpacity
                     onPress={() => {
                       this.AbrirUrl(item.telefone);
-                    }}>
+                    }}
+                  >
                     <View style={style.Cards}>
-                      <Text style={style.Nome} >{item.nome}</Text>
-                      <Text style={style.Numero} >{item.telefone}</Text>
-                      <View
-                        style={style.Botao}
-                      >
+                      <Text style={style.Nome}>{item.nome}</Text>
+                      <Text style={style.Numero}>{item.telefone}</Text>
+                      <View style={style.Botao}>
                         <Icon style={style.Icone} name="arrow-right" />
                       </View>
                     </View>
                   </TouchableOpacity>
                 </View>
-              }
+              )}
               keyExtractor={item => item._id}
               refreshing={this.state.refreshing}
-              onRefresh={this.getListTelefone} />
+              onRefresh={this.getListTelefone}
+            />
           </ScrollView>
         ) : (
-                <View style={{ flex: 1 }}>
-                  <EmptyState
-                    titulo="Tudo tão vazio por aqui... "
-                    mensagem="Parece que não há publicações no momento. Mas não desanime, logo logo novas vagas surgirão. "
-                  />
-                </View>
-              )}
+          <View style={{ flex: 1 }}>
+            <EmptyState
+              titulo="Tudo tão vazio por aqui... "
+              mensagem="Parece que não há publicações no momento. Mas não desanime, logo logo novas vagas surgirão. "
+            />
+          </View>
+        )}
       </View>
     );
   }

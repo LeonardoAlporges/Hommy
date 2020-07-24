@@ -120,6 +120,17 @@ const estilosRepublica = StyleSheet.create({
     height: 45,
     width: 170,
   },
+  botaoReload: {
+    position: 'absolute',
+    top: 0,
+    left: 10,
+    borderRadius: 10,
+    color: 'red',
+    backgroundColor: '#142850',
+    justifyContent: 'center',
+    height: 45,
+    width: 45,
+  },
   textBotaoModal: {
     color: '#ffffff',
     fontFamily: 'Roboto',

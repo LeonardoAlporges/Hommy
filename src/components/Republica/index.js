@@ -265,7 +265,8 @@ class Republica extends Component {
   };
 
   padrao = async () => {
-    await this.setState({ filtroVagas1: false,
+    await this.setState({
+      filtroVagas1: false,
       filtroAnimalSim: false,
       filtroAnimalNao: false,
       filtroMQuarto: false,
@@ -283,9 +284,10 @@ class Republica extends Component {
       filtroValorMenor: false,
       filtroValorMaior: false,
       aluguelMin: '',
-      aluguelMax: ''})
-      this.filtro();
-  }
+      aluguelMax: '',
+    });
+    this.filtro();
+  };
 
   filtro = async () => {
     await this.setState({ listaRepublicas: this.state.fullData });
@@ -313,19 +315,20 @@ class Republica extends Component {
       });
     }
     if (this.state.filtroMoradores2 === true) {
-      listaRepublicas = _.filter(listaRepublicas, ({ pessoas }) => pessoas = 2);
+      listaRepublicas = _.filter(listaRepublicas, ({ pessoas }) => (pessoas = 2));
     }
     if (this.state.filtroMoradores3 === true) {
-      listaRepublicas = _.filter(listaRepublicas, ({ pessoas }) => pessoas = 3);
+      listaRepublicas = _.filter(listaRepublicas, ({ pessoas }) => (pessoas = 3));
     }
     if (this.state.filtroMoradores4 === true) {
-      listaRepublicas = _.filter(listaRepublicas, ({ pessoas }) => pessoas = 4);
+      listaRepublicas = _.filter(listaRepublicas, ({ pessoas }) => (pessoas = 4));
     }
     if (this.state.filtroMoradores5 === true) {
-      listaRepublicas = _.filter(listaRepublicas, ({ pessoas }) => pessoas = 5);q
+      listaRepublicas = _.filter(listaRepublicas, ({ pessoas }) => (pessoas = 5));
+      q;
     }
     if (this.state.filtroMoradores6 === true) {
-      listaRepublicas = _.filter(listaRepublicas,({ pessoas }) => pessoas >= 6);
+      listaRepublicas = _.filter(listaRepublicas, ({ pessoas }) => pessoas >= 6);
     }
     if (this.state.filtroVagas1 === true) {
       listaRepublicas = _.filter(listaRepublicas, ({ numVagas }) => numVagas == 1);
@@ -489,24 +492,26 @@ class Republica extends Component {
                 />
                 <Text style={Estilos.textFiltro}>3+</Text>
               </ListItem>
-              <TouchableOpacity
-                style={Estilos.botaoModal}
-                onPress={() => {
-                  this.setState({ modalVisible: false });
-                  this.padrao();
-                }}
-              >
-                <Text style={Estilos.textBotaoModal}>Voltar ao padrão</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={Estilos.botaoModal}
-                onPress={() => {
-                  this.setState({ modalVisible: false });
-                  this.filtro();
-                }}
-              >
-                <Text style={Estilos.textBotaoModal}>Aplicar</Text>
-              </TouchableOpacity>
+              <View style={{ width: '100%', flexDirection: 'row', display: 'flex', justifyContent: 'space-evenly' }}>
+                <TouchableOpacity
+                  style={Estilos.botaoReload}
+                  onPress={() => {
+                    this.setState({ modalVisible: false });
+                    this.padrao();
+                  }}
+                >
+                  <Icon name="filter-remove-outline" style={Estilos.textBotaoModal} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={Estilos.botaoModal}
+                  onPress={() => {
+                    this.setState({ modalVisible: false });
+                    this.filtro();
+                  }}
+                >
+                  <Text style={Estilos.textBotaoModal}>Aplicar</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </Modal>
         </View>
