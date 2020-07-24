@@ -59,9 +59,10 @@ const estilosRepublica = StyleSheet.create({
   V_filtroInterno: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 450,
-    marginTop: 100,
-    marginHorizontal: 40,
+    paddingVertical: 15,
+    paddingHorizontal: 10,
+    marginHorizontal: 20,
+    marginTop: 90,
     backgroundColor: 'white',
     borderRadius: 20,
     alignItems: 'center',
@@ -110,6 +111,7 @@ const estilosRepublica = StyleSheet.create({
   },
   botaoModal: {
     alignSelf: 'center',
+    marginBottom: 15,
     backgroundColor: '#142850',
     borderRadius: 8,
     padding: 10,

@@ -40,13 +40,13 @@ class DetalhesAnuncio extends Component {
 
   renderDotIndicator() {
     this.contadorImagem = 0;
-    if (this.props.imagem1 != null) {
+    if (this.props.imagem1 != '') {
       this.contadorImagem = this.contadorImagem + 1;
     }
-    if (this.props.imagem2 != null) {
+    if (this.props.imagem2 != '') {
       this.contadorImagem = this.contadorImagem + 1;
     }
-    if (this.props.imagem3 != null) {
+    if (this.props.imagem3 != '') {
       this.contadorImagem = this.contadorImagem + 1;
     }
 
@@ -64,17 +64,17 @@ class DetalhesAnuncio extends Component {
       <ScrollView>
         <HeaderBack ajuda title={this.props.nomeRepublica} onNavigation={() => this.navegar()} />
         <IndicatorViewPager style={{ height: 300 }} indicator={this.renderDotIndicator()}>
-          {this.props.imagem1 != null && (
+          {this.props.imagem1 != '' &&(
             <View key="1">
               <Image source={{ uri: this.props.imagem1 }} style={estilo.image} />
             </View>
           )}
-          {this.props.imagem2 != null && (
+          {this.props.imagem2 != '' && (
             <View key="2">
               <Image source={{ uri: this.props.imagem2 }} style={estilo.image} />
             </View>
           )}
-          {this.props.imagem3 != null && (
+          {this.props.imagem3 != '' && (
             <View key="3">
               <Image source={{ uri: this.props.imagem3 }} style={estilo.image} />
             </View>

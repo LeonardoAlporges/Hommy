@@ -21,6 +21,7 @@ class Interessados extends Component {
     modal: false,
     refreshing: false,
     idCarona: this.props.navigation.state.params.idCarona,
+    errorMsg:'',
   };
 
   UNSAFE_componentWillMount() {
@@ -29,7 +30,7 @@ class Interessados extends Component {
 
   getlist = () => {
     api
-      .get(`/carona/confirmar/${this.state.idCarona}`)
+      .get(`/carona/confirmar/${this.props.email}`)
       .then(responseJson => {
         console.log(responseJson);
         this.setState({
@@ -38,14 +39,15 @@ class Interessados extends Component {
         });
       })
       .catch(error => {
-        this.setState({ Erro: true, Load: false });
+        const msg = error.response.data.error;
+        this.setState({ Erro: true, Load: false, errorMsg: msg });
         console.log(error);
       });
   };
 
   SendStatus = (number, user) => {
     this.setState({ Load: true });
-    console.log('SENDE', number, user);
+    console.log('SEND', number, user);
     if (number === 1) {
       console.log('User');
       const data = {
@@ -148,6 +150,7 @@ class Interessados extends Component {
         {this.state.Erro && (
           <CustomModal
             parametro="Erro"
+            descricao={this.state.errorMsg}
             callback={() => {
               this.setState({ Erro: false });
             }}

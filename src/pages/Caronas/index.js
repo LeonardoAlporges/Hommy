@@ -159,6 +159,23 @@ class Caronas extends Component {
     }
   };
 
+  padrao = async () => {
+    await this.setState({ filtroVagas1: false,
+      filtroVagas1: false,
+      filtroVagas2: false,
+      filtroVagas3: false,
+      filtroVagas4: false,
+      filtroValorMaior: false,
+      filtroValorMenor: false,
+      filtroCidadeD: false,
+      filtroCidadeS: false,
+      aluguelMin: '',
+      aluguelMax: '',
+      cidadeD: '',
+      cidadeS: ''})
+      this.filtro();
+  }
+
   filtro = async () => {
     await this.setState({ listaCaronas: this.state.fullData });
     let listaCaronas = this.state.listaCaronas;
@@ -392,7 +409,15 @@ class Caronas extends Component {
                     </Picker>
                   </Item>
                 </ListItem>
-
+                <TouchableOpacity
+                  style={Estilo.modalBtn}
+                  onPress={() => {
+                    this.setState({ modalVisible: false });
+                    this.padrao();
+                  }}
+                >
+                  <Text style={Estilo.textBtn}>Voltar ao padrão</Text>
+                </TouchableOpacity>
                 <TouchableOpacity
                   style={Estilo.modalBtn}
                   onPress={() => {

@@ -137,7 +137,7 @@ class Login extends Component {
               style={style.imgStyle}
             />
           </TouchableOpacity>
-          <Text style={style.txt_Titulo}>Hoomy</Text>
+          <Text style={style.txt_Titulo}>Hommy</Text>
         {/* <Text style={style.txt_FormaDeLogin}>Faça login com sua rede social</Text>
           <View style={style.view_OutrosLogin}>
             <Icon style={style.icons_OutroLogin} name="logo-facebook" />

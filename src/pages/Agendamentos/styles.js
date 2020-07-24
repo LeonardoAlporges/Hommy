@@ -90,7 +90,14 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     width: '45%',
     borderRadius: 50,
-    backgroundColor: '#f8f8f8',
+    backgroundColor: '#ffffff',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 7,
+    },    
+    shadowOpacity: 0.43,
+    shadowRadius: 9.51,
   },
   Analise: {
     width: '30%',

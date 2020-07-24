@@ -61,9 +61,10 @@ const Estilo = StyleSheet.create({
   V_modalInterno: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 500,
-    marginTop: 120,
-    marginHorizontal: 40,
+    paddingVertical: 15,
+    marginTop: 90,
+    paddingHorizontal: 10,
+    marginHorizontal: 20,
     backgroundColor: 'white',
     borderRadius: 20,
     alignItems: 'center',
@@ -118,6 +119,7 @@ const Estilo = StyleSheet.create({
   modalBtn: {
     alignSelf: 'center',
     backgroundColor: '#142850',
+    marginBottom: 15,
     borderRadius: 8,
     padding: 10,
     elevation: 2,
