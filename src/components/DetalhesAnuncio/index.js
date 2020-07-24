@@ -97,9 +97,9 @@ class DetalhesAnuncio extends Component {
           <Text style={estilo.tipo}>Tipo</Text>
         </View>
         <View style={estilo.V_caracteristicaItens}>
-          <View style={estilo.item}>
+          <View style={estilo.item2}>
             <Icon name="home" style={estilo.icone} />
-            <Text style={estilo.txtlabel4}>{this.props.imovel}</Text>
+            <Text style={estilo.txtlabelGenero}>{this.props.imovel}</Text>
           </View>
           <View style={estilo.item2}>
             <Icon name="people" style={estilo.icone} />

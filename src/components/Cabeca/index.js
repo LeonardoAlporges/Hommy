@@ -163,7 +163,7 @@ class Cabeca extends Component {
 
                   <Button
                     onPress={() => {
-                      Linking.openURL('https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849');
+                      Linking.openURL('mailto:contato.hommy@gmail.com');
                     }}
                     style={Estilos.botoes}
                   >
