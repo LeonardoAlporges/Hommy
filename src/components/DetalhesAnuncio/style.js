@@ -61,12 +61,11 @@ const estilo = StyleSheet.create({
   V_caracteristicaItens: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-around',
     height: 40,
     marginTop: '2%',
     width: '85%',
-    marginLeft: '11%',
-    marginRight: '5%',
+    marginHorizontal: '5%',
   },
   item: {
     alignItems: 'center',
@@ -75,6 +74,8 @@ const estilo = StyleSheet.create({
     flexDirection: 'row',
     height: 40,
     width: '38%',
+    paddingHorizontal: '5%',
+    
   },
   item2: {
     alignItems: 'center',
@@ -82,8 +83,8 @@ const estilo = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     height: 40,
-    marginLeft: '10%',
-    width: '38%',
+    width: '38%',    
+    paddingLeft: '5%',
   },
   txtlabel: {
     paddingLeft: 20,
@@ -95,17 +96,16 @@ const estilo = StyleSheet.create({
   },
   txtlabel4: {
     color: '#00909e',
-    textAlign: 'left',
     fontSize: 16,
     fontFamily: 'Roboto',
     fontWeight: '600',
-    paddingRight: 5
   },
   txtlabelGenero: {
     color: '#00909e',
     fontSize: 16,
     fontFamily: 'Roboto',
     fontWeight: '600',
+    marginLeft: "20%"
   },
   icone: {
     justifyContent: 'flex-start',

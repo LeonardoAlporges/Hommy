@@ -92,13 +92,13 @@ const Estilo = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     height: 30,
-    justifyContent: 'space-around',
   },
   Txtvalor1: {
     color: '#142850',
     fontSize: 18,
     fontFamily: 'Roboto',
     fontWeight: '200',
+    paddingRight: 30,
   },
   Txtvalor: {
     color: '#00909e',
@@ -118,10 +118,10 @@ const Estilo = StyleSheet.create({
     width: '100%',
     height: '20%',
     marginBottom: '10%',
+    paddingHorizontal: 30,
   },
   V_ptEm: {
     marginTop: 10,
-    paddingHorizontal: 30,
     width: '100%',
     height: 20,
   },
@@ -134,7 +134,6 @@ const Estilo = StyleSheet.create({
     marginTop: '2%',
     width: '100%',
     height: 22,
-    paddingLeft: 30,
     marginBottom: 20
   },
   T_label: {
