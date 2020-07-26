@@ -21,36 +21,27 @@ class CartaoServico extends Component {
 
   render() {
     return (
-      <TouchableHighlight
-        underlayColor="#fff"
-        onPress={this.onClickCard}
-        style={Estilos.touch_card}
-      >
+      <TouchableHighlight underlayColor="#fff" onPress={this.onClickCard} style={Estilos.touch_card}>
         <View style={Estilos.V_cartao}>
           <View style={Estilos.V_imagem}>
-            <Image
-              source={{ uri: this.props.leonardo.image }}
-              style={Estilos.V_imagem}
-            />
+            <Image source={{ uri: this.props.leonardo.image }} style={Estilos.V_imagem} />
           </View>
 
           <View style={Estilos.V_TituloDesc}>
             <View style={Estilos.V_titulo}>
-              <Text style={Estilos.txtTitulo}>
-                {this.props.leonardo.titulo}
-              </Text>
+              <Text style={Estilos.txtTitulo}>{this.props.leonardo.titulo}</Text>
             </View>
 
             <View style={Estilos.V_desc}>
-              <Text style={Estilos.txtDesc}>{this.props.leonardo.desc}</Text>
+              <Text numberOfLines={2} style={Estilos.txtDesc}>
+                {this.props.leonardo.desc}
+              </Text>
             </View>
           </View>
 
           <View style={Estilos.V_notasImg}>
             <View>
-              <Text style={{ fontFamily: 'Roboto', fontSize: 14 }}>
-                {this.props.leonardo.numero}
-              </Text>
+              <Text style={{ fontFamily: 'Roboto', fontSize: 14 }}>{this.props.leonardo.numero}</Text>
             </View>
 
             <View style={Estilos.imgNota}>

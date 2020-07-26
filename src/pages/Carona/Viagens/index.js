@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, FlatList, Text, TouchableOpacity, Modal } from 'react-native';
+import { View, FlatList, Text, TouchableOpacity, Modal, ScrollView } from 'react-native';
 
 import { connect } from 'react-redux';
 import style from './style';
@@ -103,7 +103,7 @@ class Viagens extends Component {
         <HeaderBack title="Meus interesses" onNavigation={() => this.navegar()} />
         {this.state.Load && <Loading />}
         {this.state.listaCaronas.length == 0 && (
-          <View style={{ flex: 1, backgroundColor: '#fff' }}>
+          <View style={{ backgroundColor: '#fff' }}>
             <EmptyState
               titulo="Você não demonstrou interesse em caronas recentemente."
               mensagem="Vamos nessa! Navegue pelo aplicativo e encontre alguém com quem possa viajar."
@@ -135,7 +135,7 @@ class Viagens extends Component {
           />
         )}
 
-        <View style={style.card}>
+        <ScrollView style={style.card}>
           <FlatList
             style={style.flatList}
             data={this.state.listaCaronas}
@@ -187,7 +187,7 @@ class Viagens extends Component {
               </View>
             )}
           />
-        </View>
+        </ScrollView>
 
         {this.state.modal && (
           <ModalAvaliacao

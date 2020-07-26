@@ -55,7 +55,7 @@ class DetalhesCarona extends Component {
             <CustomModal
               parametro="Custom"
               titulo="Obrigado pelo interesse"
-              descricao="Você sera adicionado a uma lista de interesse e sera notificado assim que o ofertante confirma sua vaga."
+              descricao="Você será adicionado a uma lista de interesse e será notificado assim que o ofertante confirmar sua vaga."
               botao="Confirmar"
               callback={() => {
                 this.props.navigation.navigate('Viagens');
@@ -67,7 +67,7 @@ class DetalhesCarona extends Component {
           <View style={Estilo.V_modal}>
             <CustomModal
               parametro="Erro"
-              descricao="Você já tem um agendamento cadastrado nessa república."
+              descricao="Você já tem um agendamento cadastrado nessa carona."
               callback={() => {
                 this.setState({ Erro: false });
               }}
@@ -107,7 +107,7 @@ class DetalhesCarona extends Component {
               <Text style={Estilo.data}>{this.state.data}</Text>
             </View>
             <View style={Estilo.V_partida}>
-              <Text style={Estilo.txtPartida}>Saida</Text>
+              <Text style={Estilo.txtPartida}>Saída</Text>
             </View>
             <View style={Estilo.V_Hora}>
               <Text style={Estilo.Txthora}>

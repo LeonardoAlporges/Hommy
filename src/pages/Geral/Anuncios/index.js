@@ -20,7 +20,9 @@ import {
   editSaida,
   editVagas,
   editValor,
+  editIdCarona,
 } from '../../../actions/CaronaActions';
+
 import {
   editValorAluguel,
   editNomeRepublica,
@@ -40,6 +42,7 @@ import {
   editRepresentante,
   editRua,
   editNumeroCasa,
+  editTipoImovel,
 } from '../../../actions/AuthActions';
 import HeaderBack from '../../../components/CustomHeader';
 import CustomModal from '../../../components/Alert';
@@ -161,6 +164,7 @@ class Anuncios extends Component {
     this.props.editImg3(dados.imagem3);
     this.props.editValor(dados.valor);
     this.props.editValorConta(dados.valorContas);
+    this.props.editTipoImovel(dados.imovel);
     this.props.navigation.navigate('Cadastro', { update: true });
   }
 
@@ -179,6 +183,7 @@ class Anuncios extends Component {
     this.props.editSaida(dados.localSaida);
     this.props.editVagas(dados.vagas);
     this.props.editValor(dados.valor);
+    this.props.editIdCarona(dados._id);
     this.props.navigation.navigate('CadastroCaronas', { update: true });
   }
   navegar = () => {
@@ -346,7 +351,7 @@ class Anuncios extends Component {
           >
             <EmptyState
               titulo="Sem anúncios"
-              mensagem="Você ainda não anunciou nada. Nós diga quando houver vagas em sua república ou ofereça uma carona."
+              mensagem="Você ainda não anunciou nada. Nos diga quando houver vagas em sua república ou ofereça uma carona."
             />
           </View>
         ) : (
@@ -377,6 +382,7 @@ const EditConnect = connect(
     editAcomodacaoQuarto,
     editAcomodacaoRepublica,
     editValorConta,
+    editTipoImovel,
     editObservacao,
     editImg1,
     editImg2,
@@ -398,6 +404,7 @@ const EditConnect = connect(
     editSaida,
     editVagas,
     editValor,
+    editIdCarona,
   }
 )(Anuncios);
 

@@ -31,6 +31,7 @@ const Estilos = StyleSheet.create({
     width: '100%',
     height: '45%',
     padding: 5,
+    justifyContent: 'center',
   },
   txtTitulo: {
     fontSize: 20,

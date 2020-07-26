@@ -164,7 +164,7 @@ class CadastroUsuario extends Component {
                     <CustomModal
                       parametro="Custom"
                       titulo="Cadastro Realizado :)"
-                      descricao="Seu cadastro no aplicativofoi realizado com sucesso, voce sera redirecionado para fazer login."
+                      descricao="Seu cadastro no aplicativo foi realizado com sucesso, voce será redirecionado para fazer login."
                       botao="Confirmar"
                       callback={() => {
                         this.resetNavigation('Login');
