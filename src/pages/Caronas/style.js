@@ -16,6 +16,23 @@ const Estilo = StyleSheet.create({
     width: '100%',
     backgroundColor: '#f2f2f2',
   },
+  botaoReload: {
+    position: 'absolute',
+    top: 0,
+    left: 10,
+    borderRadius: 10,
+    color: 'red',
+    backgroundColor: '#142850',
+    justifyContent: 'center',
+    height: 45,
+    width: 45,
+  },
+  textBotaoModal: {
+    color: '#ffffff',
+    fontFamily: 'Roboto',
+    textAlign: 'center',
+    fontSize: 20,
+  },
   V_internaLoad: {
     width: '100%',
     height: '100%',
@@ -58,6 +75,9 @@ const Estilo = StyleSheet.create({
     backgroundColor: 'rgba(52, 52, 52, 0.3)',
     flex: 1,
   },
+  modal: {
+    backgroundColor: 'rgba(52, 52, 52, 0.3)',
+  },
   V_modalInterno: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -89,22 +109,23 @@ const Estilo = StyleSheet.create({
     alignSelf: 'stretch',
     paddingHorizontal: 15,
   },
-  textValor:{
+  textValor: {
     color: '#2e2e2e',
     fontFamily: 'Roboto',
     textAlign: 'center',
     fontSize: 16,
     width: 50,
-    paddingBottom:8
+    paddingBottom: 8,
   },
-  ViewLabel:{
+  ViewLabel: {
     width: 50,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
-  itemStyle: {  
-    width: 100,
+  itemStyle: {
+    width: 70,
     height: 30,
+    marginHorizontal: 10,
     borderBottomColor: '#142850',
     justifyContent: 'center',
     alignItems: 'center',

@@ -179,7 +179,7 @@ class DetalhesAnuncio extends Component {
         </View>
         <View style={estilo.V_vagas}>
           <View style={estilo.vagas}>
-            <Icon4 name="md-paw" style={estilo.icone} />
+            <Icon4 name="md-paw" style={estilo.iconeAnimal} />
             <Text style={estilo.txtlabel}>{this.props.animal}</Text>
           </View>
         </View>

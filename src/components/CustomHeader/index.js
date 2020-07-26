@@ -32,7 +32,9 @@ export const HeaderBack = props => {
         <Icon name="ios-arrow-back" style={style.iconHeader} />
       </TouchableOpacity>
       <View style={style.V_Title}>
-        <Text style={style.txt_title}>{props.title}</Text>
+        <Text numberOfLines={1} style={style.txt_title}>
+          {props.title}
+        </Text>
       </View>
     </View>
   );

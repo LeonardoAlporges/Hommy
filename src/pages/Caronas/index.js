@@ -160,7 +160,8 @@ class Caronas extends Component {
   };
 
   padrao = async () => {
-    await this.setState({ filtroVagas1: false,
+    await this.setState({
+      filtroVagas1: false,
       filtroVagas1: false,
       filtroVagas2: false,
       filtroVagas3: false,
@@ -172,9 +173,10 @@ class Caronas extends Component {
       aluguelMin: '',
       aluguelMax: '',
       cidadeD: '',
-      cidadeS: ''})
-      this.filtro();
-  }
+      cidadeS: '',
+    });
+    this.filtro();
+  };
 
   filtro = async () => {
     await this.setState({ listaCaronas: this.state.fullData });
@@ -237,65 +239,65 @@ class Caronas extends Component {
             <Spinner color="#142850" />
           </View>
         ) : (
-            <View>
-              {this.state.erro ? (
-                <View style={Estilo.V_interna1}>
-                  <CustomModal
-                    parametro="Erro"
-                    callback={() => {
-                      this.setState({ erro: false });
-                    }}
-                  />
-                </View>
-              ) : (
-                  <View>
-                    {this.state.listaCaronas.length !== 0 ? (
-                      <View style={Estilo.card}>
-                        <FlatList
-                          style={Estilo.flatList}
-                          data={this.state.listaCaronas}
-                          renderItem={({ item }) => <CartaoCarona dados={item} />}
-                          keyExtractor={item => item._id}
-                          refreshing={this.state.refreshing}
-                          onRefresh={this.getListCarona}
-                        />
-                      </View>
-                    ) : (
-                        <View style={{ backgroundColor: '#ffffff' }}>
-                          {this.state.listaCaronas.length == 0 && (
-                            <EmptyState
-                              titulo="Nada por aqui!"
-                              mensagem="Por enquanto ninguém está oferecendo carona. Tente novamente mais tarde. "
-                            />
-                          )}
-                        </View>
-                      )}
+          <View>
+            {this.state.erro ? (
+              <View style={Estilo.V_interna1}>
+                <CustomModal
+                  parametro="Erro"
+                  callback={() => {
+                    this.setState({ erro: false });
+                  }}
+                />
+              </View>
+            ) : (
+              <View>
+                {this.state.listaCaronas.length !== 0 ? (
+                  <View style={Estilo.card}>
+                    <FlatList
+                      style={Estilo.flatList}
+                      data={this.state.listaCaronas}
+                      renderItem={({ item }) => <CartaoCarona dados={item} />}
+                      keyExtractor={item => item._id}
+                      refreshing={this.state.refreshing}
+                      onRefresh={this.getListCarona}
+                    />
+                  </View>
+                ) : (
+                  <View style={{ backgroundColor: '#ffffff' }}>
+                    {this.state.listaCaronas.length == 0 && (
+                      <EmptyState
+                        titulo="Nada por aqui!"
+                        mensagem="Por enquanto ninguém está oferecendo carona. Tente novamente mais tarde. "
+                      />
+                    )}
                   </View>
                 )}
-            </View>
-          )}
+              </View>
+            )}
+          </View>
+        )}
 
         {this.state.modalVisible && (
           <View style={Estilo.V_modalExterno}>
             <Modal animationType="fade" visible={this.state.modalVisible} transparent={true}>
               <View style={Estilo.V_modalInterno}>
-              <View
-                style={{
-                  width: '100%',
-                  height: 30,
-                  justifyContent: 'center',
-                  alignItems: 'flex-end',
-                }}
-              >
-                <TouchableOpacity
-                  style={{ marginRight: 20, marginBottom: 10 }}
-                  onPress={() => {
-                    this.setState({ modalVisible: false });
+                <View
+                  style={{
+                    width: '100%',
+                    height: 30,
+                    justifyContent: 'center',
+                    alignItems: 'flex-end',
                   }}
                 >
-                  <Icon style={{ fontSize: 22 }} name="close" />
-                </TouchableOpacity>
-              </View>
+                  <TouchableOpacity
+                    style={{ marginRight: 20, marginBottom: 10 }}
+                    onPress={() => {
+                      this.setState({ modalVisible: false });
+                    }}
+                  >
+                    <Icon style={{ fontSize: 22 }} name="close" />
+                  </TouchableOpacity>
+                </View>
                 <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Valor</Text>
                 <ListItem style={Estilo.listStyle}>
                   <View style={Estilo.ViewLabel}>
@@ -350,8 +352,8 @@ class Caronas extends Component {
                   />
                   <Text style={Estilo.textList}>4+</Text>
                 </ListItem>
-                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Saida</Text>      
-                <ListItem style={Estilo.listStyle}>                
+                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Saida</Text>
+                <ListItem style={Estilo.listStyle}>
                   <Item picker style={Estilo.pickerStyle}>
                     <Picker
                       mode="dropdown"
@@ -374,14 +376,13 @@ class Caronas extends Component {
                       <Picker.Item label="Piuma" value="Piuma" />
                       <Picker.Item label="Rive" value="Rive" />
                       <Picker.Item label="Serra" value="Serra" />
-                      <Picker.Item label="Vila Velha" value="Vila Velha" />  
+                      <Picker.Item label="Vila Velha" value="Vila Velha" />
                       <Picker.Item label="Vitoria" value="Vitoria" />
                     </Picker>
                   </Item>
                 </ListItem>
-                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Destino</Text>           
+                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Destino</Text>
                 <ListItem style={Estilo.listStyle}>
-                
                   <Item picker style={Estilo.pickerStyle}>
                     <Picker
                       mode="dropdown"
@@ -393,7 +394,7 @@ class Caronas extends Component {
                       selectedValue={this.state.cidadeD}
                       onValueChange={this.FCidadeD.bind(this)}
                     >
-                         <Picker.Item label=" " value="null" />
+                      <Picker.Item label=" " value="null" />
                       <Picker.Item label="Alegre" value="Alegre" />
                       <Picker.Item label="Bom Jesus do Norte" value="Bom Jesus do Norte" />
                       <Picker.Item label="Cachoeiro" value="Cachoeiro" />
@@ -404,29 +405,32 @@ class Caronas extends Component {
                       <Picker.Item label="Piuma" value="Piuma" />
                       <Picker.Item label="Rive" value="Rive" />
                       <Picker.Item label="Serra" value="Serra" />
-                      <Picker.Item label="Vila Velha" value="Vila Velha" />  
+                      <Picker.Item label="Vila Velha" value="Vila Velha" />
                       <Picker.Item label="Vitoria" value="Vitoria" />
                     </Picker>
                   </Item>
                 </ListItem>
-                <TouchableOpacity
-                  style={Estilo.modalBtn}
-                  onPress={() => {
-                    this.setState({ modalVisible: false });
-                    this.padrao();
-                  }}
-                >
-                  <Text style={Estilo.textBtn}>Voltar ao padrão</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={Estilo.modalBtn}
-                  onPress={() => {
-                    this.setState({ modalVisible: false });
-                    this.filtro();
-                  }}
-                >
-                  <Text style={Estilo.textBtn}>Aplicar</Text>
-                </TouchableOpacity>
+                <View style={{ width: '100%', flexDirection: 'row', display: 'flex', justifyContent: 'space-evenly' }}>
+                  <TouchableOpacity
+                    style={Estilo.botaoReload}
+                    onPress={() => {
+                      this.setState({ modalVisible: false });
+                      this.padrao();
+                    }}
+                  >
+                    <Icon name="filter-remove-outline" style={Estilo.textBotaoModal} />
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    style={Estilo.modalBtn}
+                    onPress={() => {
+                      this.setState({ modalVisible: false });
+                      this.filtro();
+                    }}
+                  >
+                    <Text style={Estilo.textBtn}>Aplicar</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             </Modal>
           </View>

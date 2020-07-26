@@ -6,10 +6,10 @@ const estilo = StyleSheet.create({
     width: '100%',
   },
   V_titulo: {
-    height: 20,
     marginTop: '3%',
     width: '100%',
     paddingLeft: '6%',
+    marginBottom: 10,
   },
   titulo: {
     color: '#142850',
@@ -18,7 +18,6 @@ const estilo = StyleSheet.create({
     fontWeight: 'bold',
   },
   V_descricao: {
-    marginTop: '4%',
     width: '88%',
     marginLeft: '6%',
     marginRight: '6%',
@@ -113,6 +112,14 @@ const estilo = StyleSheet.create({
     fontFamily: 'Roboto',
     color: '#142850',
     marginRight: '5%',
+    fontWeight: '600',
+  },
+  iconeAnimal: {
+    justifyContent: 'flex-start',
+    fontSize: 28,
+    fontFamily: 'Roboto',
+    color: '#142850',
+    marginRight: '7%',
     fontWeight: '600',
   },
   itemAcomodacao: {

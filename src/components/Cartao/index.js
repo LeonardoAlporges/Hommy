@@ -92,7 +92,9 @@ class Cartao extends Component {
           </View>
           <View style={styles.V_TituloDesc}>
             <View style={styles.V_titulo}>
-              <Text style={styles.txtTitulo}>{this.props.data.nomeRepublica}</Text>
+              <Text numberOfLines={1} style={styles.txtTitulo}>
+                {this.props.data.nomeRepublica}
+              </Text>
             </View>
             <View style={styles.V_obs}>
               <Text numberOfLines={2}>{this.props.data.descricao}</Text>
