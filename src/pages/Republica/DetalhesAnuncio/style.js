@@ -6,10 +6,10 @@ const estilo = StyleSheet.create({
     width: '100%',
   },
   V_titulo: {
-    height: 20,
     marginTop: '3%',
     width: '100%',
     paddingLeft: '6%',
+    marginBottom: 10,
   },
   titulo: {
     color: '#142850',
@@ -18,7 +18,6 @@ const estilo = StyleSheet.create({
     fontWeight: 'bold',
   },
   V_descricao: {
-    marginTop: '4%',
     width: '88%',
     marginLeft: '6%',
     marginRight: '6%',
@@ -61,12 +60,11 @@ const estilo = StyleSheet.create({
   V_caracteristicaItens: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-around',
     height: 40,
     marginTop: '2%',
     width: '85%',
-    marginLeft: '11%',
-    marginRight: '5%',
+    marginLeft: '10%',
   },
   item: {
     alignItems: 'center',
@@ -75,6 +73,7 @@ const estilo = StyleSheet.create({
     flexDirection: 'row',
     height: 40,
     width: '38%',
+    paddingHorizontal: '5%',
   },
   item2: {
     alignItems: 'center',
@@ -82,8 +81,8 @@ const estilo = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     height: 40,
-    marginLeft: '10%',
     width: '38%',
+    paddingLeft: '2%',
   },
   txtlabel: {
     paddingLeft: 20,
@@ -95,24 +94,32 @@ const estilo = StyleSheet.create({
   },
   txtlabel4: {
     color: '#00909e',
-    textAlign: 'left',
     fontSize: 16,
     fontFamily: 'Roboto',
     fontWeight: '600',
   },
   txtlabelGenero: {
-    paddingLeft: 5,
     color: '#00909e',
     fontSize: 16,
     fontFamily: 'Roboto',
     fontWeight: '600',
+    marginLeft: 30,
+    width: 100,
   },
   icone: {
     justifyContent: 'flex-start',
     fontSize: 28,
     fontFamily: 'Roboto',
     color: '#142850',
-    marginRight: 5,
+    marginRight: '5%',
+    fontWeight: '600',
+  },
+  iconeAnimal: {
+    justifyContent: 'flex-start',
+    fontSize: 28,
+    fontFamily: 'Roboto',
+    color: '#142850',
+    marginRight: '7%',
     fontWeight: '600',
   },
   itemAcomodacao: {

@@ -25,7 +25,9 @@ import {
   editSaida,
   editVagas,
   editValor,
+  editIdCarona,
 } from '../../../actions/CaronaActions';
+
 import { NavigationActions, StackActions } from 'react-navigation';
 class CadastroCarona extends Component {
   static navigationOptions = { header: null };
@@ -45,8 +47,10 @@ class CadastroCarona extends Component {
       sendTimeSaida: '00:00',
       timeSaida: '00:00',
       botaoEnviar: false,
+      dataLabel: 'Selecione a data',
     };
   }
+
   resetNavigation(Rota) {
     const resetAction = StackActions.reset({
       index: 0,
@@ -66,8 +70,8 @@ class CadastroCarona extends Component {
 
   async entrar(values) {
     this.setState({ modalLoadVisible: true });
-    const nick = this.props.nome.split(' ');
 
+    const nick = this.props.nome.split(' ');
     this.data = {
       localSaida: values.saida,
       localChegada: values.chegada,
@@ -85,33 +89,36 @@ class CadastroCarona extends Component {
     };
     console.log('?', this.data);
 
-    if (this.state.update == true) {
-      await api
-        .put(`/carona/${this.props.email}`, this.data)
-        .then(Response => {
-          this.setState({ modalLoadVisible: false });
-          this.setState({ sucesso: true });
-        })
-        .catch(error => {
-          this.setState({ erro: true });
-          this.setState({ modalLoadVisible: false });
-          console.log(error);
-        });
-    } else if (this.state.update == false) {
-      await api
-        .post('/carona', this.data)
-        .then(Response => {
-          console.log('Response');
-          this.setState({ modalLoadVisible: false });
-          this.setState({ sucesso: true });
-        })
-        .catch(error => {
-          this.setState({ modalLoadVisible: false });
-          this.setState({ erro: true });
-          console.log(error);
-        });
-    }
-    this.setState({ modalLoadVisible: false });
+    try {
+      if (this.state.update == true) {
+        await api
+          .put(`/carona/${this.props.idCarona}`, this.data)
+          .then(Response => {
+            this.setState({ modalLoadVisible: false });
+            this.setState({ sucesso: true });
+          })
+          .catch(error => {
+            this.setState({ erro: true });
+            this.setState({ modalLoadVisible: false });
+            console.log(this.props.idCarona);
+            console.log(error);
+          });
+      } else if (this.state.update == false) {
+        await api
+          .post('/carona', this.data)
+          .then(Response => {
+            console.log('Response');
+            this.setState({ modalLoadVisible: false });
+            this.setState({ sucesso: true });
+          })
+          .catch(error => {
+            this.setState({ modalLoadVisible: false });
+            this.setState({ erro: true });
+            console.log(error);
+          });
+      }
+      this.setState({ modalLoadVisible: false });
+    } catch (error) {}
   }
   navegar() {
     this.props.navigation.goBack(null);
@@ -158,7 +165,7 @@ class CadastroCarona extends Component {
           HChegada: this.props.HChegada,
           embarque: this.props.embarque,
           desembarque: this.props.desembarque,
-          vagas: this.props.vagas,
+          vagas: this.props.vagas.toString(10),
         }}
         onSubmit={values => {
           console.log('?');
@@ -180,11 +187,11 @@ class CadastroCarona extends Component {
           //data: yup.string().required('Campo obrigatório'),
           embarque: yup
             .string('Somente texto')
-            .max(70, 'Somente 70 caracteres sao permitidos')
+            .max(40, 'Somente 40 caracteres são permitidos')
             .required('Campo obrigatório'),
           desembarque: yup
             .string()
-            .max(50)
+            .max(40, 'Somente 40 caracteres são permitidos')
             .required('Campo obrigatório'),
           vagas: yup
             .number('Somente numeros')
@@ -207,7 +214,7 @@ class CadastroCarona extends Component {
               <CustomModal
                 parametro="Custom"
                 titulo="Tudo certo!"
-                descricao="Seu anuncio já estar no ar, fique atento com os agendamentos"
+                descricao="Seu anúncio já estar no ar, fique atento com os interesses"
                 botao="Confirmar"
                 callback={() => {
                   this.goToHome();
@@ -226,7 +233,7 @@ class CadastroCarona extends Component {
 
                     <View style={estilo.rowStyle}>
                       <View style={estilo.campoStyle}>
-                        <Text style={estilo.txtLabel}>Local de Saida</Text>
+                        <Text style={estilo.txtLabel}>Local de Saída</Text>
 
                         <Item picker>
                           <Picker
@@ -245,17 +252,17 @@ class CadastroCarona extends Component {
                           >
                             <Picker.Item label="" value="null" />
                             <Picker.Item label="Alegre" value="Alegre" />
-                            <Picker.Item label="Serra" value="Serra" />
-                            <Picker.Item label="Piuma" value="Piuma" />
-                            <Picker.Item label="Guarapari" value="Guarapari" />
-                            <Picker.Item label="Cachoeiro" value="Cachoeiro" />
-                            <Picker.Item label="Vitoria" value="Vitoria" />
-                            <Picker.Item label="Vila Velha" value="Vila Velha" />
-                            <Picker.Item label="Muniz Freire" value="Muniz Freire" />
-                            <Picker.Item label="Guacui" value="Guacui" />
                             <Picker.Item label="Bom Jesus do Norte" value="Bom Jesus do Norte" />
+                            <Picker.Item label="Cachoeiro" value="Cachoeiro" />
                             <Picker.Item label="Celina" value="Celina" />
+                            <Picker.Item label="Guacui" value="Guacui" />
+                            <Picker.Item label="Guarapari" value="Guarapari" />
+                            <Picker.Item label="Muniz Freire" value="Muniz Freire" />
+                            <Picker.Item label="Piuma" value="Piuma" />
                             <Picker.Item label="Rive" value="Rive" />
+                            <Picker.Item label="Serra" value="Serra" />
+                            <Picker.Item label="Vila Velha" value="Vila Velha" />
+                            <Picker.Item label="Vitoria" value="Vitoria" />
                           </Picker>
                         </Item>
 
@@ -282,17 +289,17 @@ class CadastroCarona extends Component {
                           >
                             <Picker.Item label="" value="null" />
                             <Picker.Item label="Alegre" value="Alegre" />
-                            <Picker.Item label="Serra" value="Serra" />
-                            <Picker.Item label="Piuma" value="Piuma" />
-                            <Picker.Item label="Guarapari" value="Guarapari" />
-                            <Picker.Item label="Cachoeiro" value="Cachoeiro" />
-                            <Picker.Item label="Vitoria" value="Vitoria" />
-                            <Picker.Item label="Vila Velha" value="Vila Velha" />
-                            <Picker.Item label="Muniz Freire" value="Muniz Freire" />
-                            <Picker.Item label="Guacui" value="Guacui" />
                             <Picker.Item label="Bom Jesus do Norte" value="Bom Jesus do Norte" />
+                            <Picker.Item label="Cachoeiro" value="Cachoeiro" />
                             <Picker.Item label="Celina" value="Celina" />
+                            <Picker.Item label="Guacui" value="Guacui" />
+                            <Picker.Item label="Guarapari" value="Guarapari" />
+                            <Picker.Item label="Muniz Freire" value="Muniz Freire" />
+                            <Picker.Item label="Piuma" value="Piuma" />
                             <Picker.Item label="Rive" value="Rive" />
+                            <Picker.Item label="Serra" value="Serra" />
+                            <Picker.Item label="Vila Velha" value="Vila Velha" />
+                            <Picker.Item label="Vitoria" value="Vitoria" />
                           </Picker>
                         </Item>
 
@@ -314,7 +321,7 @@ class CadastroCarona extends Component {
                             modalTransparent={true}
                             animationType={'slide'}
                             androidMode={'calendar'}
-                            placeHolderText="Selecione a data"
+                            placeHolderText={this.state.dataLabel}
                             textStyle={{
                               textAlign: 'left',
                               paddingTop: 25,
@@ -373,7 +380,7 @@ class CadastroCarona extends Component {
 
                     <View style={estilo.rowStyle}>
                       <View style={estilo.campoStyle}>
-                        <Text style={estilo.txtLabel}>Horario de saida</Text>
+                        <Text style={estilo.txtLabel}>Horário de saida</Text>
                         <Item>
                           <TouchableOpacity
                             onPress={() => {
@@ -528,11 +535,12 @@ const mapStateToProps = state => {
     HChegada: state.carona.HChegada,
     embarque: state.carona.embarque,
     desembarque: state.carona.desembarque,
-    vagas: state.carona.numVagas,
+    vagas: state.carona.vagas,
     imagem: state.user.fotoPerfil,
     nome: state.user.usuario,
     email: state.user.email,
     nota: state.user.notaUser,
+    idCarona: state.carona.idCarona,
   };
 };
 
@@ -549,6 +557,7 @@ const CaronaConnect = connect(
     editSaida,
     editVagas,
     editValor,
+    editIdCarona,
   }
 )(CadastroCarona);
 

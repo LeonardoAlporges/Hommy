@@ -159,17 +159,36 @@ class Caronas extends Component {
     }
   };
 
+  padrao = async () => {
+    await this.setState({
+      filtroVagas1: false,
+      filtroVagas1: false,
+      filtroVagas2: false,
+      filtroVagas3: false,
+      filtroVagas4: false,
+      filtroValorMaior: false,
+      filtroValorMenor: false,
+      filtroCidadeD: false,
+      filtroCidadeS: false,
+      aluguelMin: '',
+      aluguelMax: '',
+      cidadeD: '',
+      cidadeS: '',
+    });
+    this.filtro();
+  };
+
   filtro = async () => {
     await this.setState({ listaCaronas: this.state.fullData });
     let listaCaronas = this.state.listaCaronas;
     if (this.state.filtroVagas1 === true) {
-      listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas >= 1);
+      listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas == 1);
     }
     if (this.state.filtroVagas2 === true) {
-      listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas >= 2);
+      listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas == 2);
     }
     if (this.state.filtroVagas3 === true) {
-      listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas >= 3);
+      listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas == 3);
     }
     if (this.state.filtroVagas4 === true) {
       listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas >= 4);
@@ -334,7 +353,6 @@ class Caronas extends Component {
                   <Text style={Estilo.textList}>4+</Text>
                 </ListItem>
                 <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Saida</Text>
-                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 12 }}>Cidades</Text>
                 <ListItem style={Estilo.listStyle2}>
                   <Item picker style={Estilo.pickerStyle}>
                     <Picker
@@ -364,8 +382,8 @@ class Caronas extends Component {
                   </Item>
                 </ListItem>
                 <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Destino</Text>
-                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 12 }}>Cidades</Text>
-                <ListItem style={Estilo.listStyle2}>
+
+                <ListItem style={Estilo.listStyle}>
                   <Item picker style={Estilo.pickerStyle}>
                     <Picker
                       mode="dropdown"
@@ -393,16 +411,27 @@ class Caronas extends Component {
                     </Picker>
                   </Item>
                 </ListItem>
+                <View style={{ width: '100%', flexDirection: 'row', display: 'flex', justifyContent: 'space-evenly' }}>
+                  <TouchableOpacity
+                    style={Estilo.botaoReload}
+                    onPress={() => {
+                      this.setState({ modalVisible: false });
+                      this.padrao();
+                    }}
+                  >
+                    <Icon name="filter-remove-outline" style={Estilo.textBotaoModal} />
+                  </TouchableOpacity>
 
-                <TouchableOpacity
-                  style={Estilo.modalBtn}
-                  onPress={() => {
-                    this.setState({ modalVisible: false });
-                    this.filtro();
-                  }}
-                >
-                  <Text style={Estilo.textBtn}>Aplicar</Text>
-                </TouchableOpacity>
+                  <TouchableOpacity
+                    style={Estilo.modalBtn}
+                    onPress={() => {
+                      this.setState({ modalVisible: false });
+                      this.filtro();
+                    }}
+                  >
+                    <Text style={Estilo.textBtn}>Aplicar</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             </Modal>
           </View>

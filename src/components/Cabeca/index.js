@@ -77,7 +77,7 @@ class Cabeca extends Component {
         </View>
         <View style={Estilos.touch_Fake}>{/* <Icon style={Estilos.icon2} name="user" /> */}</View>
 
-        <Modal transparent={true} animationType="slide" visible={this.state.isModalVisible}>
+        <Modal transparent={true} animationType="slide" visible={this.state.isModalVisible} onRequestClose={() => this.setState({ isModalVisible: false })}>
           <View style={Estilos.bgModal}>
             <View style={Estilos.modal}>
               <View style={Estilos.voltar}>
@@ -157,13 +157,13 @@ class Cabeca extends Component {
                     }}
                   >
                     <Icon style={Estilos.iconBotoes} name="phone" />
-                    <Text style={Estilos.textBotoes}>Telefones Uteis</Text>
+                    <Text style={Estilos.textBotoes}>Telefones Úteis</Text>
                     <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
                   </Button>
 
                   <Button
                     onPress={() => {
-                      Linking.openURL('https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849');
+                      Linking.openURL('mailto:contato.hommy@gmail.com');
                     }}
                     style={Estilos.botoes}
                   >

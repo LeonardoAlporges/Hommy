@@ -47,13 +47,7 @@ class CartaoUser extends Component {
         }}
       >
         <View style={style.card}>
-          <TouchableOpacity
-            onPress={() => {
-              this.props.navigation.navigate('Perfil', {
-                dados: this.props.dados,
-                update: false,
-              });
-            }}
+          <TouchableOpacity            
             style={style.V_imagem}
           >
             <Image

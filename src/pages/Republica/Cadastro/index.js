@@ -74,6 +74,12 @@ export class Cadastro extends Component {
 
     if (parametro.update == false) {
       this.atualizarPropsRedux();
+    } else {
+      await this.setState({
+        imageURI0: this.props.imagem1,
+        imageURI1: this.props.imagem2,
+        imageURI2: this.props.imagem3,
+      });
     }
   }
   atualizarPropsRedux(dados) {
@@ -227,8 +233,8 @@ export class Cadastro extends Component {
           bairro: this.props.bairro,
           rua: this.props.rua,
           numero: this.props.numeroCasa,
-          aluguel: this.props.valorAluguel,
-          contas: this.props.valorContas,
+          aluguel: this.props.valorAluguel.toString(10),
+          contas: this.props.valorContas.toString(10),
           moradores: this.props.pessoas,
           genero: this.props.genero,
           animais: this.props.animal,
@@ -266,7 +272,7 @@ export class Cadastro extends Component {
           descricao: yup
             .string('')
             .min(3, 'Minimo de 3 caracteres')
-            .max(50, 'Maximo permitido de 50 caracteres'),
+            .max(70, 'No máximo 70 caracteres'),
           aluguel: yup
             .number('Somente numeros')
             .min(10, 'Valor minimo R$ 10')
@@ -283,13 +289,13 @@ export class Cadastro extends Component {
           numeroVagas: yup.string('').required('Campo obrigatório'),
           aQuarto: yup
             .string('')
-            .min(3)
-            .max(40)
+            .min(3, 'No mínimo 3 caracteres')
+            .max(70, 'No máximo 70 caracteres')
             .required('Campo obrigatório'),
           aRepublica: yup
             .string('')
-            .min(3)
-            .max(40)
+            .min(3, 'No mínimo 3 caracteres')
+            .max(70, 'No máximo 70 caracteres')
             .required('Campo obrigatório'),
         })}
       >
@@ -332,7 +338,7 @@ export class Cadastro extends Component {
               <CustomModal
                 parametro="Custom"
                 titulo="Tudo certo!"
-                descricao="Seu anuncio já estar no ar, fique atento com os agendamentos"
+                descricao="Seu anuncio já está no ar, fique atento com os agendamentos"
                 botao="Entendido"
                 callback={() => {
                   this.goToHome();
@@ -340,14 +346,14 @@ export class Cadastro extends Component {
               />
             )}
             {this.state.Load && <Loading />}
-            <HeaderBack title=" Cadastre sua repúblicaa" onNavigation={() => this.navegar()} />
+            <HeaderBack title=" Cadastre sua república" onNavigation={() => this.navegar()} />
             <Tabs
               initialPage={0}
               tabBarUnderlineStyle={{ backgroundColor: '#142850', height: 3 }}
               tabContainerStyle={{ height: 45 }}
             >
               <Tab
-                heading="Informaçoes"
+                heading="Informações"
                 tabStyle={estilo.tabs_style}
                 textStyle={estilo.tabs_TextStyle}
                 activeTabStyle={estilo.tabs_ActiveTabs}
@@ -363,7 +369,7 @@ export class Cadastro extends Component {
                     </View>
                     <View style={estilo.V_ImageEmpty}>
                       <ScrollView horizontal={true}>
-                        {this.state.imageURI0 == null ? (
+                        {this.state.imageURI0 == '' ? (
                           <View style={estilo.V_ImageFullEmpty}>
                             <Image
                               source={require('../../../assets/Img/Republica_Send_Pictures.png')}
@@ -375,7 +381,7 @@ export class Cadastro extends Component {
                             <Image source={{ uri: this.state.imageURI0 }} style={estilo.ImageFull} />
                           </View>
                         )}
-                        {this.state.imageURI1 == null ? (
+                        {this.state.imageURI1 == '' ? (
                           <View style={estilo.V_ImageFullEmpty}>
                             <Image
                               source={require('../../../assets/Img/Republica_Send_Pictures.png')}
@@ -387,7 +393,7 @@ export class Cadastro extends Component {
                             <Image source={{ uri: this.state.imageURI1 }} style={estilo.ImageFull} />
                           </View>
                         )}
-                        {this.state.imageURI2 == null ? (
+                        {this.state.imageURI2 == '' ? (
                           <View style={estilo.V_ImageFullEmpty}>
                             <Image
                               source={require('../../../assets/Img/Republica_Send_Pictures.png')}
@@ -705,7 +711,7 @@ export class Cadastro extends Component {
                       <View style={estilo.V_BotaoImg}>
                         <Button style={estilo.botao_send} onPress={handleSubmit}>
                           {/* //<Icon name="account-outline" style={estilo.icon_send} /> */}
-                          <Text>Publica republica</Text>
+                          <Text>Publicar sua republica</Text>
                         </Button>
                       </View>
                     </View>
@@ -745,6 +751,7 @@ const mapStateToProps = state => {
     imagem1: state.auth.imagem1,
     imagem2: state.auth.imagem2,
     imagem3: state.auth.imagem3,
+    tipoImovel: state.auth.tipoImovel,
     // Ou seja agora e como se tivessemos duas props dentro do compoennte cadastro
   };
 };

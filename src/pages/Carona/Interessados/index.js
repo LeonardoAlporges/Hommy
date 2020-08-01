@@ -21,6 +21,7 @@ class Interessados extends Component {
     modal: false,
     refreshing: false,
     idCarona: this.props.navigation.state.params.idCarona,
+    errorMsg:'',
   };
 
   UNSAFE_componentWillMount() {
@@ -38,14 +39,15 @@ class Interessados extends Component {
         });
       })
       .catch(error => {
-        this.setState({ Erro: true, Load: false });
+        const msg = error.response.data.error;
+        this.setState({ Erro: true, Load: false, errorMsg: msg });
         console.log(error);
       });
   };
 
   SendStatus = (number, user) => {
     this.setState({ Load: true });
-    console.log('SENDE', number, user);
+    console.log('SEND', number, user);
     if (number === 1) {
       console.log('User');
       const data = {
@@ -93,7 +95,7 @@ class Interessados extends Component {
       <View style={{ backgroundColor: '#ffffff', width: '100%', height: '100%' }}>
         <HeaderBack title="Solicitações" onNavigation={() => this.navegar()} />
         {this.state.Load && <Loading />}
-        {this.state.user == 0 && (
+        {this.state.user.length == 0 && (
           <EmptyState
             titulo="Ah não! "
             mensagem="Sua carona ainda não foi solicitada por nenhum usuário. Aguarde, logo você encontrará um parceiro para sua viagem."
@@ -148,6 +150,7 @@ class Interessados extends Component {
         {this.state.Erro && (
           <CustomModal
             parametro="Erro"
+            descricao={this.state.errorMsg}
             callback={() => {
               this.setState({ Erro: false });
             }}

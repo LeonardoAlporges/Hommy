@@ -3,6 +3,8 @@ import { StyleSheet } from 'react-native';
 
 const style = StyleSheet.create({
   container: {
+    marginTop: 50,
+    justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
   },
@@ -63,7 +65,7 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     width: '80%',
     justifyContent: 'space-between',
-    marginTop: '5%',
+    marginTop: '7%',
   },
   touchTx: {},
   V_modal: {
