@@ -17,6 +17,8 @@ import HeaderBack from '../../../components/CustomHeader';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { NavigationActions, StackActions } from 'react-navigation';
 import { set } from 'lodash';
+
+
 export default function CadastroUsuario({ navigation }) {
   const [imagemPerfil, setImagemPerfil] = useState();
   const [imagemPerfilPadrao, setImagemPerfilPadrao] = useState(
