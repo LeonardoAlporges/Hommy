@@ -26,13 +26,14 @@ function RenderApp(props) {
   const [load, setLoad] = useState(true);
   const [usuarioLogado, setUsuarioLogado] = useState(true);
   const [firtsOpen, setFirtsOpen] = useState(false);
-
+  const [tokenCelular, setTokenCelular] = useState();
   function pegarToken() {
     messaging()
       .getToken()
       .then(fmcToken => {
         if (fmcToken) {
           console.log('?', fmcToken);
+          setTokenCelular(fmcToken);
           props.editTokenNotificacao(fmcToken);
         } else {
           console.log('[FMCService] Sem token de dispositivo');
@@ -117,7 +118,7 @@ function RenderApp(props) {
   function reset(Rota) {
     const resetAction = StackActions.reset({
       index: 0,
-      actions: [NavigationActions.navigate({ routeName: Rota })],
+      actions: NavigationActions.navigate({ routeName: Rota, params: { tokenCelular: tokenCelular } }),
     });
 
     props.navigation.dispatch(resetAction);
@@ -139,7 +140,11 @@ function RenderApp(props) {
         </ViewCarregamento>
       ) : (
         <View>
-          {firtsOpen ? <SplashScreen /> : <View>{usuarioLogado ? reset('TabsHeader') : reset('Login')}</View>}
+          {firtsOpen ? (
+            <SplashScreen token={tokenCelular} />
+          ) : (
+            <View>{usuarioLogado ? reset('TabsHeader') : reset('Login')}</View>
+          )}
         </View>
       )}
     </View>
