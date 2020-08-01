@@ -71,7 +71,7 @@ const Navegação = createStackNavigator(
     SplashScreen,
   },
   {
-    initialRouteName: 'RenderApp',
+    initialRouteName: 'SplashScreen',
     headerMode: 'none',
     navigationOptions: {
       headerVisible: false,

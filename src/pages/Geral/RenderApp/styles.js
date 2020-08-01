@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 
 export const ViewCarregamento = styled.View`
   width: 100%;
@@ -8,7 +8,7 @@ export const ViewCarregamento = styled.View`
   align-items: center;
 `;
 
-export const Imagem = styled.Imagem`
+export const Imagem = styled.Image`
   width: 200px;
   height: 200px;
 `;

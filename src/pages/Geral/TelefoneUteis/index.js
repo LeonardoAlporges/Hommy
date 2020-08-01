@@ -3,10 +3,10 @@ import HeaderBack from '../../../components/CustomHeader';
 import { View, Text, TouchableOpacity, Linking, FlatList, ScrollView } from 'react-native';
 import style from './styles';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import api from '../../service/api';
+import api from '../../../service/api';
 import { Spinner } from 'native-base';
-import CustomModal from '../../components/Alert';
-import EmptyState from '../../components/EmptyState';
+import CustomModal from '../../../components/Alert';
+import EmptyState from '../../../components/EmptyState';
 
 export default class TelefoneUteis extends Component {
   constructor(props) {
