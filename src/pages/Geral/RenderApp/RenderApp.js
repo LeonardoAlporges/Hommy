@@ -118,7 +118,7 @@ function RenderApp(props) {
   function reset(Rota) {
     const resetAction = StackActions.reset({
       index: 0,
-      actions: NavigationActions.navigate({ routeName: Rota, params: { tokenCelular: tokenCelular } }),
+      actions: [NavigationActions.navigate({ routeName: Rota, params: { tokenCelular: tokenCelular } })],
     });
 
     props.navigation.dispatch(resetAction);

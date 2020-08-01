@@ -35,21 +35,18 @@ export default function EsqueciSenha({ navigation }) {
       });
   }
 
-  function resetNavigation(Rota) {
+  function resetarPilhaNavegacao(Rota) {
     const resetAction = StackActions.reset({
       index: 0,
       actions: [NavigationActions.navigate({ routeName: Rota })],
     });
 
-    this.props.navigation.dispatch(resetAction);
+    navigation.dispatch(resetAction);
   }
-  navegar = () => {
-    this.resetNavigation('Login');
-  };
 
   return (
     <View style={estilo.container}>
-      <HeaderBack title="Esqueceu a senha ?" onNavigation={() => this.navegar()} />
+      <HeaderBack title="Esqueceu a senha ?" onNavigation={() => resetarPilhaNavegacao('Login')} />
 
       <View style={estilo.V_img}>
         <Image style={estilo.V_img} source={require('../../../assets/Img/Send_email.png')} />
@@ -99,7 +96,7 @@ export default function EsqueciSenha({ navigation }) {
               <Button
                 style={estilo.botao}
                 onPress={() => {
-                  this.EnviarCodigo(values);
+                  EnviarCodigo(values);
                 }}
               >
                 <Text style={estilo.txtbtn}>Recuperar senha</Text>
@@ -108,7 +105,7 @@ export default function EsqueciSenha({ navigation }) {
           </Fragment>
         )}
       </Formik>
-      {this.state.Erro && (
+      {erro && (
         <CustomModal
           parametro="Erro"
           callback={() => {
@@ -116,7 +113,7 @@ export default function EsqueciSenha({ navigation }) {
           }}
         />
       )}
-      {this.state.Load && <Loading />}
+      {loading && <Loading />}
     </View>
   );
 }
