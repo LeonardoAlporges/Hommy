@@ -23,11 +23,14 @@ import { NavigationActions, StackActions } from 'react-navigation';
 import messaging from '@react-native-firebase/messaging';
 
 function RenderApp(props) {
+  const email = useSelector(state => state.user.email);
   const [load, setLoad] = useState(true);
   const [usuarioLogado, setUsuarioLogado] = useState(true);
   const [firtsOpen, setFirtsOpen] = useState(false);
   const [tokenCelular, setTokenCelular] = useState();
+
   function pegarToken() {
+    console.log('EMIAL :', email);
     messaging()
       .getToken()
       .then(fmcToken => {
@@ -141,7 +144,7 @@ function RenderApp(props) {
       ) : (
         <View>
           {firtsOpen ? (
-            <SplashScreen token={tokenCelular} />
+            <SplashScreen token={'tokenCelular'} />
           ) : (
             <View>{usuarioLogado ? reset('TabsHeader') : reset('Login')}</View>
           )}
