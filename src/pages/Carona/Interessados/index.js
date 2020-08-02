@@ -45,21 +45,23 @@ export default function Interessados({ navigation }) {
 
   function alterarStatusInteressado(number, user) {
     setLoading(true);
-    const [data, setData] = useState();
     if (number === 1) {
-      useState({
-        email: user,
-        status: 'Confirmado',
-      });
+      confirmarInteressado(user);
     } else if (number === 0) {
-      useState({
-        email: user,
-        status: 'Rejeitado',
-      });
+      recusarInteressado(user);
     }
+    setReload(!reload);
+    setLoading(false);
+  }
+
+  function recusarInteressado(user) {
+    const data = {
+      email: user,
+      status: 'Rejeitado',
+    };
     api
       .put(`/carona/confirmar/${idCarona}`, data)
-      .then(responseJson => {
+      .then(response => {
         setLoading(false);
         setReload(true);
       })
@@ -67,7 +69,23 @@ export default function Interessados({ navigation }) {
         setLoading(false);
         setErro(true);
       });
-    setLoading(false);
+  }
+
+  function confirmarInteressado(user) {
+    const data = {
+      email: user,
+      status: 'Confirmado',
+    };
+    api
+      .put(`/carona/confirmar/${idCarona}`, data)
+      .then(response => {
+        setLoading(false);
+        setReload(true);
+      })
+      .catch(error => {
+        setLoading(false);
+        setErro(true);
+      });
   }
 
   return (
