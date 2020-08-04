@@ -33,7 +33,7 @@ export function CartaoCarona({ navigation, dados }) {
     if (dados.userEmail == usuarioLogado.email) {
       desativarBotaoInteresse = true;
     }
-    navigation.navigate('DetalhesCarona', { dados: dados, desativarBotaoInteresse });
+    navigation.navigate('DetalhesCarona', { carona: dados, desativarBotaoInteresse });
   }
 
   return (
