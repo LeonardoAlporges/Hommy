@@ -30,8 +30,7 @@ class SplashScreen extends Component {
   resetNavigation(Rota) {
     const resetAction = StackActions.reset({
       index: 0,
-
-      actions: [NavigationActions.navigate({ routeName: Rota, params: { token: this.props.token } })],
+      actions: [NavigationActions.navigate({ routeName: Rota, params: { token: this.props.token } })], //navigation.state.parms.token
     });
 
     this.props.navigation.dispatch(resetAction);

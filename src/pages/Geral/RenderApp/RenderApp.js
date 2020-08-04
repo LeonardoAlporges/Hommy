@@ -35,7 +35,7 @@ function RenderApp(props) {
       .getToken()
       .then(fmcToken => {
         if (fmcToken) {
-          console.log('?', fmcToken);
+          console.log('teste', fmcToken);
           setTokenCelular(fmcToken);
           props.editTokenNotificacao(fmcToken);
         } else {
@@ -43,6 +43,7 @@ function RenderApp(props) {
         }
       })
       .catch(erro => {
+        setTokenCelular(null);
         console.log('[FMCService] getToken rejeitado ', erro);
       });
   }
