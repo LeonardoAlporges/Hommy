@@ -73,6 +73,7 @@ class Cartao extends Component {
       desativarBotaoAgenda = true;
     }
     this.props.navigation.navigate('Detalhes', {
+      dadosRepublica: dados,
       interessado: this.state.interessado,
       desativarBotaoAgenda,
     });
