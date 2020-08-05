@@ -1,8 +1,6 @@
-import React, { Component } from 'react';
-import { View, Text, StatusBar, BackHandler, Alert } from 'react-native';
-import { connect } from 'react-redux';
-import { Fab, Button, Container, Spinner, Tabs, Tab } from 'native-base';
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import React, { useState } from 'react';
+import { StatusBar } from 'react-native';
+import { Container, Tabs, Tab } from 'native-base';
 import { withNavigation } from 'react-navigation';
 
 import estilo from './style';
@@ -12,19 +10,11 @@ import Caronas from '../../Carona/Caronas';
 import Servicos from '../../Servicos';
 import Divulgacao from '../Divulgacao';
 
-class TabsHeader extends Component {
-  static navigationOptions = { header: null, headerLeft: null };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      loading: true,
-      active: false,
-    };
-  }
-
-  render() {
+function TabsHeader ({ navigation }) {
+  navigationOptions = { header: null, headerLeft: null };
+  const [loading, setLoading] = useState(true);
+  const [active, setActive] = useState(false);
+  
     return (
       <Container>
         <StatusBar barStyle="dark-content" backgroundColor="#fff" />
@@ -78,6 +68,5 @@ class TabsHeader extends Component {
       </Container>
     );
   }
-}
 
 export default withNavigation(TabsHeader);

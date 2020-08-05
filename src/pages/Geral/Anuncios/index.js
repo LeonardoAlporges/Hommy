@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, FlatList, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import estilo from './style';
@@ -51,20 +51,19 @@ import ModalConfirmacao from '../../../components/ModalConfirmacao';
 import { connect } from 'react-redux';
 import CartaoCarona from '../../../components/CartaoCarona';
 
-class Anuncios extends Component {
-  static navigationOptions = { header: null };
-  state = {
-    listaRepublicas: [],
-    listaCaronas: [],
-    dados: [],
-    Load: true,
-    Erro: false,
-    refreshing: false,
-    MConfirmacao: false,
-    item: '',
-  };
+function Anuncios({ navigation, email }) {
+  const [listaRepublicas, setListaRepublicas] = useState([]);
+  const [listaCaronas, setListaCaronas] = useState([]);
+  const [dados, setDados] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [erro, setErro] = useState(false);
+  const [reloading, setReloading] = useState(false);
+  const [modalConfirmacao, setModalConfirmacao] = useState(false);
+  const [item, setItem] = useState('');
+  const [tipo, setTipo] = useState('');
+  const [emailUser, setEmail] = useState(navigation.state.params.email);
 
-  DeleteAnuncio = (valor, item, tipo) => {
+  function DeleteAnuncio(valor, item, tipo) {
     console.log(item._id);
     if (valor == 0) {
       return null;
@@ -74,292 +73,267 @@ class Anuncios extends Component {
         .delete(`/main/${item._id}`)
         .then(responseJson => {
           console.log(responseJson);
-          this.setState({
-            listaRepublicas: [],
-            Load: false,
-          });
-          this.getlist();
+          setListaRepublicas([]);
+          setLoading(false);
+          getlist();
         })
         .catch(error => {
           console.log(error);
-          this.setState({ Load: false, Erro: true });
+          setLoading(false);
+          setErro(true);
         });
     } else if (tipo == 'Carona' && valor == 1) {
       api
         .delete(`/carona/${item._id}`)
         .then(responseJson => {
           console.log(responseJson);
-          this.setState({
-            listaCaronas: [],
-            Load: false,
-          });
-          this.getlist();
+          setListaCaronas([]);
+          setLoading(false);
+          getlist();
         })
         .catch(error => {
-          this.setState({
-            refreshing: false,
-            Load: false,
-          });
+          setReloading(false);
+          setLoading(false);
         });
     }
   };
 
-  getlist = () => {
-    this.setState({
-      refreshing: true,
-    });
+  function getlist() {
+    setReloading(true);
     api
-      .get(`/userCarona/${this.props.email}`)
+      .get(`/userCarona/${emailUser}`)
       .then(responseJson => {
         console.log(responseJson);
-        this.setState({
-          listaCaronas: responseJson.data,
-          Load: false,
-        });
+        setListaCaronas(responseJson.data);
+        setLoading(false);
       })
       .catch(error => {
-        this.setState({
-          Load: false,
-        });
+        setLoading(false);
       });
-
     api
-      .get(`/userRepublica/${this.props.email}`)
+      .get(`/userRepublica/${emailUser}`)
       .then(responseJson => {
         console.log(responseJson);
-        this.setState({
-          listaRepublicas: responseJson.data,
-          refreshing: false,
-        });
+        setListaRepublicas(responseJson.data);
+        setLoading(false);
       })
       .catch(error => {
-        this.setState({
-          refreshing: false,
-        });
+        setLoading(false);
       });
   };
-  UNSAFE_componentWillMount() {
-    this.getlist();
-  }
 
-  editRepublica(edit) {
+  useEffect(() => {
+    getlist();
+  }, [reloading]);
+
+  function editRepublica(edit) {
     const dados = edit;
     console.log('DA', edit);
-    this.props.editNomeRepublica(dados.nomeRepublica);
-    this.props.editValorAluguel(dados.valorAluguel);
-    this.props.editBairro(dados.bairro);
-    this.props.editRua(dados.rua);
-    this.props.editNumeroCasa(dados.numeroCasa);
-    this.props.editPessoas(dados.pessoas);
-    this.props.editAnimal(dados.animal);
-    this.props.editDescricao(dados.descricao);
-    this.props.editAcomodacaoQuarto(dados.acomodacaoQuarto);
-    this.props.editAcomodacaoRepublica(dados.acomodacaoRepublica);
-    this.props.editObservacao(dados.observacao);
-    this.props.editGenero(dados.genero);
-    this.props.editNumVagas(dados.numVagas);
-    this.props.editRepresentante(dados.representante);
-    this.props.editImg1(dados.imagem1);
-    this.props.editImg2(dados.imagem2);
-    this.props.editImg3(dados.imagem3);
-    this.props.editValor(dados.valor);
-    this.props.editValorConta(dados.valorContas);
-    this.props.editTipoImovel(dados.imovel);
-    this.props.navigation.navigate('Cadastro', { update: true });
+    navigation.editNomeRepublica(dados.nomeRepublica);
+    navigation.editValorAluguel(dados.valorAluguel);
+    navigation.editBairro(dados.bairro);
+    navigation.editRua(dados.rua);
+    navigation.editNumeroCasa(dados.numeroCasa);
+    navigation.editPessoas(dados.pessoas);
+    navigation.editAnimal(dados.animal);
+    navigation.editDescricao(dados.descricao);
+    navigation.editAcomodacaoQuarto(dados.acomodacaoQuarto);
+    navigation.editAcomodacaoRepublica(dados.acomodacaoRepublica);
+    navigation.editObservacao(dados.observacao);
+    navigation.editGenero(dados.genero);
+    navigation.editNumVagas(dados.numVagas);
+    navigation.editRepresentante(dados.representante);
+    navigation.editImg1(dados.imagem1);
+    navigation.editImg2(dados.imagem2);
+    navigation.editImg3(dados.imagem3);
+    navigation.editValor(dados.valor);
+    navigation.editValorConta(dados.valorContas);
+    navigation.editTipoImovel(dados.imovel);
+    navigation.navigate('Cadastro', { update: true });
   }
 
-  editCaronas(edit) {
+  function editCaronas(edit) {
     console.log(edit);
     const dados = edit;
-    this.props.editNomeOfertante(dados.nome);
-    this.props.editChegada(dados.localChegada);
-    this.props.editData(dados.data);
-    this.props.editDesembarque(dados.desembarque);
-    this.props.editEmbarque(dados.embarque);
-    this.props.editHChegada(dados.horaChegada);
-    this.props.editHSaida(dados.horaSaida);
-    this.props.editImagem(dados.imagem);
-    this.props.editNotaCarona(dados.nota);
-    this.props.editSaida(dados.localSaida);
-    this.props.editVagas(dados.vagas);
-    this.props.editValor(dados.valor);
-    this.props.editIdCarona(dados._id);
-    this.props.navigation.navigate('CadastroCaronas', { update: true });
+    navigation.editNomeOfertante(dados.nome);
+    navigation.editChegada(dados.localChegada);
+    navigation.editData(dados.data);
+    navigation.editDesembarque(dados.desembarque);
+    navigation.editEmbarque(dados.embarque);
+    navigation.editHChegada(dados.horaChegada);
+    navigation.editHSaida(dados.horaSaida);
+    navigation.editImagem(dados.imagem);
+    navigation.editNotaCarona(dados.nota);
+    navigation.editSaida(dados.localSaida);
+    navigation.editVagas(dados.vagas);
+    navigation.editValor(dados.valor);
+    navigation.editIdCarona(dados._id);
+    navigation.navigate('CadastroCaronas', { update: true });
   }
-  navegar = () => {
-    this.props.navigation.goBack(null);
-  };
-
-  render() {
-    return (
-      <View style={{ flex: 1 }}>
-        {this.state.Load && <Loading />}
-        {this.state.Erro && (
-          <CustomModal
-            parametro="Erro"
-            callback={() => {
-              this.setState({ Erro: false });
-            }}
-          />
-        )}
-        {this.state.MConfirmacao && (
-          <ModalConfirmacao
-            retornoModal={valor => {
-              this.DeleteAnuncio(valor, this.state.item, this.state.tipo);
-              this.setState({ MConfirmacao: false });
-            }}
-            titulo="Excluir anúncio?"
-            mensagem="Sua publicação será apagada e mais ninguém poderá vê-la."
-            botaoCancel="Cancelar"
-            botaoConfirmar="Excluir"
-            confirmar={true}
-          />
-        )}
-        <HeaderBack title="Meus anúncios" onNavigation={() => this.navegar()} />
-        <ScrollView>
-          <View style={estilo.V_geral}>
-            {this.state.listaRepublicas.length != 0 ? (
+  return (
+    <View style={{ flex: 1 }}>
+      {loading && <Loading />}
+      {erro && (
+        <CustomModal
+          parametro="Erro"
+          callback={() => {
+            setErro(false);
+          }}
+        />
+      )}
+      {modalConfirmacao && (
+        <ModalConfirmacao
+          retornoModal={valor => {
+            DeleteAnuncio(valor, item, tipo);
+            setModalConfirmacao(false);
+          }}
+          titulo="Excluir anúncio?"
+          mensagem="Sua publicação será apagada e mais ninguém poderá vê-la."
+          botaoCancel="Cancelar"
+          botaoConfirmar="Excluir"
+          confirmar={true}
+        />
+      )}
+      <HeaderBack title="Meus anúncios" onNavigation={() => navigation.goBack(null)} />
+      <ScrollView>
+        <View style={estilo.V_geral}>
+          {listaRepublicas.length != 0 ? (
+            <View>
+              <View style={estilo.V_label}>
+                <Text style={estilo.label}>Suas Repúblicas</Text>
+                <View style={estilo.barra} />
+              </View>
               <View>
-                <View style={estilo.V_label}>
-                  <Text style={estilo.label}>Suas Repúblicas</Text>
-                  <View style={estilo.barra} />
-                </View>
-                <View>
-                  <ScrollView style={estilo.card}>
-                    <FlatList
-                      style={estilo.flatList}
-                      data={this.state.listaRepublicas}
-                      renderItem={({ item }) => (
-                        <View>
-                          <Cartao data={item} />
-                          <View style={estilo.V_edit}>
-                            <Button
-                              style={estilo.delete}
-                              onPress={() => {
-                                this.setState({
-                                  item: item,
-                                  tipo: 'Republica',
-                                  MConfirmacao: true,
-                                });
-                              }}
-                            >
-                              <Icon style={estilo.iconDel} name="close" />
-                            </Button>
+                <ScrollView style={estilo.card}>
+                  <FlatList
+                    style={estilo.flatList}
+                    data={listaRepublicas}
+                    renderItem={({ item }) => (
+                      <View>
+                        <Cartao data={item} />
+                        <View style={estilo.V_edit}>
+                          <Button
+                            style={estilo.delete}
+                            onPress={() => {
+                              setItem(item);
+                              setTipo('Republica');
+                              setModalConfirmacao(true);
+                            }}
+                          >
+                            <Icon style={estilo.iconDel} name="close" />
+                          </Button>
 
-                            <Button
-                              style={estilo.edit}
-                              onPress={() => {
-                                this.editRepublica(item);
-                              }}
-                            >
-                              <Icon style={estilo.icon} name="pencil" />
-                              <Text style={estilo.TxtEdit}>Editar</Text>
-                            </Button>
-                            <Button
-                              style={estilo.ver}
-                              onPress={() => {
-                                this.props.navigation.navigate('Agendamentos', {
-                                  usario: false,
-                                  idRepublica: item._id,
-                                });
-                              }}
-                            >
-                              <Icon style={estilo.icon} name="list" />
-                              <Text style={estilo.TxtEdit}>Ver interessados</Text>
-                            </Button>
-                          </View>
+                          <Button
+                            style={estilo.edit}
+                            onPress={() => {
+                              editRepublica(item);
+                            }}
+                          >
+                            <Icon style={estilo.icon} name="pencil" />
+                            <Text style={estilo.TxtEdit}>Editar</Text>
+                          </Button>
+                          <Button
+                            style={estilo.ver}
+                            onPress={() => {
+                              navigation.navigate('Agendamentos', {
+                                usario: false,
+                                idRepublica: item._id,
+                              });
+                            }}
+                          >
+                            <Icon style={estilo.icon} name="list" />
+                            <Text style={estilo.TxtEdit}>Ver interessados</Text>
+                          </Button>
                         </View>
-                      )}
-                      keyExtractor={item => item._id}
-                      refreshing={this.state.refreshing}
-                      onRefresh={this.getlist}
-                    />
-                  </ScrollView>
-                </View>
+                      </View>
+                    )}
+                    keyExtractor={item => item._id}
+                    refreshing={reloading}
+                    onRefresh={getlist}
+                  />
+                </ScrollView>
               </View>
-            ) : (
+            </View>
+          ) : (
               <View />
             )}
-            {this.state.listaCaronas.length != 0 ? (
-              <View style={{ marginTop: 30 }}>
-                <View style={estilo.V_label}>
-                  <Text style={estilo.label}> Suas Caronas</Text>
-                  <View style={estilo.barra} />
-                </View>
-                <View>
-                  <ScrollView style={estilo.card}>
-                    <FlatList
-                      style={estilo.flatList}
-                      data={this.state.listaCaronas}
-                      renderItem={({ item }) => (
-                        <View>
-                          <CartaoCarona dados={item} />
-                          <View style={estilo.V_edit}>
-                            <Button
-                              style={estilo.delete}
-                              onPress={() => {
-                                this.setState({
-                                  item: item,
-                                  tipo: 'Carona',
-                                  MConfirmacao: true,
-                                });
-                              }}
-                            >
-                              <Icon style={estilo.iconDel} name="close" />
-                            </Button>
-                            <Button
-                              style={estilo.edit}
-                              onPress={() => {
-                                this.editCaronas(item);
-                              }}
-                            >
-                              <Icon style={estilo.icon} name="pencil" />
-                              <Text style={estilo.TxtEdit}>Editar</Text>
-                            </Button>
-                            <Button
-                              style={estilo.ver}
-                              onPress={() => {
-                                this.props.navigation.navigate('Interessados', {
-                                  usario: false,
-                                  idCarona: item._id,
-                                });
-                              }}
-                            >
-                              <Icon style={estilo.icon} name="list" />
-                              <Text style={estilo.TxtEdit}>Ver interessados</Text>
-                            </Button>
-                          </View>
-                        </View>
-                      )}
-                      keyExtractor={item => item._id}
-                    />
-                  </ScrollView>
-                </View>
+          {listaCaronas.length != 0 ? (
+            <View style={{ marginTop: 30 }}>
+              <View style={estilo.V_label}>
+                <Text style={estilo.label}> Suas Caronas</Text>
+                <View style={estilo.barra} />
               </View>
-            ) : (
+              <View>
+                <ScrollView style={estilo.card}>
+                  <FlatList
+                    style={estilo.flatList}
+                    data={listaCaronas}
+                    renderItem={({ item }) => (
+                      <View>
+                        <CartaoCarona dados={item} />
+                        <View style={estilo.V_edit}>
+                          <Button
+                            style={estilo.delete}
+                            onPress={() => {
+                              setItem(item);
+                              setTipo('Carona');
+                              setModalConfirmacao(true);
+                            }}
+                          >
+                            <Icon style={estilo.iconDel} name="close" />
+                          </Button>
+                          <Button
+                            style={estilo.edit}
+                            onPress={() => {
+                              editCaronas(item);
+                            }}
+                          >
+                            <Icon style={estilo.icon} name="pencil" />
+                            <Text style={estilo.TxtEdit}>Editar</Text>
+                          </Button>
+                          <Button
+                            style={estilo.ver}
+                            onPress={() => {
+                              navigation.navigate('Interessados', {
+                                usario: false,
+                                idCarona: item._id,
+                              });
+                            }}
+                          >
+                            <Icon style={estilo.icon} name="list" />
+                            <Text style={estilo.TxtEdit}>Ver interessados</Text>
+                          </Button>
+                        </View>
+                      </View>
+                    )}
+                    keyExtractor={item => item._id}
+                  />
+                </ScrollView>
+              </View>
+            </View>
+          ) : (
               <View />
             )}
-          </View>
-        </ScrollView>
-        {this.state.listaCaronas.length == 0 && this.state.listaRepublicas.length == 0 ? (
-          <View
-            style={{
-              width: '100%',
-              height: '100%',
-              alignItems: 'center',
-            }}
-          >
-            <EmptyState
-              titulo="Sem anúncios"
-              mensagem="Você ainda não anunciou nada. Nos diga quando houver vagas em sua república ou ofereça uma carona."
-            />
-          </View>
-        ) : (
+        </View>
+      </ScrollView>
+      {listaCaronas.length == 0 && listaRepublicas.length == 0 ? (
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            alignItems: 'center',
+          }}
+        >
+          <EmptyState
+            titulo="Sem anúncios"
+            mensagem="Você ainda não anunciou nada. Nos diga quando houver vagas em sua república ou ofereça uma carona."
+          />
+        </View>
+      ) : (
           <View />
         )}
-      </View>
-    );
-  }
+    </View>
+  );
 }
 const mapStateToProps = state => {
   return {
