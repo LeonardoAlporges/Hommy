@@ -23,16 +23,19 @@ import { NavigationActions, StackActions } from 'react-navigation';
 import messaging from '@react-native-firebase/messaging';
 
 function RenderApp(props) {
+  const email = useSelector(state => state.user.email);
   const [load, setLoad] = useState(true);
   const [usuarioLogado, setUsuarioLogado] = useState(true);
   const [firtsOpen, setFirtsOpen] = useState(false);
   const [tokenCelular, setTokenCelular] = useState();
+
   function pegarToken() {
+    console.log('EMIAL :', email);
     messaging()
       .getToken()
       .then(fmcToken => {
         if (fmcToken) {
-          console.log('?', fmcToken);
+          console.log('teste', fmcToken);
           setTokenCelular(fmcToken);
           props.editTokenNotificacao(fmcToken);
         } else {
@@ -40,6 +43,7 @@ function RenderApp(props) {
         }
       })
       .catch(erro => {
+        setTokenCelular(null);
         console.log('[FMCService] getToken rejeitado ', erro);
       });
   }
@@ -118,7 +122,7 @@ function RenderApp(props) {
   function reset(Rota) {
     const resetAction = StackActions.reset({
       index: 0,
-      actions: NavigationActions.navigate({ routeName: Rota, params: { tokenCelular: tokenCelular } }),
+      actions: [NavigationActions.navigate({ routeName: Rota, params: { tokenCelular: tokenCelular } })],
     });
 
     props.navigation.dispatch(resetAction);
@@ -141,7 +145,7 @@ function RenderApp(props) {
       ) : (
         <View>
           {firtsOpen ? (
-            <SplashScreen token={tokenCelular} />
+            <SplashScreen token={'tokenCelular'} />
           ) : (
             <View>{usuarioLogado ? reset('TabsHeader') : reset('Login')}</View>
           )}

@@ -41,7 +41,8 @@ export function Login({ navigation }) {
     const data = {
       email: value.email,
       password: value.password,
-      tokenD: navigation.state.params.token,
+      tokenD: 'awdawdkdja12312daw',
+      //navigation.state.params.token
     };
     api
       .post('/session', data)

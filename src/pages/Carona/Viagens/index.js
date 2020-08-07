@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { View, FlatList, Text, TouchableOpacity, Modal, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, FlatList, Text, TouchableOpacity, ScrollView } from 'react-native';
 
-import { connect } from 'react-redux';
 import style from './style';
 import { Button } from 'native-base';
 import api from '../../../service/api';
@@ -13,202 +12,164 @@ import ModalConfirmacao from '../../../components/ModalConfirmacao';
 import CartaoCarona from '../../../components/CartaoCarona';
 import ModalAvaliacao from '../../../components/ModalAvaliacao';
 import { NavigationActions, StackActions } from 'react-navigation';
+import { useSelector } from 'react-redux';
 
-class Viagens extends Component {
-  static navigationOptions = { header: null };
-  constructor(props) {
-    super(props);
-    this.state = {
-      listaCaronas: [],
-      modal: false,
-      Load: true,
-      botaoAvaliar: true,
-      emailAvaliado: '',
-      nomeAvaliado: '',
-      MConfirmacao: false,
-      item: '',
-    };
+export default function Viagens({ navigation }) {
+  const emailUsuario = useSelector(state => state.user.email);
+  const [reload, setReload] = useState(false);
+  const [listaCarona, setListaCarona] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [modalAvaliacao, setModalAvaliacao] = useState(false);
+  const [botaoAvaliacao, setBotaoAvaliacao] = useState(false);
+  const [nomeAvaliado, setNomeAvaliado] = useState();
+  const [emailAvaliado, setEmailAvaliado] = useState();
+  const [modalDesinteresse, setModalDesinteresse] = useState(false);
+  const [idCarona, setIdCarona] = useState();
+  useEffect(() => {
+    setListaCarona([]);
+    buscarListaCaronaInteressada();
+  }, [reload]);
+
+  function avaliarMotorista(item) {
+    setEmailAvaliado(item.userEmail);
+    setNomeAvaliado(item.nome);
+    setModalAvaliacao(true);
   }
 
-  UNSAFE_componentWillMount() {
-    this.getListCarona();
-  }
-
-  avaliar = item => {
-    this.setState({ emailAvaliado: item.userEmail });
-    this.setState({ nomeAvaliado: item.nome });
-    this.setState({ modal: true });
-  };
-
-  deletar(valor, idCarona) {
+  function removerInteresse(valor, idCarona) {
     if (valor == 0 || valor == 3) {
       return null;
     }
-    this.setState({ Load: true });
-
+    setLoading(true);
     return api
       .delete(`/carona/meusInteresses/${idCarona}`, {
-        data: { email: this.props.email },
+        data: { email: emailUsuario },
       })
-      .then(responseJson => {
-        this.setState({
-          listaCaronas: [],
-          Load: false,
-        });
-        this.getListCarona();
-        console.log(responseJson);
+      .then(response => {
+        setReload(!reload);
+        setLoading(false);
       })
       .catch(error => {
-        this.setState({ Load: false });
-        console.log(error);
+        setLoading(false);
       });
   }
 
-  getListCarona = () => {
+  function buscarListaCaronaInteressada() {
     return api
-      .get(`/carona/meusInteresses/${this.props.email}`)
-      .then(responseJson => {
-        console.log(responseJson);
-        this.setState({
-          listaCaronas: responseJson.data,
-          Load: false,
-        });
+      .get(`/carona/meusInteresses/${emailUsuario}`)
+      .then(response => {
+        setListaCarona(response.data);
+        setLoading(false);
       })
       .catch(error => {
-        this.setState({ Load: false });
-        console.log(error);
+        setLoading(false);
       });
-  };
-
-  returnModal() {
-    this.setState({ modal: false });
-    this.setState({ botaoAvaliar: false });
   }
-  resetNavigation(Rota) {
+
+  function fecharModalAvaliacao() {
+    setModalAvaliacao(false);
+    setBotaoAvaliacao(false);
+  }
+  function resetarPilhaNavegacao(rota) {
     const resetAction = StackActions.reset({
       index: 0,
-      actions: [NavigationActions.navigate({ routeName: Rota })],
+      actions: [NavigationActions.navigate({ routeName: rota })],
     });
 
-    this.props.navigation.dispatch(resetAction);
+    navigation.dispatch(resetAction);
   }
 
-  navegar() {
-    this.resetNavigation('TabsHeader');
-  }
-
-  render() {
-    return (
-      <View style={{ backgroundColor: '#f2f2f2', flex: 1 }}>
-        <HeaderBack title="Meus interesses" onNavigation={() => this.navegar()} />
-        {this.state.Load && <Loading />}
-        {this.state.listaCaronas.length == 0 && (
-          <View style={{ backgroundColor: '#fff' }}>
-            <EmptyState
-              titulo="Você não demonstrou interesse em caronas recentemente."
-              mensagem="Vamos nessa! Navegue pelo aplicativo e encontre alguém com quem possa viajar."
-            />
-          </View>
-        )}
-        {this.state.listaCaronas.length != 0 && (
-          <View>
-            <View style={{ widht: '100%', marginTop: 10, marginBottom: 10, height: 20, paddingHorizontal: 20 }}>
-              <Text style={style.subtitulo}>Gerencie as caronas nas quais você solicitou uma visita.</Text>
-            </View>
-            <View style={style.V_label}>
-              <Text style={style.label}>Seus interesses</Text>
-              <View style={style.barra} />
-            </View>
-          </View>
-        )}
-        {this.state.MConfirmacao && (
-          <ModalConfirmacao
-            retornoModal={valor => {
-              this.deletar(valor, this.state.item);
-              this.setState({ MConfirmacao: false });
-            }}
-            titulo=" Cancelar carona?"
-            mensagem="O motorista será notificado de que você não possui mais interesse em viajar com ele."
-            botaoConfirmar="Sim"
-            botaoCancel="Não"
-            confirmar={true}
+  return (
+    <View style={{ backgroundColor: '#f2f2f2', flex: 1 }}>
+      <HeaderBack title="Meus interesses" onNavigation={() => resetarPilhaNavegacao('TabsHeader')} />
+      {loading && <Loading />}
+      {listaCarona.length == 0 && (
+        <View style={{ backgroundColor: '#fff' }}>
+          <EmptyState
+            titulo="Você não demonstrou interesse em caronas recentemente."
+            mensagem="Vamos nessa! Navegue pelo aplicativo e encontre alguém com quem possa viajar."
           />
-        )}
+        </View>
+      )}
+      {listaCarona.length != 0 && (
+        <View>
+          <View style={{ widht: '100%', marginTop: 10, marginBottom: 10, height: 20, paddingHorizontal: 20 }}>
+            <Text style={style.subtitulo}>Gerencie as caronas nas quais você solicitou uma visita.</Text>
+          </View>
+          <View style={style.V_label}>
+            <Text style={style.label}>Seus interesses</Text>
+            <View style={style.barra} />
+          </View>
+        </View>
+      )}
+      {modalDesinteresse && (
+        <ModalConfirmacao
+          retornoModal={valor => {
+            removerInteresse(valor, idCarona);
+            setModalDesinteresse(false);
+          }}
+          titulo=" Cancelar carona?"
+          mensagem="O motorista será notificado de que você não possui mais interesse em viajar com ele."
+          botaoConfirmar="Sim"
+          botaoCancel="Não"
+          confirmar={true}
+        />
+      )}
 
-        <ScrollView style={style.card}>
-          <FlatList
-            style={style.flatList}
-            data={this.state.listaCaronas}
-            renderItem={({ item }) => (
-              <View>
-                <CartaoCarona dados={item.carona} />
-                <View style={style.ViewStatus}>
-                  {item.status == 'Análise' && (
-                    <View style={style.Analise}>
-                      <Text style={style.data}>Em análise</Text>
-                    </View>
-                  )}
-                  {item.status == 'Confirmado' && (
-                    <View style={style.Confirmado}>
-                      <Text style={style.dataConf}>Confirmada</Text>
-                    </View>
-                  )}
-                  {item.status == 'Rejeitado' && (
-                    <View style={style.Rejeitado}>
-                      <Text style={style.dataRej}>Rejeitada </Text>
-                    </View>
-                  )}
-                  {item.status == 'Realizada' && (
-                    <View style={style.V_Botao}>
-                      <Button
-                        disabled={!this.state.botaoAvaliar}
-                        style={style.botao}
-                        onPress={() => {
-                          this.avaliar(item);
-                        }}
-                      >
-                        <Icon name="star" style={style.icon} />
-                        <Text style={style.title}>Avaliar carona</Text>
-                      </Button>
-                    </View>
-                  )}
-                  <TouchableOpacity
-                    style={style.ViewBotaoClose}
-                    onPress={() => {
-                      this.setState({
-                        MConfirmacao: true,
-                        item: item.carona._id,
-                      });
-                    }}
-                  >
-                    <Icon style={style.iconeClose} name="close" />
-                  </TouchableOpacity>
-                </View>
+      <ScrollView style={style.card}>
+        <FlatList
+          style={style.flatList}
+          data={listaCarona}
+          renderItem={({ item }) => (
+            <View>
+              <CartaoCarona dados={item.carona} />
+              <View style={style.ViewStatus}>
+                {item.status == 'Análise' && (
+                  <View style={style.Analise}>
+                    <Text style={style.data}>Em análise</Text>
+                  </View>
+                )}
+                {item.status == 'Confirmado' && (
+                  <View style={style.Confirmado}>
+                    <Text style={style.dataConf}>Confirmada</Text>
+                  </View>
+                )}
+                {item.status == 'Rejeitado' && (
+                  <View style={style.Rejeitado}>
+                    <Text style={style.dataRej}>Rejeitada </Text>
+                  </View>
+                )}
+                {item.status == 'Realizada' && (
+                  <View style={style.V_Botao}>
+                    <Button
+                      disabled={!botaoAvaliacao}
+                      style={style.botao}
+                      onPress={() => {
+                        avaliarMotorista(item);
+                      }}
+                    >
+                      <Icon name="star" style={style.icon} />
+                      <Text style={style.title}>Avaliar carona</Text>
+                    </Button>
+                  </View>
+                )}
+                <TouchableOpacity
+                  style={style.ViewBotaoClose}
+                  onPress={() => {
+                    setModalDesinteresse(true);
+                    setIdCarona(item.carona._id);
+                  }}
+                >
+                  <Icon style={style.iconeClose} name="close" />
+                </TouchableOpacity>
               </View>
-            )}
-          />
-        </ScrollView>
-
-        {this.state.modal && (
-          <ModalAvaliacao
-            nome={this.state.nomeAvaliado}
-            email={this.state.emailAvaliado}
-            retornoModal={() => this.returnModal()}
-          />
-        )}
-      </View>
-    );
-  }
+            </View>
+          )}
+        />
+      </ScrollView>
+      {modalAvaliacao && (
+        <ModalAvaliacao nome={nomeAvaliado} email={emailAvaliado} retornoModal={() => fecharModalAvaliacao()} />
+      )}
+    </View>
+  );
 }
-const mapStateToProps = state => {
-  return {
-    email: state.user.email,
-  };
-};
-
-const ViagemConnect = connect(
-  mapStateToProps,
-  null
-)(Viagens);
-
-export default ViagemConnect;

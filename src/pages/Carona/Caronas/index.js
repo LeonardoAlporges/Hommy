@@ -53,19 +53,9 @@ class Caronas extends Component {
   }
 
   limparPropsCaronaRedux() {
-    this.props.editChegada(''),
-      this.props.editData(''),
-      this.props.editDesembarque(''),
-      this.props.editEmbarque(''),
-      this.props.editHChegada(''),
-      this.props.editHSaida(''),
-      this.props.editImagem(''),
-      this.props.editSaida(''),
-      this.props.editVagas(''),
-      this.props.editValor('');
-
     this.props.navigation.navigate('CadastroCaronas', {
       update: false,
+      carona: null,
     });
   }
 

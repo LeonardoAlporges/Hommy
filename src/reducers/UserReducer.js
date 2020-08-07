@@ -1,6 +1,6 @@
 const initialState = {
   usuario: 'Padrao ?',
-  email: '',
+  email: 'TESTEA@LEO>COM',
   cpf: '',
   idUser: '',
   telefone: '',
