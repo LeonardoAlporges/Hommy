@@ -65,7 +65,6 @@ class Anuncios extends Component {
   };
 
   DeleteAnuncio = (valor, item, tipo) => {
-    console.log(item._id);
     if (valor == 0) {
       return null;
     }
@@ -73,7 +72,6 @@ class Anuncios extends Component {
       api
         .delete(`/main/${item._id}`)
         .then(responseJson => {
-          console.log(responseJson);
           this.setState({
             listaRepublicas: [],
             Load: false,
@@ -81,14 +79,12 @@ class Anuncios extends Component {
           this.getlist();
         })
         .catch(error => {
-          console.log(error);
           this.setState({ Load: false, Erro: true });
         });
     } else if (tipo == 'Carona' && valor == 1) {
       api
         .delete(`/carona/${item._id}`)
         .then(responseJson => {
-          console.log(responseJson);
           this.setState({
             listaCaronas: [],
             Load: false,

@@ -91,6 +91,7 @@ class Republica extends Component {
     this.props.editTipoImovel('');
 
     this.props.navigation.navigate('Cadastro', {
+      dadosRepublica: null,
       update: false,
     });
   }
