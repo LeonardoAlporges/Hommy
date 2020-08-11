@@ -18,71 +18,61 @@ import {
 import { Button, Spinner } from 'native-base';
 import { NavigationActions, StackActions } from 'react-navigation';
 
-class SplashScreen extends Component {
-  static navigationOptions = { header: null };
-  constructor(props) {
-    super(props);
-    console.log(props);
-  }
-  state = {
-    modalVisible: false,
-  };
-  resetNavigation(Rota) {
+function SplashScreen({ navigation }) {
+  navigationOptions = { header: null };
+  const [modalVisible, setModalVisible] = useState(false);
+  function resetNavigation(Rota) {
     const resetAction = StackActions.reset({
       index: 0,
-      actions: [NavigationActions.navigate({ routeName: Rota, params: { token: this.props.token } })], //navigation.state.parms.token
+      actions: [NavigationActions.navigate({ routeName: Rota, params: { token: navigation.state.parms.token } })],
     });
 
-    this.props.navigation.dispatch(resetAction);
+    navigation.dispatch(resetAction);
   }
-  abrirLoad() {
-    this.setState({ modalVisible: true });
-
+  function abrirLoad() {
+    setModalVisible(true);
     setTimeout(() => {
-      this.setState({ modalVisible: false });
+      setModalVisible(false);
     }, 1000);
 
-    this.resetNavigation('Login');
+    resetNavigation('Login');
   }
-
-  render() {
-    return (
-      <View>
-        <Container>
-          <Conteudo>
-            <Logo>
-              <Imagem source={require('../../../assets/Img/Wellcome.png')} />
-            </Logo>
-            <Label>
-              <Titulo>Bem vindo ao Hommy </Titulo>
-              <Descricao>
-                Realize e acompanhe anúncios! Descubra a república ideal e economize tempo pedindo uma carona
+  return (
+    <View>
+      <Container>
+        <Conteudo>
+          <Logo>
+            <Imagem source={require('../../../assets/Img/Wellcome.png')} />
+          </Logo>
+          <Label>
+            <Titulo>Bem vindo ao Hommy </Titulo>
+            <Descricao>
+              Realize e acompanhe anúncios! Descubra a república ideal e economize tempo pedindo uma carona
               </Descricao>
-            </Label>
-          </Conteudo>
+          </Label>
+        </Conteudo>
 
-          <Botoes>
-            <Botao
-              onPress={() => {
-                this.abrirLoad();
-              }}
-            >
-              <TituloBotao>Acessar minha conta</TituloBotao>
-            </Botao>
-          </Botoes>
-          <View>
-            <Modal animationType="slide" transparent={true} visible={this.state.modalVisible}>
-              <FundoModal>
-                <Spin>
-                  <Spinner color="#142850" />
-                </Spin>
-              </FundoModal>
-            </Modal>
-          </View>
-        </Container>
-      </View>
-    );
-  }
+        <Botoes>
+          <Botao
+            onPress={() => {
+              abrirLoad();
+            }}
+          >
+            <TituloBotao>Acessar minha conta</TituloBotao>
+          </Botao>
+        </Botoes>
+        <View>
+          <Modal animationType="slide" transparent={true} visible={modalVisible}>
+            <FundoModal>
+              <Spin>
+                <Spinner color="#142850" />
+              </Spin>
+            </FundoModal>
+          </Modal>
+        </View>
+      </Container>
+    </View>
+  );
 }
 
 export default withNavigation(SplashScreen);
