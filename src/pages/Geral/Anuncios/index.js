@@ -51,7 +51,7 @@ import ModalConfirmacao from '../../../components/ModalConfirmacao';
 import { connect } from 'react-redux';
 import CartaoCarona from '../../../components/CartaoCarona';
 
-function Anuncios({ navigation, email }) {
+function Anuncios({ navigation }, email) {
   const [listaRepublicas, setListaRepublicas] = useState([]);
   const [listaCaronas, setListaCaronas] = useState([]);
   const [dados, setDados] = useState([]);
