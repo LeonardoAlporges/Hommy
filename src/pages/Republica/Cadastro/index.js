@@ -45,7 +45,7 @@ export default function Cadastro({ navigation }) {
   }
 
   function preencherFoto(linkImagem) {
-    if (secontadorImagem == 0) {
+    if (contadorImagem == 0) {
       setImagem1(linkImagem);
     } else if (contadorImagem == 1) {
       setImagem2(linkImagem);
