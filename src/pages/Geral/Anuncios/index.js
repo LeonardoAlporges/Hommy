@@ -96,7 +96,7 @@ function Anuncios({ navigation }, email) {
           setLoading(false);
         });
     }
-  };
+  }
 
   function getlist() {
     setReloading(true);
@@ -120,7 +120,7 @@ function Anuncios({ navigation }, email) {
       .catch(error => {
         setLoading(false);
       });
-  };
+  }
 
   useEffect(() => {
     getlist();
@@ -255,8 +255,8 @@ function Anuncios({ navigation }, email) {
               </View>
             </View>
           ) : (
-              <View />
-            )}
+            <View />
+          )}
           {listaCaronas.length != 0 ? (
             <View style={{ marginTop: 30 }}>
               <View style={estilo.V_label}>
@@ -312,8 +312,8 @@ function Anuncios({ navigation }, email) {
               </View>
             </View>
           ) : (
-              <View />
-            )}
+            <View />
+          )}
         </View>
       </ScrollView>
       {listaCaronas.length == 0 && listaRepublicas.length == 0 ? (
@@ -330,8 +330,8 @@ function Anuncios({ navigation }, email) {
           />
         </View>
       ) : (
-          <View />
-        )}
+        <View />
+      )}
     </View>
   );
 }

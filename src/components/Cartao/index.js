@@ -44,35 +44,13 @@ class Cartao extends Component {
       return;
     }
     const dados = this.props.data;
-    console.log('DADOS', dados);
-    this.props.editNomeRepublica(dados.nomeRepublica);
-    this.props.editValorConta(dados.valorContas);
-    this.props.editValorAluguel(dados.valorAluguel);
-    this.props.editBairro(dados.bairro);
-    this.props.editRua(dados.rua);
-    this.props.editNumeroCasa(dados.numeroCasa);
-    this.props.editPessoas(dados.pessoas);
-    this.props.editAnimal(dados.animal);
-    this.props.editDescricao(dados.descricao);
-    this.props.editAcomodacaoQuarto(dados.acomodacaoQuarto);
-    this.props.editAcomodacaoRepublica(dados.acomodacaoRepublica);
-    this.props.editValorConta(dados.valorContas);
-    this.props.editObservacao(dados.observacao);
-    this.props.editGenero(dados.genero);
-    this.props.editNumVagas(dados.numVagas);
-    this.props.editRepresentante(dados.representante);
-    this.props.editTipoImovel(dados.imovel);
-    this.props.editImg1(dados.imagem1);
-    this.props.editImg2(dados.imagem2);
-    this.props.editImg3(dados.imagem3);
-    this.props.edituserEmail(dados.userEmail);
-    this.props.editIdRepublica(dados._id);
 
     var desativarBotaoAgenda = false;
     if (dados.userEmail == this.props.email) {
       desativarBotaoAgenda = true;
     }
     this.props.navigation.navigate('Detalhes', {
+      dadosRepublica: dados,
       interessado: this.state.interessado,
       desativarBotaoAgenda,
     });

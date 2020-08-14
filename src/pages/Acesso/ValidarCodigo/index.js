@@ -18,10 +18,7 @@ export default function ValidarCodigo({ navigation }) {
   const [codigoErrado, setCodigoErrado] = useState(false);
   const [teste, setTeste] = useState();
 
-  useEffect(() => {
-    console.log('ema232l', email);
-    console.log('emal', email.email);
-  }, [codigoValido]);
+  useEffect(() => {}, [codigoValido]);
 
   function verificarCodigoDigitado(values) {
     setTeste(true);
