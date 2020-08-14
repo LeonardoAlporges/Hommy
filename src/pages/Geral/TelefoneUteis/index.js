@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import HeaderBack from '../../../components/CustomHeader';
 import { View, Text, TouchableOpacity, Linking, FlatList, ScrollView } from 'react-native';
 import style from './styles';
@@ -8,95 +8,84 @@ import { Spinner } from 'native-base';
 import CustomModal from '../../../components/Alert';
 import EmptyState from '../../../components/EmptyState';
 
-export default class TelefoneUteis extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      telefones: [],
-      loading: true,
-      active: false,
-      erro: false,
-      refreshing: false,
-      titulo0: '',
-      titulo1: '',
-      titulo2: '',
-      titulo3: '',
-      numeros0: [],
-      numeros1: [],
-      numeros2: [],
-      numeros3: [],
-    };
-  }
+export default function TelefoneUteis ({ navigation }) {
+  const [telefones, setTelefones] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [active, setActive] = useState(false);
+  const [erro, setErro] = useState(false);
+  const [reloading, setReloading] = useState(false);
+  const [titulo0, setTitulo0] = useState('');
+  const [titulo1, setTitulo1] = useState('');
+  const [titulo2, setTitulo2] = useState('');
+  const [titulo3, setTitulo3] = useState('');
+  const [numeros0, setNumeros0] = useState('');
+  const [numeros1, setNumeros1] = useState('');
+  const [numeros2, setNumeros2] = useState('');
+  const [numeros3, setNumeros3] = useState('');  
 
-  getListTelefone = () => {
-    this.setState({ refreshing: true });
+ function getListTelefone (){
+    setReloading(true)
     return api
       .get('/telefone')
       .then(responseJson => {
         console.log(responseJson);
-        this.setState({
-          telefones: responseJson.data,
-          fullData: responseJson.data,
-          loading: false,
-          refreshing: false,
-          titulo0: responseJson.data[0].categoria,
-          titulo1: responseJson.data[1].categoria,
-          titulo2: responseJson.data[2].categoria,
-          titulo3: responseJson.data[3].categoria,
-          numeros0: responseJson.data[0].numeros,
-          numeros1: responseJson.data[1].numeros,
-          numeros2: responseJson.data[2].numeros,
-          numeros3: responseJson.data[3].numeros,
-        });
-        console.log(this.state.telefones);
+        setTelefones(responseJson.data);
+        setLoading(false);
+        setReloading(false);
+        setTitulo0(responseJson.data[0].categoria);
+        setTitulo1(responseJson.data[1].categoria);
+        setTitulo2(responseJson.data[2].categoria);
+        setTitulo3(responseJson.data[3].categoria);
+        setnumeros0(responseJson.data[0].numeros);
+        setnumeros1(responseJson.data[1].numeros);
+        setnumeros2(responseJson.data[2].numeros);
+        setnumeros3(responseJson.data[3].numeros);
+        console.log(telefones);
       })
       .catch(error => {
-        this.setState({ loading: false });
-        this.setState({ erro: true });
-        this.setState({ refreshing: false });
+        setLoading(false);
+        setErro(true);
+        setReloading(false);
       });
   };
-  async componentDidMount() {
-    await this.getListTelefone();
-    await console.log(this.state.telefones[0]);
-  }
+
+  useEffect(() => {
+    await getListTelefone();
+    await console.log(telefones[0]);
+  }, []);
+
   AbrirUrl = tel => {
     Linking.openURL(`tel:${tel}`);
   };
 
-  navegar = () => {
-    this.props.navigation.goBack(null);
-  };
-
-  render() {
     return (
       <View style={{ height: '100%', backgroundColor: '#f8f8f8' }}>
-        <HeaderBack title="Telefone Uteis" onNavigation={() => this.navegar()} />
-        {this.state.loading ? (
+        <HeaderBack title="Telefone Uteis" onNavigation={() => navigation.goBack(null)} />
+        {loading ? (
           <View style={style.V_Load}>
             <Spinner style={{}} color="#142850" />
           </View>
-        ) : this.state.erro ? (
+        ) : erro ? (
           <View style={style.V_republicas}>
             <CustomModal
               parametro="Erro"
               callback={() => {
-                this.setState({ erro: false });
+                setErro(false)
               }}
             />
           </View>
-        ) : this.state.telefones.length != 0 ? (
+        ) : telefones.length != 0 ? (
           <ScrollView>
             <View style={style.Divisao}>
-              <Text style={style.Text}>{this.state.titulo3}</Text>
+              <Text style={style.Text}>{titulo3}</Text>
             </View>
             <FlatList
-              data={this.state.numeros3}
+              data={numeros3}
               renderItem={({ item }) => (
                 <View style={{ paddingHorizontal: 20, marginBottom: 2 }}>
                   <TouchableOpacity
                     onPress={() => {
-                      this.AbrirUrl(item.telefone);
+                      AbrirUrl(item.telefone);
                     }}
                   >
                     <View style={style.Cards}>
@@ -110,19 +99,19 @@ export default class TelefoneUteis extends Component {
                 </View>
               )}
               keyExtractor={item => item._id}
-              refreshing={this.state.refreshing}
-              onRefresh={this.getListTelefone}
+              refreshing={reloading}
+              onRefresh={getListTelefone}
             />
             <View style={style.Divisao}>
-              <Text style={style.Text}>{this.state.titulo0}</Text>
+              <Text style={style.Text}>{titulo0}</Text>
             </View>
             <FlatList
-              data={this.state.numeros0}
+              data={numeros0}
               renderItem={({ item }) => (
                 <View style={{ paddingHorizontal: 20, marginBottom: 2 }}>
                   <TouchableOpacity
                     onPress={() => {
-                      this.AbrirUrl(item.telefone);
+                      AbrirUrl(item.telefone);
                     }}
                   >
                     <View style={style.Cards}>
@@ -136,19 +125,19 @@ export default class TelefoneUteis extends Component {
                 </View>
               )}
               keyExtractor={item => item._id}
-              refreshing={this.state.refreshing}
-              onRefresh={this.getListTelefone}
+              refreshing={refreshing}
+              onRefresh={getListTelefone}
             />
             <View style={style.Divisao}>
-              <Text style={style.Text}>{this.state.titulo1}</Text>
+              <Text style={style.Text}>{titulo1}</Text>
             </View>
             <FlatList
-              data={this.state.numeros1}
+              data={numeros1}
               renderItem={({ item }) => (
                 <View style={{ paddingHorizontal: 20, marginBottom: 2 }}>
                   <TouchableOpacity
                     onPress={() => {
-                      this.AbrirUrl(item.telefone);
+                      AbrirUrl(item.telefone);
                     }}
                   >
                     <View style={style.Cards}>
@@ -162,19 +151,19 @@ export default class TelefoneUteis extends Component {
                 </View>
               )}
               keyExtractor={item => item._id}
-              refreshing={this.state.refreshing}
-              onRefresh={this.getListTelefone}
+              refreshing={refreshing}
+              onRefresh={getListTelefone}
             />
             <View style={style.Divisao}>
-              <Text style={style.Text}>{this.state.titulo2}</Text>
+              <Text style={style.Text}>{titulo2}</Text>
             </View>
             <FlatList
-              data={this.state.numeros2}
+              data={numeros2}
               renderItem={({ item }) => (
                 <View style={{ paddingHorizontal: 20, marginBottom: 2 }}>
                   <TouchableOpacity
                     onPress={() => {
-                      this.AbrirUrl(item.telefone);
+                      AbrirUrl(item.telefone);
                     }}
                   >
                     <View style={style.Cards}>
@@ -188,8 +177,8 @@ export default class TelefoneUteis extends Component {
                 </View>
               )}
               keyExtractor={item => item._id}
-              refreshing={this.state.refreshing}
-              onRefresh={this.getListTelefone}
+              refreshing={refreshing}
+              onRefresh={getListTelefone}
             />
           </ScrollView>
         ) : (
@@ -203,4 +192,3 @@ export default class TelefoneUteis extends Component {
       </View>
     );
   }
-}
