@@ -49,7 +49,7 @@ export default function TelefoneUteis ({ navigation }) {
       });
   };
 
-  useEffect(() => {
+  useEffect(async() => {
     await getListTelefone();
     await console.log(telefones[0]);
   }, []);

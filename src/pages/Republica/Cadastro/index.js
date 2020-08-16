@@ -124,7 +124,7 @@ export default function Cadastro({navigation}){
       }
   }
 
-  function postaNovaRepublica(dados){
+  async function postaNovaRepublica(dados){
     await api.post('/main', dados)
     .then(response => {
       setLoading(false);
@@ -140,7 +140,7 @@ export default function Cadastro({navigation}){
     });
   }
 
-  function atualizarRepublica(dados){
+  async function atualizarRepublica(dados){
     await api
     .put(`/main/${email}`, dados)
     .then(Response => {
