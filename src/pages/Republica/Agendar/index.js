@@ -37,18 +37,19 @@ export default function Agendar({ navigation }) {
     };
 
     api
-      .put(`/agendamento/${dadosRepublica.idRepublica}`, agendamento)
+      .put(`/agendamento/${dadosRepublica._id}`, agendamento)
       .then(response => {
         setSucesso(true);
         setLoading(false);
       })
       .catch(error => {
+        console.log(error)
         setErro(true);
         setLoading(false);
       });
   }
 
-  selecionarHorario = hora => {
+  function selecionarHorario (hora) {
     const horaLabel = moment(new Date(hora)).format('HH:mm');
     setHoraAgendamento(hora);
     setLabelHoraAgendamento(horaLabel);

@@ -7,6 +7,7 @@ import { Button } from 'native-base';
 import CustomModal from '../../../components/Alert';
 import api from '../../../service/api';
 import Loading from '../../../components/Loading';
+import { useSelector } from 'react-redux';
 
 export function DetalhesCarona({ navigation }) {
   const moment = require('moment');
@@ -15,8 +16,9 @@ export function DetalhesCarona({ navigation }) {
     weekdays: 'Domingo_Segunda_Terça_Quarta_Quinta_Sexta_Sabado'.split('_'),
   });
   const [botaoInteresse, setBotaoInteresse] = useState(navigation.state.params.desativarBotaoInteresse);
-  const [dados, setDados] = useState(navigation.state.params.dados);  
-  console.log(dados);
+  const [dados, setDados] = useState(navigation.state.params.dados); 
+
+  const email = useSelector(state => state.user.email);
   const [sucesso, setSucesso] = useState(false);
   const [erro, setErro] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -26,9 +28,10 @@ export function DetalhesCarona({ navigation }) {
 
   async function demonstrarInteresse() {
     setLoading(true);
-    const dado = { email: dados.email };
+    const dado = { email: email};
+    console.log("DAODS:",dado,dados)
     await api
-      .put(`/carona/meusInteresses/${dados.id}`, dado)
+      .put(`/carona/meusInteresses/${dados._id}`, dado)
       .then(Response => {
         setSucesso(true);
         setLoading(false);
