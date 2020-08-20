@@ -9,6 +9,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import api from '../../../service/api';
 import style from './style';
 import { NavigationActions, StackActions } from 'react-navigation';
+import { useSelector } from 'react-redux';
 
 export function Login({ navigation }) {
   useEffect(() => {
@@ -17,6 +18,8 @@ export function Login({ navigation }) {
 
   const [modalErroLogin, setmodalErroLogin] = useState(false);
   const [modalErroSenha, setmodalErroSenha] = useState(false);
+  const tokenAparelho = useSelector(state => state.user.tokenUser);
+  
   const [loading, setloading] = useState(false);
 
   async function salvarDadosStorage(dados) {
@@ -41,9 +44,9 @@ export function Login({ navigation }) {
     const data = {
       email: value.email,
       password: value.password,
-      tokenD: 'awdawdkdja12312daw',
-      //navigation.state.params.token
+      tokenD: tokenAparelho,
     };
+    console.log('tokenAparelho:',tokenAparelho)
     api
       .post('/session', data)
       .then(response => {
