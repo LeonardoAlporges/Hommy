@@ -7,43 +7,7 @@ import Cartao from '../../../components/Cartao';
 import { Button } from 'native-base';
 import { withNavigation } from 'react-navigation';
 import EmptyState from '../../../components/EmptyState';
-import {
-  editChegada,
-  editData,
-  editDesembarque,
-  editEmbarque,
-  editHChegada,
-  editHSaida,
-  editImagem,
-  editNomeOfertante,
-  editNotaCarona,
-  editSaida,
-  editVagas,
-  editValor,
-  editIdCarona,
-} from '../../../actions/CaronaActions';
 
-import {
-  editValorAluguel,
-  editNomeRepublica,
-  editBairro,
-  editPessoas,
-  editDescricao,
-  editAnimal,
-  editAcomodacaoQuarto,
-  editAcomodacaoRepublica,
-  editValorConta,
-  editObservacao,
-  editImg1,
-  editImg2,
-  editImg3,
-  editGenero,
-  editNumVagas,
-  editRepresentante,
-  editRua,
-  editNumeroCasa,
-  editTipoImovel,
-} from '../../../actions/AuthActions';
 import HeaderBack from '../../../components/CustomHeader';
 import CustomModal from '../../../components/Alert';
 import Loading from '../../../components/Loading';
@@ -54,7 +18,6 @@ import CartaoCarona from '../../../components/CartaoCarona';
 function Anuncios({ navigation }, email) {
   const [listaRepublicas, setListaRepublicas] = useState([]);
   const [listaCaronas, setListaCaronas] = useState([]);
-  const [dados, setDados] = useState([]);
   const [loading, setLoading] = useState(true);
   const [erro, setErro] = useState(false);
   const [reloading, setReloading] = useState(false);
@@ -128,48 +91,14 @@ function Anuncios({ navigation }, email) {
 
   function editRepublica(edit) {
     const dados = edit;
-    console.log('DA', edit);
-    navigation.editNomeRepublica(dados.nomeRepublica);
-    navigation.editValorAluguel(dados.valorAluguel);
-    navigation.editBairro(dados.bairro);
-    navigation.editRua(dados.rua);
-    navigation.editNumeroCasa(dados.numeroCasa);
-    navigation.editPessoas(dados.pessoas);
-    navigation.editAnimal(dados.animal);
-    navigation.editDescricao(dados.descricao);
-    navigation.editAcomodacaoQuarto(dados.acomodacaoQuarto);
-    navigation.editAcomodacaoRepublica(dados.acomodacaoRepublica);
-    navigation.editObservacao(dados.observacao);
-    navigation.editGenero(dados.genero);
-    navigation.editNumVagas(dados.numVagas);
-    navigation.editRepresentante(dados.representante);
-    navigation.editImg1(dados.imagem1);
-    navigation.editImg2(dados.imagem2);
-    navigation.editImg3(dados.imagem3);
-    navigation.editValor(dados.valor);
-    navigation.editValorConta(dados.valorContas);
-    navigation.editTipoImovel(dados.imovel);
-    navigation.navigate('Cadastro', { update: true });
+    navigation.navigate('Cadastro', { update: true,dadosRepublica:dados });
   }
 
   function editCaronas(edit) {
-    console.log(edit);
     const dados = edit;
-    navigation.editNomeOfertante(dados.nome);
-    navigation.editChegada(dados.localChegada);
-    navigation.editData(dados.data);
-    navigation.editDesembarque(dados.desembarque);
-    navigation.editEmbarque(dados.embarque);
-    navigation.editHChegada(dados.horaChegada);
-    navigation.editHSaida(dados.horaSaida);
-    navigation.editImagem(dados.imagem);
-    navigation.editNotaCarona(dados.nota);
-    navigation.editSaida(dados.localSaida);
-    navigation.editVagas(dados.vagas);
-    navigation.editValor(dados.valor);
-    navigation.editIdCarona(dados._id);
-    navigation.navigate('CadastroCaronas', { update: true });
+    navigation.navigate('CadastroCaronas', { update: true, carona: dados });
   }
+
   return (
     <View style={{ flex: 1 }}>
       {loading && <Loading />}
@@ -344,42 +273,5 @@ const mapStateToProps = state => {
     // Ou seja agora e como se tivessemos duas props dentro do compoennte cadastro
   };
 };
-const EditConnect = connect(
-  mapStateToProps,
-  {
-    editValorAluguel,
-    editNomeRepublica,
-    editBairro,
-    editPessoas,
-    editDescricao,
-    editAnimal,
-    editAcomodacaoQuarto,
-    editAcomodacaoRepublica,
-    editValorConta,
-    editTipoImovel,
-    editObservacao,
-    editImg1,
-    editImg2,
-    editImg3,
-    editGenero,
-    editNumVagas,
-    editRepresentante,
-    editRua,
-    editNumeroCasa,
-    editChegada,
-    editData,
-    editDesembarque,
-    editEmbarque,
-    editHChegada,
-    editHSaida,
-    editImagem,
-    editNomeOfertante,
-    editNotaCarona,
-    editSaida,
-    editVagas,
-    editValor,
-    editIdCarona,
-  }
-)(Anuncios);
 
-export default withNavigation(EditConnect);
+export default withNavigation(Anuncios);

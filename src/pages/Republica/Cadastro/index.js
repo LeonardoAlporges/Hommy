@@ -32,6 +32,9 @@ export default function Cadastro({ navigation }) {
   const [imagem1, setImagem1] = useState(null);
   const [imagem2, setImagem2] = useState(null);
   const [imagem3, setImagem3] = useState(null);  
+  const [linkimagem1, setLinkImagem1] = useState(null);
+  const [linkimagem2, setLinkImagem2] = useState(null);
+  const [linkimagem3, setLinkImagem3] = useState(null);
   const [usuarioLogado, setUsuarioLogado] = useState();
 
   useEffect(() => {
@@ -69,9 +72,34 @@ export default function Cadastro({ navigation }) {
         alert('Ocorreu algum erro: ', error);
       } else {
         preencherFoto(imagePickerResponse);
+         const referencia = uploadFileToFireBaseRepublica(imagePickerResponse)
+         monitorFileUpload(referencia);
       }
     });
   }
+  
+  function monitorFileUpload(task) {
+    task.on('state_changed', snapshot => {
+      switch (snapshot.state) {
+        case 'running':
+          break;
+        case 'success':
+          snapshot.ref.getDownloadURL().then(downloadURL => {
+            if (contadorImagem == 0) {
+              setLinkImagem1(downloadURL);
+            } else if (contadorImagem == 1) {
+              setLinkImagem2(downloadURL);
+            } else if (contadorImagem == 2) {
+              setLinkImagem3(downloadURL);
+            }
+          });
+          break;
+        default:
+          break;
+      }
+    });
+  };
+
 
   function resetarPilhaNavegacao(rota) {
     const resetAction = StackActions.reset({
@@ -85,30 +113,20 @@ export default function Cadastro({ navigation }) {
     resetarPilhaNavegacao('TabsHeader');
   }
 
+
   async function enviarCadatroCarona(values) {
     setLoading(true);
+    setContadorImagem(0)
     if (imagem1 == null && imagem2 == null && imagem3 == null) {
       setErroSemFoto(true);
       setLoading(false);
       return;
     }
-    const imagemSTR1 = imagem1;
-    const imagemSTR2 = imagem2;
-    const imagemSTR3 = imagem3;
-    console.log(imagemSTR1);
-    let linkImagem1 = uploadFileToFireBaseRepublica(imagemSTR1);
-    let linkImagem2 = null;
-    let linkImagem3 = null;
-    if (imagemSTR2) {
-      linkImagem2 = uploadFileToFireBaseRepublica(imagemSTR2);
-    };
-    if (imagemSTR3) {
-      linkImagem3 = uploadFileToFireBaseRepublica(imagemSTR3);
-    };
+
     const data = {
-      imagem1: linkImagem1,
-      imagem2: linkImagem2,
-      imagem3: linkImagem3,
+      imagem1: linkimagem1,
+      imagem2: linkimagem2,
+      imagem3: linkimagem3,
       nomeRepublica: values.nome,
       valorAluguel: values.aluguel,
       bairro: values.bairro,
@@ -128,7 +146,6 @@ export default function Cadastro({ navigation }) {
       descricao: values.descricao,
       userEmail: email,
     };
-    console.log("Ponto de control 2")
     if (!atualizarCadastro) {
       postaNovaRepublica(data);
     } else {
