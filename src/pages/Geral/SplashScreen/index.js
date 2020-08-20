@@ -24,7 +24,7 @@ function SplashScreen({ navigation }) {
   function resetNavigation(Rota) {
     const resetAction = StackActions.reset({
       index: 0,
-      actions: [NavigationActions.navigate({ routeName: Rota, params: { token: navigation.state.parms.token } })],
+      actions: [NavigationActions.navigate({ routeName: Rota })],
     });
 
     navigation.dispatch(resetAction);

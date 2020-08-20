@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { View, ScrollView, Image, Text, Linking } from 'react-native';
 import { Button } from 'native-base';
 import { withNavigation } from 'react-navigation';
@@ -26,16 +26,19 @@ export default function DetalhesAnuncio({ navigation }) {
     });
   }
 
-  function renderDotIndicator() {
+  useEffect(() => {
     if (republica.imagem1 != '' && republica.imagem1 != null) {
-      setContadorImagem(contadorImagem + 1);
+      setContadorImagem(contadorImagem => contadorImagem +1);
     }
     if (republica.imagem2 != '' && republica.imagem2 != null) {
-      setContadorImagem(contadorImagem + 1);
+      setContadorImagem(contadorImagem => contadorImagem +1);
     }
     if (republica.imagem3 != '' && republica.imagem3 != null) {
-      setContadorImagem(contadorImagem + 1);
+      setContadorImagem(contadorImagem => contadorImagem +1);
     }
+  },[]);
+  
+  function renderDotIndicator() {
     return (
       <PagerDotIndicator
         dotStyle={{ width: 10, height: 10, borderRadius: 10 }}
@@ -48,7 +51,7 @@ export default function DetalhesAnuncio({ navigation }) {
   return (
     <ScrollView>
       <HeaderBack ajuda title={republica.nomeRepublica} onNavigation={() => navigation.goBack(null)} />
-      <IndicatorViewPager style={{ height: 300 }} indicator={renderDotIndicator()}>
+      <IndicatorViewPager style={{ height: 300 }} indicator={renderDotIndicator()} >
         {republica.imagem1 != '' && (
           <View key="1">
             <Image source={{ uri: republica.imagem1 }} style={estilo.image} />

@@ -15,11 +15,12 @@ import ViewPager from '@react-native-community/viewpager';
 import api from '../../../service/api';
 import estilo from './style';
 import { NavigationActions, StackActions } from 'react-navigation';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default function Cadastro({ navigation }) {
   const email = useSelector(state => state.user.email);
   const telefone = useSelector(state => state.user.telefone);
-
+  const [nome, setNome] = useState();
   const [atualizarCadastro, setAtualizarCadastro] = useState(navigation.state.params.update);
   const [dadosRepublica, setDadosRepublica] = useState(navigation.state.params.dadosRepublica);
   const [contadorImagem, setContadorImagem] = useState(0);
@@ -30,7 +31,8 @@ export default function Cadastro({ navigation }) {
   const [erroSemFoto, setErroSemFoto] = useState(false);
   const [imagem1, setImagem1] = useState(null);
   const [imagem2, setImagem2] = useState(null);
-  const [imagem3, setImagem3] = useState(null);
+  const [imagem3, setImagem3] = useState(null);  
+  const [usuarioLogado, setUsuarioLogado] = useState();
 
   useEffect(() => {
     verificarParametro();
@@ -45,6 +47,7 @@ export default function Cadastro({ navigation }) {
   }
 
   function preencherFoto(linkImagem) {
+    console.log(linkImagem)
     if (contadorImagem == 0) {
       setImagem1(linkImagem);
     } else if (contadorImagem == 1) {
@@ -54,6 +57,7 @@ export default function Cadastro({ navigation }) {
     } else {
       setOcutarBotaoEnvioFoto();
     }
+    setContadorImagem(contadorImagem + 1)
   }
 
   function carregarImagemGaleria() {
@@ -64,7 +68,7 @@ export default function Cadastro({ navigation }) {
       } else if (error) {
         alert('Ocorreu algum erro: ', error);
       } else {
-        preencherFoto(imagePickerResponse.uri);
+        preencherFoto(imagePickerResponse);
       }
     });
   }
@@ -88,9 +92,19 @@ export default function Cadastro({ navigation }) {
       setLoading(false);
       return;
     }
-    const linkImagem1 = uploadFileToFireBaseRepublica(imagem1);
-    const linkImagem2 = uploadFileToFireBaseRepublica(imagem2);
-    const linkImagem3 = uploadFileToFireBaseRepublica(imagem3);
+    const imagemSTR1 = imagem1;
+    const imagemSTR2 = imagem2;
+    const imagemSTR3 = imagem3;
+    console.log(imagemSTR1);
+    let linkImagem1 = uploadFileToFireBaseRepublica(imagemSTR1);
+    let linkImagem2 = null;
+    let linkImagem3 = null;
+    if (imagemSTR2) {
+      linkImagem2 = uploadFileToFireBaseRepublica(imagemSTR2);
+    };
+    if (imagemSTR3) {
+      linkImagem3 = uploadFileToFireBaseRepublica(imagemSTR3);
+    };
     const data = {
       imagem1: linkImagem1,
       imagem2: linkImagem2,
@@ -109,45 +123,48 @@ export default function Cadastro({ navigation }) {
       genero: values.genero,
       numVagas: values.numeroVagas,
       telefone: telefone,
-      representante: dadosRepublica.representante,
+      representante: nome,
       imovel: values.tipoImovel,
       descricao: values.descricao,
       userEmail: email,
     };
-    if (atualizarCadastro == true) {
+    console.log("Ponto de control 2")
+    if (!atualizarCadastro) {
       postaNovaRepublica(data);
-    } else if (atualizarCadastro == false) {
+    } else {
       atualizarRepublica(data);
     }
   }
 
   function postaNovaRepublica(dados) {
-    api
-      .post('/main', dados)
+    console.log(dados);
+     api
+     .post('/republica', dados)
       .then(response => {
         setLoading(false);
         setSucesso(true);
       })
       .catch(error => {
         if (error.response.status == 401 || error.response.status == 404) {
-          setErroExisteRepublica(true);
+          setErroExisteRepublica(true)
         } else {
-          setErro(true);
-          setLoading(false);
+          setErro(true)
+          setLoading(false)
         }
+        console.log(error)
       });
   }
 
-  function atualizarRepublica(dados) {
-    api
-      .put(`/main/${email}`, dados)
+  async function atualizarRepublica(dados) {
+    await api
+      .put(`/republica/${email}`, dados)
       .then(Response => {
         setLoading(false);
         setSucesso(true);
       })
       .catch(e => {
-        setErro(true);
-        setLoading(false);
+        setErro(true)
+        setLoading(false)
       });
   }
 
@@ -301,10 +318,10 @@ export default function Cadastro({ navigation }) {
                           />
                         </View>
                       ) : (
-                        <View style={estilo.V_ImageFull}>
-                          <Image source={{ uri: imagem1 }} style={estilo.ImageFull} />
-                        </View>
-                      )}
+                          <View style={estilo.V_ImageFull}>
+                            <Image source={{ uri: imagem1.uri }} style={estilo.ImageFull} />
+                          </View>
+                        )}
                       {imagem2 == null ? (
                         <View style={estilo.V_ImageFullEmpty}>
                           <Image
@@ -313,10 +330,10 @@ export default function Cadastro({ navigation }) {
                           />
                         </View>
                       ) : (
-                        <View style={estilo.V_ImageFull}>
-                          <Image source={{ uri: imagem2 }} style={estilo.ImageFull} />
-                        </View>
-                      )}
+                          <View style={estilo.V_ImageFull}>
+                            <Image source={{ uri: imagem2.uri }} style={estilo.ImageFull} />
+                          </View>
+                        )}
                       {imagem3 == null ? (
                         <View style={estilo.V_ImageFullEmpty}>
                           <Image
@@ -325,10 +342,10 @@ export default function Cadastro({ navigation }) {
                           />
                         </View>
                       ) : (
-                        <View style={estilo.V_ImageFull}>
-                          <Image source={{ uri: imagem3 }} style={estilo.ImageFull} />
-                        </View>
-                      )}
+                          <View style={estilo.V_ImageFull}>
+                            <Image source={{ uri: imagem3.uri }} style={estilo.ImageFull} />
+                          </View>
+                        )}
                     </ScrollView>
                   </View>
                   <View style={estilo.V_BotaoImg}>
