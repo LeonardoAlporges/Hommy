@@ -15,7 +15,8 @@ export function DetalhesCarona({ navigation }) {
     weekdays: 'Domingo_Segunda_Terça_Quarta_Quinta_Sexta_Sabado'.split('_'),
   });
   const [botaoInteresse, setBotaoInteresse] = useState(navigation.state.params.desativarBotaoInteresse);
-  const [dados, setDados] = useState(navigation.state.params.dados);
+  const [dados, setDados] = useState(navigation.state.params.dados);  
+  console.log(dados);
   const [sucesso, setSucesso] = useState(false);
   const [erro, setErro] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -35,6 +36,7 @@ export function DetalhesCarona({ navigation }) {
       .catch(e => {
         setErro(true);
         setLoading(false);
+        
       });
     setLoading(false);
   }

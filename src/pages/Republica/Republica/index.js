@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { FlatList, View, Modal, Text, TouchableOpacity, Image } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -91,6 +91,7 @@ class Republica extends Component {
     this.props.editTipoImovel('');
 
     this.props.navigation.navigate('Cadastro', {
+      dadosRepublica: null,
       update: false,
     });
   }
@@ -98,7 +99,7 @@ class Republica extends Component {
   getListRepublica = () => {
     this.setState({ refreshing: true });
     return api
-      .get('/main')
+      .get('/republica')
       .then(responseJson => {
         console.log(responseJson);
         this.setState({
@@ -115,7 +116,7 @@ class Republica extends Component {
       });
   };
 
-  componentDidMount() {
+  useEffect() {
     this.getListRepublica();
   }
 
@@ -365,7 +366,7 @@ class Republica extends Component {
                 }}
               />
             </View>
-          ) : this.state.listaRepublicas.length != 0 ? (
+          ) : this.state.listaRepublicas.length !== 0 ? (
             <FlatList
               style={Estilos.flatList}
               data={this.state.listaRepublicas}
