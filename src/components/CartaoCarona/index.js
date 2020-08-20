@@ -11,14 +11,11 @@ import { Button } from 'native-base';
 import AsyncStorage from '@react-native-community/async-storage';
 
 export function CartaoCarona({ navigation, dados }) {
-  useEffect(() => {
-    preencherUserLogado();
-  }, [usuarioLogado]);
-
   const [usuarioLogado, setUsuarioLogado] = useState();
   const [dataViagem, setDataViagem] = useState(moment(dados.data).format('DD/MM'));
   const [horaSaida, sethoraSaida] = useState(moment(new Date(dados.horaSaida)).format('HH:mm'));
   const [horaChegada, sethoraChegada] = useState(moment(new Date(dados.horaChegada)).format('HH:mm'));
+
 
   async function preencherUserLogado() {
     await AsyncStorage.getItem('user').then(value => {
@@ -26,14 +23,18 @@ export function CartaoCarona({ navigation, dados }) {
     });
   }
 
-  function navegarParaDetalhes() {
+  async function navegarParaDetalhes() {
+    try{
+    await preencherUserLogado();
     var desativarBotaoInteresse = false;
-    console.log(dados);
-    console.log(usuarioLogado);
+    console.log(usuarioLogado)
     if (dados.userEmail == usuarioLogado.email) {
       desativarBotaoInteresse = true;
     }
-    navigation.navigate('DetalhesCarona', { carona: dados, desativarBotaoInteresse });
+    navigation.navigate('DetalhesCarona', {dados, desativarBotaoInteresse });
+    }catch( e ){
+      console.log(e)
+    }
   }
 
   return (

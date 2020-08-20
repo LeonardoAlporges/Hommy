@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Image, Text, TouchableHighlight, View } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
@@ -25,66 +25,60 @@ import {
   edituserEmail,
   editIdRepublica,
 } from '../../actions/AuthActions';
-
+import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import Icon2 from 'react-native-vector-icons/Feather';
 import styles from './styles';
 
-class Cartao extends Component {
-  constructor(props) {
-    super(props);
-    this.onClickCard = this.onClickCard.bind(this);
-    this.state = {
-      interessado: this.props.interessado,
-    };
+export function Cartao({navigation, data}){
+  const [usuarioLogado, setUsuarioLogado] = useState();
+
+  async function preencherUserLogado() {
+    await AsyncStorage.getItem('user').then(value => {
+      setUsuarioLogado(JSON.parse(value));
+    });
   }
 
-  onClickCard = () => {
-    if (this.props.mostraBotao) {
-      return;
-    }
-    const dados = this.props.data;
-
+  async function onClickCard(){
+    await preencherUserLogado();
+    const dados = data;
     var desativarBotaoAgenda = false;
-    if (dados.userEmail == this.props.email) {
+    if (dados.userEmail == usuarioLogado.email) {
       desativarBotaoAgenda = true;
     }
-    this.props.navigation.navigate('Detalhes', {
+    navigation.navigate('Detalhes', {
       dadosRepublica: dados,
-      interessado: this.state.interessado,
       desativarBotaoAgenda,
     });
   };
 
-  render() {
     return (
       <TouchableHighlight
         underlayColor="#fff"
-        disabled={this.props.mostraBotao}
-        onPress={this.onClickCard}
+        onPress={() => onClickCard()}
         style={styles.touch_card}
       >
         <View style={styles.V_cartao}>
           <View style={styles.V_imagem}>
-            <Image source={{ uri: this.props.data.imagem1 }} style={styles.V_imagem} />
+            <Image source={{ uri: data.imagem1 }} style={styles.V_imagem} />
           </View>
           <View style={styles.V_TituloDesc}>
             <View style={styles.V_titulo}>
               <Text numberOfLines={1} style={styles.txtTitulo}>
-                {this.props.data.nomeRepublica}
+                {data.nomeRepublica}
               </Text>
             </View>
             <View style={styles.V_obs}>
-              <Text numberOfLines={2}>{this.props.data.descricao}</Text>
+              <Text numberOfLines={2}>{data.descricao}</Text>
             </View>
             <View style={styles.V_desc}>
               <View style={styles.V_valor}>
                 <Icon2 style={styles.txtIcon} name="dollar-sign" />
-                <Text style={styles.txtDesc}>R$ {this.props.data.valorAluguel}</Text>
+                <Text style={styles.txtDesc}>R$ {data.valorAluguel}</Text>
               </View>
               <View style={styles.V_vagas}>
                 <Icon style={styles.txtIcon} name="people" />
-                <Text style={styles.txtDesc}>{this.props.data.numVagas} Vaga(s)</Text>
+                <Text style={styles.txtDesc}>{data.numVagas} Vaga(s)</Text>
               </View>
             </View>
           </View>
@@ -92,55 +86,4 @@ class Cartao extends Component {
       </TouchableHighlight>
     );
   }
-}
-
-const mapStateToProps = state => {
-  return {
-    email: state.user.email,
-    nomeRepublica: state.auth.nomeRepublica,
-    valorAluguel: state.auth.valorAluguel,
-    bairro: state.auth.bairro,
-    pessoas: state.auth.pessoas1,
-    descricao: state.auth.descricao,
-    animal: state.auth.animal,
-    acomodacaoQuarto: state.auth.acomodacaoQuarto,
-    acomodacaoRepublica: state.auth.acomodacaoRepublica,
-    valorContas: state.auth.valorContas,
-    observacao: state.auth.observacao,
-    imagem1: state.auth.imagem1,
-    imagem2: state.auth.imagem2,
-    imagem3: state.auth.imagem3,
-    numVagas: state.auth.numVagas,
-    numeroCasa: state.auth.numeroCasa,
-    idRepublica: state.auth.idRepublica,
-  };
-};
-
-const cardConnect = connect(
-  mapStateToProps,
-  {
-    editIdRepublica,
-    editTipoImovel,
-    editNomeRepublica,
-    editValorAluguel,
-    editBairro,
-    editPessoas,
-    editDescricao,
-    editAnimal,
-    editAcomodacaoQuarto,
-    editAcomodacaoRepublica,
-    editValorConta,
-    editObservacao,
-    editImg1,
-    editImg2,
-    editImg3,
-    editGenero,
-    editNumVagas,
-    editRepresentante,
-    editRua,
-    editNumeroCasa,
-    edituserEmail,
-  }
-)(Cartao);
-
-export default withNavigation(cardConnect);
+export default withNavigation(Cartao);

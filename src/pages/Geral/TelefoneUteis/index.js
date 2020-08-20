@@ -30,28 +30,29 @@ export default function TelefoneUteis ({ navigation }) {
       .then(responseJson => {
         console.log(responseJson);
         setTelefones(responseJson.data);
-        setLoading(false);
-        setReloading(false);
+        console.log(telefones);        
         setTitulo0(responseJson.data[0].categoria);
         setTitulo1(responseJson.data[1].categoria);
         setTitulo2(responseJson.data[2].categoria);
         setTitulo3(responseJson.data[3].categoria);
-        setnumeros0(responseJson.data[0].numeros);
-        setnumeros1(responseJson.data[1].numeros);
-        setnumeros2(responseJson.data[2].numeros);
-        setnumeros3(responseJson.data[3].numeros);
-        console.log(telefones);
+        setNumeros0(responseJson.data[0].numeros);
+        setNumeros1(responseJson.data[1].numeros);
+        setNumeros2(responseJson.data[2].numeros);
+        setNumeros3(responseJson.data[3].numeros);
+        setLoading(false);
+        setReloading(false);        
       })
       .catch(error => {
         setLoading(false);
         setErro(true);
         setReloading(false);
+        console.log(error);
       });
   };
 
   useEffect(() => {
-    await getListTelefone();
-    await console.log(telefones[0]);
+    getListTelefone();
+    console.log(telefones[0]);
   }, []);
 
   AbrirUrl = tel => {
@@ -125,7 +126,7 @@ export default function TelefoneUteis ({ navigation }) {
                 </View>
               )}
               keyExtractor={item => item._id}
-              refreshing={refreshing}
+              refreshing={reloading}
               onRefresh={getListTelefone}
             />
             <View style={style.Divisao}>
@@ -151,7 +152,7 @@ export default function TelefoneUteis ({ navigation }) {
                 </View>
               )}
               keyExtractor={item => item._id}
-              refreshing={refreshing}
+              refreshing={reloading}
               onRefresh={getListTelefone}
             />
             <View style={style.Divisao}>
@@ -177,7 +178,7 @@ export default function TelefoneUteis ({ navigation }) {
                 </View>
               )}
               keyExtractor={item => item._id}
-              refreshing={refreshing}
+              refreshing={reloading}
               onRefresh={getListTelefone}
             />
           </ScrollView>

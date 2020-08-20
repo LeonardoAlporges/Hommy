@@ -26,7 +26,7 @@ export default function DetalhesAnuncio({ navigation }) {
     });
   }
 
-  function renderDotIndicator() {
+  function renderDotIndicator () {
     if (republica.imagem1 != '' && republica.imagem1 != null) {
       setContadorImagem(contadorImagem + 1);
     }

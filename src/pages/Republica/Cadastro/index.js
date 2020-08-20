@@ -45,6 +45,7 @@ export default function Cadastro({ navigation }) {
   }
 
   function preencherFoto(linkImagem) {
+    console.log(linkImagem)
     if (contadorImagem == 0) {
       setImagem1(linkImagem);
     } else if (contadorImagem == 1) {
@@ -54,6 +55,7 @@ export default function Cadastro({ navigation }) {
     } else {
       setOcutarBotaoEnvioFoto();
     }
+    setContadorImagem(contadorImagem+1)
   }
 
   function carregarImagemGaleria() {
@@ -88,9 +90,13 @@ export default function Cadastro({ navigation }) {
       setLoading(false);
       return;
     }
-    const linkImagem1 = uploadFileToFireBaseRepublica(imagem1);
-    const linkImagem2 = uploadFileToFireBaseRepublica(imagem2);
-    const linkImagem3 = uploadFileToFireBaseRepublica(imagem3);
+    const imagemSTR1 = imagem1.toString();
+    const imagemSTR2 = imagem1.toString();
+    const imagemSTR3 = imagem1.toString();    
+    console.log(imagemSTR1);
+    const linkImagem1 = uploadFileToFireBaseRepublica(imagemSTR1);
+    const linkImagem2 = uploadFileToFireBaseRepublica(imagemSTR2);
+    const linkImagem3 = uploadFileToFireBaseRepublica(imagemSTR3);
     const data = {
       imagem1: linkImagem1,
       imagem2: linkImagem2,
@@ -114,41 +120,41 @@ export default function Cadastro({ navigation }) {
       descricao: values.descricao,
       userEmail: email,
     };
-    if (atualizarCadastro == true) {
+    console.log("Ponto de control 2")
+    if (!atualizarCadastro) {
       postaNovaRepublica(data);
-    } else if (atualizarCadastro == false) {
+    } else{
       atualizarRepublica(data);
     }
   }
 
-  function postaNovaRepublica(dados) {
-    api
-      .post('/main', dados)
-      .then(response => {
-        setLoading(false);
-        setSucesso(true);
-      })
-      .catch(error => {
-        if (error.response.status == 401 || error.response.status == 404) {
-          setErroExisteRepublica(true);
-        } else {
-          setErro(true);
-          setLoading(false);
-        }
-      });
+  async function postaNovaRepublica(dados){
+    await api.post('/republica', dados)
+    .then(response => {
+      setLoading(false);
+      setSucesso(true);
+    })
+    .catch(error => {
+      if (error.response.status == 401 || error.response.status == 404) {
+        setErroExisteRepublica(true)
+      } else {
+        setErro(true)
+        setLoading(false)
+      }
+    });
   }
 
-  function atualizarRepublica(dados) {
-    api
-      .put(`/main/${email}`, dados)
-      .then(Response => {
-        setLoading(false);
-        setSucesso(true);
-      })
-      .catch(e => {
-        setErro(true);
-        setLoading(false);
-      });
+  async function atualizarRepublica(dados){
+    await api
+    .put(`/republica/${email}`, dados)
+    .then(Response => {
+      setLoading(false);
+      setSucesso(true);
+    })
+    .catch(e => {
+      setErro(true)
+      setLoading(false)
+    });
   }
 
   return (
