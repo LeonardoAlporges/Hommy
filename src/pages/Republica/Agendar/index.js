@@ -45,6 +45,7 @@ export default function Agendar({ navigation }) {
       .catch(error => {
         setErro(true);
         setLoading(false);
+        console.log(error);
       });
   }
 
