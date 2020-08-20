@@ -16,7 +16,7 @@ import moment from 'moment';
 import EmptyState from '../../../components/EmptyState';
 import Loading from '../../../components/Loading';
 
-export default function AgendamentoUser() {
+export default function AgendamentoUser({navigation}) {
   const email = useSelector(state => state.user.email);
   const [listaAgendamento, setListaAgendamendo] = useState([]);
   const [loading, setLoading] = useState(false);
