@@ -12,10 +12,10 @@ import HeaderBack from '../../../components/CustomHeader';
 import CustomModal from '../../../components/Alert';
 import Loading from '../../../components/Loading';
 import ModalConfirmacao from '../../../components/ModalConfirmacao';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import CartaoCarona from '../../../components/CartaoCarona';
 
-function Anuncios({ navigation }, email) {
+function Anuncios({ navigation }) {
   const [listaRepublicas, setListaRepublicas] = useState([]);
   const [listaCaronas, setListaCaronas] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -24,7 +24,7 @@ function Anuncios({ navigation }, email) {
   const [modalConfirmacao, setModalConfirmacao] = useState(false);
   const [item, setItem] = useState('');
   const [tipo, setTipo] = useState('');
-  const [emailUser, setEmail] = useState(navigation.state.params.email);
+  const email = useSelector(state => state.user.email);
 
   function DeleteAnuncio(valor, item, tipo) {
     console.log(item._id);
@@ -64,7 +64,7 @@ function Anuncios({ navigation }, email) {
   function getlist() {
     setReloading(true);
     api
-      .get(`/userCarona/${emailUser}`)
+      .get(`/userCarona/${email}`)
       .then(responseJson => {
         console.log(responseJson);
         setListaCaronas(responseJson.data);
@@ -74,7 +74,7 @@ function Anuncios({ navigation }, email) {
         setLoading(false);
       });
     api
-      .get(`/userRepublica/${emailUser}`)
+      .get(`/userRepublica/${email}`)
       .then(responseJson => {
         console.log(responseJson);
         setListaRepublicas(responseJson.data);
