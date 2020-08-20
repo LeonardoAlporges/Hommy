@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Image, Text, TouchableHighlight, View } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
@@ -31,6 +31,10 @@ import Icon2 from 'react-native-vector-icons/Feather';
 import styles from './styles';
 
 export function Cartao({navigation, data}){
+  
+  useEffect(() => {
+    preencherUserLogado()
+  },[]);
   const [usuarioLogado, setUsuarioLogado] = useState();
 
   async function preencherUserLogado() {
@@ -43,6 +47,7 @@ export function Cartao({navigation, data}){
     await preencherUserLogado();
     const dados = data;
     var desativarBotaoAgenda = false;
+
     if (dados.userEmail == usuarioLogado.email) {
       desativarBotaoAgenda = true;
     }
