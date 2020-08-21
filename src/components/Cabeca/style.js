@@ -7,40 +7,39 @@ const Estilos = StyleSheet.create({
     width: '100%',
     height: 50,
     justifyContent: 'space-around',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#ffffff'
   },
   touch_Icon: {
     position: 'absolute',
-    left: 10,
+    left: 15
   },
   touch_Fake: {
     position: 'absolute',
-    right: 10,
+    right: 10
   },
   Titulo: {
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   txt: {
-    fontFamily: 'WorkSans-Thin',
-    fontSize: 23,
-    fontWeight: '600',
-    color: '#142850',
+    fontFamily: 'WorkSans-Bold',
+    fontSize: 26,
+    color: '#142850'
   },
   icon2: {
     color: '#142850',
-    fontSize: 22,
+    fontSize: 30
   },
   bgModal: {
     backgroundColor: '#f8f8f8',
-    flex: 1,
+    flex: 1
   },
   modal: {
     backgroundColor: '#f8f8f8',
     alignItems: 'center',
     borderRadius: 5,
     height: 100,
-    flex: 1,
+    flex: 1
   },
   voltar: {
     height: 30,
@@ -48,22 +47,22 @@ const Estilos = StyleSheet.create({
     marginTop: '3%',
     paddingHorizontal: '3%',
     justifyContent: 'space-between',
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   iconModal: {
     marginTop: 8,
     fontSize: 20,
-    color: '#142850',
+    color: '#142850'
   },
   fotodeperfil: {
     width: 120,
-    height: 130,
+    height: 130
   },
   fotoPerfil: {
     width: 120,
     height: 120,
     borderRadius: 100,
-    marginBottom: '2%',
+    marginBottom: '2%'
   },
   editFoto: {
     position: 'absolute',
@@ -79,28 +78,28 @@ const Estilos = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 12,
+      height: 12
     },
     shadowOpacity: 0.58,
     shadowRadius: 16.0,
 
-    elevation: 24,
+    elevation: 24
   },
   viewNome: {
     width: 300,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   textNome: {
     fontSize: 18,
     fontWeight: 'bold',
     fontFamily: 'Roboto',
-    color: '#142850',
+    color: '#142850'
   },
   textCPF: {
     fontSize: 14,
     fontFamily: 'Roboto',
-    color: '#00909e',
+    color: '#00909e'
   },
   viewDivisor: {
     marginTop: '2%',
@@ -108,7 +107,7 @@ const Estilos = StyleSheet.create({
     marginLeft: '6%',
     marginRight: '6%',
     borderBottomWidth: 1,
-    borderBottomColor: '#142850',
+    borderBottomColor: '#142850'
   },
   viewBotoes: {
     color: '#142850',
@@ -117,7 +116,7 @@ const Estilos = StyleSheet.create({
     justifyContent: 'space-between',
     height: 350,
     marginTop: '10%',
-    paddingBottom: '10%',
+    paddingBottom: '10%'
   },
   botoes: {
     width: '100%',
@@ -130,21 +129,21 @@ const Estilos = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 10,
+      height: 10
     },
     shadowOpacity: 0.51,
     shadowRadius: 13.16,
 
-    elevation: 20,
+    elevation: 20
   },
   iconBotoes: {
     fontSize: 18,
-    color: '#dae1e7',
+    color: '#dae1e7'
   },
   iconBotoesArrow: {
     paddingLeft: '2%',
     fontSize: 18,
-    color: '#dae1e7',
+    color: '#dae1e7'
   },
   textBotoes: {
     width: '75%',
@@ -152,7 +151,7 @@ const Estilos = StyleSheet.create({
     fontFamily: 'Roboto',
     fontWeight: '600',
     marginLeft: '6%',
-    color: '#ffff',
+    color: '#ffff'
   },
   viewFooter: {
     alignItems: 'center',
@@ -160,8 +159,8 @@ const Estilos = StyleSheet.create({
     position: 'absolute',
     bottom: 15,
     width: '70%',
-    color: '#fff',
-  },
+    color: '#fff'
+  }
 });
 
 export default Estilos;

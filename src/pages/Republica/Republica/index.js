@@ -33,8 +33,10 @@ import {
   editRua,
   editNumeroCasa,
   editTipoImovel,
-  editIdRepublica,
+  editIdRepublica
 } from '../../../actions/AuthActions';
+
+import { Container, Listagem } from './style';
 
 class Republica extends Component {
   static navigationOptions = { header: null, headerLeft: null };
@@ -65,10 +67,9 @@ class Republica extends Component {
       filtroValorMaior: false,
       aluguelMin: '',
       aluguelMax: '',
-      refreshing: false,
+      refreshing: false
     };
   }
-
   limparPropsRepublicaRedux() {
     this.props.editValorConta('');
     this.props.editNomeRepublica('');
@@ -92,10 +93,9 @@ class Republica extends Component {
 
     this.props.navigation.navigate('Cadastro', {
       dadosRepublica: null,
-      update: false,
+      update: false
     });
   }
-
   getListRepublica = () => {
     this.setState({ refreshing: true });
     return api
@@ -106,7 +106,7 @@ class Republica extends Component {
           listaRepublicas: responseJson.data,
           fullData: responseJson.data,
           loading: false,
-          refreshing: false,
+          refreshing: false
         });
       })
       .catch(error => {
@@ -115,11 +115,9 @@ class Republica extends Component {
         this.setState({ refreshing: false });
       });
   };
-
   useEffect() {
     this.getListRepublica();
   }
-
   fAnimalSim = async checked => {
     if (this.state.filtroAnimalSim) await this.setState({ filtroAnimalSim: false });
     else await this.setState({ filtroAnimalSim: true, filtroAnimalNao: false });
@@ -128,37 +126,33 @@ class Republica extends Component {
     if (this.state.filtroAnimalNao) await this.setState({ filtroAnimalNao: false });
     else await this.setState({ filtroAnimalNao: true, filtroAnimalSim: false });
   };
-
   fMasc = async checked => {
     if (this.state.filtroMasc) await this.setState({ filtroMasc: false });
     else
       await this.setState({
         filtroMasc: true,
         filtroFem: false,
-        filtroMista: false,
+        filtroMista: false
       });
   };
-
   fFem = async checked => {
     if (this.state.filtroFem) await this.setState({ filtroFem: false });
     else
       await this.setState({
         filtroFem: true,
         filtroMasc: false,
-        filtroMista: false,
+        filtroMista: false
       });
   };
-
   fMista = async checked => {
     if (this.state.filtroMista) await this.setState({ filtroMista: false });
     else
       await this.setState({
         filtroMista: true,
         filtroMasc: false,
-        filtroFem: false,
+        filtroFem: false
       });
   };
-
   fMoradores2 = async checked => {
     if (this.state.filtroMoradores2) await this.setState({ filtroMoradores2: false });
     else
@@ -167,10 +161,9 @@ class Republica extends Component {
         filtroMoradores3: false,
         filtroMoradores4: false,
         filtroMoradores5: false,
-        filtroMoradores6: false,
+        filtroMoradores6: false
       });
   };
-
   fMoradores3 = async checked => {
     if (this.state.filtroMoradores3) await this.setState({ filtroMoradores3: false });
     else
@@ -179,10 +172,9 @@ class Republica extends Component {
         filtroMoradores2: false,
         filtroMoradores4: false,
         filtroMoradores5: false,
-        filtroMoradores6: false,
+        filtroMoradores6: false
       });
   };
-
   fMoradores4 = async checked => {
     if (this.state.filtroMoradores4) await this.setState({ filtroMoradores4: false });
     else
@@ -191,10 +183,9 @@ class Republica extends Component {
         filtroMoradores3: false,
         filtroMoradores2: false,
         filtroMoradores5: false,
-        filtroMoradores6: false,
+        filtroMoradores6: false
       });
   };
-
   fMoradores5 = async checked => {
     if (this.state.filtroMoradores5) await this.setState({ filtroMoradores5: false });
     else
@@ -203,10 +194,9 @@ class Republica extends Component {
         filtroMoradores3: false,
         filtroMoradores4: false,
         filtroMoradores2: false,
-        filtroMoradores6: false,
+        filtroMoradores6: false
       });
   };
-
   fMoradores6 = async checked => {
     if (this.state.filtroMoradores6) await this.setState({ filtroMoradores6: false });
     else
@@ -215,40 +205,36 @@ class Republica extends Component {
         filtroMoradores3: false,
         filtroMoradores4: false,
         filtroMoradores5: false,
-        filtroMoradores2: false,
+        filtroMoradores2: false
       });
   };
-
   fVagas1 = async checked => {
     if (this.state.filtroVagas1) await this.setState({ filtroVagas1: false });
     else
       await this.setState({
         filtroVagas1: true,
         filtroVagas2: false,
-        filtroVagas3: false,
+        filtroVagas3: false
       });
   };
-
   fVagas2 = async checked => {
     if (this.state.filtroVagas2) await this.setState({ filtroVagas2: false });
     else
       await this.setState({
         filtroVagas2: true,
         filtroVagas1: false,
-        filtroVagas3: false,
+        filtroVagas3: false
       });
   };
-
   fVagas3 = async checked => {
     if (this.state.filtroVagas3) await this.setState({ filtroVagas3: false });
     else
       await this.setState({
         filtroVagas3: true,
         filtroVagas2: false,
-        filtroVagas1: false,
+        filtroVagas1: false
       });
   };
-
   valMenor = async text => {
     if (text) {
       await this.setState({ filtroValorMenor: true, aluguelMin: text });
@@ -256,7 +242,6 @@ class Republica extends Component {
       await this.setState({ filtroValorMenor: false, aluguelMin: text });
     }
   };
-
   valMaior = async text => {
     if (text) {
       await this.setState({ filtroValorMaior: true, aluguelMax: text });
@@ -264,7 +249,6 @@ class Republica extends Component {
       await this.setState({ filtroValorMaior: false, aluguelMax: text });
     }
   };
-
   padrao = async () => {
     await this.setState({
       filtroVagas1: false,
@@ -285,11 +269,10 @@ class Republica extends Component {
       filtroValorMenor: false,
       filtroValorMaior: false,
       aluguelMin: '',
-      aluguelMax: '',
+      aluguelMax: ''
     });
     this.filtro();
   };
-
   filtro = async () => {
     await this.setState({ listaRepublicas: this.state.fullData });
     let listaRepublicas = this.state.listaRepublicas;
@@ -302,17 +285,17 @@ class Republica extends Component {
     }
     if (this.state.filtroMasc === true) {
       listaRepublicas = _.filter(listaRepublicas, {
-        genero: 'Masculina',
+        genero: 'Masculina'
       });
     }
     if (this.state.filtroFem === true) {
       listaRepublicas = _.filter(listaRepublicas, {
-        genero: 'Feminina',
+        genero: 'Feminina'
       });
     }
     if (this.state.filtroMista === true) {
       listaRepublicas = _.filter(listaRepublicas, {
-        genero: 'Mista',
+        genero: 'Mista'
       });
     }
     if (this.state.filtroMoradores2 === true) {
@@ -341,16 +324,22 @@ class Republica extends Component {
       listaRepublicas = _.filter(listaRepublicas, ({ numVagas }) => numVagas >= 3);
     }
     if (this.state.filtroValorMenor === true) {
-      listaRepublicas = _.filter(listaRepublicas, ({ valorAluguel }) => valorAluguel >= this.state.aluguelMin);
+      listaRepublicas = _.filter(
+        listaRepublicas,
+        ({ valorAluguel }) => valorAluguel >= this.state.aluguelMin
+      );
     }
     if (this.state.filtroValorMaior === true) {
-      listaRepublicas = _.filter(listaRepublicas, ({ valorAluguel }) => valorAluguel <= this.state.aluguelMax);
+      listaRepublicas = _.filter(
+        listaRepublicas,
+        ({ valorAluguel }) => valorAluguel <= this.state.aluguelMax
+      );
     }
     await this.setState({ listaRepublicas });
   };
   render() {
     return (
-      <View style={Estilos.V_completa}>
+      <Container>
         <NavigationEvents onDidFocus={this.getListRepublica} />
         <View>
           {this.state.loading ? (
@@ -367,8 +356,7 @@ class Republica extends Component {
               />
             </View>
           ) : this.state.listaRepublicas.length !== 0 ? (
-            <FlatList
-              style={Estilos.flatList}
+            <Listagem
               data={this.state.listaRepublicas}
               renderItem={({ item }) => <Cartao data={item} />}
               keyExtractor={item => item._id}
@@ -392,7 +380,7 @@ class Republica extends Component {
                   width: '100%',
                   height: 30,
                   justifyContent: 'center',
-                  alignItems: 'flex-end',
+                  alignItems: 'flex-end'
                 }}
               >
                 <TouchableOpacity
@@ -427,7 +415,9 @@ class Republica extends Component {
                   />
                 </Item>
               </ListItem>
-              <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Aceita animais?</Text>
+              <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>
+                Aceita animais?
+              </Text>
               <ListItem style={Estilos.listStyle}>
                 <CheckBox
                   color="#142850"
@@ -444,7 +434,10 @@ class Republica extends Component {
                 />
                 <Text style={Estilos.textFiltro}>Não</Text>
               </ListItem>
-              <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}> Tipo de república</Text>
+              <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>
+                {' '}
+                Tipo de república
+              </Text>
               <ListItem style={Estilos.listStyle}>
                 <CheckBox
                   color="#142850"
@@ -469,7 +462,9 @@ class Republica extends Component {
                 <Text style={Estilos.textFiltro}>Mista</Text>
               </ListItem>
 
-              <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Vagas disponíveis</Text>
+              <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>
+                Vagas disponíveis
+              </Text>
               <ListItem style={Estilos.listStyle}>
                 <CheckBox
                   color="#142850"
@@ -493,7 +488,14 @@ class Republica extends Component {
                 />
                 <Text style={Estilos.textFiltro}>3+</Text>
               </ListItem>
-              <View style={{ width: '100%', flexDirection: 'row', display: 'flex', justifyContent: 'space-evenly' }}>
+              <View
+                style={{
+                  width: '100%',
+                  flexDirection: 'row',
+                  display: 'flex',
+                  justifyContent: 'space-evenly'
+                }}
+              >
                 <TouchableOpacity
                   style={Estilos.botaoReload}
                   onPress={() => {
@@ -545,35 +547,32 @@ class Republica extends Component {
             <Icon name="plus" style={Estilos.corIconFab} />
           </Button>
         </Fab>
-      </View>
+      </Container>
     );
   }
 }
 
-const RepublicaConnect = connect(
-  null,
-  {
-    editValorAluguel,
-    editNomeRepublica,
-    editBairro,
-    editPessoas,
-    editDescricao,
-    editAnimal,
-    editAcomodacaoQuarto,
-    editAcomodacaoRepublica,
-    editValorConta,
-    editObservacao,
-    editImg1,
-    editImg2,
-    editImg3,
-    editGenero,
-    editNumVagas,
-    editRepresentante,
-    editRua,
-    editNumeroCasa,
-    editTipoImovel,
-    editIdRepublica,
-  }
-)(Republica);
+const RepublicaConnect = connect(null, {
+  editValorAluguel,
+  editNomeRepublica,
+  editBairro,
+  editPessoas,
+  editDescricao,
+  editAnimal,
+  editAcomodacaoQuarto,
+  editAcomodacaoRepublica,
+  editValorConta,
+  editObservacao,
+  editImg1,
+  editImg2,
+  editImg3,
+  editGenero,
+  editNumVagas,
+  editRepresentante,
+  editRua,
+  editNumeroCasa,
+  editTipoImovel,
+  editIdRepublica
+})(Republica);
 
 export default withNavigation(RepublicaConnect);
