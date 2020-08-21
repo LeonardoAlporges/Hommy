@@ -26,16 +26,19 @@ export default function Agendar({ navigation }) {
 
   function agendarVisita() {
     setLoading(true);
-    if ((dataAgendamento || horaAgendamento) == null || (dataAgendamento || horaAgendamento) == false) {
+    if (
+      (dataAgendamento || horaAgendamento) == null ||
+      (dataAgendamento || horaAgendamento) == false
+    ) {
       setLoading(false);
       return 0;
     }
     const agendamento = {
       email: email,
       data: dataAgendamento,
-      hora: horaAgendamento,
+      hora: horaAgendamento
     };
-
+    console.log('??:', agendamento, dadosRepublica._id);
     api
       .put(`/agendamento/${dadosRepublica._id}`, agendamento)
       .then(response => {
@@ -43,18 +46,18 @@ export default function Agendar({ navigation }) {
         setLoading(false);
       })
       .catch(error => {
-        console.log(error)
+        console.log(error);
         setErro(true);
         setLoading(false);
       });
   }
 
-  function selecionarHorario (hora) {
+  function selecionarHorario(hora) {
     const horaLabel = moment(new Date(hora)).format('HH:mm');
     setHoraAgendamento(hora);
     setLabelHoraAgendamento(horaLabel);
     setHoraPicker(false);
-  };
+  }
 
   return (
     <View style={style.Container}>
@@ -65,8 +68,9 @@ export default function Agendar({ navigation }) {
       </View>
       <View style={style.V_descr}>
         <Text style={style.textDescrição}>
-          Escolha um dia e hórario para fazer uma visita na república, lembrando que depois de sua visita aprovada o não
-          comparecimento ao local na hora marcada poderá lhe trazer más avaliações.
+          Escolha um dia e hórario para fazer uma visita na república, lembrando que depois de sua
+          visita aprovada o não comparecimento ao local na hora marcada poderá lhe trazer más
+          avaliações.
         </Text>
       </View>
 
@@ -142,7 +146,7 @@ export default function Agendar({ navigation }) {
             botao="Confirmar"
             callback={() => {
               navigation.navigate('AgendamentoUser', {
-                usuario: true,
+                usuario: true
               });
             }}
           />
