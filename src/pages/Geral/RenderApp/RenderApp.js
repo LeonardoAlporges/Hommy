@@ -25,7 +25,7 @@ export default function RenderApp(props) {
       .getToken()
       .then(fmcToken => {
         if (fmcToken) {
-          dispatch(userAction.editTokenNotificacao('00000'))  
+          dispatch(userAction.editTokenNotificacao('00000'));
         } else {
           console.log('[FMCService] Sem token de dispositivo');
         }
@@ -48,7 +48,7 @@ export default function RenderApp(props) {
       console.log('[APP] onNotification:', notify);
       const option = {
         soundName: 'default',
-        playSound: true,
+        playSound: true
       };
       localNotificationService.showNotification(0, notify.title, notify.body, notify, option);
     }
@@ -88,13 +88,13 @@ export default function RenderApp(props) {
       await AsyncStorage.getItem('user').then(value => {
         if (value != null) {
           const dados = JSON.parse(value);
-          dispatch(userAction.editNome(dados.nome))
-          dispatch(userAction.editEmail(dados.email))
-          dispatch(userAction.editIdUser(dados.usuario))
-          dispatch(userAction.editLogado(dados.usuario))
-          dispatch(userAction.editTelefone(dados.celular))
-          dispatch(userAction.editFoto(dados.fotoPerfil))
-          dispatch(userAction.editNota(dados.nota))
+          dispatch(userAction.editNome(dados.nome));
+          dispatch(userAction.editEmail(dados.email));
+          dispatch(userAction.editIdUser(dados.usuario));
+          dispatch(userAction.editLogado(dados.usuario));
+          dispatch(userAction.editTelefone(dados.celular));
+          dispatch(userAction.editFoto(dados.fotoPerfil));
+          dispatch(userAction.editNota(dados.nota));
         }
       });
     } catch (erro) {
@@ -108,7 +108,7 @@ export default function RenderApp(props) {
   function reset(Rota) {
     const resetAction = StackActions.reset({
       index: 0,
-      actions: [NavigationActions.navigate({ routeName: Rota })],
+      actions: [NavigationActions.navigate({ routeName: Rota })]
     });
 
     props.navigation.dispatch(resetAction);
@@ -140,5 +140,3 @@ export default function RenderApp(props) {
     </View>
   );
 }
-
-

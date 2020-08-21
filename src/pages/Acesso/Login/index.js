@@ -26,7 +26,11 @@ import style, {
   BotesPrincipal,
   BotaoCadastro,
   LabelLogin,
-  LabelCadastro
+  LabelCadastro,
+  BackgroundLoad,
+  LabelErro,
+  ModalLoad,
+  Click
 } from './style';
 
 import CustomModal from '../../../components/Alert';
@@ -62,7 +66,6 @@ export function Login({ navigation }) {
       password: value.password,
       tokenD: tokenAparelho
     };
-    console.log('tokenAparelho:', tokenAparelho);
     api
       .post('/session', data)
       .then(response => {
@@ -71,14 +74,18 @@ export function Login({ navigation }) {
         setloading(false);
       })
       .catch(error => {
+        console.log(error.response);
         setloading(false);
+        console.log(error.response.data.code);
         if (error.response.data.code == 206) {
           setmodalErroSenha(true);
         } else if (error.response.data.code == 203) {
           setmodalErroLogin(true);
         }
+        setmodalErroLogin(true);
       });
   }
+
   function changePassword() {
     setPassword(!password);
   }
@@ -87,7 +94,6 @@ export function Login({ navigation }) {
     <View>
       {modalErroLogin && (
         <CustomModal
-          visivel={modalErroLogin}
           parametro="Custom"
           imagem="NaoEncontrado"
           titulo="E-mail não encontrado."
@@ -100,7 +106,6 @@ export function Login({ navigation }) {
       )}
       {modalErroSenha && (
         <CustomModal
-          visivel={modalErroSenha}
           parametro="Custom"
           imagem="NaoEncontrado"
           titulo="Senha invalida."
@@ -177,7 +182,7 @@ export function Login({ navigation }) {
           {({ values, handleChange, errors, setFieldTouched, touched, handleSubmit }) => (
             <>
               <CampoLogin>
-                <Item regular inlineLabel>
+                <Item regular inlineLabel style={{ borderRadius: 5 }}>
                   <Input
                     underline="false"
                     placeholder="Digite seu e-mail"
@@ -187,14 +192,12 @@ export function Login({ navigation }) {
                   />
                 </Item>
                 <Invalido>
-                  {touched.email && errors.email && (
-                    <Text style={style.txtError}>{errors.email}</Text>
-                  )}
+                  {touched.email && errors.email && <LabelErro>{errors.email}</LabelErro>}
                 </Invalido>
               </CampoLogin>
 
               <CampoLogin>
-                <Item regular inlineLabel>
+                <Item regular inlineLabel style={{ borderRadius: 5 }}>
                   <Input
                     value={values.password}
                     onChangeText={handleChange('password')}
@@ -213,19 +216,17 @@ export function Login({ navigation }) {
                   </TouchableOpacity>
                 </Item>
                 <Invalido>
-                  {touched.password && errors.password && (
-                    <Text style={style.txtError}>{errors.password}</Text>
-                  )}
+                  {touched.password && errors.password && <LabelErro>{errors.password}</LabelErro>}
                 </Invalido>
               </CampoLogin>
               <RecuperaSenha>
-                <TouchableOpacity
+                <Click
                   onPress={() => {
                     navigation.navigate('EsqueciSenha');
                   }}
                 >
                   <LabelEsqueciSenha>Esqueci minha senha!</LabelEsqueciSenha>
-                </TouchableOpacity>
+                </Click>
               </RecuperaSenha>
 
               <BotesPrincipal>
@@ -252,13 +253,15 @@ export function Login({ navigation }) {
           )}
         </Formik>
       </Container>
-      <Modal animationType="slide" transparent visible={loading}>
-        <View style={style.ViewFundo}>
-          <View style={style.ViewModal}>
-            <Spinner color="#142850" />
-          </View>
-        </View>
-      </Modal>
+      {loading && (
+        <Modal animationType="slide" transparent visible={loading}>
+          <BackgroundLoad>
+            <ModalLoad>
+              <Spinner color="#142850" />
+            </ModalLoad>
+          </BackgroundLoad>
+        </Modal>
+      )}
     </View>
   );
 }
