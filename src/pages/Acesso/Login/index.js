@@ -2,24 +2,40 @@ import * as yup from 'yup';
 import { Formik } from 'formik';
 import React, { useState, Fragment, useEffect } from 'react';
 import { View, Image, Text, ScrollView, Modal, TouchableOpacity } from 'react-native';
-import { Icon, Input, Item, Button, Spinner } from 'native-base';
-import CustomModal from '../../../components/Alert';
-import { withNavigation } from 'react-navigation';
+import { Icon, Input, Item, Button, Spinner, Label } from 'native-base';
+import { withNavigation, NavigationActions, StackActions } from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
-import api from '../../../service/api';
-import style from './style';
-import { NavigationActions, StackActions } from 'react-navigation';
 import { useSelector } from 'react-redux';
+import LinearGradient from 'react-native-linear-gradient';
+import api from '../../../service/api';
+import style, {
+  Container,
+  Logo,
+  LabelRedeSocial,
+  Invalido,
+  BotesLogin,
+  Hr,
+  Ou,
+  Divisoria,
+  Botao,
+  LabelBotoes,
+  CampoLogin,
+  RecuperaSenha,
+  LabelEsqueciSenha,
+  BotaoLogin,
+  BotesPrincipal,
+  BotaoCadastro,
+  LabelLogin,
+  LabelCadastro
+} from './style';
+
+import CustomModal from '../../../components/Alert';
 
 export function Login({ navigation }) {
-  useEffect(() => {
-    console.log(navigation);
-  });
-
   const [modalErroLogin, setmodalErroLogin] = useState(false);
   const [modalErroSenha, setmodalErroSenha] = useState(false);
+  const [password, setPassword] = useState(true);
   const tokenAparelho = useSelector(state => state.user.tokenUser);
-  
   const [loading, setloading] = useState(false);
 
   async function salvarDadosStorage(dados) {
@@ -34,7 +50,7 @@ export function Login({ navigation }) {
   function resetarPilhaNavegacao(Rota) {
     const resetAction = StackActions.reset({
       index: 0,
-      actions: [NavigationActions.navigate({ routeName: Rota })],
+      actions: [NavigationActions.navigate({ routeName: Rota })]
     });
     navigation.dispatch(resetAction);
   }
@@ -44,9 +60,9 @@ export function Login({ navigation }) {
     const data = {
       email: value.email,
       password: value.password,
-      tokenD: tokenAparelho,
+      tokenD: tokenAparelho
     };
-    console.log('tokenAparelho:',tokenAparelho)
+    console.log('tokenAparelho:', tokenAparelho);
     api
       .post('/session', data)
       .then(response => {
@@ -63,9 +79,12 @@ export function Login({ navigation }) {
         }
       });
   }
+  function changePassword() {
+    setPassword(!password);
+  }
 
   return (
-    <ScrollView>
+    <View>
       {modalErroLogin && (
         <CustomModal
           visivel={modalErroLogin}
@@ -93,18 +112,52 @@ export function Login({ navigation }) {
         />
       )}
 
-      <View style={style.container}>
-        <TouchableOpacity>
-          <Image
-            source={{
-              uri:
-                'https://firebsestorage.googleapis.com/v0/b/republicas.appspot.com/o/leo.png?alt=media&token=82587fae-0527-42f4-8ba1-4f9d1d8e3395',
-            }}
-            style={style.imgStyle}
+      <Container>
+        <LinearGradient
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          colors={['#021334', '#006c8b', '#0094ac']}
+          style={style.linear}
+        >
+          <Logo
+            resizeMode="contain"
+            style={{ width: 200, height: 100 }}
+            source={require('../../../assets/Img/logo-white.png')}
           />
-        </TouchableOpacity>
-        <Text style={style.txt_Titulo}>Hommy</Text>
-    
+        </LinearGradient>
+        <LabelRedeSocial>FAÇA LOGIN COM SUA REDE SOCIAL</LabelRedeSocial>
+        <BotesLogin>
+          <Botao transparent>
+            <Image
+              resizeMode="contain"
+              style={{ width: 20, height: 20 }}
+              source={require('../../../assets/Img/Login/google.png')}
+            />
+            <LabelBotoes>Google</LabelBotoes>
+          </Botao>
+          <Botao transparent>
+            <Image
+              resizeMode="contain"
+              style={{ width: 20, height: 20 }}
+              source={require('../../../assets/Img/Login/facebook.png')}
+            />
+            <LabelBotoes>Facebook</LabelBotoes>
+          </Botao>
+          <Botao transparent>
+            <Image
+              resizeMode="contain"
+              style={{ width: 20, height: 20 }}
+              source={require('../../../assets/Img/Login/twitter.png')}
+            />
+            <LabelBotoes>Twitter</LabelBotoes>
+          </Botao>
+        </BotesLogin>
+        <Hr>
+          <Divisoria />
+          <Ou>OU</Ou>
+          <Divisoria />
+        </Hr>
+
         <Formik
           initialValues={{ email: '', password: '' }}
           onSubmit={values => {
@@ -118,76 +171,95 @@ export function Login({ navigation }) {
             password: yup
               .string('')
               .min(8, 'Mínimo 8 dígitos necessários')
-              .required('Campo obrigatório'),
+              .required('Campo obrigatório')
           })}
         >
           {({ values, handleChange, errors, setFieldTouched, touched, handleSubmit }) => (
-            <Fragment>
-              <View style={style.view_CamposLogin}>
-                <Item>
-                  <Icon name="md-person" style={style.icons_CamposLogin} />
+            <>
+              <CampoLogin>
+                <Item regular inlineLabel>
                   <Input
+                    underline="false"
+                    placeholder="Digite seu e-mail"
                     value={values.email}
                     onChangeText={handleChange('email')}
-                    placeholder="E-mail"
                     onBlur={() => setFieldTouched('email')}
                   />
                 </Item>
-                {touched.email && errors.email && <Text style={style.txtError}>{errors.email}</Text>}
-              </View>
+                <Invalido>
+                  {touched.email && errors.email && (
+                    <Text style={style.txtError}>{errors.email}</Text>
+                  )}
+                </Invalido>
+              </CampoLogin>
 
-              <View style={style.view_CamposLogin}>
-                <Item>
-                  <Icon name="md-key" style={style.icons_CamposLogin} />
+              <CampoLogin>
+                <Item regular inlineLabel>
                   <Input
                     value={values.password}
                     onChangeText={handleChange('password')}
-                    placeholder="Senha"
-                    secureTextEntry={true}
+                    underline="false"
+                    placeholder="Digite sua senha"
+                    secureTextEntry={password}
                     onBlur={() => setFieldTouched('password')}
                   />
-                </Item>
-                <View style={{ marginVertical: 10, height: 30 }}>
-                  {touched.password && errors.password && <Text style={style.txtError}>{errors.password}</Text>}
-                </View>
-              </View>
 
-              <View style={style.V_cadastrar}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      changePassword();
+                    }}
+                  >
+                    <Icon name="eye" style={{ color: '#31aab8' }} />
+                  </TouchableOpacity>
+                </Item>
+                <Invalido>
+                  {touched.password && errors.password && (
+                    <Text style={style.txtError}>{errors.password}</Text>
+                  )}
+                </Invalido>
+              </CampoLogin>
+              <RecuperaSenha>
                 <TouchableOpacity
                   onPress={() => {
                     navigation.navigate('EsqueciSenha');
                   }}
                 >
-                  <Text style={style.touchTx}>Esqueci minha senha!</Text>
+                  <LabelEsqueciSenha>Esqueci minha senha!</LabelEsqueciSenha>
                 </TouchableOpacity>
-              </View>
+              </RecuperaSenha>
 
-              <View>
-                <Button style={style.botao_login} onPress={handleSubmit}>
-                  <Text style={style.labelBotao}>Login</Text>
-                </Button>
-
-                <Button
-                  style={style.botao_cadastro}
+              <BotesPrincipal>
+                <BotaoCadastro
+                  transparent
                   onPress={() => {
                     navigation.navigate('CadastroUsuario');
                   }}
                 >
-                  <Text style={style.labelBotao}>Cadastre-se</Text>
-                </Button>
-              </View>
-            </Fragment>
+                  <LabelCadastro>Cadastre-se</LabelCadastro>
+                </BotaoCadastro>
+                <BotaoLogin onPress={handleSubmit}>
+                  <LinearGradient
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}
+                    colors={['#021334', '#006c8b', '#0094ac']}
+                    style={style.Botaolinear}
+                  >
+                    <LabelLogin>Login</LabelLogin>
+                  </LinearGradient>
+                </BotaoLogin>
+              </BotesPrincipal>
+            </>
           )}
         </Formik>
-      </View>
-      <Modal animationType="slide" transparent={true} visible={loading}>
+      </Container>
+      <Modal animationType="slide" transparent visible={loading}>
         <View style={style.ViewFundo}>
           <View style={style.ViewModal}>
             <Spinner color="#142850" />
           </View>
         </View>
       </Modal>
-    </ScrollView>
+    </View>
   );
 }
 
