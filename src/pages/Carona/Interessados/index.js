@@ -44,6 +44,7 @@ export default function Interessados({ navigation }) {
   }
 
   function alterarStatusInteressado(number, user) {
+    console.log(number);
     setLoading(true);
     if (number === 1) {
       confirmarInteressado(user);
@@ -59,6 +60,7 @@ export default function Interessados({ navigation }) {
       email: user,
       status: 'Rejeitado',
     };
+    console.log(data);
     api
       .put(`/carona/confirmar/${idCarona}`, data)
       .then(response => {
@@ -68,7 +70,9 @@ export default function Interessados({ navigation }) {
       .catch(error => {
         setLoading(false);
         setErro(true);
-      });
+        console.log("teste" + error);
+      });      
+      
   }
 
   function confirmarInteressado(user) {

@@ -16,21 +16,22 @@ import moment from 'moment';
 import EmptyState from '../../../components/EmptyState';
 import Loading from '../../../components/Loading';
 
-export default function AgendamentoUser() {
+export default function AgendamentoUser({navigation}) {
   const email = useSelector(state => state.user.email);
   const [listaAgendamento, setListaAgendamendo] = useState([]);
   const [loading, setLoading] = useState(false);
   const [erro, setErro] = useState(false);
   const [modalRemocaoAgendamento, setModalRemocaoAgendamento] = useState(false);
   const [republicaID, setRepublicaID] = useState();
-  const [reload, setReload] = useState(false);
+  const [reload, setReload] = useState();
 
-  useEffect(() => {
-    setListaAgendamendo([]);
+  useEffect(() => {   
     carregarMeusAgendamentos();
   }, [reload]);
-
+  
   function carregarMeusAgendamentos() {
+    console.log(email);
+    setListaAgendamendo([]);
     api
       .get(`/agendamento/${email}`)
       .then(response => {

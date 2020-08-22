@@ -44,7 +44,7 @@ function TabsHeader ({ navigation }) {
           >
             <Caronas />
           </Tab>
-          <Tab
+          {/* <Tab
             heading="Serviços"
             initialPage="2"
             tabStyle={estilo.tabs_style}
@@ -63,7 +63,7 @@ function TabsHeader ({ navigation }) {
             activeTextStyle={estilo.tabs_ActiveTextStyle}
           >
             <Divulgacao />
-          </Tab>
+          </Tab> */}
         </Tabs>
       </Container>
     );

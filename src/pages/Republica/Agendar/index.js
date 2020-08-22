@@ -35,21 +35,23 @@ export default function Agendar({ navigation }) {
       data: dataAgendamento,
       hora: horaAgendamento,
     };
-
+    console.log(agendamento);
+    console.log(dadosRepublica._id);
     api
-      .put(`/agendamento/${dadosRepublica.idRepublica}`, agendamento)
+      .put(`/agendamento/${dadosRepublica._id}`, agendamento)
       .then(response => {
         setSucesso(true);
         setLoading(false);
       })
       .catch(error => {
+        console.log(error)
         setErro(true);
         setLoading(false);
         console.log(error);
       });
   }
 
-  selecionarHorario = hora => {
+  function selecionarHorario(hora) {
     const horaLabel = moment(new Date(hora)).format('HH:mm');
     setHoraAgendamento(hora);
     setLabelHoraAgendamento(horaLabel);
@@ -94,8 +96,8 @@ export default function Agendar({ navigation }) {
           {labeHoraAgendamento == '00:00' ? (
             <Text style={style.textClockPlace}>{labeHoraAgendamento}</Text>
           ) : (
-            <Text style={style.textClock}>{labeHoraAgendamento}</Text>
-          )}
+              <Text style={style.textClock}>{labeHoraAgendamento}</Text>
+            )}
 
           <View style={style.V_botaoCalendar}>
             <Button

@@ -33,7 +33,7 @@ function Anuncios({ navigation }, email) {
     }
     if (tipo == 'Republica' && valor == 1) {
       api
-        .delete(`/main/${item._id}`)
+        .delete(`/republica/${item._id}`)
         .then(responseJson => {
           console.log(responseJson);
           setListaRepublicas([]);
@@ -63,6 +63,7 @@ function Anuncios({ navigation }, email) {
 
   function getlist() {
     setReloading(true);
+    console.log(emailUser)
     api
       .get(`/userCarona/${emailUser}`)
       .then(responseJson => {
