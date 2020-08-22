@@ -10,17 +10,17 @@ const style = StyleSheet.create({
     borderBottomWidth: 2,
     borderBottomColor: '#142850',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-start'
   },
   iconHeader: {
     fontSize: 26,
-    color: '#142850',
+    color: '#142850'
   },
   title: {
     fontSize: 24,
     fontFamily: 'WorkSans',
     fontWeight: 'bold',
-    color: '#142850',
+    color: '#142850'
   },
   V_headerBack: {
     display: 'flex',
@@ -29,26 +29,26 @@ const style = StyleSheet.create({
     height: 55,
     backgroundColor: '#ffffff',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-start'
   },
   Touch: {
     width: '10%',
     alignItems: 'center',
     height: 40,
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   V_Title: {
     width: '80%',
     height: 40,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   txt_title: {
     fontSize: 16,
-    fontFamily: 'WorkSans-Thin',
+    fontFamily: 'WorkSans',
     //fontWeight: 'bold',
-    color: '#142850',
-  },
+    color: '#142850'
+  }
 });
 
 export default style;

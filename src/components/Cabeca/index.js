@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { NavigationActions, StackActions } from 'react-navigation';
 
 import { Button } from 'native-base';
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import Estilos from './style';
@@ -15,7 +15,7 @@ class Cabeca extends Component {
   static navigationOptions = { header: null, left: null };
   state = {
     isModalVisible: false,
-    dados: this.props,
+    dados: this.props
   };
 
   AbrirUrl = () => {
@@ -27,7 +27,7 @@ class Cabeca extends Component {
     console.log('pe');
     const resetAction = StackActions.reset({
       index: 0,
-      actions: [NavigationActions.navigate({ routeName: Rota })],
+      actions: [NavigationActions.navigate({ routeName: Rota })]
     });
 
     this.props.navigation.dispatch(resetAction);
@@ -70,14 +70,19 @@ class Cabeca extends Component {
             this.setState({ isModalVisible: true });
           }}
         >
-          <Icon style={Estilos.icon2} name="user" />
+          <Icon style={Estilos.icon2} name="account-circle-outline" />
         </TouchableOpacity>
         <View style={Estilos.Titulo}>
-          <Text style={Estilos.txt}> HOMMY </Text>
+          <Text style={Estilos.txt}> Hommy </Text>
         </View>
         <View style={Estilos.touch_Fake}>{/* <Icon style={Estilos.icon2} name="user" /> */}</View>
 
-        <Modal transparent={true} animationType="slide" visible={this.state.isModalVisible} onRequestClose={() => this.setState({ isModalVisible: false })}>
+        <Modal
+          transparent={true}
+          animationType="slide"
+          visible={this.state.isModalVisible}
+          onRequestClose={() => this.setState({ isModalVisible: false })}
+        >
           <View style={Estilos.bgModal}>
             <View style={Estilos.modal}>
               <View style={Estilos.voltar}>
@@ -96,7 +101,7 @@ class Cabeca extends Component {
                 <View style={Estilos.fotodeperfil}>
                   <Image
                     source={{
-                      uri: this.props.fotoPerfil,
+                      uri: this.props.fotoPerfil
                     }}
                     style={Estilos.fotoPerfil}
                   />
@@ -130,7 +135,7 @@ class Cabeca extends Component {
                     style={Estilos.botoes}
                     onPress={() => {
                       this.props.navigation.navigate('AgendamentoUser', {
-                        usuario: true,
+                        usuario: true
                       }),
                         this.setState({ isModalVisible: false });
                     }}
@@ -141,7 +146,8 @@ class Cabeca extends Component {
                   </Button>
                   <Button
                     onPress={() => {
-                      this.props.navigation.navigate('Viagens'), this.setState({ isModalVisible: false });
+                      this.props.navigation.navigate('Viagens'),
+                        this.setState({ isModalVisible: false });
                     }}
                     style={Estilos.botoes}
                   >
@@ -192,13 +198,10 @@ const mapsStateToProps = state => {
     idUser: state.user.idUser,
     telefone: state.user.telefone,
     fotoPerfil: state.user.fotoPerfil,
-    logado: state.user.logado,
+    logado: state.user.logado
   };
 };
 
-const cabecaConnect = connect(
-  mapsStateToProps,
-  null
-)(Cabeca);
+const cabecaConnect = connect(mapsStateToProps, null)(Cabeca);
 
 export default withNavigation(cabecaConnect);

@@ -35,14 +35,14 @@ const Navegação = createStackNavigator(
     RenderApp: {
       screen: RenderApp,
       navigationOptions: {
-        headerLeft: null,
-      },
+        headerLeft: null
+      }
     },
     TabsHeader: {
       screen: TabsHeader,
       navigationOptions: {
-        headerLeft: null,
-      },
+        headerLeft: null
+      }
     },
     Detalhes: DetalhesAnuncio,
     Login: Login,
@@ -68,14 +68,14 @@ const Navegação = createStackNavigator(
     Servicos,
     Cadastro,
     Confirmacao,
-    SplashScreen,
+    SplashScreen
   },
   {
     initialRouteName: 'RenderApp',
     headerMode: 'none',
     navigationOptions: {
-      headerVisible: false,
-    },
+      headerVisible: false
+    }
   }
 );
 

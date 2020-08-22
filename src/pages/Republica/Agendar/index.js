@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react';
 import { View } from 'react-native';
-import { DatePicker, Text, Button } from 'native-base';
+import { DatePicker, Text, Button, Picker } from 'native-base';
 import Cartao from '../../../components/Cartao';
 import style from './styles';
 import HeaderBack from '../../../components/CustomHeader';
@@ -26,17 +26,19 @@ export default function Agendar({ navigation }) {
 
   function agendarVisita() {
     setLoading(true);
-    if ((dataAgendamento || horaAgendamento) == null || (dataAgendamento || horaAgendamento) == false) {
+    if (
+      (dataAgendamento || horaAgendamento) == null ||
+      (dataAgendamento || horaAgendamento) == false
+    ) {
       setLoading(false);
       return 0;
     }
     const agendamento = {
       email: email,
       data: dataAgendamento,
-      hora: horaAgendamento,
+      hora: horaAgendamento
     };
-    console.log(agendamento);
-    console.log(dadosRepublica._id);
+    console.log('??:', agendamento, dadosRepublica._id);
     api
       .put(`/agendamento/${dadosRepublica._id}`, agendamento)
       .then(response => {
@@ -44,19 +46,25 @@ export default function Agendar({ navigation }) {
         setLoading(false);
       })
       .catch(error => {
-        console.log(error)
+        console.log(error);
         setErro(true);
         setLoading(false);
-        console.log(error);
+        console.log(error.response);
       });
   }
 
-  function selecionarHorario(hora) {
+  async function selecionarHorario(hora) {
+    console.log(horaPicker);
+    setHoraPicker(false);
     const horaLabel = moment(new Date(hora)).format('HH:mm');
     setHoraAgendamento(hora);
     setLabelHoraAgendamento(horaLabel);
-    setHoraPicker(false);
-  };
+    console.log(horaPicker);
+  }
+
+  function picker(){
+    setHoraPicker(true);
+  }
 
   return (
     <View style={style.Container}>
@@ -67,8 +75,9 @@ export default function Agendar({ navigation }) {
       </View>
       <View style={style.V_descr}>
         <Text style={style.textDescrição}>
-          Escolha um dia e hórario para fazer uma visita na república, lembrando que depois de sua visita aprovada o não
-          comparecimento ao local na hora marcada poderá lhe trazer más avaliações.
+          Escolha um dia e hórario para fazer uma visita na república, lembrando que depois de sua
+          visita aprovada o não comparecimento ao local na hora marcada poderá lhe trazer más
+          avaliações.
         </Text>
       </View>
 
@@ -103,7 +112,7 @@ export default function Agendar({ navigation }) {
             <Button
               style={style.botaoCalendar}
               onPress={() => {
-                setHoraPicker(true);
+                picker();
               }}
             >
               <Icon name="clock" style={style.IconCaledar} />
@@ -144,7 +153,7 @@ export default function Agendar({ navigation }) {
             botao="Confirmar"
             callback={() => {
               navigation.navigate('AgendamentoUser', {
-                usuario: true,
+                usuario: true
               });
             }}
           />

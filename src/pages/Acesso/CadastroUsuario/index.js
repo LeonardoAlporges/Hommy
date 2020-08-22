@@ -1,23 +1,35 @@
 import * as yup from 'yup';
 import { Formik } from 'formik';
 
-import React, { Component, Fragment, useState } from 'react';
-import { Text, Image, ScrollView, Modal } from 'react-native';
+import React, { Fragment, useState } from 'react';
+import { ScrollView, Modal, TouchableOpacity } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
-import { Item, Input, Button, Spinner } from 'native-base';
+import { Item, Input, Button, Spinner, Icon } from 'native-base';
 import { imagePickerOptions, uploadFileToFireBaseUser, uploadProgress } from '../../../utils';
-import { withNavigation } from 'react-navigation';
+
 import CustomModal from '../../../components/Alert';
 import estilo from './style';
 import { View } from 'native-base';
 import api from '../../../service/api';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import TextInputMask from 'react-native-text-input-mask';
 import HeaderBack from '../../../components/CustomHeader';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { NavigationActions, StackActions } from 'react-navigation';
-import { set } from 'lodash';
+import LinearGradient from 'react-native-linear-gradient';
 
+import {
+  Container,
+  Imagem,
+  BotaoEnviarFoto,
+  BotaoFoto,
+  LabelBotaoFoto,
+  CampoLogin,
+  Invalido,
+  LabelErro,
+  BotaoCadastro,
+  LabelBotao,
+  BackgroundLoad,
+  ModalLoad
+} from './style';
 
 export default function CadastroUsuario({ navigation }) {
   const [imagemPerfil, setImagemPerfil] = useState();
@@ -30,11 +42,12 @@ export default function CadastroUsuario({ navigation }) {
   const [imagemParaEnvio, setImagemParaEnvio] = useState();
   const [erro, setErro] = useState(false);
   const [sucesso, setSucesso] = useState(false);
+  const [password, setPassword] = useState(true);
 
   function resetarPilhaNavegacao(rota) {
     const resetAction = StackActions.reset({
       index: 0,
-      actions: [NavigationActions.navigate({ routeName: rota })],
+      actions: [NavigationActions.navigate({ routeName: rota })]
     });
 
     navigation.dispatch(resetAction);
@@ -74,20 +87,23 @@ export default function CadastroUsuario({ navigation }) {
     navigation.goBack(null);
   }
 
+  function changePassword() {
+    setPassword(!password);
+  }
   return (
-    <ScrollView>
+    <ScrollView style={{ display: 'flex' }}>
       <HeaderBack title="Cadastro de usuário" onNavigation={() => goBackScreen()} />
-      <View style={estilo.container}>
+      <Container>
         {imagemPerfil ? (
-          <Image source={{ uri: imagemPerfil }} style={estilo.imagemStyle} />
+          <Imagem source={{ uri: imagemPerfil }} />
         ) : (
-          <Image source={require('../../../assets/Img/Republica_Send_Pictures.png')} style={estilo.imagemStyle} />
+          <Imagem source={require('../../../assets/Img/pessoas.png')} />
         )}
-        <View style={estilo.V_Btn}>
-          <Button style={estilo.botao_send} onPress={() => gerarLinkImagemPerfil()}>
-            <Text style={estilo.textoLabel}>Enviar foto de perfil</Text>
-          </Button>
-        </View>
+        <BotaoEnviarFoto>
+          <BotaoFoto onPress={() => gerarLinkImagemPerfil()}>
+            <LabelBotaoFoto> + ENVIAR FOTO</LabelBotaoFoto>
+          </BotaoFoto>
+        </BotaoEnviarFoto>
         <Formik
           initialValues={{
             nome: '',
@@ -95,25 +111,19 @@ export default function CadastroUsuario({ navigation }) {
             confirmaEmail: '',
             password: '',
             celular: '',
-            fotoPerfil: '',
+            fotoPerfil: ''
           }}
           onSubmit={values => {
             enviarCadastro(values);
           }}
           validationSchema={yup.object().shape({
-            nome: yup.string().required('Insira seu nome completo '),
-            email: yup
-              .string()
-              .email('E-mail inválido ou incorreto')
-              .required('Campo obrigatório'),
-            celular: yup
-              .string()
-              .max(9999999999999)
-              .required(' Campo obrigatórior'),
+            nome: yup.string().required('Campo obrigatórior'),
+            email: yup.string().email('E-mail inválido ou incorreto').required('Campo obrigatório'),
+            celular: yup.string().max(9999999999999).required(' Campo obrigatórior'),
             password: yup
               .string()
               .min(8, 'Mínimo 8 dígitos necessários')
-              .required('Campo obrigatório'),
+              .required('Campo obrigatório')
           })}
         >
           {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
@@ -129,27 +139,21 @@ export default function CadastroUsuario({ navigation }) {
                   }}
                 />
               )}
-              {sucesso ? (
-                <View style={estilo.V_modal}>
-                  <CustomModal
-                    parametro="Custom"
-                    titulo="Cadastro Realizado :)"
-                    descricao="Seu cadastro no aplicativo foi realizado com sucesso, voce será redirecionado para fazer login."
-                    botao="Confirmar"
-                    callback={() => {
-                      resetarPilhaNavegacao('Login');
-                    }}
-                  />
-                </View>
-              ) : (
-                <View />
+              {sucesso && (
+                <CustomModal
+                  parametro="Custom"
+                  titulo="Cadastro Realizado :)"
+                  descricao="Seu cadastro no aplicativo foi realizado com sucesso, voce será redirecionado para fazer login."
+                  botao="Confirmar"
+                  callback={() => {
+                    resetarPilhaNavegacao('Login');
+                  }}
+                />
               )}
-              <View style={estilo.view_CamposLogin}>
-                <Item>
-                  <Icon style={estilo.icons_CamposLogin} active name="account-outline" />
+              <CampoLogin>
+                <Item regular inlineLabel style={{ borderRadius: 5 }}>
                   <Input
-                    autoFocus={true}
-                    placeholderTextColor="#2e2e2e"
+                    placeholderTextColor="#263b50"
                     style={estilo.labelInput}
                     value={values.nome}
                     onChangeText={handleChange('nome')}
@@ -157,21 +161,15 @@ export default function CadastroUsuario({ navigation }) {
                     placeholder="Nome"
                   />
                 </Item>
-              </View>
+                <Invalido>
+                  {touched.nome && errors.nome && <LabelErro>{errors.nome}</LabelErro>}
+                </Invalido>
+              </CampoLogin>
 
-              {touched.nome && errors.nome ? (
-                <View style={estilo.V_Erro}>
-                  <Text style={estilo.txtErro}>{errors.nome}</Text>
-                </View>
-              ) : (
-                <View style={estilo.V_ErroSem} />
-              )}
-
-              <View style={estilo.view_CamposLogin}>
-                <Item>
-                  <Icon style={estilo.icons_CamposLogin} active name="email-outline" />
+              <CampoLogin>
+                <Item regular inlineLabel style={{ borderRadius: 5 }}>
                   <Input
-                    placeholderTextColor="#2e2e2e"
+                    placeholderTextColor="#263b50"
                     style={estilo.labelInput}
                     value={values.email} //EMAIL
                     onChangeText={handleChange('email')}
@@ -179,20 +177,15 @@ export default function CadastroUsuario({ navigation }) {
                     onBlur={() => setFieldTouched('email')}
                   />
                 </Item>
-              </View>
-              {touched.email && errors.email ? (
-                <View style={estilo.V_Erro}>
-                  <Text style={estilo.txtErro}>{errors.email}</Text>
-                </View>
-              ) : (
-                <View style={estilo.V_ErroSem} />
-              )}
+                <Invalido>
+                  {touched.email && errors.email && <LabelErro>{errors.email}</LabelErro>}
+                </Invalido>
+              </CampoLogin>
 
-              <View style={estilo.view_CamposLogin}>
-                <Item>
-                  <Icon style={estilo.icons_CamposLogin} active name="phone-outline" />
+              <CampoLogin>
+                <Item regular inlineLabel style={{ borderRadius: 5 }}>
                   <TextInputMask
-                    placeholderTextColor="#2e2e2e"
+                    placeholderTextColor="#263b50"
                     style={estilo.labelInput}
                     keyboardType="number-pad"
                     mask={'([00]) [00000]-[0000]'}
@@ -202,54 +195,60 @@ export default function CadastroUsuario({ navigation }) {
                     onBlur={() => setFieldTouched('celular')}
                   />
                 </Item>
-              </View>
-              {touched.celular && errors.celular ? (
-                <View style={estilo.V_Erro}>
-                  <Text style={estilo.txtErro}>{errors.celular}</Text>
-                </View>
-              ) : (
-                <View style={estilo.V_ErroSem} />
-              )}
+                <Invalido>
+                  {touched.celular && errors.celular && <LabelErro>{errors.celular}</LabelErro>}
+                </Invalido>
+              </CampoLogin>
 
-              <View style={estilo.view_CamposLogin}>
-                <Item>
-                  <Icon style={estilo.icons_CamposLogin} active name="key-outline" />
+              <CampoLogin>
+                <Item regular inlineLabel style={{ borderRadius: 5 }}>
                   <Input
-                    placeholderTextColor="#2e2e2e"
+                    placeholderTextColor="#263b50"
                     style={estilo.labelInput}
                     value={values.password} //Senha
                     onChangeText={handleChange('password')}
                     placeholder="Senha"
-                    secureTextEntry={true}
+                    secureTextEntry={password}
                     onBlur={() => setFieldTouched('password')}
                   />
+                  <TouchableOpacity
+                    onPress={() => {
+                      changePassword();
+                    }}
+                  >
+                    <Icon name="eye" style={{ color: '#263b50' }} />
+                  </TouchableOpacity>
                 </Item>
-              </View>
-              {touched.password && errors.password ? (
-                <View style={estilo.V_Erro}>
-                  <Text style={estilo.txtErro}>{errors.password}</Text>
-                </View>
-              ) : (
-                <View style={estilo.V_ErroSem} />
-              )}
+                <Invalido>
+                  {touched.password && errors.password && <LabelErro>{errors.password}</LabelErro>}
+                </Invalido>
+              </CampoLogin>
 
               <View style={estilo.view_BotaoEntar}>
-                <Button disabled={!isValid} style={estilo.botao_login} onPress={handleSubmit}>
-                  <Text style={estilo.textoLabel}>Enviar</Text>
-                </Button>
+                <BotaoCadastro disabled={!isValid} onPress={handleSubmit}>
+                  <LinearGradient
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}
+                    colors={['#021334', '#006c8b', '#0094ac']}
+                    style={estilo.Botaolinear}
+                  >
+                    <LabelBotao>CADASTRAR</LabelBotao>
+                  </LinearGradient>
+                </BotaoCadastro>
               </View>
             </Fragment>
           )}
         </Formik>
-      </View>
-
-      <Modal animationType="fade" transparent={true} visible={loading}>
-        <View style={estilo.ViewFundo}>
-          <View style={estilo.ViewModal}>
-            <Spinner color="#142850" />
-          </View>
-        </View>
-      </Modal>
+      </Container>
+      {loading && (
+        <Modal animationType="slide" transparent visible={loading}>
+          <BackgroundLoad>
+            <ModalLoad>
+              <Spinner color="#142850" />
+            </ModalLoad>
+          </BackgroundLoad>
+        </Modal>
+      )}
     </ScrollView>
   );
 }

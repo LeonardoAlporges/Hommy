@@ -1,29 +1,40 @@
+import styled from 'styled-components/native';
+import { Button } from 'native-base';
 import { StyleSheet } from 'react-native';
 
+export const Container = styled.View`
+  width: 100%;
+  height: 100%;
+  align-items: center;
+`;
+export const Listagem = styled.FlatList`
+  width: 100%;
+  height: 100%;
+`;
 const estilosRepublica = StyleSheet.create({
   card: {
     marginTop: 0,
     marginBottom: 0,
     height: '100%',
-    width: '50%',
+    width: '50%'
   },
   flatList: {
     marginBottom: 0,
     paddingBottom: 0,
     width: '100%',
     height: '50%',
-    paddingHorizontal: 0,
+    paddingHorizontal: 0
   },
   V_completa: {
     width: '100%',
     height: '100%',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   V_Load: {
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   V_republicas: {
     height: '100%',
@@ -31,16 +42,16 @@ const estilosRepublica = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: '10%',
-    backgroundColor: '#f8f8f8',
+    backgroundColor: '#f8f8f8'
   },
   imageModal: {
     height: 200,
-    width: 200,
+    width: 200
   },
   txtModal: {
     fontSize: 22,
     fontWeight: 'bold',
-    fontFamily: 'Roboto',
+    fontFamily: 'Roboto'
   },
   txtErr: {
     marginTop: 10,
@@ -48,13 +59,13 @@ const estilosRepublica = StyleSheet.create({
     fontSize: 18,
     fontWeight: '400',
     fontFamily: 'Roboto',
-    width: '80%',
+    width: '80%'
   },
   V_filtroExterno: {
     height: '100%',
     width: '100%',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   V_filtroInterno: {
     justifyContent: 'center',
@@ -69,45 +80,45 @@ const estilosRepublica = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 2
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5,
+    elevation: 5
   },
   listStyle: {
     alignItems: 'stretch',
-    marginBottom: 10,
+    marginBottom: 10
   },
   listStyleInput: {
     alignItems: 'stretch',
     marginBottom: 10,
 
-    height: 60,
+    height: 60
   },
   textFiltro: {
     alignSelf: 'stretch',
     paddingHorizontal: 8,
-    textAlign: 'center',
+    textAlign: 'center'
   },
   textFiltroValor: {
     color: '#2e2e2e',
     fontFamily: 'Roboto',
     textAlign: 'center',
     fontSize: 16,
-    paddingBottom: 8,
+    paddingBottom: 8
   },
   ViewLabel: {
     width: 50,
     justifyContent: 'flex-end',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   itemInput: {
     width: 50,
     borderBottomColor: '#142850',
     justifyContent: 'center',
     alignItems: 'center',
-    marginHorizontal: 20,
+    marginHorizontal: 20
   },
   botaoModal: {
     alignSelf: 'center',
@@ -118,7 +129,7 @@ const estilosRepublica = StyleSheet.create({
     elevation: 2,
     justifyContent: 'center',
     height: 45,
-    width: 170,
+    width: 170
   },
   botaoReload: {
     position: 'absolute',
@@ -129,25 +140,25 @@ const estilosRepublica = StyleSheet.create({
     backgroundColor: '#142850',
     justifyContent: 'center',
     height: 45,
-    width: 45,
+    width: 45
   },
   textBotaoModal: {
     color: '#ffffff',
     fontFamily: 'Roboto',
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 20
   },
   S_FAB: {
     backgroundColor: '#142850',
     position: 'absolute',
-    bottom: 10,
+    bottom: 10
   },
   corFAB: {
-    backgroundColor: '#142850',
+    backgroundColor: '#142850'
   },
   corIconFab: {
-    color: '#ffffff',
-  },
+    color: '#ffffff'
+  }
 });
 
 export default estilosRepublica;

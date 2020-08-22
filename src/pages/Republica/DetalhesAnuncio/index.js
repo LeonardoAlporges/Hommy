@@ -36,6 +36,7 @@ export default function DetalhesAnuncio({ navigation }) {
     if (republica.imagem3 != '' && republica.imagem3 != null) {
       setContadorImagem(contadorImagem => contadorImagem +1);
     }
+    console.log(contadorImagem);
   },[]);
   
   function renderDotIndicator() {
@@ -52,17 +53,17 @@ export default function DetalhesAnuncio({ navigation }) {
     <ScrollView>
       <HeaderBack ajuda title={republica.nomeRepublica} onNavigation={() => navigation.goBack(null)} />
       <IndicatorViewPager style={{ height: 300 }} indicator={renderDotIndicator()} >
-        {republica.imagem1 != '' && (
+        {(republica.imagem1 != '' && republica.imagem1 != null) && (
           <View key="1">
             <Image source={{ uri: republica.imagem1 }} style={estilo.image} />
           </View>
         )}
-        {republica.imagem2 != '' && (
+        {(republica.imagem2 != '' && republica.imagem2 != null) && (
           <View key="2">
             <Image source={{ uri: republica.imagem2 }} style={estilo.image} />
           </View>
         )}
-        {republica.imagem3 != '' && (
+        {(republica.imagem3 != '' && republica.imagem3 != null) && (
           <View key="3">
             <Image source={{ uri: republica.imagem3 }} style={estilo.image} />
           </View>
@@ -149,7 +150,7 @@ export default function DetalhesAnuncio({ navigation }) {
       <View style={estilo.V_vagas}>
         <View style={estilo.vagas}>
           <Icon name="chart" style={estilo.icone} />
-          <Text style={estilo.txtlabel}>R$ {republica.valorConta}</Text>
+          <Text style={estilo.txtlabel}>R$ {republica.valorContas}</Text>
         </View>
       </View>
       <View style={estilo.V_tipo}>

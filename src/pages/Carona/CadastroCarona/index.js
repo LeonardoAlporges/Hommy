@@ -17,7 +17,10 @@ import { Text, Item, Input, Label, Button, Icon, DatePicker, Spinner, Picker } f
 
 import { NavigationActions, StackActions } from 'react-navigation';
 import { set } from 'lodash';
-export default function CadastroCarona({ navigation }, carona) {
+export default function CadastroCarona({ navigation }) {
+  useEffect(() => {
+    console.log(navigation);
+  }, []);
   const avatarUser = useSelector(state => state.user.fotoPerfil);
   const emailUser = useSelector(state => state.user.email);
   const notaUser = useSelector(state => state.user.notaUser);
@@ -28,7 +31,7 @@ export default function CadastroCarona({ navigation }, carona) {
   const [sucesso, setSucesso] = useState(false);
   const [loading, setLoading] = useState(false);
   const [atualizacao, setAtualizacao] = useState(navigation.state.params.update);
-  const [caronaID, setCaronaID] = useState(navigation.state.params.carona);
+  const [dadosCarona, setdadosCarona] = useState(navigation.state.params.carona);
 
   const [datePicker, setDatePicker] = useState(false);
   const [horarioSaidaPicker, setHorarioSaidaPicker] = useState(false);
@@ -42,16 +45,17 @@ export default function CadastroCarona({ navigation }, carona) {
 
   useEffect(() => {
     if (atualizacao) {
-      console.log('ATT');
+      selecionarHorario(dadosCarona.horaSaida, 'Saida');
+      selecionarHorario(dadosCarona.horaChegada, 'Chegada');
+      console.log(dadosCarona);
     } else {
-      console.log('Nao', carona);
     }
   }, []);
 
   function resetarPilhaNavegacao(rota) {
     const resetAction = StackActions.reset({
       index: 0,
-      actions: [NavigationActions.navigate({ routeName: rota })],
+      actions: [NavigationActions.navigate({ routeName: rota })]
     });
     navigation.dispatch(resetAction);
   }
@@ -81,7 +85,7 @@ export default function CadastroCarona({ navigation }, carona) {
       nome: nomeFragmentado[0],
       imagem: avatarUser,
       userEmail: emailUser,
-      nota: notaUser,
+      nota: notaUser
     };
 
     if (atualizacao) {
@@ -122,14 +126,14 @@ export default function CadastroCarona({ navigation }, carona) {
   function selecionarHorario(date, tipo) {
     if (tipo == 'Saida') {
       const saida = moment(new Date(date)).format('HH:mm');
-      setHoraSaida(date);
-      setPlaceHoraSaida(saida);
       setHorarioSaidaPicker(false);
+      setHoraSaida(date);
+      setPlaceHoraSaida(saida);     
     } else {
       const chegada = moment(new Date(date)).format('HH:mm');
-      setHoraChegada(date);
-      setPlaceHoraChegada(chegada);
       setHorarioChegadaPicker(false);
+      setHoraChegada(date);
+      setPlaceHoraChegada(chegada);      
     }
   }
 
@@ -144,15 +148,15 @@ export default function CadastroCarona({ navigation }, carona) {
   return (
     <Formik
       initialValues={{
-        saida: carona.saida,
-        chegada: carona.chegada,
-        data: carona.data,
-        valor: carona.valor,
-        Hsaida: carona.Hsaida,
-        HChegada: carona.HChegada,
-        embarque: carona.embarque,
-        desembarque: carona.desembarque,
-        vagas: carona.vagas,
+        saida: dadosCarona ? dadosCarona.localSaida : '',
+        chegada: dadosCarona ? dadosCarona.localChegada : '',
+        data: dadosCarona ? dadosCarona.data : '',
+        valor: dadosCarona ? dadosCarona.valor : '',
+        Hsaida: dadosCarona ? dadosCarona.horaSaida : '',
+        HChegada: dadosCarona ? dadosCarona.horaChegada : '',
+        embarque: dadosCarona ? dadosCarona.embarque : '',
+        desembarque: dadosCarona ? dadosCarona.desembarque : '',
+        vagas: dadosCarona ? dadosCarona.vagas.toString() : ''
       }}
       onSubmit={values => {
         verificarTipoDeRequisicao(values);
@@ -178,7 +182,7 @@ export default function CadastroCarona({ navigation }, carona) {
           .number('Somente numeros')
           .min(1, 'Minimo é de 1 vaga')
           .max(10, ' Maximo é de 10 vaga')
-          .required('Campo obrigatório'),
+          .required('Campo obrigatório')
       })}
     >
       {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
@@ -205,11 +209,15 @@ export default function CadastroCarona({ navigation }, carona) {
           <ViewPager style={{ flex: 1 }}>
             <ScrollView>
               <View key="1">
-                <HeaderBack title="Cadastre sua viagem" onNavigation={() => navigation.goBack(null)} />
+                <HeaderBack
+                  title="Cadastre sua viagem"
+                  onNavigation={() => navigation.goBack(null)}
+                />
 
                 <View style={estilo.V_Conteudo}>
                   <Text style={estilo.txtCarona}>
-                    Preencha os campos abaixo com as informações necessárias para registrar sua carona.
+                    Preencha os campos abaixo com as informações necessárias para registrar sua
+                    carona.
                   </Text>
 
                   <View style={estilo.rowStyle}>
@@ -248,7 +256,9 @@ export default function CadastroCarona({ navigation }, carona) {
                       </Item>
 
                       <View style={estilo.V_erro}>
-                        {touched.saida && errors.saida && <Text style={estilo.textError}>{errors.saida}</Text>}
+                        {touched.saida && errors.saida && (
+                          <Text style={estilo.textError}>{errors.saida}</Text>
+                        )}
                       </View>
                     </View>
 
@@ -285,7 +295,9 @@ export default function CadastroCarona({ navigation }, carona) {
                       </Item>
 
                       <View style={estilo.V_erro}>
-                        {touched.chegada && errors.chegada && <Text style={estilo.textError}>{errors.chegada}</Text>}
+                        {touched.chegada && errors.chegada && (
+                          <Text style={estilo.textError}>{errors.chegada}</Text>
+                        )}
                       </View>
                     </View>
                   </View>
@@ -308,7 +320,7 @@ export default function CadastroCarona({ navigation }, carona) {
                             paddingTop: 25,
                             height: 50,
                             fontSize: 11,
-                            color: '#006fa9',
+                            color: '#006fa9'
                           }}
                           placeHolderTextStyle={{
                             textAlign: 'right',
@@ -316,21 +328,23 @@ export default function CadastroCarona({ navigation }, carona) {
 
                             height: 50,
                             fontSize: 11,
-                            color: '#2e2e2e',
+                            color: '#2e2e2e'
                           }}
                           onDateChange={date => {
                             setDataViagem(date);
                           }}
                           disabled={false}
-                          selectedValue={values.data}
+                          selectedValue={new Date(values.data)}
                           onValueChange={handleChange('data')}
-                          value={values.data}
+                          value={new Date(values.data)}
                           onChangeText={handleChange('data')}
                           onBlur={() => setFieldTouched('data')}
                         />
                       </Item>
                       <View style={estilo.V_erro}>
-                        {dataViagem && botaoEnviar && <Text style={estilo.textError}>Campo obrigatório</Text>}
+                        {dataViagem && botaoEnviar && (
+                          <Text style={estilo.textError}>Campo obrigatório</Text>
+                        )}
                       </View>
                     </View>
 
@@ -341,7 +355,7 @@ export default function CadastroCarona({ navigation }, carona) {
                         <TextInputMask
                           style={{
                             width: '100%',
-                            height: '100%',
+                            height: '100%'
                           }}
                           keyboardType="number-pad"
                           mask={'[0000]'}
@@ -352,7 +366,9 @@ export default function CadastroCarona({ navigation }, carona) {
                         />
                       </Item>
                       <View style={estilo.V_erro}>
-                        {touched.valor && errors.valor && <Text style={estilo.textError}>{errors.valor}</Text>}
+                        {touched.valor && errors.valor && (
+                          <Text style={estilo.textError}>{errors.valor}</Text>
+                        )}
                       </View>
                     </View>
                   </View>
@@ -383,7 +399,9 @@ export default function CadastroCarona({ navigation }, carona) {
                       </Item>
 
                       <View style={estilo.V_erro}>
-                        {!horaSaida && botaoEnviar && <Text style={estilo.textError}>Campo obrigatório</Text>}
+                        {!horaSaida && botaoEnviar && (
+                          <Text style={estilo.textError}>Campo obrigatório</Text>
+                        )}
                       </View>
                     </View>
 
@@ -411,7 +429,9 @@ export default function CadastroCarona({ navigation }, carona) {
                       </Item>
 
                       <View style={estilo.V_erro}>
-                        {!horaChegada && botaoEnviar && <Text style={estilo.textError}>Campo obrigatório</Text>}
+                        {!horaChegada && botaoEnviar && (
+                          <Text style={estilo.textError}>Campo obrigatório</Text>
+                        )}
                       </View>
                     </View>
                   </View>
@@ -422,13 +442,15 @@ export default function CadastroCarona({ navigation }, carona) {
                       <Input
                         value={values.embarque}
                         onChangeText={handleChange('embarque')}
-                        placeholder={carona.titulo}
+                        placeholder=""
                         onBlur={() => setFieldTouched('embarque')}
                       />
                     </Item>
                   </View>
                   <View style={estilo.V_erro}>
-                    {touched.embarque && errors.embarque && <Text style={estilo.textError}>{errors.embarque}</Text>}
+                    {touched.embarque && errors.embarque && (
+                      <Text style={estilo.textError}>{errors.embarque}</Text>
+                    )}
                   </View>
 
                   <View style={estilo.campos} inlineLabel>
@@ -461,7 +483,9 @@ export default function CadastroCarona({ navigation }, carona) {
                     </Item>
                   </View>
                   <View style={estilo.V_erro}>
-                    {touched.vagas && errors.vagas && <Text style={estilo.textError}>{errors.vagas}</Text>}
+                    {touched.vagas && errors.vagas && (
+                      <Text style={estilo.textError}>{errors.vagas}</Text>
+                    )}
                   </View>
 
                   <View style={estilo.V_btn}>

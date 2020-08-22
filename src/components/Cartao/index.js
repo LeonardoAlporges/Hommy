@@ -1,40 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { Image, Text, TouchableHighlight, View } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { connect } from 'react-redux';
-import {
-  editNomeRepublica,
-  editValorAluguel,
-  editBairro,
-  editPessoas,
-  editDescricao,
-  editAnimal,
-  editAcomodacaoQuarto,
-  editAcomodacaoRepublica,
-  editValorConta,
-  editObservacao,
-  editImg1,
-  editImg2,
-  editImg3,
-  editGenero,
-  editNumVagas,
-  editRepresentante,
-  editRua,
-  editNumeroCasa,
-  editTipoImovel,
-  edituserEmail,
-  editIdRepublica,
-} from '../../actions/AuthActions';
 import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import Icon2 from 'react-native-vector-icons/Feather';
 import styles from './styles';
-
-export function Cartao({navigation, data}){
-  
+import {
+  Container,
+  ViewImagem,
+  Imagem,
+  ViewTitulo,
+  Titulo,
+  ViewDados,
+  ViewDescricao,
+  Descricao,
+  ViewValor,
+  ViewVagas,
+  Label,
+  ViewComIcones
+} from './styles';
+export function Cartao({ navigation, data }) {
   useEffect(() => {
-    preencherUserLogado()
-  },[]);
+    preencherUserLogado();
+  }, []);
   const [usuarioLogado, setUsuarioLogado] = useState();
 
   async function preencherUserLogado() {
@@ -43,7 +31,7 @@ export function Cartao({navigation, data}){
     });
   }
 
-  async function onClickCard(){
+  async function onClickCard() {
     await preencherUserLogado();
     const dados = data;
     var desativarBotaoAgenda = false;
@@ -53,42 +41,36 @@ export function Cartao({navigation, data}){
     }
     navigation.navigate('Detalhes', {
       dadosRepublica: dados,
-      desativarBotaoAgenda,
+      desativarBotaoAgenda
     });
-  };
-
-    return (
-      <TouchableHighlight
-        underlayColor="#fff"
-        onPress={() => onClickCard()}
-        style={styles.touch_card}
-      >
-        <View style={styles.V_cartao}>
-          <View style={styles.V_imagem}>
-            <Image source={{ uri: data.imagem1 }} style={styles.V_imagem} />
-          </View>
-          <View style={styles.V_TituloDesc}>
-            <View style={styles.V_titulo}>
-              <Text numberOfLines={1} style={styles.txtTitulo}>
-                {data.nomeRepublica}
-              </Text>
-            </View>
-            <View style={styles.V_obs}>
-              <Text numberOfLines={2}>{data.descricao}</Text>
-            </View>
-            <View style={styles.V_desc}>
-              <View style={styles.V_valor}>
-                <Icon2 style={styles.txtIcon} name="dollar-sign" />
-                <Text style={styles.txtDesc}>R$ {data.valorAluguel}</Text>
-              </View>
-              <View style={styles.V_vagas}>
-                <Icon style={styles.txtIcon} name="people" />
-                <Text style={styles.txtDesc}>{data.numVagas} Vaga(s)</Text>
-              </View>
-            </View>
-          </View>
-        </View>
-      </TouchableHighlight>
-    );
   }
+
+  return (
+    <Container underlayColor="#fff" onPress={() => onClickCard()} style={styles.touch_card}>
+      <View style={styles.V_cartao}>
+        <ViewImagem>
+          <Imagem source={{ uri: data.imagem1 }} />
+        </ViewImagem>
+        <ViewDados>
+          <ViewTitulo>
+            <Titulo numberOfLines={1}>{data.nomeRepublica}</Titulo>
+          </ViewTitulo>
+          <ViewDescricao>
+            <Descricao numberOfLines={2}>{data.descricao}</Descricao>
+          </ViewDescricao>
+          <ViewComIcones>
+            <ViewValor>
+              <Icon style={styles.icones} name="wallet" />
+              <Label>R$ {data.valorAluguel}</Label>
+            </ViewValor>
+            <ViewVagas>
+              <Icon style={styles.icones} name="home" />
+              <Label>{data.numVagas} Vaga</Label>
+            </ViewVagas>
+          </ViewComIcones>
+        </ViewDados>
+      </View>
+    </Container>
+  );
+}
 export default withNavigation(Cartao);

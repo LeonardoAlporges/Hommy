@@ -15,11 +15,11 @@ import {
   FundoModal,
   Spin,
 } from './styles';
-import { Button, Spinner } from 'native-base';
+import { Spinner } from 'native-base';
 import { NavigationActions, StackActions } from 'react-navigation';
 
 function SplashScreen({ navigation }) {
-  navigationOptions = { header: null };
+
   const [modalVisible, setModalVisible] = useState(false);
   function resetNavigation(Rota) {
     const resetAction = StackActions.reset({

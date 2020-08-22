@@ -119,15 +119,7 @@ export const editObservacao = newObs => {
     },
   };
 };
-export const selecionarItem = (item, b) => {
-  return {
-    type: 'selecionarItem',
-    payload: {
-      titulo: item.titulo,
-      valor: item.valor,
-    },
-  };
-};
+
 export const editImg1 = newImg1 => {
   return {
     type: 'editImg1', //nome da açao

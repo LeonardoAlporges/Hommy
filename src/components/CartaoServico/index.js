@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Image, TouchableHighlight, Text, View } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { selecionarItem } from '../../actions/DetalhesActions';
-import { connect } from 'react-redux';
+
 
 import Estilos from './style';
 
@@ -15,7 +14,6 @@ class CartaoServico extends Component {
 
   onClickCard = () => {
     const dados = this.props.leonardo;
-    this.props.selecionarItem(dados);
     this.props.navigation.navigate('DetalhesServicos');
   };
 
@@ -60,9 +58,5 @@ class CartaoServico extends Component {
   }
 }
 
-const cardConnect = connect(
-  null,
-  { selecionarItem }
-)(CartaoServico);
 
-export default withNavigation(cardConnect);
+export default withNavigation(CartaoServico);

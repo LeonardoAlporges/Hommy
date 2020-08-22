@@ -10,7 +10,7 @@ import HeaderBack from '../../../components/CustomHeader';
 import EmptyState from '../../../components/EmptyState';
 import Loading from '../../../components/Loading';
 import CustomModal from '../../../components/Alert';
-import { set } from 'lodash';
+
 
 export default function Interessados({ navigation }) {
   const email = useSelector(state => state.user.email);
@@ -29,7 +29,6 @@ export default function Interessados({ navigation }) {
 
   function buscarListaInteressado() {
     setUsuarios([]);
-    console.log(email);
     api
       .get(`/carona/confirmar/${email}`)
       .then(response => {
@@ -60,7 +59,7 @@ export default function Interessados({ navigation }) {
       email: user,
       status: 'Rejeitado',
     };
-    console.log(data);
+    console.log(data,idCarona)
     api
       .put(`/carona/confirmar/${idCarona}`, data)
       .then(response => {
@@ -68,6 +67,8 @@ export default function Interessados({ navigation }) {
         setReload(true);
       })
       .catch(error => {
+
+        console.log(error)
         setLoading(false);
         setErro(true);
         console.log("teste" + error);
