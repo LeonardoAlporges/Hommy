@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react';
 import { View } from 'react-native';
-import { DatePicker, Text, Button } from 'native-base';
+import { DatePicker, Text, Button, Picker } from 'native-base';
 import Cartao from '../../../components/Cartao';
 import style from './styles';
 import HeaderBack from '../../../components/CustomHeader';
@@ -49,14 +49,21 @@ export default function Agendar({ navigation }) {
         console.log(error);
         setErro(true);
         setLoading(false);
+        console.log(error.response);
       });
   }
 
-  function selecionarHorario(hora) {
+  async function selecionarHorario(hora) {
+    console.log(horaPicker);
+    setHoraPicker(false);
     const horaLabel = moment(new Date(hora)).format('HH:mm');
     setHoraAgendamento(hora);
     setLabelHoraAgendamento(horaLabel);
-    setHoraPicker(false);
+    console.log(horaPicker);
+  }
+
+  function picker(){
+    setHoraPicker(true);
   }
 
   return (
@@ -98,14 +105,14 @@ export default function Agendar({ navigation }) {
           {labeHoraAgendamento == '00:00' ? (
             <Text style={style.textClockPlace}>{labeHoraAgendamento}</Text>
           ) : (
-            <Text style={style.textClock}>{labeHoraAgendamento}</Text>
-          )}
+              <Text style={style.textClock}>{labeHoraAgendamento}</Text>
+            )}
 
           <View style={style.V_botaoCalendar}>
             <Button
               style={style.botaoCalendar}
               onPress={() => {
-                setHoraPicker(true);
+                picker();
               }}
             >
               <Icon name="clock" style={style.IconCaledar} />

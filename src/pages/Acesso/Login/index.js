@@ -82,7 +82,6 @@ export function Login({ navigation }) {
         } else if (error.response.data.code == 203) {
           setmodalErroLogin(true);
         }
-        setmodalErroLogin(true);
       });
   }
 

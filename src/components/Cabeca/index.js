@@ -124,8 +124,7 @@ class Cabeca extends Component {
                   <Button
                     style={Estilos.botoes}
                     onPress={() => {
-                      this.props.navigation.navigate('Anuncios', this.props.email),
-                        this.setState({ isModalVisible: false });
+                      this.props.navigation.navigate('Anuncios', {email: this.props.email}), this.setState({ isModalVisible: false });
                     }}
                   >
                     <Icon style={Estilos.iconBotoes} name="book-open" />

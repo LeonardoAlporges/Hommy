@@ -39,7 +39,6 @@ export function DetalhesCarona({ navigation }) {
       .catch(e => {
         setErro(true);
         setLoading(false);
-        
       });
     setLoading(false);
   }
@@ -154,8 +153,8 @@ export function DetalhesCarona({ navigation }) {
             </View>
           </View>
         ) : (
-          <View style={{ height: 40 }} />
-        )}
+            <View style={{ height: 40 }} />
+          )}
       </View>
     </ScrollView>
   );

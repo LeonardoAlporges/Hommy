@@ -23,14 +23,15 @@ export default function AgendamentoUser({navigation}) {
   const [erro, setErro] = useState(false);
   const [modalRemocaoAgendamento, setModalRemocaoAgendamento] = useState(false);
   const [republicaID, setRepublicaID] = useState();
-  const [reload, setReload] = useState(false);
+  const [reload, setReload] = useState();
 
-  useEffect(() => {
-    setListaAgendamendo([]);
+  useEffect(() => {   
     carregarMeusAgendamentos();
   }, [reload]);
-
+  
   function carregarMeusAgendamentos() {
+    console.log(email);
+    setListaAgendamendo([]);
     api
       .get(`/agendamento/${email}`)
       .then(response => {

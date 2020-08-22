@@ -20,7 +20,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 export default function Cadastro({ navigation }) {
   const email = useSelector(state => state.user.email);
   const telefone = useSelector(state => state.user.telefone);
-  const [nome, setNome] = useState();
+  const nome = useSelector(state => state.user.usuario);
   const [atualizarCadastro, setAtualizarCadastro] = useState(navigation.state.params.update);
   const [dadosRepublica, setDadosRepublica] = useState(navigation.state.params.dadosRepublica);
   const [contadorImagem, setContadorImagem] = useState(0);

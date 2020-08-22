@@ -126,14 +126,14 @@ export default function CadastroCarona({ navigation }) {
   function selecionarHorario(date, tipo) {
     if (tipo == 'Saida') {
       const saida = moment(new Date(date)).format('HH:mm');
-      setHoraSaida(date);
-      setPlaceHoraSaida(saida);
       setHorarioSaidaPicker(false);
+      setHoraSaida(date);
+      setPlaceHoraSaida(saida);     
     } else {
       const chegada = moment(new Date(date)).format('HH:mm');
-      setHoraChegada(date);
-      setPlaceHoraChegada(chegada);
       setHorarioChegadaPicker(false);
+      setHoraChegada(date);
+      setPlaceHoraChegada(chegada);      
     }
   }
 

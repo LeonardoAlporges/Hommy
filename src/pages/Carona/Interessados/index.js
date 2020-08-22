@@ -43,6 +43,7 @@ export default function Interessados({ navigation }) {
   }
 
   function alterarStatusInteressado(number, user) {
+    console.log(number);
     setLoading(true);
     if (number === 1) {
       confirmarInteressado(user);
@@ -70,7 +71,9 @@ export default function Interessados({ navigation }) {
         console.log(error)
         setLoading(false);
         setErro(true);
-      });
+        console.log("teste" + error);
+      });      
+      
   }
 
   function confirmarInteressado(user) {
