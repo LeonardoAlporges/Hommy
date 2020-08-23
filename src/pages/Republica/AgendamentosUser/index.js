@@ -16,7 +16,7 @@ import moment from 'moment';
 import EmptyState from '../../../components/EmptyState';
 import Loading from '../../../components/Loading';
 
-export default function AgendamentoUser({navigation}) {
+export default function AgendamentoUser({ navigation }) {
   const email = useSelector(state => state.user.email);
   const [listaAgendamento, setListaAgendamendo] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -25,10 +25,10 @@ export default function AgendamentoUser({navigation}) {
   const [republicaID, setRepublicaID] = useState();
   const [reload, setReload] = useState();
 
-  useEffect(() => {   
+  useEffect(() => {
     carregarMeusAgendamentos();
   }, [reload]);
-  
+
   function carregarMeusAgendamentos() {
     console.log(email);
     setListaAgendamendo([]);
@@ -97,7 +97,8 @@ export default function AgendamentoUser({navigation}) {
 
       <FlatList
         data={listaAgendamento}
-        renderItem={({ item }) => (
+        style={style.flatlist}
+        renderItem={({ item }) => (          
           <View>
             <Cartao data={item.republica} interessado />
             <View style={style.viewData}>

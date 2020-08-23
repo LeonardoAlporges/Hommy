@@ -16,13 +16,10 @@ export default function ValidarCodigo({ navigation }) {
   const [codigoValido, setCodigoValido] = useState(false);
   const [email, setEmail] = useState(navigation.state.params.email);
   const [codigoErrado, setCodigoErrado] = useState(false);
-  const [teste, setTeste] = useState();
 
   useEffect(() => {}, [codigoValido]);
 
   function verificarCodigoDigitado(values) {
-    setTeste(true);
-
     const data = {
       email: email.email,
       numConfirm: values,
@@ -31,12 +28,11 @@ export default function ValidarCodigo({ navigation }) {
     api
       .put('/alterar/confirm', data)
       .then(response => {
-        setTeste(true);
         setCodigoValido(true);
       })
       .catch(error => {
-        setTeste(false);
-        if (error.response.status == 401 || error.response.status == 404) {
+        console.log(error.response)
+        if (error.response.data.code == 204) {
           setCodigoErrado(true);
         } else {
           setErro(true);
@@ -128,6 +124,7 @@ export default function ValidarCodigo({ navigation }) {
             {erro && (
               <CustomModal
                 parametro="Erro "
+                descricao="Opss! Ocorreu um erro estranho :O"
                 callback={() => {
                   setErro(false);
                 }}
@@ -137,7 +134,6 @@ export default function ValidarCodigo({ navigation }) {
             {codigoErrado && (
               <CustomModal
                 parametro="Custom"
-                imagem="NaoEncontrado"
                 titulo="Código incorreto"
                 descricao="Verifique se digitou tudo certo. Não foi possível continuar a recuperação de sua senha com este código."
                 botao="Verificar"
@@ -158,6 +154,7 @@ export default function ValidarCodigo({ navigation }) {
                     onChangeText={handleChange('codigo')}
                     onBlur={() => setFieldTouched('codigo')}
                     placeholder="000000"
+                    keyboardType="numeric"
                   />
                 </Item>
               </View>

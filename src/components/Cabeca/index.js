@@ -55,6 +55,7 @@ class Cabeca extends Component {
 
   closeToken = async () => {
     await AsyncStorage.removeItem('token')
+    await AsyncStorage.removeItem('user')
       .then(value => {
         this.resetNavigation('Login');
       })

@@ -8,7 +8,7 @@ const estilo = StyleSheet.create({
   },
   V_img: {
     marginTop: '10%',
-    width: 150,
+    width: 200,
     height: 150,
   },
   V_title: {

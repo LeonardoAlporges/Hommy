@@ -117,7 +117,7 @@ export default function CadastroUsuario({ navigation }) {
             enviarCadastro(values);
           }}
           validationSchema={yup.object().shape({
-            nome: yup.string().required('Campo obrigatórior'),
+            nome: yup.string().required('Campo obrigatórior').max(20, 'Máxim de caracteres é 20'),
             email: yup.string().email('E-mail inválido ou incorreto').required('Campo obrigatório'),
             celular: yup.string().max(9999999999999).required(' Campo obrigatórior'),
             password: yup
