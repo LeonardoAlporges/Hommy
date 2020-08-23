@@ -5,7 +5,7 @@ import { View, Image, Text, ScrollView, Modal, TouchableOpacity } from 'react-na
 import { Icon, Input, Item, Button, Spinner, Label } from 'native-base';
 import { withNavigation, NavigationActions, StackActions } from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import api from '../../../service/api';
 import style, {
@@ -34,6 +34,7 @@ import style, {
 } from './style';
 
 import CustomModal from '../../../components/Alert';
+import * as userAction from '../../../actions/UserAction';
 
 export function Login({ navigation }) {
   const [modalErroLogin, setmodalErroLogin] = useState(false);
@@ -41,9 +42,15 @@ export function Login({ navigation }) {
   const [password, setPassword] = useState(true);
   const tokenAparelho = useSelector(state => state.user.tokenUser);
   const [loading, setloading] = useState(false);
+  const dispatch = useDispatch();
 
   async function salvarDadosStorage(dados) {
     try {
+      dispatch(userAction.editNome(dados.nome));
+      dispatch(userAction.editEmail (dados.email));
+      dispatch(userAction.editFoto(dados.fotoPerfil));
+      dispatch(userAction.editNota(dados.nota));
+      dispatch(userAction.editTelefone(dados.celular));
       await AsyncStorage.setItem('token', JSON.stringify(dados.token));
       await AsyncStorage.setItem('user', JSON.stringify(dados.usuario));
     } catch (error) {
@@ -69,7 +76,7 @@ export function Login({ navigation }) {
     api
       .post('/session', data)
       .then(response => {
-        salvarDadosStorage(response.data);
+        salvarDadosStorage(response.data.usuario);
         resetarPilhaNavegacao('TabsHeader');
         setloading(false);
       })
