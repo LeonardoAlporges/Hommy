@@ -55,8 +55,11 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-evenly',
-    alignItems: 'center',
-    height: 40,
+    alignItems: 'center'
+  },
+  flatlist: {
+    width: "100%",
+    height: "100%"
   },
   data: {
     fontSize: 16,
