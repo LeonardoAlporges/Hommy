@@ -63,7 +63,6 @@ function Anuncios({ navigation }) {
 
   function getlist() {
     setReloading(true);
-    console.log(emailUser)
     api
       .get(`/userCarona/${email}`)
       .then(responseJson => {
@@ -92,7 +91,7 @@ function Anuncios({ navigation }) {
 
   function editRepublica(edit) {
     const dados = edit;
-    navigation.navigate('Cadastro', { update: true,dadosRepublica:dados });
+    navigation.navigate('Cadastro', { update: true, dadosRepublica: dados });
   }
 
   function editCaronas(edit) {
@@ -167,7 +166,7 @@ function Anuncios({ navigation }) {
                             onPress={() => {
                               navigation.navigate('Agendamentos', {
                                 usario: false,
-                                idRepublica: item._id,
+                                idRepublica: item._id
                               });
                             }}
                           >
@@ -226,7 +225,7 @@ function Anuncios({ navigation }) {
                             onPress={() => {
                               navigation.navigate('Interessados', {
                                 usario: false,
-                                idCarona: item._id,
+                                idCarona: item._id
                               });
                             }}
                           >
@@ -251,7 +250,7 @@ function Anuncios({ navigation }) {
           style={{
             width: '100%',
             height: '100%',
-            alignItems: 'center',
+            alignItems: 'center'
           }}
         >
           <EmptyState
@@ -268,7 +267,7 @@ function Anuncios({ navigation }) {
 const mapStateToProps = state => {
   return {
     //para pegar do reducer e State."NOME DO REDUCER"."NOME DA PROPIEDADE"
-    email: state.user.email,
+    email: state.user.email
     //nota: state.carona.nota,
 
     // Ou seja agora e como se tivessemos duas props dentro do compoennte cadastro
