@@ -33,6 +33,7 @@ import {
 
 export default function CadastroUsuario({ navigation }) {
   const [imagemPerfil, setImagemPerfil] = useState();
+  const [imagemLink, setImagemLink] = useState();
   const [imagemPerfilPadrao, setImagemPerfilPadrao] = useState(
     'https://firebasestorage.googleapis.com/v0/b/hommy-d0890.appspot.com/o/pictures%2Fuser%2Funnamed.png?alt=media&token=fa5dad7d-3792-49ec-9545-4d65a2fa1498'
   );
@@ -55,8 +56,9 @@ export default function CadastroUsuario({ navigation }) {
 
   async function enviarCadastro(value) {
     setLoading(true);
-    await uploadFileToFireBaseUser(imagemParaEnvio);
-    value.fotoPerfil = imagemPerfil ? imagemPerfil : imagemPerfilPadrao;
+    console.log('1');
+    value.fotoPerfil = imagemLink ? imagemLink : imagemPerfilPadrao;
+    console.log('2');
     api
       .post('/usuario', value)
       .then(response => {
@@ -77,7 +79,8 @@ export default function CadastroUsuario({ navigation }) {
       } else if (error) {
         alert('Ocorreu um erro: ', error);
       } else {
-        setImagemParaEnvio(imagePickerResponse);
+        const referencia = uploadFileToFireBaseUser(imagePickerResponse);
+        monitorFileUpload(referencia);
         setImagemPerfil(imagePickerResponse.uri);
       }
     });
@@ -90,6 +93,22 @@ export default function CadastroUsuario({ navigation }) {
   function changePassword() {
     setPassword(!password);
   }
+
+  function monitorFileUpload(task) {
+    task.on('state_changed', snapshot => {
+      switch (snapshot.state) {
+        case 'running':
+          break;
+        case 'success':
+          snapshot.ref.getDownloadURL().then(downloadURL => {
+            setImagemLink(downloadURL);
+          });
+          break;
+        default:
+          break;
+      }
+    });
+  }
   return (
     <ScrollView style={{ display: 'flex' }}>
       <HeaderBack title="Cadastro de usuário" onNavigation={() => goBackScreen()} />
@@ -97,8 +116,8 @@ export default function CadastroUsuario({ navigation }) {
         {imagemPerfil ? (
           <Imagem source={{ uri: imagemPerfil }} />
         ) : (
-          <Imagem source={require('../../../assets/Img/pessoas.png')} />
-        )}
+            <Imagem source={require('../../../assets/Img/pessoas.png')} />
+          )}
         <BotaoEnviarFoto>
           <BotaoFoto onPress={() => gerarLinkImagemPerfil()}>
             <LabelBotaoFoto> + ENVIAR FOTO</LabelBotaoFoto>

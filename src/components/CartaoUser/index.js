@@ -21,8 +21,7 @@ class CartaoUser extends Component {
   };
 
   retornoCarona = number => {
-    console.log('numero', number, 'user', this.props.dados.email);
-    this.props.callback(number, this.props.dados.email);
+    this.props.retornoCarona(number, this.props.dados.email);
   };
 
   mudarStatusInteressado = number => {
@@ -33,7 +32,8 @@ class CartaoUser extends Component {
       this.retorno(number);
       this.props.callback();
     } else if (this.props.tipoRetorno == 'Carona') {
-      this.retornoCarona(number);
+      this.retornoCarona(number)
+      this.props.callback();
     }
   };
 

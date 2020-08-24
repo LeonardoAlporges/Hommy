@@ -21,7 +21,7 @@ export default function Agendamentos({ navigation }) {
   const [listaAgendamento, setListaAgendamento] = useState([]);
   const [loading, setLoading] = useState(false);
   const [reload, setReload] = useState(false);
-  const [republicaID, setUsuario] = useState(navigation.state.params.redpublicaID);
+  const [republicaID, setUsuario] = useState(navigation.state.params.idRepublica);
   const [erro, setErro] = useState(false);
 
   useEffect(() => {
