@@ -11,7 +11,7 @@ import {
   editImagem,
   editSaida,
   editVagas,
-  editValor,
+  editValor
 } from '../../../actions/CaronaActions';
 import { connect } from 'react-redux';
 import { withNavigation, NavigationEvents } from 'react-navigation';
@@ -25,6 +25,8 @@ import CartaoCarona from '../../../components/CartaoCarona';
 import api from '../../../service/api';
 import _ from 'lodash';
 import EmptyState from '../../../components/EmptyState';
+
+import { Container } from './style';
 
 class Caronas extends Component {
   static navigationOptions = { header: null };
@@ -48,14 +50,14 @@ class Caronas extends Component {
       aluguelMin: '',
       aluguelMax: '',
       cidadeD: '',
-      cidadeS: '',
+      cidadeS: ''
     };
   }
 
   limparPropsCaronaRedux() {
     this.props.navigation.navigate('CadastroCaronas', {
       update: false,
-      carona: null,
+      carona: null
     });
   }
 
@@ -70,7 +72,7 @@ class Caronas extends Component {
         filtroVagas1: true,
         filtroVagas2: false,
         filtroVagas3: false,
-        filtroVagas4: false,
+        filtroVagas4: false
       });
   };
 
@@ -81,7 +83,7 @@ class Caronas extends Component {
         filtroVagas2: true,
         filtroVagas1: false,
         filtroVagas3: false,
-        filtroVagas4: false,
+        filtroVagas4: false
       });
   };
 
@@ -92,7 +94,7 @@ class Caronas extends Component {
         filtroVagas3: true,
         filtroVagas2: false,
         filtroVagas1: false,
-        filtroVagas4: false,
+        filtroVagas4: false
       });
   };
   fVagas4 = async checked => {
@@ -102,7 +104,7 @@ class Caronas extends Component {
         filtroVagas4: true,
         filtroVagas2: false,
         filtroVagas1: false,
-        filtroVagas3: false,
+        filtroVagas3: false
       });
   };
   valMenor = async text => {
@@ -125,12 +127,12 @@ class Caronas extends Component {
     if (value != 'null')
       this.setState({
         cidadeS: value,
-        filtroCidadeS: true,
+        filtroCidadeS: true
       });
     else {
       this.setState({
         cidadeS: value,
-        filtroCidadeS: false,
+        filtroCidadeS: false
       });
     }
   };
@@ -139,12 +141,12 @@ class Caronas extends Component {
     if (value != 'null')
       this.setState({
         cidadeD: value,
-        filtroCidadeD: true,
+        filtroCidadeD: true
       });
     else {
       this.setState({
         cidadeD: value,
-        filtroCidadeD: false,
+        filtroCidadeD: false
       });
     }
   };
@@ -163,7 +165,7 @@ class Caronas extends Component {
       aluguelMin: '',
       aluguelMax: '',
       cidadeD: '',
-      cidadeS: '',
+      cidadeS: ''
     });
     this.filtro();
   };
@@ -188,7 +190,7 @@ class Caronas extends Component {
     }
     if (this.state.filtroCidadeD === true) {
       listaCaronas = _.filter(listaCaronas, {
-        localChegada: this.state.cidadeD,
+        localChegada: this.state.cidadeD
       });
     }
     if (this.state.filtroValorMenor === true) {
@@ -200,7 +202,7 @@ class Caronas extends Component {
     await this.setState({ listaCaronas });
   };
 
-  getListCarona = () => {    
+  getListCarona = () => {
     this.setState({ refreshing: true, listaCaronas: [] });
     return api
       .get('/carona')
@@ -210,7 +212,7 @@ class Caronas extends Component {
           listaCaronas: responseJson.data,
           fullData: responseJson.data,
           loading: false,
-          refreshing: false,
+          refreshing: false
         });
       })
       .catch(error => {
@@ -276,7 +278,7 @@ class Caronas extends Component {
                     width: '100%',
                     height: 30,
                     justifyContent: 'center',
-                    alignItems: 'flex-end',
+                    alignItems: 'flex-end'
                   }}
                 >
                   <TouchableOpacity
@@ -288,7 +290,9 @@ class Caronas extends Component {
                     <Icon style={{ fontSize: 22 }} name="close" />
                   </TouchableOpacity>
                 </View>
-                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Valor</Text>
+                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>
+                  Valor
+                </Text>
                 <ListItem style={Estilo.listStyle}>
                   <View style={Estilo.ViewLabel}>
                     <Text style={Estilo.textValor}>De R$</Text>
@@ -311,7 +315,9 @@ class Caronas extends Component {
                     />
                   </Item>
                 </ListItem>
-                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Vagas disponíveis</Text>
+                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>
+                  Vagas disponíveis
+                </Text>
                 <ListItem style={Estilo.listStyle}>
                   <CheckBox
                     color="#142850"
@@ -342,7 +348,9 @@ class Caronas extends Component {
                   />
                   <Text style={Estilo.textList}>4+</Text>
                 </ListItem>
-                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Saida</Text>
+                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>
+                  Saida
+                </Text>
                 <ListItem style={Estilo.listStyle2}>
                   <Item picker style={Estilo.pickerStyle}>
                     <Picker
@@ -371,7 +379,9 @@ class Caronas extends Component {
                     </Picker>
                   </Item>
                 </ListItem>
-                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Destino</Text>
+                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>
+                  Destino
+                </Text>
 
                 <ListItem style={Estilo.listStyle}>
                   <Item picker style={Estilo.pickerStyle}>
@@ -401,7 +411,14 @@ class Caronas extends Component {
                     </Picker>
                   </Item>
                 </ListItem>
-                <View style={{ width: '100%', flexDirection: 'row', display: 'flex', justifyContent: 'space-evenly' }}>
+                <View
+                  style={{
+                    width: '100%',
+                    flexDirection: 'row',
+                    display: 'flex',
+                    justifyContent: 'space-evenly'
+                  }}
+                >
                   <TouchableOpacity
                     style={Estilo.botaoReload}
                     onPress={() => {
@@ -459,20 +476,17 @@ class Caronas extends Component {
   }
 }
 
-const CaronasConnect = connect(
-  null,
-  {
-    editChegada,
-    editData,
-    editDesembarque,
-    editEmbarque,
-    editHChegada,
-    editHSaida,
-    editImagem,
-    editSaida,
-    editVagas,
-    editValor,
-  }
-)(Caronas);
+const CaronasConnect = connect(null, {
+  editChegada,
+  editData,
+  editDesembarque,
+  editEmbarque,
+  editHChegada,
+  editHSaida,
+  editImagem,
+  editSaida,
+  editVagas,
+  editValor
+})(Caronas);
 
 export default withNavigation(CaronasConnect);
