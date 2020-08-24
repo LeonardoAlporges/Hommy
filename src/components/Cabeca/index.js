@@ -57,12 +57,12 @@ function Cabeca({ navigation }) {
   // };
 
   closeToken = async () => {
-    await AsyncStorage.removeItem('token')
+    await AsyncStorage.removeItem('token');
     await AsyncStorage.removeItem('user')
       .then(value => {
         resetNavigation('Login');
       })
-      .catch(error => { });
+      .catch(error => {});
   };
   return (
     <View style={Estilos.ViewCabeca}>
@@ -90,7 +90,7 @@ function Cabeca({ navigation }) {
             <View style={Estilos.voltar}>
               <TouchableOpacity
                 onPress={() => {
-                  setIsModalVisible(false)
+                  setIsModalVisible(false);
                 }}
               >
                 <Icon style={Estilos.iconModal} name="arrow-left" />
@@ -126,7 +126,7 @@ function Cabeca({ navigation }) {
                 <Button
                   style={Estilos.botoes}
                   onPress={() => {
-                    navigation.navigate('Anuncios', { email: email }), setIsModalVisible(false);
+                    navigation.navigate('Anuncios'), setIsModalVisible(false);
                   }}
                 >
                   <Icon style={Estilos.iconBotoes} name="book-open" />
@@ -148,8 +148,7 @@ function Cabeca({ navigation }) {
                 </Button>
                 <Button
                   onPress={() => {
-                    navigation.navigate('Viagens'),
-                      setIsModalVisible(false);
+                    navigation.navigate('Viagens'), setIsModalVisible(false);
                   }}
                   style={Estilos.botoes}
                 >

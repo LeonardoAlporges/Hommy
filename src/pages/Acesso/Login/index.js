@@ -46,10 +46,10 @@ export function Login({ navigation }) {
 
   async function salvarDadosStorage(dados) {
     try {
-      dispatch(userAction.editNome(dados.nome));
-      dispatch(userAction.editEmail (dados.email));
-      dispatch(userAction.editFoto(dados.fotoPerfil));
-      dispatch(userAction.editNota(dados.nota));
+      dispatch(userAction.editNome(dados.usuario.nome));
+      dispatch(userAction.editEmail(dados.usuario.email));
+      dispatch(userAction.editFoto(dados.usuario.fotoPerfil));
+      dispatch(userAction.editNota(dados.usuario.nota));
       dispatch(userAction.editTelefone(dados.celular));
       await AsyncStorage.setItem('token', JSON.stringify(dados.token));
       await AsyncStorage.setItem('user', JSON.stringify(dados.usuario));
@@ -76,7 +76,7 @@ export function Login({ navigation }) {
     api
       .post('/session', data)
       .then(response => {
-        salvarDadosStorage(response.data.usuario);
+        salvarDadosStorage(response.data);
         resetarPilhaNavegacao('TabsHeader');
         setloading(false);
       })
