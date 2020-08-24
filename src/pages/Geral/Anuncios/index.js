@@ -62,7 +62,7 @@ function Anuncios({ navigation }) {
   }
 
   function getlist() {
-    setReloading(true);
+    setLoading(true);
     api
       .get(`/userCarona/${email}`)
       .then(responseJson => {

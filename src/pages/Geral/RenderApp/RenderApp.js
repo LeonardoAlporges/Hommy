@@ -25,8 +25,9 @@ export default function RenderApp(props) {
       .getToken()
       .then(fmcToken => {
         if (fmcToken) {
-          dispatch(userAction.editTokenNotificacao('00000'));
+          dispatch(userAction.editTokenNotificacao(fmcToken));
         } else {
+          dispatch(userAction.editTokenNotificacao(null));
           console.log('[FMCService] Sem token de dispositivo');
         }
       })

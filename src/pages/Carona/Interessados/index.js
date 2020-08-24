@@ -17,6 +17,7 @@ export default function Interessados({ navigation }) {
 
   const [usuarioLogado, setUsuarioLogado] = useState();
   const [erro, setErro] = useState(false);
+  const [erroVaga, setErroVaga] = useState(false);
   const [loading, setLoading] = useState(false);
   const [usuarios, setUsuarios] = useState([]);
   const [usuarioConfirmado, setUsuarioConfirmado] = useState([]);
@@ -24,19 +25,20 @@ export default function Interessados({ navigation }) {
   const [idCarona, setIdCarona] = useState(navigation.state.params.idCarona);
 
   useEffect(() => {
+    setUsuarios([]);
     buscarListaInteressado();
   }, [reload]);
 
-  function buscarListaInteressado() {
-    setUsuarios([]);
+  function buscarListaInteressado() {    
+    setLoading(true);
     api
-      .get(`/carona/confirmar/${email}`)
+      .get(`/carona/confirmar/${idCarona}`)
       .then(response => {
         setUsuarios(response.data);
+        console.log(usuarios);
         setLoading(false);
       })
       .catch(error => {
-        console.log(error);
         setErro(true);
         setLoading(false);
       });
@@ -50,8 +52,6 @@ export default function Interessados({ navigation }) {
     } else if (number === 0) {
       recusarInteressado(user);
     }
-    setReload(!reload);
-    setLoading(false);
   }
 
   function recusarInteressado(user) {
@@ -59,21 +59,19 @@ export default function Interessados({ navigation }) {
       email: user,
       status: 'Rejeitado',
     };
-    console.log(data,idCarona)
+    setLoading(true);
     api
       .put(`/carona/confirmar/${idCarona}`, data)
       .then(response => {
         setLoading(false);
-        setReload(true);
+        setReload(!reload);
       })
       .catch(error => {
-
         console.log(error)
         setLoading(false);
         setErro(true);
-        console.log("teste" + error);
-      });      
-      
+      });
+
   }
 
   function confirmarInteressado(user) {
@@ -81,15 +79,20 @@ export default function Interessados({ navigation }) {
       email: user,
       status: 'Confirmado',
     };
+    setLoading(true);
     api
       .put(`/carona/confirmar/${idCarona}`, data)
       .then(response => {
         setLoading(false);
-        setReload(true);
+        setReload(!reload);
       })
       .catch(error => {
+        if (error.response.data.code == 205) {
+          setErroVaga(true);
+        }
         setLoading(false);
         setErro(true);
+        console.log(error.response);
       });
   }
 
@@ -120,24 +123,25 @@ export default function Interessados({ navigation }) {
             renderItem={({ item }) => (
               <View>
                 <CartaoUser
-                  status={item[0].status}
-                  callback={(number, user) => alterarStatusInteressado(number, user)}
-                  dados={item[0].user}
+                  status={item.status}
+                  callback={() => setReload()}
+                  retornoCarona={(number, user) => alterarStatusInteressado(number, user)}
+                  dados={item.user}
                   dadosGerais={item}
                   tipoRetorno="Carona"
                 />
                 <View style={{ marginTop: 10 }}>
-                  {item[0].status == 'Confirmado' && (
+                  {item.status == 'Confirmado' && (
                     <View style={style.botaoStatusConf}>
                       <Text style={style.textStatusConf}>Confirmada</Text>
                     </View>
                   )}
-                  {item[0].status == 'Análise' && (
+                  {item.status == 'Análise' && (
                     <View style={style.botaoStatusAna}>
                       <Text style={style.textStatusAna}>Em análise</Text>
                     </View>
                   )}
-                  {item[0].status == 'Rejeitado' && (
+                  {item.status == 'Rejeitado' && (
                     <View style={style.botaoStatusRej}>
                       <Text style={style.textStatusRej}>Rejeitada </Text>
                     </View>
@@ -145,7 +149,7 @@ export default function Interessados({ navigation }) {
                 </View>
               </View>
             )}
-            keyExtractor={item => item[0]._id}
+            keyExtractor={item => item._id}
           />
         </View>
       </ScrollView>
@@ -155,6 +159,15 @@ export default function Interessados({ navigation }) {
           descricao="Opss! Ocorreu um erro estranho :O"
           callback={() => {
             setErro(false);
+          }}
+        />
+      )}
+      {erroVaga && (
+        <CustomModal
+          parametro="Erro"
+          descricao="Não há mais vagas nessa carona!"
+          callback={() => {
+            setErroVaga(false);
           }}
         />
       )}
