@@ -1,20 +1,27 @@
+import styled from 'styled-components/native';
+import { Button } from 'native-base';
 import { StyleSheet } from 'react-native';
+
+export const Container = styled.TouchableHighlight`
+  flex: 1;
+  padding: 10px 10px 10px 10px;
+`;
 
 const Estilo = StyleSheet.create({
   card: {
     marginTop: 0,
-    marginBottom: 0,
+    marginBottom: 0
   },
   flatList: {
     backgroundColor: '#f2f2f2',
-    padding: 1,
+    padding: 0,
     marginBottom: 0,
-    paddingBottom: 0,
+    paddingBottom: 0
   },
   V_externa: {
     height: '100%',
     width: '100%',
-    backgroundColor: '#f2f2f2',
+    backgroundColor: '#f2f2f2'
   },
   botaoReload: {
     position: 'absolute',
@@ -25,13 +32,13 @@ const Estilo = StyleSheet.create({
     backgroundColor: '#142850',
     justifyContent: 'center',
     height: 45,
-    width: 45,
+    width: 45
   },
   textBotaoModal: {
     color: '#ffffff',
     fontFamily: 'Roboto',
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 20
   },
   V_internaLoad: {
     width: '100%',
@@ -39,29 +46,29 @@ const Estilo = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: '10%',
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
   },
   V_interna1: {
     width: '100%',
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingBottom: '10%',
+    paddingBottom: '10%'
   },
   V_Interna2: {
     height: '100%',
     width: '100%',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   imagemError: {
     height: 200,
-    width: 200,
+    width: 200
   },
   textError: {
     fontSize: 22,
     fontWeight: 'bold',
-    fontFamily: 'Roboto',
+    fontFamily: 'Roboto'
   },
   textError2: {
     marginTop: 10,
@@ -69,14 +76,14 @@ const Estilo = StyleSheet.create({
     fontSize: 18,
     fontWeight: '400',
     fontFamily: 'Roboto',
-    width: '80%',
+    width: '80%'
   },
   V_modalExterno: {
     backgroundColor: 'rgba(52, 52, 52, 0.3)',
-    flex: 1,
+    flex: 1
   },
   modal: {
-    backgroundColor: 'rgba(52, 52, 52, 0.3)',
+    backgroundColor: 'rgba(52, 52, 52, 0.3)'
   },
   V_modalInterno: {
     justifyContent: 'center',
@@ -91,23 +98,23 @@ const Estilo = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 2
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5,
+    elevation: 5
   },
   listStyle: {
     alignItems: 'stretch',
-    marginBottom: 10,
+    marginBottom: 10
   },
   listStyle: {
     alignItems: 'stretch',
-    marginBottom: 10,
+    marginBottom: 10
   },
   textList: {
     alignSelf: 'stretch',
-    paddingHorizontal: 15,
+    paddingHorizontal: 15
   },
   textValor: {
     color: '#2e2e2e',
@@ -115,12 +122,12 @@ const Estilo = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     width: 50,
-    paddingBottom: 8,
+    paddingBottom: 8
   },
   ViewLabel: {
     width: 50,
     justifyContent: 'flex-end',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   itemStyle: {
     width: 70,
@@ -128,14 +135,14 @@ const Estilo = StyleSheet.create({
     marginHorizontal: 10,
     borderBottomColor: '#142850',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   inputStyle: {
-    alignSelf: 'stretch',
+    alignSelf: 'stretch'
   },
   pickerStyle: {
     marginLeft: 50,
-    marginRight: 50,
+    marginRight: 50
   },
   modalBtn: {
     alignSelf: 'center',
@@ -146,24 +153,24 @@ const Estilo = StyleSheet.create({
     elevation: 2,
     justifyContent: 'center',
     height: 45,
-    width: 170,
+    width: 170
   },
   textBtn: {
     color: '#ffffff',
     fontFamily: 'Roboto',
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 20
   },
   FABStyle: {
     backgroundColor: '#142850',
-    position: 'absolute',
+    position: 'absolute'
   },
   FabBTN: {
-    backgroundColor: '#142850',
+    backgroundColor: '#142850'
   },
   FabIcon: {
-    color: '#ffffff',
-  },
+    color: '#ffffff'
+  }
 });
 
 export default Estilo;
