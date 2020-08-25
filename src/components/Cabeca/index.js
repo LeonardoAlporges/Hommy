@@ -33,7 +33,9 @@ import {
   ViewLabelAmigos,
   BotesLogin,
   Botao,
-  LabelBotoes
+  LabelBotoes,
+  SairdoApp,
+  LabelBotaoSair
 } from './style';
 
 function Cabeca({ navigation }) {
@@ -245,110 +247,14 @@ function Cabeca({ navigation }) {
                   </BotesLogin>
                 </CardAmigos>
               </Linha>
+              <Linha>
+                <SairdoApp style={Estilos.card} onPress={closeToken}>
+                  <LabelBotaoSair>Desconectar-se</LabelBotaoSair>
+                </SairdoApp>
+              </Linha>
             </Menu>
           </ScrollView>
         </Container>
-
-        {/* <View style={Estilos.bgModal}>
-          <View style={Estilos.modal}>
-            <View style={Estilos.voltar}>
-              <TouchableOpacity
-                onPress={() => {
-                  setIsModalVisible(false);
-                }}
-              >
-                <Icon style={Estilos.iconModal} name="arrow-left" />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={closeToken}>
-                <Icon style={Estilos.iconModal} name="login" />
-              </TouchableOpacity>
-            </View>
-            {fotoPerfil != null && (
-              <View style={Estilos.fotodeperfil}>
-                <Image
-                  source={{
-                    uri: fotoPerfil
-                  }}
-                  style={Estilos.fotoPerfil}
-                />
-                {/* <TouchableOpacity style={Estilos.editFoto}>
-                    <Icon style={Estilos.iconBotoesArrow} name="pencil" />
-                  </TouchableOpacity> 
-              </View>
-            )}
-
-            <View style={Estilos.viewNome}>
-              <Text style={Estilos.textNome}>{nome}</Text>
-              <Text style={Estilos.textCPF}>
-                {nota}
-                <Icon name="star" />
-              </Text>
-            </View>
-            <View style={Estilos.viewDivisor} /> */}
-        {/* <ScrollView>
-              <View style={Estilos.viewBotoes}>
-                <Button
-                  style={Estilos.botoes}
-                  onPress={() => {
-                    navigation.navigate('Anuncios'), setIsModalVisible(false);
-                  }}
-                >
-                  <Icon style={Estilos.iconBotoes} name="book-open" />
-                  <Text style={Estilos.textBotoes}>Meus Anuncios</Text>
-                  <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
-                </Button>
-                <Button
-                  style={Estilos.botoes}
-                  onPress={() => {
-                    navigation.navigate('AgendamentoUser', {
-                      usuario: true
-                    }),
-                      setIsModalVisible(false);
-                  }}
-                >
-                  <Icon style={Estilos.iconBotoes} name="list" />
-                  <Text style={Estilos.textBotoes}>Meus Agendamentos</Text>
-                  <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
-                </Button>
-                <Button
-                  onPress={() => {
-                    navigation.navigate('Viagens'), setIsModalVisible(false);
-                  }}
-                  style={Estilos.botoes}
-                >
-                  <Icon style={Estilos.iconBotoes} name="question" />
-                  <Text style={Estilos.textBotoes}>Meus interesses</Text>
-                  <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
-                </Button>
-                <Button
-                  style={Estilos.botoes}
-                  onPress={() => {
-                    navigation.navigate('TelefoneUteis');
-                    setIsModalVisible(false);
-                  }}
-                >
-                  <Icon style={Estilos.iconBotoes} name="phone" />
-                  <Text style={Estilos.textBotoes}>Telefones Úteis</Text>
-                  <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
-                </Button>
-
-                <Button
-                  onPress={() => {
-                    Linking.openURL('mailto:contato.hommy@gmail.com');
-                  }}
-                  style={Estilos.botoes}
-                >
-                  <Icon style={Estilos.iconBotoes} name="exclamation" />
-                  <Text style={Estilos.textBotoes}>Enviar feedback</Text>
-                  <Icon style={Estilos.iconBotoesArrow} name="arrow-right" />
-                </Button>
-              </View>
-            </ScrollView> */}
-        {/* <View style={Estilos.viewFooter}>
-                <Text width="100%">©2020 Todos direiros reservados.</Text>
-              </View> */}
-        {/* </View>
-        </View> */}
       </Modal>
     </View>
   );

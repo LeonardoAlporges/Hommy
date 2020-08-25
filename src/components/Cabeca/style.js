@@ -63,7 +63,6 @@ export const Menu = styled.View`
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: #f2f2f2;
 `;
 export const Linha = styled.View`
   margin: 10px 0 10px 0;
@@ -136,6 +135,21 @@ export const Botao = styled(Button)`
 export const LabelBotoes = styled.Text`
   font-family: WorkSans;
   font-size: 14px;
+  color: #022250;
+`;
+
+export const SairdoApp = styled.TouchableOpacity`
+  background-color: #fff;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 40px;
+  border-radius: 5;
+`;
+export const LabelBotaoSair = styled.Text`
+  font-family: WorkSans;
+  font-size: 16px;
   color: #022250;
 `;
 
