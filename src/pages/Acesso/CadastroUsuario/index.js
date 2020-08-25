@@ -56,10 +56,7 @@ export default function CadastroUsuario({ navigation }) {
 
   async function enviarCadastro(value) {
     setLoading(true);
-    console.log('1');
     value.fotoPerfil = imagemLink ? imagemLink : imagemPerfilPadrao;
-    console.log('2');
-    console.log(value);
     api
       .post('/usuario', value)
       .then(response => {
