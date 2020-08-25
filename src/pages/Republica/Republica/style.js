@@ -62,10 +62,7 @@ const estilosRepublica = StyleSheet.create({
     width: '80%'
   },
   V_filtroExterno: {
-    height: '100%',
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center'
+    flex: 1
   },
   V_filtroInterno: {
     justifyContent: 'center',
@@ -73,9 +70,9 @@ const estilosRepublica = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 10,
     marginHorizontal: 20,
-    marginTop: 90,
-    backgroundColor: 'white',
-    borderRadius: 20,
+    marginTop: 130,
+    backgroundColor: '#fff',
+    borderRadius: 5,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
