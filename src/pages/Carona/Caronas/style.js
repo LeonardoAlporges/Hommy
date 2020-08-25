@@ -13,7 +13,7 @@ const Estilo = StyleSheet.create({
     marginBottom: 0
   },
   flatList: {
-    backgroundColor: '#f2f2f2',
+    backgroundColor: '#ffffff',
     padding: 0,
     marginBottom: 0,
     paddingBottom: 0

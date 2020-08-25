@@ -104,8 +104,7 @@ function Cabeca({ navigation }) {
               <ViewFotoPerfil>
                 <Image
                   source={{
-                    uri:
-                      'https://postcron.com/pt/blog/wp-content/uploads/2016/05/foto-de-perfil-assimetrica-ideal.jpg'
+                    uri: fotoPerfil
                   }}
                   style={Estilos.fotoPerfil}
                 />
