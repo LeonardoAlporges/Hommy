@@ -59,13 +59,16 @@ export default function CadastroUsuario({ navigation }) {
     console.log('1');
     value.fotoPerfil = imagemLink ? imagemLink : imagemPerfilPadrao;
     console.log('2');
+    console.log(value);
     api
       .post('/usuario', value)
       .then(response => {
+        console.log(response);
         setLoading(false);
         setSucesso(true);
       })
       .catch(error => {
+        console.log(response);
         setLoading(false);
         setErro(true);
       });
@@ -116,8 +119,8 @@ export default function CadastroUsuario({ navigation }) {
         {imagemPerfil ? (
           <Imagem source={{ uri: imagemPerfil }} />
         ) : (
-            <Imagem source={require('../../../assets/Img/pessoas.png')} />
-          )}
+          <Imagem source={require('../../../assets/Img/pessoas.png')} />
+        )}
         <BotaoEnviarFoto>
           <BotaoFoto onPress={() => gerarLinkImagemPerfil()}>
             <LabelBotaoFoto> + ENVIAR FOTO</LabelBotaoFoto>
