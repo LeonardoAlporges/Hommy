@@ -32,9 +32,12 @@ import style, {
   ModalLoad,
   Click
 } from './style';
+import { LoginButton, AccessToken, LoginResult } from 'react-native-fbsdk';
+import { facebookLogin } from '../../../utils/facebook';
 
 import CustomModal from '../../../components/Alert';
 import * as userAction from '../../../actions/UserAction';
+import { set } from 'lodash';
 
 export function Login({ navigation }) {
   const [modalErroLogin, setmodalErroLogin] = useState(false);
@@ -44,6 +47,21 @@ export function Login({ navigation }) {
   const [loading, setloading] = useState(false);
   const dispatch = useDispatch();
 
+  const [faceUser, setFaceUser] = useState();
+  const [faceErro, setFaceErro] = useState();
+  const [social_id, setSocial_id] = useState();
+  const [faceEmail, setFaceEmail] = useState();
+  const [faceUsername, setFaceUsername] = useState();
+  const [faceSocialOrigem, setFaceSocialOrigem] = useState();
+
+  useEffect(() => {
+    pegar();
+  }, []);
+  async function pegar() {
+    const dados = JSON.parse(await AsyncStorage.getItem('@Facebook:accessData'));
+    console.log(dados);
+  }
+
   async function salvarDadosStorage(dados) {
     try {
       dispatch(userAction.editNome(dados.usuario.nome));
@@ -51,6 +69,7 @@ export function Login({ navigation }) {
       dispatch(userAction.editFoto(dados.usuario.fotoPerfil));
       dispatch(userAction.editNota(dados.usuario.nota));
       dispatch(userAction.editTelefone(dados.celular));
+
       await AsyncStorage.setItem('token', JSON.stringify(dados.token));
       await AsyncStorage.setItem('user', JSON.stringify(dados.usuario));
     } catch (error) {
@@ -64,6 +83,23 @@ export function Login({ navigation }) {
       actions: [NavigationActions.navigate({ routeName: Rota })]
     });
     navigation.dispatch(resetAction);
+  }
+
+  function login_facebook() {
+    const response = facebookLogin();
+
+    if (response.error) {
+      console.log('RESPOSTA DE ERRO:', response);
+      //Se o tipo do erro foi token expirado, chamar de novo a rotina para gerar um token novo
+      setFaceErro(true);
+      return false;
+    }
+    console.log('Resposta da busca de informaçao:', response);
+    setFaceUser(response.user);
+    setFaceErro('');
+    setSocial_id(response.user.id);
+    setFaceUsername(response.user.name);
+    setFaceSocialOrigem('FACEBOOK');
   }
 
   function fazerLogin(value) {
@@ -137,6 +173,17 @@ export function Login({ navigation }) {
           />
         </LinearGradient>
         <LabelRedeSocial>FAÇA LOGIN COM SUA REDE SOCIAL</LabelRedeSocial>
+        <LoginButton
+          onLoginFinished={(error, result) => {
+            if (error) {
+              console.log('login has error: ' + result.error);
+            } else if (result.isCancelled) {
+              console.log('login is cancelled.');
+            }
+            login_facebook();
+          }}
+          onLogoutFinished={() => console.log('logout.')}
+        />
         <BotesLogin>
           <Botao transparent>
             <Image
