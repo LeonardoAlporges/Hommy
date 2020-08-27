@@ -7,6 +7,7 @@ buildscript {
         compileSdkVersion = 28
         targetSdkVersion = 28
         supportLibVersion = "28.0.0"
+        googlePlayServicesAuthVersion = "16.0.1"
     }
     repositories {
         google()
@@ -14,7 +15,6 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-
         classpath('com.android.tools.build:gradle:3.6.3')
         classpath('com.google.gms:google-services:4.3.3')
         // NOTE: Do not place your application dependencies here; they belong

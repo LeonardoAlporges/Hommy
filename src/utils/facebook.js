@@ -46,7 +46,8 @@ export const facebookLogin = async () => {
       await AsyncStorage.setItem('@Facebook:accessData', JSON.stringify(accessData));
     }
     const info = await getAccountInfo(accessData);
-    return { user: info };
+    console.log('info', info);
+    return info;
   } catch (err) {
     await AsyncStorage.removeItem('@Facebook:accessData');
     // return err.userInfo[Object.keys(err.userInfo)[2]].body;
