@@ -97,7 +97,7 @@ export const ViewLabel = styled.View`
 export const Label = styled.Text`
   font-family: WorkSans;
   font-size: 14px;
-  color: #022250;
+  color: #212c50;
 `;
 export const CardAmigos = styled.TouchableOpacity`
   background-color: #fff;
@@ -181,7 +181,8 @@ const Estilos = StyleSheet.create({
   },
   touch_Icon: {
     position: 'absolute',
-    left: 15
+    left: 15,
+    color: '#1f242e'
   },
   touch_Fake: {
     position: 'absolute',
@@ -194,10 +195,10 @@ const Estilos = StyleSheet.create({
   txt: {
     fontFamily: 'WorkSans-Bold',
     fontSize: 26,
-    color: '#142850'
+    color: '#1f242e'
   },
   icon2: {
-    color: '#142850',
+    color: '#1f242e',
     fontSize: 30
   },
   bgModal: {

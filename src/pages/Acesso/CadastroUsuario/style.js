@@ -26,12 +26,12 @@ export const BotaoFoto = styled(Button)`
   border-radius: 2px;
   align-items: center;
   justify-content: center;
-  background-color: #d9e0e6;
+  background-color: #dae1e7;
 `;
 export const LabelBotaoFoto = styled.Text`
   font-family: WorkSans-Bold;
   font-size: 14px;
-  color: #263b50;
+  color: #142850;
 `;
 export const CampoLogin = styled.View`
   width: 80%;
@@ -59,7 +59,7 @@ export const BotaoCadastro = styled.TouchableOpacity`
   border-radius: 4px;
 `;
 export const LabelBotao = styled.Text`
-  font-family: WorkSans-Bold;
+  font-family: WorkSans-SemiBold;
   font-size: 16px;
   color: #ffffff;
 `;
@@ -193,7 +193,7 @@ const estilo = StyleSheet.create({
     marginLeft: '2%',
     width: '88%',
     height: 40,
-    color: '#263b50'
+    color: '#142850'
   }
 });
 

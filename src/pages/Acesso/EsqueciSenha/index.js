@@ -76,8 +76,9 @@ export default function EsqueciSenha({ navigation }) {
                 <Icon style={estilo.icons_CamposLogin} active name="email-outline" />
                 <Input
                   placeholderTextColor="#2e2e2e"
+                  floatingLabel={false}
                   style={estilo.labelInput}
-                  value={values.email} //NOME
+                  value={values.email} 
                   onChangeText={handleChange('email')}
                   onBlur={() => setFieldTouched('email')}
                   placeholder="E-mail"
