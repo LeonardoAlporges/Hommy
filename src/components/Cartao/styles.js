@@ -29,9 +29,9 @@ export const ViewTitulo = styled.View`
   padding-top: 5px;
 `;
 export const Titulo = styled.Text`
-  font-family: WorkSans-Bold;
+  font-family: WorkSans-SemiBold;
   font-size: 18px;
-  color: #203258;
+  color: #212c50;
 `;
 export const ViewComIcones = styled.View`
   justify-content: space-evenly;
@@ -52,7 +52,7 @@ export const ViewDescricao = styled.View`
 export const Descricao = styled.Text`
   font-family: WorkSans;
   font-size: 14px;
-  color: #022250;
+  color: #212c50;
 `;
 export const ViewValor = styled.View`
   justify-content: flex-start;
@@ -72,12 +72,12 @@ export const ViewVagas = styled.View`
 export const Label = styled.Text`
   font-family: WorkSans-Bold;
   font-size: 14px;
-  color: #022250;
+  color: #212c50;
 `;
 
 const styles = StyleSheet.create({
   V_cartao: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fff',
     padding: 15,
     display: 'flex',
     flexDirection: 'row',
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   icones: {
     marginHorizontal: 5,
     fontSize: 18,
-    color: '#022250'
+    color: '#212c50'
   }
 });
 

@@ -66,7 +66,7 @@ const estilo = StyleSheet.create({
     alignItems: 'center',
   },
   view_CamposLogin: {
-    marginTop: '10%',
+    marginTop: '15%',
     height: 40,
     width: 330,
   },

@@ -10,12 +10,12 @@ const estilo = StyleSheet.create({
   },
   tabs_TextStyle: {
     color: '#142850',
-    fontFamily: 'WorkSans',
+    fontFamily: 'WorkSans-Black',
     fontSize: 15
   },
   tabs_ActiveTextStyle: {
     color: '#142850',
-    fontFamily: 'WorkSans',
+    fontFamily: 'WorkSans-Medium',
     fontWeight: '700',
     fontSize: 16
   },
