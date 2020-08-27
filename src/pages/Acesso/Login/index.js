@@ -248,12 +248,7 @@ export function Login({ navigation }) {
             />
             <LabelBotoes>Google</LabelBotoes>
           </Botao>
-          <Botao
-            transparent
-            onPress={() => {
-              handleFacebookLogin();
-            }}
-          >
+          <Botao transparent>
             <Image
               resizeMode="contain"
               style={{ width: 20, height: 20 }}

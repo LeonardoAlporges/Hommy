@@ -195,10 +195,10 @@ const Estilos = StyleSheet.create({
   txt: {
     fontFamily: 'WorkSans-Bold',
     fontSize: 26,
-    color: '#1f242e'
+    color: '#212c50'
   },
   icon2: {
-    color: '#1f242e',
+    color: '#212c50',
     fontSize: 30
   },
   bgModal: {
