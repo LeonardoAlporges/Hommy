@@ -129,7 +129,7 @@ function Cabeca({ navigation }) {
                   }}
                 >
                   <ViewIcons>
-                    <Icon name="card-text-outline" color="#022250" size={35}></Icon>
+                    <Icon name="card-text-outline" color="#212c50" size={35}></Icon>
                   </ViewIcons>
                   <ViewLabel>
                     <Label>Anuncios</Label>
@@ -145,7 +145,7 @@ function Cabeca({ navigation }) {
                   }}
                 >
                   <ViewIcons>
-                    <Icon name="calendar-month-outline" color="#022250" size={35}></Icon>
+                    <Icon name="calendar-month-outline" color="#212c50" size={35}></Icon>
                   </ViewIcons>
                   <ViewLabel>
                     <Label>Agendamentos</Label>
@@ -160,7 +160,7 @@ function Cabeca({ navigation }) {
                   }}
                 >
                   <ViewIcons>
-                    <Icon name="car" color="#022250" size={35}></Icon>
+                    <Icon name="car" color="#212c50" size={35}></Icon>
                   </ViewIcons>
                   <ViewLabel>
                     <Label>Interesses</Label>
@@ -174,7 +174,7 @@ function Cabeca({ navigation }) {
                   }}
                 >
                   <ViewIcons>
-                    <Icon name="phone-outline" color="#022250" size={35}></Icon>
+                    <Icon name="phone-outline" color="#212c50" size={35}></Icon>
                   </ViewIcons>
                   <ViewLabel>
                     <Label>Telefones</Label>
@@ -189,7 +189,7 @@ function Cabeca({ navigation }) {
                   }}
                 >
                   <ViewIcons>
-                    <Icon name="help-circle-outline" color="#022250" size={35}></Icon>
+                    <Icon name="help-circle-outline" color="#212c50" size={35}></Icon>
                   </ViewIcons>
                   <ViewLabel>
                     <Label>Ajuda</Label>
@@ -202,7 +202,7 @@ function Cabeca({ navigation }) {
                   }}
                 >
                   <ViewIcons>
-                    <Icon name="heart-outline" color="#022250" size={35}></Icon>
+                    <Icon name="heart-outline" color="#212c50" size={35}></Icon>
                   </ViewIcons>
                   <ViewLabel>
                     <Label>Feedback</Label>
@@ -212,7 +212,7 @@ function Cabeca({ navigation }) {
               <Linha>
                 <CardAmigos style={Estilos.card}>
                   <ViewIcons>
-                    <Icon name="account-multiple-plus-outline" color="#022250" size={35}></Icon>
+                    <Icon name="account-multiple-plus-outline" color="#212c50" size={35}></Icon>
                   </ViewIcons>
                   <ViewLabelAmigos>
                     <Label>Convidar amigos</Label>

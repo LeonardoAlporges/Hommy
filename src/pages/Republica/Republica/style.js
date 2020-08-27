@@ -70,7 +70,7 @@ const estilosRepublica = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 10,
     marginHorizontal: 20,
-    marginTop: 130,
+    marginVertical: 120,
     backgroundColor: '#fff',
     borderRadius: 5,
     alignItems: 'center',

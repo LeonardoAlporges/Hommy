@@ -13,7 +13,7 @@ const Estilo = StyleSheet.create({
     marginBottom: 0
   },
   flatList: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#f7f8f9',
     padding: 0,
     marginBottom: 0,
     paddingBottom: 0
@@ -89,7 +89,7 @@ const Estilo = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 15,
-    marginTop: 90,
+    marginVertical: 120,
     paddingHorizontal: 10,
     marginHorizontal: 20,
     backgroundColor: 'white',
