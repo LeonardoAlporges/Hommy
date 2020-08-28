@@ -38,11 +38,24 @@ export default function Cadastro({ navigation }) {
   const [usuarioLogado, setUsuarioLogado] = useState();
 
   useEffect(() => {
-    console.log(dadosRepublica, atualizarCadastro);
     if (atualizarCadastro) {
-      setImagem1(dadosRepublica.imagem1);
-      setImagem2(dadosRepublica.imagem2);
-      setImagem3(dadosRepublica.imagem3);
+      if (dadosRepublica.imagem1 != null) {
+        setImagem1(dadosRepublica.imagem1);
+        setLinkImagem1(dadosRepublica.imagem1);
+        setContadorImagem(contadorImagem + 1);
+      }
+
+      if (dadosRepublica.imagem2 != null) {
+        setImagem2(dadosRepublica.imagem2);
+        setLinkImagem2(dadosRepublica.imagem2);
+        setContadorImagem(contadorImagem + 1);
+      }
+
+      if (dadosRepublica.imagem3 != null) {
+        setImagem3(dadosRepublica.imagem3);
+        setLinkImagem3(dadosRepublica.imagem3);
+        setContadorImagem(contadorImagem + 1);
+      }
     }
     verificarParametro();
   }, []);
@@ -162,8 +175,13 @@ export default function Cadastro({ navigation }) {
         setSucesso(true);
       })
       .catch(error => {
-        if (error.response.status == 401 || error.response.status == 404) {
+        if (
+          error.response.status == 401 ||
+          error.response.status == 404 ||
+          error.response.status == 400
+        ) {
           setErroExisteRepublica(true);
+          setLoading(false);
         } else {
           setErro(true);
           setLoading(false);
