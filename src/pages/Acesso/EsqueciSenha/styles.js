@@ -67,7 +67,7 @@ const estilo = StyleSheet.create({
   },
   view_CamposLogin: {
     marginTop: '15%',
-    height: 40,
+    height: 60,
     width: 330,
   },
 
