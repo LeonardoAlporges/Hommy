@@ -81,7 +81,7 @@ export function CartaoCarona({ navigation, dados }) {
           <Separador></Separador>
           <CardsInfeirores>
             <Label>Chegada</Label>
-            <Informacao>{horaSaida}</Informacao>
+            <Informacao>{horaChegada}</Informacao>
           </CardsInfeirores>
           <Separador></Separador>
           <CardsInfeirores>
