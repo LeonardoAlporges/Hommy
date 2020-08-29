@@ -212,7 +212,7 @@ export default function CadastroCarona({ navigation }) {
             <ScrollView>
               <View key="1">
                 <HeaderBack
-                  title="Cadastre sua viagem"
+                  title="Cadastre de carona"
                   onNavigation={() => navigation.goBack(null)}
                 />
 

@@ -7,13 +7,13 @@ const style = StyleSheet.create({
     width: '100%',
     height: 55,
     backgroundColor: 'rgba(20, 40, 80,0.0)',
-    borderBottomWidth: 2,
+    borderBottomWidth: 1,
     borderBottomColor: '#142850',
     alignItems: 'center',
     justifyContent: 'flex-start'
   },
   iconHeader: {
-    fontSize: 26,
+    fontSize: 28,
     color: '#142850'
   },
   title: {
@@ -29,24 +29,26 @@ const style = StyleSheet.create({
     height: 55,
     backgroundColor: '#ffffff',
     alignItems: 'center',
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
+    borderBottomWidth: 1,
+    borderBottomColor: '#dcdcdc'
   },
   Touch: {
-    width: '10%',
+    width: '18%',
     alignItems: 'center',
     height: 40,
     justifyContent: 'center'
   },
   V_Title: {
-    width: '80%',
+    width: '82%',
     height: 40,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'flex-start'
   },
   txt_title: {
-    fontSize: 16,
-    fontFamily: 'WorkSans',
-    //fontWeight: 'bold',
+    fontSize: 20,
+    fontFamily: 'WorkSans-Bold',
+
     color: '#142850'
   }
 });
