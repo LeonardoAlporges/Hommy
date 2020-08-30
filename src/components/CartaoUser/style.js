@@ -37,7 +37,7 @@ const style = StyleSheet.create({
   nome: {
     textAlign: 'center',
     fontSize: 18,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
   },
   V_nota: {
     flexDirection: 'row',
@@ -49,7 +49,7 @@ const style = StyleSheet.create({
   nota: {
     textAlign: 'center',
     fontSize: 16,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
   },
   icon: { fontSize: 14, color: '#142850' },
   iconAceite: {

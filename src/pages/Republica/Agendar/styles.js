@@ -42,7 +42,7 @@ const style = StyleSheet.create({
     fontSize: 16,
     color: '#142850',
     fontWeight: 'bold',
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
   },
   placeHolder: {
     paddingTop: 15,
@@ -51,7 +51,7 @@ const style = StyleSheet.create({
     fontSize: 16,
     color: '#989898',
     fontWeight: 'bold',
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
   },
   ViewClock: {
     flexDirection: 'row',
@@ -59,14 +59,14 @@ const style = StyleSheet.create({
     alignItems: 'center',
   },
   textClock: {
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontWeight: 'bold',
     fontSize: 16,
     color: '#142850',
     marginRight: 10,
   },
   textClockPlace: {
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontWeight: 'bold',
     fontSize: 16,
     color: '#989898',
@@ -87,7 +87,7 @@ const style = StyleSheet.create({
     marginTop: 10,
   },
   textDescrição: {
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontSize: 14,
     color: '#687368',
     marginBottom: 25,

@@ -10,7 +10,7 @@ const estilo = StyleSheet.create({
   },
   tabs_TextStyle: {
     color: '#142850',
-    fontFamily: 'WorkSans-Black',
+    fontFamily: 'WorkSans',
     fontSize: 15
   },
   tabs_ActiveTextStyle: {
@@ -20,10 +20,10 @@ const estilo = StyleSheet.create({
     fontSize: 16
   },
   tabs_ActiveTabs: {
-    backgroundColor: '#fff'
+    backgroundColor: '#ffffff'
   },
   tabs_style: {
-    backgroundColor: '#fff'
+    backgroundColor: '#ffffff'
   },
   empty: {
     marginBottom: '8%',

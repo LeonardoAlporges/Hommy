@@ -13,7 +13,7 @@ const estilo = StyleSheet.create({
   },
   titulo: {
     color: '#000',
-    fontFamily: 'Roboto-bold',
+    fontFamily: 'WorkSans-bold',
     fontSize: 26,
     fontWeight: 'bold',
   },
@@ -26,7 +26,7 @@ const estilo = StyleSheet.create({
   },
   descricao: {
     color: '#000',
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontSize: 16,
   },
   barra: {
@@ -50,7 +50,7 @@ const estilo = StyleSheet.create({
   fontTitulo: {
     fontSize: 20,
     fontWeight: '600',
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
   },
   conteudo: {
     display: 'flex',
