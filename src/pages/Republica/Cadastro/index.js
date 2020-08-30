@@ -16,7 +16,18 @@ import api from '../../../service/api';
 import estilo from './style';
 import { NavigationActions, StackActions } from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
-
+import {
+  FieldSet,
+  LabelFielSet,
+  Linha,
+  FieldSetLarge,
+  FieldSetRua,
+  FieldSetNumero,
+  AreaFotos,
+  LabelFotos,
+  DivisaoFotos,
+  Foto
+} from './style';
 export default function Cadastro({ navigation }) {
   const email = useSelector(state => state.user.email);
   const telefone = useSelector(state => state.user.telefone);
@@ -332,18 +343,18 @@ export default function Cadastro({ navigation }) {
             tabContainerStyle={{ height: 45 }}
           >
             <Tab
-              heading="Informações"
+              heading="SOBRE A REPUBLICA"
               tabStyle={estilo.tabs_style}
               textStyle={estilo.tabs_TextStyle}
               activeTabStyle={estilo.tabs_ActiveTabs}
               activeTextStyle={estilo.tabs_ActiveTextStyle}
             >
-              <ScrollView>
+              <ScrollView style={{ width: '100%' }}>
                 <View style={estilo.V_Conteudo}>
                   <Text style={estilo.textRepublica}>
                     Insira as informações necessárias para registrar uma nova república.
                   </Text>
-                  <View style={estilo.V_ImageLabel}>
+                  {/* <View style={estilo.V_ImageLabel}>
                     <Text style={estilo.txtLabel}>Envie Fotos de Sua República</Text>
                   </View>
                   <View style={estilo.V_ImageEmpty}>
@@ -385,56 +396,49 @@ export default function Cadastro({ navigation }) {
                         </View>
                       )}
                     </ScrollView>
-                  </View>
-                  <View style={estilo.V_BotaoImg}>
-                    <Button
-                      disabled={contadorImagem == 3}
-                      style={estilo.botao_send}
-                      onPress={() => {
-                        carregarImagemGaleria();
-                      }}
-                    >
-                      <Text>Enviar Fotos ({contadorImagem}/3)</Text>
-                    </Button>
-                  </View>
-                  <View>
-                    <Text style={estilo.txtLabel}>Nome da República</Text>
-                    <Item>
-                      <Input
-                        value={values.nome}
-                        onChangeText={handleChange('nome')}
-                        placeholder=""
-                        onBlur={() => setFieldTouched('nome')}
-                      />
-                    </Item>
-                  </View>
-                  <View style={estilo.V_error}>
-                    {touched.nome && errors.nome && (
-                      <Text style={estilo.textError}>{errors.nome}</Text>
-                    )}
-                  </View>
+                  </View> */}
+                  <Linha>
+                    <FieldSetLarge>
+                      <LabelFielSet>Nome da republica</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
+                        <Input
+                          value={values.nome}
+                          onChangeText={handleChange('nome')}
+                          placeholder=""
+                          onBlur={() => setFieldTouched('nome')}
+                        />
+                      </Item>
 
-                  <View style={estilo.campos} inlineLabel>
-                    <Label style={estilo.txtLabel}>Bairro</Label>
-                    <Item>
-                      <Input
-                        value={values.bairro}
-                        onChangeText={handleChange('bairro')}
-                        placeholder=""
-                        onBlur={() => setFieldTouched('bairro')}
-                      />
-                    </Item>
-                  </View>
-                  <View style={estilo.V_error}>
-                    {touched.bairro && errors.bairro && (
-                      <Text style={estilo.textError}>{errors.bairro}</Text>
-                    )}
-                  </View>
+                      <View style={estilo.V_error}>
+                        {touched.nome && errors.nome && (
+                          <Text style={estilo.textError}>{errors.nome}</Text>
+                        )}
+                      </View>
+                    </FieldSetLarge>
+                  </Linha>
+                  <Linha>
+                    <FieldSetLarge>
+                      <LabelFielSet>Bairro</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
+                        <Input
+                          value={values.bairro}
+                          onChangeText={handleChange('bairro')}
+                          placeholder=""
+                          onBlur={() => setFieldTouched('bairro')}
+                        />
+                      </Item>
 
-                  <View style={estilo.ruaNum}>
-                    <View floatingLabel style={{ width: '70%' }}>
-                      <Label style={estilo.txtLabel}>Rua </Label>
-                      <Item>
+                      <View style={estilo.V_error}>
+                        {touched.bairro && errors.bairro && (
+                          <Text style={estilo.textError}>{errors.bairro}</Text>
+                        )}
+                      </View>
+                    </FieldSetLarge>
+                  </Linha>
+                  <Linha>
+                    <FieldSetRua>
+                      <LabelFielSet>Rua</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
                         <Input
                           value={values.rua}
                           onChangeText={handleChange('rua')}
@@ -447,11 +451,10 @@ export default function Cadastro({ navigation }) {
                           <Text style={estilo.textError}>{errors.rua}</Text>
                         )}
                       </View>
-                    </View>
-
-                    <View floatingLabel style={{ width: '20%' }}>
-                      <Label style={estilo.txtLabel}>N°</Label>
-                      <Item>
+                    </FieldSetRua>
+                    <FieldSetNumero>
+                      <LabelFielSet>N°</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
                         <Input
                           keyboardType="number-pad"
                           value={values.numero}
@@ -465,33 +468,95 @@ export default function Cadastro({ navigation }) {
                           <Text style={estilo.textError}>{errors.numero}</Text>
                         )}
                       </View>
-                    </View>
-                  </View>
+                    </FieldSetNumero>
+                  </Linha>
 
-                  <View style={estilo.camposAmb} inlineLabel>
-                    <Label style={estilo.txtLabel}>Descrição do Ambiente</Label>
-                    <Item>
-                      <Input
-                        value={values.descricao}
-                        onChangeText={handleChange('descricao')}
-                        placeholderTextColor="#2e2e2e"
-                        //style={estilo.textoValue}
-                        placeholderTextColor="#989898"
-                        placeholder="...Perto da UFES, local para estudo..."
-                        onBlur={() => setFieldTouched('descricao')}
-                      />
-                    </Item>
-                  </View>
-                  <View style={estilo.V_error}>
-                    {touched.descricao && errors.descricao && (
-                      <Text style={estilo.textError}>{errors.descricao}</Text>
-                    )}
-                  </View>
+                  <Linha>
+                    <FieldSetLarge>
+                      <LabelFielSet>Descrição do Ambiente</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
+                        <Input
+                          value={values.descricao}
+                          onChangeText={handleChange('descricao')}
+                          placeholderTextColor="#2e2e2e"
+                          //style={estilo.textoValue}
+                          placeholderTextColor="#989898"
+                          placeholder="...Perto da UFES, local para estudo..."
+                          onBlur={() => setFieldTouched('descricao')}
+                        />
+                      </Item>
+                      <View style={estilo.V_error}>
+                        {touched.descricao && errors.descricao && (
+                          <Text style={estilo.textError}>{errors.descricao}</Text>
+                        )}
+                      </View>
+                    </FieldSetLarge>
+                  </Linha>
+                  <AreaFotos>
+                    <LabelFotos>Fotos da sua republica</LabelFotos>
+                    <DivisaoFotos>
+                      {imagem1 == null ? (
+                        <View style={estilo.V_ImageFullEmpty}>
+                          <Image
+                            source={require('../../../assets/Img/Republica_Send_Pictures.png')}
+                            style={estilo.ImageEmpty}
+                          />
+                        </View>
+                      ) : (
+                        <View style={estilo.V_ImageFull}>
+                          <Image source={{ uri: imagem1 }} style={estilo.ImageFull} />
+                        </View>
+                      )}
+                      {imagem2 == null ? (
+                        <View style={estilo.V_ImageFullEmpty}>
+                          <Image
+                            source={require('../../../assets/Img/Republica_Send_Pictures.png')}
+                            style={estilo.ImageEmpty}
+                          />
+                        </View>
+                      ) : (
+                        <View style={estilo.V_ImageFull}>
+                          <Image source={{ uri: imagem2 }} style={estilo.ImageFull} />
+                        </View>
+                      )}
+                      {imagem3 == null ? (
+                        <View style={estilo.V_ImageFullEmpty}>
+                          <Image
+                            source={require('../../../assets/Img/Republica_Send_Pictures.png')}
+                            style={estilo.ImageEmpty}
+                          />
+                        </View>
+                      ) : (
+                        <View style={estilo.V_ImageFull}>
+                          <Image source={{ uri: imagem3 }} style={estilo.ImageFull} />
+                        </View>
+                      )}
+                    </DivisaoFotos>
+                    <View style={estilo.V_BotaoImg}>
+                      <TouchableOpacity
+                        disabled={contadorImagem == 3}
+                        style={estilo.botao_send}
+                        onPress={() => {
+                          carregarImagemGaleria();
+                        }}
+                      >
+                        <Text
+                          style={{
+                            color: '#142850',
+                            fontFamily: 'WorkSans-SemiBold',
+                            fontSize: 16
+                          }}
+                        >
+                          Enviar Fotos ({contadorImagem}/3)
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  </AreaFotos>
                 </View>
               </ScrollView>
             </Tab>
             <Tab
-              heading="Detalhes"
+              heading="CARACTERISTICAS"
               tabStyle={estilo.tabs_style}
               textStyle={estilo.tabs_TextStyle}
               activeTabStyle={estilo.tabs_ActiveTabs}
@@ -503,11 +568,10 @@ export default function Cadastro({ navigation }) {
                     <Text style={estilo.textRepublica}>
                       Nos campos abaixo preencha os detalhes de sua república.
                     </Text>
-
-                    <View style={estilo.V_Caracteristicas}>
-                      <View style={estilo.V_Campos}>
-                        <Text style={estilo.txtLabel}>Aluguel</Text>
-                        <Item>
+                    <Linha>
+                      <FieldSet>
+                        <LabelFielSet>Aluguel</LabelFielSet>
+                        <Item style={{ borderColor: 'transparent' }}>
                           <Label fixedLabel>R$</Label>
                           <Input
                             keyboardType="number-pad"
@@ -522,11 +586,10 @@ export default function Cadastro({ navigation }) {
                             <Text style={estilo.textError}>{errors.aluguel}</Text>
                           )}
                         </View>
-                      </View>
-
-                      <View style={estilo.V_Campos}>
-                        <Text style={estilo.txtLabel}>Média de Contas</Text>
-                        <Item>
+                      </FieldSet>
+                      <FieldSet>
+                        <LabelFielSet>Média de contas</LabelFielSet>
+                        <Item style={{ borderColor: 'transparent' }}>
                           <Label fixedLabel>R$</Label>
                           <Input
                             keyboardType="number-pad"
@@ -541,13 +604,12 @@ export default function Cadastro({ navigation }) {
                             <Text style={estilo.textError}>{errors.contas}</Text>
                           )}
                         </View>
-                      </View>
-                    </View>
-
-                    <View style={estilo.V_Caracteristicas}>
-                      <View style={estilo.V_Campos}>
-                        <Text style={estilo.txtLabel}>Gênero</Text>
-                        <Item picker>
+                      </FieldSet>
+                    </Linha>
+                    <Linha>
+                      <FieldSet>
+                        <LabelFielSet>Gênero</LabelFielSet>
+                        <Item style={{ borderColor: 'transparent' }}>
                           <Picker
                             mode="dropdown"
                             iosIcon={<Icon name="arrow-down" />}
@@ -573,10 +635,11 @@ export default function Cadastro({ navigation }) {
                             <Text style={estilo.textError}>{errors.genero}</Text>
                           )}
                         </View>
-                      </View>
-                      <View style={estilo.V_Campos}>
-                        <Text style={estilo.txtLabel}>Aceita Animais ?</Text>
-                        <Item picker>
+                      </FieldSet>
+
+                      <FieldSet>
+                        <LabelFielSet>Aceita Animais ?</LabelFielSet>
+                        <Item style={{ borderColor: 'transparent' }}>
                           <Picker
                             mode="dropdown"
                             iosIcon={<Icon name="arrow-down" />}
@@ -601,13 +664,12 @@ export default function Cadastro({ navigation }) {
                             <Text style={estilo.textError}>{errors.animais}</Text>
                           )}
                         </View>
-                      </View>
-                    </View>
-
-                    <View style={estilo.V_Caracteristicas}>
-                      <View style={estilo.V_Campos}>
-                        <Text style={estilo.txtLabel}>Tipo de Imóvel</Text>
-                        <Item picker>
+                      </FieldSet>
+                    </Linha>
+                    <Linha>
+                      <FieldSet>
+                        <LabelFielSet>Imovel</LabelFielSet>
+                        <Item style={{ borderColor: 'transparent' }}>
                           <Picker
                             mode="dropdown"
                             iosIcon={<Icon name="arrow-down" />}
@@ -632,10 +694,10 @@ export default function Cadastro({ navigation }) {
                             <Text style={estilo.textError}>{errors.tipoImovel}</Text>
                           )}
                         </View>
-                      </View>
-                      <View style={estilo.V_Campos}>
-                        <Text style={estilo.txtLabel}>Vagas Disponíveis</Text>
-                        <Item picker>
+                      </FieldSet>
+                      <FieldSet>
+                        <LabelFielSet>Vagas</LabelFielSet>
+                        <Item style={{ borderColor: 'transparent' }}>
                           <Picker
                             mode="dropdown"
                             iosIcon={<Icon name="arrow-down" />}
@@ -662,49 +724,56 @@ export default function Cadastro({ navigation }) {
                             <Text style={estilo.textError}>{errors.numeroVagas}</Text>
                           )}
                         </View>
-                      </View>
-                    </View>
+                      </FieldSet>
+                    </Linha>
+                    <Linha>
+                      <FieldSetLarge>
+                        <LabelFielSet>Mobilia quarto</LabelFielSet>
+                        <Item style={{ borderColor: 'transparent' }}>
+                          <Input
+                            style={estilo.place}
+                            value={values.aQuarto}
+                            onChangeText={handleChange('aQuarto')}
+                            onBlur={() => setFieldTouched('aQuarto')}
+                            placeholder="...Cama, Ventilador, Janela"
+                            placeholderTextColor="#989898"
+                          />
+                        </Item>
+                        <View style={estilo.V_error}>
+                          {touched.aQuarto && errors.aQuarto && (
+                            <Text style={estilo.textError}>{errors.aQuarto}</Text>
+                          )}
+                        </View>
+                      </FieldSetLarge>
+                    </Linha>
+                    <Linha>
+                      <FieldSetLarge>
+                        <LabelFielSet>Mobilia comun</LabelFielSet>
+                        <Item style={{ borderColor: 'transparent' }}>
+                          <Input
+                            style={estilo.place}
+                            value={values.aRepublica}
+                            onChangeText={handleChange('aRepublica')}
+                            onBlur={() => setFieldTouched('aRepublica')}
+                            placeholderTextColor="#989898"
+                            placeholder="...Wifi, Maquina de Lavar, Fogao"
+                          />
+                        </Item>
+                        <View style={estilo.V_error}>
+                          {touched.aRepublica && errors.aRepublica && (
+                            <Text style={estilo.textError}>{errors.aRepublica}</Text>
+                          )}
+                        </View>
+                      </FieldSetLarge>
+                    </Linha>
 
-                    <View style={estilo.campos} inlineLabel>
-                      <Label style={estilo.txtLabel}>Mobília do Quarto</Label>
-                      <Item>
-                        <Input
-                          style={estilo.place}
-                          value={values.aQuarto}
-                          onChangeText={handleChange('aQuarto')}
-                          onBlur={() => setFieldTouched('aQuarto')}
-                          placeholder="...Cama, Ventilador, Janela"
-                          placeholderTextColor="#989898"
-                        />
-                      </Item>
-                    </View>
-                    <View style={estilo.V_error}>
-                      {touched.aQuarto && errors.aQuarto && (
-                        <Text style={estilo.textError}>{errors.aQuarto}</Text>
-                      )}
-                    </View>
-
-                    <View style={estilo.campos} inlineLabel>
-                      <Label style={estilo.txtLabel}>Mobília e eletrodomésticos de uso comum</Label>
-                      <Item>
-                        <Input
-                          style={estilo.place}
-                          value={values.aRepublica}
-                          onChangeText={handleChange('aRepublica')}
-                          onBlur={() => setFieldTouched('aRepublica')}
-                          placeholderTextColor="#989898"
-                          placeholder="...Wifi, Maquina de Lavar, Fogao"
-                        />
-                      </Item>
-                    </View>
-                    <View style={estilo.V_error}>
-                      {touched.aRepublica && errors.aRepublica && (
-                        <Text style={estilo.textError}>{errors.aRepublica}</Text>
-                      )}
-                    </View>
                     <View style={estilo.V_BotaoImg}>
                       <Button style={estilo.botao_send} onPress={handleSubmit}>
-                        <Text>Publicar sua republica</Text>
+                        <Text
+                          style={{ color: '#142850', fontFamily: 'WorkSans-Bold', fontSize: 18 }}
+                        >
+                          Cadastrar republica
+                        </Text>
                       </Button>
                     </View>
                   </View>
