@@ -223,12 +223,12 @@ export function Login({ navigation }) {
           />
         </LinearGradient>
         <LabelRedeSocial>FAÇA LOGIN COM SUA REDE SOCIAL</LabelRedeSocial>
-        <GoogleSigninButton
+        {/* <GoogleSigninButton
           style={{ width: 192, height: 48 }}
           size={GoogleSigninButton.Size.Wide}
           color={GoogleSigninButton.Color.Dark}
           onPress={signIn}
-        />
+        /> */}
         {/* <LoginButton
           onLoginFinished={(error, result) => {
             if (error) {
