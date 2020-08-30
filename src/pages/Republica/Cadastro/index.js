@@ -305,7 +305,7 @@ export default function Cadastro({ navigation }) {
               parametro="Custom"
               imagem="NaoEncontrado"
               titulo="Algo deu errado"
-              descricao="Verifique se você ja possui republica cadastradas em seu email"
+              descricao="Verifique se você ja possui república cadastradas em seu email"
               botao="Entendido"
               callback={() => {
                 setErroExisteRepublica(false);
@@ -343,13 +343,13 @@ export default function Cadastro({ navigation }) {
             tabContainerStyle={{ height: 45 }}
           >
             <Tab
-              heading="SOBRE A REPUBLICA"
+              heading="SOBRE A REPUBLÍCA"
               tabStyle={estilo.tabs_style}
               textStyle={estilo.tabs_TextStyle}
               activeTabStyle={estilo.tabs_ActiveTabs}
               activeTextStyle={estilo.tabs_ActiveTextStyle}
             >
-              <ScrollView style={{ width: '100%' }}>
+              <ScrollView>
                 <View style={estilo.V_Conteudo}>
                   <Text style={estilo.textRepublica}>
                     Insira as informações necessárias para registrar uma nova república.
@@ -399,7 +399,7 @@ export default function Cadastro({ navigation }) {
                   </View> */}
                   <Linha>
                     <FieldSetLarge>
-                      <LabelFielSet>Nome da republica</LabelFielSet>
+                      <LabelFielSet>Nome da república</LabelFielSet>
                       <Item style={{ borderColor: 'transparent' }}>
                         <Input
                           value={values.nome}
@@ -476,12 +476,13 @@ export default function Cadastro({ navigation }) {
                       <LabelFielSet>Descrição do Ambiente</LabelFielSet>
                       <Item style={{ borderColor: 'transparent' }}>
                         <Input
+                          style={{ fontFamily: 'WorkSans' }}
                           value={values.descricao}
                           onChangeText={handleChange('descricao')}
                           placeholderTextColor="#2e2e2e"
                           //style={estilo.textoValue}
                           placeholderTextColor="#989898"
-                          placeholder="...Perto da UFES, local para estudo..."
+                          placeholder="EX.:Perto da UFES, local para estudo..."
                           onBlur={() => setFieldTouched('descricao')}
                         />
                       </Item>
@@ -493,7 +494,7 @@ export default function Cadastro({ navigation }) {
                     </FieldSetLarge>
                   </Linha>
                   <AreaFotos>
-                    <LabelFotos>Fotos da sua republica</LabelFotos>
+                    <LabelFotos>Fotos da sua república</LabelFotos>
                     <DivisaoFotos>
                       {imagem1 == null ? (
                         <View style={estilo.V_ImageFullEmpty}>
@@ -564,7 +565,7 @@ export default function Cadastro({ navigation }) {
             >
               <View key="2">
                 <ScrollView>
-                  <View style={estilo.V_Conteudo2}>
+                  <View style={estilo.V_Conteudo}>
                     <Text style={estilo.textRepublica}>
                       Nos campos abaixo preencha os detalhes de sua república.
                     </Text>
@@ -572,8 +573,19 @@ export default function Cadastro({ navigation }) {
                       <FieldSet>
                         <LabelFielSet>Aluguel</LabelFielSet>
                         <Item style={{ borderColor: 'transparent' }}>
-                          <Label fixedLabel>R$</Label>
+                          <Label
+                            style={{
+                              marginLeft: 10,
+                              fontSize: 16,
+                              fontFamily: 'WorkSans',
+                              color: '#bfc6ea'
+                            }}
+                            fixedLabel
+                          >
+                            R$
+                          </Label>
                           <Input
+                            style={{ fontFamily: 'WorkSans' }}
                             keyboardType="number-pad"
                             value={values.aluguel}
                             onChangeText={handleChange('aluguel')}
@@ -590,8 +602,19 @@ export default function Cadastro({ navigation }) {
                       <FieldSet>
                         <LabelFielSet>Média de contas</LabelFielSet>
                         <Item style={{ borderColor: 'transparent' }}>
-                          <Label fixedLabel>R$</Label>
+                          <Label
+                            style={{
+                              marginLeft: 10,
+                              fontSize: 16,
+                              fontFamily: 'WorkSans',
+                              color: '#bfc6ea'
+                            }}
+                            fixedLabel
+                          >
+                            R$
+                          </Label>
                           <Input
+                            style={{ fontFamily: 'WorkSans' }}
                             keyboardType="number-pad"
                             value={values.contas}
                             onChangeText={handleChange('contas')}
@@ -613,7 +636,7 @@ export default function Cadastro({ navigation }) {
                           <Picker
                             mode="dropdown"
                             iosIcon={<Icon name="arrow-down" />}
-                            style={{ width: undefined }}
+                            style={{ fontFamily: 'WorkSans' }}
                             placeholder=""
                             placeholderStyle={{ color: '#bfc6ea' }}
                             placeholderIconColor="#007aff"
@@ -643,7 +666,7 @@ export default function Cadastro({ navigation }) {
                           <Picker
                             mode="dropdown"
                             iosIcon={<Icon name="arrow-down" />}
-                            style={{ width: undefined }}
+                            style={{ fontFamily: 'WorkSans' }}
                             placeholder="Sim ou Nao"
                             placeholderStyle={{ color: '#bfc6ea' }}
                             placeholderIconColor="#007aff"
@@ -668,12 +691,12 @@ export default function Cadastro({ navigation }) {
                     </Linha>
                     <Linha>
                       <FieldSet>
-                        <LabelFielSet>Imovel</LabelFielSet>
+                        <LabelFielSet>Imóvel</LabelFielSet>
                         <Item style={{ borderColor: 'transparent' }}>
                           <Picker
                             mode="dropdown"
                             iosIcon={<Icon name="arrow-down" />}
-                            style={{ width: undefined }}
+                            style={{ fontFamily: 'WorkSans' }}
                             placeholder=""
                             placeholderStyle={{ color: '#bfc6ea' }}
                             placeholderIconColor="#007aff"
@@ -733,9 +756,10 @@ export default function Cadastro({ navigation }) {
                           <Input
                             style={estilo.place}
                             value={values.aQuarto}
+                            placeholderStyle={{ fontFamily: 'WorkSans' }}
                             onChangeText={handleChange('aQuarto')}
                             onBlur={() => setFieldTouched('aQuarto')}
-                            placeholder="...Cama, Ventilador, Janela"
+                            placeholder="Ex.:Cama, Ventilador, Janela"
                             placeholderTextColor="#989898"
                           />
                         </Item>
@@ -753,10 +777,11 @@ export default function Cadastro({ navigation }) {
                           <Input
                             style={estilo.place}
                             value={values.aRepublica}
+                            placeholderStyle={{ fontFamily: 'WorkSans' }}
                             onChangeText={handleChange('aRepublica')}
                             onBlur={() => setFieldTouched('aRepublica')}
                             placeholderTextColor="#989898"
-                            placeholder="...Wifi, Maquina de Lavar, Fogao"
+                            placeholder="Ex.:Wifi, Maquina de Lavar, Fogao"
                           />
                         </Item>
                         <View style={estilo.V_error}>
@@ -772,7 +797,7 @@ export default function Cadastro({ navigation }) {
                         <Text
                           style={{ color: '#142850', fontFamily: 'WorkSans-Bold', fontSize: 18 }}
                         >
-                          Cadastrar republica
+                          Cadastrar república
                         </Text>
                       </Button>
                     </View>

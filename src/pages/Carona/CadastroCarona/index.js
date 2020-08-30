@@ -232,12 +232,6 @@ export default function CadastroCarona({ navigation }) {
                         }}
                       >
                         <Picker
-                          itemStyle={{
-                            color: 'blue',
-                            backgroundColor: 'green',
-                            marginLeft: 0,
-                            paddingLeft: 10
-                          }}
                           mode="dropdown"
                           placeholder="Cidades"
                           placeholderStyle={{ color: '#bfc6ea' }}
@@ -331,7 +325,7 @@ export default function CadastroCarona({ navigation }) {
                             paddingTop: 13,
                             fontFamily: 'WorkSans',
                             fontSize: 16,
-                            color: '#2e2e2e'
+                            color: '#bfc6ea'
                           }}
                           onDateChange={date => {
                             setDataViagem(date);
@@ -359,7 +353,7 @@ export default function CadastroCarona({ navigation }) {
                             marginLeft: 45,
                             fontFamily: 'WorkSans',
                             fontSize: 16,
-                            color: '#2e2e2e'
+                            color: '#bfc6ea'
                           }}
                         >
                           R$

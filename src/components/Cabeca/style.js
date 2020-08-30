@@ -264,12 +264,12 @@ const Estilos = StyleSheet.create({
   textNome: {
     fontSize: 18,
     fontWeight: 'bold',
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans-Bold',
     color: '#142850'
   },
   textCPF: {
     fontSize: 14,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     color: '#00909e'
   },
   viewDivisor: {
@@ -319,8 +319,8 @@ const Estilos = StyleSheet.create({
   textBotoes: {
     width: '75%',
     fontSize: 18,
-    fontFamily: 'Roboto',
-    fontWeight: '600',
+    fontFamily: 'WorkSans-Bold',
+
     marginLeft: '6%',
     color: '#ffff'
   },

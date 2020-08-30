@@ -45,7 +45,7 @@ export const LabelFielSet = styled.Text`
   left: 10px;
   font-family: WorkSans;
   font-size: 16px;
-  color: #022250;
+  color: #142850;
   background-color: #ffffff;
   padding: 0 5px 0 5px;
 `;
@@ -160,7 +160,8 @@ const estilo = StyleSheet.create({
   },
   V_Conteudo: {
     width: '100%',
-    height: 650,
+    height: '100%',
+    marginBottom: 60,
     paddingVertical: 15,
     paddingHorizontal: 20,
     backgroundColor: '#fff'
@@ -192,7 +193,7 @@ const estilo = StyleSheet.create({
     marginTop: 20
   },
   place: {
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontSize: 14,
     color: '#000000'
   },
@@ -232,11 +233,15 @@ const estilo = StyleSheet.create({
     color: '#687368'
   },
   textError: {
+    fontFamily: 'WorkSans',
+    textAlign: 'left',
     fontSize: 10,
     color: 'red'
   },
   V_error: {
-    height: 15
+    height: 12,
+    width: '100%',
+    textAlign: 'left'
   },
   V_ImageLabel: {
     width: '100%',
