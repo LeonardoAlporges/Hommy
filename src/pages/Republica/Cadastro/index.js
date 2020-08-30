@@ -564,7 +564,7 @@ export default function Cadastro({ navigation }) {
             >
               <View key="2">
                 <ScrollView>
-                  <View style={estilo.V_Conteudo}>
+                  <View style={estilo.V_Conteudo2}>
                     <Text style={estilo.textRepublica}>
                       Nos campos abaixo preencha os detalhes de sua república.
                     </Text>

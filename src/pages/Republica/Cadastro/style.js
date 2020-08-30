@@ -165,6 +165,13 @@ const estilo = StyleSheet.create({
     paddingHorizontal: 20,
     backgroundColor: '#fff'
   },
+  V_Conteudo2: {
+    width: '100%',
+    height: 550,
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    backgroundColor: '#fff'
+  },
   ruaNum: {
     display: 'flex',
     height: 50,
