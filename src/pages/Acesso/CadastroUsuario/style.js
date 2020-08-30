@@ -148,7 +148,7 @@ const estilo = StyleSheet.create({
     flexDirection: 'row'
   },
   txtErro: {
-    fontFamily: 'Roboto-light',
+    fontFamily: 'WorkSans-light',
     fontSize: 10,
     color: 'red'
   },
@@ -167,7 +167,7 @@ const estilo = StyleSheet.create({
   },
   V_Btn: {},
   textoLabel: {
-    fontFamily: 'Roboto Bold',
+    fontFamily: 'WorkSans-Bold',
     fontSize: 13,
     color: '#ffffff'
   },

@@ -35,7 +35,7 @@ const Estilos = StyleSheet.create({
   },
   txtTitulo: {
     fontSize: 20,
-    fontFamily: 'Roboto-Bold',
+    fontFamily: 'WorkSans-Bold',
     fontWeight: 'bold',
   },
   V_desc: {
@@ -45,7 +45,7 @@ const Estilos = StyleSheet.create({
   },
   txtDesc: {
     fontSize: 14,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
   },
   V_notasImg: {
     borderRadius: 10,

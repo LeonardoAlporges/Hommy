@@ -278,7 +278,7 @@ class Caronas extends Component {
                     width: '100%',
                     height: 30,
                     justifyContent: 'center',
-                    alignItems: 'flex-end'
+                    alignItems: 'flex-end',
                   }}
                 >
                   <TouchableOpacity
@@ -290,7 +290,7 @@ class Caronas extends Component {
                     <Icon style={{ fontSize: 22 }} name="close" />
                   </TouchableOpacity>
                 </View>
-                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>
+                <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}>
                   Valor
                 </Text>
                 <ListItem style={Estilo.listStyle}>
@@ -315,7 +315,7 @@ class Caronas extends Component {
                     />
                   </Item>
                 </ListItem>
-                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>
+                <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}>
                   Vagas disponíveis
                 </Text>
                 <ListItem style={Estilo.listStyle}>
@@ -348,7 +348,7 @@ class Caronas extends Component {
                   />
                   <Text style={Estilo.textList}>4+</Text>
                 </ListItem>
-                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>
+                <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}>
                   Saida
                 </Text>
                 <ListItem style={Estilo.listStyle2}>
@@ -379,7 +379,7 @@ class Caronas extends Component {
                     </Picker>
                   </Item>
                 </ListItem>
-                <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>
+                <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}>
                   Destino
                 </Text>
 

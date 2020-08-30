@@ -14,12 +14,12 @@ const estilo = StyleSheet.create({
   },
   tabs_TextStyle: {
     color: '#142850',
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontSize: 15,
   },
   tabs_ActiveTextStyle: {
     color: '#142850',
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontWeight: '700',
     fontSize: 18,
   },
@@ -31,7 +31,7 @@ const estilo = StyleSheet.create({
   },
   textoValue: {
     color: '#2e2e2e',
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontWeight: '600',
     fontSize: 14,
   },
@@ -63,14 +63,14 @@ const estilo = StyleSheet.create({
     marginLeft: '5%',
   },
   txtLabel: {
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontSize: 16,
     fontWeight: 'bold',
     color: '#586880',
   },
   title: {
     fontSize: 24,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontWeight: 'bold',
     color: '#142850',
   },
@@ -101,7 +101,7 @@ const estilo = StyleSheet.create({
     marginTop: 20,
   },
   place: {
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontSize: 14,
     color: '#000000',
   },
@@ -136,7 +136,7 @@ const estilo = StyleSheet.create({
     alignItems: 'center',
   },
   textRepublica: {
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontSize: 14,
     color: '#687368',
     marginBottom: 25,

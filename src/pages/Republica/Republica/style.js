@@ -51,18 +51,18 @@ const estilosRepublica = StyleSheet.create({
   txtModal: {
     fontSize: 22,
     fontWeight: 'bold',
-    fontFamily: 'Roboto'
+    fontFamily: 'WorkSans'
   },
   txtErr: {
     marginTop: 10,
     textAlign: 'center',
     fontSize: 18,
     fontWeight: '400',
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     width: '80%'
   },
   V_filtroExterno: {
-    flex: 1
+    flex: 1,
   },
   V_filtroInterno: {
     justifyContent: 'center',
@@ -100,7 +100,7 @@ const estilosRepublica = StyleSheet.create({
   },
   textFiltroValor: {
     color: '#2e2e2e',
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     textAlign: 'center',
     fontSize: 16,
     paddingBottom: 8
@@ -141,7 +141,7 @@ const estilosRepublica = StyleSheet.create({
   },
   textBotaoModal: {
     color: '#ffffff',
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     textAlign: 'center',
     fontSize: 20
   },

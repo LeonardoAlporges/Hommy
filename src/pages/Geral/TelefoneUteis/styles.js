@@ -23,11 +23,11 @@ const style = StyleSheet.create({
     width: '100%',
     height: 50,
   },
-  Nome: { paddingLeft: 10, width: '50%', fontFamily: 'Roboto', fontSize: 16 },
+  Nome: { paddingLeft: 10, width: '50%', fontFamily: 'WorkSans', fontSize: 16 },
   Numero: {
     textAlign: 'right',
     width: '42%',
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontSize: 16,
     paddingRight: 10,
   },

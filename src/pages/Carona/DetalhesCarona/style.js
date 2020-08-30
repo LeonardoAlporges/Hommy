@@ -45,13 +45,13 @@ const Estilo = StyleSheet.create({
   Nome: {
     color: '#ffff',
     fontSize: 18,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontWeight: 'bold',
   },
   Nota: {
     color: '#ffff',
     fontSize: 16,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
   },
   V_Infor: {
     paddingHorizontal: 30,
@@ -61,7 +61,7 @@ const Estilo = StyleSheet.create({
   },
   data: {
     fontSize: 24,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     color: '#00909e',
     fontWeight: 'bold',
   },
@@ -72,7 +72,7 @@ const Estilo = StyleSheet.create({
     height: 20,
   },
   txtPartida: {
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontWeight: '100',
     fontSize: 16,
     color: '#142850',
@@ -85,7 +85,7 @@ const Estilo = StyleSheet.create({
   Txthora: {
     color: '#142850',
     fontSize: 22,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
   },
   V_valor: {
     marginTop: '10%',
@@ -96,14 +96,14 @@ const Estilo = StyleSheet.create({
   Txtvalor1: {
     color: '#142850',
     fontSize: 18,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontWeight: '200',
     paddingRight: 30,
   },
   Txtvalor: {
     color: '#00909e',
     fontSize: 22,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontWeight: 'bold',
   },
   barra: {
@@ -128,7 +128,7 @@ const Estilo = StyleSheet.create({
   T_ptEm: {
     color: '#142850',
     fontSize: 18,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
   },
   V_label: {
     marginTop: '2%',
@@ -139,7 +139,7 @@ const Estilo = StyleSheet.create({
   T_label: {
     color: '#142850',
     fontSize: 20,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontWeight: 'bold',
   },
   ViewButon: {
@@ -159,7 +159,7 @@ const Estilo = StyleSheet.create({
   txtBotao: {
     color: '#FFF',
     fontSize: 20,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontWeight: 'bold',
   },
   iconBtn: {

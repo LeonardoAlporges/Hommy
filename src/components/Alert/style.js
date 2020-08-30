@@ -37,7 +37,7 @@ const Estilos = StyleSheet.create({
     marginBottom: 15,
     textAlign: 'center',
     justifyContent: 'center',
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontSize: 22,
     fontWeight: 'bold',
   },
@@ -46,7 +46,7 @@ const Estilos = StyleSheet.create({
     marginBottom: '3%',
     textAlign: 'center',
     justifyContent: 'center',
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontSize: 15,
   },
   botao: {
@@ -62,7 +62,7 @@ const Estilos = StyleSheet.create({
   },
   botaoTxt: {
     color: '#ffffff',
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     textAlign: 'center',
     fontSize: 20,
   },

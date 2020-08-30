@@ -17,7 +17,7 @@ function TabsHeader ({ navigation }) {
   
     return (
       <Container>
-        <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+        <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
         <Cabeca />
 
         <Tabs

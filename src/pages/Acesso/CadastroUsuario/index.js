@@ -35,7 +35,7 @@ export default function CadastroUsuario({ navigation }) {
   const [imagemPerfil, setImagemPerfil] = useState();
   const [imagemLink, setImagemLink] = useState();
   const [imagemPerfilPadrao, setImagemPerfilPadrao] = useState(
-    'https://firebasestorage.googleapis.com/v0/b/hommy-d0890.appspot.com/o/pictures%2Fuser%2Funnamed.png?alt=media&token=fa5dad7d-3792-49ec-9545-4d65a2fa1498'
+    'https://firebasestorage.googleapis.com/v0/b/hommy-d0890.appspot.com/o/pictures%2Fuser%2Fperf.png?alt=media&token=ca558498-4912-40ab-8be3-33ee17b69e68'
   );
   const [uploadImagem, setUploadImagem] = useState(false);
   const [loadingEnvioImagem, setLoadingEnvioImagem] = useState(false);
