@@ -1,171 +1,106 @@
+import styled from 'styled-components/native';
+import { Button } from 'native-base';
 import { StyleSheet } from 'react-native';
-import { color } from 'react-native-reanimated';
 
+export const Container = styled.TouchableHighlight`
+  flex: 1;
+  padding: 13px 13px 13px 13px;
+`;
+export const ViewImgaem = styled.View`
+  width: 70px;
+  height: 70px;
+  justify-content: center;
+  align-items: center;
+`;
+export const ViewSuperior = styled.View`
+  width: 100%;
+  height: 70px;
+  flex-direction: row;
+`;
+export const ViewAvaliacaoDestinos = styled.View`
+  width: 80%;
+  height: 100%;
+  padding-left: 5px;
+`;
+export const ViewAvaliacao = styled.View`
+  width: 100%;
+  height: 20px;
+  flex-direction: row;
+`;
+export const ViewDestinos = styled.View`
+  width: 100%;
+  height: 50px;
+  flex-direction: row;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+`;
+export const LabelLocalSaida = styled.Text`
+  height: 25px;
+  font-family: WorkSans-Bold;
+  font-size: 20px;
+  color: #203258;
+`;
+export const LabelLocalChegada = styled.Text`
+  height: 25px;
+  font-family: WorkSans-Bold;
+  font-size: 20px;
+  color: #203258;
+`;
+export const ViewInferior = styled.View`
+  margin: 15px 0 7px 0;
+  width: 100%;
+  height: 40px;
+  flex-direction: row;
+  justify-content: space-around;
+`;
+export const CardsInfeirores = styled.View`
+  width: 30%;
+  height: 40px;
+  align-items: center;
+`;
+export const Label = styled.Text`
+  height: 22px;
+  font-family: WorkSans;
+  font-size: 14px;
+  color: #203258;
+`;
+export const Informacao = styled.Text`
+  height: 20px;
+  font-family: WorkSans-Bold;
+  font-size: 14px;
+  color: #203258;
+`;
+export const Separador = styled.View`
+  width: 1px;
+  height: 40px;
+  border-left-width: 1px;
+  border-style: solid;
+  border-color: #e0e0e0;
+`;
 const Estilos = StyleSheet.create({
-  touch_card: {
-    flex: 1,
-    height: 132,
-    padding: 3,
-    marginTop: 4,
-    backgroundColor: '#ffff',
-    padding: 0,
-    borderWidth: 1,
-    borderRadius: 10,
-    borderColor: '#CFD3D6',
-    marginBottom: 8
-  },
   V_cartao: {
+    backgroundColor: '#ffffff',
+    padding: 15,
     display: 'flex',
-    flexDirection: 'row',
+    height: 150,
+    borderRadius: 4,
+    width: '100%',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 4
   },
-  txtnome: {
-    fontSize: 16,
-    fontFamily: 'Roboto',
-    fontWeight: 'bold',
-    color: '#142850',
-  },
-  V_ImgNome: {
-    flexDirection: 'column',
-    height: '100%',
-    width: 85,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  V_nota: {
-    flexDirection: 'row',
-    width: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  icon: {
-    fontSize: 12,
-    color: '#00909e',
-  },
-  V_imagem: {
-    height: 70,
-    width: 100,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 20,
-  },
+
   imagem: {
-    borderRadius: 50,
-    height: 60,
-    width: 60,
-  },
-  V_local: {
-    width: '50%',
-    height: '100%',
-    paddingLeft: 0,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-  },
-  V_LocLabel: {
-    flexDirection: 'row',
-    width: '100%',
-    height: '50%',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  V_DataVal: {
-    width: '24%',
-    height: '100%',
-  },
-  Data: {
-    marginHorizontal: 5,
-    width: '100%',
-    height: '50%',
-    justifyContent: 'flex-start',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  Valor: {
-    flexDirection: 'row',
-    width: '100%',
-    height: '50%',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  txtIcon: {
-    padding: 0,
-    marginHorizontal: '2%',
-    fontSize: 18,
-    color: '#00909e',
-  },
-  txtdeslc: {
-    fontSize: 18,
-    fontFamily: 'Roboto',
-    fontWeight: 'bold',
-    color: '#142850',    
-    backgroundColor: "blue"
-  },
-  iconDesCh: {
-    fontSize: 12,
-    marginHorizontal: 6,
-  },
-  iconDesSa: {
-    fontSize: 12,
-    marginHorizontal: 6,
-  },
-  txtdeslcSaHora: {
-    paddingTop: 20,
-    fontSize: 18,
-    width: '28%',
-    justifyContent: 'center',
-    height: '100%',
-    fontFamily: 'Roboto',
-    fontWeight: 'bold',
-    color: '#142850',
-  },
-  V_TxtSaida: {
-    justifyContent: 'center',
-    marginLeft: '2%',
-    width: '65%',
-    height: '100%',
-  },
-  txtdeslcSa: {
-    fontSize: 18,
-    fontFamily: 'Roboto',
-    fontWeight: 'bold',
-    color: '#142850',
-    width: "80%",
-  },
-
-  txtdeslcChHora: {
-    width: '28%',
-    height: '100%',
-    paddingTop: 15,
-
-    fontSize: 18,
-    fontFamily: 'Roboto',
-    fontWeight: '400',
-    color: '#142850',
-  },
-
-  txtdeslcCh: {
-    width: '60%',
-    height: '100%',
-    paddingTop: 13,
-    marginLeft: '2%',
-    fontSize: 18,
-    fontFamily: 'Roboto',
-    fontWeight: '400',
-    color: '#142850',  
-  },
-  txtData: {
-    marginLeft: 5,
-    fontFamily: 'Roboto',
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#142850',
-  },
-  txtvalor: {
-    marginLeft: 5,
-    fontFamily: 'Roboto',
-    fontSize: 16,
-    fontWeight: '400',
-    color: '#142850',
-  },
+    borderRadius: 4,
+    height: 70,
+    width: 70
+  }
 });
 
 export default Estilos;

@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   titulo: {
     width: '80%',
     textAlign: 'center',
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontSize: 22,
     fontWeight: 'bold',
     color: '#142850',
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     width: 300,
     textAlign: 'center',
     color: '#1458',
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontSize: 18,
     fontWeight: '400',
   },

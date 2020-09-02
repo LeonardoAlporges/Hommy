@@ -2,31 +2,31 @@ import React, { Component } from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
-import PageAnuncio from './pages/PageAnuncio';
-import Cadastro from './pages/Cadastro/index';
-import Login from './pages/Login';
-import TabsHeader from './pages/Tabs';
+import DetalhesAnuncio from './pages/Republica/DetalhesAnuncio';
+import Cadastro from './pages/Republica/Cadastro/index';
+import Login from './pages/Acesso/Login';
+import TabsHeader from './pages/Geral/Home';
 import Servicos from './pages/Servicos';
-import Republica from './components/Republica';
-import CadastroUsuario from './pages/CadastroUsuario';
+import Republica from './pages/Republica/Republica';
+import CadastroUsuario from './pages/Acesso/CadastroUsuario';
 import DetalhesServicos from './components/DetalhesServicos';
 import Confirmacao from './components/Confirmacao';
-import Anuncios from './pages/Anuncios';
-import Caronas from './pages/Caronas';
-import DetalhesCarona from './pages/DetalhesCarona';
-import RenderApp from './pages/RenderApp/RenderApp';
-import CadastroCaronas from './pages/CadastroCarona';
-import SplashScreen from './pages/SplashScreen';
-import Interessados from './pages/Interessados';
-import Viagens from './pages/Viagens';
-import Perfil from './pages/Perfil';
-import EsqueciSenha from './pages/EsqueciSenha';
-import Agendar from './pages/Agendar';
-import Agendamentos from './pages/Agendamentos';
-import AgendamentoUser from './pages/AgendamentosUser';
-import ValidarCodigo from './pages/ValidarCodigo';
-import Notificacao from './pages/TesteNot';
-import TelefoneUteis from './pages/TelefoneUteis';
+import Anuncios from './pages/Geral/Anuncios';
+import Caronas from './pages/Carona/Caronas';
+import DetalhesCarona from './pages/Carona/DetalhesCarona';
+import RenderApp from './pages/Geral/RenderApp/RenderApp';
+import CadastroCaronas from './pages/Carona/CadastroCarona';
+import SplashScreen from './pages/Geral/SplashScreen';
+import Interessados from './pages/Carona/Interessados';
+import Viagens from './pages/Carona/Viagens';
+import Perfil from './pages/Geral/Perfil';
+import EsqueciSenha from './pages/Acesso/EsqueciSenha';
+import Agendar from './pages/Republica/Agendar';
+import Agendamentos from './pages/Republica/Agendamentos';
+import AgendamentoUser from './pages/Republica/AgendamentosUser';
+import ValidarCodigo from './pages/Acesso/ValidarCodigo';
+import Notificacao from './pages/Geral/TesteNot';
+import TelefoneUteis from './pages/Geral/TelefoneUteis';
 
 import { createDrawerNavigator } from 'react-navigation-drawer';
 
@@ -35,15 +35,16 @@ const Navegação = createStackNavigator(
     RenderApp: {
       screen: RenderApp,
       navigationOptions: {
-        headerLeft: null,
-      },
+        headerLeft: null
+      }
     },
     TabsHeader: {
       screen: TabsHeader,
       navigationOptions: {
-        headerLeft: null,
-      },
+        headerLeft: null
+      }
     },
+    Detalhes: DetalhesAnuncio,
     Login: Login,
     CadastroUsuario: CadastroUsuario,
     ValidarCodigo,
@@ -61,20 +62,20 @@ const Navegação = createStackNavigator(
     DetalhesCarona,
     Caronas,
     Anuncios,
-    Detalhes: PageAnuncio,
+
     DetalhesServicos,
     Republica,
     Servicos,
     Cadastro,
     Confirmacao,
-    SplashScreen,
+    SplashScreen
   },
   {
     initialRouteName: 'RenderApp',
     headerMode: 'none',
     navigationOptions: {
-      headerVisible: false,
-    },
+      headerVisible: false
+    }
   }
 );
 

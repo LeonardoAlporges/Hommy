@@ -6,7 +6,7 @@ export default class CustomModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalVisible: true,
+      modalVisible: this.props.visivel,
       icon: '',
       titulo: '',
       descricao: '',
@@ -69,7 +69,7 @@ export default class CustomModal extends Component {
       });
       if (!this.props.descricao) {
         this.setState({
-          descricao: 'Alguma coisa deu errado. Por favor, verifique sua conexão com a internet.'
+          descricao: 'Alguma coisa deu errado. Por favor, verifique sua conexão com a internet.',
         });
       }
     }
@@ -77,26 +77,24 @@ export default class CustomModal extends Component {
 
   render() {
     return (
-      <View>
-        <Modal animationType="fade" visible={this.state.modalVisible} transparent={true}>
-          <View style={Estilos.ViewFundo}>
-            <View style={Estilos.ViewModal}>
-              <Image style={Estilos.Imagem} source={this.state.icon} />
+      <Modal animationType="fade" visible={this.state.modalVisible} transparent={true}>
+        <View style={Estilos.ViewFundo}>
+          <View style={Estilos.ViewModal}>
+            <Image style={Estilos.Imagem} source={this.state.icon} />
 
-              <Text style={Estilos.titulo}>{this.state.titulo}</Text>
-              <Text style={Estilos.descricao}>{this.state.descricao}</Text>
-              <TouchableOpacity
-                style={Estilos.botao}
-                onPress={async () => {
-                  this.navegar();
-                }}
-              >
-                <Text style={Estilos.botaoTxt}>{this.state.botao}</Text>
-              </TouchableOpacity>
-            </View>
+            <Text style={Estilos.titulo}>{this.state.titulo}</Text>
+            <Text style={Estilos.descricao}>{this.state.descricao}</Text>
+            <TouchableOpacity
+              style={Estilos.botao}
+              onPress={async () => {
+                this.navegar();
+              }}
+            >
+              <Text style={Estilos.botaoTxt}>{this.state.botao}</Text>
+            </TouchableOpacity>
           </View>
-        </Modal>
-      </View>
+        </View>
+      </Modal>
     );
   }
 }
