@@ -15,7 +15,7 @@ const estilo = StyleSheet.create({
   },
   tabs_ActiveTextStyle: {
     color: '#142850',
-    fontFamily: 'WorkSans-Medium',
+    fontFamily: 'WorkSans-Bold',
     fontWeight: '700',
     fontSize: 16
   },

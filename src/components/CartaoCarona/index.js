@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Image, Text, View } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import 'moment/locale/br';
-
+import { useSelector } from 'react-redux';
 import moment from 'moment';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon2 from 'react-native-vector-icons/Feather';
@@ -31,25 +31,14 @@ export function CartaoCarona({ navigation, dados }) {
   const [horaChegada, sethoraChegada] = useState(
     moment(new Date(dados.horaChegada)).format('HH:mm')
   );
-
-  async function preencherUserLogado() {
-    await AsyncStorage.getItem('user').then(value => {
-      setUsuarioLogado(JSON.parse(value));
-    });
-  }
+  const emailUser = useSelector(state => state.user.email);
 
   async function navegarParaDetalhes() {
-    try {
-      await preencherUserLogado();
-      var desativarBotaoInteresse = false;
-      console.log(usuarioLogado);
-      if (dados.userEmail == usuarioLogado.email) {
-        desativarBotaoInteresse = true;
-      }
-      navigation.navigate('DetalhesCarona', { dados, desativarBotaoInteresse });
-    } catch (e) {
-      console.log(e);
+    var desativarBotaoInteresse = false;
+    if (dados.userEmail == emailUser) {
+      desativarBotaoInteresse = true;
     }
+    navigation.navigate('DetalhesCarona', { dados, desativarBotaoInteresse });
   }
 
   return (
@@ -81,7 +70,7 @@ export function CartaoCarona({ navigation, dados }) {
           <Separador></Separador>
           <CardsInfeirores>
             <Label>Chegada</Label>
-            <Informacao>{horaSaida}</Informacao>
+            <Informacao>{horaChegada}</Informacao>
           </CardsInfeirores>
           <Separador></Separador>
           <CardsInfeirores>
