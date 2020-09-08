@@ -40,7 +40,7 @@ const estilo = StyleSheet.create({
     textAlign: 'center',
     fontSize: 22,
     fontWeight: 'bold',
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
 
     width: '80%',
   },
@@ -49,18 +49,18 @@ const estilo = StyleSheet.create({
     textAlign: 'center',
     fontSize: 18,
     fontWeight: '400',
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     width: '80%',
   },
   txtLabel: {
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontSize: 16,
     fontWeight: 'bold',
     color: '#586880',
   },
   title: {
     fontSize: 24,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontWeight: 'bold',
     color: '#142850',
   },
@@ -73,7 +73,7 @@ const estilo = StyleSheet.create({
   },
   label: {
     marginLeft: '6%',
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontSize: 16,
   },
   V_label: {
@@ -130,7 +130,7 @@ const estilo = StyleSheet.create({
   TxtEdit: {
     color: '#ffffff',
     fontSize: 18,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
   },
 
   iconDel: {

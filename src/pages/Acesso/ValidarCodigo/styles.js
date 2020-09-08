@@ -20,7 +20,7 @@ const estilo = StyleSheet.create({
     alignItems: 'flex-start',
   },
   title: {
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontSize: 16,
     color: '#687368',
   },
@@ -32,7 +32,7 @@ const estilo = StyleSheet.create({
   },
   subtitle: {
     textAlign: 'center',
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontSize: 16,
     color: '#687368',
   },
@@ -55,7 +55,7 @@ const estilo = StyleSheet.create({
   },
   txtbtn: {
     textAlign: 'center',
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontSize: 20,
     color: '#ffff',
     fontWeight: 'bold',
@@ -83,7 +83,7 @@ const estilo = StyleSheet.create({
   },
   labelInput: {
     fontSize: 20,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     marginLeft: '2%',
     width: '88%',
     height: 60,

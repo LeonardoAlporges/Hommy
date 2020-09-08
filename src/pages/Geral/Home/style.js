@@ -20,10 +20,10 @@ const estilo = StyleSheet.create({
     fontSize: 16
   },
   tabs_ActiveTabs: {
-    backgroundColor: '#fff'
+    backgroundColor: '#ffffff'
   },
   tabs_style: {
-    backgroundColor: '#fff'
+    backgroundColor: '#ffffff'
   },
   empty: {
     marginBottom: '8%',

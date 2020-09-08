@@ -14,7 +14,7 @@ const style = StyleSheet.create({
   },
   subtitulo: {
     fontSize: 14,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     color: '#2e2e2e',
     marginBottom: 10,
   },
@@ -32,7 +32,7 @@ const style = StyleSheet.create({
   },
   label: {
     marginLeft: '6%',
-    fontFamily: 'Roboto Bold',
+    fontFamily: 'WorkSans-Bold',
     fontSize: 16,
     color: '#142850',
   },
@@ -81,26 +81,26 @@ const style = StyleSheet.create({
   },
   dataRej: {
     fontSize: 16,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     color: '#FFFFFF',
     fontWeight: 'bold',
   },
   data: {
     fontSize: 16,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     color: '#142850',
     fontWeight: 'bold',
   },
   dataConf: {
     fontSize: 16,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     color: '#FFFFFF',
     fontWeight: 'bold',
   },
   title: {
     marginLeft: 5,
     fontSize: 16,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontWeight: 'bold',
     color: '#142850',
   },
@@ -126,7 +126,7 @@ const style = StyleSheet.create({
   },
   titleHeader: {
     fontSize: 24,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontWeight: 'bold',
     color: '#142850',
   },

@@ -23,7 +23,7 @@ const style = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontWeight: 'bold',
     color: '#142850',
   },
@@ -58,7 +58,7 @@ const style = StyleSheet.create({
   },
   nome: {
     fontSize: 18,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
 
     color: '#142850',
   },
@@ -71,7 +71,7 @@ const style = StyleSheet.create({
   nota: {
     marginLeft: 10,
     fontSize: 18,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     color: '#142850',
   },
   V_contatos: {
@@ -99,7 +99,7 @@ const style = StyleSheet.create({
     marginTop: '5%',
     marginLeft: '5%',
     fontSize: 14,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     color: '#142850',
   },
   labelbotao: {

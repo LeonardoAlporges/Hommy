@@ -23,13 +23,13 @@ const style = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontWeight: 'bold',
     color: '#142850',
   },
   subtitulo: {
     fontSize: 14,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
   },
   barra: {
     width: '90%',
@@ -40,7 +40,7 @@ const style = StyleSheet.create({
   },
   label: {
     marginLeft: '6%',
-    fontFamily: 'Roboto Bold',
+    fontFamily: 'WorkSans Bold',
     fontSize: 16,
     color: '#142850',
   },
@@ -67,13 +67,13 @@ const style = StyleSheet.create({
   },
   data: {
     fontSize: 16,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     color: '#142850',
     fontWeight: 'bold',
   },
   dataConf: {
     fontSize: 16,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     color: '#FFFFFF',
     fontWeight: 'bold',
   },
@@ -88,7 +88,7 @@ const style = StyleSheet.create({
   },
   textStatusConf: {
     fontSize: 16,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     color: '#ffffff',
   },
   botaoStatusAna: {
@@ -102,7 +102,7 @@ const style = StyleSheet.create({
   },
   textStatusAna: {
     fontSize: 16,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     color: '#000',
   },
   botaoStatusRej: {
@@ -116,7 +116,7 @@ const style = StyleSheet.create({
   },
   textStatusRej: {
     fontSize: 16,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     color: '#fff',
   },
 
@@ -126,7 +126,7 @@ const style = StyleSheet.create({
   titleCategoria: {
     marginHorizontal: '5%',
     fontSize: 16,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     color: '#2e2e2e',
   },
   V_title: {

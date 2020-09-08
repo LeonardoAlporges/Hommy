@@ -71,14 +71,14 @@ const estilo = StyleSheet.create({
     backgroundColor: 'rgba(52, 52, 52, 0.1)'
   },
   txtLabel: {
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontSize: 16,
     fontWeight: 'bold',
     color: '#586880'
   },
   title: {
     fontSize: 24,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontWeight: 'bold',
     color: '#142850'
   },
@@ -108,7 +108,7 @@ const estilo = StyleSheet.create({
     marginTop: 20
   },
   place: {
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontSize: 14,
     color: '#989898'
   },
@@ -147,7 +147,7 @@ const estilo = StyleSheet.create({
     color: '#fff'
   },
   txtCarona: {
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontSize: 14,
     color: '#687368',
     marginHorizontal: 20

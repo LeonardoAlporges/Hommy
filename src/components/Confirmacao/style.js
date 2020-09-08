@@ -76,7 +76,7 @@ const estilo = StyleSheet.create({
   },
   labelInput: {
     fontSize: 26,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     marginLeft: '2%',
     width: '88%',
     height: 60

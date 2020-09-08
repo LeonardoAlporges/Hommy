@@ -13,7 +13,7 @@ const estilo = StyleSheet.create({
   },
   titulo: {
     color: '#142850',
-    fontFamily: 'Roboto-bold',
+    fontFamily: 'WorkSans-bold',
     fontSize: 24,
     fontWeight: 'bold',
   },
@@ -25,7 +25,7 @@ const estilo = StyleSheet.create({
   },
   descricao: {
     color: '#142850',
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontSize: 18,
   },
   barra: {
@@ -42,7 +42,7 @@ const estilo = StyleSheet.create({
     paddingLeft: '10%',
   },
   caracteristicaTitle: {
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontSize: 22,
     fontWeight: '600',
     color: '#142850',
@@ -54,7 +54,7 @@ const estilo = StyleSheet.create({
     paddingLeft: '10%',
   },
   tipo: {
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontSize: 20,
   },
   V_caracteristicaItens: {
@@ -89,19 +89,19 @@ const estilo = StyleSheet.create({
     color: '#00909e',
     textAlign: 'left',
     fontSize: 16,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontWeight: '600',
   },
   txtlabel4: {
     color: '#00909e',
     fontSize: 16,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontWeight: '600',
   },
   txtlabelGenero: {
     color: '#00909e',
     fontSize: 16,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     fontWeight: '600',
     marginLeft: 30,
     width: 100,
@@ -109,7 +109,7 @@ const estilo = StyleSheet.create({
   icone: {
     justifyContent: 'flex-start',
     fontSize: 28,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     color: '#142850',
     marginRight: '5%',
     fontWeight: '600',
@@ -117,7 +117,7 @@ const estilo = StyleSheet.create({
   iconeAnimal: {
     justifyContent: 'flex-start',
     fontSize: 28,
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     color: '#142850',
     marginRight: '7%',
     fontWeight: '600',

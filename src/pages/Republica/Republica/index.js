@@ -391,7 +391,7 @@ class Republica extends Component {
                 <Icon style={{ fontSize: 22 }} name="close" />
               </TouchableOpacity>
             </View>
-            <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>Valor</Text>
+            <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}>Valor</Text>
             <ListItem style={Estilos.listStyleInput}>
               <View style={Estilos.ViewLabel}>
                 <Text style={Estilos.textFiltroValor}>De R$</Text>
@@ -414,7 +414,7 @@ class Republica extends Component {
                 />
               </Item>
             </ListItem>
-            <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>
+            <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}>
               Aceita animais?
             </Text>
             <ListItem style={Estilos.listStyle}>
@@ -433,7 +433,7 @@ class Republica extends Component {
               />
               <Text style={Estilos.textFiltro}>Não</Text>
             </ListItem>
-            <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>
+            <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}>
               {' '}
               Tipo de república
             </Text>
@@ -461,7 +461,7 @@ class Republica extends Component {
               <Text style={Estilos.textFiltro}>Mista</Text>
             </ListItem>
 
-            <Text style={{ fontFamily: 'Roboto', fontWeight: 'bold', fontSize: 18 }}>
+            <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}>
               Vagas disponíveis
             </Text>
             <ListItem style={Estilos.listStyle}>

@@ -13,7 +13,7 @@ const Estilo = StyleSheet.create({
     marginBottom: 0
   },
   flatList: {
-    backgroundColor: '#f7f8f9',
+    backgroundColor: '#ffffff',
     padding: 0,
     marginBottom: 0,
     paddingBottom: 0
@@ -21,7 +21,7 @@ const Estilo = StyleSheet.create({
   V_externa: {
     height: '100%',
     width: '100%',
-    backgroundColor: '#f2f2f2'
+    backgroundColor: '#ffffff'
   },
   botaoReload: {
     position: 'absolute',
@@ -36,7 +36,7 @@ const Estilo = StyleSheet.create({
   },
   textBotaoModal: {
     color: '#ffffff',
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     textAlign: 'center',
     fontSize: 20
   },
@@ -68,14 +68,14 @@ const Estilo = StyleSheet.create({
   textError: {
     fontSize: 22,
     fontWeight: 'bold',
-    fontFamily: 'Roboto'
+    fontFamily: 'WorkSans'
   },
   textError2: {
     marginTop: 10,
     textAlign: 'center',
     fontSize: 18,
     fontWeight: '400',
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     width: '80%'
   },
   V_modalExterno: {
@@ -118,7 +118,7 @@ const Estilo = StyleSheet.create({
   },
   textValor: {
     color: '#2e2e2e',
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     textAlign: 'center',
     fontSize: 16,
     width: 50,
@@ -157,7 +157,7 @@ const Estilo = StyleSheet.create({
   },
   textBtn: {
     color: '#ffffff',
-    fontFamily: 'Roboto',
+    fontFamily: 'WorkSans',
     textAlign: 'center',
     fontSize: 20
   },
