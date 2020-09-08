@@ -27,6 +27,7 @@ import AgendamentoUser from './pages/Republica/AgendamentosUser';
 import ValidarCodigo from './pages/Acesso/ValidarCodigo';
 import Notificacao from './pages/Geral/TesteNot';
 import TelefoneUteis from './pages/Geral/TelefoneUteis';
+import AutenticacaoTelefone from './pages/Acesso/AutenticaçãoTelefone';
 
 import { createDrawerNavigator } from 'react-navigation-drawer';
 
@@ -68,7 +69,8 @@ const Navegação = createStackNavigator(
     Servicos,
     Cadastro,
     Confirmacao,
-    SplashScreen
+    SplashScreen,
+    AutenticacaoTelefone
   },
   {
     initialRouteName: 'RenderApp',

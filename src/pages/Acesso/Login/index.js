@@ -228,7 +228,7 @@ export function Login({ navigation }) {
               <RecuperaSenha>
                 <Click
                   onPress={() => {
-                    navigation.navigate('EsqueciSenha');
+                    navigation.navigate('AutenticacaoTelefone');
                   }}
                 >
                   <LabelEsqueciSenha>Esqueci minha senha!</LabelEsqueciSenha>
