@@ -11,41 +11,40 @@ const Estilos = StyleSheet.create({
     padding: 0,
     borderWidth: 1,
     borderRadius: 10,
-    borderColor: '#CFD3D6',
+    borderColor: '#CFD3D6'
   },
   V_cartao: {
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   V_imagem: {
     height: 120,
     width: 120,
-    borderRadius: 10,
+    borderRadius: 10
   },
   V_TituloDesc: {
     width: '53%',
     flexDirection: 'column',
-    padding: 5,
+    padding: 5
   },
   V_titulo: {
     width: '100%',
     height: '45%',
     padding: 5,
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   txtTitulo: {
     fontSize: 20,
-    fontFamily: 'WorkSans-Bold',
-    fontWeight: 'bold',
+    fontFamily: 'WorkSans-Bold'
   },
   V_desc: {
     width: '100%',
     height: '50%',
-    padding: 10,
+    padding: 10
   },
   txtDesc: {
     fontSize: 14,
-    fontFamily: 'WorkSans',
+    fontFamily: 'WorkSans'
   },
   V_notasImg: {
     borderRadius: 10,
@@ -53,12 +52,12 @@ const Estilos = StyleSheet.create({
     padding: 5,
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   imgNota: {
     height: 15,
-    width: 15,
-  },
+    width: 15
+  }
 });
 
 export default Estilos;

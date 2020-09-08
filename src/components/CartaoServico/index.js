@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Image, TouchableHighlight, Text, View } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
-
 import Estilos from './style';
 
 class CartaoServico extends Component {
@@ -19,7 +18,11 @@ class CartaoServico extends Component {
 
   render() {
     return (
-      <TouchableHighlight underlayColor="#fff" onPress={this.onClickCard} style={Estilos.touch_card}>
+      <TouchableHighlight
+        underlayColor="#fff"
+        onPress={this.onClickCard}
+        style={Estilos.touch_card}
+      >
         <View style={Estilos.V_cartao}>
           <View style={Estilos.V_imagem}>
             <Image source={{ uri: this.props.leonardo.image }} style={Estilos.V_imagem} />
@@ -39,14 +42,16 @@ class CartaoServico extends Component {
 
           <View style={Estilos.V_notasImg}>
             <View>
-              <Text style={{ fontFamily: 'Roboto', fontSize: 14 }}>{this.props.leonardo.numero}</Text>
+              <Text style={{ fontFamily: 'WorkSans', fontSize: 14 }}>
+                {this.props.leonardo.numero}
+              </Text>
             </View>
 
             <View style={Estilos.imgNota}>
               <Image
                 source={{
                   uri:
-                    'https://firebasestorage.googleapis.com/v0/b/republicas.appspot.com/o/Imagens%2FEstrela.png?alt=media&token=c6e03865-4e3e-4b5d-8bac-bbe06f2debd9',
+                    'https://firebasestorage.googleapis.com/v0/b/republicas.appspot.com/o/Imagens%2FEstrela.png?alt=media&token=c6e03865-4e3e-4b5d-8bac-bbe06f2debd9'
                 }}
                 style={Estilos.imgNota}
               />
@@ -57,6 +62,5 @@ class CartaoServico extends Component {
     );
   }
 }
-
 
 export default withNavigation(CartaoServico);

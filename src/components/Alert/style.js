@@ -6,7 +6,7 @@ const Estilos = StyleSheet.create({
     height: '100%',
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   ViewModal: {
     justifyContent: 'center',
@@ -20,17 +20,17 @@ const Estilos = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 2
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5,
+    elevation: 5
   },
   Imagem: {
     alignSelf: 'center',
     width: 150,
     height: 150,
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   titulo: {
     marginVertical: '3%',
@@ -39,7 +39,7 @@ const Estilos = StyleSheet.create({
     justifyContent: 'center',
     fontFamily: 'WorkSans',
     fontSize: 22,
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   descricao: {
     marginHorizontal: 30,
@@ -47,7 +47,7 @@ const Estilos = StyleSheet.create({
     textAlign: 'center',
     justifyContent: 'center',
     fontFamily: 'WorkSans',
-    fontSize: 15,
+    fontSize: 15
   },
   botao: {
     marginTop: '5%',
@@ -58,14 +58,14 @@ const Estilos = StyleSheet.create({
     elevation: 2,
     justifyContent: 'center',
     height: 50,
-    width: 170,
+    width: 170
   },
   botaoTxt: {
     color: '#ffffff',
     fontFamily: 'WorkSans',
     textAlign: 'center',
-    fontSize: 20,
-  },
+    fontSize: 20
+  }
 });
 
 export default Estilos;

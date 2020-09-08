@@ -195,10 +195,10 @@ const Estilos = StyleSheet.create({
   txt: {
     fontFamily: 'WorkSans-Bold',
     fontSize: 26,
-    color: '#1f242e'
+    color: '#212c50'
   },
   icon2: {
-    color: '#1f242e',
+    color: '#212c50',
     fontSize: 30
   },
   bgModal: {
@@ -264,7 +264,7 @@ const Estilos = StyleSheet.create({
   textNome: {
     fontSize: 18,
     fontWeight: 'bold',
-    fontFamily: 'WorkSans',
+    fontFamily: 'WorkSans-Bold',
     color: '#142850'
   },
   textCPF: {
@@ -319,8 +319,8 @@ const Estilos = StyleSheet.create({
   textBotoes: {
     width: '75%',
     fontSize: 18,
-    fontFamily: 'WorkSans',
-    fontWeight: '600',
+    fontFamily: 'WorkSans-Bold',
+
     marginLeft: '6%',
     color: '#ffff'
   },

@@ -17,6 +17,8 @@ import { Text, Item, Input, Label, Button, Icon, DatePicker, Spinner, Picker } f
 
 import { NavigationActions, StackActions } from 'react-navigation';
 import { set } from 'lodash';
+
+import { FieldSet, LabelFielSet, Linha, FieldSetLarge } from './style';
 export default function CadastroCarona({ navigation }) {
   useEffect(() => {
     console.log(navigation);
@@ -38,10 +40,10 @@ export default function CadastroCarona({ navigation }) {
   const [horarioChegadaPicker, setHorarioChegadaPicker] = useState(false);
   const [horaChegada, setHoraChegada] = useState('00:00');
   const [horaSaida, setHoraSaida] = useState('00:00');
-  const [placeHoraSaida, setPlaceHoraSaida] = useState('00:00');
-  const [placeHoraChegada, setPlaceHoraChegada] = useState('00:00');
+  const [placeHoraSaida, setPlaceHoraSaida] = useState();
+  const [placeHoraChegada, setPlaceHoraChegada] = useState();
   const [botaoEnviar, setBotaoEnviar] = useState(false);
-  const [dataLabel, setDataLabel] = useState('Selecione a data');
+  const [dataLabel, setDataLabel] = useState('Selecione');
 
   useEffect(() => {
     if (atualizacao) {
@@ -128,12 +130,12 @@ export default function CadastroCarona({ navigation }) {
       const saida = moment(new Date(date)).format('HH:mm');
       setHorarioSaidaPicker(false);
       setHoraSaida(date);
-      setPlaceHoraSaida(saida);     
+      setPlaceHoraSaida(saida);
     } else {
       const chegada = moment(new Date(date)).format('HH:mm');
       setHorarioChegadaPicker(false);
       setHoraChegada(date);
-      setPlaceHoraChegada(chegada);      
+      setPlaceHoraChegada(chegada);
     }
   }
 
@@ -210,7 +212,7 @@ export default function CadastroCarona({ navigation }) {
             <ScrollView>
               <View key="1">
                 <HeaderBack
-                  title="Cadastre sua viagem"
+                  title="Cadastre de carona"
                   onNavigation={() => navigation.goBack(null)}
                 />
 
@@ -220,15 +222,17 @@ export default function CadastroCarona({ navigation }) {
                     carona.
                   </Text>
 
-                  <View style={estilo.rowStyle}>
-                    <View style={estilo.campoStyle}>
-                      <Text style={estilo.txtLabel}>Local de Saída</Text>
-
-                      <Item picker>
+                  <Linha>
+                    <FieldSet>
+                      <LabelFielSet>Local de saida</LabelFielSet>
+                      <Item
+                        style={{
+                          paddingLeft: 7,
+                          borderColor: 'transparent'
+                        }}
+                      >
                         <Picker
                           mode="dropdown"
-                          iosIcon={<Icon name="arrow-down" />}
-                          style={{ width: undefined }}
                           placeholder="Cidades"
                           placeholderStyle={{ color: '#bfc6ea' }}
                           placeholderIconColor="#007aff"
@@ -236,7 +240,6 @@ export default function CadastroCarona({ navigation }) {
                           onValueChange={handleChange('saida')}
                           value={values.saida}
                           onChangeText={handleChange('saida')}
-                          placeholder=""
                           onBlur={() => setFieldTouched('saida')}
                         >
                           <Picker.Item label="" value="null" />
@@ -254,17 +257,15 @@ export default function CadastroCarona({ navigation }) {
                           <Picker.Item label="Vitoria" value="Vitoria" />
                         </Picker>
                       </Item>
-
                       <View style={estilo.V_erro}>
                         {touched.saida && errors.saida && (
                           <Text style={estilo.textError}>{errors.saida}</Text>
                         )}
                       </View>
-                    </View>
-
-                    <View style={estilo.campoStyle}>
-                      <Text style={estilo.txtLabel}>Local de Chegada</Text>
-                      <Item picker>
+                    </FieldSet>
+                    <FieldSet>
+                      <LabelFielSet>Local de Chegada</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
                         <Picker
                           mode="dropdown"
                           iosIcon={<Icon name="arrow-down" />}
@@ -293,20 +294,17 @@ export default function CadastroCarona({ navigation }) {
                           <Picker.Item label="Vitoria" value="Vitoria" />
                         </Picker>
                       </Item>
-
                       <View style={estilo.V_erro}>
                         {touched.chegada && errors.chegada && (
                           <Text style={estilo.textError}>{errors.chegada}</Text>
                         )}
                       </View>
-                    </View>
-                  </View>
-
-                  <View style={estilo.rowStyle}>
-                    <View style={estilo.campoStyle}>
-                      <Text style={estilo.txtLabel}>Data</Text>
-                      <Item>
-                        <Label fixedLabel />
+                    </FieldSet>
+                  </Linha>
+                  <Linha>
+                    <FieldSet>
+                      <LabelFielSet>Data</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
                         <DatePicker
                           minimumDate={new Date()}
                           locale={'pt-br'}
@@ -316,19 +314,18 @@ export default function CadastroCarona({ navigation }) {
                           androidMode={'calendar'}
                           placeHolderText={dataLabel}
                           textStyle={{
-                            textAlign: 'left',
-                            paddingTop: 25,
-                            height: 50,
-                            fontSize: 11,
-                            color: '#006fa9'
+                            width: 155,
+                            paddingTop: 13,
+                            fontFamily: 'WorkSans',
+                            fontSize: 16,
+                            color: '#2e2e2e'
                           }}
                           placeHolderTextStyle={{
-                            textAlign: 'right',
-                            paddingTop: 28,
-
-                            height: 50,
-                            fontSize: 11,
-                            color: '#2e2e2e'
+                            width: 155,
+                            paddingTop: 13,
+                            fontFamily: 'WorkSans',
+                            fontSize: 16,
+                            color: '#bfc6ea'
                           }}
                           onDateChange={date => {
                             setDataViagem(date);
@@ -346,12 +343,21 @@ export default function CadastroCarona({ navigation }) {
                           <Text style={estilo.textError}>Campo obrigatório</Text>
                         )}
                       </View>
-                    </View>
-
-                    <View style={estilo.campoStyle}>
-                      <Text style={estilo.txtLabel}>Valor</Text>
-                      <Item>
-                        <Label fixedLabel>R$</Label>
+                    </FieldSet>
+                    <FieldSet>
+                      <LabelFielSet>Valor</LabelFielSet>
+                      <Item regular style={{ borderColor: 'transparent' }}>
+                        <Label
+                          fixedLabel
+                          style={{
+                            marginLeft: 45,
+                            fontFamily: 'WorkSans',
+                            fontSize: 16,
+                            color: '#bfc6ea'
+                          }}
+                        >
+                          R$
+                        </Label>
                         <TextInputMask
                           style={{
                             width: '100%',
@@ -370,13 +376,12 @@ export default function CadastroCarona({ navigation }) {
                           <Text style={estilo.textError}>{errors.valor}</Text>
                         )}
                       </View>
-                    </View>
-                  </View>
-
-                  <View style={estilo.rowStyle}>
-                    <View style={estilo.campoStyle}>
-                      <Text style={estilo.txtLabel}>Horário de saida</Text>
-                      <Item>
+                    </FieldSet>
+                  </Linha>
+                  <Linha>
+                    <FieldSet>
+                      <LabelFielSet>Hora de saida</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
                         <TouchableOpacity
                           onPress={() => {
                             setHorarioSaidaPicker(true);
@@ -397,17 +402,15 @@ export default function CadastroCarona({ navigation }) {
                           />
                         </TouchableOpacity>
                       </Item>
-
                       <View style={estilo.V_erro}>
                         {!horaSaida && botaoEnviar && (
                           <Text style={estilo.textError}>Campo obrigatório</Text>
                         )}
                       </View>
-                    </View>
-
-                    <View style={estilo.campoStyle}>
-                      <Text style={estilo.txtLabel}>Horario de chegada</Text>
-                      <Item>
+                    </FieldSet>
+                    <FieldSet>
+                      <LabelFielSet>Hora de chegada</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
                         <TouchableOpacity
                           onPress={() => {
                             setHorarioChegadaPicker(true);
@@ -427,76 +430,96 @@ export default function CadastroCarona({ navigation }) {
                           />
                         </TouchableOpacity>
                       </Item>
-
                       <View style={estilo.V_erro}>
                         {!horaChegada && botaoEnviar && (
                           <Text style={estilo.textError}>Campo obrigatório</Text>
                         )}
                       </View>
-                    </View>
-                  </View>
-
-                  <View>
-                    <Text style={estilo.txtLabel}>Ponto de Embarque</Text>
-                    <Item>
-                      <Input
-                        value={values.embarque}
-                        onChangeText={handleChange('embarque')}
-                        placeholder=""
-                        onBlur={() => setFieldTouched('embarque')}
-                      />
-                    </Item>
-                  </View>
-                  <View style={estilo.V_erro}>
-                    {touched.embarque && errors.embarque && (
-                      <Text style={estilo.textError}>{errors.embarque}</Text>
-                    )}
-                  </View>
-
-                  <View style={estilo.campos} inlineLabel>
-                    <Label style={estilo.txtLabel}>Ponto final de Desembarque</Label>
-                    <Item>
-                      <Input
-                        value={values.desembarque}
-                        onChangeText={handleChange('desembarque')}
-                        placeholder=""
-                        onBlur={() => setFieldTouched('desembarque')}
-                      />
-                    </Item>
-                  </View>
-                  <View style={estilo.V_erro}>
-                    {touched.desembarque && errors.desembarque && (
-                      <Text style={estilo.textError}>{errors.desembarque}</Text>
-                    )}
-                  </View>
-
-                  <View style={estilo.campos} inlineLabel>
-                    <Label style={estilo.txtLabel}>Vagas no carro</Label>
-                    <Item>
-                      <Input
-                        keyboardType="number-pad"
-                        value={values.vagas}
-                        onChangeText={handleChange('vagas')}
-                        placeholder=""
-                        onBlur={() => setFieldTouched('vagas')}
-                      />
-                    </Item>
-                  </View>
-                  <View style={estilo.V_erro}>
-                    {touched.vagas && errors.vagas && (
-                      <Text style={estilo.textError}>{errors.vagas}</Text>
-                    )}
-                  </View>
+                    </FieldSet>
+                  </Linha>
+                  <Linha>
+                    <FieldSet>
+                      <LabelFielSet>Vagas no carro</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
+                        <Input
+                          keyboardType="number-pad"
+                          value={values.vagas}
+                          onChangeText={handleChange('vagas')}
+                          placeholder=""
+                          onBlur={() => setFieldTouched('vagas')}
+                        />
+                      </Item>
+                      <View style={estilo.V_erro}>
+                        {touched.vagas && errors.vagas && (
+                          <Text style={estilo.textError}>{errors.vagas}</Text>
+                        )}
+                      </View>
+                    </FieldSet>
+                    {/* <FieldSet>
+                      <LabelFielSet>Vagas no carro</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
+                        <Input
+                          keyboardType="number-pad"
+                          value={values.vagas}
+                          onChangeText={handleChange('vagas')}
+                          placeholder=""
+                          onBlur={() => setFieldTouched('vagas')}
+                        />
+                      </Item>
+                      <View style={estilo.V_erro}>
+                        {touched.vagas && errors.vagas && (
+                          <Text style={estilo.textError}>{errors.vagas}</Text>
+                        )}
+                      </View>
+                    </FieldSet> */}
+                  </Linha>
+                  <Linha>
+                    <FieldSetLarge>
+                      <LabelFielSet>Ponto de embarque</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
+                        <Input
+                          value={values.embarque}
+                          onChangeText={handleChange('embarque')}
+                          placeholder=""
+                          onBlur={() => setFieldTouched('embarque')}
+                        />
+                      </Item>
+                      <View style={estilo.V_erro}>
+                        {touched.embarque && errors.embarque && (
+                          <Text style={estilo.textError}>{errors.embarque}</Text>
+                        )}
+                      </View>
+                    </FieldSetLarge>
+                  </Linha>
+                  <Linha>
+                    <FieldSetLarge>
+                      <LabelFielSet>Ponto final de desembarque</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
+                        <Input
+                          value={values.desembarque}
+                          onChangeText={handleChange('desembarque')}
+                          placeholder=""
+                          onBlur={() => setFieldTouched('desembarque')}
+                        />
+                      </Item>
+                      <View style={estilo.V_erro}>
+                        {touched.desembarque && errors.desembarque && (
+                          <Text style={estilo.textError}>{errors.desembarque}</Text>
+                        )}
+                      </View>
+                    </FieldSetLarge>
+                  </Linha>
 
                   <View style={estilo.V_btn}>
                     <Button
                       style={estilo.btnProximo}
                       onPress={() => {
-                        setBotaoEnviar(true);
                         handleSubmit(values);
                       }}
                     >
-                      <Text>Publicar carona</Text>
+                      <Text style={{ fontFamily: 'WorkSans-Bold', color: '#142850', fontSize: 18 }}>
+                        Publicar carona
+                      </Text>
                     </Button>
                   </View>
                 </View>

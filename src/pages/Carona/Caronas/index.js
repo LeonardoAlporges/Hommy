@@ -256,7 +256,7 @@ class Caronas extends Component {
                   </View>
                 ) : (
                   <View style={{ backgroundColor: '#ffffff' }}>
-                    {this.state.listaCaronas.length == 0 && (
+                    {this.state.listaCaronas.length == 0 && !this.state.refreshing && (
                       <EmptyState
                         titulo="Nada por aqui!"
                         mensagem="Por enquanto ninguém está oferecendo carona. Tente novamente mais tarde. "
