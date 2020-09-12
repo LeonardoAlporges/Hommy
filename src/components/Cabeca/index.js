@@ -65,7 +65,7 @@ function Cabeca({ navigation }) {
       .then(value => {
         resetNavigation('Login');
       })
-      .catch(error => {});
+      .catch(error => { });
   };
   return (
     <View style={Estilos.ViewCabeca}>
@@ -208,6 +208,22 @@ function Cabeca({ navigation }) {
                     <Label>Feedback</Label>
                   </ViewLabel>
                 </Card>
+              </Linha>
+              <Linha>
+                <Card
+                  style={Estilos.card}
+                  onPress={() => {
+                    Linking.openURL('mailto:contato.hommy@gmail.com');
+                  }}
+                >
+                  <ViewIcons>
+                    <Icon name="help-circle-outline" color="#212c50" size={35}></Icon>
+                  </ViewIcons>
+                  <ViewLabel>
+                    <Label>Ajuda</Label>
+                  </ViewLabel>
+                </Card>
+
               </Linha>
               <Linha>
                 <CardAmigos style={Estilos.card}>
