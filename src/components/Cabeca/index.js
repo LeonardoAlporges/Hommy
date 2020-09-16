@@ -65,7 +65,7 @@ function Cabeca({ navigation }) {
       .then(value => {
         resetNavigation('Login');
       })
-      .catch(error => {});
+      .catch(error => { });
   };
   return (
     <View style={Estilos.ViewCabeca}>
@@ -208,6 +208,23 @@ function Cabeca({ navigation }) {
                     <Label>Feedback</Label>
                   </ViewLabel>
                 </Card>
+              </Linha>
+              <Linha>
+                <Card
+                  style={Estilos.card}
+                  onPress={() => {
+                    navigation.navigate('GerenciamentoDeRepublica'),
+                      setIsModalVisible(false);
+                  }}
+                >
+                  <ViewIcons>
+                    <Icon name="car" color="#212c50" size={35}></Icon>
+                  </ViewIcons>
+                  <ViewLabel>
+                    <Label>Ajuda</Label>
+                  </ViewLabel>
+                </Card>
+
               </Linha>
               <Linha>
                 <CardAmigos style={Estilos.card}>
