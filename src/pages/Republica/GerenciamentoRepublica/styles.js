@@ -108,7 +108,7 @@ export const TituloSession = styled.Text`
   color: #142850;
 `;
 
-export const CardsContas = styled.View`
+export const CardsContas = styled.TouchableOpacity`
  width:100%;
  height:35px;
  display:flex;
@@ -168,7 +168,7 @@ export const ViewInputConta = styled.View`
 `;
 
 export const FieldSetRua = styled.View`
-  width: 60%;
+  width: 37%;
   height:  45px;
   border-radius: 3;
   border-width: 1px;
@@ -177,7 +177,7 @@ export const FieldSetRua = styled.View`
   padding-top: 5px;
 `;
 export const FieldSetNumero = styled.View`
-  width: 35%;
+  width: 20%;
   height: 45px;
   border-radius: 3;
   border-width: 1px;
@@ -192,3 +192,11 @@ export const Linha2 = styled.View`
   justify-content: space-between;
   margin-top: 10px;
 `;
+export const Data = styled.View`
+  width: 25%;
+  height: 45px;
+  border-radius: 3;
+  align-items: center;
+  background-color:#142850;
+`;
+

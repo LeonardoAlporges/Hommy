@@ -1,96 +1,191 @@
 import React, { Component, useState, useEffect } from 'react';
-import { Container, AdicionarRepublica, Titulo, V_titulo, FieldSetLarge, LabelFielSet, Linha, FieldSetRua, Linha2, FieldSetNumero, ViewBotaoADD, ViewTarefas, ViewTitulo, BotaoAdicionarConta, LabelBotaoADD, Botao, CardsContas, NomeConta, ValorConta, ViewContas, TituloEPicker, TituloSession, LinhaBotao, LabelBotao, ViewNomeRepublica, NomeRepublica, TelaGerenciamento } from './styles';
+import { Container, AdicionarRepublica, Titulo, V_titulo, FieldSetLarge, LabelFielSet, Linha, FieldSetRua, Linha2, FieldSetNumero, ViewBotaoADD, ViewTarefas, ViewTitulo, Data, BotaoAdicionarConta, LabelBotaoADD, Botao, CardsContas, NomeConta, ValorConta, ViewContas, TituloEPicker, TituloSession, LinhaBotao, LabelBotao, ViewNomeRepublica, NomeRepublica, TelaGerenciamento } from './styles';
 
 import HeaderBack from '../../../components/CustomHeader';
 import { View, Text, Image, FlatList, Modal } from 'react-native'
-import { Input, Item, Picker } from 'native-base';
-import { set } from 'lodash';
+import { Input, Item, Picker, DatePicker } from 'native-base';
+import { map, set, values } from 'lodash';
 import api from '../../../service/api';
 import { useSelector } from 'react-redux';
+import moment from 'moment';
 import AsyncStorage from '@react-native-community/async-storage';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import { asyncStorage } from 'reactotron-react-native';
 
 export default function GerenciamentoDeRepublica({ navigation }) {
-  useEffect(() => {
 
-  }, [listaContas, listaMebros, listaTarefas])
-  const listaContas = [{
-    nome: 'Luz',
-    valor: '94,00R$',
-    id: 1,
-  }, {
-    nome: 'Gás',
-    valor: '75,00R$',
-    id: 2,
-  }, {
-    nome: 'Internet',
-    valor: '140,00R$',
-    id: 3,
-  }, {
-    nome: 'Empregada',
-    valor: '100,00R$',
-    id: 4,
-  },]
-  const listaMebros = [{
-    nome: 'Leonardo Alporges',
-    id: 1,
-  }, {
-    nome: 'Robinson Lima',
-    id: 2,
-  }, {
-    nome: 'Giuliano Prado Moraes',
-    id: 3,
-  }, {
-    nome: 'Aleg Biano',
-    id: 4,
-  },]
-  const listaTarefas = [{
-    nome: 'Limpar banheiro',
-    id: 1,
-  }, {
-    nome: 'Compra Gás',
-    id: 2,
-  }, {
-    nome: 'Festa dia 05',
-    id: 3,
-  }, {
-    nome: 'Empregada',
-    id: 4,
-  },]
-  function adicionarContas() {
-    listaContas.push(nomeConta, valorConta)
-    setAdiconarConta(!adiconarConta);
-    console.log(listaContas);
-    console.log(nomeConta, valorConta);
-
-  }
+  const moment = require('moment');
+  moment.locale('pt', {
+    months: 'Janeiro_Fevereiro_Março_Abril_Maio_Junho_Julho_Agosto_Setembro_Outubro_Novembro_Dezembro'.split('_'),
+  });
+  const anoCorrente = moment().format('YYYY');
+  const [idRepublica, setIdRepublica] = useState('')
   const email = useSelector(state => state.user.email);
-  const [adiconarConta, setAdiconarConta] = useState(true)
+  const [adiconarContaButao, setAdiconarContaButao] = useState(true)
+  const [adiconarTarefaButao, setAdiconarTarefaButao] = useState(true)
+  const [nomeTarefa, setNomeTarefa] = useState('');
+  const [emailMebroSelecionado, setEmailMebroSelecionado] = useState('');
   const [existeRepublica, setExisteRepublica] = useState(false)
   const [modal, setModal] = useState(false)
   const [nomeRepublica, setNomeRepublica] = useState()
   const [valorConta, setValorConta] = useState('');
   const [nomeConta, setNomeConta] = useState('');
   const [erro, setErro] = useState(false);
+  const [dataVencimento, setDataVencimento] = useState(null)
+  const [listaDeContas, setListaDeContas] = useState([]);
+  const [listaDeMebros, setListaDeMebros] = useState([]);
+  const [listaDeTarefas, setListaDeTarefas] = useState([])
+  const [republica, setRepublica] = useState();
+  const [mesSelecionado, setMesSelecionado] = useState(moment().format('MMMM'));
+  const [valorGeralContas, setValorGeralContas] = useState(0);
 
+
+  useEffect(() => {
+    verificarSeJaCadastrou();
+  }, []);
+
+  useEffect(() => {
+    alterarValorGeralDasContas();
+  }, [listaDeContas]);
+
+  useEffect(() => {
+    buscarContas();
+    buscarTarefas();
+  }, [idRepublica]);
+
+  //CADASTRO ESTA OK
   function cadastrarRepublica() {
     const data = {
       email: email,
       nomeRepublica: nomeRepublica
     }
-    console.log(data)
     api.post(`/gerenciaRepublica`, data)
       .then(response => {
-        console.log(response)
-        AsyncStorage.setItem('REPUBLICA_GERENCIADA', JSON.stringify(data));
-        setExisteRepublica(true);
+        setRepublica(response.data)
+        AsyncStorage.setItem('REPUBLICA_GERENCIADA', JSON.stringify(response.data));
+      })
+      .catch(error => {
+        setErro(true);
+      });
+  }
 
+  function alterarValorGeralDasContas() {
+    var valores = 0
+    listaDeContas.map((item) => {
+      valores = valores + item.valor;
+    })
+    setValorGeralContas(valores)
+  }
+
+  async function verificarSeJaExiste() {
+    //await AsyncStorage.getItem('REPUBLICA_GERENCIADA').then(value => {
+    //console.log(value)
+    // if (value != null) {
+    //   setExisteRepublica(true)
+    //   preencherVariaveis(value);
+    // } else {
+    // AsyncStorage.getItem('REPUBLICA_GERENCIADA').then(value => { console.log(JSON.parse(value)) })
+    // AsyncStorage.getItem('REPUBLICA_GERENCIADA_CONTAS').then(value => { console.log(JSON.parse(value)) })
+    // AsyncStorage.getItem('REPUBLICA_GERENCIADA_TAREFAS').then(value => { console.log(JSON.parse(value)) })
+    // AsyncStorage.getItem('REPUBLICA_GERENCIADA_MEMBROS').then(value => { console.log(JSON.parse(value)) })
+    //}
+    // });
+  }
+
+  //
+  async function verificarSeJaCadastrou() {
+    await api.get(`/gerenciaRepublica/${'leo@teste.com'}`)
+      .then(response => {
+        console.log("res", response)
+        setListaDeMebros(listaDeMebros.concat(response.data.membros))
+        setRepublica(response.data);
+        setIdRepublica(response.data._id);
+        AsyncStorage.setItem('REPUBLICA_GERENCIADA', JSON.stringify(response.data));
+        AsyncStorage.setItem('REPUBLICA_GERENCIADA_MEMBROS', JSON.stringify(response.data.membros));
+        setExisteRepublica(true)
       })
       .catch(error => {
         console.log(error.response);
         setErro(true);
-        console.log('erro')
       });
   }
+
+  function atulizarListaContas(value) {
+    setMesSelecionado(value)
+    setListaDeContas([]);
+    //buscarContas();
+  }
+  function buscarContas() {
+    api.get(`/contas/${idRepublica}/${mesSelecionado}/${anoCorrente}`)
+      .then(response => {
+        setListaDeContas(listaDeContas.concat(response.data))
+        AsyncStorage.setItem('REPUBLICA_GERENCIADA_CONTAS', JSON.stringify(response.data));
+      })
+      .catch(error => {
+        console.log(error);
+        setErro(true);
+      });
+  }
+  function adicionarConta() {
+    setAdiconarContaButao(!adiconarContaButao);
+    const data = {
+      descricao: nomeConta,
+      valor: valorConta,
+      vencimento: dataVencimento,
+      idRepublica: idRepublica,
+    }
+    api.post(`/contas/`, data)
+      .then(response => {
+        console.log(response);
+        setListaDeContas(listaDeContas.concat(response.data))
+      })
+      .catch(error => {
+        console.log(error);
+        setErro(true);
+      });
+    setNomeConta('');
+    setValorConta('');
+    setDataVencimento(null);
+  }
+
+
+  function adicionarTarefa() {
+    setAdiconarTarefaButao(!adiconarTarefaButao);
+    console.log('EMAIL:', emailMebroSelecionado)
+    const data = {
+      descricao: nomeTarefa,
+      email: 'leo@teste.com',
+      dataLimite: dataVencimento,
+      idRepublica: idRepublica,
+    }
+    api.post(`/tarefas/`, data)
+      .then(response => {
+        console.log('TAREFFA POSTADA', response)
+        setListaDeTarefas(listaDeTarefas.concat(response.data))
+      })
+      .catch(error => {
+        console.log(error.response);
+        setErro(true);
+      });
+    setNomeTarefa('');
+    setEmailMebroSelecionado('');
+    setDataVencimento(null);
+  }
+
+  function buscarTarefas() {
+
+    api.get(`/tarefas/${idRepublica}`,)
+      .then(response => {
+        setListaDeTarefas(listaDeTarefas.concat(response.data))
+        AsyncStorage.setItem('REPUBLICA_GERENCIADA_TAREFAS', JSON.stringify(response.data));
+      })
+      .catch(error => {
+        console.log(error);
+        setErro(true);
+      });
+  }
+
+
 
   return (
     <Container>
@@ -126,7 +221,7 @@ export default function GerenciamentoDeRepublica({ navigation }) {
       ) : (
           <TelaGerenciamento>
             <ViewNomeRepublica>
-              <NomeRepublica>{nomeRepublica}</NomeRepublica>
+              <NomeRepublica>{republica.republica}</NomeRepublica>
             </ViewNomeRepublica>
             <ViewContas>
               <TituloEPicker>
@@ -137,39 +232,38 @@ export default function GerenciamentoDeRepublica({ navigation }) {
                     style={{ width: undefined }}
                     placeholderStyle={{ color: '#bfc6ea' }}
                     placeholderIconColor="#007aff"
-                    selectedValue={'Agosto'}
-                    value={'Agosto'}
+                    selectedValue={mesSelecionado}
+                    onValueChange={value => { atulizarListaContas(value) }}
+                    value={mesSelecionado}
                   >
                     <Picker.Item label="Agosto" value="Não informado" />
-                    <Picker.Item label="Setembro" value="1" />
-                    <Picker.Item label="Outubro" value="2" />
-                    <Picker.Item label="Novembro" value="3" />
-                    <Picker.Item label="Dezembro" value="4" />
+                    <Picker.Item label="Setembro" value="Setembro" />
+                    <Picker.Item label="Outubro" value="Outubro" />
+                    <Picker.Item label="Novembro" value="Novembro" />
+                    <Picker.Item label="Dezembro" value="Dezembro" />
                   </Picker>
                 </Item>
 
               </TituloEPicker>
               <FlatList
                 style={{ backgroundColor: '#f8f8f8', marginTop: 5, borderRadius: 4, borderWidth: 1, borderColor: '#e2e2e2', width: '100%', maxHeight: 160 }}
-                data={listaContas}
-                renderItem={({ item }) => <CardsContas><NomeConta>{item.nome}</NomeConta><ValorConta>{item.valor}</ValorConta></CardsContas>}
-                keyExtractor={item => item.id}
+                data={listaDeContas}
+                renderItem={({ item }) => <CardsContas delayLongPress={1} onLongPress={() => setAdiconarContaButao(!adiconarContaButao)}  ><NomeConta>{item.descricao}</NomeConta><ValorConta>{item.valor} R$</ValorConta></CardsContas>}
+                keyExtractor={item => item._id}
               />
-              <CardsContas><NomeConta style={{ fontFamily: 'WorkSans-Bold' }}>Valor dividido para 4 membros</NomeConta><ValorConta style={{ fontFamily: 'WorkSans-Bold' }}>98,00R$</ValorConta></CardsContas>
-              {adiconarConta ?
+              <CardsContas><NomeConta style={{ fontFamily: 'WorkSans-Bold' }}>Valor dividido para 4 membros</NomeConta><ValorConta style={{ fontFamily: 'WorkSans-Bold' }}>{valorGeralContas} R$</ValorConta></CardsContas>
+              {adiconarContaButao ?
                 <ViewBotaoADD >
-                  <BotaoAdicionarConta onPress={() => setAdiconarConta(!adiconarConta)}><LabelBotaoADD>Adiconar Conta</LabelBotaoADD></BotaoAdicionarConta>
+                  <BotaoAdicionarConta onPress={() => setAdiconarContaButao(!adiconarContaButao)}><LabelBotaoADD>Adiconar Conta</LabelBotaoADD></BotaoAdicionarConta>
                 </ViewBotaoADD>
                 :
                 <View>
-                  <Linha2>
+                  <Linha2 style={{ marginTop: 15 }} >
                     <FieldSetRua>
                       <LabelFielSet>Descrição</LabelFielSet>
                       <Item style={{ borderColor: 'transparent' }}>
                         <Input
                           onChangeText={value => setNomeConta(value)}
-                          onBlur={value => setNomeConta(value)}
-
                           placeholder=""
                         />
                       </Item>
@@ -179,17 +273,36 @@ export default function GerenciamentoDeRepublica({ navigation }) {
                       <Item style={{ borderColor: 'transparent' }}>
                         <Input
                           onChangeText={value => setValorConta(value)}
-                          onBlur={value => setValorConta(value)}
 
                           style={{ justifyContent: 'center' }}
                           keyboardType="number-pad"
                           placeholder=""
                         />
                       </Item>
+
                     </FieldSetNumero>
+                    <FieldSetRua>
+                      <LabelFielSet>Vencimento</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
+                        <DatePicker
+                          defaultDate={new Date()}
+                          minimumDate={new Date()}
+                          locale={'pt-br'}
+                          timeZoneOffsetInMinutes={undefined}
+                          modalTransparent={true}
+                          animationType={'slide'}
+                          androidMode={'default'}
+                          placeHolderText="__/__/___"
+                          onDateChange={date => {
+                            setDataVencimento(date);
+                          }}
+                          disabled={false}
+                        />
+                      </Item>
+                    </FieldSetRua>
                   </Linha2>
                   <ViewBotaoADD >
-                    <BotaoAdicionarConta onPress={() => adicionarContas()}><LabelBotaoADD>Adicionar</LabelBotaoADD></BotaoAdicionarConta>
+                    <BotaoAdicionarConta onPress={() => adicionarConta()}><LabelBotaoADD>Adicionar</LabelBotaoADD></BotaoAdicionarConta>
                   </ViewBotaoADD>
                 </View>
               }
@@ -197,40 +310,100 @@ export default function GerenciamentoDeRepublica({ navigation }) {
 
 
             </ViewContas>
+
+
             <ViewTarefas>
               <ViewTitulo>
                 <TituloSession>Tarefas/Eventos</TituloSession>
               </ViewTitulo>
               <FlatList
                 style={{ backgroundColor: '#f8f8f8', marginTop: 5, borderRadius: 4, borderWidth: 1, borderColor: '#e2e2e2', width: '100%', maxHeight: 160 }}
-                data={listaTarefas}
-                renderItem={({ item }) => <CardsContas><NomeConta numberOfLines={1}>{item.nome}</NomeConta></CardsContas>}
-                keyExtractor={item => item.id}
+                data={listaDeTarefas}
+                renderItem={({ item }) => <CardsContas><NomeConta numberOfLines={1}>{item.descricao}</NomeConta></CardsContas>}
+                keyExtractor={item => item._id}
               />
-              <ViewBotaoADD >
-                <BotaoAdicionarConta><LabelBotaoADD>Adiconar Tarefa</LabelBotaoADD></BotaoAdicionarConta>
-              </ViewBotaoADD>
+              {adiconarTarefaButao ?
+                <ViewBotaoADD >
+                  <BotaoAdicionarConta onPress={() => setAdiconarTarefaButao(!adiconarTarefaButao)}><LabelBotaoADD>Adiconar tarefa</LabelBotaoADD></BotaoAdicionarConta>
+                </ViewBotaoADD>
+                :
+                <View>
+                  <Linha2 style={{ marginTop: 15 }} >
+                    <FieldSetRua style={{ width: '58%' }}>
+                      <LabelFielSet>Descrição</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
+                        <Input
+                          onChangeText={value => setNomeTarefa(value)}
+                          placeholder=""
+                        />
+                      </Item>
+                    </FieldSetRua>
+
+                    <FieldSetRua>
+                      <LabelFielSet>Data Limite</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
+                        <DatePicker
+                          defaultDate={new Date()}
+                          minimumDate={new Date()}
+                          locale={'pt-br'}
+                          timeZoneOffsetInMinutes={undefined}
+                          modalTransparent={true}
+                          animationType={'slide'}
+                          androidMode={'default'}
+                          placeHolderText="__/__/___"
+                          onDateChange={date => {
+                            setDataVencimento(date);
+                          }}
+                          disabled={false}
+                        />
+                      </Item>
+                    </FieldSetRua>
+                  </Linha2>
+                  <Linha2 style={{ marginTop: 20, marginBottom: 10 }}>
+                    <FieldSetLarge>
+                      <LabelFielSet>Membro</LabelFielSet>
+
+                      <Item style={{ borderColor: 'transparent' }}>
+                        <Picker
+                          mode="dropdown"
+                          style={{ width: undefined }}
+                          placeholderIconColor="#007aff"
+
+                          selectedValue={emailMebroSelecionado}
+                          onValueChange={value => setEmailMebroSelecionado(value)}
+                          value={emailMebroSelecionado}
+                          onChangeText={value => setEmailMebroSelecionado(value)}
+                        >
+                          <Picker.Item label="Selecione um membro" value="Não informado" />
+                          {listaDeMebros.map((item) => { return (<Picker.Item label={item.nome} value={item.email} />) })}
+                        </Picker>
+                      </Item>
+
+                    </FieldSetLarge>
+                  </Linha2>
+                  <ViewBotaoADD >
+                    <BotaoAdicionarConta onPress={() => adicionarTarefa()}><LabelBotaoADD>Adicionar</LabelBotaoADD></BotaoAdicionarConta>
+                  </ViewBotaoADD>
+                </View>
+              }
             </ViewTarefas>
+
             <ViewTarefas>
               <ViewTitulo>
                 <TituloSession>Membros</TituloSession>
               </ViewTitulo>
               <FlatList
                 style={{ backgroundColor: '#f8f8f8', marginTop: 5, borderRadius: 4, borderWidth: 1, borderColor: '#e2e2e2', width: '100%', maxHeight: 160 }}
-                data={listaTarefas}
+                data={listaDeMebros}
                 renderItem={({ item }) => <CardsContas><NomeConta numberOfLines={1}>{item.nome}</NomeConta></CardsContas>}
-                keyExtractor={item => item.id}
+                keyExtractor={item => item._id}
               />
-              <ViewBotaoADD >
-                <BotaoAdicionarConta><LabelBotaoADD>Adiconar Membro</LabelBotaoADD></BotaoAdicionarConta>
-              </ViewBotaoADD>
             </ViewTarefas>
             <ViewBotaoADD></ViewBotaoADD>
-
           </TelaGerenciamento>
-        )}
-
-    </Container>
+        )
+      }
+    </Container >
 
   );
 }

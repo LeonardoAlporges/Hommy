@@ -213,11 +213,12 @@ function Cabeca({ navigation }) {
                 <Card
                   style={Estilos.card}
                   onPress={() => {
-                    Linking.openURL('mailto:contato.hommy@gmail.com');
+                    navigation.navigate('GerenciamentoDeRepublica'),
+                      setIsModalVisible(false);
                   }}
                 >
                   <ViewIcons>
-                    <Icon name="help-circle-outline" color="#212c50" size={35}></Icon>
+                    <Icon name="car" color="#212c50" size={35}></Icon>
                   </ViewIcons>
                   <ViewLabel>
                     <Label>Ajuda</Label>
