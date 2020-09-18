@@ -1,4 +1,4 @@
-package br.com.hommy;
+package br.com.ufes.hommy;
 
 import android.app.Application;
 import android.util.Log;

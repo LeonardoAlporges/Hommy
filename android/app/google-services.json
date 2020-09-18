@@ -8,12 +8,36 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:896135200677:android:8a17efa352eab94a59f24c",
+        "mobilesdk_app_id": "1:896135200677:android:095d0ed99428e86b59f24c",
         "android_client_info": {
-          "package_name": "br.com.hommy"
+          "package_name": "br.com.ufes.hommy"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "896135200677-4fnvgvk14ttk3g5klif4ja8hatdh6u63.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.ufes.hommy",
+            "certificate_hash": "f9093820dbd5342f5848d3433d41b2375a428e9f"
+          }
+        },
+        {
+          "client_id": "896135200677-q5hqep88dh08d45rjsbcr5537a1b4o36.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.ufes.hommy",
+            "certificate_hash": "94569be83150fe3bc3637804c92c25ae0afc05fc"
+          }
+        },
+        {
+          "client_id": "896135200677-4uir3kc1uoi2a940jqmcgg30eufitdnn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.ufes.hommy",
+            "certificate_hash": "9a487cefff2fd6ef348c469d8bc43b052e6a9c11"
+          }
+        },
         {
           "client_id": "896135200677-l6couqinr2mhpsj6jni1f37udjfra7ek.apps.googleusercontent.com",
           "client_type": 3

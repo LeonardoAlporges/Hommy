@@ -128,7 +128,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "br.com.hommy"
+        applicationId "br.com.ufes.hommy"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 2
