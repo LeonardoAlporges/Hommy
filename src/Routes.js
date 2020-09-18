@@ -71,7 +71,7 @@ const Navegação = createStackNavigator(
     SplashScreen
   },
   {
-    initialRouteName: 'GerenciamentoDeRepublica',
+    initialRouteName: 'RenderApp',
     headerMode: 'none',
     navigationOptions: {
       headerVisible: false
