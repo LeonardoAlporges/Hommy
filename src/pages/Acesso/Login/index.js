@@ -223,13 +223,13 @@ export function Login({ navigation }) {
           />
         </LinearGradient>
         <LabelRedeSocial>FAÇA LOGIN COM SUA REDE SOCIAL</LabelRedeSocial>
-        {/* <GoogleSigninButton
+        <GoogleSigninButton
           style={{ width: 192, height: 48 }}
           size={GoogleSigninButton.Size.Wide}
           color={GoogleSigninButton.Color.Dark}
           onPress={signIn}
-        /> */}
-        {/* <LoginButton
+        />
+        <LoginButton
           onLoginFinished={(error, result) => {
             if (error) {
               console.log('login has error: ' + result.error);
@@ -238,9 +238,9 @@ export function Login({ navigation }) {
             }
           }}
           onLogoutFinished={() => console.log('logout.')}
-        />  */}
+        />
         <BotesLogin>
-          <Botao transparent>
+          <Botao transparent onPress={signIn}>
             <Image
               resizeMode="contain"
               style={{ width: 20, height: 20 }}
@@ -248,7 +248,7 @@ export function Login({ navigation }) {
             />
             <LabelBotoes>Google</LabelBotoes>
           </Botao>
-          <Botao transparent>
+          <Botao transparent onPress={handleFacebookLogin}>
             <Image
               resizeMode="contain"
               style={{ width: 20, height: 20 }}
