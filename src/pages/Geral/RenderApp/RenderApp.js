@@ -87,6 +87,7 @@ export default function RenderApp(props) {
         }
       });
       await AsyncStorage.getItem('user').then(value => {
+        console.log('STORAGE:', value);
         if (value != null) {
           const dados = JSON.parse(value);
           dispatch(userAction.editNome(dados.nome));
