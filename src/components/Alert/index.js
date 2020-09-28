@@ -10,7 +10,7 @@ export default class CustomModal extends Component {
       icon: '',
       titulo: '',
       descricao: '',
-      botao: '',
+      botao: ''
     };
   }
 
@@ -25,6 +25,7 @@ export default class CustomModal extends Component {
       this.props.onAction();
     }
   };
+
   verificarImagem = () => {
     if (this.props.imagem == '') {
       this.setState({ icon: require('../../assets/Img/Succes.png') });
@@ -48,7 +49,7 @@ export default class CustomModal extends Component {
       this.setState({
         titulo: this.props.titulo,
         descricao: this.props.descricao,
-        botao: this.props.botao,
+        botao: this.props.botao
       });
     }
 
@@ -57,7 +58,7 @@ export default class CustomModal extends Component {
         icon: require('../../assets/Img/Succes.png'),
         titulo: 'Tudo certo!',
         descricao: 'Concluído com sucesso',
-        botao: 'Ok',
+        botao: 'Ok'
       });
     }
     if (this.props.parametro == 'Erro') {
@@ -65,11 +66,11 @@ export default class CustomModal extends Component {
         icon: require('../../assets/Img/Fail_Connection.png'),
         titulo: 'OOPS!',
         descricao: this.props.descricao,
-        botao: 'Voltar',
+        botao: 'Voltar'
       });
       if (!this.props.descricao) {
         this.setState({
-          descricao: 'Alguma coisa deu errado. Por favor, verifique sua conexão com a internet.',
+          descricao: 'Alguma coisa deu errado. Por favor, verifique sua conexão com a internet.'
         });
       }
     }
