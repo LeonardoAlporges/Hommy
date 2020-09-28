@@ -69,7 +69,7 @@ const Navegação = createStackNavigator(
     Cadastro,
     Confirmacao,
     SplashScreen,
-    AutenticacaoTelefone
+    //AutenticacaoTelefone
   },
   {
     initialRouteName: 'RenderApp',
