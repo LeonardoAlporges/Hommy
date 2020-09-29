@@ -62,7 +62,7 @@ export default function GerenciamentoDeRepublica({ navigation }) {
   const [emailMebroSelecionado, setEmailMebroSelecionado] = useState('');
   const [existeRepublica, setExisteRepublica] = useState(false);
   const [modal, setModal] = useState(false);
-  const [nomeRepublica, setNomeRepublica] = useState();
+  const [nomeRepublica, setNomeRepublica] = useState('');
   const [valorConta, setValorConta] = useState('');
   const [nomeConta, setNomeConta] = useState('');
   const [erro, setErro] = useState(false);
@@ -105,6 +105,7 @@ export default function GerenciamentoDeRepublica({ navigation }) {
       email: email,
       nomeRepublica: nomeRepublica
     };
+    console.log(data);
 
     api
       .post(`/gerenciaRepublica`, data)
@@ -359,7 +360,6 @@ export default function GerenciamentoDeRepublica({ navigation }) {
                       <Input
                         placeholderStyle={{ fontFamily: 'WorkSans' }}
                         onChangeText={value => setNomeRepublica(value)}
-                        onBlur={value => setNomeRepublica(value)}
                         placeholder="Nome da sua republica"
                         placeholderTextColor="#989898"
                       />

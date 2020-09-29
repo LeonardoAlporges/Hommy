@@ -96,19 +96,13 @@ export default function CadastroUsuario({ navigation }) {
 
   function monitorFileUpload(task) {
     task.on('state_changed', snapshot => {
-      switch (snapshot.state) {
-        case 'running':
-          break;
-        case 'success':
           snapshot.ref.getDownloadURL().then(downloadURL => {
             setImagemLink(downloadURL);
           });
           break;
-        default:
-          break;
-      }
     });
-  }
+  };
+  
   return (
     <ScrollView style={{ display: 'flex' }}>
       <HeaderBack title="Cadastro de usuário" onNavigation={() => goBackScreen()} />
