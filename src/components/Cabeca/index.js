@@ -65,7 +65,7 @@ function Cabeca({ navigation }) {
       .then(value => {
         resetNavigation('Login');
       })
-      .catch(error => { });
+      .catch(error => {});
   };
   return (
     <View style={Estilos.ViewCabeca}>
@@ -213,18 +213,16 @@ function Cabeca({ navigation }) {
                 <Card
                   style={Estilos.card}
                   onPress={() => {
-                    navigation.navigate('GerenciamentoDeRepublica'),
-                      setIsModalVisible(false);
+                    navigation.navigate('GerenciamentoDeRepublica'), setIsModalVisible(false);
                   }}
                 >
                   <ViewIcons>
-                    <Icon name="car" color="#212c50" size={35}></Icon>
+                    <Icon name="account-group-outline" color="#212c50" size={35}></Icon>
                   </ViewIcons>
                   <ViewLabel>
-                    <Label>Ajuda</Label>
+                    <Label>Gerenciamento</Label>
                   </ViewLabel>
                 </Card>
-
               </Linha>
               <Linha>
                 <CardAmigos style={Estilos.card}>
