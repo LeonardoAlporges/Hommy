@@ -62,7 +62,7 @@ export default function GerenciamentoDeRepublica({ navigation }) {
   const [emailMebroSelecionado, setEmailMebroSelecionado] = useState('');
   const [existeRepublica, setExisteRepublica] = useState(false);
   const [modal, setModal] = useState(false);
-  const [nomeRepublica, setNomeRepublica] = useState();
+  const [nomeRepublica, setNomeRepublica] = useState('');
   const [valorConta, setValorConta] = useState('');
   const [nomeConta, setNomeConta] = useState('');
   const [erro, setErro] = useState(false);
@@ -80,6 +80,13 @@ export default function GerenciamentoDeRepublica({ navigation }) {
   const [idTipoSelecionado, setIdTipoSelecionado] = useState();
   const [tipoDeInformacao, setTipoDeInformacao] = useState();
   const [responsavelTarefa, setResponsavelTarefa] = useState();
+
+  const handleChangeInput = event => {
+    console.log('evento', event);
+    setNomeRepublica(event);
+    console.log(nomeRepublica);
+  };
+
   useEffect(() => {
     verificarSeJaCadastrou();
     setLoading(false);
@@ -100,7 +107,23 @@ export default function GerenciamentoDeRepublica({ navigation }) {
     setLoading(false);
   }, [idRepublica]);
 
+  function adicionarMembroPorCodigo() {
+    const data = {
+      email: email
+    };
+    console.log(codigoRepublica);
+    api
+      .put(`/gerenciaRepublica/membros/${codigoRepublica}`, data)
+      .then(response => {
+        console.log('Resposta', response);
+        verificarSeJaCadastrou();
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
+  }
   function cadastrarRepublica() {
+    console.log(nomeRepublica);
     const data = {
       email: email,
       nomeRepublica: nomeRepublica
@@ -116,7 +139,7 @@ export default function GerenciamentoDeRepublica({ navigation }) {
         // AsyncStorage.setItem('REPUBLICA_GERENCIADA', JSON.stringify(response.data));
       })
       .catch(error => {
-        console.log(error);
+        console.log(error.response);
         setErro(true);
       });
   }
@@ -359,7 +382,6 @@ export default function GerenciamentoDeRepublica({ navigation }) {
                       <Input
                         placeholderStyle={{ fontFamily: 'WorkSans' }}
                         onChangeText={value => setNomeRepublica(value)}
-                        onBlur={value => setNomeRepublica(value)}
                         placeholder="Nome da sua republica"
                         placeholderTextColor="#989898"
                       />
@@ -379,12 +401,11 @@ export default function GerenciamentoDeRepublica({ navigation }) {
                 </V_titulo>
                 <Linha>
                   <FieldSetLarge>
-                    <LabelFielSet>Codigo da republica</LabelFielSet>
+                    <LabelFielSet>Codigo da republica{codigoRepublica}</LabelFielSet>
                     <Item style={{ borderColor: 'transparent' }}>
                       <Input
                         placeholderStyle={{ fontFamily: 'WorkSans' }}
                         onChangeText={value => setCodigoRepublica(value)}
-                        onBlur={value => setCodigoRepublica(value)}
                         placeholder="Codigo da republica"
                         placeholderTextColor="#989898"
                       />
@@ -392,7 +413,7 @@ export default function GerenciamentoDeRepublica({ navigation }) {
                   </FieldSetLarge>
                 </Linha>
                 <LinhaBotao>
-                  <Botao onPress={() => cadastrarRepublica()}>
+                  <Botao onPress={() => adicionarMembroPorCodigo()}>
                     <LabelBotao>Entrar na republica</LabelBotao>
                   </Botao>
                 </LinhaBotao>
@@ -448,7 +469,7 @@ export default function GerenciamentoDeRepublica({ navigation }) {
                   style={{ width: 80, height: 80 }}
                 />
                 <V_titulo>
-                  <Titulo style={{ fontSize: 14 }}>Voce ainda nao contas registradas</Titulo>
+                  <Titulo style={{ fontSize: 14 }}>Voce ainda nao tem contas registradas</Titulo>
                 </V_titulo>
               </EmptyContas>
             ) : (

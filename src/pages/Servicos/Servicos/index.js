@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, StyleSheet, FlatList } from 'react-native';
 import axios from 'axios';
 
-import CartaoServico from '../../components/CartaoServico';
+import CartaoServico from '../../../components/CartaoServico';
 import Estilo from './style';
 
 class Servicos extends Component {

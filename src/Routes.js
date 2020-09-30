@@ -6,7 +6,7 @@ import DetalhesAnuncio from './pages/Republica/DetalhesAnuncio';
 import Cadastro from './pages/Republica/Cadastro/index';
 import Login from './pages/Acesso/Login';
 import TabsHeader from './pages/Geral/Home';
-import Servicos from './pages/Servicos';
+import Servicos from './pages/Servicos/Servicos';
 import Republica from './pages/Republica/Republica';
 import CadastroUsuario from './pages/Acesso/CadastroUsuario';
 import DetalhesServicos from './components/DetalhesServicos';
@@ -28,6 +28,7 @@ import ValidarCodigo from './pages/Acesso/ValidarCodigo';
 import Notificacao from './pages/Geral/TesteNot';
 import TelefoneUteis from './pages/Geral/TelefoneUteis';
 import GerenciamentoDeRepublica from './pages/Republica/GerenciamentoRepublica';
+import CadastroServico from './pages/Servicos/Cadastro';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 
 const Navegação = createStackNavigator(
@@ -68,10 +69,11 @@ const Navegação = createStackNavigator(
     Servicos,
     Cadastro,
     Confirmacao,
-    SplashScreen
+    SplashScreen,
+    CadastroServico
   },
   {
-    initialRouteName: 'RenderApp',
+    initialRouteName: 'CadastroServico',
     headerMode: 'none',
     navigationOptions: {
       headerVisible: false
