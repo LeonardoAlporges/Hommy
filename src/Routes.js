@@ -9,7 +9,7 @@ import TabsHeader from './pages/Geral/Home';
 import Servicos from './pages/Servicos/Servicos';
 import Republica from './pages/Republica/Republica';
 import CadastroUsuario from './pages/Acesso/CadastroUsuario';
-import DetalhesServicos from './components/DetalhesServicos';
+import DetalhesServicos from './pages/Servicos/DetalhesServico';
 import Confirmacao from './components/Confirmacao';
 import Anuncios from './pages/Geral/Anuncios';
 import Caronas from './pages/Carona/Caronas';
@@ -25,11 +25,10 @@ import Agendar from './pages/Republica/Agendar';
 import Agendamentos from './pages/Republica/Agendamentos';
 import AgendamentoUser from './pages/Republica/AgendamentosUser';
 import ValidarCodigo from './pages/Acesso/ValidarCodigo';
-import Notificacao from './pages/Geral/TesteNot';
+
 import TelefoneUteis from './pages/Geral/TelefoneUteis';
 import GerenciamentoDeRepublica from './pages/Republica/GerenciamentoRepublica';
 import CadastroServico from './pages/Servicos/Cadastro';
-import { createDrawerNavigator } from 'react-navigation-drawer';
 
 const Navegação = createStackNavigator(
   {
@@ -45,6 +44,8 @@ const Navegação = createStackNavigator(
         headerLeft: null
       }
     },
+
+    DetalhesServicos: DetalhesServicos,
     Detalhes: DetalhesAnuncio,
     Login: Login,
     CadastroUsuario: CadastroUsuario,
@@ -64,7 +65,6 @@ const Navegação = createStackNavigator(
     Caronas,
     Anuncios,
     GerenciamentoDeRepublica,
-    DetalhesServicos,
     Republica,
     Servicos,
     Cadastro,
@@ -73,7 +73,7 @@ const Navegação = createStackNavigator(
     CadastroServico
   },
   {
-    initialRouteName: 'CadastroServico',
+    initialRouteName: 'TabsHeader',
     headerMode: 'none',
     navigationOptions: {
       headerVisible: false
