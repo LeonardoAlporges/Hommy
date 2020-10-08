@@ -24,6 +24,10 @@ export const createStorageReferenceToFileUser = response => {
   return FireBaseStorage.ref(`/pictures/user/${fileName}`);
   //return FireBaseStorage.ref(`/imagem/${fileName}`).delete();
 };
+export const createStorageReferenceToFileServico = response => {
+  const { fileName } = response;
+  return FireBaseStorage.ref(`/pictures/servicos/${fileName}`);
+};
 
 export const uploadFileToFireBaseRepublica = imagePickerResponse => {
   const fileSource = getFileLocalPath(imagePickerResponse);
@@ -34,6 +38,12 @@ export const uploadFileToFireBaseRepublica = imagePickerResponse => {
 export const uploadFileToFireBase = imagePickerResponse => {
   const fileSource = getFileLocalPath(imagePickerResponse);
   const storageRef = createStorageReferenceToFile(imagePickerResponse);
+  return storageRef.putFile(fileSource);
+};
+
+export const uploadFileToFireBaseServico = imagePickerResponse => {
+  const fileSource = getFileLocalPath(imagePickerResponse);
+  const storageRef = createStorageReferenceToFileServico(imagePickerResponse);
   return storageRef.putFile(fileSource);
 };
 

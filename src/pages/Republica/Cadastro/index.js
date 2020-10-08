@@ -119,7 +119,6 @@ export default function Cadastro({ navigation }) {
               setLinkImagem3(downloadURL);
             }
           });
-          break;
     });
   }
 

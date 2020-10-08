@@ -99,7 +99,6 @@ export default function CadastroUsuario({ navigation }) {
           snapshot.ref.getDownloadURL().then(downloadURL => {
             setImagemLink(downloadURL);
           });
-          break;
     });
   };
   
