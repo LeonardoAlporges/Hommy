@@ -1,185 +1,157 @@
+import { Button } from 'native-base';
 import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
 
-const Estilo = StyleSheet.create({
-  header: {
-    padding: 20,
-    width: '100%',
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    backgroundColor: '#142850',
-  },
-  iconHer: {
-    fontSize: 30,
-    color: '#FFFFFF',
-  },
-  V_HeaderUser: {
-    width: '100%',
-    height: '30%',
-    backgroundColor: '#142850',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  V_imagem: {
-    height: 100,
-    width: 100,
-    borderRadius: 50,
-  },
-  V_Nome: {
-    marginTop: '3%',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    width: 250,
-    height: 60,
-  },
-  V_nota: {
-    paddingTop: 3,
-    flexDirection: 'row',
-    height: 30,
-  },
-  iconNota: {
-    fontSize: 20,
-    color: '#FFFFFF',
-    marginHorizontal: 3,
-  },
-  Nome: {
-    color: '#ffff',
-    fontSize: 18,
-    fontFamily: 'WorkSans',
-    fontWeight: 'bold',
-  },
-  Nota: {
-    color: '#ffff',
-    fontSize: 16,
-    fontFamily: 'WorkSans',
-  },
-  V_Infor: {
-    paddingHorizontal: 30,
-    paddingVertical: 10,
-    width: '100%',
-    height: '37%',
-  },
-  data: {
-    fontSize: 24,
-    fontFamily: 'WorkSans',
-    color: '#00909e',
-    fontWeight: 'bold',
-  },
-  V_partida: {
-    justifyContent: 'space-between',
-    marginTop: '4%',
-    width: '100%',
-    height: 20,
-  },
-  txtPartida: {
-    fontFamily: 'WorkSans',
-    fontWeight: '100',
-    fontSize: 16,
-    color: '#142850',
-  },
-  V_Hora: {
-    width: '100%',
-    height: 28,
-    color: '#142850',
-  },
-  Txthora: {
-    color: '#142850',
-    fontSize: 22,
-    fontFamily: 'WorkSans',
-  },
-  V_valor: {
-    marginTop: '10%',
-    flexDirection: 'row',
-    width: '100%',
-    height: 30,
-  },
-  Txtvalor1: {
-    color: '#142850',
-    fontSize: 18,
-    fontFamily: 'WorkSans',
-    fontWeight: '200',
-    paddingRight: 30,
-  },
-  Txtvalor: {
-    color: '#00909e',
-    fontSize: 22,
-    fontFamily: 'WorkSans',
-    fontWeight: 'bold',
-  },
-  barra: {
-    width: '88%',
-    marginLeft: '6%',
-    marginRight: '6%',
-    borderBottomWidth: 1,
-    borderBottomColor: '#adadad',
-  },
-  Pontos: {
-    padding: 10,
-    width: '100%',
-    height: '20%',
-    marginBottom: '10%',
-    paddingHorizontal: 30,
-  },
-  V_ptEm: {
-    marginTop: 10,
-    width: '100%',
-    height: 20,
-  },
-  T_ptEm: {
-    color: '#142850',
-    fontSize: 18,
-    fontFamily: 'WorkSans',
-  },
-  V_label: {
-    marginTop: '2%',
-    width: '100%',
-    height: 22,
-    marginBottom: 20
-  },
-  T_label: {
-    color: '#142850',
-    fontSize: 20,
-    fontFamily: 'WorkSans',
-    fontWeight: 'bold',
-  },
-  ViewButon: {
-    width: '100%',
-    height: 45,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  Botao: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-    height: 50,
-    borderRadius: 6,
-    backgroundColor: '#142850',
-  },
-  txtBotao: {
-    color: '#FFF',
-    fontSize: 20,
-    fontFamily: 'WorkSans',
-    fontWeight: 'bold',
-  },
-  iconBtn: {
-    fontSize: 20,
-    color: '#ffffff',
-    marginHorizontal: 10,
-  },
-  V_modal: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  V_Margin: {
-    marginBottom: '15%',
-  },
-  V_Btn: {
-    width: '80%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export const Header = styled.View`
+  width: 100%;
+  padding: 20px;
+  height: 50px;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #142850;
+`;
 
-export default Estilo;
+export const HeaderUser = styled.View`
+  width: 100%;
+  padding: 20px;
+  height: 30%;
+  justify-content: center;
+  align-items: center;
+  background-color: #142850;
+`;
+export const Imagem = styled.Image`
+  height: 100px;
+  width: 100px;
+  border-radius: 50px;
+`;
+export const InformacaoPerfil = styled.View`
+  margin-top: 3%;
+  justify-content: space-around;
+  align-items: center;
+  width: 250px;
+  height: 60px;
+`;
+export const Nome = styled.Text`
+  font-family: WorkSans-SemiBold;
+  font-size: 18px;
+  color: #ffffff;
+`;
+export const ViewNotas = styled.View`
+  padding: 3px;
+  flex-direction: row;
+  margin: 0 3px 0 3px;
+`;
+export const Nota = styled.Text`
+  font-family: WorkSans;
+  font-size: 16px;
+  color: #ffffff;
+`;
+export const ContainerIformacao = styled.View`
+  padding: 10px 30px 10px 30px;
+
+  width: 100%;
+  height: 37%;
+`;
+export const ViewData = styled.View`
+  justify-content: space-between;
+  margin-top: 2%;
+  width: 100%;
+  height: 30px;
+  flex-direction: row;
+`;
+export const Data = styled.Text`
+  font-family: WorkSans-SemiBold;
+  font-size: 24px;
+  color: #00909e;
+`;
+export const ViewPartida = styled.View`
+  justify-content: space-between;
+  margin-top: 4%;
+  width: 100%;
+  height: 20px;
+`;
+export const Partida = styled.Text`
+  font-family: WorkSans;
+  font-size: 16px;
+  color: #142850;
+`;
+export const ViewHora = styled.View`
+  width: 100%;
+  height: 28px;
+`;
+export const Hora = styled.Text`
+  font-family: WorkSans;
+  color: #142850;
+  font-size: 22;
+`;
+export const ViewValor = styled.View`
+  margin-top: 10%;
+  flex-direction: row;
+  width: 100%;
+  height: 30px;
+`;
+export const LabelValor = styled.Text`
+  font-family: WorkSans;
+  color: #142850;
+  font-size: 18;
+  padding-right: 30;
+`;
+export const Valor = styled.Text`
+  font-family: WorkSans-SemiBold;
+  color: #00909e;
+  font-size: 22;
+  padding-right: 30;
+`;
+export const BarraSeparadora = styled.View`
+  margin: 0px 0px 0px 4%;
+  border-bottom-width: 1px;
+  border-bottom-color: #adadad;
+  width: 88%;
+`;
+export const ViewPontos = styled.View`
+  padding: 10px;
+  width: 100%;
+  height: 20%;
+  margin-bottom: 10%;
+  padding: 0px 30px 0px 30px;
+`;
+export const ViewPontoEmbarque = styled.View`
+  width: 100%;
+  height: 20px;
+  margin-top: 10px;
+`;
+export const LabelPontoEmbarque = styled.Text`
+  font-family: WorkSans;
+  color: #142850;
+  font-size: 18;
+`;
+export const ViewLabel = styled.View`
+  width: 100%;
+  height: 20px;
+  margin-top: 10px;
+`;
+export const TextoLabel = styled.Text`
+  font-family: WorkSans-SemiBold;
+  color: #142850;
+  font-size: 20;
+`;
+export const ViewBotao = styled.View`
+  width: 100%;
+  height: 45px;
+  align-items: center;
+  justify-content: center;
+`;
+export const Botao = styled(Button)`
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  height:50px;
+  border-radius:5px;
+  background-color:#142850;
+`;
+export const LabelBotao = styled.Text`
+  font-family: WorkSans-SemiBold;
+  color: #fff;
+  font-size: 20;
+`;
+

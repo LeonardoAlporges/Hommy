@@ -13,18 +13,17 @@ import {
   Botoes,
   TituloBotao,
   FundoModal,
-  Spin,
+  Spin
 } from './styles';
 import { Spinner } from 'native-base';
 import { NavigationActions, StackActions } from 'react-navigation';
 
 function SplashScreen({ navigation }) {
-
   const [modalVisible, setModalVisible] = useState(false);
   function resetNavigation(Rota) {
     const resetAction = StackActions.reset({
       index: 0,
-      actions: [NavigationActions.navigate({ routeName: Rota })],
+      actions: [NavigationActions.navigate({ routeName: Rota })]
     });
 
     navigation.dispatch(resetAction);
@@ -48,7 +47,7 @@ function SplashScreen({ navigation }) {
             <Titulo>Bem vindo ao Hommy </Titulo>
             <Descricao>
               Realize e acompanhe anúncios! Descubra a república ideal e economize tempo pedindo uma carona
-              </Descricao>
+            </Descricao>
           </Label>
         </Conteudo>
 

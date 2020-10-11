@@ -1,26 +1,22 @@
-import React, { Component, useState, useEffect } from 'react';
-import { View, TouchableOpacity, Text, FlatList, ScrollView } from 'react-native';
-import { Icon } from 'native-base';
-import style from './style';
+import React, { useState, useEffect } from 'react';
+import { View, FlatList, ScrollView } from 'react-native';
+
+
 import api from '../../../service/api';
 import CartaoUser from '../../../components/CartaoUser';
-import ModalConfirmacao from '../../../components/ModalConfirmacao';
-import { connect, useSelector } from 'react-redux';
 import HeaderBack from '../../../components/CustomHeader';
 import EmptyState from '../../../components/EmptyState';
 import Loading from '../../../components/Loading';
 import CustomModal from '../../../components/Alert';
 
+import {Container,V_Subtitulo,Subtitulo,V_Label,Label,BarraSeparacao,V_StatusInteresse,BotaoAnalise,BotaoRejeitado,BotaoConfirmado,LabelAnalise,LabelConfirmado,LabelRejeitado} from './styles';
 
 export default function Interessados({ navigation }) {
-  const email = useSelector(state => state.user.email);
 
-  const [usuarioLogado, setUsuarioLogado] = useState();
   const [erro, setErro] = useState(false);
   const [erroVaga, setErroVaga] = useState(false);
   const [loading, setLoading] = useState(false);
   const [usuarios, setUsuarios] = useState([]);
-  const [usuarioConfirmado, setUsuarioConfirmado] = useState([]);
   const [reload, setReload] = useState();
   const [idCarona, setIdCarona] = useState(navigation.state.params.idCarona);
 
@@ -35,7 +31,6 @@ export default function Interessados({ navigation }) {
       .get(`/carona/confirmar/${idCarona}`)
       .then(response => {
         setUsuarios(response.data);
-        console.log(usuarios);
         setLoading(false);
       })
       .catch(error => {
@@ -45,7 +40,6 @@ export default function Interessados({ navigation }) {
   }
 
   function alterarStatusInteressado(number, user) {
-    console.log(number);
     setLoading(true);
     if (number === 1) {
       confirmarInteressado(user);
@@ -67,7 +61,6 @@ export default function Interessados({ navigation }) {
         setReload(!reload);
       })
       .catch(error => {
-        console.log(error)
         setLoading(false);
         setErro(true);
       });
@@ -92,12 +85,11 @@ export default function Interessados({ navigation }) {
         }
         setLoading(false);
         setErro(true);
-        console.log(error.response);
       });
   }
 
   return (
-    <View style={{ backgroundColor: '#ffffff', width: '100%', height: '100%' }}>
+    <Container>
       <HeaderBack title="Solicitações" onNavigation={() => navigation.goBack(null)} />
       {loading && <Loading />}
       {usuarios.length == 0 && (
@@ -107,18 +99,16 @@ export default function Interessados({ navigation }) {
         />
       )}
       <ScrollView>
-        <View style={{ widht: '100%', height: 40, paddingHorizontal: 20 }}>
-          <Text style={style.subtitulo}>
+        <V_Subtitulo>
+          <Subtitulo >
             Logo abaixo estão listadas as pessoas que demonstraram interesse em viajar com você.
-          </Text>
-        </View>
-        <View style={style.V_label}>
-          <Text style={style.label}>Interessados</Text>
-          <View style={style.barra} />
-        </View>
-        <View style={style.Listas}>
+          </Subtitulo>
+        </V_Subtitulo>
+        <V_Label>
+          <Label>Interessados</Label>
+          <BarraSeparacao/>
+        </V_Label>
           <FlatList
-            style={style.flatList}
             data={usuarios}
             renderItem={({ item }) => (
               <View>
@@ -130,28 +120,27 @@ export default function Interessados({ navigation }) {
                   dadosGerais={item}
                   tipoRetorno="Carona"
                 />
-                <View style={{ marginTop: 10 }}>
+                <V_StatusInteresse>
                   {item.status == 'Confirmado' && (
-                    <View style={style.botaoStatusConf}>
-                      <Text style={style.textStatusConf}>Confirmada</Text>
-                    </View>
+                    <BotaoConfirmado>
+                      <LabelConfirmado>Confirmada</LabelConfirmado>
+                    </BotaoConfirmado>
                   )}
                   {item.status == 'Análise' && (
-                    <View style={style.botaoStatusAna}>
-                      <Text style={style.textStatusAna}>Em análise</Text>
-                    </View>
+                    <BotaoAnalise>
+                      <LabelAnalise>Em análise</LabelAnalise>
+                    </BotaoAnalise>
                   )}
                   {item.status == 'Rejeitado' && (
-                    <View style={style.botaoStatusRej}>
-                      <Text style={style.textStatusRej}>Rejeitada </Text>
-                    </View>
+                    <BotaoRejeitado>
+                      <LabelRejeitado>Rejeitada </LabelRejeitado>
+                    </BotaoRejeitado>
                   )}
-                </View>
+                </V_StatusInteresse>
               </View>
             )}
             keyExtractor={item => item._id}
           />
-        </View>
       </ScrollView>
       {erro && (
         <CustomModal
@@ -171,6 +160,6 @@ export default function Interessados({ navigation }) {
           }}
         />
       )}
-    </View>
+    </Container>
   );
 }
