@@ -1,18 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { View, FlatList, Text, TouchableOpacity, ScrollView } from 'react-native';
-
-import style from './style';
-import { Button } from 'native-base';
-import api from '../../../service/api';
+import { View, FlatList, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import { NavigationActions, StackActions } from 'react-navigation';
+import { useSelector } from 'react-redux';
+
+import api from '../../../service/api';
 import EmptyState from '../../../components/EmptyState';
 import Loading from '../../../components/Loading';
 import HeaderBack from '../../../components/CustomHeader';
 import ModalConfirmacao from '../../../components/ModalConfirmacao';
 import CartaoCarona from '../../../components/CartaoCarona';
 import ModalAvaliacao from '../../../components/ModalAvaliacao';
-import { NavigationActions, StackActions } from 'react-navigation';
-import { useSelector } from 'react-redux';
+
+import {
+  Container,
+  V_Subtitulo,
+  V_Label,
+  Subtitulo,
+  Label,
+  BarraSeparacao,
+  V_Status,
+  V_Confirmado,
+  V_Analise,
+  V_Rejeitado,
+  V_Close,
+  LabelAnalise,
+  LabelRejeitado,
+  LabelConfirmado
+} from './style';
 
 export default function Viagens({ navigation }) {
   const emailUsuario = useSelector(state => state.user.email);
@@ -25,6 +40,7 @@ export default function Viagens({ navigation }) {
   const [emailAvaliado, setEmailAvaliado] = useState();
   const [modalDesinteresse, setModalDesinteresse] = useState(false);
   const [idCarona, setIdCarona] = useState();
+
   useEffect(() => {
     setListaCarona([]);
     buscarListaCaronaInteressada();
@@ -43,7 +59,7 @@ export default function Viagens({ navigation }) {
     setLoading(true);
     return api
       .delete(`/carona/meusInteresses/${idCarona}`, {
-        data: { email: emailUsuario },
+        data: { email: emailUsuario }
       })
       .then(response => {
         setReload(!reload);
@@ -70,36 +86,35 @@ export default function Viagens({ navigation }) {
     setModalAvaliacao(false);
     setBotaoAvaliacao(false);
   }
+
   function resetarPilhaNavegacao(rota) {
     const resetAction = StackActions.reset({
       index: 0,
-      actions: [NavigationActions.navigate({ routeName: rota })],
+      actions: [NavigationActions.navigate({ routeName: rota })]
     });
 
     navigation.dispatch(resetAction);
   }
 
   return (
-    <View style={{ backgroundColor: '#f2f2f2', flex: 1 }}>
+    <Container>
       <HeaderBack title="Meus interesses" onNavigation={() => resetarPilhaNavegacao('TabsHeader')} />
       {loading && <Loading />}
       {listaCarona.length == 0 && (
-        <View style={{ backgroundColor: '#fff' }}>
-          <EmptyState
-            titulo="Você não demonstrou interesse em caronas recentemente."
-            mensagem="Vamos nessa! Navegue pelo aplicativo e encontre alguém com quem possa viajar."
-          />
-        </View>
+        <EmptyState
+          titulo="Você não demonstrou interesse em caronas recentemente."
+          mensagem="Vamos nessa! Navegue pelo aplicativo e encontre alguém com quem possa viajar."
+        />
       )}
       {listaCarona.length != 0 && (
         <View>
-          <View style={{ widht: '100%', marginTop: 10, marginBottom: 10, height: 20, paddingHorizontal: 20 }}>
-            <Text style={style.subtitulo}>Gerencie as caronas nas quais você solicitou uma visita.</Text>
-          </View>
-          <View style={style.V_label}>
-            <Text style={style.label}>Seus interesses</Text>
-            <View style={style.barra} />
-          </View>
+          <V_Subtitulo>
+            <Subtitulo>Gerencie as caronas nas quais você solicitou uma visita.</Subtitulo>
+          </V_Subtitulo>
+          <V_Label>
+            <Label>Seus interesses</Label>
+            <BarraSeparacao />
+          </V_Label>
         </View>
       )}
       {modalDesinteresse && (
@@ -116,60 +131,44 @@ export default function Viagens({ navigation }) {
         />
       )}
 
-      <ScrollView style={style.card}>
+      <ScrollView>
         <FlatList
-          style={style.flatList}
           data={listaCarona}
           renderItem={({ item }) => (
             <View>
               <CartaoCarona dados={item.carona} />
-              <View style={style.ViewStatus}>
+              <V_Status>
                 {item.status == 'Análise' && (
-                  <View style={style.Analise}>
-                    <Text style={style.data}>Em análise</Text>
-                  </View>
+                  <V_Analise>
+                    <LabelAnalise>Em análise</LabelAnalise>
+                  </V_Analise>
                 )}
                 {item.status == 'Confirmado' && (
-                  <View style={style.Confirmado}>
-                    <Text style={style.dataConf}>Confirmada</Text>
-                  </View>
+                  <V_Confirmado>
+                    <LabelConfirmado>Confirmada</LabelConfirmado>
+                  </V_Confirmado>
                 )}
                 {item.status == 'Rejeitado' && (
-                  <View style={style.Rejeitado}>
-                    <Text style={style.dataRej}>Rejeitada </Text>
-                  </View>
+                  <V_Rejeitado>
+                    <LabelRejeitado>Rejeitada </LabelRejeitado>
+                  </V_Rejeitado>
                 )}
-                {item.status == 'Realizada' && (
-                  <View style={style.V_Botao}>
-                    <Button
-                      disabled={!botaoAvaliacao}
-                      style={style.botao}
-                      onPress={() => {
-                        avaliarMotorista(item);
-                      }}
-                    >
-                      <Icon name="star" style={style.icon} />
-                      <Text style={style.title}>Avaliar carona</Text>
-                    </Button>
-                  </View>
-                )}
-                <TouchableOpacity
-                  style={style.ViewBotaoClose}
+                <V_Close
                   onPress={() => {
                     setModalDesinteresse(true);
                     setIdCarona(item.carona._id);
                   }}
                 >
-                  <Icon style={style.iconeClose} name="close" />
-                </TouchableOpacity>
-              </View>
+                  <Icon style={{ fontSize: 20 }} name="close" />
+                </V_Close>
+              </V_Status>
             </View>
           )}
         />
       </ScrollView>
-      {modalAvaliacao && (
+      {/* {modalAvaliacao && (
         <ModalAvaliacao nome={nomeAvaliado} email={emailAvaliado} retornoModal={() => fecharModalAvaliacao()} />
-      )}
-    </View>
+      )} */}
+    </Container>
   );
 }

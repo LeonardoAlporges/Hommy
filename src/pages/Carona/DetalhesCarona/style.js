@@ -1,3 +1,4 @@
+import { Button } from 'native-base';
 import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 
@@ -140,22 +141,17 @@ export const ViewBotao = styled.View`
   align-items: center;
   justify-content: center;
 `;
+export const Botao = styled(Button)`
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  height:50px;
+  border-radius:5px;
+  background-color:#142850;
+`;
+export const LabelBotao = styled.Text`
+  font-family: WorkSans-SemiBold;
+  color: #fff;
+  font-size: 20;
+`;
 
-const Estilo = StyleSheet.create({
-  Botao: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-    height: 50,
-    borderRadius: 6,
-    backgroundColor: '#142850'
-  },
-  txtBotao: {
-    color: '#FFF',
-    fontSize: 20,
-    fontFamily: 'WorkSans',
-    fontWeight: 'bold'
-  }
-});
-
-export default Estilo;

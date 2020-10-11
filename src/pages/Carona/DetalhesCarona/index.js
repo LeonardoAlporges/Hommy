@@ -9,8 +9,6 @@ import CustomModal from '../../../components/Alert';
 import api from '../../../service/api';
 import Loading from '../../../components/Loading';
 
-import Estilo from './style';
-
 import {
   Header,
   HeaderUser,
@@ -34,7 +32,11 @@ import {
   ViewPontoEmbarque,
   LabelPontoEmbarque,
   ViewLabel,
-  TextoLabel
+  TextoLabel,
+  ViewBotao,
+  Botao,
+  LabelBotao
+  
 } from './style';
 
 export function DetalhesCarona({ navigation }) {
@@ -163,14 +165,14 @@ export function DetalhesCarona({ navigation }) {
       </ViewPontos>
       {!botaoInteresse ? (
         <ViewBotao>
-          <Button
-            style={Estilo.Botao}
+          <Botao
+            
             onPress={() => {
               demonstrarInteresse();
             }}
           >
-            <Text style={Estilo.txtBotao}>Tenho Interesse</Text>
-          </Button>
+            <LabelBotao>Tenho Interesse</LabelBotao>
+          </Botao>
         </ViewBotao>
       ) : (
         <View style={{ height: 40 }} />
