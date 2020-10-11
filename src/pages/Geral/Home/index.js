@@ -3,18 +3,15 @@ import { StatusBar } from 'react-native';
 import { Container, Tabs, Tab } from 'native-base';
 import { withNavigation } from 'react-navigation';
 
-import estilo from './style';
 import Cabeca from '../../../components/Cabeca';
 import Republica from '../../Republica/Republica';
 import Caronas from '../../Carona/Caronas';
 import Servicos from '../../Servicos/Servicos';
 import Divulgacao from '../Divulgacao';
 
-function TabsHeader({ navigation }) {
-  navigationOptions = { header: null, headerLeft: null };
-  const [loading, setLoading] = useState(true);
-  const [active, setActive] = useState(false);
+import estilo from './style';
 
+function TabsHeader({ navigation }) {
   return (
     <Container>
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />

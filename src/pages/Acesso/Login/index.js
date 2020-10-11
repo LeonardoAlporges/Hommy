@@ -35,11 +35,7 @@ import style, {
 import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk';
 import { facebookLogin } from '../../../utils/facebook';
 
-import {
-  GoogleSignin,
-  GoogleSigninButton,
-  statusCodes
-} from '@react-native-community/google-signin';
+import { GoogleSignin, GoogleSigninButton, statusCodes } from '@react-native-community/google-signin';
 
 import CustomModal from '../../../components/Alert';
 import * as userAction from '../../../actions/UserAction';
@@ -97,12 +93,7 @@ export function Login({ navigation }) {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       console.log('userInfo', userInfo);
-      fazerLoginRedeSocial(
-        userInfo.user.email,
-        userInfo.user.name,
-        userInfo.user.photo,
-        userInfo.user.id
-      );
+      fazerLoginRedeSocial(userInfo.user.email, userInfo.user.name, userInfo.user.photo, userInfo.user.id);
     } catch (error) {
       console.log(error);
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -267,14 +258,6 @@ export function Login({ navigation }) {
             />
             <LabelBotoes>Facebook</LabelBotoes>
           </Botao>
-          <Botao transparent>
-            <Image
-              resizeMode="contain"
-              style={{ width: 20, height: 20 }}
-              source={require('../../../assets/Img/Login/twitter.png')}
-            />
-            <LabelBotoes>Twitter</LabelBotoes>
-          </Botao>
         </BotesLogin>
         <Hr>
           <Divisoria />
@@ -288,14 +271,8 @@ export function Login({ navigation }) {
             fazerLogin(values);
           }}
           validationSchema={yup.object().shape({
-            email: yup
-              .string('')
-              .email('E-mail inválido ou incorreto')
-              .required('Campo obrigatório'),
-            password: yup
-              .string('')
-              .min(8, 'Mínimo 8 dígitos necessários')
-              .required('Campo obrigatório')
+            email: yup.string('').email('E-mail inválido ou incorreto').required('Campo obrigatório'),
+            password: yup.string('').min(8, 'Mínimo 8 dígitos necessários').required('Campo obrigatório')
           })}
         >
           {({ values, handleChange, errors, setFieldTouched, touched, handleSubmit }) => (
@@ -310,9 +287,7 @@ export function Login({ navigation }) {
                     onBlur={() => setFieldTouched('email')}
                   />
                 </Item>
-                <Invalido>
-                  {touched.email && errors.email && <LabelErro>{errors.email}</LabelErro>}
-                </Invalido>
+                <Invalido>{touched.email && errors.email && <LabelErro>{errors.email}</LabelErro>}</Invalido>
               </CampoLogin>
 
               <CampoLogin>
@@ -334,9 +309,7 @@ export function Login({ navigation }) {
                     <Icon name="eye" style={{ color: '#31aab8' }} />
                   </TouchableOpacity>
                 </Item>
-                <Invalido>
-                  {touched.password && errors.password && <LabelErro>{errors.password}</LabelErro>}
-                </Invalido>
+                <Invalido>{touched.password && errors.password && <LabelErro>{errors.password}</LabelErro>}</Invalido>
               </CampoLogin>
               <RecuperaSenha>
                 <Click

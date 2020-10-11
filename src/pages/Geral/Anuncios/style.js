@@ -1,146 +1,75 @@
+import { Button } from 'native-base';
 import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
 
-const estilo = StyleSheet.create({
-  V_header: {
-    display: 'flex',
-    flexDirection: 'row',
-    width: '100%',
-    height: 55,
-    backgroundColor: '#f8f8f8',
-    borderBottomWidth: 2,
-    borderBottomColor: '#142850',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-  },
-  campos: {
-    marginTop: 20,
-  },
-  V_geral: {
-    flexWrap: 'nowrap',
-    marginTop: '3%',
-    width: '100%',
-    height: '100%',
-  },
-  iconHeader: {
-    fontSize: 26,
-    color: '#142850',
-    marginHorizontal: '5%',
-  },
-  V_interna2: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingBottom: '20%',
-  },
-  imagemError: {
-    height: 200,
-    width: 200,
-  },
-  textError: {
-    textAlign: 'center',
-    fontSize: 22,
-    fontWeight: 'bold',
-    fontFamily: 'WorkSans',
-
-    width: '80%',
-  },
-  textError2: {
-    marginTop: 10,
-    textAlign: 'center',
-    fontSize: 18,
-    fontWeight: '400',
-    fontFamily: 'WorkSans',
-    width: '80%',
-  },
-  txtLabel: {
-    fontFamily: 'WorkSans',
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#586880',
-  },
-  title: {
-    fontSize: 24,
-    fontFamily: 'WorkSans',
-    fontWeight: 'bold',
-    color: '#142850',
-  },
-  barra: {
-    width: '90%',
-    marginLeft: '5%',
-    marginRight: '5%',
-    borderBottomWidth: 1,
-    borderBottomColor: '#adadad',
-  },
-  label: {
-    marginLeft: '6%',
-    fontFamily: 'WorkSans',
-    fontSize: 16,
-  },
-  V_label: {
-    marginTop: '0%',
-  },
-  card: {
-    marginTop: 0,
-    marginBottom: 0,
-    paddingVertical: '3%',
-    paddingHorizontal: '1%',
-  },
-  flatList: {
-    padding: 1,
-    marginBottom: 0,
-    paddingBottom: 0,
-  },
-  V_edit: {
-    marginTop: 10,
-    width: '100%',
-    flexDirection: 'row',
-    height: 40,
-    justifyContent: 'space-evenly',
-    alignItems: 'flex-end',
-  },
-  delete: {
-    borderRadius: 6,
-    height: 34,
-    width: 34,
-    backgroundColor: '#142850',
-    justifyContent: 'center',
-    alignItems: 'center',
-    color: '#ffffff',
-  },
-  edit: {
-    borderRadius: 6,
-    height: 34,
-    width: 100,
-    backgroundColor: '#142850',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-    color: '#ffffff',
-  },
-  ver: {
-    borderRadius: 6,
-    height: 34,
-    width: 200,
-    backgroundColor: '#142850',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-    color: '#ffffff',
-  },
-  TxtEdit: {
-    color: '#ffffff',
-    fontSize: 18,
-    fontFamily: 'WorkSans',
-  },
-
-  iconDel: {
-    fontSize: 16,
-    color: '#ffffff',
-  },
-  icon: {
-    fontSize: 16,
-    marginRight: 10,
-    color: '#ffffff',
-  },
-});
-export default estilo;
+export const Container = styled.View`
+  flex: 1;
+  background-color: #f2f2f2;
+`;
+export const V_Subtitulo = styled.View`
+  width: 100%;
+  height: 40px;
+  padding: 0 20px 0 20px;
+`;
+export const Subtitulo = styled.Text`
+  font-family: WorkSans;
+  font-size: 14px;
+`;
+export const V_Label = styled.View`
+  width: 100%;
+  padding: 8px 0px 8px 0px;
+`;
+export const Label = styled.Text`
+  font-family: WorkSans-SemiBold;
+  font-size: 16px;
+  color: #142850;
+  margin-left: 6%;
+`;
+export const BarraSeparacao = styled.View`
+  width: 90%;
+  margin: 0 5% 0 5%;
+  border-bottom-width: 1px;
+  border-bottom-color: #adadad;
+`;
+export const ViewOpcoes = styled.View`
+  margin-top: 10px;
+  width: 100%;
+  flex-direction: row;
+  height: 40px;
+  justify-content: space-evenly;
+  align-items: flex-end;
+`;
+export const BotaoDelete = styled(Button)`
+  border-radius: 5px;
+  height: 34px;
+  width: 34px;
+  background-color: #142850;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+`;
+export const BotaoEditar = styled(Button)`
+  border-radius: 5px;
+  height: 34px;
+  width: 100px;
+  background-color: #142850;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  color: #fff;
+`;
+export const LabelBotaoEditar = styled.Text`
+  font-family: WorkSans;
+  font-size: 16px;
+  color: #fff;
+`;
+export const BotaoInteressado = styled(Button)`
+  border-radius: 5px;
+  height: 34px;
+  width: 200px;
+  background-color: #142850;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  color: #fff;
+`;

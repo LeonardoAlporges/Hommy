@@ -1,26 +1,25 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Spinner } from 'native-base';
-import { View, Image, StatusBar } from 'react-native';
+import { View, StatusBar } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useSelector, useDispatch } from 'react-redux';
-import * as userAction from '../../../actions/UserAction';
-import SplashScreen from '../SplashScreen';
-import { ViewCarregamento, Imagem, ViewSpinner } from './styles';
-import { fmcService } from '../../../Firebase/FMCService';
-import { localNotificationService } from '../../../Firebase/LocalSendNotification';
 import { NavigationActions, StackActions } from 'react-navigation';
 import messaging from '@react-native-firebase/messaging';
 
+import * as userAction from '../../../actions/UserAction';
+import SplashScreen from '../SplashScreen';
+import { fmcService } from '../../../Firebase/FMCService';
+import { localNotificationService } from '../../../Firebase/LocalSendNotification';
+
+import { ViewCarregamento, Imagem, ViewSpinner } from './styles';
+
 export default function RenderApp(props) {
-  const email = useSelector(state => state.user.email);
-  const leo = useSelector(state => state.user.tokenUser);
   const [load, setLoad] = useState(true);
   const [usuarioLogado, setUsuarioLogado] = useState(true);
   const [firtsOpen, setFirtsOpen] = useState(false);
   const dispatch = useDispatch();
 
   function pegarToken() {
-    console.log('EMIAL :', email);
     messaging()
       .getToken()
       .then(fmcToken => {
@@ -32,7 +31,7 @@ export default function RenderApp(props) {
         }
       })
       .catch(erro => {
-        console.log('[FMCService] getToken rejeitado ');
+        console.log('[FMCService] GetToken rejeitado');
       });
   }
   function registrarNotificacao() {
@@ -46,7 +45,6 @@ export default function RenderApp(props) {
     }
 
     function onNotification(notify) {
-      console.log('[APP] onNotification:', notify);
       const option = {
         soundName: 'default',
         playSound: true
@@ -55,12 +53,10 @@ export default function RenderApp(props) {
     }
 
     function onOpenNotification(notify) {
-      console.log('[APP] OnOPENNOTIFICAÇAO:', notify);
-      alert('Notificação Aberta: ' + notify.body);
+      alert('ALTERAR ESSE TROSSO QUANDO TIVER EM PRODUÇÂO: ' + notify.body);
     }
 
     return () => {
-      console.log('[App] Unregsitre');
       fmcService.unRegister();
       localNotificationService.unRegister();
     };
@@ -87,7 +83,6 @@ export default function RenderApp(props) {
         }
       });
       await AsyncStorage.getItem('user').then(value => {
-        console.log('STORAGE:', value);
         if (value != null) {
           const dados = JSON.parse(value);
           dispatch(userAction.editNome(dados.nome));
@@ -112,7 +107,6 @@ export default function RenderApp(props) {
       index: 0,
       actions: [NavigationActions.navigate({ routeName: Rota })]
     });
-
     props.navigation.dispatch(resetAction);
   }
 
@@ -132,11 +126,7 @@ export default function RenderApp(props) {
         </ViewCarregamento>
       ) : (
         <View>
-          {firtsOpen ? (
-            <SplashScreen />
-          ) : (
-            <View>{usuarioLogado ? reset('TabsHeader') : reset('Login')}</View>
-          )}
+          {firtsOpen ? <SplashScreen /> : <View>{usuarioLogado ? reset('TabsHeader') : reset('Login')}</View>}
         </View>
       )}
     </View>

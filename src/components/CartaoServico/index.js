@@ -9,11 +9,12 @@ class CartaoServico extends Component {
   constructor(props) {
     super(props);
     this.onClickCard = this.onClickCard.bind(this);
+    console.log('Dados:', this.props.leonardo);
   }
 
   onClickCard = () => {
     const dados = this.props.leonardo;
-    this.props.navigation.navigate('DetalhesServicos');
+    this.props.navigation.navigate('DetalhesServicos', { dados });
   };
 
   render() {
