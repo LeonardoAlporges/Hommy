@@ -55,10 +55,11 @@ export const Botao = styled(Button)`
   height: 50px;
   justify-content: center;
   align-items: center;
+  background-color: #142850;
 `;
 
 export const TituloBotao = styled.Text`
-  font-family: 'WorkSans';
+  font-family: WorkSans-SemiBold;
   color: #ffffff;
   font-size: 20px;
 `;
