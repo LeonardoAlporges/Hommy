@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { Image, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { Image, View } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import 'moment/locale/br';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Icon2 from 'react-native-vector-icons/Feather';
+
 import Estilos from './style';
-import { Button } from 'native-base';
-import AsyncStorage from '@react-native-community/async-storage';
+
 import {
   Container,
   ViewImgaem,
@@ -28,9 +27,7 @@ export function CartaoCarona({ navigation, dados }) {
   const [usuarioLogado, setUsuarioLogado] = useState();
   const [dataViagem, setDataViagem] = useState(moment(dados.data).format('DD/MM'));
   const [horaSaida, sethoraSaida] = useState(moment(new Date(dados.horaSaida)).format('HH:mm'));
-  const [horaChegada, sethoraChegada] = useState(
-    moment(new Date(dados.horaChegada)).format('HH:mm')
-  );
+  const [horaChegada, sethoraChegada] = useState(moment(new Date(dados.horaChegada)).format('HH:mm'));
   const emailUser = useSelector(state => state.user.email);
 
   async function navegarParaDetalhes() {

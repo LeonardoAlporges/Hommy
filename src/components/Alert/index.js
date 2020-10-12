@@ -1,101 +1,86 @@
-import React, { Component } from 'react';
-import { TouchableOpacity, View, Text, Modal, Image } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Modal } from 'react-native';
 import Estilos from './style';
 
-export default class CustomModal extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      modalVisible: this.props.visivel,
-      icon: '',
-      titulo: '',
-      descricao: '',
-      botao: ''
-    };
+import { Container, Imagem, Titulo, Descricao, Botao, LabelBotao } from './style';
+
+export default function CustomModal(props) {
+  const [modalVisivel, setModalVisivel] = useState(props.visivel);
+  const [icone, setIcone] = useState();
+  const [titulo, setTitulo] = useState();
+  const [descricao, setDescricao] = useState();
+  const [botao, setBotao] = useState();
+  const [imagem, setImagem] = useState();
+
+  function callback() {
+    props.callback();
   }
 
-  callback = () => {
-    this.props.callback();
-  };
-
-  navegar = props => {
-    this.setState({ modalVisible: false });
-    this.callback();
-    if (this.props.onAction != null) {
-      this.props.onAction();
-    }
-  };
-
-  verificarImagem = () => {
-    if (this.props.imagem == '') {
-      this.setState({ icon: require('../../assets/Img/Succes.png') });
-    } else if (this.props.imagem == 'NaoEncontrado') {
-      this.setState({ icon: require('../../assets/Img/Nao_Encontrado.png') });
-    } else if (this.props.imagem == 'EnvieImagem') {
-      this.setState({ icon: require('../../assets/Img/Enviar_Foto.png') });
-    } else if (this.props.imagem == 'Faltando') {
-      this.setState({ icon: require('../../assets/Img/Vazio.png') });
-    } else if (this.props.imagem == 'Teste') {
-      this.setState({ icon: require('../../assets/Img/Nao_Encontrado.png') });
-    }
-  };
-
-  UNSAFE_componentWillMount() {
-    this.verificarImagem();
-    if (this.props.parametro == 'Custom') {
-      if (this.props.imagem == '' || !this.props.imagem) {
-        this.setState({ icon: require('../../assets/Img/Succes.png') });
-      }
-      this.setState({
-        titulo: this.props.titulo,
-        descricao: this.props.descricao,
-        botao: this.props.botao
-      });
-    }
-
-    if (this.props.parametro == 'Sucesso') {
-      this.setState({
-        icon: require('../../assets/Img/Succes.png'),
-        titulo: 'Tudo certo!',
-        descricao: 'Concluído com sucesso',
-        botao: 'Ok'
-      });
-    }
-    if (this.props.parametro == 'Erro') {
-      this.setState({
-        icon: require('../../assets/Img/Fail_Connection.png'),
-        titulo: 'OOPS!',
-        descricao: this.props.descricao,
-        botao: 'Voltar'
-      });
-      if (!this.props.descricao) {
-        this.setState({
-          descricao: 'Alguma coisa deu errado. Por favor, verifique sua conexão com a internet.'
-        });
-      }
+  function navegar() {
+    setModalVisivel(false);
+    callback();
+    if (props.onAction != null) {
+      props.onAction();
     }
   }
 
-  render() {
-    return (
-      <Modal animationType="fade" visible={this.state.modalVisible} transparent={true}>
-        <View style={Estilos.ViewFundo}>
-          <View style={Estilos.ViewModal}>
-            <Image style={Estilos.Imagem} source={this.state.icon} />
+  function verificarImagem() {
+    if (imagem == '') {
+      setIcone(require('../../assets/Img/Succes.png'));
+    } else if (imagem == 'NaoEncontrado') {
+      setIcone('../../assets/Img/Nao_Encontrado.png');
+    } else if (imagem == 'EnvieImagem') {
+      setIcone(require('../../assets/Img/Enviar_Foto.png'));
+    } else if (imagem == 'Faltando') {
+      setIcone(require('../../assets/Img/Vazio.png'));
+    }
+  }
+  function verificarParametro() {
+    if (props.parametro == 'Custom') {
+      if (props.imagem == '' || !props.imagem) {
+        setIcone(require('../../assets/Img/Succes.png'));
+      }
+      setTitulo(props.titulo);
+      setDescricao(props.descricao);
+      setBotao(props.botao);
+    }
+    if (props.parametro == 'Sucesso') {
+      setIcone(require('../../assets/Img/Succes.png'));
+      setTitulo('Tudo certo!');
+      setDescricao('Concluído com sucesso');
+      setBotao('Ok');
+    }
+    if (props.parametro == 'Erro') {
+      setIcone(require('../../assets/Img/Fail_Connection.png'));
+      setTitulo('OOPS!');
+      setDescricao(props.descricao);
+      setBotao('Voltar');
+      if (!props.descricao) {
+        setDescricao('Alguma coisa deu errado. Por favor, verifique sua conexão com a internet.');
+      }
+    }
+  }
+  useEffect(() => {
+    verificarImagem();
+    verificarParametro();
+  }, []);
 
-            <Text style={Estilos.titulo}>{this.state.titulo}</Text>
-            <Text style={Estilos.descricao}>{this.state.descricao}</Text>
-            <TouchableOpacity
-              style={Estilos.botao}
-              onPress={async () => {
-                this.navegar();
-              }}
-            >
-              <Text style={Estilos.botaoTxt}>{this.state.botao}</Text>
-            </TouchableOpacity>
-          </View>
+  return (
+    <Modal animationType="fade" visible={modalVisivel} transparent={true}>
+      <Container>
+        <View style={Estilos.ViewModal}>
+          <Imagem source={icone} />
+          <Titulo>{titulo}</Titulo>
+          <Descricao>{descricao}</Descricao>
+          <Botao
+            onPress={async () => {
+              navegar();
+            }}
+          >
+            <LabelBotao>{botao}</LabelBotao>
+          </Botao>
         </View>
-      </Modal>
-    );
-  }
+      </Container>
+    </Modal>
+  );
 }

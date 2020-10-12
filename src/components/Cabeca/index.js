@@ -1,17 +1,12 @@
-import React, { Component, useState } from 'react';
-import { withNavigation } from 'react-navigation';
-import { TouchableOpacity, View, Text, BackHandler, Modal, Image, Linking } from 'react-native';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
+import { Modal, Image, Linking } from 'react-native';
 import { useSelector } from 'react-redux';
-
 import { NavigationActions, StackActions } from 'react-navigation';
-
-import { Button } from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AsyncStorage from '@react-native-community/async-storage';
+import { ScrollView } from 'react-native-gesture-handler';
 
 import Estilos from './style';
-import { ScrollView } from 'react-native-gesture-handler';
 
 import {
   Container,
@@ -35,52 +30,48 @@ import {
   Botao,
   LabelBotoes,
   SairdoApp,
-  LabelBotaoSair
+  LabelBotaoSair,
+  HeaderPrincipal,
+  IconeMenu,
+  Icone,
+  V_titulo,
+  Titulo
 } from './style';
 
-function Cabeca({ navigation }) {
-  navigationOptions = { header: null, left: null };
-  const [dados, setDados] = useState();
+export default function Cabeca({ navigation }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const nome = useSelector(state => state.user.usuario);
   const fotoPerfil = useSelector(state => state.user.fotoPerfil);
-  const nota = useSelector(state => state.user.notaUser);
-  AbrirUrl = () => {
-    Linking.openURL(`tel:27997488849`);
-    //Linking.openUrl('https://api.whatsapp.com/send?1=pt_BR&phone=5527997488849');
-  };
 
   function resetNavigation(Rota) {
-    console.log('pe');
     const resetAction = StackActions.reset({
       index: 0,
       actions: [NavigationActions.navigate({ routeName: Rota })]
     });
-
     navigation.dispatch(resetAction);
   }
-  closeToken = async () => {
+
+  async function closeToken() {
     await AsyncStorage.removeItem('token');
     await AsyncStorage.removeItem('user')
       .then(value => {
         resetNavigation('Login');
       })
       .catch(error => {});
-  };
+  }
   return (
-    <View style={Estilos.ViewCabeca}>
-      <TouchableOpacity
-        style={Estilos.touch_Icon}
+    <HeaderPrincipal>
+      <IconeMenu
         onPress={() => {
           setIsModalVisible(true);
         }}
       >
-        <Icon style={Estilos.icon2} name="account-circle-outline" />
-      </TouchableOpacity>
-      <View style={Estilos.Titulo}>
-        <Text style={Estilos.txt}> Hommy </Text>
-      </View>
-      <View style={Estilos.touch_Fake}>{/* <Icon style={Estilos.icon2} name="user" /> */}</View>
+        <Icone name="account-circle-outline" />
+      </IconeMenu>
+      <V_titulo>
+        <Titulo> Hommy </Titulo>
+      </V_titulo>
+      {/* <View style={Estilos.touch_Fake}><Icon style={Estilos.icon2} name="user" /></View> */}
 
       <Modal
         transparent={true}
@@ -270,22 +261,6 @@ function Cabeca({ navigation }) {
           </ScrollView>
         </Container>
       </Modal>
-    </View>
+    </HeaderPrincipal>
   );
 }
-
-const mapsStateToProps = state => {
-  return {
-    nome: state.user.usuario,
-    email: state.user.email,
-    nota: state.user.notaUser,
-    idUser: state.user.idUser,
-    telefone: state.user.telefone,
-    fotoPerfil: state.user.fotoPerfil,
-    logado: state.user.logado
-  };
-};
-
-const cabecaConnect = connect(mapsStateToProps, null)(Cabeca);
-
-export default withNavigation(cabecaConnect);
