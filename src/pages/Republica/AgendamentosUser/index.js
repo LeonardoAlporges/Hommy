@@ -15,6 +15,22 @@ import ModalConfirmacao from '../../../components/ModalConfirmacao';
 import moment from 'moment';
 import EmptyState from '../../../components/EmptyState';
 import Loading from '../../../components/Loading';
+import {
+  Container,
+  ViewDetalhes,
+  Subtitulo,
+  ViewData,
+  LabelData,
+  LabelConfirmacao,
+  Barra,
+  Label,
+  ViewLabel,
+  Analise,
+  Confirmado,
+  Rejeitado,
+  LabelReijeicao
+} from './styles';
+
 
 export default function AgendamentoUser({ navigation }) {
   const email = useSelector(state => state.user.email);
@@ -63,7 +79,7 @@ export default function AgendamentoUser({ navigation }) {
   }
 
   return (
-    <View style={style.Container}>
+    <Container>
       <HeaderBack title="Meus agendamentos" onNavigation={() => navigation.goBack(null)} />
       {loading && <Loading />}
 
@@ -88,12 +104,12 @@ export default function AgendamentoUser({ navigation }) {
         />
       )}
       <View style={{ widht: '100%', height: 20, paddingHorizontal: 20, marginBottom: 10 }}>
-        <Text style={style.subtitulo}>Fique atento no status das repúblicas nas quais você solicitou uma visita.</Text>
+        <Subtitulo>Fique atento no status das repúblicas nas quais você solicitou uma visita.</Subtitulo>
       </View>
-      <View style={style.V_label}>
-        <Text style={style.label}>Agendamentos</Text>
-        <View style={style.barra} />
-      </View>
+      <ViewLabel>
+        <Label>Agendamentos</Label>
+        <Barra/>
+      </ViewLabel>
 
       <FlatList
         data={listaAgendamento}
@@ -101,27 +117,27 @@ export default function AgendamentoUser({ navigation }) {
         renderItem={({ item }) => (          
           <View>
             <Cartao data={item.republica} interessado />
-            <View style={style.viewData}>
+            <ViewData>
               {item.status == 'Análise' && (
-                <View style={style.ViewAnalise}>
-                  <Text style={style.data}>{item.status}</Text>
-                </View>
+                <Analise>
+                  <LabelData>{item.status}</LabelData>
+                </Analise>
               )}
               {item.status == 'Confirmado' && (
-                <View style={style.View_Confirmado}>
-                  <Text style={style.dataConf}>{item.status}</Text>
-                </View>
+                <Confirmado>
+                  <LabelConfirmacao>{item.status}</LabelConfirmacao>
+                </Confirmado>
               )}
               {item.status == 'Rejeitado' && (
-                <View style={style.View_Rejeitado}>
-                  <Text style={style.dataRej}>{item.status}</Text>
-                </View>
+                <Rejeitado>
+                  <LabelReijeicao>{item.status}</LabelReijeicao>
+                </Rejeitado>
               )}
 
               <View style={style.viewData2}>
-                <Text style={style.data}>{moment(new Date(item.data)).format('DD/MM/YY')}</Text>
+                <LabelData>{moment(new Date(item.data)).format('DD/MM/YY')}</LabelData>
                 <Text>As</Text>
-                <Text style={style.data}>{moment(new Date(item.hora)).format('hh:mm')}</Text>
+                <LabelData>{moment(new Date(item.hora)).format('hh:mm')}</LabelData>
               </View>
 
               <TouchableOpacity
@@ -133,21 +149,21 @@ export default function AgendamentoUser({ navigation }) {
               >
                 <Icon name="close" style={style.iconDel} />
               </TouchableOpacity>
-            </View>
+            </ViewData>
           </View>
         )}
         keyExtractor={item => item._id}
       />
       {erro && (
-        <View style={style.V_Detalhes}>
+        <ViewDetalhes>
           <CustomModal
             parametro="Erro"
             callback={() => {
               setErro(false);
             }}
           />
-        </View>
+        </ViewDetalhes>
       )}
-    </View>
+    </Container>
   );
 }

@@ -1,131 +1,112 @@
 import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
+
+export const Container = styled.View`
+  align-items: 'center',
+  flex: 1,  
+`;
+
+export const ViewDetalhes = styled.View`
+flex: 1,
+justify-content: 'center',
+align-items: 'center',
+`;
+
+export const Subtitulo = styled.Text`
+font-family: 'WorkSans',
+font-size: 14,
+color: '#687368',
+margin-horizontal: 20,
+`;
+
+export const ViewData = styled.View`
+margin-top: 0,
+flex-direction: 'row',
+width: '100%',
+justify-content: 'space-evenly',
+align-items: 'center',
+height: 40,
+`;
+
+export const LabelData = styled.Text`
+font-size: 16,
+font-family: 'WorkSans',
+color: '#142850',
+font-weight: 'bold',
+`;
+
+export const LabelConfirmacao = styled.Text`
+font-size: 16,
+font-family: 'WorkSans',
+color: '#FFFFFF',
+font-weight: 'bold',
+`;
+
+export const Barra = styled.View`
+width: '90%',
+margin-horizontal: '5%',
+border-bottom-width: 1,
+border-bottom-color: '#adadad',
+`;
+
+export const Label = styled.Text`
+margin-left: '6%',
+font-family: 'WorkSans Bold',
+font-size: 16,
+color: '#142850',
+`;
+
+export const ViewLabel = styled.View`
+width: '100%',
+margin-vertical: 10,
+`;
+
+export const Analise = styled.View`
+width: '30%',
+border-radius: 20,
+background-color: 'yellow',
+justify-content: 'center',
+align-items: 'center',
+`;
+
+export const Confirmado = styled.View`
+width: '30%',
+border-radius: 20,
+background-color: 'green',
+justify-content: 'center',
+align-items: 'center',
+`;
+
+export const Rejeitado = styled.View`
+width: '30%',
+border-radius: 20,
+background-color: 'red',
+justify-content: 'center',
+align-items: 'center',
+`;
+
+export const LabelReijeicao = styled.Text`
+font-size: 16,
+font-family: 'WorkSans',
+color: '#FFFFFF',
+font-weight: 'bold',
+`;
+
 
 const style = StyleSheet.create({
-  Container: {
-    alignItems: 'center',
-    flex: 1,
-  },
-  V_botao: {
-    marginTop: 20,
-    marginBottom: 20,
-    height: 60,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
-  V_Detalhes: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  iconDel: {
-    fontSize: 20,
-  },
-  subtitulo: {
-    fontSize: 14,
-    color: '#2e2e2e',
-    fontFamily: 'WorkSans',
-  },
-  botao: {
-    backgroundColor: '#142850',
-    display: 'flex',
-    flexDirection: 'row',
-    borderRadius: 8,
-    width: '80%',
-    height: 60,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  V_Detalhes: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  iconWhatsapp: {
-    color: '#ffffff',
-    fontSize: 30,
-  },
-  txtWhatsapp: {
-    color: '#FFFFFF',
-    marginLeft: 15,
-  },
-  viewData: {
-    marginTop: 0,
-    flexDirection: 'row',
-    width: '100%',
-    justifyContent: 'space-evenly',
-    alignItems: 'center'
-  },
-  flatlist: {
-    width: "100%",
-    height: "100%"
-  },
-  data: {
-    fontSize: 16,
-    fontFamily: 'WorkSans',
-    color: '#142850',
-    fontWeight: 'bold',
-  },
-  dataConf: {
-    fontSize: 16,
-    fontFamily: 'WorkSans',
-    color: '#FFFFFF',
-    fontWeight: 'bold',
-  },
-  barra: {
-    width: '90%',
-    marginLeft: '5%',
-    marginRight: '5%',
-    borderBottomWidth: 1,
-    borderBottomColor: '#adadad',
-  },
-  label: {
-    marginLeft: '6%',
-    fontFamily: 'WorkSans Bold',
-    fontSize: 16,
-    color: '#142850',
-  },
-  V_label: {
-    width: '100%',
-    marginVertical: 10,
-  },
-  View_Confirmado: {
-    width: '30%',
-    height: 30,
-    borderRadius: 6,
-    backgroundColor: 'green',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  ViewAnalise: {
-    width: '30%',
-    height: 30,
-    borderRadius: 6,
-    backgroundColor: 'yellow',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  viewData2: {
+   viewData2: {
     justifyContent: 'space-evenly',
     flexDirection: 'row',
     width: '45%',
     borderRadius: 50,
-    backgroundColor: '#f8f8f8',
-  },
-  View_Rejeitado: {
-    width: '30%',
-    height: 30,
-    borderRadius: 6,
-    backgroundColor: 'red',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  dataRej: {
-    fontSize: 16,
-    fontFamily: 'WorkSans',
-    color: '#FFFFFF',
-    fontWeight: 'bold',
-  },
+    backgroundColor: '#ffffff',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 7,
+    },
+    shadowOpacity: 0.43,
+    shadowRadius: 9.51,
+  }  
 });
 export default style;

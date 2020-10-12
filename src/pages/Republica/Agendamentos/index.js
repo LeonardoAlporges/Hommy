@@ -14,6 +14,21 @@ import moment from 'moment';
 import EmptyState from '../../../components/EmptyState';
 import Loading from '../../../components/Loading';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import {
+  Container,
+  ViewDetalhes,
+  Subtitulo,
+  ViewData,
+  LabelData,
+  LabelConfirmacao,
+  Barra,
+  Label,
+  ViewLabel,
+  Analise,
+  Confirmado,
+  Rejeitado,
+  LabelReijeicao
+} from './styles';
 
 export default function Agendamentos({ navigation }) {
   const email = useSelector(state => state.user.email);
@@ -82,7 +97,7 @@ export default function Agendamentos({ navigation }) {
   }
 
   return (
-    <View style={style.Container}>
+    <Container>
       <HeaderBack title="Agendamentos" onNavigation={() => navigation.goBack(null)} />
       {loading && <Loading />}
       {listaAgendamento.length == 0 && (
@@ -94,14 +109,14 @@ export default function Agendamentos({ navigation }) {
       {listaAgendamento.length != 0 && (
         <View>
           <View style={{ width: '100%', paddingHorizontal: 5, height: 40 }}>
-            <Text style={style.subtitulo}>
+            <Subtitulo>
               Abaixo estão listadas as pessoas que solicitaram uma visita a sua república.
-            </Text>
+            </Subtitulo>
           </View>
-          <View style={style.V_label}>
-            <Text style={style.label}>Interessados</Text>
-            <View style={style.barra} />
-          </View>
+          <ViewLabel>
+            <Label>Interessados</Label>
+            <Barra/>
+          </ViewLabel>
         </View>
       )}
       <FlatList
@@ -116,42 +131,42 @@ export default function Agendamentos({ navigation }) {
               dadosGerais={item}
               tipoRetorno="Republica"
             />
-            <View style={style.viewData}>
+            <ViewData>
               <View style={style.viewData2}>
-                <Text style={style.data}>{moment(new Date(item.data)).format('DD/MM/YY')}</Text>
+                <LabelData>{moment(new Date(item.data)).format('DD/MM/YY')}</LabelData>
                 <Text>As</Text>
-                <Text style={style.data}>{moment(new Date(item.hora)).format('hh:mm')}</Text>
+                <LabelData>{moment(new Date(item.hora)).format('hh:mm')}</LabelData>
               </View>
               {item.status == 'Análise' && (
-                <View style={style.Analise}>
-                  <Text style={style.data}>Em análise</Text>
-                </View>
+                <Analise>
+                  <Label>Em análise</Label>
+                </Analise>
               )}
               {item.status == 'Confirmado' && (
-                <View style={style.Confirmado}>
-                  <Text style={style.dataConf}>Confirmada</Text>
-                </View>
+                <Confirmado>
+                  <LabelConfirmacao>Confirmada</LabelConfirmacao>
+                </Confirmado>
               )}
               {item.status == 'Rejeitado' && (
-                <View style={style.Rejeitado}>
-                  <Text style={style.dataRej}>Rejeitada</Text>
-                </View>
+                <Rejeitado>
+                  <LabelReijeicao>Rejeitada</LabelReijeicao>
+                </Rejeitado>
               )}
-            </View>
+            </ViewData>
           </ScrollView>
         )}
         keyExtractor={item => item._id}
       />
       {erro && (
-        <View style={style.V_Detalhes}>
+        <ViewDetalhes>
           <CustomModal
             parametro="Erro"
             callback={() => {
               setErro(false);
             }}
           />
-        </View>
+        </ViewDetalhes>
       )}
-    </View>
+    </Container>
   );
 }

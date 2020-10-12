@@ -1,12 +1,14 @@
+import React, { useState, useEffect } from 'react';
+import { View, Image, Modal, TouchableOpacity } from 'react-native';
 import * as yup from 'yup';
 import { Formik } from 'formik';
-import React, { useState, Fragment, useEffect } from 'react';
-import { View, Image, Text, ScrollView, Modal, TouchableOpacity } from 'react-native';
+
 import { Icon, Input, Item, Button, Spinner, Label } from 'native-base';
 import { withNavigation, NavigationActions, StackActions } from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useSelector, useDispatch } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
+
 import api from '../../../service/api';
 import style, {
   Container,

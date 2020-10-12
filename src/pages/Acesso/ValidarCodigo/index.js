@@ -1,14 +1,31 @@
-import * as yup from 'yup';
-import { Formik } from 'formik';
 import React, { Component, Fragment, useState, useEffect } from 'react';
 import { Image, Text, View } from 'react-native';
+import * as yup from 'yup';
+import { Formik } from 'formik';
+
 import { Button, Item, Input } from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import CustomModal from '../../../components/Alert';
-import api from '../../../service/api';
 import { NavigationActions, StackActions } from 'react-navigation';
+
 import estilo from './styles';
 import HeaderBack from '../../../components/CustomHeader';
+import CustomModal from '../../../components/Alert';
+import api from '../../../service/api';
+import {
+  Container,
+  ViewImagem,
+  ViewTitulo,
+  Titulo,
+  ViewSubtitulo,
+  Subtitulo,
+  ViewBotao,
+  TextoBotao,
+  ViewModal,
+  CamposLogin,
+  CamposLoginSenha,
+  ViewErro,
+  LabelErro
+} from './styles';
 
 export default function ValidarCodigo({ navigation }) {
   const [erro, setErro] = useState(false);
@@ -65,10 +82,10 @@ export default function ValidarCodigo({ navigation }) {
   }
 
   return (
-    <View style={estilo.container}>
+    <Container>
       <HeaderBack title={'Recuperação de senha'} onNavigation={() => resetarPilhaNavegacao('Login')} />
 
-      <View style={estilo.V_img}>
+      <ViewImagem>
         <Image
           style={estilo.V_img}
           source={
@@ -77,20 +94,20 @@ export default function ValidarCodigo({ navigation }) {
               : require('../../../assets/Img/Send_email.png')
           }
         />
-      </View>
+      </ViewImagem>
 
-      <View style={estilo.V_title}>
+      <ViewTitulo>
         {codigoValido ? (
-          <Text style={estilo.title}>
+          <Titulo>
             Cadastre uma nova senha de acesso. Sua senha antiga será apagada, crie uma nova para se conectar ao
             aplicativo.
-          </Text>
+          </Titulo>
         ) : (
-          <Text style={estilo.title}>
+          <Titulo>
             Um código para prosseguir foi enviado ao seu e-mail. Por favor, informe-o no campo abaixo.
-          </Text>
+          </Titulo>
         )}
-      </View>
+      </ViewTitulo>
 
       <Formik
         initialValues={{
@@ -144,7 +161,7 @@ export default function ValidarCodigo({ navigation }) {
             )}
 
             {!codigoValido && (
-              <View style={estilo.view_CamposLogin}>
+              <CamposLogin>
                 <Item>
                   <Icon style={estilo.icons_CamposLogin} active name="key-outline" />
                   <Input
@@ -157,32 +174,32 @@ export default function ValidarCodigo({ navigation }) {
                     keyboardType="numeric"
                   />
                 </Item>
-              </View>
+              </CamposLogin>
             )}
             <View>
               {touched.codigo && errors.codigo ? (
-                <View style={estilo.V_Erro}>
-                  <Text style={estilo.txtErro}>{errors.codigo}</Text>
-                </View>
+                <ViewErro>
+                  <LabelErro>{errors.codigo}</LabelErro>
+                </ViewErro>
               ) : (
                 <View style={estilo.V_ErroSem} />
               )}
             </View>
             {!codigoValido && (
-              <View style={estilo.V_botao}>
+              <ViewBotao>
                 <Button
                   style={estilo.botao}
                   onPress={() => {
                     verificarCodigoDigitado(values.codigo);
                   }}
                 >
-                  <Text style={estilo.txtbtn}>Prosseguir</Text>
+                  <TextoBotao>Prosseguir</TextoBotao>
                 </Button>
-              </View>
+              </ViewBotao>
             )}
 
             {codigoValido && (
-              <View style={estilo.view_CamposLoginSenha}>
+              <CamposLogin>
                 <Item>
                   <Icon style={estilo.icons_CamposLogin} active name="key-outline" />
                   <Input
@@ -194,29 +211,29 @@ export default function ValidarCodigo({ navigation }) {
                     placeholder="Nova senha"
                   />
                 </Item>
-              </View>
+              </CamposLogin>
             )}
             <View>
               {touched.novaSenha && errors.novaSenha ? (
-                <View style={estilo.V_Erro}>
-                  <Text style={estilo.txtErro}>{errors.novaSenha}</Text>
-                </View>
+                <ViewErro>
+                  <LabelErro>{errors.novaSenha}</LabelErro>
+                </ViewErro>
               ) : (
                 <View style={estilo.V_ErroSem} />
               )}
             </View>
 
             {codigoValido && (
-              <View style={estilo.V_botao}>
+              <ViewBotao>
                 <Button
                   style={estilo.botao}
                   onPress={() => {
                     enviarNovaSenha(values);
                   }}
                 >
-                  <Text style={estilo.txtbtn}>Enviar nova senha</Text>
+                  <TextoBotao>Enviar nova senha</TextoBotao>
                 </Button>
-              </View>
+              </ViewBotao>
             )}
           </Fragment>
         )}
@@ -233,6 +250,6 @@ export default function ValidarCodigo({ navigation }) {
           }}
         />
       )}
-    </View>
+    </Container>
   );
 }

@@ -1,48 +1,103 @@
 import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
+
+export const Container = styled.View`
+  width: '100%',
+  height: '100%',
+  alignItems: 'center'
+`;
+
+export const ViewImagem = styled.View`
+  margin-top: '10%',
+  width: 200,
+  height: 150
+`;
+
+export const ViewTitulo = styled.View`
+  margin-top: '5%',
+  padding: '10%',
+  paddingTop: '0%',
+  width: '100%',
+  height: 28,
+  align-items: 'flex-start',
+`;
+
+export const Titulo = styled.Text`
+  font-family: 'WorkSans',
+  font-size: 16,
+  color: '#687368',
+`;
+
+export const ViewSubtitulo = styled.View`
+  width: '80%',
+  height: 55,
+  justify-content: 'center',
+  align-items: 'center',
+`;
+
+export const Subtitulo = styled.Text`
+  text-align: 'center',
+  font-family: 'WorkSans',
+  font-size: 16,
+  color: '#687368',
+`;
+
+export const ViewBotao = styled.View`
+  margin-top: '30%',
+  justify-content: 'center',
+  align-items: 'center',
+  width: '100%',
+  height: 50,
+  flex-direction: "row"
+`;
+
+export const TextoBotao = styled.Text`
+  text-align: 'center',
+  font-family: 'WorkSans',
+  font-size: 20,
+  color: '#ffff',
+  font-weight: 'bold',
+`;
+
+export const ViewModal = styled.View`
+  flex: 1,
+  justify-content: 'center',
+  align-items: 'center',
+`;
+
+export const CamposLogin = styled.View`
+  margin-top: '10%',
+  height: 40,
+  width: 300,
+`;
+
+export const CamposLoginSenha = styled.View`
+  margin-top: '10%',
+  height: 40,
+  width: 300,
+`;
+
+export const ViewErro = styled.View`
+  height: 12px;
+  width: 100%;
+  text-align: left;
+`;
+
+export const LabelErro = styled.Text`
+  text-align: left;
+  font-family: WorkSans;
+  font-size: 10px;
+  color: red;
+`;
+
+
+
 
 const estilo = StyleSheet.create({
-  container: {
-    width: '100%',
-    height: '100%',
-    alignItems: 'center',
-  },
   V_img: {
     marginTop: '10%',
     width: 200,
     height: 150,
-  },
-  V_title: {
-    marginTop: '5%',
-    padding: '10%',
-    paddingTop: '0%',
-    width: '100%',
-    height: 28,
-    alignItems: 'flex-start',
-  },
-  title: {
-    fontFamily: 'WorkSans',
-    fontSize: 16,
-    color: '#687368',
-  },
-  V_Subtitle: {
-    width: '80%',
-    height: 55,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  subtitle: {
-    textAlign: 'center',
-    fontFamily: 'WorkSans',
-    fontSize: 16,
-    color: '#687368',
-  },
-  V_botao: {
-    marginTop: '30%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    height: 50,
-    flexDirection: "row"
   },
   botao: {
     width: '80%',
@@ -53,29 +108,6 @@ const estilo = StyleSheet.create({
     borderRadius: 10,
     flexDirection: "row"
   },
-  txtbtn: {
-    textAlign: 'center',
-    fontFamily: 'WorkSans',
-    fontSize: 20,
-    color: '#ffff',
-    fontWeight: 'bold',
-  },
-  V_modal: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  view_CamposLogin: {
-    marginTop: '10%',
-    height: 40,
-    width: 160,
-  },
-  view_CamposLoginSenha: {
-    marginTop: '10%',
-    height: 40,
-    width: 300,
-  },
-
   icons_CamposLogin: {
     fontSize: 25,
     margin: 5,

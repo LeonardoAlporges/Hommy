@@ -1,16 +1,31 @@
-import * as yup from 'yup';
-import { Formik } from 'formik';
 import React, { Component, Fragment, useState, useEffect } from 'react';
 import { Image, Text, View } from 'react-native';
+import * as yup from 'yup';
+import { Formik } from 'formik';
+
 import { Button, Item, Input } from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import TextInputMask from 'react-native-text-input-mask';
+
 import CustomModal from '../../../components/Alert';
-import api from '../../../service/api';
-import { NavigationActions, StackActions } from 'react-navigation';
-import estilo from './styles';
 import HeaderBack from '../../../components/CustomHeader';
 import auth from '@react-native-firebase/auth';
-import TextInputMask from 'react-native-text-input-mask';
+import estilo from './styles';
+import {
+  Container,
+  ViewImagem,
+  ViewTitulo,
+  Titulo,
+  ViewSubtitulo,
+  Subtitulo,
+  ViewBotao,
+  TextoBotao,
+  ViewModal,
+  CamposLogin,
+  CamposLoginSenha,
+  ViewErro,
+  LabelErro
+} from './styles';
 
 export default function PhoneSignIn() {
   // If null, no SMS has been sent
@@ -45,10 +60,10 @@ export default function PhoneSignIn() {
   }
 
   return (
-    <View style={estilo.container}>
+    <Container>
       <HeaderBack title={'Confirmação por telefone'} onNavigation={() => resetarPilhaNavegacao('Login')} />
 
-      <View style={estilo.V_img}>
+      <ViewImagem>
         <Image
           style={estilo.V_img}
           source={
@@ -57,19 +72,19 @@ export default function PhoneSignIn() {
               : require('../../../assets/Img/Send_email.png')
           }
         />
-      </View>
+      </ViewImagem>
 
-      <View style={estilo.V_title}>
+      <ViewTitulo>
         {codigoValido ? (
-          <Text style={estilo.title}>
+          <Titulo>
             Digite seu telefone para enviarmos o código de confirmação por SMS para você verificar seu número de celular.
-          </Text>
+          </Titulo>
         ) : (
-            <Text style={estilo.title}>
+            <Titulo>
               Um código para prosseguir foi enviado via SMS. Por favor, informe seu código de confirmação no campo abaixo.
-            </Text>
+            </Titulo>
           )}
-      </View>
+      </ViewTitulo>
 
       <Formik
         initialValues={{
@@ -121,7 +136,7 @@ export default function PhoneSignIn() {
             )}
 
             {!codigoValido && (
-              <View style={estilo.view_CamposLogin}>
+              <CamposLogin>
                 <Item>
                   <Icon style={estilo.icons_CamposLogin} active name="key-outline" />
                   <TextInputMask
@@ -135,32 +150,32 @@ export default function PhoneSignIn() {
                     keyboardType="number-pad"
                   />
                 </Item>
-              </View>
+              </CamposLogin>
             )}
             <View>
               {touched.numeroTelefone && errors.numeroTelefone ? (
-                <View style={estilo.V_Erro}>
-                  <Text style={estilo.txtErro}>{errors.numeroTelefone}</Text>
-                </View>
+                <ViewErro>
+                  <LabelErro>{errors.numeroTelefone}</LabelErro>
+                </ViewErro>
               ) : (
                   <View style={estilo.V_ErroSem} />
                 )}
             </View>
             {!codigoValido && (
-              <View style={estilo.V_botao}>
+              <ViewBotao>
                 <Button
                   style={estilo.botao}
                   onPress={() => {
                     signInWithPhoneNumber("+55" + values.numeroTelefone);
                   }}
                 >
-                  <Text style={estilo.txtbtn}>Prosseguir</Text>
+                  <TextoBotao>Prosseguir</TextoBotao>
                 </Button>
-              </View>
+              </ViewBotao>
             )}
 
             {codigoValido && (
-              <View style={estilo.view_CamposLoginSenha}>
+              <CamposLoginSenha>
                 <Item>
                   <Icon style={estilo.icons_CamposLogin} active name="key-outline" />
                   <Input
@@ -172,29 +187,29 @@ export default function PhoneSignIn() {
                     placeholder="000-000"
                   />
                 </Item>
-              </View>
+              </CamposLoginSenha>
             )}
             <View>
               {touched.codigo && errors.codigo ? (
-                <View style={estilo.V_Erro}>
-                  <Text style={estilo.txtErro}>{errors.codigo}</Text>
-                </View>
+                <ViewErro>
+                  <LabelErro>{errors.codigo}</LabelErro>
+                </ViewErro>
               ) : (
                   <View style={estilo.V_ErroSem} />
                 )}
             </View>
 
             {codigoValido && (
-              <View style={estilo.V_botao}>
+              <ViewBotao>
                 <Button
                   style={estilo.botao}
                   onPress={() => {
                     confirmCode(values);
                   }}
                 >
-                  <Text style={estilo.txtbtn}>Enviar nova senha</Text>
+                  <TextoBotao>Enviar nova senha</TextoBotao>
                 </Button>
-              </View>
+              </ViewBotao>
             )}
           </Fragment>
         )}
@@ -211,6 +226,6 @@ export default function PhoneSignIn() {
           }}
         />
       )}
-    </View>
+    </Container>
   );
 }
