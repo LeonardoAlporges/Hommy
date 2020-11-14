@@ -1,5 +1,5 @@
 import React, { Component, Fragment, useState, useEffect } from 'react';
-import { View, ScrollView, TouchableOpacity, Modal } from 'react-native';
+import { View, ScrollView, TouchableOpacity, Modal, Image } from 'react-native';
 import * as yup from 'yup';
 import { Formik } from 'formik';
 import ViewPager from '@react-native-community/viewpager';
@@ -12,22 +12,52 @@ import TextInputMask from 'react-native-text-input-mask';
 import HeaderBack from '../../../components/CustomHeader';
 import Loading from '../../../components/Loading';
 import moment from 'moment';
+import ImagePicker from 'react-native-image-picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { Text, Item, Input, Label, Button, Icon, DatePicker, Spinner, Picker } from 'native-base';
+import { imagePickerOptions, uploadFileToFireBaseServico, uploadProgress } from '../../../utils';
 
 import { NavigationActions, StackActions } from 'react-navigation';
 import { set } from 'lodash';
 
-import { FieldSet, LabelFielSet, Linha, FieldSetLarge } from './styles';
+import { FieldSet, LabelFielSet, Linha, FieldSetLarge, AreaFotos, LabelFotos, DivisaoFotos, } from './styles';
 export default function CadastroServico({ navigation }) {
   const avatarUser = useSelector(state => state.user.fotoPerfil);
   const emailUser = useSelector(state => state.user.email);
   const notaUser = useSelector(state => state.user.notaUser);
   const nomeUser = useSelector(state => state.user.usuario);
 
+  const [nomeEmpresa, setNomeEmpresa] = useState(null);
+  const [contadorImagem, setContadorImagem] = useState(0);
+  const [nomePrestador, setNomePrestador] = useState(null);
+  const [telefone, setTelefone] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [cidade, setCidade] = useState(null);
+  const [tipo, setTipo] = useState(null);
+  const [descricao, setDescricao] = useState(null);
+  const [redeSocial, setRedeSocial] = useState(null);
+  const [bairro, setBairro] = useState(null);
+  const [rua, setRua] = useState(null);
+  const [numero, setNumero] = useState(null);
+  const [diaInicial, setDiaInicial] = useState(null);
+  const [diaFinal, setDiaFinal] = useState(null);
+  const [imagem1, setImagem1] = useState(null);
+  const [imagem2, setImagem2] = useState(null);
+  const [imagem3, setImagem3] = useState(null);
+  const [linkimagem1, setLinkImagem1] = useState(null);
+  const [linkimagem2, setLinkImagem2] = useState(null);
+  const [linkimagem3, setLinkImagem3] = useState(null);
   const [erro, setErro] = useState(false);
-  const [sucesso, setSucesso] = useState([]);
+  const [sucesso, setSucesso] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const [datePicker, setDatePicker] = useState(false);
+  const [horaInicialPicker, setHoraInicialPicker] = useState(false);
+  const [horaFinalPicker, setHoraFinalPicker] = useState(false);
+  const [horaInicial, setHoraInicial] = useState('00:00');
+  const [horaFinal, setHoraFinal] = useState('00:00');
+  const [placeHoraFinal, setPlaceHoraFinal] = useState(moment(new Date()).format('HH:mm'));
+  const [placeHoraInicial, setPlaceHoraInicial] = useState(moment(new Date()).format('HH:mm'));
 
   const [botaoEnviar, setBotaoEnviar] = useState(false);
 
@@ -42,15 +72,112 @@ export default function CadastroServico({ navigation }) {
   function irParaTelaIncial() {
     resetarPilhaNavegacao('TabsHeader');
   }
-  //CRIAR A FUNÇAO PARA MANDAR O SERVIÇO
-  function criarNovoAnuncioCarona(dados) {
+
+  function selecionarHorario(date, tipo) {
+    if (tipo == 'inicial') {
+      const inicial = moment(new Date(date)).format('HH:mm');
+      console.log(date);
+      setHoraInicialPicker(false);
+      setHoraInicial(date);
+      setPlaceHoraInicial(inicial);
+    } else {
+      const final = moment(new Date(date)).format('HH:mm');
+      setHoraFinalPicker(false);
+      setHoraFinal(date);
+      setPlaceHoraFinal(final);
+    }
+  }
+
+  function fecharPickerHoario(date, tipo) {
+    if (tipo == 'inicial') {
+      setHoraInicialPicker(false);
+    } else {
+      setHoraFinalPicker(false);
+    }
+  }
+
+  function preencherFoto(linkImagem) {
+    console.log(linkImagem.uri);
+    if (contadorImagem == 0) {
+      setImagem1(linkImagem.uri);
+    } else if (contadorImagem == 1) {
+      setImagem2(linkImagem.uri);
+    } else if (contadorImagem == 2) {
+      setImagem3(linkImagem.uri);
+    } else {
+      setOcutarBotaoEnvioFoto();
+    }
+    setContadorImagem(contadorImagem + 1);
+  }
+  function carregarImagemGaleria() {
+    ImagePicker.launchImageLibrary(imagePickerOptions, imagePickerResponse => {
+      const { didCancel, error } = imagePickerResponse;
+      if (didCancel) {
+        alert('Envio cancelado');
+      } else if (error) {
+        alert('Ocorreu algum erro: ', error);
+      } else {
+        console.log(imagePickerResponse);
+        preencherFoto(imagePickerResponse);
+        const referencia = uploadFileToFireBaseServico(imagePickerResponse);
+        console.log(referencia);
+        monitorFileUpload(referencia);
+        console.log(linkimagem1);
+      }
+    });
+  }
+
+  function monitorFileUpload(task) {
+    task.on('state_changed', snapshot => {
+      snapshot.ref.getDownloadURL().then(downloadURL => {
+        if (contadorImagem == 0) {
+          console.log(downloadURL);
+          setLinkImagem1(downloadURL);
+        } else if (contadorImagem == 1) {
+          setLinkImagem2(downloadURL);
+        } else if (contadorImagem == 2) {
+          setLinkImagem3(downloadURL);
+        }
+      });
+    });
+  }
+
+  function preencherDados(value) {
+    console.log('teste');
+    setLoading(true);
+    const data = {
+      titulo: value.nomeEmpresa,
+      tipo: value.tipo,
+      desc: value.descricao,
+      redeSocial: value.redeSocial,
+      responsavel: value.nomePrestador,
+      telefone: value.telefone,
+      userEmail: value.email,
+      cidade: value.cidade,
+      bairro: value.bairro,
+      rua: value.rua,
+      numero: value.numero,
+      dia: { inicio: value.diaInicial, fim: value.diaFinal },
+      horario: { inicio: placeHoraInicial, fim: placeHoraFinal },
+      imagem1: linkimagem1,
+      imagem2: linkimagem2,
+      imagem3: linkimagem3
+    };
+    console.log(data);
+    criarNovoAnuncio(data);
+    setLoading(false);
+  }
+
+  function criarNovoAnuncio(data) {
     api
-      .post('/carona', dados)
+      .post('/servicos', data)
       .then(Response => {
+        console.log(Response);
         setLoading(false);
         setSucesso(true);
       })
       .catch(error => {
+        console.log(error.response.data);
         setLoading(false);
         setErro(true);
       });
@@ -60,19 +187,86 @@ export default function CadastroServico({ navigation }) {
     <Formik
       initialValues={
         {
-          //COLOCAR O VALORES DOS CAMPOS AQUI VOU POR 1 DE EXEMPLO
-          //nomeEmpresa :  '',
-          //nomePrestador :  '',
+          nomeEmpresa: '',
+          nomePrestador: '',
+          telefone: '',
+          email: '',
+          cidade: '',
+          tipo: '',
+          desc: '',
+          redeSocial: '',
+          bairro: '',
+          rua: '',
+          numero: '',
+          diaInicial: '',
+          diaFnal: '',
+          horaInicial: '',
+          horaFinal: '',
+
         }
       }
       onSubmit={values => {
-        //Funçao para enviar
-        verificarTipoDeRequisicao(values);
+        preencherDados(values);
       }}
       validationSchema={yup.object().shape({
-        //VALIDAÇÕES PARA OS CAMPOS
-        saida: yup.string().required('Campo obrigatório'),
-        chegada: yup.string().required('Campo obrigatório')
+        nomeEmpresa: yup
+          .string('')
+          .min(3, 'Minimo de 3 caracteres')
+          .max(30, 'Maximo permitido de 30 caracteres')
+          .required('Campo obrigatório'),
+        tipo: yup
+          .string('')
+          .min(3, 'Minimo de 3 caracteres')
+          .max(30, 'Maximo permitido de 30 caracteres')
+          .required('Campo obrigatório'),
+        descricao: yup
+          .string('')
+          .min(3, 'Minimo de 3 caracteres')
+          .max(120, 'Maximo permitido de 120 caracteres')
+          .required('Campo obrigatório'),
+        redeSocial: yup
+          .string('')
+          .min(3, 'Minimo de 3 caracteres')
+          .max(30, 'Maximo permitido de 30 caracteres')
+          .required('Campo obrigatório'),
+        nomePrestador: yup
+          .string('')
+          .min(3, 'Minimo de 3 caracteres')
+          .max(30, 'Maximo permitido de 30 caracteres')
+          .required('Campo obrigatório'),
+        telefone: yup
+          .string()
+          .max(9999999999999)
+          .required(' Campo obrigatórior'),
+        email: yup
+          .string()
+          .email('E-mail inválido ou incorreto')
+          .required('Campo obrigatório'),
+        cidade: yup
+          .string('')
+          .min(3, 'Minimo de 3 caracteres')
+          .max(30, 'Maximo permitido de 30 caracteres'),
+        bairro: yup
+          .string('')
+          .min(3, 'Minimo de 3 caracteres')
+          .max(30, 'Maximo permitido de 30 caracteres'),
+        rua: yup
+          .string('')
+          .min(3, 'Minimo de 3 caracteres')
+          .max(30, 'Maximo permitido de 30 caracteres'),
+        numero: yup
+          .number('Somente números')
+          .required('Campo Obrigatório'),
+        diaInicial: yup
+          .string('')
+          .min(3, 'Minimo de 3 caracteres')
+          .max(30, 'Maximo permitido de 30 caracteres')
+          .required('Campo obrigatório'),
+        diaFinal: yup
+          .string('')
+          .min(3, 'Minimo de 3 caracteres')
+          .max(30, 'Maximo permitido de 30 caracteres')
+          .required('Campo obrigatório')
       })}
     >
       {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
@@ -115,20 +309,15 @@ export default function CadastroServico({ navigation }) {
                       <LabelFielSet>Nome empresa/serviço</LabelFielSet>
                       <Item style={{ borderColor: 'transparent' }}>
                         <Input
-                          keyboardType="number-pad"
-                          value={values.vagas}
-                          onChangeText={handleChange('nome')}
+                          value={values.nomeEmpresa}
+                          onChangeText={handleChange('nomeEmpresa')}
                           placeholder=""
-                          onBlur={() => setFieldTouched('vagas')}
+                          onBlur={() => setFieldTouched('nomeEmpresa')}
                         />
                       </Item>
-                      {/* COLOCAR ESSES VIEW AQUI EM BAIXO EM TODOS OS CAMPOS PARA APLICAR A VALIDAÇÂO */}
-                      {/* COLOCAR ESSES VIEW AQUI EM BAIXO EM TODOS OS CAMPOS PARA APLICAR A VALIDAÇÂO */}
-                      {/* COLOCAR ESSES VIEW AQUI EM BAIXO EM TODOS OS CAMPOS PARA APLICAR A VALIDAÇÂO */}
-                      {/* COLOCAR ESSES VIEW AQUI EM BAIXO EM TODOS OS CAMPOS PARA APLICAR A VALIDAÇÂO */}
                       <View style={estilo.V_erro}>
-                        {touched.vagas && errors.vagas && (
-                          <Text style={estilo.textError}>{errors.vagas}</Text>
+                        {touched.nomeEmpresa && errors.nomeEmpresa && (
+                          <Text style={estilo.textError}>{errors.nomeEmpresa}</Text>
                         )}
                       </View>
                     </FieldSetLarge>
@@ -138,20 +327,115 @@ export default function CadastroServico({ navigation }) {
                       <LabelFielSet>Nome do prestador</LabelFielSet>
                       <Item style={{ borderColor: 'transparent' }}>
                         <Input
-                          keyboardType="number-pad"
-                          value={values.vagas}
-                          onChangeText={handleChange('vagas')}
+                          value={values.nomePrestador}
+                          onChangeText={handleChange('nomePrestador')}
                           placeholder=""
-                          onBlur={() => setFieldTouched('vagas')}
+                          onBlur={() => setFieldTouched('nomePrestador')}
                         />
                       </Item>
                       <View style={estilo.V_erro}>
-                        {touched.vagas && errors.vagas && (
-                          <Text style={estilo.textError}>{errors.vagas}</Text>
+                        {touched.nomePrestador && errors.nomePrestador && (
+                          <Text style={estilo.textError}>{errors.nomePrestador}</Text>
                         )}
                       </View>
                     </FieldSetLarge>
                   </Linha>
+                  <Linha>
+                    <FieldSetLarge>
+                      <LabelFielSet>Tipo de serviço prestado</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
+                        <Input
+                          value={values.tipo}
+                          onChangeText={handleChange('tipo')}
+                          placeholder="Eletricista, mecânico, pintor..."
+                          onBlur={() => setFieldTouched('tipo')}
+                        />
+                      </Item>
+                      <View style={estilo.V_erro}>
+                        {touched.tipo && errors.tipo && (
+                          <Text style={estilo.textError}>{errors.tipo}</Text>
+                        )}
+                      </View>
+                    </FieldSetLarge>
+                  </Linha>
+                  <Linha>
+                    <FieldSetLarge>
+                      <LabelFielSet>Descrição</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
+                        <Input
+                          value={values.descricao}
+                          onChangeText={handleChange('descricao')}
+                          placeholder="Breve descrição sobre o serviço prestado."
+                          onBlur={() => setFieldTouched('descricao')}
+                        />
+                      </Item>
+                      <View style={estilo.V_erro}>
+                        {touched.descricao && errors.descricao && (
+                          <Text style={estilo.textError}>{errors.descricao}</Text>
+                        )}
+                      </View>
+                    </FieldSetLarge>
+                  </Linha>
+                  <AreaFotos>
+                    <LabelFotos>Fotos da sua república</LabelFotos>
+                    <DivisaoFotos>
+                      {imagem1 == null ? (
+                        <View style={estilo.V_ImageFullEmpty}>
+                          <Image
+                            source={require('../../../assets/Img/Republica_Send_Pictures.png')}
+                            style={estilo.ImageEmpty}
+                          />
+                        </View>
+                      ) : (
+                          <View style={estilo.V_ImageFull}>
+                            <Image source={{ uri: imagem1 }} style={estilo.ImageFull} />
+                          </View>
+                        )}
+                      {imagem2 == null ? (
+                        <View style={estilo.V_ImageFullEmpty}>
+                          <Image
+                            source={require('../../../assets/Img/Republica_Send_Pictures.png')}
+                            style={estilo.ImageEmpty}
+                          />
+                        </View>
+                      ) : (
+                          <View style={estilo.V_ImageFull}>
+                            <Image source={{ uri: imagem2 }} style={estilo.ImageFull} />
+                          </View>
+                        )}
+                      {imagem3 == null ? (
+                        <View style={estilo.V_ImageFullEmpty}>
+                          <Image
+                            source={require('../../../assets/Img/Republica_Send_Pictures.png')}
+                            style={estilo.ImageEmpty}
+                          />
+                        </View>
+                      ) : (
+                          <View style={estilo.V_ImageFull}>
+                            <Image source={{ uri: imagem3 }} style={estilo.ImageFull} />
+                          </View>
+                        )}
+                    </DivisaoFotos>
+                    <View style={estilo.V_BotaoImg}>
+                      <TouchableOpacity
+                        disabled={contadorImagem == 3}
+                        style={estilo.botao_send}
+                        onPress={() => {
+                          carregarImagemGaleria();
+                        }}
+                      >
+                        <Text
+                          style={{
+                            color: '#142850',
+                            fontFamily: 'WorkSans-SemiBold',
+                            fontSize: 16
+                          }}
+                        >
+                          Enviar Fotos ({contadorImagem}/3)
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  </AreaFotos>
                   <Linha>
                     <FieldSet>
                       <LabelFielSet>Telefone</LabelFielSet>
@@ -161,15 +445,15 @@ export default function CadastroServico({ navigation }) {
                           style={estilo.labelInput}
                           keyboardType="number-pad"
                           mask={'([00]) [00000]-[0000]'}
-                          value={values.celular} //celular
-                          onChangeText={handleChange('celular')}
-                          placeholder="(__)______-______"
-                          onBlur={() => setFieldTouched('celular')}
+                          value={values.telefone}
+                          onChangeText={handleChange('telefone')}
+                          placeholder="(__) ______-______"
+                          onBlur={() => setFieldTouched('telefone')}
                         />
                       </Item>
                       <View style={estilo.V_erro}>
-                        {touched.vagas && errors.vagas && (
-                          <Text style={estilo.textError}>{errors.vagas}</Text>
+                        {touched.telefone && errors.telefone && (
+                          <Text style={estilo.textError}>{errors.telefone}</Text>
                         )}
                       </View>
                     </FieldSet>
@@ -177,21 +461,39 @@ export default function CadastroServico({ navigation }) {
                       <LabelFielSet>Email</LabelFielSet>
                       <Item style={{ borderColor: 'transparent' }}>
                         <Input
-                          value={values.embarque}
-                          onChangeText={handleChange('embarque')}
+                          value={values.email}
+                          onChangeText={handleChange('email')}
                           placeholder=""
-                          onBlur={() => setFieldTouched('embarque')}
+                          onBlur={() => setFieldTouched('email')}
                         />
                       </Item>
                       <View style={estilo.V_erro}>
-                        {touched.vagas && errors.vagas && (
-                          <Text style={estilo.textError}>{errors.vagas}</Text>
+                        {touched.email && errors.email && (
+                          <Text style={estilo.textError}>{errors.email}</Text>
                         )}
                       </View>
                     </FieldSet>
                   </Linha>
+                  <Linha>
+                    <FieldSetLarge>
+                      <LabelFielSet>Rede Social</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
+                        <Input
+                          value={values.redeSocial}
+                          onChangeText={handleChange('redeSocial')}
+                          placeholder=""
+                          onBlur={() => setFieldTouched('redeSocial')}
+                        />
+                      </Item>
+                      <View style={estilo.V_erro}>
+                        {touched.redeSocial && errors.redeSocial && (
+                          <Text style={estilo.textError}>{errors.redeSocial}</Text>
+                        )}
+                      </View>
+                    </FieldSetLarge>
+                  </Linha>
                   <Text style={estilo.txtCarona}>
-                    preencha as informaçoes abaixo se você presta serviço em local fixo
+                    Preencha as informaçoes abaixo se você presta serviço em local fixo
                   </Text>
                   <Linha>
                     <FieldSet>
@@ -202,16 +504,21 @@ export default function CadastroServico({ navigation }) {
                           placeholder="Cidades"
                           placeholderStyle={{ color: '#bfc6ea' }}
                           placeholderIconColor="#007aff"
-                          selectedValue={values.saida}
-                          onValueChange={handleChange('saida')}
-                          value={values.saida}
-                          onChangeText={handleChange('saida')}
-                          onBlur={() => setFieldTouched('saida')}
+                          selectedValue={values.cidade}
+                          onValueChange={handleChange('cidade')}
+                          value={values.cidade}
+                          onChangeText={handleChange('cidade')}
+                          onBlur={() => setFieldTouched('cidade')}
                         >
                           <Picker.Item label="" value="null" />
                           <Picker.Item label="Alegre" value="Alegre" />
                         </Picker>
                       </Item>
+                      <View style={estilo.V_erro}>
+                        {touched.cidade && errors.cidade && (
+                          <Text style={estilo.textError}>{errors.cidade}</Text>
+                        )}
+                      </View>
                     </FieldSet>
                     <FieldSet>
                       <LabelFielSet>Bairro</LabelFielSet>
@@ -221,11 +528,11 @@ export default function CadastroServico({ navigation }) {
                           placeholder="Cidades"
                           placeholderStyle={{ color: '#bfc6ea' }}
                           placeholderIconColor="#007aff"
-                          selectedValue={values.saida}
-                          onValueChange={handleChange('saida')}
-                          value={values.saida}
-                          onChangeText={handleChange('saida')}
-                          onBlur={() => setFieldTouched('saida')}
+                          selectedValue={values.bairro}
+                          onValueChange={handleChange('bairro')}
+                          value={values.bairro}
+                          onChangeText={handleChange('bairro')}
+                          onBlur={() => setFieldTouched('bairro')}
                         >
                           <Picker.Item label="" value="null" />
                           <Picker.Item label="Centro" value="Centro" />
@@ -235,6 +542,11 @@ export default function CadastroServico({ navigation }) {
                           <Picker.Item label="Vila Alta" value="Vila Alta" />
                         </Picker>
                       </Item>
+                      <View style={estilo.V_erro}>
+                        {touched.bairro && errors.bairro && (
+                          <Text style={estilo.textError}>{errors.bairro}</Text>
+                        )}
+                      </View>
                     </FieldSet>
                   </Linha>
                   <Linha>
@@ -242,73 +554,171 @@ export default function CadastroServico({ navigation }) {
                       <LabelFielSet>Rua</LabelFielSet>
                       <Item style={{ borderColor: 'transparent' }}>
                         <Input
-                          value={values.embarque}
-                          onChangeText={handleChange('embarque')}
+                          value={values.rua}
+                          onChangeText={handleChange('rua')}
                           placeholder=""
-                          onBlur={() => setFieldTouched('embarque')}
+                          onBlur={() => setFieldTouched('rua')}
                         />
                       </Item>
                       <View style={estilo.V_erro}>
-                        {touched.vagas && errors.vagas && (
-                          <Text style={estilo.textError}>{errors.vagas}</Text>
+                        {touched.rua && errors.rua && (
+                          <Text style={estilo.textError}>{errors.rua}</Text>
                         )}
                       </View>
                     </FieldSet>
                     <FieldSet style={{ width: '30%' }}>
-                      <LabelFielSet>Numero</LabelFielSet>
+                      <LabelFielSet>Número</LabelFielSet>
                       <Item style={{ borderColor: 'transparent' }}>
                         <Input
-                          value={values.embarque}
-                          onChangeText={handleChange('embarque')}
+                          value={values.numero}
+                          onChangeText={handleChange('numero')}
                           placeholder=""
-                          onBlur={() => setFieldTouched('embarque')}
+                          onBlur={() => setFieldTouched('numero')}
                         />
                       </Item>
                       <View style={estilo.V_erro}>
-                        {touched.vagas && errors.vagas && (
-                          <Text style={estilo.textError}>{errors.vagas}</Text>
+                        {touched.numero && errors.numero && (
+                          <Text style={estilo.textError}>{errors.numero}</Text>
                         )}
                       </View>
                     </FieldSet>
                   </Linha>
-                  {/* COLOCAR ESSES BUTTON CHECK PARA O CARA ESCOLHER O HORARIO DISPONIVEL 
-                      E QUANDO O CARA CLICAR ELE ADICIONA NO ARRAY DE HORARIO DISPONIVEL
-                      [Segunda,Terça,Quarta,Quinta,Sexta...]
-                  */}
+                  <Text style={estilo.txtCarona}>
+                    Informe seu período de trabalho nos campos abaixo
+                  </Text>
                   <Linha>
-                    <Button>
-                      <Text>Segunda</Text>
-                    </Button>
-                    <Button>
-                      <Text>Terça </Text>
-                    </Button>
-                    <Button>
-                      <Text>Quarta</Text>
-                    </Button>
+                    <FieldSet>
+                      <LabelFielSet>Dia de inicio</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
+                        <Picker
+                          mode="dropdown"
+                          placeholder="Dias da semana"
+                          placeholderStyle={{ color: '#bfc6ea' }}
+                          placeholderIconColor="#007aff"
+                          selectedValue={values.diaInicial}
+                          onValueChange={handleChange('diaInicial')}
+                          value={values.diaInicial}
+                          onChangeText={handleChange('diaInicial')}
+                          onBlur={() => setFieldTouched('diaInicial')}
+                        >
+                          <Picker.Item label="" value="null" />
+                          <Picker.Item label="Domingo" value="Domingo" />
+                          <Picker.Item label="Segunda" value="Segunda" />
+                          <Picker.Item label="Terça" value="Terça" />
+                          <Picker.Item label="Quarta" value="Quarta" />
+                          <Picker.Item label="Quinta" value="Quinta" />
+                          <Picker.Item label="Sexta" value="Sexta" />
+                          <Picker.Item label="Sábado" value="Sábado" />
+                        </Picker>
+                      </Item>
+                      <View style={estilo.V_erro}>
+                        {touched.diaInicial && errors.diaInicial && (
+                          <Text style={estilo.textError}>{errors.diaInicial}</Text>
+                        )}
+                      </View>
+                    </FieldSet>
+                    <FieldSet>
+                      <LabelFielSet>Dia de termino</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
+                        <Picker
+                          mode="dropdown"
+                          placeholder="Dias da semana"
+                          placeholderStyle={{ color: '#bfc6ea' }}
+                          placeholderIconColor="#007aff"
+                          selectedValue={values.diaFinal}
+                          onValueChange={handleChange('diaFinal')}
+                          value={values.diaFinal}
+                          onChangeText={handleChange('diaFinal')}
+                          onBlur={() => setFieldTouched('diaFinal')}
+                        >
+                          <Picker.Item label="" value="null" />
+                          <Picker.Item label="Domingo" value="Domingo" />
+                          <Picker.Item label="Segunda" value="Segunda" />
+                          <Picker.Item label="Terça" value="Terça" />
+                          <Picker.Item label="Quarta" value="Quarta" />
+                          <Picker.Item label="Quinta" value="Quinta" />
+                          <Picker.Item label="Sexta" value="Sexta" />
+                          <Picker.Item label="Sábado" value="Sábado" />
+                        </Picker>
+                      </Item>
+                      <View style={estilo.V_erro}>
+                        {touched.diaFinal && errors.diaFinal && (
+                          <Text style={estilo.textError}>{errors.diaFinal}</Text>
+                        )}
+                      </View>
+                    </FieldSet>
                   </Linha>
                   <Linha>
-                    <Button>
-                      <Text>Segunda</Text>
-                    </Button>
-                    <Button>
-                      <Text>Terça </Text>
-                    </Button>
-                    <Button>
-                      <Text>Quarta</Text>
-                    </Button>
+                    <FieldSet>
+                      <LabelFielSet>Hora de inicio</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
+                        <TouchableOpacity
+                          onPress={() => {
+                            setHoraInicialPicker(true);
+                          }}
+                          style={estilo.InputHora}
+                        >
+                          <Label>{placeHoraInicial}</Label>
+                          <DateTimePickerModal
+                            isVisible={horaInicialPicker}
+                            mode="time"
+                            onConfirm={date => selecionarHorario(date, 'inicial')}
+                            onCancel={date => fecharPickerHoario(date, 'inicial')}
+                            date={new Date()}
+                            locale={'pt-br'}
+                            is24Hour={true}
+                            onChange={handleChange('horaInicial')}
+                          />
+                        </TouchableOpacity>
+                      </Item>
+                      <View style={estilo.V_erro}>
+                        {!horaInicial && botaoEnviar && (
+                          <Text style={estilo.textError}>Campo obrigatório</Text>
+                        )}
+                      </View>
+
+                    </FieldSet>
+                    <FieldSet>
+                      <LabelFielSet>Hora de termino</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
+                        <TouchableOpacity
+                          onPress={() => {
+                            setHoraFinalPicker(true);
+                          }}
+                          style={estilo.InputHora}
+                        >
+                          <Label>{placeHoraFinal}</Label>
+                          <DateTimePickerModal
+                            isVisible={horaFinalPicker}
+                            mode="time"
+                            onConfirm={date => selecionarHorario(date, 'final')}
+                            onCancel={date => fecharPickerHoario(date, 'final')}
+                            date={new Date()}
+                            locale={'pt-br'}
+                            is24Hour={true}
+                            onCChange={handleChange('horaFinal')}
+                          />
+                        </TouchableOpacity>
+                      </Item>
+                      <View style={estilo.V_erro}>
+                        {!horaFinal && botaoEnviar && (
+                          <Text style={estilo.textError}>Campo obrigatório</Text>
+                        )}
+                      </View>
+                    </FieldSet>
                   </Linha>
 
                   <View style={estilo.V_btn}>
-                    <Button
+                    <TouchableOpacity
                       style={estilo.btnProximo}
                       onPress={() => {
                         handleSubmit(values);
                       }}
                     >
                       <Text style={{ fontFamily: 'WorkSans-Bold', color: '#142850', fontSize: 18 }}>
-                        Publicar carona
+                        Publicar Serviço
                       </Text>
-                    </Button>
+                    </TouchableOpacity>
                   </View>
                 </View>
               </View>

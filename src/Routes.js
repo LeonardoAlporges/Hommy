@@ -67,6 +67,7 @@ const Navegação = createStackNavigator(
     Servicos,
     Cadastro,
     SplashScreen,
+    //AutenticacaoTelefone
     CadastroServico
   },
   {

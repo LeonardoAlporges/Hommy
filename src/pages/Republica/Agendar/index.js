@@ -1,16 +1,33 @@
 import React, { Component, useState } from 'react';
 import { View } from 'react-native';
+
 import { DatePicker, Text, Button, Picker } from 'native-base';
-import Cartao from '../../../components/Cartao';
-import style from './styles';
-import HeaderBack from '../../../components/CustomHeader';
 import { connect, useSelector } from 'react-redux';
-import api from '../../../service/api';
-import CustomModal from '../../../components/Alert';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
+
+
+import Cartao from '../../../components/Cartao';
+import style from './styles';
+import api from '../../../service/api';
+import CustomModal from '../../../components/Alert';
 import Loading from '../../../components/Loading';
+import HeaderBack from '../../../components/CustomHeader';
+import {
+  Container,
+  ViewBotao,
+  ViewDetalhes,
+  ViewDate,
+  ViewClock,
+  TextoClock,
+  TextoClockPlace,
+  TextoAgendamento,
+  ViewDescricao,
+  TextoDescricao,
+  ViewInputs,
+  ViewBotaoCalendario
+} from './styles';
 
 export default function Agendar({ navigation }) {
   const email = useSelector(state => state.user.email);
@@ -67,22 +84,22 @@ export default function Agendar({ navigation }) {
   }
 
   return (
-    <View style={style.Container}>
+    <Container>
       <HeaderBack title="Agendar visita" onNavigation={() => navigation.goBack(null)} />
       {loading && <Loading />}
       <View style={{ width: '100%', height: 140, marginTop: 20 }}>
         <Cartao mostraBotao={true} data={dadosRepublica} />
       </View>
-      <View style={style.V_descr}>
-        <Text style={style.textDescrição}>
+      <ViewDescricao>
+        <TextoDescricao>
           Escolha um dia e hórario para fazer uma visita na república, lembrando que depois de sua
           visita aprovada o não comparecimento ao local na hora marcada poderá lhe trazer más
           avaliações.
-        </Text>
-      </View>
+        </TextoDescricao>
+      </ViewDescricao>
 
-      <View style={style.V_Inputs}>
-        <View style={style.ViewDate}>
+      <ViewInputs>
+        <ViewDate>
           <Icon name="calendar" style={style.IconCaledarA} />
           <DatePicker
             defaultDate={new Date()}
@@ -100,15 +117,15 @@ export default function Agendar({ navigation }) {
             }}
             disabled={false}
           />
-        </View>
-        <View style={style.ViewClock}>
+        </ViewDate>
+        <ViewClock>
           {labeHoraAgendamento == '00:00' ? (
-            <Text style={style.textClockPlace}>{labeHoraAgendamento}</Text>
+            <TextoClockPlace>{labeHoraAgendamento}</TextoClockPlace>
           ) : (
-              <Text style={style.textClock}>{labeHoraAgendamento}</Text>
+              <TextoClock>{labeHoraAgendamento}</TextoClock>
             )}
 
-          <View style={style.V_botaoCalendar}>
+          <ViewBotaoCalendario>
             <Button
               style={style.botaoCalendar}
               onPress={() => {
@@ -117,9 +134,9 @@ export default function Agendar({ navigation }) {
             >
               <Icon name="clock" style={style.IconCaledar} />
             </Button>
-          </View>
-        </View>
-      </View>
+          </ViewBotaoCalendario>
+        </ViewClock>
+      </ViewInputs>
 
       <DateTimePickerModal
         isVisible={horaPicker}
@@ -133,19 +150,19 @@ export default function Agendar({ navigation }) {
         is24Hour={true}
       />
 
-      <View style={style.V_botao}>
+      <ViewBotao>
         <Button
           style={style.botao}
           onPress={() => {
             agendarVisita();
           }}
         >
-          <Text style={style.txtWhatsapp}>Agendar uma visita</Text>
+          <TextoAgendamento>Agendar uma visita</TextoAgendamento>
         </Button>
-      </View>
+      </ViewBotao>
 
       {sucesso && (
-        <View style={style.V_Detalhes}>
+        <ViewDetalhes>
           <CustomModal
             parametro="Custom"
             titulo="Visita agendada :)"
@@ -157,10 +174,10 @@ export default function Agendar({ navigation }) {
               });
             }}
           />
-        </View>
+        </ViewDetalhes>
       )}
       {alertaFaltaDados && (
-        <View style={style.V_Detalhes}>
+        <ViewDetalhes>
           <CustomModal
             parametro="Custom"
             imagem="Faltando"
@@ -171,10 +188,10 @@ export default function Agendar({ navigation }) {
               setAlertaFaltaDados(false);
             }}
           />
-        </View>
+        </ViewDetalhes>
       )}
       {erro && (
-        <View style={style.V_Detalhes}>
+        <ViewDetalhes>
           <CustomModal
             parametro="Erro"
             descricao="Você já tem um agendamento cadastrado nessa república."
@@ -182,8 +199,8 @@ export default function Agendar({ navigation }) {
               setErro(false);
             }}
           />
-        </View>
+        </ViewDetalhes>
       )}
-    </View>
+    </Container>
   );
 }

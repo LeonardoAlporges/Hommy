@@ -13,7 +13,25 @@ import Icon2 from 'react-native-vector-icons/Feather';
 import Icon3 from 'react-native-vector-icons/Entypo';
 import Icon4 from 'react-native-vector-icons/Ionicons';
 import { PagerTabIndicator, IndicatorViewPager, PagerTitleIndicator, PagerDotIndicator } from 'rn-viewpager';
-
+import {
+  ViewTitulo,
+  Titulo,
+  ViewDescricao,
+  Descricao,
+  Barra,
+  ViewCaracteristicaTitle,
+  CaracteristicaTitle,
+  ViewTipo,
+  Tipo,
+  ViewCaracteristicaItens,
+  Item2,
+  TextLabel,
+  TextLabelGenero,
+  ViewInterna,
+  ViewVagas,
+  ViewBotao,
+  TextoAgendamento
+} from './style';
 export default function DetalhesAnuncio({ navigation }) {
   const [usuarioJaInteressado, setUsuarioJaInteressado] = useState(navigation.state.params.interessado);
   const [ocutarBotaoAgendamento, setOcutarBotaoAgendamento] = useState(navigation.state.params.desativarBotaoAgenda);
@@ -70,118 +88,118 @@ export default function DetalhesAnuncio({ navigation }) {
         )}
       </IndicatorViewPager>
 
-      <View style={estilo.V_titulo}>
-        <Text style={estilo.titulo}>{republica.nomeRepublica}</Text>
-      </View>
+      <ViewTitulo>
+        <Titulo>{republica.nomeRepublica}</Titulo>
+      </ViewTitulo>
 
-      <View style={estilo.V_descricao}>
-        <Text style={estilo.descricao}>{republica.descricao}</Text>
-      </View>
-      <View style={estilo.barra} />
+      <ViewDescricao>
+        <Descricao>{republica.descricao}</Descricao>
+      </ViewDescricao>
+      <Barra/>
 
-      <View style={estilo.V_caracteristicaTitle}>
-        <Text style={estilo.caracteristicaTitle}>Características</Text>
-      </View>
-      <View style={estilo.V_tipo}>
-        <Text style={estilo.tipo}>Tipo</Text>
-      </View>
-      <View style={estilo.V_caracteristicaItens}>
-        <View style={estilo.item2}>
+      <ViewCaracteristicaTitle>
+        <CaracteristicaTitle>Características</CaracteristicaTitle>
+      </ViewCaracteristicaTitle>
+      <ViewTipo>
+        <Tipo>Tipo</Tipo>
+      </ViewTipo>
+      <ViewCaracteristicaItens>
+        <Item2>
           <Icon name="home" style={estilo.icone} />
-          <Text style={estilo.txtlabelGenero}>{republica.imovel}</Text>
-        </View>
-        <View style={estilo.item2}>
+          <TextLabel>{republica.imovel}</TextLabel>
+        </Item2>
+        <Item2>
           <Icon name="people" style={estilo.icone} />
-          <Text style={estilo.txtlabelGenero}>{republica.genero}</Text>
-        </View>
-      </View>
-      <View style={estilo.V_tipo}>
-        <Text style={estilo.tipo}>Mobília do quarto</Text>
-      </View>
-      <View style={estilo.V_caracteristicaAcomodacao}>
-        <View style={estilo.itemAcomodacao}>
+          <TextLabel>{republica.genero}</TextLabel>
+        </Item2>
+      </ViewCaracteristicaItens>
+      <ViewTipo>
+        <Tipo>Mobília do quarto</Tipo>
+      </ViewTipo>
+      <ViewVagas>
+        <ViewInterna>
           <Icon name="drawer" style={estilo.icone} />
-          <Text style={estilo.txtlabel}>{republica.acomodacaoQuarto}</Text>
-        </View>
-      </View>
-      <View style={estilo.V_tipo}>
-        <Text style={estilo.tipo}>Mobília e eletrodomésticos</Text>
-      </View>
-      <View style={estilo.V_caracteristicaAcomodacao}>
-        <View style={estilo.itemAcomodacao}>
+          <TextLabel>{republica.acomodacaoQuarto}</TextLabel>
+        </ViewInterna>
+      </ViewVagas>
+      <ViewTipo>
+        <Tipo>Mobília e eletrodomésticos</Text>
+      </ViewTipo>
+      <ViewVagas>
+        <ViewInterna>
           <Icon name="screen-desktop" style={estilo.icone} />
-          <Text style={estilo.txtlabel}>{republica.acomodacaoRepublica}</Text>
-        </View>
-      </View>
+          <TextLabel>{republica.acomodacaoRepublica}</TextLabel>
+        </ViewInterna>
+      </ViewVagas>
 
-      <View style={estilo.V_tipo}>
-        <Text style={estilo.tipo}>Disponibilidade</Text>
-      </View>
-      <View style={estilo.V_vagas}>
-        <View style={estilo.vagas}>
+      <ViewTipo>
+        <Tipo>Disponibilidade</Text>
+      </ViewTipo>
+      <ViewVagas>
+        <ViewInterna>
           <Icon name="user-follow" style={estilo.icone} />
-          <Text style={estilo.txtlabel}>{republica.numVagas} Vaga(s)</Text>
-        </View>
-      </View>
-      <View style={estilo.V_tipo}>
-        <Text style={estilo.tipo}>Endereço</Text>
-      </View>
-      <View style={estilo.V_vagas}>
-        <View style={estilo.vagas}>
+          <TextLabel>{republica.numVagas} Vaga(s)</TextLabel>
+        </ViewInterna>
+      </ViewVagas>
+      <ViewTipo>
+        <Tipo>Endereço</Text>
+      </ViewTipo>
+      <ViewVagas>
+        <ViewInterna>
           <Icon name="location-pin" style={estilo.icone} />
-          <Text style={estilo.txtlabel}>
+          <TextLabel>
             {republica.rua}, {republica.bairro}, Nº
             {republica.numeroCasa}
-          </Text>
-        </View>
-      </View>
-      <View style={estilo.V_tipo}>
-        <Text style={estilo.tipo}>Representante</Text>
-      </View>
-      <View style={estilo.V_vagas}>
-        <View style={estilo.vagas}>
+          </TextLabel>
+        </ViewInterna>
+      </ViewVagas>
+      <ViewTipo>
+        <Tipo>Representante</Tipo>
+      </ViewTipo>
+      <ViewVagas>
+        <ViewInterna>
           <Icon name="user" style={estilo.icone} />
-          <Text style={estilo.txtlabel}>{republica.representante}</Text>
-        </View>
-      </View>
-      <View style={estilo.V_tipo}>
-        <Text style={estilo.tipo}>Valor médio das contas</Text>
-      </View>
-      <View style={estilo.V_vagas}>
-        <View style={estilo.vagas}>
+          <TextLabel>{republica.representante}</TextLabel>
+        </ViewInterna>
+      </ViewVagas>
+      <ViewTipo>
+        <Tipo>Valor médio das contas</Tipo>
+      </ViewTipo>
+      <ViewVagas>
+        <ViewInterna>
           <Icon name="chart" style={estilo.icone} />
-          <Text style={estilo.txtlabel}>R$ {republica.valorContas}</Text>
-        </View>
-      </View>
-      <View style={estilo.V_tipo}>
-        <Text style={estilo.tipo}>Valor Aluguel</Text>
-      </View>
-      <View style={estilo.V_vagas}>
-        <View style={estilo.vagas}>
+          <TextLabel>R$ {republica.valorContas}</TextLabel>
+        </ViewInterna>
+      </ViewVagas>
+      <ViewTipo>
+        <Tipo>Valor Aluguel</Tipo>
+      </ViewTipo>
+      <ViewVagas>
+        <ViewInterna>
           <Icon2 name="dollar-sign" style={estilo.icone} />
-          <Text style={estilo.txtlabel}>R$ {republica.valorAluguel}</Text>
-        </View>
-      </View>
-      <View style={estilo.V_tipo}>
-        <Text style={estilo.tipo}>Aceita animais?</Text>
-      </View>
-      <View style={estilo.V_vagas}>
-        <View style={estilo.vagas}>
+          <TextLabel>R$ {republica.valorAluguel}</TextLabel>
+        </ViewInterna>
+      </ViewVagas>
+      <ViewTipo>
+        <Tipo>Aceita animais?</Tipo>
+      </ViewTipo>
+      <ViewVagas>
+        <ViewInterna>
           <Icon4 name="md-paw" style={estilo.iconeAnimal} />
-          <Text style={estilo.txtlabel}>{republica.animal}</Text>
-        </View>
-      </View>
+          <TextLabel>{republica.animal}</TextLabel>
+        </ViewInterna>
+      </ViewVagas>
       {!usuarioJaInteressado && !ocutarBotaoAgendamento ? (
-        <View style={estilo.V_botao}>
+        <ViewBotao>
           <Button
             style={estilo.botao}
             onPress={() => {
               irParaAgendamento();
             }}
           >
-            <Text style={estilo.txtWhatsapp}>Agendar uma visita</Text>
+            <TextoAgendamento>Agendar uma visita</TextoAgendamento>
           </Button>
-        </View>
+        </ViewBotao>
       ) : (
         <View style={{ height: 30 }} />
       )}

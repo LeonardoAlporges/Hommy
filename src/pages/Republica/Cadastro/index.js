@@ -97,21 +97,21 @@ export default function Cadastro({ navigation }) {
       } else if (error) {
         alert('Ocorreu algum erro: ', error);
       } else {
+        console.log(imagePickerResponse);
         preencherFoto(imagePickerResponse);
         const referencia = uploadFileToFireBaseRepublica(imagePickerResponse);
+        console.log(referencia);
         monitorFileUpload(referencia);
+        console.log(linkimagem1);
       }
     });
   }
 
   function monitorFileUpload(task) {
     task.on('state_changed', snapshot => {
-      switch (snapshot.state) {
-        case 'running':
-          break;
-        case 'success':
           snapshot.ref.getDownloadURL().then(downloadURL => {
             if (contadorImagem == 0) {
+              console.log(1);
               setLinkImagem1(downloadURL);
             } else if (contadorImagem == 1) {
               setLinkImagem2(downloadURL);
@@ -119,10 +119,6 @@ export default function Cadastro({ navigation }) {
               setLinkImagem3(downloadURL);
             }
           });
-          break;
-        default:
-          break;
-      }
     });
   }
 
@@ -504,10 +500,10 @@ export default function Cadastro({ navigation }) {
                           />
                         </View>
                       ) : (
-                        <View style={estilo.V_ImageFull}>
-                          <Image source={{ uri: imagem1 }} style={estilo.ImageFull} />
-                        </View>
-                      )}
+                          <View style={estilo.V_ImageFull}>
+                            <Image source={{ uri: imagem1 }} style={estilo.ImageFull} />
+                          </View>
+                        )}
                       {imagem2 == null ? (
                         <View style={estilo.V_ImageFullEmpty}>
                           <Image
@@ -516,10 +512,10 @@ export default function Cadastro({ navigation }) {
                           />
                         </View>
                       ) : (
-                        <View style={estilo.V_ImageFull}>
-                          <Image source={{ uri: imagem2 }} style={estilo.ImageFull} />
-                        </View>
-                      )}
+                          <View style={estilo.V_ImageFull}>
+                            <Image source={{ uri: imagem2 }} style={estilo.ImageFull} />
+                          </View>
+                        )}
                       {imagem3 == null ? (
                         <View style={estilo.V_ImageFullEmpty}>
                           <Image
@@ -528,10 +524,10 @@ export default function Cadastro({ navigation }) {
                           />
                         </View>
                       ) : (
-                        <View style={estilo.V_ImageFull}>
-                          <Image source={{ uri: imagem3 }} style={estilo.ImageFull} />
-                        </View>
-                      )}
+                          <View style={estilo.V_ImageFull}>
+                            <Image source={{ uri: imagem3 }} style={estilo.ImageFull} />
+                          </View>
+                        )}
                     </DivisaoFotos>
                     <View style={estilo.V_BotaoImg}>
                       <TouchableOpacity
