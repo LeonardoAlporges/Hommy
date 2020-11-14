@@ -5,6 +5,7 @@ import { NavigationActions, StackActions } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AsyncStorage from '@react-native-community/async-storage';
 import { ScrollView } from 'react-native-gesture-handler';
+import { withNavigation } from 'react-navigation';
 
 import Estilos from './style';
 
@@ -38,7 +39,7 @@ import {
   Titulo
 } from './style';
 
-export default function Cabeca({ navigation }) {
+export function Cabeca({ navigation }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const nome = useSelector(state => state.user.usuario);
   const fotoPerfil = useSelector(state => state.user.fotoPerfil);
@@ -54,7 +55,9 @@ export default function Cabeca({ navigation }) {
   async function closeToken() {
     await AsyncStorage.removeItem('token');
     await AsyncStorage.removeItem('user')
+
       .then(value => {
+        console.log('SAIU');
         resetNavigation('Login');
       })
       .catch(error => {});
@@ -71,7 +74,6 @@ export default function Cabeca({ navigation }) {
       <V_titulo>
         <Titulo> Hommy </Titulo>
       </V_titulo>
-      {/* <View style={Estilos.touch_Fake}><Icon style={Estilos.icon2} name="user" /></View> */}
 
       <Modal
         transparent={true}
@@ -264,3 +266,4 @@ export default function Cabeca({ navigation }) {
     </HeaderPrincipal>
   );
 }
+export default withNavigation(Cabeca);
