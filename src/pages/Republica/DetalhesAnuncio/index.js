@@ -198,7 +198,7 @@ export default function DetalhesAnuncio({ navigation }) {
       <View style={estilo.V_vagas}>
         <View style={estilo.vagas}>
           <Icon name="location-pin" style={estilo.icone} />
-          <Text style={estilo.txtlabel}>
+          <TextLabel>
             {republica.rua}, {republica.bairro}, Nº
             {republica.numeroCasa}
           </Text>

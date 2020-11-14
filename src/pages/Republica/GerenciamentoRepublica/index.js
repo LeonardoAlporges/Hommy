@@ -128,6 +128,7 @@ export default function GerenciamentoDeRepublica({ navigation }) {
       email: email,
       nomeRepublica: nomeRepublica
     };
+    console.log(data);
 
     api
       .post(`/gerenciaRepublica`, data)

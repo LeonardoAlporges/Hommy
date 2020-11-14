@@ -38,6 +38,26 @@ export const Linha = styled.View`
   justify-content: space-between;
   margin-top: 33px;
 `;
+export const AreaFotos = styled.View`
+  height: 130px;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 33px;
+  margin-bottom: 70px;
+`;
+export const LabelFotos = styled.Text`
+  height: 30px;
+  width: 100%;
+  font-family: WorkSans;
+  font-size: 16px;
+  color: #022250;
+`;
+export const DivisaoFotos = styled.View`
+  height: 100px;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+`;
 const estilo = StyleSheet.create({
   V_header: {
     display: 'flex',
@@ -134,7 +154,8 @@ const estilo = StyleSheet.create({
     shadowOpacity: 0.43,
     shadowRadius: 9.51,
 
-    elevation: 15
+    elevation: 15,
+    zIndex: 1
   },
   iconeBtn: {
     margin: 0,
@@ -150,7 +171,8 @@ const estilo = StyleSheet.create({
     fontFamily: 'WorkSans',
     fontSize: 14,
     color: '#687368',
-    marginHorizontal: 20
+    marginHorizontal: 20,
+    marginTop: 20
   },
   rowStyle: {
     flexDirection: 'row',
@@ -199,7 +221,79 @@ const estilo = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     alignItems: 'center'
-  }
+  },
+  V_ImageLabel: {
+    width: '100%',
+    height: 20,
+    marginBottom: 18
+  },
+  V_ImageEmpty: {
+    justifyContent: 'space-around',
+    width: '100%',
+    height: 100,
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  V_ImageFull: {
+    marginHorizontal: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 100,
+    height: 100,
+    borderWidth: 1,
+    borderRadius: 3,
+    borderColor: '#2e2e2e',
+    padding: 10,
+    opacity: 1
+  },
+  V_ImageFullEmpty: {
+    marginHorizontal: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 100,
+    height: 100,
+    borderWidth: 1,
+    borderRadius: 3,
+    borderColor: '#2e2e2e',
+    padding: 10,
+    opacity: 0.3
+  },
+  ImageEmpty: {
+    width: 50,
+    height: 50,
+    borderRadius: 3,
+    opacity: 0.7
+  },
+  ImageFull: {
+    width: 100,
+    height: 100,
+    borderRadius: 3
+  },
+  V_BotaoImg: {
+    marginTop: 10,
+    width: '100%',
+    height: 50,
+    alignContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  botao_send: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: 40,
+    borderRadius: 6,
+    backgroundColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 7
+    },
+    shadowOpacity: 0.43,
+    shadowRadius: 9.51,
+
+    elevation: 15
+  },
 });
 
 export default estilo;

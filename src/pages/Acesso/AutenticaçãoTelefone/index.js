@@ -5,12 +5,12 @@ import { Formik } from 'formik';
 
 import { Button, Item, Input } from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { NavigationActions, StackActions } from 'react-navigation';
+import TextInputMask from 'react-native-text-input-mask';
 
-import estilo from './styles';
-import HeaderBack from '../../../components/CustomHeader';
 import CustomModal from '../../../components/Alert';
-import api from '../../../service/api';
+import HeaderBack from '../../../components/CustomHeader';
+import auth from '@react-native-firebase/auth';
+import estilo from './styles';
 import {
   Container,
   ViewImagem,
@@ -27,63 +27,41 @@ import {
   LabelErro
 } from './styles';
 
-export default function ValidarCodigo({ navigation }) {
+export default function PhoneSignIn() {
+  // If null, no SMS has been sent
   const [erro, setErro] = useState(false);
   const [sucesso, setSucesso] = useState(false);
   const [codigoValido, setCodigoValido] = useState(false);
-  const [email, setEmail] = useState(navigation.state.params.email);
   const [codigoErrado, setCodigoErrado] = useState(false);
+  const [confirm, setConfirm] = useState(null);
 
-  useEffect(() => {}, [codigoValido]);
+  useEffect(() => { }, [confirm]);
 
-  function verificarCodigoDigitado(values) {
-    const data = {
-      email: email.email,
-      numConfirm: values,
-    };
-    console.log(data);
-    api
-      .put('/alterar/confirm', data)
-      .then(response => {
-        setCodigoValido(true);
-      })
-      .catch(error => {
-        console.log(error.response)
-        if (error.response.data.code == 204) {
-          setCodigoErrado(true);
-        } else {
-          setErro(true);
-        }
-      });
+  // Handle the button press
+  async function signInWithPhoneNumber(phoneNumber) {
+    var confirmation;
+    try {
+      confirmation = await auth().signInWithPhoneNumber(phoneNumber);
+      setConfirm(confirmation);
+      setCodigoValido(true);
+    } catch (error){
+      setErro(true)      
+    }
+    console.log(confirmation);    
   }
 
-  function resetarPilhaNavegacao(rota) {
-    const resetAction = StackActions.reset({
-      index: 0,
-      actions: [NavigationActions.navigate({ routeName: rota })],
-    });
-    navigation.dispatch(resetAction);
-  }
-
-  function enviarNovaSenha(values) {
-    const data = {
-      email: email.email,
-      pass: values.novaSenha,
-    };
-    console.log('leo', data);
-    api
-      .put('/alterar/senha', data)
-      .then(response => {
-        setSucesso(true);
-      })
-      .catch(error => {
-        setErro(true);
-      });
+  async function confirmCode(values) {
+    try {
+      await confirm.confirm(values.codigo);
+      setSucesso(true);
+    } catch (error) {
+      setErro(true)
+    }
   }
 
   return (
     <Container>
-      <HeaderBack title={'Recuperação de senha'} onNavigation={() => resetarPilhaNavegacao('Login')} />
+      <HeaderBack title={'Confirmação por telefone'} onNavigation={() => resetarPilhaNavegacao('Login')} />
 
       <ViewImagem>
         <Image
@@ -99,25 +77,25 @@ export default function ValidarCodigo({ navigation }) {
       <ViewTitulo>
         {codigoValido ? (
           <Titulo>
-            Cadastre uma nova senha de acesso. Sua senha antiga será apagada, crie uma nova para se conectar ao
-            aplicativo.
+            Digite seu telefone para enviarmos o código de confirmação por SMS para você verificar seu número de celular.
           </Titulo>
         ) : (
-          <Titulo>
-            Um código para prosseguir foi enviado ao seu e-mail. Por favor, informe-o no campo abaixo.
-          </Titulo>
-        )}
+            <Titulo>
+              Um código para prosseguir foi enviado via SMS. Por favor, informe seu código de confirmação no campo abaixo.
+            </Titulo>
+          )}
       </ViewTitulo>
 
       <Formik
         initialValues={{
           codigo: yup
-            .string()
+            .string('')
             .min(6, 'Mínimo 6 dígitos necessários')
             .max(6, 'Somente 6 dígitos são permitido'),
-          novaSenha: yup
+          numeroTelefone: yup
             .string('')
-            .min(8, 'Mínimo 8 dígitos necessários')
+            .min(11, 'Mínimo 11 dígitos necessários')
+            .max(11, 'Máximo 11 dígitos necessários')
             .required('Insira uma senha para sua conta'),
         }}
         validationSchema={yup.object().shape({
@@ -126,21 +104,18 @@ export default function ValidarCodigo({ navigation }) {
             .min(6, 'Mínimo 6 dígitos necessários')
             .max(6, 'Somente 6 digitos permitido')
             .required('Campo obrigatório'),
-          novaSenha: yup
+          numeroTelefone: yup
             .string()
-            .min(8, 'Mínimo 8 dígitos necessários')
-            .required('Campo obrigatório'),
-          confirmacaoSenha: yup
-            .string()
-            .min(8, 'Mínimo 8 dígitos necessários')
-            .required('Campo obrigatório'),
+            .min(10, 'Mínimo 11 dígitos necessários')
+            .max(11, 'Máximo 11 dígitos necessários')
+            .required('Campo obrigatório')
         })}
       >
         {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
           <Fragment>
             {erro && (
               <CustomModal
-                parametro="Erro "
+                parametro="Erro"
                 descricao="Opss! Ocorreu um erro estranho :O"
                 callback={() => {
                   setErro(false);
@@ -164,33 +139,34 @@ export default function ValidarCodigo({ navigation }) {
               <CamposLogin>
                 <Item>
                   <Icon style={estilo.icons_CamposLogin} active name="key-outline" />
-                  <Input
+                  <TextInputMask
                     placeholderTextColor="#2e2e2e"
                     style={estilo.labelInput}
                     value={values.codigo} //NOME
-                    onChangeText={handleChange('codigo')}
-                    onBlur={() => setFieldTouched('codigo')}
-                    placeholder="000000"
-                    keyboardType="numeric"
+                    onChangeText={handleChange('numeroTelefone')}
+                    onBlur={() => setFieldTouched('numeroTelefone')}
+                    placeholder="Telefone"
+                    mask={'([00]) [00000]-[0000]'}
+                    keyboardType="number-pad"
                   />
                 </Item>
               </CamposLogin>
             )}
             <View>
-              {touched.codigo && errors.codigo ? (
+              {touched.numeroTelefone && errors.numeroTelefone ? (
                 <ViewErro>
-                  <LabelErro>{errors.codigo}</LabelErro>
+                  <LabelErro>{errors.numeroTelefone}</LabelErro>
                 </ViewErro>
               ) : (
-                <View style={estilo.V_ErroSem} />
-              )}
+                  <View style={estilo.V_ErroSem} />
+                )}
             </View>
             {!codigoValido && (
               <ViewBotao>
                 <Button
                   style={estilo.botao}
                   onPress={() => {
-                    verificarCodigoDigitado(values.codigo);
+                    signInWithPhoneNumber("+55" + values.numeroTelefone);
                   }}
                 >
                   <TextoBotao>Prosseguir</TextoBotao>
@@ -199,28 +175,28 @@ export default function ValidarCodigo({ navigation }) {
             )}
 
             {codigoValido && (
-              <CamposLogin>
+              <CamposLoginSenha>
                 <Item>
                   <Icon style={estilo.icons_CamposLogin} active name="key-outline" />
                   <Input
                     placeholderTextColor="#2e2e2e"
                     style={estilo.labelInput}
-                    value={values.novaSenha} //NOME
-                    onChangeText={handleChange('novaSenha')}
-                    onBlur={() => setFieldTouched('novaSenha')}
-                    placeholder="Nova senha"
+                    value={values.codigo} //NOME
+                    onChangeText={handleChange('codigo')}
+                    onBlur={() => setFieldTouched('codigo')}
+                    placeholder="000-000"
                   />
                 </Item>
-              </CamposLogin>
+              </CamposLoginSenha>
             )}
             <View>
-              {touched.novaSenha && errors.novaSenha ? (
+              {touched.codigo && errors.codigo ? (
                 <ViewErro>
-                  <LabelErro>{errors.novaSenha}</LabelErro>
+                  <LabelErro>{errors.codigo}</LabelErro>
                 </ViewErro>
               ) : (
-                <View style={estilo.V_ErroSem} />
-              )}
+                  <View style={estilo.V_ErroSem} />
+                )}
             </View>
 
             {codigoValido && (
@@ -228,7 +204,7 @@ export default function ValidarCodigo({ navigation }) {
                 <Button
                   style={estilo.botao}
                   onPress={() => {
-                    enviarNovaSenha(values);
+                    confirmCode(values);
                   }}
                 >
                   <TextoBotao>Enviar nova senha</TextoBotao>

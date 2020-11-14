@@ -14,6 +14,22 @@ import estilo from './styles';
 import HeaderBack from '../../../components/CustomHeader';
 import { NavigationActions, StackActions } from 'react-navigation';
 import { set, functionsIn } from 'lodash';
+import {
+  Container,
+  ViewImagem,
+  ViewTitulo,
+  Titulo,
+  ViewSubtitulo,
+  Subtitulo,
+  ViewBotao,
+  TextoBotao,
+  ViewModal,
+  CamposLogin,
+  CamposLoginSenha,
+  ViewErro,
+  LabelErro
+} from './styles';
+
 
 export default function EsqueciSenha({ navigation }) {
   const [erro, setErro] = useState(false);
@@ -45,18 +61,18 @@ export default function EsqueciSenha({ navigation }) {
   }
 
   return (
-    <View style={estilo.container}>
+    <Container>
       <HeaderBack title="Esqueceu a senha ?" onNavigation={() => resetarPilhaNavegacao('Login')} />
 
-      <View style={estilo.V_img}>
+      <ViewImagem>
         <Image style={estilo.V_img} source={require('../../../assets/Img/Send_email.png')} />
-      </View>
+      </ViewImagem>
 
-      <View style={estilo.V_title}>
-        <Text style={estilo.title}>
+      <ViewTitulo>
+        <Titulo>
           Informe seu e-mail cadastrado no aplicativo para que possamos lhe enviar um codigo de recuperação.
-        </Text>
-      </View>
+        </Titulo>
+      </ViewTitulo>
 
       <Formik
         initialValues={{
@@ -71,7 +87,7 @@ export default function EsqueciSenha({ navigation }) {
       >
         {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
           <Fragment>
-            <View style={estilo.view_CamposLogin}>
+            <CamposLogin>
               <Item>
                 <Icon style={estilo.icons_CamposLogin} active name="email-outline" />
                 <Input
@@ -83,25 +99,25 @@ export default function EsqueciSenha({ navigation }) {
                   placeholder="E-mail"
                 />
               </Item>
-            </View>
+            </CamposLogin>
 
             {touched.email && errors.email ? (
-              <View style={estilo.V_Erro}>
-                <Text style={estilo.txtErro}>{errors.email}</Text>
-              </View>
+              <ViewErro>
+                <LabelErro>{errors.email}</LabelErro>
+              </ViewErro>
             ) : (
               <View style={estilo.V_ErroSem} />
             )}
-            <View style={estilo.V_botao}>
+            <ViewBotao>
               <Button
                 style={estilo.botao}
                 onPress={() => {
                   EnviarCodigo(values);
                 }}
               >
-                <Text style={estilo.txtbtn}>Recuperar senha</Text>
+                <TextoBotao>Recuperar senha</TextoBotao>
               </Button>
-            </View>
+            </ViewBotao>
           </Fragment>
         )}
       </Formik>
@@ -114,6 +130,6 @@ export default function EsqueciSenha({ navigation }) {
         />
       )}
       {loading && <Loading />}
-    </View>
+    </Container>
   );
 }

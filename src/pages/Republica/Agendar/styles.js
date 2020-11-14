@@ -1,20 +1,97 @@
 import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
+
+export const Container = styled.View`
+align-items: 'center',
+flex: 1,
+background-color: '#f8f8f8',
+`;
+
+export const ViewBotao = styled.View`
+margin-top: 20,
+margin-bottom: 20,
+height: 60,
+align-items: 'center',
+justify-content: 'center',
+flex-direction: 'row',
+justify-content: 'space-around',
+`;
+
+export const ViewDetalhes = styled.View`
+flex: 1,
+justify-content: 'center',
+align-items: 'center',
+`;
+
+export const ViewDate = styled.View`
+flex-direction: 'row',
+justify-content: 'center',
+align-items: 'center',
+`;
+
+export const ViewClock = styled.View`
+flex-direction: 'row',
+justify-content: 'center',
+align-items: 'center',
+`;
+
+export const TextoClock = styled.Text`
+font-family: 'WorkSans',
+font-weight: 'bold',
+font-size: 16,
+color: '#142850',
+margin-right: 10,
+`;
+
+export const TextoClockPlace = styled.Text`
+font-family: 'WorkSans',
+font-weight: 'bold',
+font-size: 16,
+color: '#989898',
+margin-right: 10,
+`;
+
+export const TextoAgendamento = styled.Text`
+color: '#FFFFFF',
+margin-left: 15,
+`;
+
+export const ViewDescricao = styled.View`
+width: '100%',
+height: 100,
+padding-horizontal: 20,
+margin-top: 10,
+`;
+
+export const TextoDescricao = styled.Text`
+font-family: 'WorkSans',
+font-size: 14,
+color: '#687368',
+margin-bottom: 25,
+`;
+
+export const ViewInputs = styled.View`
+margin-top: 20,
+width: '90%',
+height: 100,
+justify-content: 'space-around',
+flex-direction: 'row',
+align-items: 'center',
+border-radius: 10,
+background-color: '#fff',
+`;
+
+export const ViewBotaoCalendario = styled.View`
+height: 50,
+width: 50,
+align-items: 'center',
+justify-content: 'center',
+flex-direction: 'row',
+justify-content: 'space-around',
+`;
+
 
 const style = StyleSheet.create({
-  Container: {
-    alignItems: 'center',
-    flex: 1,
-    backgroundColor: '#f8f8f8',
-  },
-  V_botao: {
-    marginTop: 20,
-    marginBottom: 20,
-    height: 60,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
   botao: {
     backgroundColor: '#142850',
     display: 'flex',
@@ -25,16 +102,6 @@ const style = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  V_Detalhes: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  ViewDate: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   textStyledate: {
     paddingTop: 15,
     textAlign: 'center',
@@ -43,72 +110,6 @@ const style = StyleSheet.create({
     color: '#142850',
     fontWeight: 'bold',
     fontFamily: 'WorkSans',
-  },
-  placeHolder: {
-    paddingTop: 15,
-    textAlign: 'center',
-    height: 50,
-    fontSize: 16,
-    color: '#989898',
-    fontWeight: 'bold',
-    fontFamily: 'WorkSans',
-  },
-  ViewClock: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  textClock: {
-    fontFamily: 'WorkSans',
-    fontWeight: 'bold',
-    fontSize: 16,
-    color: '#142850',
-    marginRight: 10,
-  },
-  textClockPlace: {
-    fontFamily: 'WorkSans',
-    fontWeight: 'bold',
-    fontSize: 16,
-    color: '#989898',
-    marginRight: 10,
-  },
-  iconWhatsapp: {
-    color: '#ffffff',
-    fontSize: 30,
-  },
-  txtWhatsapp: {
-    color: '#FFFFFF',
-    marginLeft: 15,
-  },
-  V_descr: {
-    width: '100%',
-    height: 100,
-    paddingHorizontal: 20,
-    marginTop: 10,
-  },
-  textDescrição: {
-    fontFamily: 'WorkSans',
-    fontSize: 14,
-    color: '#687368',
-    marginBottom: 25,
-  },
-  V_Inputs: {
-    marginTop: 20,
-    width: '90%',
-    height: 100,
-    justifyContent: 'space-around',
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderRadius: 10,
-    backgroundColor: '#fff',
-  },
-  V_botaoCalendar: {
-    height: 50,
-    width: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
   },
   botaoCalendar: {
     backgroundColor: '#142850',

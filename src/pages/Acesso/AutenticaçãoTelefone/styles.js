@@ -1,8 +1,5 @@
 import { StyleSheet } from 'react-native';
-
-import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
-
 
 export const Container = styled.View`
   width: '100%',
@@ -50,7 +47,8 @@ export const ViewBotao = styled.View`
   justify-content: 'center',
   align-items: 'center',
   width: '100%',
-  height: 50
+  height: 50,
+  flex-direction: "row"
 `;
 
 export const TextoBotao = styled.Text`
@@ -68,9 +66,15 @@ export const ViewModal = styled.View`
 `;
 
 export const CamposLogin = styled.View`
-  margin-top: '15%',
-  height: 60,
-  width: 330,
+  margin-top: '10%',
+  height: 40,
+  width: 300,
+`;
+
+export const CamposLoginSenha = styled.View`
+  margin-top: '10%',
+  height: 40,
+  width: 300,
 `;
 
 export const ViewErro = styled.View`
@@ -85,6 +89,9 @@ export const LabelErro = styled.Text`
   font-size: 10px;
   color: red;
 `;
+
+
+
 
 const estilo = StyleSheet.create({
   V_img: {
