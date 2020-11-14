@@ -82,11 +82,7 @@ export const ItemUnico = styled.View`
   align-items: center;
 `;
 export const ViewIcone = styled.View`
-  height: 60px;
-  width: 40px;
-  align-items: flex-start;
-  justify-content: center;
-  align-items: center;
+   margin-horizontal: 5%;
 `;
 export const LabelItem = styled.Text`
   width: 75%;
@@ -97,25 +93,28 @@ export const LabelItem = styled.Text`
 export const ViewBotao = styled.View`
   margin-top: 5%;
   height: 60px;
-  width: 100%;
   align-items: center;
-  justify-content: center;
-  margin-left: 20%;
+  justify-content: center; 
 `;
 export const BotaoContato = styled(Button)`
-  width: 55%;
-  height: 50px;
+  width: 88%;
+  height: 60px;
   border-width: 1px;
   border-style: solid;
   border-color: #f2f2f2;
-  justify-content: space-around;
+  align-items: center;
+  justify-content: center;
   border-radius: 5px;
+  text-align:center;
   background-color: #142850;
 `;
 export const LabelBotao = styled.Text`
+text-align:center;
   width: 75%;
   color: #142850;
   font-family: WorkSans;
+  align-items: center;
+  justify-content: center;
   font-size: 14px;
   color: #ffffff;
 `;
