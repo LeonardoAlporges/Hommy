@@ -1,47 +1,38 @@
-import { StyleSheet } from 'react-native';
-
-const styles = StyleSheet.create({
-  Container: {
-    width: '100%',
-    height: '100%',
-    paddingBottom: '25%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  imagem: {
-    height: 200,
-    width: 200,
-  },
-  V_Titutlo: {
-    width: '100%',
-
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  V_mensagem: {
-    width: '100%',
-
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  titulo: {
-    width: '80%',
-    textAlign: 'center',
-    fontFamily: 'WorkSans',
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: '#142850',
-
-    marginBottom: 10,
-  },
-  mensage: {
-    width: 300,
-    textAlign: 'center',
-    color: '#1458',
-    fontFamily: 'WorkSans',
-    fontSize: 18,
-    fontWeight: '400',
-  },
-});
-
-export default styles;
+import styled from 'styled-components/native';
+export const Container = styled.View`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: flex-start;
+`;
+export const Imagem = styled.Image`
+  width: 200px;
+  height: 200px;
+`;
+export const ViewTitulo = styled.View`
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+export const Titulo = styled.Text`
+  width: 80%;
+  text-align: center;
+  font-family: WorkSans-bold;
+  font-size: 22px;
+  color: #142850;
+  margin-bottom: 10px;
+`;
+export const ViewMensagem = styled.View`
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+export const Mensagem = styled.Text`
+  width: 60%;
+  text-align: center;
+  font-family: WorkSans;
+  font-size: 22px;
+  color: #1458;
+  margin-bottom: 10px;
+`;

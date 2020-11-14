@@ -1,13 +1,52 @@
+import { Button } from 'native-base';
 import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
+
+export const Container = styled.View`
+  flex: 1;
+  background-color: #00000080;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Imagem = styled.Image`
+  align-self: center;
+  width: 150px;
+  height: 150px;
+  justify-content: center;
+`;
+export const Titulo = styled.Text`
+  margin: 3% 0px 10px 0px;
+  text-align: center;
+  justify-content: center;
+  font-family: WorkSans-SemiBold;
+  font-size: 22px;
+`;
+export const Descricao = styled.Text`
+  margin: 0px 15px 3% 15px;
+  text-align: center;
+  justify-content: center;
+  font-family: WorkSans;
+  font-size: 15px;
+`;
+export const Botao = styled.TouchableOpacity`
+  margin-top: 5%;
+  align-self: center;
+  background-color: #142850;
+  border-radius: 5px;
+  padding: 10px;
+  justify-content: center;
+  height: 50px;
+  width: 170px;
+`;
+export const LabelBotao = styled.Text`
+  text-align: center;
+  font-family: WorkSans;
+  font-size: 18px;
+  color: #fff;
+`;
 
 const Estilos = StyleSheet.create({
-  ViewFundo: {
-    backgroundColor: '#00000080',
-    height: '100%',
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
   ViewModal: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -15,7 +54,7 @@ const Estilos = StyleSheet.create({
     height: 370,
     marginHorizontal: 30,
     backgroundColor: 'white',
-    borderRadius: 10,
+    borderRadius: 5,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
@@ -25,46 +64,6 @@ const Estilos = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5
-  },
-  Imagem: {
-    alignSelf: 'center',
-    width: 150,
-    height: 150,
-    justifyContent: 'center'
-  },
-  titulo: {
-    marginVertical: '3%',
-    marginBottom: 15,
-    textAlign: 'center',
-    justifyContent: 'center',
-    fontFamily: 'WorkSans',
-    fontSize: 22,
-    fontWeight: 'bold'
-  },
-  descricao: {
-    marginHorizontal: 30,
-    marginBottom: '3%',
-    textAlign: 'center',
-    justifyContent: 'center',
-    fontFamily: 'WorkSans',
-    fontSize: 15
-  },
-  botao: {
-    marginTop: '5%',
-    alignSelf: 'center',
-    backgroundColor: '#142850',
-    borderRadius: 5,
-    padding: 10,
-    elevation: 2,
-    justifyContent: 'center',
-    height: 50,
-    width: 170
-  },
-  botaoTxt: {
-    color: '#ffffff',
-    fontFamily: 'WorkSans',
-    textAlign: 'center',
-    fontSize: 20
   }
 });
 

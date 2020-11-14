@@ -21,7 +21,8 @@ import {
   SubTitle,
   BotaoContato,
   ViewBotao,
-  LabelBotao
+  LabelBotao,
+  Imagem
 } from './styles';
 
 import { IndicatorViewPager, PagerDotIndicator } from 'rn-viewpager';
@@ -31,12 +32,13 @@ import HeaderBack from '../../../components/CustomHeader';
 export default function DetalhesServicos({ navigation }) {
   const [contadorImagem, setContadorImagem] = useState(0);
   const [servico, setServicos] = useState(navigation.state.params.dados);
-  AbrirTelefone = () => {
+
+  function AbrirTelefone() {
     Linking.openURL(`tel:${servico.tel}`);
-  };
-  navegar = () => {
+  }
+  function navegar() {
     navigation.goBack(null);
-  };
+  }
 
   function renderDotIndicator() {
     return (
@@ -55,17 +57,17 @@ export default function DetalhesServicos({ navigation }) {
         <IndicatorViewPager style={{ height: 300 }} indicator={renderDotIndicator()}>
           {servico.image != '' && servico.image != null && (
             <View key="1">
-              <Image source={{ uri: servico.image }} style={estilo.image} />
+              <Imagem source={{ uri: servico.image }} />
             </View>
           )}
           {servico.image != '' && servico.image != null && (
             <View key="2">
-              <Image source={{ uri: servico.image }} style={estilo.image} />
+              <Imagem source={{ uri: servico.image }} />
             </View>
           )}
           {servico.image != '' && servico.image != null && (
             <View key="3">
-              <Image source={{ uri: servico.image }} style={estilo.image} />
+              <Imagem source={{ uri: servico.image }} />
             </View>
           )}
         </IndicatorViewPager>

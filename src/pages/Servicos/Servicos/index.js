@@ -18,6 +18,7 @@ class Servicos extends Component {
     return api
       .get('/servicos')
       .then(responseJson => {
+        console.log('SERVIÇOS', responseJson);
         this.setState({ listaServicos: responseJson.data });
       })
       .catch(error => {
@@ -27,14 +28,16 @@ class Servicos extends Component {
 
   render() {
     return (
-      <View style={Estilo.container}>
-        <ScrollView style={Estilo.card}>
-          <FlatList
-            style={Estilo.flatList}
-            data={this.state.listaServicos}
-            renderItem={({ item }) => <CartaoServico leonardo={item} />}
-            keyExtractor={item => item.key}
-          />
+      <View style={Estilo.V_externa}>
+        <ScrollView>
+          <View style={Estilo.card}>
+            <FlatList
+              style={Estilo.flatList}
+              data={this.state.listaServicos}
+              renderItem={({ item }) => <CartaoServico dados={item} />}
+              keyExtractor={item => item._id}
+            />
+          </View>
         </ScrollView>
         <Fab
           active={this.state.active}

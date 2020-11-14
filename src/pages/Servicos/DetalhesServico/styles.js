@@ -13,6 +13,10 @@ export const ViewDoTitulo = styled.View`
   width: 100%;
   padding-left: 6%;
 `;
+export const Imagem = styled.Image`
+  height: 300px;
+  width: 100%;
+`;
 
 export const Titulo = styled.Text`
   color: #142850;

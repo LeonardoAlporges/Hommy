@@ -10,7 +10,6 @@ import Servicos from './pages/Servicos/Servicos';
 import Republica from './pages/Republica/Republica';
 import CadastroUsuario from './pages/Acesso/CadastroUsuario';
 import DetalhesServicos from './pages/Servicos/DetalhesServico';
-import Confirmacao from './components/Confirmacao';
 import Anuncios from './pages/Geral/Anuncios';
 import Caronas from './pages/Carona/Caronas';
 import DetalhesCarona from './pages/Carona/DetalhesCarona';
@@ -54,7 +53,6 @@ const Navegação = createStackNavigator(
     AgendamentoUser,
     Agendamentos,
     Agendar,
-    Confirmacao,
     EsqueciSenha,
     Perfil,
     Viagens,
@@ -68,12 +66,11 @@ const Navegação = createStackNavigator(
     Republica,
     Servicos,
     Cadastro,
-    Confirmacao,
     SplashScreen,
     CadastroServico
   },
   {
-    initialRouteName: 'TabsHeader',
+    initialRouteName: 'RenderApp',
     headerMode: 'none',
     navigationOptions: {
       headerVisible: false

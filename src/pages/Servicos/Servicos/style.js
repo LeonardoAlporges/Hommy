@@ -1,20 +1,20 @@
 import { StyleSheet } from 'react-native';
 
 const Estilo = StyleSheet.create({
-  container: {
-    width: '100%',
+  V_externa: {
     height: '100%',
-    alignItems: 'center'
+    width: '100%',
+    backgroundColor: '#ffffff'
   },
   card: {
     marginTop: 0,
-    paddingBottom: 0
+    marginBottom: 0
   },
   flatList: {
-    backgroundColor: '#f2f2f2f2',
-    padding: 1,
+    backgroundColor: '#ffffff',
+    padding: 0,
     marginBottom: 0,
-    paddingBottom: 15
+    paddingBottom: 0
   },
   S_FAB: {
     backgroundColor: '#142850',
