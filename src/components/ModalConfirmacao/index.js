@@ -1,62 +1,65 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Modal, Text } from 'react-native';
 
 import style from './styles';
 import { Button } from 'native-base';
 import { number } from 'yup';
+import {
+  ViewFundo,
+  ViewModal,
+  Titulo,
+  Descricao,
+  BotaoTxt,
+  BotaoTxtCancelar,
+  ViewBotoes
+} from'./styles';
 
-class ModalConfirmacao extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      modalVisible: true,
-      mensagem: this.props.mensagem,
-      confirmar: this.props.confirmar,
-      rejeitar: this.props.rejeitar,
-    };
-  }
+export default function ModalConfirmacao(props) {
+  const [modalVisivel, setModalVisivel] = useState(true);
+  const [mensagem, setMensagem] = useState('');
+  const [confirmar, setConfirmar] = useState(false);
+  const [rejeitar, setRejeitar] = useState(false);
+
   onDimiss = number => {
-    this.props.retornoModal(3);
+    props.retornoModal(3);
   };
 
   mudarEstado = () => {
-    if (this.state.confirmar == true) {
-      this.props.retornoModal(1);
-    } else if (this.state.rejeitar == true) {
-      this.props.retornoModal(0);
+    if (confirmar == true) {
+      props.retornoModal(1);
+    } else if (rejeitar == true) {
+      props.retornoModal(0);
     }
   };
-  render() {
-    return (
-      <Modal animationType="fade" visible={this.state.modalVisible} transparent={true}>
-        <View style={style.ViewFundo}>
-          <View style={style.ViewModal}>
-            <Text style={style.titulo}>{this.props.titulo}</Text>
-            {this.props.mensagem != '' && <Text style={style.descricao}>{this.state.mensagem}</Text>}
-            <View style={style.V_botoes}>
-              <Button
-                style={style.botaoCancelar}
-                onPress={async () => {
-                  this.onDimiss();
-                  this.setState({ modalVisible: false });
-                }}
-              >
-                <Text style={style.botaoTxtCancelar}>{this.props.botaoCancel}</Text>
-              </Button>
-              <Button
-                style={style.botao}
-                onPress={async () => {
-                  this.mudarEstado();
-                  this.setState({ modalVisible: false });
-                }}
-              >
-                <Text style={style.botaoTxt}>{this.props.botaoConfirmar}</Text>
-              </Button>
-            </View>
-          </View>
-        </View>
-      </Modal>
-    );
-  }
+
+  return (
+    <Modal animationType="fade" visible={modalVisivel} transparent={true}>
+      <ViewFundo>
+        <ViewModal>
+          <Titulo>{props.titulo}</Titulo>
+          {mensagem != '' && <Descricao>{mensagem}</Descricao>}
+          <ViewBotoes>
+            <Button
+              style={style.botaoCancelar}
+              onPress={async () => {
+                onDimiss();
+                setModalVisivel(false);
+              }}
+            >
+              <BotaoTxtCancelar>{props.botaoCancel}</BotaoTxtCancelar>
+            </Button>
+            <Button
+              style={style.botao}
+              onPress={async () => {
+                mudarEstado();
+                setModalVisivel(false);
+              }}
+            >
+              <BotaoTxt>{props.botaoConfirmar}</BotaoTxt>
+            </Button>
+          </ViewBotoes>
+        </ViewModal>
+      </ViewFundo>
+    </Modal>
+  );
 }
-export default ModalConfirmacao;

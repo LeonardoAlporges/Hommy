@@ -2,137 +2,137 @@ import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 
 export const ViewTitulo = styled.View`
-margin-top: '3%',
-width: '100%',
-padding-left: '6%',
-margin-bottom: 10,
+margin-top: 3%;
+width: 100%;
+padding-left: 6%;
+margin-bottom: 10;
 `;
 
 export const Titulo = styled.Text`
-color: '#142850',
-font-family: 'WorkSans-bold',
-font-size: 24,
-font-weight: 'bold',
+color: #142850;
+font-family: WorkSans-bold;
+font-size: 24;
+font-weight: bold;
 `;
 
 export const ViewDescricao = styled.View`
-width: '88%',
-margin-left: '6%',
-margin-right: '6%',
-margin-bottom: 10,
+width: 88%;
+margin-left: 6%;
+margin-right: 6%;
+margin-bottom: 10;
 `;
 
 export const Descricao = styled.Text`
-color: '#142850',
-font-family: 'WorkSans',
-font-size: 18,
+color: #142850;
+font-family: WorkSans;
+font-size: 18;
 `;
 
 export const Barra = styled.View`
-width: '88%',
-margin-left: '6%',
-margin-right: '6%',
-border-bottom-width: 1,
-border-bottom-color: '#142850',
+width: 88%;
+margin-left: 6%;
+margin-right: 6%;
+border-bottom-width: 1;
+border-bottom-color: #142850;
 `;
 
 export const ViewCaracteristicaTitle = styled.View`
-height: 30,
-margin-top: '4%',
-width: '100%',
-padding-left: '10%',
+height: 30;
+margin-top: 4%;
+width: 100%;
+padding-left: 10%;
 `;
 
 export const CaracteristicaTitle = styled.Text`
-font-family: 'WorkSans',
-font-size: 22,
-font-weight: '600',
-color: '#142850',
+font-family: WorkSans;
+font-size: 22;
+font-weight: 600;
+color: #142850;
 `;
 
 export const ViewTipo = styled.View`
-height: 30,
-margin-top: '2%',
-width: '100%',
-padding-left: '10%',
+height: 30;
+margin-top: 2%;
+width: 100%;
+padding-left: 10%;
 `;
 
 export const Tipo = styled.Text`
-font-family: 'WorkSans',
+font-family: WorkSans;
 font-size: 20
 `;
 
 export const ViewCaracteristicaItens = styled.View`
-display: 'flex',
-flex-direction: 'row',
-justify-content: 'space-around',
-height: 40,
-margin-top: '2%',
-width: '85%',
-margin-left: '10%',
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+height: 40;
+margin-top: 2%;
+width: 85%;
+margin-left: 10%;
 `;
 
 export const Item2 = styled.View`
-align-items: 'center',
-justify-content: 'space-around',
-display: 'flex',
-flex-direction: 'row',
-height: 40,
-width: '38%',
-padding-left: '2%',
+align-items: center;
+justify-content: space-around;
+display: flex;
+flex-direction: row;
+height: 40;
+width: 38%;
+padding-left: 2%;
 `;
 
 export const TextLabel = styled.Text`
-padding-left: 20,
-color: '#00909e',
-text-align: 'left',
-font-size: 16,
-font-family: 'WorkSans',
-font-weight: '600',
+padding-left: 20;
+color: #00909e;
+text-align: left;
+font-size: 16;
+font-family: WorkSans;
+font-weight: 600;
 `;
 
 export const TextLabelGenero = styled.Text`
-color: '#00909e',
-font-size: 16,
-font-family: 'WorkSans',
-font-weight: '600',
-margin-left: 30,
-width: 100,
+color: #00909e;
+font-size: 16;
+font-family: WorkSans;
+font-weight: 600;
+margin-left: 30;
+width: 100;
 `;
 
 export const ViewInterna = styled.View`
-align-items: 'center',
-justify-content: 'flex-start',
-display: 'flex',
-flex-direction: 'row',
-height: 40,
-width: '90%',
-padding-left: '5%',
+align-items: center;
+justify-content: flex-start;
+display: flex;
+flex-direction: row;
+height: 40;
+width: 90%;
+padding-left: 5%;
 `;
 
 export const ViewVagas = styled.View`
-display: 'flex',
-flex-direction: 'row',
-height: 40,
-margin-top: '1%',
-width: '85%',
-margin-left: '10%',
-margin-right: '10%',
+display: flex;
+flex-direction: row;
+height: 40;
+margin-top: 1%;
+width: 85%;
+margin-left: 10%;
+margin-right: 10%;
 `;
 
 export const ViewBotao = styled.View`
-margin-top: 20,
-margin-bottom: 20,
-height: 60,
-align-items: 'center',
-justify-content: 'center',
-flex-direction: 'row',
-justify-content: 'space-around',
+margin-top: 20;
+margin-bottom: 20;
+height: 60;
+align-items: center;
+justify-content: center;
+flex-direction: row;
+justify-content: space-around;
 `;
 
 export const TextoAgendamento = styled.Text`
-color: '#FFFFFF',
-margin-left: 15,
+color: #FFFFFF;
+margin-left: 15;
 `;
 
 

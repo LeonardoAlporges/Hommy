@@ -123,7 +123,7 @@ export default function DetalhesAnuncio({ navigation }) {
         </ViewInterna>
       </ViewVagas>
       <ViewTipo>
-        <Tipo>Mobília e eletrodomésticos</Text>
+        <Tipo>Mobília e eletrodomésticos</Tipo>
       </ViewTipo>
       <ViewVagas>
         <ViewInterna>
@@ -133,7 +133,7 @@ export default function DetalhesAnuncio({ navigation }) {
       </ViewVagas>
 
       <ViewTipo>
-        <Tipo>Disponibilidade</Text>
+        <Tipo>Disponibilidade</Tipo>
       </ViewTipo>
       <ViewVagas>
         <ViewInterna>
@@ -142,7 +142,7 @@ export default function DetalhesAnuncio({ navigation }) {
         </ViewInterna>
       </ViewVagas>
       <ViewTipo>
-        <Tipo>Endereço</Text>
+        <Tipo>Endereço</Tipo>
       </ViewTipo>
       <ViewVagas>
         <ViewInterna>
