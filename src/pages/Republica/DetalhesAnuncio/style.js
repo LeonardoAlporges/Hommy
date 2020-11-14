@@ -1,27 +1,25 @@
 import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
-
+import { Button } from 'native-base';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 export const ViewTitulo = styled.View`
 margin-top: 3%;
 width: 100%;
 padding-left: 6%;
 margin-bottom: 10;
 `;
-
 export const Titulo = styled.Text`
 color: #142850;
 font-family: WorkSans-bold;
 font-size: 24;
 font-weight: bold;
 `;
-
 export const ViewDescricao = styled.View`
 width: 88%;
 margin-left: 6%;
 margin-right: 6%;
 margin-bottom: 10;
 `;
-
 export const Descricao = styled.Text`
 color: #142850;
 font-family: WorkSans;
