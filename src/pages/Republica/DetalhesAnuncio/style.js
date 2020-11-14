@@ -1,206 +1,99 @@
 import { StyleSheet } from 'react-native';
-
-const estilo = StyleSheet.create({
-  image: {
-    height: 300,
-    width: '100%',
-  },
-  V_titulo: {
-    marginTop: '3%',
-    width: '100%',
-    paddingLeft: '6%',
-    marginBottom: 10,
-  },
-  titulo: {
-    color: '#142850',
-    fontFamily: 'WorkSans-bold',
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  V_descricao: {
-    width: '88%',
-    marginLeft: '6%',
-    marginRight: '6%',
-    marginBottom: 10,
-  },
-  descricao: {
-    color: '#142850',
-    fontFamily: 'WorkSans',
-    fontSize: 18,
-  },
-  barra: {
-    width: '88%',
-    marginLeft: '6%',
-    marginRight: '6%',
-    borderBottomWidth: 1,
-    borderBottomColor: '#142850',
-  },
-  V_caracteristicaTitle: {
-    height: 30,
-    marginTop: '4%',
-    width: '100%',
-    paddingLeft: '10%',
-  },
-  caracteristicaTitle: {
-    fontFamily: 'WorkSans',
-    fontSize: 22,
-    fontWeight: '600',
-    color: '#142850',
-  },
-  V_tipo: {
-    height: 30,
-    marginTop: '2%',
-    width: '100%',
-    paddingLeft: '10%',
-  },
-  tipo: {
-    fontFamily: 'WorkSans',
-    fontSize: 20,
-  },
-  V_caracteristicaItens: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    height: 40,
-    marginTop: '2%',
-    width: '85%',
-    marginLeft: '10%',
-  },
-  item: {
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    display: 'flex',
-    flexDirection: 'row',
-    height: 40,
-    width: '38%',
-    paddingHorizontal: '5%',
-  },
-  item2: {
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    display: 'flex',
-    flexDirection: 'row',
-    height: 40,
-    width: '38%',
-    paddingLeft: '2%',
-  },
-  txtlabel: {
-    paddingLeft: 20,
-    color: '#00909e',
-    textAlign: 'left',
-    fontSize: 16,
-    fontFamily: 'WorkSans',
-    fontWeight: '600',
-  },
-  txtlabel4: {
-    color: '#00909e',
-    fontSize: 16,
-    fontFamily: 'WorkSans',
-    fontWeight: '600',
-  },
-  txtlabelGenero: {
-    color: '#00909e',
-    fontSize: 16,
-    fontFamily: 'WorkSans',
-    fontWeight: '600',
-    marginLeft: 30,
-    width: 100,
-  },
-  icone: {
-    justifyContent: 'flex-start',
-    fontSize: 28,
-    fontFamily: 'WorkSans',
-    color: '#142850',
-    marginRight: '5%',
-    fontWeight: '600',
-  },
-  iconeAnimal: {
-    justifyContent: 'flex-start',
-    fontSize: 28,
-    fontFamily: 'WorkSans',
-    color: '#142850',
-    marginRight: '7%',
-    fontWeight: '600',
-  },
-  itemAcomodacao: {
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    display: 'flex',
-    flexDirection: 'row',
-    paddingLeft: '5%',
-    height: 40,
-    width: '90%',
-  },
-  V_caracteristicaAcomodacao: {
-    display: 'flex',
-    flexDirection: 'row',
-    height: 40,
-    marginTop: '1%',
-    width: '85%',
-    marginLeft: '10%',
-    marginRight: '10%',
-  },
-  V_vagas: {
-    display: 'flex',
-    flexDirection: 'row',
-    height: 40,
-    marginTop: '1%',
-    width: '85%',
-    marginLeft: '10%',
-    marginRight: '10%',
-  },
-  vagas: {
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    display: 'flex',
-    flexDirection: 'row',
-    paddingLeft: '5%',
-    height: 40,
-    width: '90%',
-  },
-  V_mapa: {
-    display: 'flex',
-    width: '100%',
-    height: 320,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  imageMapa: {
-    height: 300,
-    width: 300,
-  },
-  V_botao: {
-    marginTop: 20,
-    marginBottom: 20,
-    height: 60,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
-  botao: {
-    backgroundColor: '#142850',
-    display: 'flex',
-    flexDirection: 'row',
-    borderRadius: 8,
-    width: '80%',
-    height: 60,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  V_Detalhes: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  iconWhatsapp: {
-    color: '#ffffff',
-    fontSize: 30,
-  },
-  txtWhatsapp: {
-    color: '#FFFFFF',
-    marginLeft: 15,
-  },
-});
-
-export default estilo;
+import styled from 'styled-components/native';
+import { Button } from 'native-base';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+export const ViewTitulo = styled.View`
+  margin: 20px 16px 5px 16px;
+`;
+export const Titulo = styled.Text`
+  font-family: WorkSans;
+  font-size: 16px;
+  color: #142850;
+`;
+export const ViewDescricao = styled.View`
+  margin: 0px 16px 5px 16px;
+`;
+export const Descricao = styled.Text`
+  font-family: WorkSans;
+  font-size: 18px;
+  color: #c0c0c0;
+`;
+export const Imagem = styled.Image`
+  width: 100%;
+  height: 300px;
+`;
+export const Card = styled.View`
+  margin: 0px 16px 5px 16px;
+  border-width: 1px;
+  border-color: #d3d3d3;
+  display: flex;
+  background-color: #fff;
+`;
+export const Linha = styled.View`
+  padding: 3px 5px 3px 5px;
+  flex-direction: row;
+  border-color: #d3d3d3;
+  display: flex;
+  justify-content: space-between;
+  height: 60px;
+`;
+export const CardDeInformacao = styled.View`
+  width: 48%;
+  flex-direction: row;
+  display: flex;
+`;
+export const IconesInformacao = styled.View`
+  width: 20%;
+  height: 55px;
+  justify-content: center;
+  align-items: center;
+`;
+export const Icone = styled(Icon)`
+  font-size: 28px;
+  color: #142850;
+`;
+export const Informacaoes = styled.View`
+  display: flex;
+  padding-left: 10px;
+  justify-content: space-around;
+`;
+export const TipoInformacao = styled.Text`
+  height: 20px;
+  font-size: 16px;
+  color: #142850;
+  font-family: WorkSans-SemiBold;
+`;
+export const Informacao = styled.Text`
+  font-size: 16px;
+  color: #142850;
+  font-family: WorkSans;
+`;
+export const Categoria = styled.Text`
+  margin: 20px 16px 5px 16px;
+  font-family: WorkSans;
+  font-size: 18px;
+  color: #142850;
+`;
+export const ViewBotao = styled.View`
+  margin: 20px 0px 20px 0px;
+  height: 60px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
+`;
+export const Botao = styled(Button)`
+  display: flex;
+  background-color: #142850;
+  flex-direction: row;
+  border-radius: 5px;
+  width: 88%;
+  height: 60px;
+  align-items: center;
+  justify-content: center;
+`;
+export const Label = styled.Text`
+  font-size: 20px;
+  color: #fff;
+  font-family: WorkSans-SemiBold;
+`;

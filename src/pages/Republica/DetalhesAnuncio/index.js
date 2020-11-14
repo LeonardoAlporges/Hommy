@@ -1,18 +1,30 @@
-import React, { Component, useState, useEffect } from 'react';
-import { View, ScrollView, Image, Text, Linking } from 'react-native';
-import { Button } from 'native-base';
-import { withNavigation } from 'react-navigation';
+import React, { useState, useEffect } from 'react';
+import { View, ScrollView, Text, Image } from 'react-native';
+
 import HeaderBack from '../../../components/CustomHeader';
 
-import { connect } from 'react-redux';
-
-import estilo from './style';
-import ViewPager from '@react-native-community/viewpager';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
-import Icon2 from 'react-native-vector-icons/Feather';
-import Icon3 from 'react-native-vector-icons/Entypo';
-import Icon4 from 'react-native-vector-icons/Ionicons';
-import { PagerTabIndicator, IndicatorViewPager, PagerTitleIndicator, PagerDotIndicator } from 'rn-viewpager';
+import { IndicatorViewPager, PagerDotIndicator } from 'rn-viewpager';
+
+import {
+  Imagem,
+  ViewTitulo,
+  Titulo,
+  ViewDescricao,
+  Descricao,
+  Card,
+  Linha,
+  CardDeInformacao,
+  IconesInformacao,
+  Icone,
+  Informacaoes,
+  TipoInformacao,
+  Informacao,
+  Categoria,
+  Botao,
+  Label,
+  ViewBotao
+} from './style';
 
 export default function DetalhesAnuncio({ navigation }) {
   const [usuarioJaInteressado, setUsuarioJaInteressado] = useState(navigation.state.params.interessado);
@@ -22,23 +34,23 @@ export default function DetalhesAnuncio({ navigation }) {
 
   function irParaAgendamento() {
     navigation.navigate('Agendar', {
-      data: republica,
+      data: republica
     });
   }
 
   useEffect(() => {
     if (republica.imagem1 != '' && republica.imagem1 != null) {
-      setContadorImagem(contadorImagem => contadorImagem +1);
+      setContadorImagem(contadorImagem => contadorImagem + 1);
     }
     if (republica.imagem2 != '' && republica.imagem2 != null) {
-      setContadorImagem(contadorImagem => contadorImagem +1);
+      setContadorImagem(contadorImagem => contadorImagem + 1);
     }
     if (republica.imagem3 != '' && republica.imagem3 != null) {
-      setContadorImagem(contadorImagem => contadorImagem +1);
+      setContadorImagem(contadorImagem => contadorImagem + 1);
     }
     console.log(contadorImagem);
-  },[]);
-  
+  }, []);
+
   function renderDotIndicator() {
     return (
       <PagerDotIndicator
@@ -50,80 +62,137 @@ export default function DetalhesAnuncio({ navigation }) {
   }
 
   return (
-    <ScrollView>
+    <ScrollView style={{ backgroundColor: '#F7F8F9' }}>
       <HeaderBack ajuda title={republica.nomeRepublica} onNavigation={() => navigation.goBack(null)} />
-      <IndicatorViewPager style={{ height: 300 }} indicator={renderDotIndicator()} >
-        {(republica.imagem1 != '' && republica.imagem1 != null) && (
+      <IndicatorViewPager style={{ height: 300 }} indicator={renderDotIndicator()}>
+        {republica.imagem1 != '' && republica.imagem1 != null && (
           <View key="1">
-            <Image source={{ uri: republica.imagem1 }} style={estilo.image} />
+            <Imagem source={{ uri: republica.imagem1 }} />
           </View>
         )}
-        {(republica.imagem2 != '' && republica.imagem2 != null) && (
+        {republica.imagem2 != '' && republica.imagem2 != null && (
           <View key="2">
-            <Image source={{ uri: republica.imagem2 }} style={estilo.image} />
+            <Imagem source={{ uri: republica.imagem2 }} />
           </View>
         )}
-        {(republica.imagem3 != '' && republica.imagem3 != null) && (
+        {republica.imagem3 != '' && republica.imagem3 != null && (
           <View key="3">
-            <Image source={{ uri: republica.imagem3 }} style={estilo.image} />
+            <Imagem source={{ uri: republica.imagem3 }} />
           </View>
         )}
       </IndicatorViewPager>
 
-      <View style={estilo.V_titulo}>
-        <Text style={estilo.titulo}>{republica.nomeRepublica}</Text>
-      </View>
+      <ViewTitulo>
+        <Titulo>{republica.nomeRepublica}</Titulo>
+      </ViewTitulo>
 
-      <View style={estilo.V_descricao}>
-        <Text style={estilo.descricao}>{republica.descricao}</Text>
-      </View>
-      <View style={estilo.barra} />
+      <ViewDescricao>
+        <Descricao>{republica.descricao}</Descricao>
+      </ViewDescricao>
+      <Card>
+        <Linha>
+          <CardDeInformacao>
+            <IconesInformacao>
+              <Icone name="account-outline" />
+            </IconesInformacao>
+            <Informacaoes>
+              <TipoInformacao>Representante</TipoInformacao>
+              <Informacao>{republica.representante}</Informacao>
+            </Informacaoes>
+          </CardDeInformacao>
+          <CardDeInformacao>
+            <IconesInformacao>
+              <Icone name="home-outline" />
+            </IconesInformacao>
+            <Informacaoes>
+              <TipoInformacao>Tipo de imóvel</TipoInformacao>
+              <Informacao>{republica.imovel}</Informacao>
+            </Informacaoes>
+          </CardDeInformacao>
+        </Linha>
+        <Linha>
+          <CardDeInformacao>
+            <IconesInformacao>
+              <Icone name="gender-male-female" />
+            </IconesInformacao>
+            <Informacaoes>
+              <TipoInformacao>Gênero</TipoInformacao>
+              <Informacao>{republica.genero}</Informacao>
+            </Informacaoes>
+          </CardDeInformacao>
+          <CardDeInformacao>
+            <IconesInformacao>
+              <Icone name="paw" />
+            </IconesInformacao>
+            <Informacaoes>
+              <TipoInformacao>Aceita animais?</TipoInformacao>
+              <Informacao>{republica.animal}</Informacao>
+            </Informacaoes>
+          </CardDeInformacao>
+        </Linha>
+        <Linha>
+          <CardDeInformacao>
+            <IconesInformacao>
+              <Icone name="account-group-outline" />
+            </IconesInformacao>
+            <Informacaoes>
+              <TipoInformacao>Disponibilidade</TipoInformacao>
+              <Informacao>{republica.numVagas} Vaga(s)</Informacao>
+            </Informacaoes>
+          </CardDeInformacao>
+        </Linha>
+      </Card>
 
-      <View style={estilo.V_caracteristicaTitle}>
-        <Text style={estilo.caracteristicaTitle}>Características</Text>
-      </View>
-      <View style={estilo.V_tipo}>
-        <Text style={estilo.tipo}>Tipo</Text>
-      </View>
-      <View style={estilo.V_caracteristicaItens}>
-        <View style={estilo.item2}>
-          <Icon name="home" style={estilo.icone} />
-          <Text style={estilo.txtlabelGenero}>{republica.imovel}</Text>
-        </View>
-        <View style={estilo.item2}>
-          <Icon name="people" style={estilo.icone} />
-          <Text style={estilo.txtlabelGenero}>{republica.genero}</Text>
-        </View>
-      </View>
-      <View style={estilo.V_tipo}>
-        <Text style={estilo.tipo}>Mobília do quarto</Text>
-      </View>
-      <View style={estilo.V_caracteristicaAcomodacao}>
-        <View style={estilo.itemAcomodacao}>
-          <Icon name="drawer" style={estilo.icone} />
-          <Text style={estilo.txtlabel}>{republica.acomodacaoQuarto}</Text>
-        </View>
-      </View>
-      <View style={estilo.V_tipo}>
-        <Text style={estilo.tipo}>Mobília e eletrodomésticos</Text>
-      </View>
-      <View style={estilo.V_caracteristicaAcomodacao}>
-        <View style={estilo.itemAcomodacao}>
-          <Icon name="screen-desktop" style={estilo.icone} />
-          <Text style={estilo.txtlabel}>{republica.acomodacaoRepublica}</Text>
-        </View>
-      </View>
+      <Categoria>Valores</Categoria>
 
-      <View style={estilo.V_tipo}>
-        <Text style={estilo.tipo}>Disponibilidade</Text>
-      </View>
-      <View style={estilo.V_vagas}>
-        <View style={estilo.vagas}>
-          <Icon name="user-follow" style={estilo.icone} />
-          <Text style={estilo.txtlabel}>{republica.numVagas} Vaga(s)</Text>
-        </View>
-      </View>
-      <View style={estilo.V_tipo}>
+      <Card>
+        <Linha>
+          <CardDeInformacao>
+            <IconesInformacao>
+              <Icone name="home-currency-usd" />
+            </IconesInformacao>
+            <Informacaoes>
+              <TipoInformacao>Aluguel</TipoInformacao>
+              <Informacao>R$ {republica.valorAluguel}</Informacao>
+            </Informacaoes>
+          </CardDeInformacao>
+          <CardDeInformacao>
+            <IconesInformacao>
+              <Icone name="currency-usd" />
+            </IconesInformacao>
+            <Informacaoes>
+              <TipoInformacao>Contas (média)</TipoInformacao>
+              <Informacao>R$ {republica.valorContas}</Informacao>
+            </Informacaoes>
+          </CardDeInformacao>
+        </Linha>
+      </Card>
+
+      <Categoria>Mobília</Categoria>
+      <Card>
+        <Linha>
+          <CardDeInformacao>
+            <IconesInformacao>
+              <Icone name="lamp" />
+            </IconesInformacao>
+            <Informacaoes>
+              <TipoInformacao>Quarto</TipoInformacao>
+              <Informacao>{republica.acomodacaoQuarto}</Informacao>
+            </Informacaoes>
+          </CardDeInformacao>
+          <CardDeInformacao>
+            <IconesInformacao>
+              <Icone name="tumble-dryer" />
+            </IconesInformacao>
+            <Informacaoes>
+              <TipoInformacao>Moveis comuns</TipoInformacao>
+              <Informacao>{republica.acomodacaoRepublica}</Informacao>
+            </Informacaoes>
+          </CardDeInformacao>
+        </Linha>
+      </Card>
+
+      {/* <View style={estilo.V_tipo}>
         <Text style={estilo.tipo}>Endereço</Text>
       </View>
       <View style={estilo.V_vagas}>
@@ -134,54 +203,28 @@ export default function DetalhesAnuncio({ navigation }) {
             {republica.numeroCasa}
           </Text>
         </View>
-      </View>
-      <View style={estilo.V_tipo}>
-        <Text style={estilo.tipo}>Representante</Text>
-      </View>
-      <View style={estilo.V_vagas}>
-        <View style={estilo.vagas}>
-          <Icon name="user" style={estilo.icone} />
-          <Text style={estilo.txtlabel}>{republica.representante}</Text>
-        </View>
-      </View>
-      <View style={estilo.V_tipo}>
-        <Text style={estilo.tipo}>Valor médio das contas</Text>
-      </View>
-      <View style={estilo.V_vagas}>
-        <View style={estilo.vagas}>
-          <Icon name="chart" style={estilo.icone} />
-          <Text style={estilo.txtlabel}>R$ {republica.valorContas}</Text>
-        </View>
-      </View>
-      <View style={estilo.V_tipo}>
-        <Text style={estilo.tipo}>Valor Aluguel</Text>
-      </View>
-      <View style={estilo.V_vagas}>
-        <View style={estilo.vagas}>
-          <Icon2 name="dollar-sign" style={estilo.icone} />
-          <Text style={estilo.txtlabel}>R$ {republica.valorAluguel}</Text>
-        </View>
-      </View>
-      <View style={estilo.V_tipo}>
-        <Text style={estilo.tipo}>Aceita animais?</Text>
-      </View>
-      <View style={estilo.V_vagas}>
-        <View style={estilo.vagas}>
-          <Icon4 name="md-paw" style={estilo.iconeAnimal} />
-          <Text style={estilo.txtlabel}>{republica.animal}</Text>
-        </View>
-      </View>
+      </View> */}
+      <Categoria>Endereço</Categoria>
+      <Card>
+        <Image
+          style={{ width: '100%', height: 100 }}
+          source={{
+            uri:
+              'https://firebasestorage.googleapis.com/v0/b/hommy-d0890.appspot.com/o/pictures%2FEndereco.png?alt=media&token=2103feff-5e6e-4faa-8cb6-87a214d17ff8'
+          }}
+        />
+      </Card>
+
       {!usuarioJaInteressado && !ocutarBotaoAgendamento ? (
-        <View style={estilo.V_botao}>
-          <Button
-            style={estilo.botao}
+        <ViewBotao>
+          <Botao
             onPress={() => {
               irParaAgendamento();
             }}
           >
-            <Text style={estilo.txtWhatsapp}>Agendar uma visita</Text>
-          </Button>
-        </View>
+            <Label>Agendar uma visita</Label>
+          </Botao>
+        </ViewBotao>
       ) : (
         <View style={{ height: 30 }} />
       )}
