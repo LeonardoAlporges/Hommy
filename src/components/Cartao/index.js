@@ -19,6 +19,7 @@ import {
   Label,
   ViewComIcones
 } from './styles';
+
 export function Cartao({ navigation, data }) {
   useEffect(() => {
     preencherUserLogado();

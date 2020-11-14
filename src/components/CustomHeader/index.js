@@ -1,27 +1,19 @@
 import React from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { withNavigation } from 'react-navigation';
-import style from './styles';
+import { Container, ViewIcon, Icone, ViewTitulo, Titulo } from './styles';
 
-export const HeaderBack = props => {
+export default function HeaderBack(props) {
   return (
-    <View style={style.V_headerBack}>
-      <TouchableOpacity
-        style={style.Touch}
+    <Container>
+      <ViewIcon
         onPress={async () => {
           props.onNavigation();
         }}
       >
-        <Icon name="arrow-left" style={style.iconHeader} />
-      </TouchableOpacity>
-      <View style={style.V_Title}>
-        <Text numberOfLines={1} style={style.txt_title}>
-          {props.title}
-        </Text>
-      </View>
-    </View>
+        <Icone name="arrow-left" />
+      </ViewIcon>
+      <ViewTitulo>
+        <Titulo numberOfLines={1}>{props.title}</Titulo>
+      </ViewTitulo>
+    </Container>
   );
-};
-
-export default HeaderBack;
+}

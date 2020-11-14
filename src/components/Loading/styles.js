@@ -1,21 +1,16 @@
-import { StyleSheet } from 'react-native';
-
-const style = StyleSheet.create({
-  ViewFundo: {
-    height: '100%',
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#00000080',
-  },
-  ViewModal: {
-    backgroundColor: 'rgba(52, 52, 52, 0)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 50,
-    marginHorizontal: 30,
-    alignItems: 'center',
-  },
-});
-
-export default style;
+import styled from 'styled-components/native';
+export const ViewFundo = styled.View`
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: #00000080;
+`;
+export const ViewModal = styled.View`
+  width: 100%;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  margin: 0 30px 0 30px;
+`;

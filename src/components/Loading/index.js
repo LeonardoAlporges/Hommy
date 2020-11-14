@@ -1,20 +1,16 @@
 import React from 'react';
-import { View, Modal } from 'react-native';
+import { Modal } from 'react-native';
 import { Spinner } from 'native-base';
-import styles from './styles';
+import { ViewFundo, ViewModal } from './styles';
 
-const Loading = () => {
+export default function Loading() {
   return (
-    <View>
-      <Modal animationType="fade" transparent={true} visible={true}>
-        <View style={styles.ViewFundo}>
-          <View style={styles.ViewModal}>
-            <Spinner color="#142850" />
-          </View>
-        </View>
-      </Modal>
-    </View>
+    <Modal animationType="fade" transparent={true} visible={true}>
+      <ViewFundo>
+        <ViewModal>
+          <Spinner color="#142850" />
+        </ViewModal>
+      </ViewFundo>
+    </Modal>
   );
-};
-
-export default Loading;
+}
