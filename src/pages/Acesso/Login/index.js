@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { View, Image, Modal, TouchableOpacity } from 'react-native';
 import * as yup from 'yup';
 import { Formik } from 'formik';
-
-import { Icon, Input, Item, Button, Spinner, Label } from 'native-base';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Input, Item, Button, Spinner, Label } from 'native-base';
 import { withNavigation, NavigationActions, StackActions } from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useSelector, useDispatch } from 'react-redux';
@@ -60,7 +60,7 @@ export function Login({ navigation }) {
 
   useEffect(() => {
     GoogleSignin.configure({
-      scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
+      scopes: ['email'], // what API you want to access on behalf of the user, default is email and profile
       webClientId: '896135200677-l6couqinr2mhpsj6jni1f37udjfra7ek.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
       offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
       forceCodeForRefreshToken: true // [Android] related to `serverAuthCode`, read the docs link below *.
@@ -72,7 +72,7 @@ export function Login({ navigation }) {
     const data = {
       email: email,
       password: id,
-      //tokenAparelho:tokenAparelho,
+      tokenAparelho: tokenAparelho,
       nome: nome,
       fotoPerfil: foto
     };
@@ -87,6 +87,11 @@ export function Login({ navigation }) {
         console.log(error.response);
         setloading(false);
         console.log(error.response.data.code);
+        if (error.response.data.code == 206) {
+          setmodalErroSenha(true);
+        } else if (error.response.data.code == 203) {
+          setmodalErroLogin(true);
+        }
       });
   }
 
@@ -151,25 +156,6 @@ export function Login({ navigation }) {
       })
       .catch(e => console.log('erro', e));
   }
-
-  // function handleFacebookLogin() {
-  //   LoginManager.logInWithPermissions(['public_profile', 'email', 'user_friends']).then(
-  //     function (result) {
-  //       if (result.isCancelled) {
-  //         console.log('Login cancelled');
-  //       } else {
-  //         console.log('Login success with permissions: ' + result.grantedPermissions.toString());
-  //         login_facebook();
-  //         AccessToken.AccessToken.getCurrentAccessToken().then(data => {
-  //           console.log('Data:', data);
-  //         });
-  //       }
-  //     },
-  //     function (error) {
-  //       console.log('Login fail with error: ' + error);
-  //     }
-  //   );
-  // }
 
   function fazerLogin(value) {
     setloading(true);
@@ -308,7 +294,7 @@ export function Login({ navigation }) {
                       changePassword();
                     }}
                   >
-                    <Icon name="eye" style={{ color: '#31aab8' }} />
+                    <Icon name="key-outline" style={{ color: '#31aab8', fontSize: 20, marginRight: 10 }} />
                   </TouchableOpacity>
                 </Item>
                 <Invalido>{touched.password && errors.password && <LabelErro>{errors.password}</LabelErro>}</Invalido>
