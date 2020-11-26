@@ -3,8 +3,7 @@ import { Button } from 'native-base';
 import { StyleSheet } from 'react-native';
 
 export const Container = styled.View`
-  width: 100%;
-  height: 100%;
+  flex: 1;
   align-items: center;
 `;
 export const Listagem = styled.FlatList`
@@ -62,7 +61,7 @@ const estilosRepublica = StyleSheet.create({
     width: '80%'
   },
   V_filtroExterno: {
-    flex: 1,
+    flex: 1
   },
   V_filtroInterno: {
     justifyContent: 'center',

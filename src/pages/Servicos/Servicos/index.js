@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, StyleSheet, FlatList, View } from 'react-native';
 import axios from 'axios';
+import { withNavigation, NavigationEvents } from 'react-navigation';
 
 import CartaoServico from '../../../components/CartaoServico';
 import Estilo from './style';
@@ -30,6 +31,9 @@ class Servicos extends Component {
         console.error('SERVIDOR ESTA DESLIGADO');
       });
   }
+  irParaCadastro() {
+    this.props.navigation.navigate('CadastroServico');
+  }
 
   render() {
     return (
@@ -56,7 +60,12 @@ class Servicos extends Component {
         >
           {this.state.active ? <Icon name="minus" /> : <Icon name="plus" />}
 
-          <Button style={Estilo.corFAB} onPress={() => { this.servicosRedux();}}>
+          <Button
+            style={Estilo.corFAB}
+            onPress={() => {
+              this.servicosRedux();
+            }}
+          >
             <Icon name="plus" style={Estilo.corIconFab} />
           </Button>
         </Fab>
