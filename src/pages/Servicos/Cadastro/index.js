@@ -162,11 +162,13 @@ export default function CadastroServico({ navigation }) {
       bairro: value.bairro,
       rua: value.rua,
       numero: value.numero,
-      dia: { inicio: value.diaInicial, fim: value.diaFinal },
-      horario: { inicio: placeHoraInicial, fim: placeHoraFinal },
-      imagem1: linkimagem1,
-      imagem2: linkimagem2,
-      imagem3: linkimagem3
+      inicioD: value.diaInicial,
+      fimD: value.diaFinal,
+      inicioH: placeHoraInicial,
+      fimH: placeHoraFinal,
+      image1: linkimagem1,
+      image2: linkimagem2,
+      image3: linkimagem3
     };
     console.log(data);
     criarNovoAnuncio(data);

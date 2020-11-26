@@ -145,58 +145,56 @@ export default function DetalhesAnuncio({ navigation }) {
 
       <Categoria>Valores</Categoria>
 
-      <Card>
-        <Linha>
-          <CardDeInformacao>
-            <IconesInformacao>
-              <Icone name="home-currency-usd" />
-            </IconesInformacao>
-            <Informacaoes>
-              <TipoInformacao>Aluguel</TipoInformacao>
-              <Informacao>R$ {republica.valorAluguel}</Informacao>
-            </Informacaoes>
-          </CardDeInformacao>
-          <CardDeInformacao>
-            <IconesInformacao>
-              <Icone name="currency-usd" />
-            </IconesInformacao>
-            <Informacaoes>
-              <TipoInformacao>Contas (média)</TipoInformacao>
-              <Informacao>R$ {republica.valorContas}</Informacao>
-            </Informacaoes>
-          </CardDeInformacao>
-        </Linha>
-      </Card>
 
-      <Categoria>Mobília</Categoria>
-      <Card>
-        <Linha>
-          <CardDeInformacao>
-            <IconesInformacao>
-              <Icone name="lamp" />
-            </IconesInformacao>
-            <Informacaoes>
-              <TipoInformacao>Quarto</TipoInformacao>
-              <Informacao>{republica.acomodacaoQuarto}</Informacao>
-            </Informacaoes>
-          </CardDeInformacao>
-          <CardDeInformacao>
-            <IconesInformacao>
-              <Icone name="tumble-dryer" />
-            </IconesInformacao>
-            <Informacaoes>
-              <TipoInformacao>Moveis comuns</TipoInformacao>
-              <Informacao>{republica.acomodacaoRepublica}</Informacao>
-            </Informacaoes>
-          </CardDeInformacao>
-        </Linha>
-      </Card>
+      <ViewCaracteristicaTitle>
+        <CaracteristicaTitle>Características</CaracteristicaTitle>
+      </ViewCaracteristicaTitle>
+      <ViewTipo>
+        <Tipo>Tipo</Tipo>
+      </ViewTipo>
+      <ViewCaracteristicaItens>
+        <Item2>
+          <Icon name="home" style={estilo.icone} />
+          <TextLabel>{republica.imovel}</TextLabel>
+        </Item2>
+        <Item2>
+          <Icon name="people" style={estilo.icone} />
+          <TextLabel>{republica.genero}</TextLabel>
+        </Item2>
+      </ViewCaracteristicaItens>
+      <ViewTipo>
+        <Tipo>Mobília do quarto</Tipo>
+      </ViewTipo>
+      <ViewVagas>
+        <ViewInterna>
+          <Icon name="drawer" style={estilo.icone} />
+          <TextLabel>{republica.acomodacaoQuarto}</TextLabel>
+        </ViewInterna>
+      </ViewVagas>
+      <ViewTipo>
+        <Tipo>Mobília e eletrodomésticos</Tipo>
+      </ViewTipo>
+      <ViewVagas>
+        <ViewInterna>
+          <Icon name="screen-desktop" style={estilo.icone} />
+          <TextLabel>{republica.acomodacaoRepublica}</TextLabel>
+        </ViewInterna>
+      </ViewVagas>
 
-      {/* <View style={estilo.V_tipo}>
-        <Text style={estilo.tipo}>Endereço</Text>
-      </View>
-      <View style={estilo.V_vagas}>
-        <View style={estilo.vagas}>
+      <ViewTipo>
+        <Tipo>Disponibilidade</Tipo>
+      </ViewTipo>
+      <ViewVagas>
+        <ViewInterna>
+          <Icon name="user-follow" style={estilo.icone} />
+          <TextLabel>{republica.numVagas} Vaga(s)</TextLabel>
+        </ViewInterna>
+      </ViewVagas>
+      <ViewTipo>
+        <Tipo>Endereço</Tipo>
+      </ViewTipo>
+      <ViewVagas>
+        <ViewInterna>p
           <Icon name="location-pin" style={estilo.icone} />
           <TextLabel>
             {republica.rua}, {republica.bairro}, Nº

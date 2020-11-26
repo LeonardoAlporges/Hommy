@@ -8,11 +8,16 @@ import Estilo from './style';
 import { CheckBox, ListItem, Button, Fab, Input, Item, Label } from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import api from '../../../service/api';
+import { withNavigation, NavigationEvents } from 'react-navigation';
+
 class Servicos extends Component {
   static navigationOptions = { header: null };
   constructor(props) {
     super(props);
     this.state = { listaServicos: [], active: false };
+  }
+  servicosRedux() {
+    this.props.navigation.navigate('CadastroServico');
   }
 
   UNSAFE_componentWillMount() {
@@ -58,7 +63,7 @@ class Servicos extends Component {
           <Button
             style={Estilo.corFAB}
             onPress={() => {
-              this.irParaCadastro();
+              this.servicosRedux();
             }}
           >
             <Icon name="plus" style={Estilo.corIconFab} />

@@ -30,7 +30,7 @@ export function CartaoServico(props) {
     <Container underlayColor="#fff" onPress={onClickCard} style={styles.touch_card}>
       <View style={styles.V_cartao}>
         <ViewImagem>
-          <Imagem source={{ uri: props.dados.image }} />
+          <Imagem source={{ uri: props.dados.image1 }} />
         </ViewImagem>
         <ViewDados>
           <ViewTitulo>
@@ -42,11 +42,11 @@ export function CartaoServico(props) {
           <ViewComIcones>
             <ViewValor>
               <Icon style={styles.icones} name="star" />
-              <Label>5</Label>
+              <Label>{props.dados.nota}</Label>
             </ViewValor>
             <ViewVagas>
               <Icon style={styles.icones} name="clock" />
-              <Label>Seg a Sex</Label>
+              <Label>{props.dados.dia.inicio} à {props.dados.dia.fim}</Label>
             </ViewVagas>
           </ViewComIcones>
         </ViewDados>

@@ -3,97 +3,174 @@ import styled from 'styled-components/native';
 import { Button } from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 export const ViewTitulo = styled.View`
-  margin: 20px 16px 5px 16px;
+margin-top: 3%;
+width: 100%;
+padding-left: 6%;
+margin-bottom: 10;
 `;
 export const Titulo = styled.Text`
-  font-family: WorkSans;
-  font-size: 16px;
-  color: #142850;
+color: #142850;
+font-family: WorkSans-bold;
+font-size: 24;
+font-weight: bold;
 `;
 export const ViewDescricao = styled.View`
-  margin: 0px 16px 5px 16px;
+width: 88%;
+margin-left: 6%;
+margin-right: 6%;
+margin-bottom: 10;
 `;
 export const Descricao = styled.Text`
-  font-family: WorkSans;
-  font-size: 18px;
-  color: #c0c0c0;
+color: #142850;
+font-family: WorkSans;
+font-size: 18;
 `;
-export const Imagem = styled.Image`
-  width: 100%;
-  height: 300px;
+
+export const Barra = styled.View`
+width: 88%;
+margin-left: 6%;
+margin-right: 6%;
+border-bottom-width: 1;
+border-bottom-color: #142850;
 `;
-export const Card = styled.View`
-  margin: 0px 16px 5px 16px;
-  border-width: 1px;
-  border-color: #d3d3d3;
-  display: flex;
-  background-color: #fff;
+
+export const ViewCaracteristicaTitle = styled.View`
+height: 30;
+margin-top: 4%;
+width: 100%;
+padding-left: 10%;
 `;
-export const Linha = styled.View`
-  padding: 3px 5px 3px 5px;
-  flex-direction: row;
-  border-color: #d3d3d3;
-  display: flex;
-  justify-content: space-between;
-  height: 60px;
+
+export const CaracteristicaTitle = styled.Text`
+font-family: WorkSans;
+font-size: 22;
+font-weight: 600;
+color: #142850;
 `;
-export const CardDeInformacao = styled.View`
-  width: 48%;
-  flex-direction: row;
-  display: flex;
+
+export const ViewTipo = styled.View`
+height: 30;
+margin-top: 2%;
+width: 100%;
+padding-left: 10%;
 `;
-export const IconesInformacao = styled.View`
-  width: 20%;
-  height: 55px;
-  justify-content: center;
-  align-items: center;
+
+export const Tipo = styled.Text`
+font-family: WorkSans;
+font-size: 20
 `;
-export const Icone = styled(Icon)`
-  font-size: 28px;
-  color: #142850;
+
+export const ViewCaracteristicaItens = styled.View`
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+height: 40;
+margin-top: 2%;
+width: 85%;
+margin-left: 10%;
 `;
-export const Informacaoes = styled.View`
-  display: flex;
-  padding-left: 10px;
-  justify-content: space-around;
+
+export const Item2 = styled.View`
+align-items: center;
+justify-content: space-around;
+display: flex;
+flex-direction: row;
+height: 40;
+width: 38%;
+padding-left: 2%;
 `;
-export const TipoInformacao = styled.Text`
-  height: 20px;
-  font-size: 16px;
-  color: #142850;
-  font-family: WorkSans-SemiBold;
+
+export const TextLabel = styled.Text`
+padding-left: 20;
+color: #00909e;
+text-align: left;
+font-size: 16;
+font-family: WorkSans;
+font-weight: 600;
 `;
-export const Informacao = styled.Text`
-  font-size: 16px;
-  color: #142850;
-  font-family: WorkSans;
+
+export const TextLabelGenero = styled.Text`
+color: #00909e;
+font-size: 16;
+font-family: WorkSans;
+font-weight: 600;
+margin-left: 30;
+width: 100;
 `;
-export const Categoria = styled.Text`
-  margin: 20px 16px 5px 16px;
-  font-family: WorkSans;
-  font-size: 18px;
-  color: #142850;
+
+export const ViewInterna = styled.View`
+align-items: center;
+justify-content: flex-start;
+display: flex;
+flex-direction: row;
+height: 40;
+width: 90%;
+padding-left: 5%;
 `;
+
+export const ViewVagas = styled.View`
+display: flex;
+flex-direction: row;
+height: 40;
+margin-top: 1%;
+width: 85%;
+margin-left: 10%;
+margin-right: 10%;
+`;
+
 export const ViewBotao = styled.View`
-  margin: 20px 0px 20px 0px;
-  height: 60px;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  justify-content: space-around;
+margin-top: 20;
+margin-bottom: 20;
+height: 60;
+align-items: center;
+justify-content: center;
+flex-direction: row;
+justify-content: space-around;
 `;
-export const Botao = styled(Button)`
-  display: flex;
-  background-color: #142850;
-  flex-direction: row;
-  border-radius: 5px;
-  width: 88%;
-  height: 60px;
-  align-items: center;
-  justify-content: center;
+
+export const TextoAgendamento = styled.Text`
+color: #FFFFFF;
+margin-left: 15;
 `;
-export const Label = styled.Text`
-  font-size: 20px;
-  color: #fff;
-  font-family: WorkSans-SemiBold;
-`;
+
+
+
+
+const estilo = StyleSheet.create({
+  image: {
+    height: 300,
+    width: '100%',
+  },
+  icone: {
+    justifyContent: 'flex-start',
+    fontSize: 28,
+    fontFamily: 'WorkSans',
+    color: '#142850',
+    marginRight: '5%',
+    fontWeight: '600',
+  },
+  iconeAnimal: {
+    justifyContent: 'flex-start',
+    fontSize: 28,
+    fontFamily: 'WorkSans',
+    color: '#142850',
+    marginRight: '7%',
+    fontWeight: '600',
+  },
+  botao: {
+    backgroundColor: '#142850',
+    display: 'flex',
+    flexDirection: 'row',
+    borderRadius: 8,
+    width: '80%',
+    height: 60,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  txtWhatsapp: {
+    color: '#FFFFFF',
+    marginLeft: 15,
+  },
+});
+
+export default estilo;
