@@ -47,7 +47,7 @@ export function Login({ navigation }) {
   const [modalErroLogin, setmodalErroLogin] = useState(false);
   const [modalErroSenha, setmodalErroSenha] = useState(false);
   const [password, setPassword] = useState(true);
-  const tokenAparelho = useSelector(state => state.user.tokenUser);
+  //const tokenAparelho = useSelector(state => state.user.tokenUser);
   const [loading, setloading] = useState(false);
   const dispatch = useDispatch();
 
@@ -172,16 +172,19 @@ export function Login({ navigation }) {
   // }
 
   function fazerLogin(value) {
+    console.log('?32??');
     setloading(true);
     const data = {
       email: value.email,
-      password: value.password,
-      tokenD: tokenAparelho
+      password: value.password
+      // tokenD: tokenAparelho
     };
+    console.log('?32??', data);
     api
       .post('/session', data)
       .then(response => {
         salvarDadosStorage(response.data);
+        console.log('???', response);
         resetarPilhaNavegacao('TabsHeader');
         setloading(false);
       })

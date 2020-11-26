@@ -19,8 +19,7 @@ const Estilo = StyleSheet.create({
     paddingBottom: 0
   },
   V_externa: {
-    height: '100%',
-    width: '100%',
+    flex: 1,
     backgroundColor: '#ffffff'
   },
   botaoReload: {

@@ -1,8 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
-
 
 export const Container = styled.View`
   width: '100%',
@@ -90,7 +88,7 @@ const estilo = StyleSheet.create({
   V_img: {
     marginTop: '10%',
     width: 200,
-    height: 150,
+    height: 150
   },
   botao: {
     width: '80%',
@@ -99,20 +97,20 @@ const estilo = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#142850',
     borderRadius: 10,
-    flexDirection: "row"
+    flexDirection: 'row'
   },
   icons_CamposLogin: {
     fontSize: 25,
     margin: 5,
-    color: '#142850',
+    color: '#142850'
   },
   labelInput: {
     fontSize: 20,
     fontFamily: 'WorkSans',
     marginLeft: '2%',
     width: '88%',
-    height: 60,
-  },
+    height: 60
+  }
 });
 
 export default estilo;

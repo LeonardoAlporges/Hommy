@@ -28,7 +28,7 @@ export const ViewTitulo = styled.View`
   align-items: center;
 `;
 export const Titulo = styled.Text`
-  font-size: 28px;
+  font-size: 20px;
   color: #142850;
   font-family: WorkSans-Bold;
 `;
