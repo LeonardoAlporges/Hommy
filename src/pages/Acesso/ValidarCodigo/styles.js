@@ -16,7 +16,7 @@ export const ViewImagem = styled.View`
 export const ViewTitulo = styled.View`
   margin-top: 5%;
   padding: 10%;
-  paddingtop: 0%;
+  padding-top: 0%;
   width: 100%;
   height: 28;
   align-items: flex-start;
