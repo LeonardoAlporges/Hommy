@@ -8,7 +8,6 @@ import Estilo from './style';
 import { CheckBox, ListItem, Button, Fab, Input, Item, Label } from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import api from '../../../service/api';
-import { withNavigation, NavigationEvents } from 'react-navigation';
 
 class Servicos extends Component {
   static navigationOptions = { header: null };

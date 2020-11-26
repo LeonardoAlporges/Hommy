@@ -143,7 +143,7 @@ const estilo = StyleSheet.create({
     borderRadius: 3,
     justifyContent: 'center',
     alignItems: 'center',
-    width: '80%',
+    width: '100%',
     height: 50,
     backgroundColor: '#fff',
     shadowColor: '#000',
@@ -194,12 +194,12 @@ const estilo = StyleSheet.create({
     color: 'red'
   },
   V_btn: {
+    marginTop: 20,
     width: '100%',
+    backgroundColor: 'red',
     justifyContent: 'center',
     display: 'flex',
-    alignContent: 'center',
-    paddingLeft: '20%',
-    marginTop: '10%'
+    alignContent: 'center'
   },
   ViewFundo: {
     height: '100%',
@@ -281,7 +281,7 @@ const estilo = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    height: 40,
+    height: 50,
     borderRadius: 6,
     backgroundColor: '#fff',
     shadowColor: '#000',
@@ -293,7 +293,7 @@ const estilo = StyleSheet.create({
     shadowRadius: 9.51,
 
     elevation: 15
-  },
+  }
 });
 
 export default estilo;

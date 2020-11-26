@@ -109,16 +109,16 @@ export default function Cadastro({ navigation }) {
 
   function monitorFileUpload(task) {
     task.on('state_changed', snapshot => {
-          snapshot.ref.getDownloadURL().then(downloadURL => {
-            if (contadorImagem == 0) {
-              console.log(1);
-              setLinkImagem1(downloadURL);
-            } else if (contadorImagem == 1) {
-              setLinkImagem2(downloadURL);
-            } else if (contadorImagem == 2) {
-              setLinkImagem3(downloadURL);
-            }
-          });
+      snapshot.ref.getDownloadURL().then(downloadURL => {
+        if (contadorImagem == 0) {
+          console.log(1);
+          setLinkImagem1(downloadURL);
+        } else if (contadorImagem == 1) {
+          setLinkImagem2(downloadURL);
+        } else if (contadorImagem == 2) {
+          setLinkImagem3(downloadURL);
+        }
+      });
     });
   }
 
@@ -182,11 +182,7 @@ export default function Cadastro({ navigation }) {
         setSucesso(true);
       })
       .catch(error => {
-        if (
-          error.response.status == 401 ||
-          error.response.status == 404 ||
-          error.response.status == 400
-        ) {
+        if (error.response.status == 401 || error.response.status == 404 || error.response.status == 400) {
           setErroExisteRepublica(true);
           setLoading(false);
         } else {
@@ -252,10 +248,7 @@ export default function Cadastro({ navigation }) {
           .min(1, 'Valor minimo 1')
           .max(10000, 'Valor maximo ')
           .required('Campo obrigatório'),
-        descricao: yup
-          .string('')
-          .min(3, 'Minimo de 3 caracteres')
-          .max(70, 'No máximo 70 caracteres'),
+        descricao: yup.string('').min(3, 'Minimo de 3 caracteres').max(70, 'No máximo 70 caracteres'),
         aluguel: yup
           .number('Somente numeros')
           .min(10, 'Valor minimo R$ 10')
@@ -329,10 +322,7 @@ export default function Cadastro({ navigation }) {
             />
           )}
           {loading && <Loading />}
-          <HeaderBack
-            title=" Cadastre sua república"
-            onNavigation={() => navigation.goBack(null)}
-          />
+          <HeaderBack title=" Cadastre sua república" onNavigation={() => navigation.goBack(null)} />
           <Tabs
             initialPage={0}
             tabBarUnderlineStyle={{ backgroundColor: '#142850', height: 3 }}
@@ -406,9 +396,7 @@ export default function Cadastro({ navigation }) {
                       </Item>
 
                       <View style={estilo.V_error}>
-                        {touched.nome && errors.nome && (
-                          <Text style={estilo.textError}>{errors.nome}</Text>
-                        )}
+                        {touched.nome && errors.nome && <Text style={estilo.textError}>{errors.nome}</Text>}
                       </View>
                     </FieldSetLarge>
                   </Linha>
@@ -425,9 +413,7 @@ export default function Cadastro({ navigation }) {
                       </Item>
 
                       <View style={estilo.V_error}>
-                        {touched.bairro && errors.bairro && (
-                          <Text style={estilo.textError}>{errors.bairro}</Text>
-                        )}
+                        {touched.bairro && errors.bairro && <Text style={estilo.textError}>{errors.bairro}</Text>}
                       </View>
                     </FieldSetLarge>
                   </Linha>
@@ -443,9 +429,7 @@ export default function Cadastro({ navigation }) {
                         />
                       </Item>
                       <View style={estilo.V_error}>
-                        {touched.rua && errors.rua && (
-                          <Text style={estilo.textError}>{errors.rua}</Text>
-                        )}
+                        {touched.rua && errors.rua && <Text style={estilo.textError}>{errors.rua}</Text>}
                       </View>
                     </FieldSetRua>
                     <FieldSetNumero>
@@ -460,9 +444,7 @@ export default function Cadastro({ navigation }) {
                         />
                       </Item>
                       <View style={estilo.V_error}>
-                        {touched.numero && errors.numero && (
-                          <Text style={estilo.textError}>{errors.numero}</Text>
-                        )}
+                        {touched.numero && errors.numero && <Text style={estilo.textError}>{errors.numero}</Text>}
                       </View>
                     </FieldSetNumero>
                   </Linha>
@@ -500,10 +482,10 @@ export default function Cadastro({ navigation }) {
                           />
                         </View>
                       ) : (
-                          <View style={estilo.V_ImageFull}>
-                            <Image source={{ uri: imagem1 }} style={estilo.ImageFull} />
-                          </View>
-                        )}
+                        <View style={estilo.V_ImageFull}>
+                          <Image source={{ uri: imagem1 }} style={estilo.ImageFull} />
+                        </View>
+                      )}
                       {imagem2 == null ? (
                         <View style={estilo.V_ImageFullEmpty}>
                           <Image
@@ -512,10 +494,10 @@ export default function Cadastro({ navigation }) {
                           />
                         </View>
                       ) : (
-                          <View style={estilo.V_ImageFull}>
-                            <Image source={{ uri: imagem2 }} style={estilo.ImageFull} />
-                          </View>
-                        )}
+                        <View style={estilo.V_ImageFull}>
+                          <Image source={{ uri: imagem2 }} style={estilo.ImageFull} />
+                        </View>
+                      )}
                       {imagem3 == null ? (
                         <View style={estilo.V_ImageFullEmpty}>
                           <Image
@@ -524,10 +506,10 @@ export default function Cadastro({ navigation }) {
                           />
                         </View>
                       ) : (
-                          <View style={estilo.V_ImageFull}>
-                            <Image source={{ uri: imagem3 }} style={estilo.ImageFull} />
-                          </View>
-                        )}
+                        <View style={estilo.V_ImageFull}>
+                          <Image source={{ uri: imagem3 }} style={estilo.ImageFull} />
+                        </View>
+                      )}
                     </DivisaoFotos>
                     <View style={estilo.V_BotaoImg}>
                       <TouchableOpacity
@@ -562,9 +544,7 @@ export default function Cadastro({ navigation }) {
               <View key="2">
                 <ScrollView>
                   <View style={estilo.V_Conteudo}>
-                    <Text style={estilo.textRepublica}>
-                      Nos campos abaixo preencha os detalhes de sua república.
-                    </Text>
+                    <Text style={estilo.textRepublica}>Nos campos abaixo preencha os detalhes de sua república.</Text>
                     <Linha>
                       <FieldSet>
                         <LabelFielSet>Aluguel</LabelFielSet>
@@ -590,9 +570,7 @@ export default function Cadastro({ navigation }) {
                           />
                         </Item>
                         <View style={estilo.V_error}>
-                          {touched.aluguel && errors.aluguel && (
-                            <Text style={estilo.textError}>{errors.aluguel}</Text>
-                          )}
+                          {touched.aluguel && errors.aluguel && <Text style={estilo.textError}>{errors.aluguel}</Text>}
                         </View>
                       </FieldSet>
                       <FieldSet>
@@ -619,9 +597,7 @@ export default function Cadastro({ navigation }) {
                           />
                         </Item>
                         <View style={estilo.V_error}>
-                          {touched.contas && errors.contas && (
-                            <Text style={estilo.textError}>{errors.contas}</Text>
-                          )}
+                          {touched.contas && errors.contas && <Text style={estilo.textError}>{errors.contas}</Text>}
                         </View>
                       </FieldSet>
                     </Linha>
@@ -650,9 +626,7 @@ export default function Cadastro({ navigation }) {
                           </Picker>
                         </Item>
                         <View style={estilo.V_error}>
-                          {touched.genero && errors.genero && (
-                            <Text style={estilo.textError}>{errors.genero}</Text>
-                          )}
+                          {touched.genero && errors.genero && <Text style={estilo.textError}>{errors.genero}</Text>}
                         </View>
                       </FieldSet>
 
@@ -679,9 +653,7 @@ export default function Cadastro({ navigation }) {
                           </Picker>
                         </Item>
                         <View style={estilo.V_error}>
-                          {touched.animais && errors.animais && (
-                            <Text style={estilo.textError}>{errors.animais}</Text>
-                          )}
+                          {touched.animais && errors.animais && <Text style={estilo.textError}>{errors.animais}</Text>}
                         </View>
                       </FieldSet>
                     </Linha>
@@ -760,9 +732,7 @@ export default function Cadastro({ navigation }) {
                           />
                         </Item>
                         <View style={estilo.V_error}>
-                          {touched.aQuarto && errors.aQuarto && (
-                            <Text style={estilo.textError}>{errors.aQuarto}</Text>
-                          )}
+                          {touched.aQuarto && errors.aQuarto && <Text style={estilo.textError}>{errors.aQuarto}</Text>}
                         </View>
                       </FieldSetLarge>
                     </Linha>
@@ -788,11 +758,9 @@ export default function Cadastro({ navigation }) {
                       </FieldSetLarge>
                     </Linha>
 
-                    <View style={estilo.V_BotaoImg}>
+                    <View style={estilo.V_BotaoSend}>
                       <Button style={estilo.botao_send} onPress={handleSubmit}>
-                        <Text
-                          style={{ color: '#142850', fontFamily: 'WorkSans-Bold', fontSize: 18 }}
-                        >
+                        <Text style={{ color: '#142850', fontFamily: 'WorkSans-Bold', fontSize: 18 }}>
                           Cadastrar república
                         </Text>
                       </Button>
