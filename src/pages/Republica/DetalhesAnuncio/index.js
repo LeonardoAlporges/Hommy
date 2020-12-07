@@ -194,14 +194,14 @@ export default function DetalhesAnuncio({ navigation }) {
         <Tipo>Endereço</Tipo>
       </ViewTipo>
       <ViewVagas>
-        <ViewInterna>p
+        <ViewInterna>
           <Icon name="location-pin" style={estilo.icone} />
           <TextLabel>
             {republica.rua}, {republica.bairro}, Nº
             {republica.numeroCasa}
-          </Text>
-        </View>
-      </View> */}
+          </TextLabel>
+        </ViewInterna>
+      </ViewVagas>
       <Categoria>Endereço</Categoria>
       <Card>
         <Image
