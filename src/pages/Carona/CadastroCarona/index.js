@@ -352,10 +352,10 @@ export default function CadastroCarona({ navigation }) {
                         height: '100%'
                       }}
                       keyboardType="number-pad"
-                      mask={'[0000]'}
+                      mask={'[999]{.}[99]'}
                       value={values.valor}
                       onChangeText={handleChange('valor')}
-                      placeholder=""
+                      placeholder="000.00"
                       onBlur={() => setFieldTouched('valor')}
                     />
                   </Item>

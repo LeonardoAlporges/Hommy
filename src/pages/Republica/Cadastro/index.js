@@ -6,6 +6,7 @@ import { View, ScrollView, Image, TouchableOpacity, Modal } from 'react-native';
 import { connect, useSelector } from 'react-redux';
 import HeaderBack from '../../../components/CustomHeader';
 import CustomModal from '../../../components/Alert';
+import TextInputMask from 'react-native-text-input-mask';
 
 import { imagePickerOptions, uploadFileToFireBaseRepublica, uploadProgress } from '../../../utils';
 import ImagePicker from 'react-native-image-picker';
@@ -560,12 +561,15 @@ export default function Cadastro({ navigation }) {
                           >
                             R$
                           </Label>
-                          <Input
-                            style={{ fontFamily: 'WorkSans' }}
+                          <TextInputMask
+                            placeholderTextColor="#263b50"
+                            style={{  fontFamily: 'WorkSans', width: '80%',
+                            height: '100%' }}
                             keyboardType="number-pad"
+                            mask={'[9999]{.}[99]'}
                             value={values.aluguel}
                             onChangeText={handleChange('aluguel')}
-                            placeholder=""
+                            placeholder="000.00"
                             onBlur={() => setFieldTouched('aluguel')}
                           />
                         </Item>
@@ -587,12 +591,18 @@ export default function Cadastro({ navigation }) {
                           >
                             R$
                           </Label>
-                          <Input
-                            style={{ fontFamily: 'WorkSans' }}
+
+                          <TextInputMask
+                            placeholderTextColor="#263b50"
+                            style={{
+                              fontFamily: 'WorkSans', width: '80%',
+                              height: '100%'
+                            }}
                             keyboardType="number-pad"
+                            mask={'[999]{.}[99]'}
                             value={values.contas}
                             onChangeText={handleChange('contas')}
-                            placeholder=""
+                            placeholder="000.00"
                             onBlur={() => setFieldTouched('contas')}
                           />
                         </Item>
