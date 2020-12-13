@@ -95,10 +95,8 @@ const estilo = StyleSheet.create({
   },
   tabs_ActiveTextStyle: {
     color: '#142850',
-    fontFamily: 'WorkSans-Bold',
     fontSize: 12,
-    fontFamily: 'WorkSans',
-    fontSize: 15,
+    fontFamily: 'WorkSans-Bold'
   },
   tabs_ActiveTabs: {
     backgroundColor: '#fff'
@@ -130,7 +128,7 @@ const estilo = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    height: 40,
+    height: 50,
     borderRadius: 6,
     backgroundColor: '#fff',
     shadowColor: '#000',
@@ -292,10 +290,16 @@ const estilo = StyleSheet.create({
     height: 100,
     borderRadius: 3
   },
+  V_BotaoSend: {
+    flex: 1,
+    alignContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   V_BotaoImg: {
-    marginTop: 10,
+    marginTop: 20,
     width: '100%',
-    height: 50,
+    height: 40,
     alignContent: 'center',
     alignItems: 'center',
     justifyContent: 'center'

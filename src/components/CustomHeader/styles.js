@@ -22,10 +22,10 @@ export const Icone = styled(Icon)`
   color: #142850;
 `;
 export const ViewTitulo = styled.View`
-  width: 28%;
+  width: 70%;
   height: 40px;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 `;
 export const Titulo = styled.Text`
   font-size: 20px;

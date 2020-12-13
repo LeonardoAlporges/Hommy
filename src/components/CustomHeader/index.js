@@ -12,7 +12,7 @@ export default function HeaderBack(props) {
         <Icone name="arrow-left" />
       </ViewIcon>
       <ViewTitulo>
-        <Titulo numberOfLines={1}>{props.title}</Titulo>
+        <Titulo>{props.title}</Titulo>
       </ViewTitulo>
     </Container>
   );
