@@ -10,6 +10,7 @@ import { NavigationActions, StackActions } from 'react-navigation';
 import estilo from './styles';
 import HeaderBack from '../../../components/CustomHeader';
 import CustomModal from '../../../components/Alert';
+import TextInputMask from 'react-native-text-input-mask';
 import api from '../../../service/api';
 import {
   Container,
@@ -34,7 +35,7 @@ export default function ValidarCodigo({ navigation }) {
   const [email, setEmail] = useState(navigation.state.params.email);
   const [codigoErrado, setCodigoErrado] = useState(false);
 
-  useEffect(() => {}, [codigoValido]);
+  useEffect(() => { }, [codigoValido]);
 
   function verificarCodigoDigitado(values) {
     const data = {
@@ -103,10 +104,10 @@ export default function ValidarCodigo({ navigation }) {
             aplicativo.
           </Titulo>
         ) : (
-          <Titulo>
-            Um código para prosseguir foi enviado ao seu e-mail. Por favor, informe-o no campo abaixo.
-          </Titulo>
-        )}
+            <Titulo>
+              Um código para prosseguir foi enviado ao seu e-mail. Por favor, informe-o no campo abaixo.
+            </Titulo>
+          )}
       </ViewTitulo>
 
       <Formik
@@ -164,14 +165,15 @@ export default function ValidarCodigo({ navigation }) {
               <CamposLogin>
                 <Item>
                   <Icon style={estilo.icons_CamposLogin} active name="key-outline" />
-                  <Input
+                  <TextInputMask
                     placeholderTextColor="#2e2e2e"
                     style={estilo.labelInput}
-                    value={values.codigo} //NOME
+                    keyboardType="number-pad"
+                    mask={'[999999'}
+                    value={values.codigo}
                     onChangeText={handleChange('codigo')}
-                    onBlur={() => setFieldTouched('codigo')}
                     placeholder="000000"
-                    keyboardType="numeric"
+                    onBlur={() => setFieldTouched('alucodigoguel')}
                   />
                 </Item>
               </CamposLogin>
@@ -182,8 +184,8 @@ export default function ValidarCodigo({ navigation }) {
                   <LabelErro>{errors.codigo}</LabelErro>
                 </ViewErro>
               ) : (
-                <View style={estilo.V_ErroSem} />
-              )}
+                  <View style={estilo.V_ErroSem} />
+                )}
             </View>
             {!codigoValido && (
               <ViewBotao>
@@ -219,8 +221,8 @@ export default function ValidarCodigo({ navigation }) {
                   <LabelErro>{errors.novaSenha}</LabelErro>
                 </ViewErro>
               ) : (
-                <View style={estilo.V_ErroSem} />
-              )}
+                  <View style={estilo.V_ErroSem} />
+                )}
             </View>
 
             {codigoValido && (
