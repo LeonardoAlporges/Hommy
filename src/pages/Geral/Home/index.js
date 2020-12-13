@@ -21,75 +21,61 @@ function TabsHeader({ navigation }) {
   }
 
   return (
-    // <Container>
-    //   <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
-    //   <Cabeca />
+    <Container>
+      <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
+      <Cabeca />
 
-    //   <Tabs
-    //     initialPage={0}
-    //     tabBarUnderlineStyle={{ backgroundColor: '#142850', height: 3 }}
-    //     tabContainerStyle={{ height: 45 }}
-    //   >
-    //     <Tab
-    //       heading="Repúblicas"
-    //       tabStyle={estilo.tabs_style}
-    //       textStyle={estilo.tabs_TextStyle}
-    //       activeTabStyle={estilo.tabs_ActiveTabs}
-    //       activeTextStyle={estilo.tabs_ActiveTextStyle}
-    //     >
-    //       <Republica style={estilo.card} />
-    //     </Tab>
-    //     <Tab
-    //       heading="Caronas"
-    //       initialPage="2"
-    //       tabStyle={estilo.tabs_style}
-    //       textStyle={estilo.tabs_TextStyle}
-    //       activeTabStyle={estilo.tabs_ActiveTabs}
-    //       activeTextStyle={estilo.tabs_ActiveTextStyle}
-    //     >
-    //       <Caronas />
-    //     </Tab>
-    //     {/* <Tab
-    //         heading="Serviços"
-    //         initialPage="2"
-    //         tabStyle={estilo.tabs_style}
-    //         textStyle={estilo.tabs_TextStyle}
-    //         activeTabStyle={estilo.tabs_ActiveTabs}
-    //         activeTextStyle={estilo.tabs_ActiveTextStyle}
-    //       >
-    //         <Servicos />
-    //       </Tab>
-    //       <Tab
-    //         heading="Promoções"
-    //         initialPage="2"
-    //         tabStyle={estilo.tabs_style}
-    //         textStyle={estilo.tabs_TextStyle}
-    //         activeTabStyle={estilo.tabs_ActiveTabs}
-    //         activeTextStyle={estilo.tabs_ActiveTextStyle}
-    //       >
-    //         <Divulgacao />
-    //       </Tab> */}
-    //   </Tabs>
-    // </Container>
-    <View style={estilo.container}>
-      <Button
+      <Tabs
+        initialPage={0}
+        tabBarUnderlineStyle={{ backgroundColor: '#142850', height: 3 }}
+        tabContainerStyle={{ height: 45 }}
+      >
+        <Tab
+          heading="Repúblicas"
+          tabStyle={estilo.tabs_style}
+          textStyle={estilo.tabs_TextStyle}
+          activeTabStyle={estilo.tabs_ActiveTabs}
+          activeTextStyle={estilo.tabs_ActiveTextStyle}
+        >
+          <Republica style={estilo.card} />
+        </Tab>
+        <Tab
+          heading="Caronas"
+          initialPage="2"
+          tabStyle={estilo.tabs_style}
+          textStyle={estilo.tabs_TextStyle}
+          activeTabStyle={estilo.tabs_ActiveTabs}
+          activeTextStyle={estilo.tabs_ActiveTextStyle}
+        >
+          <Caronas />
+        </Tab>
+        <Tab
+          heading="Serviços"
+          initialPage="2"
+          tabStyle={estilo.tabs_style}
+          textStyle={estilo.tabs_TextStyle}
+          activeTabStyle={estilo.tabs_ActiveTabs}
+          activeTextStyle={estilo.tabs_ActiveTextStyle}
+        >
+          <Servicos />
+        </Tab>
+        <Tab
+          heading="Promoções"
+          initialPage="2"
+          tabStyle={estilo.tabs_style}
+          textStyle={estilo.tabs_TextStyle}
+          activeTabStyle={estilo.tabs_ActiveTabs}
+          activeTextStyle={estilo.tabs_ActiveTextStyle}
+        >
+          <Divulgacao />
+        </Tab>
+      </Tabs>
+    </Container>
+
+    /* <Button
         style={{ width: '100%', height: '30%' }}
-        onPress={() =>
-          Linking.openURL(`https://www.google.com/maps/dir/?api=1&destination=-20.76698470734127,-41.53869791886807`)
-        }
-      ></Button>
-
-      {/* <MapView
-        provider={PROVIDER_GOOGLE} // remove if not using Google Maps
-        style={estilo.map}
-        initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421
-        }}
-      ></MapView> */}
-    </View>
+        onPress={() => Linking.openURL(`https://www.google.com/maps/search/?api=1&query=Rua+Pastor+Abdias+11`)}
+      ></Button> */
   );
 }
 

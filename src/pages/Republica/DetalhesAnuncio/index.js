@@ -23,7 +23,17 @@ import {
   Categoria,
   Botao,
   Label,
-  ViewBotao
+  ViewBotao,
+  ViewCaracteristicaTitle,
+  CaracteristicaTitle,
+  ViewTipo,
+  Tipo,
+  ViewCaracteristicaItens,
+  Item2,
+  TextLabel,
+  ViewVagas,
+  ViewInterna,
+  Container
 } from './style';
 
 export default function DetalhesAnuncio({ navigation }) {
@@ -62,9 +72,9 @@ export default function DetalhesAnuncio({ navigation }) {
   }
 
   return (
-    <ScrollView style={{ backgroundColor: '#F7F8F9' }}>
-      <HeaderBack ajuda title={republica.nomeRepublica} onNavigation={() => navigation.goBack(null)} />
-      <IndicatorViewPager style={{ height: 300 }} indicator={renderDotIndicator()}>
+    <ScrollView>
+      <HeaderBack title={republica.nomeRepublica} onNavigation={() => navigation.goBack(null)} />
+      {/* <IndicatorViewPager style={{ height: 300 }} indicator={renderDotIndicator()}>
         {republica.imagem1 != '' && republica.imagem1 != null && (
           <View key="1">
             <Imagem source={{ uri: republica.imagem1 }} />
@@ -80,7 +90,7 @@ export default function DetalhesAnuncio({ navigation }) {
             <Imagem source={{ uri: republica.imagem3 }} />
           </View>
         )}
-      </IndicatorViewPager>
+      </IndicatorViewPager> */}
 
       <ViewTitulo>
         <Titulo>{republica.nomeRepublica}</Titulo>
@@ -143,7 +153,7 @@ export default function DetalhesAnuncio({ navigation }) {
         </Linha>
       </Card>
 
-      <Categoria>Valores</Categoria>
+      {/* <Categoria>Valores</Categoria>
 
       <ViewCaracteristicaTitle>
         <CaracteristicaTitle>Características</CaracteristicaTitle>
@@ -153,11 +163,11 @@ export default function DetalhesAnuncio({ navigation }) {
       </ViewTipo>
       <ViewCaracteristicaItens>
         <Item2>
-          <Icon name="home" style={estilo.icone} />
+          <Icon name="home" />
           <TextLabel>{republica.imovel}</TextLabel>
         </Item2>
         <Item2>
-          <Icon name="people" style={estilo.icone} />
+          <Icon name="people" />
           <TextLabel>{republica.genero}</TextLabel>
         </Item2>
       </ViewCaracteristicaItens>
@@ -166,26 +176,26 @@ export default function DetalhesAnuncio({ navigation }) {
       </ViewTipo>
       <ViewVagas>
         <ViewInterna>
-          <Icon name="drawer" style={estilo.icone} />
+          <Icon name="drawer" />
           <TextLabel>{republica.acomodacaoQuarto}</TextLabel>
         </ViewInterna>
       </ViewVagas>
       <ViewTipo>
         <Tipo>Mobília e eletrodomésticos</Tipo>
-      </ViewTipo>
+      </ViewTipo> */}
       <ViewVagas>
         <ViewInterna>
-          <Icon name="screen-desktop" style={estilo.icone} />
+          <Icon name="screen-desktop" />
           <TextLabel>{republica.acomodacaoRepublica}</TextLabel>
         </ViewInterna>
       </ViewVagas>
 
-      <ViewTipo>
+      {/* <ViewTipo>
         <Tipo>Disponibilidade</Tipo>
       </ViewTipo>
       <ViewVagas>
         <ViewInterna>
-          <Icon name="user-follow" style={estilo.icone} />
+          <Icon name="user-follow" />
           <TextLabel>{republica.numVagas} Vaga(s)</TextLabel>
         </ViewInterna>
       </ViewVagas>
@@ -194,7 +204,7 @@ export default function DetalhesAnuncio({ navigation }) {
       </ViewTipo>
       <ViewVagas>
         <ViewInterna>
-          <Icon name="location-pin" style={estilo.icone} />
+          <Icon name="location-pin" />
           <TextLabel>
             {republica.rua}, {republica.bairro}, Nº
             {republica.numeroCasa}
@@ -210,9 +220,9 @@ export default function DetalhesAnuncio({ navigation }) {
               'https://firebasestorage.googleapis.com/v0/b/hommy-d0890.appspot.com/o/pictures%2FEndereco.png?alt=media&token=2103feff-5e6e-4faa-8cb6-87a214d17ff8'
           }}
         />
-      </Card>
+      </Card> */}
 
-      {!usuarioJaInteressado && !ocutarBotaoAgendamento ? (
+      {/* {!usuarioJaInteressado && !ocutarBotaoAgendamento ? (
         <ViewBotao>
           <Botao
             onPress={() => {
@@ -224,7 +234,7 @@ export default function DetalhesAnuncio({ navigation }) {
         </ViewBotao>
       ) : (
         <View style={{ height: 30 }} />
-      )}
+      )} */}
     </ScrollView>
   );
 }
