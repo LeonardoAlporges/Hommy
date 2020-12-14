@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, Text, Image } from 'react-native';
+import { View, ScrollView, Image } from 'react-native';
 
 import HeaderBack from '../../../components/CustomHeader';
 
@@ -37,7 +37,6 @@ import {
 } from './style';
 
 export default function DetalhesAnuncio({ navigation }) {
-  const [usuarioJaInteressado, setUsuarioJaInteressado] = useState(navigation.state.params.interessado);
   const [ocutarBotaoAgendamento, setOcutarBotaoAgendamento] = useState(navigation.state.params.desativarBotaoAgenda);
   const [republica, setRepublica] = useState(navigation.state.params.dadosRepublica);
   const [contadorImagem, setContadorImagem] = useState(0);
@@ -49,6 +48,8 @@ export default function DetalhesAnuncio({ navigation }) {
   }
 
   useEffect(() => {
+    console.log(navigation.state.params);
+    console.log('REPUBLICAS', republica);
     if (republica.imagem1 != '' && republica.imagem1 != null) {
       setContadorImagem(contadorImagem => contadorImagem + 1);
     }
@@ -72,30 +73,28 @@ export default function DetalhesAnuncio({ navigation }) {
   }
 
   return (
-    <ScrollView>
+    <ScrollView style={{ backgroundColor: '#f8f8f8' }}>
       <HeaderBack title={republica.nomeRepublica} onNavigation={() => navigation.goBack(null)} />
-      {/* <IndicatorViewPager style={{ height: 300 }} indicator={renderDotIndicator()}>
+      <IndicatorViewPager style={{ height: 300 }} indicator={renderDotIndicator()}>
         {republica.imagem1 != '' && republica.imagem1 != null && (
           <View key="1">
-            <Imagem source={{ uri: republica.imagem1 }} />
+            <Image style={{ height: 300 }} source={{ uri: republica.imagem1 }} />
           </View>
         )}
         {republica.imagem2 != '' && republica.imagem2 != null && (
           <View key="2">
-            <Imagem source={{ uri: republica.imagem2 }} />
+            <Image style={{ height: 300 }} source={{ uri: republica.imagem2 }} />
           </View>
         )}
         {republica.imagem3 != '' && republica.imagem3 != null && (
           <View key="3">
-            <Imagem source={{ uri: republica.imagem3 }} />
+            <Image style={{ height: 300 }} source={{ uri: republica.imagem3 }} />
           </View>
         )}
-      </IndicatorViewPager> */}
-
+      </IndicatorViewPager>
       <ViewTitulo>
         <Titulo>{republica.nomeRepublica}</Titulo>
       </ViewTitulo>
-
       <ViewDescricao>
         <Descricao>{republica.descricao}</Descricao>
       </ViewDescricao>
@@ -150,79 +149,69 @@ export default function DetalhesAnuncio({ navigation }) {
               <Informacao>{republica.numVagas} Vaga(s)</Informacao>
             </Informacaoes>
           </CardDeInformacao>
+          <CardDeInformacao>
+            <IconesInformacao>
+              <Icone name="google-maps" />
+            </IconesInformacao>
+            <Informacaoes>
+              <TipoInformacao>Endereço</TipoInformacao>
+              <Informacao>
+                {republica.rua}, {republica.bairro}, Nº
+                {republica.numeroCasa}
+              </Informacao>
+            </Informacaoes>
+          </CardDeInformacao>
         </Linha>
       </Card>
 
-      {/* <Categoria>Valores</Categoria>
-
-      <ViewCaracteristicaTitle>
-        <CaracteristicaTitle>Características</CaracteristicaTitle>
-      </ViewCaracteristicaTitle>
-      <ViewTipo>
-        <Tipo>Tipo</Tipo>
-      </ViewTipo>
-      <ViewCaracteristicaItens>
-        <Item2>
-          <Icon name="home" />
-          <TextLabel>{republica.imovel}</TextLabel>
-        </Item2>
-        <Item2>
-          <Icon name="people" />
-          <TextLabel>{republica.genero}</TextLabel>
-        </Item2>
-      </ViewCaracteristicaItens>
-      <ViewTipo>
-        <Tipo>Mobília do quarto</Tipo>
-      </ViewTipo>
-      <ViewVagas>
-        <ViewInterna>
-          <Icon name="drawer" />
-          <TextLabel>{republica.acomodacaoQuarto}</TextLabel>
-        </ViewInterna>
-      </ViewVagas>
-      <ViewTipo>
-        <Tipo>Mobília e eletrodomésticos</Tipo>
-      </ViewTipo> */}
-      <ViewVagas>
-        <ViewInterna>
-          <Icon name="screen-desktop" />
-          <TextLabel>{republica.acomodacaoRepublica}</TextLabel>
-        </ViewInterna>
-      </ViewVagas>
-
-      {/* <ViewTipo>
-        <Tipo>Disponibilidade</Tipo>
-      </ViewTipo>
-      <ViewVagas>
-        <ViewInterna>
-          <Icon name="user-follow" />
-          <TextLabel>{republica.numVagas} Vaga(s)</TextLabel>
-        </ViewInterna>
-      </ViewVagas>
-      <ViewTipo>
-        <Tipo>Endereço</Tipo>
-      </ViewTipo>
-      <ViewVagas>
-        <ViewInterna>
-          <Icon name="location-pin" />
-          <TextLabel>
-            {republica.rua}, {republica.bairro}, Nº
-            {republica.numeroCasa}
-          </TextLabel>
-        </ViewInterna>
-      </ViewVagas>
-      <Categoria>Endereço</Categoria>
+      <Categoria>Valores</Categoria>
       <Card>
-        <Image
-          style={{ width: '100%', height: 100 }}
-          source={{
-            uri:
-              'https://firebasestorage.googleapis.com/v0/b/hommy-d0890.appspot.com/o/pictures%2FEndereco.png?alt=media&token=2103feff-5e6e-4faa-8cb6-87a214d17ff8'
-          }}
-        />
-      </Card> */}
+        <Linha>
+          <CardDeInformacao>
+            <IconesInformacao>
+              <Icone name="wallet-outline" />
+            </IconesInformacao>
+            <Informacaoes>
+              <TipoInformacao>Aluguel</TipoInformacao>
+              <Informacao>R$ {republica.valorAluguel},00</Informacao>
+            </Informacaoes>
+          </CardDeInformacao>
+          <CardDeInformacao>
+            <IconesInformacao>
+              <Icone name="chart-bar" />
+            </IconesInformacao>
+            <Informacaoes>
+              <TipoInformacao>Contas (média)</TipoInformacao>
+              <Informacao>R$ {republica.valorContas},00</Informacao>
+            </Informacaoes>
+          </CardDeInformacao>
+        </Linha>
+      </Card>
+      <Categoria>Mobilia</Categoria>
+      <Card>
+        <Linha>
+          <CardDeInformacao>
+            <IconesInformacao>
+              <Icone name="bed-double" />
+            </IconesInformacao>
+            <Informacaoes>
+              <TipoInformacao>Quarto</TipoInformacao>
+              <Informacao>{republica.acomodacaoQuarto}</Informacao>
+            </Informacaoes>
+          </CardDeInformacao>
+          <CardDeInformacao>
+            <IconesInformacao>
+              <Icone name="fridge-outline" />
+            </IconesInformacao>
+            <Informacaoes>
+              <TipoInformacao>Social</TipoInformacao>
+              <Informacao>{republica.acomodacaoRepublica}</Informacao>
+            </Informacaoes>
+          </CardDeInformacao>
+        </Linha>
+      </Card>
 
-      {/* {!usuarioJaInteressado && !ocutarBotaoAgendamento ? (
+      {!ocutarBotaoAgendamento ? (
         <ViewBotao>
           <Botao
             onPress={() => {
@@ -234,7 +223,7 @@ export default function DetalhesAnuncio({ navigation }) {
         </ViewBotao>
       ) : (
         <View style={{ height: 30 }} />
-      )} */}
+      )}
     </ScrollView>
   );
 }
