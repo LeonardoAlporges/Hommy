@@ -1,6 +1,4 @@
-import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
-import { Button } from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 export const Container = styled.ScrollView`
   width: 100%;
@@ -13,6 +11,64 @@ export const ViewTitulo = styled.View`
   padding-left: 6%;
   margin-bottom: 10;
 `;
+export const Card = styled.View`
+  width: 92%;
+  margin: 0 16px 0 16px;
+  background-color: #fff;
+  border-width: 1px;
+  border-color: #d6d6d6;
+  justify-content: center;
+`;
+export const Linha = styled.View`
+  width: 100%;
+  justify-content: space-evenly;
+  min-height: 50px;
+  flex-direction: row;
+  margin-top: 5px;
+`;
+export const CardDeInformacao = styled.View`
+  width: 48%;
+  justify-content: space-around;
+  height: 50px;
+  justify-content: center;
+  flex-direction: row;
+`;
+export const IconesInformacao = styled.View`
+  width: 35px;
+  height: 50px;
+  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
+`;
+export const Icone = styled(Icon)`
+  font-size: 25px;
+  color: #142850;
+`;
+export const Informacaoes = styled.View`
+  flex: 1;
+  height: 50px;
+  padding-left: 5px;
+  justify-content: space-around;
+  align-items: flex-start;
+`;
+export const TipoInformacao = styled.Text`
+  font-size: 14px;
+  color: #142850;
+  font-family: WorkSans-SemiBold;
+`;
+export const Informacao = styled.Text`
+  font-size: 14px;
+  color: #142850;
+  font-family: WorkSans;
+`;
+export const Categoria = styled.Text`
+  margin-top: 10px;
+  margin-left: 16px;
+  font-size: 16px;
+  color: #142850;
+  font-family: WorkSans-SemiBold;
+`;
+
 export const Titulo = styled.Text`
   color: #142850;
   font-family: WorkSans-bold;
@@ -126,53 +182,28 @@ export const ViewVagas = styled.View`
 export const ViewBotao = styled.View`
   margin-top: 20;
   margin-bottom: 20;
-  height: 60;
+  width: 100%;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   justify-content: space-around;
+`;
+export const Botao = styled.TouchableOpacity`
+  width: 50%;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  background-color: #142850;
+  border-radius: 5px;
+`;
+export const Label = styled.Text`
+  color: #fff;
+  font-size: 16px;
+  font-family: WorkSans;
 `;
 
 export const TextoAgendamento = styled.Text`
   color: #ffffff;
   margin-left: 15;
 `;
-
-const estilo = StyleSheet.create({
-  image: {
-    height: 300,
-    width: '100%'
-  },
-  icone: {
-    justifyContent: 'flex-start',
-    fontSize: 28,
-    fontFamily: 'WorkSans',
-    color: '#142850',
-    marginRight: '5%',
-    fontWeight: '600'
-  },
-  iconeAnimal: {
-    justifyContent: 'flex-start',
-    fontSize: 28,
-    fontFamily: 'WorkSans',
-    color: '#142850',
-    marginRight: '7%',
-    fontWeight: '600'
-  },
-  botao: {
-    backgroundColor: '#142850',
-    display: 'flex',
-    flexDirection: 'row',
-    borderRadius: 8,
-    width: '80%',
-    height: 60,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  txtWhatsapp: {
-    color: '#FFFFFF',
-    marginLeft: 15
-  }
-});
-
-export default estilo;

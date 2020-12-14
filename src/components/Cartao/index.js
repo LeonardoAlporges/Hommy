@@ -37,6 +37,7 @@ export function Cartao({ navigation, data }) {
     const dados = data;
     var desativarBotaoAgenda = false;
 
+    console.log('DADOS : ', dados);
     if (dados.userEmail == usuarioLogado.email) {
       desativarBotaoAgenda = true;
     }
