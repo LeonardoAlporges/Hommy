@@ -29,6 +29,7 @@ import {
   DivisaoFotos,
   Foto
 } from './style';
+
 export default function Cadastro({ navigation }) {
   const email = useSelector(state => state.user.email);
   const telefone = useSelector(state => state.user.telefone);
@@ -563,8 +564,7 @@ export default function Cadastro({ navigation }) {
                           </Label>
                           <TextInputMask
                             placeholderTextColor="#263b50"
-                            style={{  fontFamily: 'WorkSans', width: '80%',
-                            height: '100%' }}
+                            style={{ fontFamily: 'WorkSans', width: '80%', height: '100%' }}
                             keyboardType="number-pad"
                             mask={'[9999]{.}[99]'}
                             value={values.aluguel}
@@ -595,7 +595,8 @@ export default function Cadastro({ navigation }) {
                           <TextInputMask
                             placeholderTextColor="#263b50"
                             style={{
-                              fontFamily: 'WorkSans', width: '80%',
+                              fontFamily: 'WorkSans',
+                              width: '80%',
                               height: '100%'
                             }}
                             keyboardType="number-pad"
@@ -770,9 +771,16 @@ export default function Cadastro({ navigation }) {
 
                     <View style={estilo.V_BotaoSend}>
                       <Button style={estilo.botao_send} onPress={handleSubmit}>
-                        <Text style={{ color: '#142850', fontFamily: 'WorkSans-Bold', fontSize: 18 }}>
-                          Cadastrar república
-                        </Text>
+                        {atualizarCadastro ? (
+                          <Text style={{ color: '#142850', fontFamily: 'WorkSans-Bold', fontSize: 18 }}>
+                            {' '}
+                            Atualizar república
+                          </Text>
+                        ) : (
+                          <Text style={{ color: '#142850', fontFamily: 'WorkSans-Bold', fontSize: 18 }}>
+                            Cadastrar república
+                          </Text>
+                        )}
                       </Button>
                     </View>
                   </View>

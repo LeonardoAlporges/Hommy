@@ -28,6 +28,7 @@ import {
   ViewBotao,
   LabeBotaoEnviar
 } from './style';
+import Loading from '../../../components/Loading';
 
 export default function CadastroCarona({ navigation }) {
   const avatarUser = useSelector(state => state.user.fotoPerfil);
@@ -96,7 +97,6 @@ export default function CadastroCarona({ navigation }) {
     } else if (!atualizacao) {
       criarNovoAnuncioCarona(data);
     }
-    setLoading(false);
   }
 
   function atulizarAnuncioCarona(dados) {
@@ -109,7 +109,8 @@ export default function CadastroCarona({ navigation }) {
       .catch(error => {
         setLoading(false);
         setErro(true);
-      });
+      })
+      .finally(setLoading(false));
   }
 
   function criarNovoAnuncioCarona(dados) {
@@ -176,10 +177,7 @@ export default function CadastroCarona({ navigation }) {
           .string('Somente texto')
           .max(40, 'Somente 40 caracteres são permitidos')
           .required('Campo obrigatório'),
-        desembarque: yup
-          .string()
-          .max(40, 'Somente 40 caracteres são permitidos')
-          .required('Campo obrigatório'),
+        desembarque: yup.string().max(40, 'Somente 40 caracteres são permitidos').required('Campo obrigatório'),
         vagas: yup
           .number('Somente numeros')
           .min(1, 'Minimo é de 1 vaga')
@@ -189,6 +187,7 @@ export default function CadastroCarona({ navigation }) {
     >
       {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
         <Fragment>
+          {loading && <Loading></Loading>}
           {erro && (
             <CustomModal
               parametro="Erro"
@@ -212,9 +211,7 @@ export default function CadastroCarona({ navigation }) {
             <HeaderBack title="Publique sua carona" onNavigation={() => navigation.goBack(null)} />
 
             <Container>
-              <Subtitle>
-                Preencha os campos abaixo com as informações necessárias para registrar sua carona.
-              </Subtitle>
+              <Subtitle>Preencha os campos abaixo com as informações necessárias para registrar sua carona.</Subtitle>
 
               <Linha>
                 <FieldSet>
@@ -251,9 +248,7 @@ export default function CadastroCarona({ navigation }) {
                       <Picker.Item label="Vitoria" value="Vitoria" />
                     </Picker>
                   </Item>
-                  <ViewErro>
-                    {touched.saida && errors.saida && <LabelErro>{errors.saida}</LabelErro>}
-                  </ViewErro>
+                  <ViewErro>{touched.saida && errors.saida && <LabelErro>{errors.saida}</LabelErro>}</ViewErro>
                 </FieldSet>
                 <FieldSet>
                   <LabelFielSet>Local de Chegada</LabelFielSet>
@@ -286,9 +281,7 @@ export default function CadastroCarona({ navigation }) {
                       <Picker.Item label="Vitoria" value="Vitoria" />
                     </Picker>
                   </Item>
-                  <ViewErro>
-                    {touched.chegada && errors.chegada && <LabelErro>{errors.chegada}</LabelErro>}
-                  </ViewErro>
+                  <ViewErro>{touched.chegada && errors.chegada && <LabelErro>{errors.chegada}</LabelErro>}</ViewErro>
                 </FieldSet>
               </Linha>
               <Linha>
@@ -328,9 +321,7 @@ export default function CadastroCarona({ navigation }) {
                       onBlur={() => setFieldTouched('data')}
                     />
                   </Item>
-                  <ViewErro>
-                    {!dataViagem && botaoEnviar && <LabelErro>Campo obrigatório</LabelErro>}
-                  </ViewErro>
+                  <ViewErro>{!dataViagem && botaoEnviar && <LabelErro>Campo obrigatório</LabelErro>}</ViewErro>
                 </FieldSet>
                 <FieldSet>
                   <LabelFielSet>Valor</LabelFielSet>
@@ -359,9 +350,7 @@ export default function CadastroCarona({ navigation }) {
                       onBlur={() => setFieldTouched('valor')}
                     />
                   </Item>
-                  <ViewErro>
-                    {touched.valor && errors.valor && <LabelErro>{errors.valor}</LabelErro>}
-                  </ViewErro>
+                  <ViewErro>{touched.valor && errors.valor && <LabelErro>{errors.valor}</LabelErro>}</ViewErro>
                 </FieldSet>
               </Linha>
               <Linha>
@@ -387,9 +376,7 @@ export default function CadastroCarona({ navigation }) {
                       />
                     </InputHora>
                   </Item>
-                  <ViewErro>
-                    {!horaSaida && botaoEnviar && <LabelErro>Campo obrigatório</LabelErro>}
-                  </ViewErro>
+                  <ViewErro>{!horaSaida && botaoEnviar && <LabelErro>Campo obrigatório</LabelErro>}</ViewErro>
                 </FieldSet>
                 <FieldSet>
                   <LabelFielSet>Hora de chegada</LabelFielSet>
@@ -412,9 +399,7 @@ export default function CadastroCarona({ navigation }) {
                       />
                     </InputHora>
                   </Item>
-                  <ViewErro>
-                    {!horaChegada && botaoEnviar && <LabelErro>Campo obrigatório</LabelErro>}
-                  </ViewErro>
+                  <ViewErro>{!horaChegada && botaoEnviar && <LabelErro>Campo obrigatório</LabelErro>}</ViewErro>
                 </FieldSet>
               </Linha>
               <Linha>
@@ -429,9 +414,7 @@ export default function CadastroCarona({ navigation }) {
                       onBlur={() => setFieldTouched('vagas')}
                     />
                   </Item>
-                  <ViewErro>
-                    {touched.vagas && errors.vagas && <LabelErro>{errors.vagas}</LabelErro>}
-                  </ViewErro>
+                  <ViewErro>{touched.vagas && errors.vagas && <LabelErro>{errors.vagas}</LabelErro>}</ViewErro>
                 </FieldSet>
               </Linha>
               <Linha>
@@ -445,11 +428,7 @@ export default function CadastroCarona({ navigation }) {
                       onBlur={() => setFieldTouched('embarque')}
                     />
                   </Item>
-                  <ViewErro>
-                    {touched.embarque && errors.embarque && (
-                      <LabelErro>{errors.embarque}</LabelErro>
-                    )}
-                  </ViewErro>
+                  <ViewErro>{touched.embarque && errors.embarque && <LabelErro>{errors.embarque}</LabelErro>}</ViewErro>
                 </FieldSetLarge>
               </Linha>
               <Linha>
@@ -464,9 +443,7 @@ export default function CadastroCarona({ navigation }) {
                     />
                   </Item>
                   <ViewErro>
-                    {touched.desembarque && errors.desembarque && (
-                      <LabelErro>{errors.desembarque}</LabelErro>
-                    )}
+                    {touched.desembarque && errors.desembarque && <LabelErro>{errors.desembarque}</LabelErro>}
                   </ViewErro>
                 </FieldSetLarge>
               </Linha>
@@ -483,16 +460,6 @@ export default function CadastroCarona({ navigation }) {
               </ViewBotao>
             </Container>
           </ScrollView>
-
-          <View>
-            <Modal animationType="fade" transparent={true} visible={loading}>
-              <View style={estilo.ViewFundo}>
-                <View style={estilo.ViewModal}>
-                  <Spinner color="red" />
-                </View>
-              </View>
-            </Modal>
-          </View>
         </Fragment>
       )}
     </Formik>

@@ -50,18 +50,17 @@ export default function Agendamentos({ navigation }) {
       .get(`/confirmAgendamento/${email}`)
       .then(response => {
         setListaAgendamento(response.data);
-        setLoading(false);
       })
       .catch(error => {
-        setLoading(false);
         setErro(true);
-      });
+      })
+      .finally(setLoading(false));
   }
 
   function confirmarAgendamento(user) {
     const data = {
       email: user,
-      status: 'Confirmado',
+      status: 'Confirmado'
     };
     api
       .put(`/confirmAgendamento/${republicaID}`, data)
@@ -76,7 +75,7 @@ export default function Agendamentos({ navigation }) {
   function rejeitarAgendamento(user) {
     const data = {
       email: user,
-      status: 'Rejeitado',
+      status: 'Rejeitado'
     };
     api
       .put(`/confirmAgendamento/${republicaID}`, data)
@@ -100,22 +99,20 @@ export default function Agendamentos({ navigation }) {
     <Container>
       <HeaderBack title="Agendamentos" onNavigation={() => navigation.goBack(null)} />
       {loading && <Loading />}
-      {listaAgendamento.length == 0 && (
+      {listaAgendamento.length == 0 && !loading && (
         <EmptyState
           titulo="Sem Agendamentos"
           mensagem="Ninguém agendou uma visita a sua república. Aguarde, logo aparecerá alguém para preencher esse vazio"
         />
       )}
-      {listaAgendamento.length != 0 && (
+      {listaAgendamento.length != 0 && !loading && (
         <View>
           <View style={{ width: '100%', paddingHorizontal: 5, height: 40 }}>
-            <Subtitulo>
-              Abaixo estão listadas as pessoas que solicitaram uma visita a sua república.
-            </Subtitulo>
+            <Subtitulo>Abaixo estão listadas as pessoas que solicitaram uma visita a sua república.</Subtitulo>
           </View>
           <ViewLabel>
             <Label>Interessados</Label>
-            <Barra/>
+            <Barra />
           </ViewLabel>
         </View>
       )}

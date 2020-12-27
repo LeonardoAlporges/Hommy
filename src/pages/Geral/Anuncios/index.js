@@ -76,20 +76,20 @@ function Anuncios({ navigation }) {
       .get(`/userCarona/${email}`)
       .then(responseJson => {
         setListaCaronas(responseJson.data);
-        setLoading(false);
       })
       .catch(error => {
         setLoading(false);
-      });
+      })
+      .finally(setLoading(false));
     api
       .get(`/userRepublica/${email}`)
       .then(responseJson => {
         setListaRepublicas(responseJson.data);
-        setLoading(false);
       })
       .catch(error => {
         setLoading(false);
-      });
+      })
+      .finally(setLoading(false));
   }
 
   useEffect(() => {
@@ -109,7 +109,7 @@ function Anuncios({ navigation }) {
   return (
     <Container>
       {loading && <Loading />}
-      {listaCaronas.length == 0 && listaRepublicas.length == 0 && (
+      {listaCaronas.length == 0 && listaRepublicas.length == 0 && !loading && (
         <EmptyState
           titulo="Sem anúncios"
           mensagem="Você ainda não anunciou nada. Nos diga quando houver vagas em sua república ou ofereça uma carona."

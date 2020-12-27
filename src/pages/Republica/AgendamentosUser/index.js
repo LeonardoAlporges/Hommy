@@ -31,7 +31,6 @@ import {
   LabelReijeicao
 } from './styles';
 
-
 export default function AgendamentoUser({ navigation }) {
   const email = useSelector(state => state.user.email);
   const [listaAgendamento, setListaAgendamendo] = useState([]);
@@ -61,12 +60,13 @@ export default function AgendamentoUser({ navigation }) {
   }
 
   function removerMeuAgendamento(valorRetorno, idRepublica) {
+    console.log(valorRetorno);
     if (valorRetorno == 3) {
       return null;
     }
     return api
       .delete(`/agendamento/${idRepublica}`, {
-        data: { email: email },
+        data: { email: email }
       })
       .then(response => {
         setReload(!reload);
@@ -108,14 +108,13 @@ export default function AgendamentoUser({ navigation }) {
       </View>
       <ViewLabel>
         <Label>Agendamentos</Label>
-        <Barra/>
+        <Barra />
       </ViewLabel>
 
       <FlatList
         data={listaAgendamento}
-        style={style.flatlist}
-        renderItem={({ item }) => (          
-          <View>
+        renderItem={({ item }) => (
+          <View style={{ flex: 1 }}>
             <Cartao data={item.republica} interessado />
             <ViewData>
               {item.status == 'Análise' && (
