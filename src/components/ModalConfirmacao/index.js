@@ -3,22 +3,13 @@ import { View, Modal, Text } from 'react-native';
 
 import style from './styles';
 import { Button } from 'native-base';
-import { number } from 'yup';
-import {
-  ViewFundo,
-  ViewModal,
-  Titulo,
-  Descricao,
-  BotaoTxt,
-  BotaoTxtCancelar,
-  ViewBotoes
-} from'./styles';
+import { ViewFundo, Titulo, Descricao, BotaoTxt, BotaoTxtCancelar, ViewBotoes } from './styles';
 
 export default function ModalConfirmacao(props) {
   const [modalVisivel, setModalVisivel] = useState(true);
   const [mensagem, setMensagem] = useState('');
-  const [confirmar, setConfirmar] = useState(false);
-  const [rejeitar, setRejeitar] = useState(false);
+  const [confirmar, setConfirmar] = useState(props.confirmar);
+  const [rejeitar, setRejeitar] = useState(props.rejeitar);
 
   onDimiss = number => {
     props.retornoModal(3);
@@ -35,7 +26,7 @@ export default function ModalConfirmacao(props) {
   return (
     <Modal animationType="fade" visible={modalVisivel} transparent={true}>
       <ViewFundo>
-        <ViewModal>
+        <View style={style.viewModal}>
           <Titulo>{props.titulo}</Titulo>
           {mensagem != '' && <Descricao>{mensagem}</Descricao>}
           <ViewBotoes>
@@ -58,7 +49,7 @@ export default function ModalConfirmacao(props) {
               <BotaoTxt>{props.botaoConfirmar}</BotaoTxt>
             </Button>
           </ViewBotoes>
-        </ViewModal>
+        </View>
       </ViewFundo>
     </Modal>
   );

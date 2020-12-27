@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -36,7 +36,6 @@ import {
   ViewBotao,
   Botao,
   LabelBotao
-  
 } from './style';
 
 export function DetalhesCarona({ navigation }) {
@@ -53,9 +52,12 @@ export function DetalhesCarona({ navigation }) {
   const [erro, setErro] = useState(false);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(moment(dados.data).format('dddd, DD MMMM'));
-  const [horaSaida, setHoraSaida] = useState(moment(dados.Hsaida).format('HH:mm'));
-  const [horaChegada, setHoraChegada] = useState(moment(dados.HChegada).format('HH:mm'));
+  const [horaSaida, setHoraSaida] = useState(moment(dados.horaSaida).format('HH:mm'));
+  const [horaChegada, setHoraChegada] = useState(moment(dados.horaChegada).format('HH:mm'));
 
+  useEffect(() => {
+    console.log(navigation.state.params.dados);
+  }, []);
   async function demonstrarInteresse() {
     setLoading(true);
     const dado = { email: email }; //ALTERAR ISSO PARA RECEBER SOMENTE O EMAIL
@@ -166,7 +168,6 @@ export function DetalhesCarona({ navigation }) {
       {!botaoInteresse ? (
         <ViewBotao>
           <Botao
-            
             onPress={() => {
               demonstrarInteresse();
             }}

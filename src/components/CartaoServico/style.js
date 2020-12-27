@@ -57,7 +57,7 @@ export const Descricao = styled.Text`
 export const ViewValor = styled.View`
   justify-content: flex-start;
   flex-direction: row;
-  width: 45%;
+  width: 25%;
   height: 40;
 
   padding: 8px 0px 0px 0px;
@@ -65,7 +65,7 @@ export const ViewValor = styled.View`
 export const ViewVagas = styled.View`
   justify-content: center;
   flex-direction: row;
-  width: 55%;
+  width: 70%;
   height: 40;
   padding: 8px 0px 0px 0px;
 `;

@@ -75,14 +75,27 @@ export const ItemDuplo = styled.View`
   flex-direction: row;
   align-items: center;
 `;
+export const ItemDuploLink = styled.TouchableOpacity`
+  height: 60px;
+  width: 45%;
+  flex-direction: row;
+  align-items: center;
+`;
+
 export const ItemUnico = styled.View`
   height: 60px;
   width: 100%;
   flex-direction: row;
   align-items: center;
 `;
+export const ItemUnicoLink = styled.TouchableOpacity`
+  height: 60px;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+`;
 export const ViewIcone = styled.View`
-   margin-horizontal: 5%;
+  margin: 0 5% 0 5%;
 `;
 export const LabelItem = styled.Text`
   width: 75%;
@@ -90,12 +103,17 @@ export const LabelItem = styled.Text`
   font-family: WorkSans;
   font-size: 14px;
 `;
+
 export const ViewBotao = styled.View`
-  margin-top: 5%;
-  height: 60px;
+  margin-top: 20;
+  margin-bottom: 20;
+  width: 100%;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
 `;
+
 export const BotaoContato = styled(Button)`
   width: 88%;
   height: 60px;
@@ -105,11 +123,11 @@ export const BotaoContato = styled(Button)`
   align-items: center;
   justify-content: center;
   border-radius: 5px;
-  text-align:center;
+  text-align: center;
   background-color: #142850;
 `;
 export const LabelBotao = styled.Text`
-text-align:center;
+  text-align: center;
   width: 75%;
   color: #142850;
   font-family: WorkSans;

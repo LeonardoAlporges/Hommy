@@ -196,7 +196,6 @@ const estilo = StyleSheet.create({
   V_btn: {
     marginTop: 20,
     width: '100%',
-    backgroundColor: 'red',
     justifyContent: 'center',
     display: 'flex',
     alignContent: 'center'

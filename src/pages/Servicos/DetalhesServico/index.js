@@ -22,12 +22,15 @@ import {
   BotaoContato,
   ViewBotao,
   LabelBotao,
-  Imagem
+  Imagem,
+  ItemUnicoLink,
+  ItemDuploLink
 } from './styles';
 
 import { IndicatorViewPager, PagerDotIndicator } from 'rn-viewpager';
 
 import HeaderBack from '../../../components/CustomHeader';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function DetalhesServicos({ navigation }) {
   const [contadorImagem, setContadorImagem] = useState(0);
@@ -36,6 +39,12 @@ export default function DetalhesServicos({ navigation }) {
   function AbrirTelefone() {
     Linking.openURL(`tel:${servico.telefone}`);
   }
+  function AbrirInstagram() {
+    Linking.openURL(`http://instagram.com/_u/${servico.redeSocial}`);
+  }
+  function AbrirEmail() {
+    Linking.openURL(`mailto:${servico.userEmail}`);
+  }
   function navegar() {
     navigation.goBack(null);
   }
@@ -43,9 +52,11 @@ export default function DetalhesServicos({ navigation }) {
   useEffect(() => {
     if (servico.image1 != '' && servico.image1 != null) {
       setContadorImagem(contadorImagem => contadorImagem + 1);
-    } if (servico.image2 != '' && servico.image2 != null) {
+    }
+    if (servico.image2 != '' && servico.image2 != null) {
       setContadorImagem(contadorImagem => contadorImagem + 1);
-    } if (servico.image3 != '' && servico.image3 != null) {
+    }
+    if (servico.image3 != '' && servico.image3 != null) {
       setContadorImagem(contadorImagem => contadorImagem + 1);
     }
   }, []);
@@ -61,8 +72,6 @@ export default function DetalhesServicos({ navigation }) {
   }
 
   return (
-
-
     <ScrollView>
       <HeaderBack title="Detalhes Serviço" onNavigation={() => navegar()} />
       <IndicatorViewPager style={{ height: 300 }} indicator={renderDotIndicator()}>
@@ -110,34 +119,39 @@ export default function DetalhesServicos({ navigation }) {
           <ViewIcone>
             <Icon name="home-outline" style={{ fontSize: 25, color: '#142850' }} />
           </ViewIcone>
-          <LabelItem>{servico.rua}, {servico.numero} - {servico.bairro}</LabelItem>
+          <LabelItem>
+            {servico.rua}, {servico.numero} - {servico.bairro}
+          </LabelItem>
         </ItemUnico>
       </LinhaUnica>
 
       <ViewSubTitle>
         <SubTitle>Contato</SubTitle>
       </ViewSubTitle>
-      <LinhaDupla>
-        <ItemDuplo>
-          <ViewIcone>
-            <Icon name="phone-outline" style={{ fontSize: 25, color: '#142850' }} />
-          </ViewIcone>
-          <LabelItem>{servico.telefone}</LabelItem>
-        </ItemDuplo>
-        <ItemDuplo>
+      <LinhaUnica>
+        <ItemUnicoLink
+          onPress={() => {
+            AbrirEmail();
+          }}
+        >
           <ViewIcone>
             <Icon name="email-outline" style={{ fontSize: 25, color: '#142850' }} />
           </ViewIcone>
           <LabelItem>{servico.userEmail}</LabelItem>
-        </ItemDuplo>
-      </LinhaDupla>
+        </ItemUnicoLink>
+      </LinhaUnica>
       <LinhaUnica>
-        <ItemUnico>
+        <ItemUnicoLink
+          onPress={() => {
+            AbrirInstagram();
+          }}
+        >
           <ViewIcone>
             <Icon name="instagram" style={{ fontSize: 25, color: '#142850' }} />
           </ViewIcone>
+
           <LabelItem>{servico.redeSocial}</LabelItem>
-        </ItemUnico>
+        </ItemUnicoLink>
       </LinhaUnica>
       <ViewSubTitle>
         <SubTitle>Horarios de atendimento</SubTitle>
@@ -147,7 +161,9 @@ export default function DetalhesServicos({ navigation }) {
           <ViewIcone>
             <Icon name="clock-outline" style={{ fontSize: 25, color: '#142850' }} />
           </ViewIcone>
-          <LabelItem>De {servico.horario.inicio} às {servico.horario.fim} - {servico.dia.inicio} até {servico.dia.fim}</LabelItem>
+          <LabelItem>
+            De {servico.horario.inicio} às {servico.horario.fim} - {servico.dia.inicio} até {servico.dia.fim}
+          </LabelItem>
         </ItemUnico>
       </LinhaUnica>
       <ViewBotao>
@@ -164,6 +180,5 @@ export default function DetalhesServicos({ navigation }) {
         </BotaoContato>
       </ViewBotao>
     </ScrollView>
-
   );
 }

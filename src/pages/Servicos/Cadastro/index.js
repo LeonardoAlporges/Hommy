@@ -20,7 +20,7 @@ import { imagePickerOptions, uploadFileToFireBaseServico, uploadProgress } from 
 import { NavigationActions, StackActions } from 'react-navigation';
 import { set } from 'lodash';
 
-import { FieldSet, LabelFielSet, Linha, FieldSetLarge, AreaFotos, LabelFotos, DivisaoFotos, } from './styles';
+import { FieldSet, LabelFielSet, Linha, FieldSetLarge, AreaFotos, LabelFotos, DivisaoFotos } from './styles';
 export default function CadastroServico({ navigation }) {
   const avatarUser = useSelector(state => state.user.fotoPerfil);
   const emailUser = useSelector(state => state.user.email);
@@ -187,26 +187,23 @@ export default function CadastroServico({ navigation }) {
 
   return (
     <Formik
-      initialValues={
-        {
-          nomeEmpresa: '',
-          nomePrestador: '',
-          telefone: '',
-          email: '',
-          cidade: '',
-          tipo: '',
-          desc: '',
-          redeSocial: '',
-          bairro: '',
-          rua: '',
-          numero: '',
-          diaInicial: '',
-          diaFnal: '',
-          horaInicial: '',
-          horaFinal: '',
-
-        }
-      }
+      initialValues={{
+        nomeEmpresa: '',
+        nomePrestador: '',
+        telefone: '',
+        email: '',
+        cidade: '',
+        tipo: '',
+        desc: '',
+        redeSocial: '',
+        bairro: '',
+        rua: '',
+        numero: '',
+        diaInicial: '',
+        diaFnal: '',
+        horaInicial: '',
+        horaFinal: ''
+      }}
       onSubmit={values => {
         preencherDados(values);
       }}
@@ -236,29 +233,12 @@ export default function CadastroServico({ navigation }) {
           .min(3, 'Minimo de 3 caracteres')
           .max(30, 'Maximo permitido de 30 caracteres')
           .required('Campo obrigatório'),
-        telefone: yup
-          .string()
-          .max(9999999999999)
-          .required(' Campo obrigatórior'),
-        email: yup
-          .string()
-          .email('E-mail inválido ou incorreto')
-          .required('Campo obrigatório'),
-        cidade: yup
-          .string('')
-          .min(3, 'Minimo de 3 caracteres')
-          .max(30, 'Maximo permitido de 30 caracteres'),
-        bairro: yup
-          .string('')
-          .min(3, 'Minimo de 3 caracteres')
-          .max(30, 'Maximo permitido de 30 caracteres'),
-        rua: yup
-          .string('')
-          .min(3, 'Minimo de 3 caracteres')
-          .max(30, 'Maximo permitido de 30 caracteres'),
-        numero: yup
-          .number('Somente números')
-          .required('Campo Obrigatório'),
+        telefone: yup.string().max(9999999999999).required(' Campo obrigatórior'),
+        email: yup.string().email('E-mail inválido ou incorreto').required('Campo obrigatório'),
+        cidade: yup.string('').min(3, 'Minimo de 3 caracteres').max(30, 'Maximo permitido de 30 caracteres'),
+        bairro: yup.string('').min(3, 'Minimo de 3 caracteres').max(30, 'Maximo permitido de 30 caracteres'),
+        rua: yup.string('').min(3, 'Minimo de 3 caracteres').max(30, 'Maximo permitido de 30 caracteres'),
+        numero: yup.number('Somente números').required('Campo Obrigatório'),
         diaInicial: yup
           .string('')
           .min(3, 'Minimo de 3 caracteres')
@@ -273,6 +253,7 @@ export default function CadastroServico({ navigation }) {
     >
       {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
         <Fragment>
+          {loading && <Loading></Loading>}
           {erro && (
             <CustomModal
               parametro="Erro"
@@ -295,15 +276,11 @@ export default function CadastroServico({ navigation }) {
           <ViewPager style={{ flex: 1 }}>
             <ScrollView>
               <View key="1">
-                <HeaderBack
-                  title="Cadastro de serviço"
-                  onNavigation={() => navigation.goBack(null)}
-                />
+                <HeaderBack title="Cadastro de serviço" onNavigation={() => navigation.goBack(null)} />
 
                 <View style={estilo.V_Conteudo}>
                   <Text style={estilo.txtCarona}>
-                    Preencha os campos abaixo com as informações necessárias para registrar sua
-                    empresa/serviço
+                    Preencha os campos abaixo com as informações necessárias para registrar sua empresa/serviço
                   </Text>
 
                   <Linha>
@@ -354,9 +331,7 @@ export default function CadastroServico({ navigation }) {
                         />
                       </Item>
                       <View style={estilo.V_erro}>
-                        {touched.tipo && errors.tipo && (
-                          <Text style={estilo.textError}>{errors.tipo}</Text>
-                        )}
+                        {touched.tipo && errors.tipo && <Text style={estilo.textError}>{errors.tipo}</Text>}
                       </View>
                     </FieldSetLarge>
                   </Linha>
@@ -389,10 +364,10 @@ export default function CadastroServico({ navigation }) {
                           />
                         </View>
                       ) : (
-                          <View style={estilo.V_ImageFull}>
-                            <Image source={{ uri: imagem1 }} style={estilo.ImageFull} />
-                          </View>
-                        )}
+                        <View style={estilo.V_ImageFull}>
+                          <Image source={{ uri: imagem1 }} style={estilo.ImageFull} />
+                        </View>
+                      )}
                       {imagem2 == null ? (
                         <View style={estilo.V_ImageFullEmpty}>
                           <Image
@@ -401,10 +376,10 @@ export default function CadastroServico({ navigation }) {
                           />
                         </View>
                       ) : (
-                          <View style={estilo.V_ImageFull}>
-                            <Image source={{ uri: imagem2 }} style={estilo.ImageFull} />
-                          </View>
-                        )}
+                        <View style={estilo.V_ImageFull}>
+                          <Image source={{ uri: imagem2 }} style={estilo.ImageFull} />
+                        </View>
+                      )}
                       {imagem3 == null ? (
                         <View style={estilo.V_ImageFullEmpty}>
                           <Image
@@ -413,10 +388,10 @@ export default function CadastroServico({ navigation }) {
                           />
                         </View>
                       ) : (
-                          <View style={estilo.V_ImageFull}>
-                            <Image source={{ uri: imagem3 }} style={estilo.ImageFull} />
-                          </View>
-                        )}
+                        <View style={estilo.V_ImageFull}>
+                          <Image source={{ uri: imagem3 }} style={estilo.ImageFull} />
+                        </View>
+                      )}
                     </DivisaoFotos>
                     <View style={estilo.V_BotaoImg}>
                       <TouchableOpacity
@@ -454,9 +429,7 @@ export default function CadastroServico({ navigation }) {
                         />
                       </Item>
                       <View style={estilo.V_erro}>
-                        {touched.telefone && errors.telefone && (
-                          <Text style={estilo.textError}>{errors.telefone}</Text>
-                        )}
+                        {touched.telefone && errors.telefone && <Text style={estilo.textError}>{errors.telefone}</Text>}
                       </View>
                     </FieldSet>
                     <FieldSet>
@@ -470,9 +443,7 @@ export default function CadastroServico({ navigation }) {
                         />
                       </Item>
                       <View style={estilo.V_erro}>
-                        {touched.email && errors.email && (
-                          <Text style={estilo.textError}>{errors.email}</Text>
-                        )}
+                        {touched.email && errors.email && <Text style={estilo.textError}>{errors.email}</Text>}
                       </View>
                     </FieldSet>
                   </Linha>
@@ -517,9 +488,7 @@ export default function CadastroServico({ navigation }) {
                         </Picker>
                       </Item>
                       <View style={estilo.V_erro}>
-                        {touched.cidade && errors.cidade && (
-                          <Text style={estilo.textError}>{errors.cidade}</Text>
-                        )}
+                        {touched.cidade && errors.cidade && <Text style={estilo.textError}>{errors.cidade}</Text>}
                       </View>
                     </FieldSet>
                     <FieldSet>
@@ -545,9 +514,7 @@ export default function CadastroServico({ navigation }) {
                         </Picker>
                       </Item>
                       <View style={estilo.V_erro}>
-                        {touched.bairro && errors.bairro && (
-                          <Text style={estilo.textError}>{errors.bairro}</Text>
-                        )}
+                        {touched.bairro && errors.bairro && <Text style={estilo.textError}>{errors.bairro}</Text>}
                       </View>
                     </FieldSet>
                   </Linha>
@@ -563,9 +530,7 @@ export default function CadastroServico({ navigation }) {
                         />
                       </Item>
                       <View style={estilo.V_erro}>
-                        {touched.rua && errors.rua && (
-                          <Text style={estilo.textError}>{errors.rua}</Text>
-                        )}
+                        {touched.rua && errors.rua && <Text style={estilo.textError}>{errors.rua}</Text>}
                       </View>
                     </FieldSet>
                     <FieldSet style={{ width: '30%' }}>
@@ -580,15 +545,11 @@ export default function CadastroServico({ navigation }) {
                         />
                       </Item>
                       <View style={estilo.V_erro}>
-                        {touched.numero && errors.numero && (
-                          <Text style={estilo.textError}>{errors.numero}</Text>
-                        )}
+                        {touched.numero && errors.numero && <Text style={estilo.textError}>{errors.numero}</Text>}
                       </View>
                     </FieldSet>
                   </Linha>
-                  <Text style={estilo.txtCarona}>
-                    Informe seu período de trabalho nos campos abaixo
-                  </Text>
+                  <Text style={estilo.txtCarona}>Informe seu período de trabalho nos campos abaixo</Text>
                   <Linha>
                     <FieldSet>
                       <LabelFielSet>Dia de inicio</LabelFielSet>
@@ -645,9 +606,7 @@ export default function CadastroServico({ navigation }) {
                         </Picker>
                       </Item>
                       <View style={estilo.V_erro}>
-                        {touched.diaFinal && errors.diaFinal && (
-                          <Text style={estilo.textError}>{errors.diaFinal}</Text>
-                        )}
+                        {touched.diaFinal && errors.diaFinal && <Text style={estilo.textError}>{errors.diaFinal}</Text>}
                       </View>
                     </FieldSet>
                   </Linha>
@@ -675,11 +634,8 @@ export default function CadastroServico({ navigation }) {
                         </TouchableOpacity>
                       </Item>
                       <View style={estilo.V_erro}>
-                        {!horaInicial && botaoEnviar && (
-                          <Text style={estilo.textError}>Campo obrigatório</Text>
-                        )}
+                        {!horaInicial && botaoEnviar && <Text style={estilo.textError}>Campo obrigatório</Text>}
                       </View>
-
                     </FieldSet>
                     <FieldSet>
                       <LabelFielSet>Hora de termino</LabelFielSet>
@@ -704,9 +660,7 @@ export default function CadastroServico({ navigation }) {
                         </TouchableOpacity>
                       </Item>
                       <View style={estilo.V_erro}>
-                        {!horaFinal && botaoEnviar && (
-                          <Text style={estilo.textError}>Campo obrigatório</Text>
-                        )}
+                        {!horaFinal && botaoEnviar && <Text style={estilo.textError}>Campo obrigatório</Text>}
                       </View>
                     </FieldSet>
                   </Linha>
@@ -727,15 +681,6 @@ export default function CadastroServico({ navigation }) {
               </View>
             </ScrollView>
           </ViewPager>
-          <View>
-            <Modal animationType="fade" transparent={true} visible={loading}>
-              <View style={estilo.ViewFundo}>
-                <View style={estilo.ViewModal}>
-                  <Spinner color="red" />
-                </View>
-              </View>
-            </Modal>
-          </View>
         </Fragment>
       )}
     </Formik>
