@@ -48,9 +48,7 @@ import { ScrollView } from 'react-native';
 export default function GerenciamentoDeRepublica({ navigation }) {
   const moment = require('moment');
   moment.locale('pt', {
-    months: 'Janeiro_Fevereiro_Março_Abril_Maio_Junho_Julho_Agosto_Setembro_Outubro_Novembro_Dezembro'.split(
-      '_'
-    )
+    months: 'Janeiro_Fevereiro_Março_Abril_Maio_Junho_Julho_Agosto_Setembro_Outubro_Novembro_Dezembro'.split('_')
   });
   const [codigoRepublica, setCodigoRepublica] = useState();
   const anoCorrente = moment().format('YYYY');
@@ -82,9 +80,7 @@ export default function GerenciamentoDeRepublica({ navigation }) {
   const [responsavelTarefa, setResponsavelTarefa] = useState();
 
   const handleChangeInput = event => {
-    console.log('evento', event);
     setNomeRepublica(event);
-    console.log(nomeRepublica);
   };
 
   useEffect(() => {
@@ -102,10 +98,11 @@ export default function GerenciamentoDeRepublica({ navigation }) {
   }, [listaDeContas]);
 
   useEffect(() => {
+    setLoading(true);
     buscarContas();
     buscarTarefas();
     setLoading(false);
-  }, [idRepublica]);
+  }, [existeRepublica]);
 
   function adicionarMembroPorCodigo() {
     const data = {
@@ -168,7 +165,8 @@ export default function GerenciamentoDeRepublica({ navigation }) {
         console.log(error.response);
 
         setErro(true);
-      });
+      })
+      .finally(setLoading(false));
   }
   function buscarContas() {
     api
@@ -237,7 +235,6 @@ export default function GerenciamentoDeRepublica({ navigation }) {
         }
       })
       .catch(error => {
-        console.log('TArefas ERRO :', error);
         setErro(true);
       });
   }
@@ -360,21 +357,20 @@ export default function GerenciamentoDeRepublica({ navigation }) {
         />
       )}
       <HeaderBack title="Gerenciamento de republica" onNavigation={() => navigation.goBack(null)} />
+      {loading && <Loading />}
       {!existeRepublica ? (
         <ScrollView>
-          <AdicionarRepublica>
-            {loading ? (
-              <Loading></Loading>
-            ) : (
+          {loading ? (
+            <Loading></Loading>
+          ) : (
+            <AdicionarRepublica>
               <View style={{ alignItems: 'center', marginTop: 50, marginBottom: 40 }}>
                 <Image
                   source={require('../../../assets/Img/adicionar_republica.png')}
                   style={{ width: 150, height: 150 }}
                 />
                 <V_titulo>
-                  <Titulo>
-                    Voce ainda nao tem uma republica cadastrada para gerenciar. Cadastre agora mesmo
-                  </Titulo>
+                  <Titulo>Voce ainda nao tem uma republica cadastrada para gerenciar. Cadastre agora mesmo</Titulo>
                 </V_titulo>
                 <Linha>
                   <FieldSetLarge>
@@ -395,10 +391,7 @@ export default function GerenciamentoDeRepublica({ navigation }) {
                   </Botao>
                 </LinhaBotao>
                 <V_titulo style={{ marginTop: 20 }}>
-                  <Titulo>
-                    {' '}
-                    Ou entre em uma republica já existente com o codigo de convite da mesma
-                  </Titulo>
+                  <Titulo> Ou entre em uma republica já existente com o codigo de convite da mesma</Titulo>
                 </V_titulo>
                 <Linha>
                   <FieldSetLarge>
@@ -419,11 +412,12 @@ export default function GerenciamentoDeRepublica({ navigation }) {
                   </Botao>
                 </LinhaBotao>
               </View>
-            )}
-          </AdicionarRepublica>
+            </AdicionarRepublica>
+          )}
         </ScrollView>
       ) : (
         <TelaGerenciamento>
+          {loading && <Loading />}
           <ViewNomeRepublica style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
             <NomeRepublica>{republica.republica}</NomeRepublica>
             <TouchableOpacity onPress={() => excluirRepublica()}>
@@ -465,10 +459,7 @@ export default function GerenciamentoDeRepublica({ navigation }) {
             </TituloEPicker>
             {listaDeContas.length == 0 ? (
               <EmptyContas>
-                <Image
-                  source={require('../../../assets/Img/semInformacao.png')}
-                  style={{ width: 80, height: 80 }}
-                />
+                <Image source={require('../../../assets/Img/semInformacao.png')} style={{ width: 80, height: 80 }} />
                 <V_titulo>
                   <Titulo style={{ fontSize: 14 }}>Voce ainda nao tem contas registradas</Titulo>
                 </V_titulo>
@@ -561,10 +552,7 @@ export default function GerenciamentoDeRepublica({ navigation }) {
             </ViewTitulo>
             {listaDeTarefas.length == 0 ? (
               <EmptyContas>
-                <Image
-                  source={require('../../../assets/Img/semInformacao.png')}
-                  style={{ width: 80, height: 80 }}
-                />
+                <Image source={require('../../../assets/Img/semInformacao.png')} style={{ width: 80, height: 80 }} />
                 <V_titulo>
                   <Titulo style={{ fontSize: 14 }}>Voce ainda nao tem tarefas registradas</Titulo>
                 </V_titulo>
