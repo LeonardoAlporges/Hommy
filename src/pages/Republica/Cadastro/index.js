@@ -52,30 +52,26 @@ export default function Cadastro({ navigation }) {
 
   useEffect(() => {
     if (atualizarCadastro) {
+      var cont = 0;
       if (dadosRepublica.imagem1 != null) {
         setImagem1(dadosRepublica.imagem1);
         setLinkImagem1(dadosRepublica.imagem1);
-        setContadorImagem(contadorImagem + 1);
+        cont++;
       }
 
       if (dadosRepublica.imagem2 != null) {
         setImagem2(dadosRepublica.imagem2);
         setLinkImagem2(dadosRepublica.imagem2);
-        setContadorImagem(contadorImagem + 1);
+        cont++;
       }
 
       if (dadosRepublica.imagem3 != null) {
         setImagem3(dadosRepublica.imagem3);
-        setLinkImagem3(dadosRepublica.imagem3);
-        setContadorImagem(contadorImagem + 1);
+        cont++;
       }
     }
-    verificarParametro();
+    setContadorImagem(cont);
   }, []);
-
-  function verificarParametro() {
-    console.log(imagem1, imagem2, imagem3);
-  }
 
   function preencherFoto(linkImagem) {
     console.log(linkImagem.uri);
@@ -600,7 +596,7 @@ export default function Cadastro({ navigation }) {
                               height: '100%'
                             }}
                             keyboardType="number-pad"
-                            mask={'[999]{.}[99]'}
+                            mask={'[999][99]'}
                             value={values.contas}
                             onChangeText={handleChange('contas')}
                             placeholder="000.00"

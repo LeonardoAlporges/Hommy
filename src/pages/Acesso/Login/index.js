@@ -47,7 +47,7 @@ export function Login({ navigation }) {
   const [modalErroLogin, setmodalErroLogin] = useState(false);
   const [modalErroSenha, setmodalErroSenha] = useState(false);
   const [password, setPassword] = useState(true);
-  //const tokenAparelho = useSelector(state => state.user.tokenUser);
+  const tokenAparelho = useSelector(state => state.user.tokenUser);
   const [loading, setloading] = useState(false);
   const dispatch = useDispatch();
 
@@ -162,8 +162,8 @@ export function Login({ navigation }) {
     setloading(true);
     const data = {
       email: value.email,
-      password: value.password
-      // tokenD: tokenAparelho
+      password: value.password,
+      tokenD: tokenAparelho
     };
     console.log('?32??', data);
     api
@@ -305,7 +305,7 @@ export function Login({ navigation }) {
               <RecuperaSenha>
                 <Click
                   onPress={() => {
-                    navigation.navigate('AutenticacaoTelefone');
+                    navigation.navigate('EsqueciSenha');
                   }}
                 >
                   <LabelEsqueciSenha>Esqueci minha senha!</LabelEsqueciSenha>

@@ -71,7 +71,7 @@ const style = StyleSheet.create({
   viewModal: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 250,
+    height: 180,
     marginHorizontal: 30,
     backgroundColor: 'white',
     borderRadius: 10

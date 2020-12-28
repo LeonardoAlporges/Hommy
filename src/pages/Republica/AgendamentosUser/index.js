@@ -97,7 +97,7 @@ export default function AgendamentoUser({ navigation }) {
           confirmar={true}
         />
       )}
-      {listaAgendamento.length == 0 && (
+      {listaAgendamento.length == 0 && !loading && (
         <EmptyState
           titulo="Você não possui visitas agendadas."
           mensagem="O que está esperando? Navegue pelo aplicativo e encontre uma vaga na república ideal. "
