@@ -35,7 +35,7 @@ import {
   TextoLabel,
   ViewBotao,
   Botao,
-  LabelBotao
+  Label
 } from './style';
 
 export function DetalhesCarona({ navigation }) {
@@ -75,109 +75,107 @@ export function DetalhesCarona({ navigation }) {
   }
 
   return (
-    <ScrollView style={{ paddingBottom: 50 }}>
-      {loading && <Loading />}
-      {sucesso && (
-        <CustomModal
-          parametro="Custom"
-          titulo="Obrigado pelo interesse"
-          descricao="Você será adicionado a uma lista de interesse e será notificado assim que o ofertante confirmar sua vaga."
-          botao="Confirmar"
-          callback={() => {
-            navigation.navigate('Viagens');
-          }}
-        />
-      )}
-      {erro && (
-        <CustomModal
-          parametro="Erro"
-          descricao="Você já tem um agendamento cadastrado nessa carona."
-          callback={() => {
-            setErro(false);
-          }}
-        />
-      )}
-
-      <Header>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.goBack(null);
-          }}
-        >
-          <Icon style={{ fontSize: 30, color: '#FFFFFF' }} name="arrow-left" />
-        </TouchableOpacity>
-      </Header>
-
-      <HeaderUser>
-        <Imagem
-          source={{
-            uri: dados.imagem
-          }}
-        />
-        <InformacaoPerfil>
-          <Nome>{dados.nome} </Nome>
-          <ViewNotas>
-            <Icon style={{ fontSize: 20, color: '#FFFFFF', marginHorizontal: 3 }} name="star-outline" />
-            <Nota>{dados.nota}</Nota>
-          </ViewNotas>
-        </InformacaoPerfil>
-      </HeaderUser>
-
-      <ContainerIformacao>
-        <ViewData>
-          <Data>{data}</Data>
-        </ViewData>
-        <ViewPartida>
-          <Partida>Saída</Partida>
-        </ViewPartida>
-        <ViewHora>
-          <Hora>
-            {horaSaida} - {dados.localSaida}
-          </Hora>
-        </ViewHora>
-        <ViewPartida>
-          <Partida>Previsão Chegada</Partida>
-        </ViewPartida>
-        <ViewHora>
-          <Hora>
-            {horaChegada} - {dados.localChegada}
-          </Hora>
-        </ViewHora>
-
-        <ViewValor>
-          <LabelValor>Preço para 1 passageiro</LabelValor>
-          <Valor>R$ {dados.valor},00</Valor>
-        </ViewValor>
-      </ContainerIformacao>
-      <BarraSeparadora />
-
-      <ViewPontos>
-        <ViewPontoEmbarque>
-          <LabelPontoEmbarque>Ponto de Embarque</LabelPontoEmbarque>
-        </ViewPontoEmbarque>
-        <ViewLabel>
-          <TextoLabel>•{dados.embarque}</TextoLabel>
-        </ViewLabel>
-        <ViewPontoEmbarque>
-          <LabelPontoEmbarque>Ponto Final</LabelPontoEmbarque>
-        </ViewPontoEmbarque>
-        <ViewLabel>
-          <TextoLabel>•{dados.desembarque}</TextoLabel>
-        </ViewLabel>
-      </ViewPontos>
-      {!botaoInteresse ? (
-        <ViewBotao>
-          <Botao
+    <ScrollView>
+      <View style={{ width: '100%', height: '100%', paddingBottom: 40 }}>
+        {loading && <Loading />}
+        {sucesso && (
+          <CustomModal
+            parametro="Custom"
+            titulo="Obrigado pelo interesse"
+            descricao="Você será adicionado a uma lista de interesse e será notificado assim que o ofertante confirmar sua vaga."
+            botao="Confirmar"
+            callback={() => {
+              navigation.navigate('Viagens');
+            }}
+          />
+        )}
+        {erro && (
+          <CustomModal
+            parametro="Erro"
+            descricao="Você já tem um agendamento cadastrado nessa carona."
+            callback={() => {
+              setErro(false);
+            }}
+          />
+        )}
+        <Header>
+          <TouchableOpacity
             onPress={() => {
-              demonstrarInteresse();
+              navigation.goBack(null);
             }}
           >
-            <LabelBotao>Tenho Interesse</LabelBotao>
-          </Botao>
-        </ViewBotao>
-      ) : (
-        <View style={{ height: 40 }} />
-      )}
+            <Icon style={{ fontSize: 30, color: '#FFFFFF' }} name="arrow-left" />
+          </TouchableOpacity>
+        </Header>
+        <HeaderUser>
+          <Imagem
+            source={{
+              uri: dados.imagem
+            }}
+          />
+          <InformacaoPerfil>
+            <Nome>{dados.nome} </Nome>
+            <ViewNotas>
+              <Icon style={{ fontSize: 20, color: '#FFFFFF', marginHorizontal: 3 }} name="star-outline" />
+              <Nota>{dados.nota}</Nota>
+            </ViewNotas>
+          </InformacaoPerfil>
+        </HeaderUser>
+        <ContainerIformacao>
+          <ViewData>
+            <Data>{data}</Data>
+          </ViewData>
+          <ViewPartida>
+            <Partida>Saída</Partida>
+          </ViewPartida>
+          <ViewHora>
+            <Hora>
+              {horaSaida} - {dados.localSaida}
+            </Hora>
+          </ViewHora>
+          <ViewPartida>
+            <Partida>Previsão Chegada</Partida>
+          </ViewPartida>
+          <ViewHora>
+            <Hora>
+              {horaChegada} - {dados.localChegada}
+            </Hora>
+          </ViewHora>
+
+          <ViewValor>
+            <LabelValor>Preço para 1 passageiro</LabelValor>
+            <Valor>R$ {dados.valor},00</Valor>
+          </ViewValor>
+        </ContainerIformacao>
+        <BarraSeparadora />
+        <ViewPontos>
+          <ViewPontoEmbarque>
+            <LabelPontoEmbarque>Ponto de Embarque</LabelPontoEmbarque>
+          </ViewPontoEmbarque>
+          <ViewLabel>
+            <TextoLabel>•{dados.embarque}</TextoLabel>
+          </ViewLabel>
+          <ViewPontoEmbarque>
+            <LabelPontoEmbarque>Ponto Final</LabelPontoEmbarque>
+          </ViewPontoEmbarque>
+          <ViewLabel>
+            <TextoLabel>•{dados.desembarque}</TextoLabel>
+          </ViewLabel>
+        </ViewPontos>
+        {!botaoInteresse ? (
+          <ViewBotao>
+            <Botao
+              onPress={() => {
+                demonstrarInteresse();
+              }}
+            >
+              <Label>Tenho Interesse</Label>
+            </Botao>
+          </ViewBotao>
+        ) : (
+          <View style={{ height: 30 }} />
+        )}
+      </View>
     </ScrollView>
   );
 }

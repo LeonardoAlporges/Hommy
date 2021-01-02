@@ -4,8 +4,9 @@ import { Formik } from 'formik';
 import React, { Fragment, useState } from 'react';
 import { ScrollView, Modal, TouchableOpacity } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
-import { Item, Input, Button, Spinner, Icon } from 'native-base';
+import { Item, Input, Button, Spinner } from 'native-base';
 import { imagePickerOptions, uploadFileToFireBaseUser, uploadProgress } from '../../../utils';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import CustomModal from '../../../components/Alert';
 import estilo from './style';
@@ -30,6 +31,7 @@ import {
   BackgroundLoad,
   ModalLoad
 } from './style';
+import Loading from '../../../components/Loading';
 
 export default function CadastroUsuario({ navigation }) {
   const [imagemPerfil, setImagemPerfil] = useState();
@@ -65,7 +67,7 @@ export default function CadastroUsuario({ navigation }) {
         setSucesso(true);
       })
       .catch(error => {
-        console.log(response);
+        console.log(error);
         setLoading(false);
         setErro(true);
       });
@@ -96,12 +98,12 @@ export default function CadastroUsuario({ navigation }) {
 
   function monitorFileUpload(task) {
     task.on('state_changed', snapshot => {
-          snapshot.ref.getDownloadURL().then(downloadURL => {
-            setImagemLink(downloadURL);
-          });
+      snapshot.ref.getDownloadURL().then(downloadURL => {
+        setImagemLink(downloadURL);
+      });
     });
-  };
-  
+  }
+
   return (
     <ScrollView style={{ display: 'flex' }}>
       <HeaderBack title="Cadastro de usuário" onNavigation={() => goBackScreen()} />
@@ -132,10 +134,7 @@ export default function CadastroUsuario({ navigation }) {
             nome: yup.string().required('Campo obrigatórior').max(20, 'Máxim de caracteres é 20'),
             email: yup.string().email('E-mail inválido ou incorreto').required('Campo obrigatório'),
             celular: yup.string().max(9999999999999).required(' Campo obrigatórior'),
-            password: yup
-              .string()
-              .min(8, 'Mínimo 8 dígitos necessários')
-              .required('Campo obrigatório')
+            password: yup.string().min(8, 'Mínimo 8 dígitos necessários').required('Campo obrigatório')
           })}
         >
           {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
@@ -173,9 +172,7 @@ export default function CadastroUsuario({ navigation }) {
                     placeholder="Nome"
                   />
                 </Item>
-                <Invalido>
-                  {touched.nome && errors.nome && <LabelErro>{errors.nome}</LabelErro>}
-                </Invalido>
+                <Invalido>{touched.nome && errors.nome && <LabelErro>{errors.nome}</LabelErro>}</Invalido>
               </CampoLogin>
 
               <CampoLogin>
@@ -189,9 +186,7 @@ export default function CadastroUsuario({ navigation }) {
                     onBlur={() => setFieldTouched('email')}
                   />
                 </Item>
-                <Invalido>
-                  {touched.email && errors.email && <LabelErro>{errors.email}</LabelErro>}
-                </Invalido>
+                <Invalido>{touched.email && errors.email && <LabelErro>{errors.email}</LabelErro>}</Invalido>
               </CampoLogin>
 
               <CampoLogin>
@@ -207,9 +202,7 @@ export default function CadastroUsuario({ navigation }) {
                     onBlur={() => setFieldTouched('celular')}
                   />
                 </Item>
-                <Invalido>
-                  {touched.celular && errors.celular && <LabelErro>{errors.celular}</LabelErro>}
-                </Invalido>
+                <Invalido>{touched.celular && errors.celular && <LabelErro>{errors.celular}</LabelErro>}</Invalido>
               </CampoLogin>
 
               <CampoLogin>
@@ -228,12 +221,10 @@ export default function CadastroUsuario({ navigation }) {
                       changePassword();
                     }}
                   >
-                    <Icon name="eye" style={{ color: '#263b50' }} />
+                    <Icon name="key-outline" style={{ fontSize: 20, color: '#263b50', marginRight: 10 }} />
                   </TouchableOpacity>
                 </Item>
-                <Invalido>
-                  {touched.password && errors.password && <LabelErro>{errors.password}</LabelErro>}
-                </Invalido>
+                <Invalido>{touched.password && errors.password && <LabelErro>{errors.password}</LabelErro>}</Invalido>
               </CampoLogin>
 
               <View style={estilo.view_BotaoEntar}>
@@ -252,15 +243,7 @@ export default function CadastroUsuario({ navigation }) {
           )}
         </Formik>
       </Container>
-      {loading && (
-        <Modal animationType="slide" transparent visible={loading}>
-          <BackgroundLoad>
-            <ModalLoad>
-              <Spinner color="#142850" />
-            </ModalLoad>
-          </BackgroundLoad>
-        </Modal>
-      )}
+      {loading && <Loading></Loading>}
     </ScrollView>
   );
 }

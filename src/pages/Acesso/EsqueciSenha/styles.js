@@ -1,11 +1,10 @@
 import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 
-
 export const Container = styled.View`
   width: 100%;
   height: 100%;
-  alignItems: center;
+  align-items: center;
 `;
 
 export const ViewImagem = styled.View`
@@ -17,7 +16,7 @@ export const ViewImagem = styled.View`
 export const ViewTitulo = styled.View`
   margin-top: 5%;
   padding: 10%;
-  paddingTop: 0%;
+  padding-top: 0%;
   width: 100%;
   height: 28;
   align-items: flex-start;
@@ -47,8 +46,8 @@ export const ViewBotao = styled.View`
   margin-top: 30%;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 50;
+  width: 200px;
+  height: 50px;
 `;
 
 export const TextoBotao = styled.Text`
@@ -68,7 +67,7 @@ export const ViewModal = styled.View`
 export const CamposLogin = styled.View`
   margin-top: 15%;
   height: 60;
-  width: 330;
+  width: 330px;
 `;
 
 export const ViewErro = styled.View`
@@ -88,29 +87,29 @@ const estilo = StyleSheet.create({
   V_img: {
     marginTop: '10%',
     width: 200,
-    height: 150,
+    height: 150
   },
   botao: {
-    width: '80%',
+    width: 200,
     height: 60,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#142850',
     borderRadius: 10,
-    flexDirection: "row"
+    flexDirection: 'row'
   },
   icons_CamposLogin: {
     fontSize: 25,
     margin: 5,
-    color: '#142850',
+    color: '#142850'
   },
   labelInput: {
     fontSize: 20,
     fontFamily: 'WorkSans',
     marginLeft: '2%',
-    width: '88%',
-    height: 60,
-  },
+    width: 200,
+    height: 60
+  }
 });
 
 export default estilo;
