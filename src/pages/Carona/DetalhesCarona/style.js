@@ -112,7 +112,6 @@ export const ViewPontos = styled.View`
   padding: 10px;
   width: 100%;
   height: 20%;
-  margin-bottom: 10%;
   padding: 0px 30px 0px 30px;
 `;
 export const ViewPontoEmbarque = styled.View`
@@ -135,23 +134,26 @@ export const TextoLabel = styled.Text`
   color: #142850;
   font-size: 20;
 `;
+
 export const ViewBotao = styled.View`
+  margin-bottom: 20;
   width: 100%;
-  height: 45px;
   align-items: center;
   justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
 `;
-export const Botao = styled(Button)`
-  align-items:center;
-  justify-content:center;
-  width:100%;
-  height:50px;
-  border-radius:5px;
-  background-color:#142850;
+export const Botao = styled.TouchableOpacity`
+  width: 50%;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  background-color: #142850;
+  border-radius: 5px;
 `;
-export const LabelBotao = styled.Text`
-  font-family: WorkSans-SemiBold;
+export const Label = styled.Text`
   color: #fff;
-  font-size: 20;
+  font-size: 16px;
+  font-family: WorkSans;
 `;
-

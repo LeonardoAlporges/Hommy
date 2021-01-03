@@ -30,10 +30,8 @@ import {
   LabelErro
 } from './styles';
 
-
 export default function EsqueciSenha({ navigation }) {
   const [erro, setErro] = useState(false);
-  const [sucesso, setSucesso] = useState(false);
   const [loading, setLoading] = useState(false);
 
   function EnviarCodigo(values) {
@@ -42,19 +40,20 @@ export default function EsqueciSenha({ navigation }) {
       .put('/alterar/cod/', values)
       .then(response => {
         setLoading(false);
-        setSucesso(true);
         navigation.navigate('ValidarCodigo', { email: values });
+        console.log(response);
       })
       .catch(error => {
         setLoading(false);
         setErro(true);
+        console.log(error);
       });
   }
 
   function resetarPilhaNavegacao(Rota) {
     const resetAction = StackActions.reset({
       index: 0,
-      actions: [NavigationActions.navigate({ routeName: Rota })],
+      actions: [NavigationActions.navigate({ routeName: Rota })]
     });
 
     navigation.dispatch(resetAction);
@@ -76,13 +75,10 @@ export default function EsqueciSenha({ navigation }) {
 
       <Formik
         initialValues={{
-          email: '',
+          email: ''
         }}
         validationSchema={yup.object().shape({
-          email: yup
-            .string('')
-            .email('E-mail inválido ou incorreto')
-            .required('Campo obrigatório'),
+          email: yup.string('').email('E-mail inválido ou incorreto').required('Campo obrigatório')
         })}
       >
         {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
@@ -93,7 +89,7 @@ export default function EsqueciSenha({ navigation }) {
                 <Input
                   placeholderTextColor="#2e2e2e"
                   style={estilo.labelInput}
-                  value={values.email} 
+                  value={values.email}
                   onChangeText={handleChange('email')}
                   onBlur={() => setFieldTouched('email')}
                   placeholder="E-mail"
@@ -125,7 +121,7 @@ export default function EsqueciSenha({ navigation }) {
         <CustomModal
           parametro="Erro"
           callback={() => {
-            this.setState({ Erro: false });
+            setErro(false);
           }}
         />
       )}

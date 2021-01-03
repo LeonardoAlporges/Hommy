@@ -192,7 +192,7 @@ export default function DetalhesAnuncio({ navigation }) {
         <Linha>
           <CardDeInformacao>
             <IconesInformacao>
-              <Icone name="bed-double" />
+              <Icone name="television" />
             </IconesInformacao>
             <Informacaoes>
               <TipoInformacao>Quarto</TipoInformacao>

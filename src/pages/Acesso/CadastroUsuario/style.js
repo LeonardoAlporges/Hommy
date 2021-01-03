@@ -14,15 +14,15 @@ export const Imagem = styled.Image`
   margin: 0px;
 `;
 export const BotaoEnviarFoto = styled.View`
-  width: 100%;
+  width: 130px;
   height: 45px;
   align-items: center;
   justify-content: center;
   margin-bottom: 10%;
 `;
 export const BotaoFoto = styled(Button)`
-  width: 130;
-  height: 45;
+  width: 130px;
+  height: 45px;
   border-radius: 2px;
   align-items: center;
   justify-content: center;

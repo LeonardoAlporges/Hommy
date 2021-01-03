@@ -59,7 +59,7 @@ function TabsHeader({ navigation }) {
         >
           <Servicos />
         </Tab>
-        <Tab
+        {/* <Tab
           heading="Promoções"
           initialPage="2"
           tabStyle={estilo.tabs_style}
@@ -68,7 +68,7 @@ function TabsHeader({ navigation }) {
           activeTextStyle={estilo.tabs_ActiveTextStyle}
         >
           <Divulgacao />
-        </Tab>
+        </Tab>*/}
       </Tabs>
     </Container>
 
