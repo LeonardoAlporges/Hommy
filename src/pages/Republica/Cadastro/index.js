@@ -12,7 +12,6 @@ import { imagePickerOptions, uploadFileToFireBaseRepublica, uploadProgress } fro
 import ImagePicker from 'react-native-image-picker';
 import { Text, Item, Input, Label, Button, Icon, Picker, Spinner, Tabs, Tab } from 'native-base';
 import Loading from '../../../components/Loading';
-import ViewPager from '@react-native-community/viewpager';
 import api from '../../../service/api';
 import estilo from './style';
 import { NavigationActions, StackActions } from 'react-navigation';
@@ -234,12 +233,12 @@ export default function Cadastro({ navigation }) {
         bairro: yup
           .string('')
           .min(3, 'Minimo de 3 caracteres')
-          .max(25, 'Maximo permitido de 25 caracteres')
+          .max(50, 'Maximo permitido de 25 caracteres')
           .required('Campo obrigatório'),
         rua: yup
           .string('')
           .min(3, 'Minimo de 3 caracteres')
-          .max(25, 'Maximo permitido de 25 caracteres')
+          .max(50, 'Maximo permitido de 25 caracteres')
           .required('Campo obrigatório'),
         numero: yup
           .number('Somente numeros')

@@ -22,6 +22,10 @@ DerivedData
 *.xcuserstate
 project.xcworkspace
 
+# HPROF
+# -----
+*.hprof
+
 # Android/IntelliJ
 #
 build/

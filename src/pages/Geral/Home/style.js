@@ -1,4 +1,23 @@
+import { Button } from 'native-base';
 import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+export const BotaoFooter = styled(Button)`
+  background: white;
+  border-bottom-width: ${props => (props.active ? '2px' : '0px')};
+  border-bottom-color: ${props => (props.active ? '#142850' : 'white')};
+  box-shadow: 10px 5px 5px #000;
+`;
+export const Icone = styled(Icon)`
+  font-size: 24;
+  color: ${props => (props.active ? '#142850' : '#193264')};
+`;
+export const Label = styled.Text`
+  font-size: 14;
+  font-weight: ${props => (props.active ? 'bold' : 'normal')};
+  color: ${props => (props.active ? '#142850' : '#193264')};
+`;
 
 const estilo = StyleSheet.create({
   container: {

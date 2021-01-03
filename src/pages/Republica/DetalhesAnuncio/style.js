@@ -33,6 +33,14 @@ export const CardDeInformacao = styled.View`
   justify-content: center;
   flex-direction: row;
 `;
+export const CardDeInformacaoLocalizacao = styled.TouchableOpacity`
+  width: 48%;
+  justify-content: space-around;
+  height: 50px;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+`;
 export const IconesInformacao = styled.View`
   width: 35px;
   height: 50px;
