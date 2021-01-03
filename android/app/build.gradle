@@ -126,13 +126,17 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    
+    dexOptions {
+       javaMaxHeapSize "3g"
+    }
 
     defaultConfig {
         applicationId "br.com.ufes.hommy"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 2
-        versionName "1.0.2"
+        versionCode 1
+        versionName "1.0.3"
          multiDexEnabled true
     }
     signingConfigs {

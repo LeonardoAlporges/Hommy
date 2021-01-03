@@ -9,15 +9,16 @@ import Republica from '../../Republica/Republica';
 import Caronas from '../../Carona/Caronas';
 import Servicos from '../../Servicos/Servicos';
 import Divulgacao from '../Divulgacao';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
 
+import { BotaoFooter, Icone, Label } from './style';
 import estilo from './style';
 
 function TabsHeader({ navigation }) {
   const [index, setIndex] = useState(1);
+  const [page, setPage] = useState(1);
 
   function alterarTela(number) {
-    setIndex(number);
+    setPage(number);
   }
 
   return (
@@ -37,7 +38,52 @@ function TabsHeader({ navigation }) {
           activeTabStyle={estilo.tabs_ActiveTabs}
           activeTextStyle={estilo.tabs_ActiveTextStyle}
         >
-          <Republica style={estilo.card} />
+          {page === 1 && <Republica style={estilo.card} />}
+          {page === 2 && <Divulgacao />}
+          {page === 3 && <Divulgacao />}
+          <Footer
+            style={{
+              shadowColor: '#000',
+              shadowOffset: {
+                width: 0,
+                height: 12
+              },
+              shadowOpacity: 0.58,
+              shadowRadius: 16.0,
+
+              elevation: 24
+            }}
+          >
+            <FooterTab style={{ borderTopWidth: 1, borderTopColor: '#2e2e2e' }}>
+              <BotaoFooter
+                active={page === 1 ? true : false}
+                onPress={() => {
+                  alterarTela(1);
+                }}
+              >
+                <Icone active={page === 1 ? true : false} name="home" />
+                <Label active={page === 1 ? true : false}>Anuncios</Label>
+              </BotaoFooter>
+              <BotaoFooter
+                active={page === 2 ? true : false}
+                onPress={() => {
+                  alterarTela(2);
+                }}
+              >
+                <Icone active={page === 2 ? true : false} name="calendar" />
+                <Label active={page === 2 ? true : false}>Eventos</Label>
+              </BotaoFooter>
+              <BotaoFooter
+                active={page === 3 ? true : false}
+                onPress={() => {
+                  alterarTela(3);
+                }}
+              >
+                <Icone active={page === 3 ? true : false} name="cart-outline" />
+                <Label active={page === 3 ? true : false}> Compra e venda</Label>
+              </BotaoFooter>
+            </FooterTab>
+          </Footer>
         </Tab>
         <Tab
           heading="Caronas"
@@ -71,11 +117,6 @@ function TabsHeader({ navigation }) {
         </Tab>*/}
       </Tabs>
     </Container>
-
-    /* <Button
-        style={{ width: '100%', height: '30%' }}
-        onPress={() => Linking.openURL(`https://www.google.com/maps/search/?api=1&query=Rua+Pastor+Abdias+11`)}
-      ></Button> */
   );
 }
 

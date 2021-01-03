@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, Image } from 'react-native';
+import { View, ScrollView, Image, Button, Text, Linking } from 'react-native';
 
 import HeaderBack from '../../../components/CustomHeader';
 
@@ -24,6 +24,7 @@ import {
   Botao,
   Label,
   ViewBotao,
+  CardDeInformacaoLocalizacao,
   ViewCaracteristicaTitle,
   CaracteristicaTitle,
   ViewTipo,
@@ -48,8 +49,9 @@ export default function DetalhesAnuncio({ navigation }) {
   }
 
   useEffect(() => {
-    console.log(navigation.state.params);
-    console.log('REPUBLICAS', republica);
+    if (republica.bairro === 'Guararema' || republica.bairro === 'guararema') {
+      republica.bairro = 'Bilau';
+    }
     if (republica.imagem1 != '' && republica.imagem1 != null) {
       setContadorImagem(contadorImagem => contadorImagem + 1);
     }
@@ -155,12 +157,28 @@ export default function DetalhesAnuncio({ navigation }) {
             </IconesInformacao>
             <Informacaoes>
               <TipoInformacao>Endereço</TipoInformacao>
-              <Informacao>
+              <Informacao numberOfLines={2}>
                 {republica.rua}, {republica.bairro}, Nº
                 {republica.numeroCasa}
               </Informacao>
             </Informacaoes>
           </CardDeInformacao>
+        </Linha>
+        <Linha>
+          <CardDeInformacaoLocalizacao
+            onPress={() =>
+              Linking.openURL(
+                `https://www.google.com/maps/search/?api=1&query=${republica.rua},+${republica.numeroCasa}-+${
+                  republica.bairro
+                },${'Alegre-ES'}`
+              )
+            }
+          >
+            <IconesInformacao>
+              <Icone name="google-maps" />
+            </IconesInformacao>
+            <TipoInformacao>Buscar no google maps </TipoInformacao>
+          </CardDeInformacaoLocalizacao>
         </Linha>
       </Card>
 
@@ -210,7 +228,6 @@ export default function DetalhesAnuncio({ navigation }) {
           </CardDeInformacao>
         </Linha>
       </Card>
-
       {!ocutarBotaoAgendamento ? (
         <ViewBotao>
           <Botao

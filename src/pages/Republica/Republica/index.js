@@ -69,6 +69,7 @@ class Republica extends Component {
       aluguelMax: '',
       refreshing: false
     };
+    this.getListRepublica();
   }
   limparPropsRepublicaRedux() {
     this.props.editValorConta('');
@@ -98,6 +99,7 @@ class Republica extends Component {
   }
   getListRepublica = () => {
     this.setState({ refreshing: true });
+    this.setState({ loading: false });
     return api
       .get('/republica')
       .then(responseJson => {
@@ -117,6 +119,8 @@ class Republica extends Component {
   };
   useEffect() {
     this.getListRepublica();
+    this.setState({ refreshing: false });
+    this.setState({ loading: false });
   }
   fAnimalSim = async checked => {
     if (this.state.filtroAnimalSim) await this.setState({ filtroAnimalSim: false });
@@ -324,23 +328,17 @@ class Republica extends Component {
       listaRepublicas = _.filter(listaRepublicas, ({ numVagas }) => numVagas >= 3);
     }
     if (this.state.filtroValorMenor === true) {
-      listaRepublicas = _.filter(
-        listaRepublicas,
-        ({ valorAluguel }) => valorAluguel >= this.state.aluguelMin
-      );
+      listaRepublicas = _.filter(listaRepublicas, ({ valorAluguel }) => valorAluguel >= this.state.aluguelMin);
     }
     if (this.state.filtroValorMaior === true) {
-      listaRepublicas = _.filter(
-        listaRepublicas,
-        ({ valorAluguel }) => valorAluguel <= this.state.aluguelMax
-      );
+      listaRepublicas = _.filter(listaRepublicas, ({ valorAluguel }) => valorAluguel <= this.state.aluguelMax);
     }
     await this.setState({ listaRepublicas });
   };
   render() {
     return (
       <Container>
-        <NavigationEvents onDidFocus={this.getListRepublica} />
+        {/* <NavigationEvents onDidFocus={this.getListRepublica} /> */}
         <View>
           {this.state.loading ? (
             <View style={Estilos.V_Load}>
@@ -414,9 +412,7 @@ class Republica extends Component {
                 />
               </Item>
             </ListItem>
-            <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}>
-              Aceita animais?
-            </Text>
+            <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}>Aceita animais?</Text>
             <ListItem style={Estilos.listStyle}>
               <CheckBox
                 color="#142850"
@@ -433,10 +429,7 @@ class Republica extends Component {
               />
               <Text style={Estilos.textFiltro}>Não</Text>
             </ListItem>
-            <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}>
-              {' '}
-              Tipo de república
-            </Text>
+            <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}> Tipo de república</Text>
             <ListItem style={Estilos.listStyle}>
               <CheckBox
                 color="#142850"
@@ -461,9 +454,7 @@ class Republica extends Component {
               <Text style={Estilos.textFiltro}>Mista</Text>
             </ListItem>
 
-            <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}>
-              Vagas disponíveis
-            </Text>
+            <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}>Vagas disponíveis</Text>
             <ListItem style={Estilos.listStyle}>
               <CheckBox
                 color="#142850"
