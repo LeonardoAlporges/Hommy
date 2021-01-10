@@ -1,0 +1,78 @@
+import React, { Component } from 'react';
+import { ScrollView, StyleSheet, FlatList, View } from 'react-native';
+import axios from 'axios';
+import { withNavigation, NavigationEvents } from 'react-navigation';
+
+import Estilo from './style';
+import { CheckBox, ListItem, Button, Fab, Input, Item, Label } from 'native-base';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import api from '../../../../service/api';
+import CartaoProdutos from '../../../../components/CartaoProdutos';
+import CartaoEvento from '../../../../components/CartaoEvento';
+
+class Eventos extends Component {
+  static navigationOptions = { header: null };
+  constructor(props) {
+    super(props);
+    this.state = { listaEvento: [], active: false };
+  }
+  servicosRedux() {
+    this.props.navigation.navigate('CadastroProduto');
+  }
+
+  UNSAFE_componentWillMount() {
+    return api
+      .get('/eventos')
+      .then(responseJson => {
+        console.log('SERVIÇOS', responseJson);
+        this.setState({ listaEvento: responseJson.data });
+      })
+      .catch(error => {
+        console.log(error);
+        console.error('SERVIDOR ESTA DESLIGADO');
+      });
+  }
+  irParaCadastro() {
+    this.props.navigation.navigate('CadastroEvento');
+  }
+
+  render() {
+    return (
+      <View style={Estilo.V_externa}>
+        <ScrollView>
+          <View style={Estilo.card}>
+            <FlatList
+              style={Estilo.flatList}
+              data={this.state.listaEvento}
+              renderItem={({ item }) => <CartaoEvento dados={item} />}
+              keyExtractor={item => item._id}
+            />
+          </View>
+        </ScrollView>
+        <Fab
+          active={this.state.active}
+          direction="up"
+          containerStyle={{}}
+          style={Estilo.S_FAB}
+          position="bottomRight"
+          onPress={() => {
+            this.setState({ active: !this.state.active });
+          }}
+        >
+          {this.state.active ? <Icon name="minus" /> : <Icon name="plus" />}
+
+          <Button
+            style={Estilo.corFAB}
+            onPress={() => {
+              this.servicosRedux();
+            }}
+          >
+            <Icon name="plus" style={Estilo.corIconFab} />
+          </Button>
+        </Fab>
+      </View>
+    );
+  }
+}
+
+export default withNavigation(Eventos);

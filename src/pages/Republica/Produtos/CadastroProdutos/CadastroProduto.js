@@ -35,7 +35,7 @@ import {
 } from './styles';
 import Loading from '../../../../components/Loading';
 
-export default function CadastroEvento({ navigation }) {
+export default function CadastroProduto({ navigation }) {
   const avatarUser = useSelector(state => state.user.fotoPerfil);
   const emailUser = useSelector(state => state.user.email);
   const notaUser = useSelector(state => state.user.notaUser);
@@ -123,17 +123,16 @@ export default function CadastroEvento({ navigation }) {
     });
   }
 
-  function publicarEvento(values) {
+  function publicarProduto(values) {
     const data = {
-      titulo: values.tituloEvento,
+      titulo: values.tituloProduto,
+      descricao: values.descricao,
       valor: values.valor,
-      userEmail: emailUser,
-      data: dataEvento,
-      hora: horarioDeInicio,
-      localCompraIngresso: values.localCompraIngresso,
+      userEmail: 'leo@teste.com',
+      telefone: values.contato,
       imagem1: linkimagem1,
       imagem2: linkimagem2,
-      imagem3: linkimagem3
+      imagem3: linkimagem1
     };
 
     if (imagem1 == null && imagem2 == null && imagem3 == null) {
@@ -143,7 +142,7 @@ export default function CadastroEvento({ navigation }) {
     }
     console.log('ANTES', data);
     api
-      .post('/eventos', data)
+      .post('/produto', data)
       .then(Response => {
         console.log('DEPOIS', Response);
         setLoading(false);
@@ -174,19 +173,17 @@ export default function CadastroEvento({ navigation }) {
   return (
     <Formik
       initialValues={{
-        tituloEvento: '',
-        data: '',
-        horarioDeInicio: '',
-        localVenda: '',
+        tituloProduto: '',
+        descricao: '',
         valor: '',
         contato: ''
       }}
       onSubmit={values => {
-        publicarEvento(values);
+        publicarProduto(values);
       }}
       validationSchema={yup.object().shape({
-        tituloEvento: yup.string().required('Campo obrigatório').max(40, 'Somente 40 caracteres são permitidos'),
-        localVenda: yup.string().required('Campo obrigatório').max(70, 'Somente 70 caracteres são permitidos'),
+        tituloProduto: yup.string().required('Campo obrigatório').max(40, 'Somente 40 caracteres são permitidos'),
+        descricao: yup.string().required('Campo obrigatório').max(100, 'Somente 100 caracteres são permitidos'),
         contato: yup.string().max(9999999999999).required(' Campo obrigatórior'),
         valor: yup.number('Somente numeros!').max(200, 'Valor maximo de R$ 200,00').required('Campo obrigatório')
       })}
@@ -198,96 +195,42 @@ export default function CadastroEvento({ navigation }) {
           {erro && <ModalErro />}
           {sucesso && <ModalSucesso />}
           <ScrollView>
-            <HeaderBack title="Publique seu evento" onNavigation={() => navigation.goBack(null)} />
+            <HeaderBack title="Venda seus Itens" onNavigation={() => navigation.goBack(null)} />
 
             <Container>
-              <Subtitle>Preencha os campos abaixo com as informações necessárias para registrar seu evento.</Subtitle>
+              <Subtitle>Preencha os campos abaixo com as informações necessárias para registrar seu Produto.</Subtitle>
 
               <Linha>
                 <FieldSetLarge>
-                  <LabelFielSet>Titulo do evento</LabelFielSet>
+                  <LabelFielSet>Titulo</LabelFielSet>
                   <Item style={{ borderColor: 'transparent' }}>
                     <Input
                       value={values.tituloEvento}
-                      onChangeText={handleChange('tituloEvento')}
+                      onChangeText={handleChange('tituloProduto')}
                       placeholder=""
-                      onBlur={() => setFieldTouched('tituloEvento')}
+                      onBlur={() => setFieldTouched('tituloProduto')}
                     />
                   </Item>
                   <View style={estilo.V_error}>
-                    {touched.tituloEvento && errors.tituloEvento && (
-                      <Text style={estilo.textError}>{errors.tituloEvento}</Text>
+                    {touched.tituloProduto && errors.tituloProduto && (
+                      <Text style={estilo.textError}>{errors.tituloProduto}</Text>
                     )}
                   </View>
                 </FieldSetLarge>
               </Linha>
               <Linha>
-                <FieldSet>
-                  <LabelFielSet>Hora de incio</LabelFielSet>
-                  <Item style={{ borderColor: 'transparent' }}>
-                    <InputHora
-                      onPress={() => {
-                        setHorarioInicioPicker(true);
-                      }}
-                    >
-                      <Label>{placeHorarioDeInicio}</Label>
-                      <DateTimePickerModal
-                        isVisible={horarioDeInicioPicker}
-                        mode="time"
-                        onConfirm={date => selecionarHorario(date)}
-                        onCancel={date => setHorarioInicioPicker(false)}
-                        date={new Date()}
-                        locale={'pt-br'}
-                        is24Hour={true}
-                        onDateChange={handleChange('horarioDeInicio')}
-                      />
-                    </InputHora>
-                  </Item>
-                  <ViewErro>
-                    {values.horarioDeInicio == '' && !botaoEnviar && <LabelErro>Campo obrigatório</LabelErro>}
-                  </ViewErro>
-                </FieldSet>
-                <FieldSet>
-                  <LabelFielSet>Data</LabelFielSet>
-                  <Item style={{ borderColor: 'transparent' }}>
-                    <InputHora
-                      onPress={() => {
-                        setDataEventoPicker(true);
-                      }}
-                    >
-                      <Label>{placeDataEvento}</Label>
-
-                      <DateTimePickerModal
-                        isVisible={dataEventoPicker}
-                        mode="date"
-                        onConfirm={date => selecionarData(date)}
-                        onCancel={() => setDataEventoPicker(false)}
-                        date={new Date()}
-                        locale={'pt-br'}
-                        is24Hour={true}
-                        onDateChange={handleChange('data')}
-                      />
-                    </InputHora>
-                  </Item>
-                  <ViewErro>{values.data == '' && !botaoEnviar && <LabelErro>Campo obrigatório</LabelErro>}</ViewErro>
-                </FieldSet>
-              </Linha>
-              <Linha>
                 <FieldSetLarge>
-                  <LabelFielSet>Locais de venda de ingresso</LabelFielSet>
+                  <LabelFielSet>Descrição</LabelFielSet>
                   <Item style={{ borderColor: 'transparent' }}>
                     <Input
-                      value={values.localVenda}
-                      onChangeText={handleChange('localVenda')}
+                      value={values.descricao}
+                      onChangeText={handleChange('descricao')}
                       placeholder=""
-                      onBlur={() => setFieldTouched('localVenda')}
+                      onBlur={() => setFieldTouched('descricao')}
                     />
                   </Item>
-
                   <View style={estilo.V_error}>
-                    {touched.localVenda && errors.localVenda && (
-                      <Text style={estilo.textError}>{errors.localVenda}</Text>
-                    )}
+                    {touched.descricao && errors.descricao && <Text style={estilo.textError}>{errors.descricao}</Text>}
                   </View>
                 </FieldSetLarge>
               </Linha>
@@ -314,7 +257,7 @@ export default function CadastroEvento({ navigation }) {
                       placeholderTextColor="#263b50"
                       keyboardType="number-pad"
                       mask={'([00]) [00000]-[0000]'}
-                      value={values.contato} //celular
+                      value={values.contato}
                       onChangeText={handleChange('contato')}
                       onBlur={() => setFieldTouched('contato')}
                     />
@@ -327,7 +270,7 @@ export default function CadastroEvento({ navigation }) {
               </Linha>
 
               <AreaFotos>
-                <LabelFotos>Fotos da sua república</LabelFotos>
+                <LabelFotos>Fotos do seu produto</LabelFotos>
                 <DivisaoFotos>
                   {imagem1 == null ? (
                     <View style={estilo.V_ImageFullEmpty}>
@@ -389,7 +332,7 @@ export default function CadastroEvento({ navigation }) {
 
               <ViewBotao>
                 <Button style={estilo.btnProximo} onPress={handleSubmit}>
-                  <LabeBotaoEnviar>Publicar Evento</LabeBotaoEnviar>
+                  <LabeBotaoEnviar>Publicar Produto</LabeBotaoEnviar>
                 </Button>
               </ViewBotao>
             </Container>
