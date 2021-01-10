@@ -28,6 +28,7 @@ import ValidarCodigo from './pages/Acesso/ValidarCodigo';
 import TelefoneUteis from './pages/Geral/TelefoneUteis';
 import GerenciamentoDeRepublica from './pages/Republica/GerenciamentoRepublica';
 import CadastroServico from './pages/Servicos/Cadastro';
+import CadastroEvento from './pages/Republica/Eventos/CadastroEvento/CadastroEvento';
 
 const Navegação = createStackNavigator(
   {
@@ -67,11 +68,12 @@ const Navegação = createStackNavigator(
     Servicos,
     Cadastro,
     SplashScreen,
+    CadastroEvento,
     //AutenticacaoTelefone
     CadastroServico
   },
   {
-    initialRouteName: 'RenderApp',
+    initialRouteName: 'CadastroEvento',
     headerMode: 'none',
     navigationOptions: {
       headerVisible: false

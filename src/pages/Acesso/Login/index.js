@@ -72,7 +72,7 @@ export function Login({ navigation }) {
     const data = {
       email: email,
       password: id,
-      tokenAparelho: tokenAparelho,
+      //tokenAparelho: tokenAparelho,
       nome: nome,
       fotoPerfil: foto
     };
@@ -158,12 +158,11 @@ export function Login({ navigation }) {
   }
 
   function fazerLogin(value) {
-    console.log('?32??');
     setloading(true);
     const data = {
       email: value.email,
-      password: value.password,
-      tokenD: tokenAparelho
+      password: value.password
+      //tokenD: tokenAparelho
     };
     console.log('?32??', data);
     api
@@ -175,7 +174,9 @@ export function Login({ navigation }) {
         setloading(false);
       })
       .catch(error => {
+        resetarPilhaNavegacao('TabsHeader');
         console.log(error.response);
+        console.log(error);
         setloading(false);
         console.log(error.response.data.code);
         if (error.response.data.code == 206) {

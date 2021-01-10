@@ -5,7 +5,7 @@ import storage from '@react-native-firebase/storage';
 import { Platform } from 'react-native';
 
 export const imagePickerOptions = {
-  noData: true,
+  noData: true
 };
 export const FireBaseStorage = storage();
 
@@ -19,6 +19,11 @@ export const createStorageReferenceToFileRepublica = response => {
   return FireBaseStorage.ref(`/pictures/republicas/${fileName}`);
   //return FireBaseStorage.ref(`/imagem/${fileName}`).delete();
 };
+export const createStorageReferenceToFileRepublicaEvento = response => {
+  const { fileName } = response;
+  return FireBaseStorage.ref(`/pictures/republicasEventos/${fileName}`);
+  //return FireBaseStorage.ref(`/imagem/${fileName}`).delete();
+};
 export const createStorageReferenceToFileUser = response => {
   const { fileName } = response;
   return FireBaseStorage.ref(`/pictures/user/${fileName}`);
@@ -30,6 +35,12 @@ export const createStorageReferenceToFileServico = response => {
 };
 
 export const uploadFileToFireBaseRepublica = imagePickerResponse => {
+  const fileSource = getFileLocalPath(imagePickerResponse);
+  const storageRef = createStorageReferenceToFileRepublica(imagePickerResponse);
+  return storageRef.putFile(fileSource);
+};
+
+export const uploadFileToFireBaseRepublicaEventos = imagePickerResponse => {
   const fileSource = getFileLocalPath(imagePickerResponse);
   const storageRef = createStorageReferenceToFileRepublica(imagePickerResponse);
   return storageRef.putFile(fileSource);
