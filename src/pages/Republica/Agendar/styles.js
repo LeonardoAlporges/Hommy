@@ -25,8 +25,8 @@ export const ViewDetalhes = styled.View`
 
 export const ViewDate = styled.View`
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
 `;
 
 export const ViewClock = styled.View`

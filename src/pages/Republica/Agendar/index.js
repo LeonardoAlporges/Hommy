@@ -1,5 +1,5 @@
-import moment from 'moment';
-import { Button, DatePicker } from 'native-base';
+import 'moment/locale/br';
+import { Button } from 'native-base';
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
@@ -26,11 +26,19 @@ import style, {
 } from './styles';
 
 export default function Agendar({ navigation }) {
+  const moment = require('moment');
+  moment.locale('pt', {
+    months: 'Janeiro_Fevereiro_Março_Abril_Maio_Junho_Julho_Agosto_Setembro_Outubro_Novembro_Dezembro'.split('_')
+  });
+
   const email = useSelector(state => state.user.email);
   const [erro, setErro] = useState(false);
   const [sucesso, setSucesso] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [dataAgendamento, setDataAgendamento] = useState();
+  const [dataAgendamento, setDataAgendamento] = useState(new Date());
+  const [labelData, setLabelData] = useState('Selecionar Data');
+  const [dataPicker, setDataPicker] = useState(false);
+
   const [dadosRepublica, setDadosRepuublica] = useState(navigation.state.params.data);
   const [labeHoraAgendamento, setLabelHoraAgendamento] = useState('00:00');
   const [horaAgendamento, setHoraAgendamento] = useState();
@@ -68,8 +76,19 @@ export default function Agendar({ navigation }) {
     setLabelHoraAgendamento(horaLabel);
   }
 
+  async function selecionarData(date) {
+    setDataPicker(false);
+    const dataLabel = moment(new Date(date)).format('DD [de] MMMM');
+    setDataAgendamento(date);
+    setLabelData(dataLabel);
+  }
+
   function picker() {
     setHoraPicker(true);
+  }
+
+  function pickerData() {
+    setDataPicker(true);
   }
 
   return (
@@ -87,23 +106,27 @@ export default function Agendar({ navigation }) {
       </ViewDescricao>
 
       <ViewInputs>
-        <ViewDate>
-          <Icon name="calendar" style={style.IconCaledarA} />
-          <DatePicker
-            defaultDate={new Date()}
-            minimumDate={new Date()}
-            locale={'pt-br'}
-            timeZoneOffsetInMinutes={undefined}
-            modalTransparent={true}
-            animationType={'slide'}
-            androidMode={'default'}
-            placeHolderText="Selecione a data"
-            textStyle={style.textStyledate}
-            placeHolderTextStyle={style.placeHolder}
-            onDateChange={date => {
-              setDataAgendamento(date);
+        <ViewBotaoCalendario>
+          <Button
+            style={style.botaoCalendar}
+            onPress={() => {
+              pickerData();
             }}
-            disabled={false}
+          >
+            <Icon name="calendar" style={style.IconCaledar} />
+          </Button>
+        </ViewBotaoCalendario>
+        <ViewDate>
+          <TextoClockPlace>{labelData}</TextoClockPlace>
+          <DateTimePickerModal
+            isVisible={dataPicker}
+            mode="date"
+            onConfirm={hora => selecionarData(hora)}
+            onCancel={() => {
+              setDataPicker(false);
+            }}
+            date={new Date()}
+            locale="pt_BR"
           />
         </ViewDate>
         <ViewClock>
