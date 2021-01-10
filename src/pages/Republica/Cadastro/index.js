@@ -30,7 +30,7 @@ export default function Cadastro({ navigation }) {
   const nome = useSelector(state => state.user.usuario);
   const [atualizarCadastro, setAtualizarCadastro] = useState(navigation.state.params.update);
   const [dadosRepublica, setDadosRepublica] = useState(navigation.state.params.dadosRepublica);
-  const [contadorImagem, setContadorImagem] = useState(0);
+  const [contadorImagem, setContadorImagem] = useState('0');
   const [loading, setLoading] = useState();
   const [erro, setErro] = useState(false);
   const [sucesso, setSucesso] = useState(false);
@@ -139,6 +139,7 @@ export default function Cadastro({ navigation }) {
       valorAluguel: values.aluguel,
       bairro: values.bairro,
       rua: values.rua,
+      pontoReferencia: values.pontoReferencia,
       numeroCasa: values.numero,
       pessoas: values.moradores,
       descricao: values.desc,
@@ -200,6 +201,7 @@ export default function Cadastro({ navigation }) {
         rua: dadosRepublica ? dadosRepublica.rua : '',
         numero: dadosRepublica ? dadosRepublica.numeroCasa : '',
         aluguel: dadosRepublica ? dadosRepublica.valorAluguel.toString() : '',
+        pontoReferencia: dadosRepublica ? dadosRepublica.pontoReferencia : '',
         contas: dadosRepublica ? dadosRepublica.valorContas.toString() : '',
         moradores: dadosRepublica ? dadosRepublica.pessoas : '',
         genero: dadosRepublica ? dadosRepublica.genero : '',
@@ -227,7 +229,12 @@ export default function Cadastro({ navigation }) {
         rua: yup
           .string('')
           .min(3, 'Minimo de 3 caracteres')
-          .max(50, 'Maximo permitido de 25 caracteres')
+          .max(50, 'Maximo permitido de 50 caracteres')
+          .required('Campo obrigatório'),
+        pontoReferencia: yup
+          .string('')
+          .min(3, 'Minimo de 3 caracteres')
+          .max(40, 'Maximo permitido de 40 caracteres')
           .required('Campo obrigatório'),
         numero: yup
           .number('Somente numeros')
@@ -326,49 +333,6 @@ export default function Cadastro({ navigation }) {
                   <Text style={estilo.textRepublica}>
                     Insira as informações necessárias para registrar uma nova república.
                   </Text>
-                  {/* <View style={estilo.V_ImageLabel}>
-                    <Text style={estilo.txtLabel}>Envie Fotos de Sua República</Text>
-                  </View>
-                  <View style={estilo.V_ImageEmpty}>
-                    <ScrollView horizontal={true}>
-                      {imagem1 == null ? (
-                        <View style={estilo.V_ImageFullEmpty}>
-                          <Image
-                            source={require('../../../assets/Img/Republica_Send_Pictures.png')}
-                            style={estilo.ImageEmpty}
-                          />
-                        </View>
-                      ) : (
-                        <View style={estilo.V_ImageFull}>
-                          <Image source={{ uri: imagem1 }} style={estilo.ImageFull} />
-                        </View>
-                      )}
-                      {imagem2 == null ? (
-                        <View style={estilo.V_ImageFullEmpty}>
-                          <Image
-                            source={require('../../../assets/Img/Republica_Send_Pictures.png')}
-                            style={estilo.ImageEmpty}
-                          />
-                        </View>
-                      ) : (
-                        <View style={estilo.V_ImageFull}>
-                          <Image source={{ uri: imagem2 }} style={estilo.ImageFull} />
-                        </View>
-                      )}
-                      {imagem3 == null ? (
-                        <View style={estilo.V_ImageFullEmpty}>
-                          <Image
-                            source={require('../../../assets/Img/Republica_Send_Pictures.png')}
-                            style={estilo.ImageEmpty}
-                          />
-                        </View>
-                      ) : (
-                        <View style={estilo.V_ImageFull}>
-                          <Image source={{ uri: imagem3 }} style={estilo.ImageFull} />
-                        </View>
-                      )}
-                    </ScrollView>
-                  </View> */}
                   <Linha>
                     <FieldSetLarge>
                       <LabelFielSet>Nome da república</LabelFielSet>
@@ -390,12 +354,29 @@ export default function Cadastro({ navigation }) {
                     <FieldSetLarge>
                       <LabelFielSet>Bairro</LabelFielSet>
                       <Item style={{ borderColor: 'transparent' }}>
-                        <Input
+                        <Picker
+                          mode="dropdown"
+                          placeholder="Bairro"
+                          placeholderStyle={{ color: '#bfc6ea' }}
+                          placeholderIconColor="#007aff"
+                          selectedValue={values.bairro}
+                          onValueChange={handleChange('bairro')}
                           value={values.bairro}
                           onChangeText={handleChange('bairro')}
-                          placeholder=""
                           onBlur={() => setFieldTouched('bairro')}
-                        />
+                        >
+                          <Picker.Item label="" value="null" />
+                          <Picker.Item label="Bilau(Guararema)" value="Bilau" />
+                          <Picker.Item label="Colina" value="Colina" />
+                          <Picker.Item label="Conceição" value="Conceição" />
+                          <Picker.Item label="Nova Alegre(Vila Alta)" value="Nova Alegre" />
+                          <Picker.Item label="Centro" value="Centro" />
+                          <Picker.Item label="Vila Reis" value="Vila Reis" />
+                          <Picker.Item label="Campo de Aviação" value="Campo de Aviação" />
+                          <Picker.Item label="Vila do Sul" value="Vila do Sul" />
+                          <Picker.Item label="São Manoel" value="São Manoel" />
+                          <Picker.Item label="Charqueada" value="Charqueada" />
+                        </Picker>
                       </Item>
 
                       <View style={estilo.V_error}>
@@ -446,13 +427,35 @@ export default function Cadastro({ navigation }) {
                           placeholderTextColor="#2e2e2e"
                           //style={estilo.textoValue}
                           placeholderTextColor="#989898"
-                          placeholder="EX.:Perto da UFES, local para estudo..."
+                          placeholder="EX.:Local para estudo..."
                           onBlur={() => setFieldTouched('descricao')}
                         />
                       </Item>
                       <View style={estilo.V_error}>
                         {touched.descricao && errors.descricao && (
                           <Text style={estilo.textError}>{errors.descricao}</Text>
+                        )}
+                      </View>
+                    </FieldSetLarge>
+                  </Linha>
+                  <Linha>
+                    <FieldSetLarge>
+                      <LabelFielSet>Ponto de Referencia</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
+                        <Input
+                          style={{ fontFamily: 'WorkSans' }}
+                          value={values.descricao}
+                          onChangeText={handleChange('pontoReferencia')}
+                          placeholderTextColor="#2e2e2e"
+                          //style={estilo.textoValue}
+                          placeholderTextColor="#989898"
+                          placeholder="EX.:Ao lado do BC Supermercado"
+                          onBlur={() => setFieldTouched('pontoReferencia')}
+                        />
+                      </Item>
+                      <View style={estilo.V_error}>
+                        {touched.pontoReferencia && errors.pontoReferencia && (
+                          <Text style={estilo.textError}>{errors.pontoReferencia}</Text>
                         )}
                       </View>
                     </FieldSetLarge>
