@@ -14,9 +14,9 @@ export const getFileLocalPath = response => {
   return Platform.OS === 'android' ? path : uri;
 };
 
-export const createStorageReferenceToFileRepublica = response => {
+export const createStorageReferenceToFileRepublicaProduto = response => {
   const { fileName } = response;
-  return FireBaseStorage.ref(`/pictures/republicas/${fileName}`);
+  return FireBaseStorage.ref(`/pictures/republicasProdutos/${fileName}`);
   //return FireBaseStorage.ref(`/imagem/${fileName}`).delete();
 };
 export const createStorageReferenceToFileRepublicaEvento = response => {
@@ -42,7 +42,12 @@ export const uploadFileToFireBaseRepublica = imagePickerResponse => {
 
 export const uploadFileToFireBaseRepublicaEventos = imagePickerResponse => {
   const fileSource = getFileLocalPath(imagePickerResponse);
-  const storageRef = createStorageReferenceToFileRepublica(imagePickerResponse);
+  const storageRef = createStorageReferenceToFileRepublicaEvento(imagePickerResponse);
+  return storageRef.putFile(fileSource);
+};
+export const uploadFileToFireBaseRepublicaProduto = imagePickerResponse => {
+  const fileSource = getFileLocalPath(imagePickerResponse);
+  const storageRef = createStorageReferenceToFileRepublicaProduto(imagePickerResponse);
   return storageRef.putFile(fileSource);
 };
 

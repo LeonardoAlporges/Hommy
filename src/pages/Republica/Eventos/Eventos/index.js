@@ -1,14 +1,11 @@
+import { Button, Fab } from 'native-base';
 import React, { Component } from 'react';
-import { ScrollView, StyleSheet, FlatList, View } from 'react-native';
-import axios from 'axios';
-import { withNavigation, NavigationEvents } from 'react-navigation';
-
-import Estilo from './style';
-import { CheckBox, ListItem, Button, Fab, Input, Item, Label } from 'native-base';
+import { FlatList, ScrollView, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import api from '../../../../service/api';
-import CartaoProdutos from '../../../../components/CartaoProdutos';
+import { withNavigation } from 'react-navigation';
 import CartaoEvento from '../../../../components/CartaoEvento';
+import api from '../../../../service/api';
+import Estilo from './style';
 
 class Eventos extends Component {
   static navigationOptions = { header: null };
@@ -24,13 +21,9 @@ class Eventos extends Component {
     return api
       .get('/eventos')
       .then(responseJson => {
-        console.log('SERVIÇOS', responseJson);
         this.setState({ listaEvento: responseJson.data });
       })
-      .catch(error => {
-        console.log(error);
-        console.error('SERVIDOR ESTA DESLIGADO');
-      });
+      .catch(error => {});
   }
   irParaCadastro() {
     this.props.navigation.navigate('CadastroEvento');

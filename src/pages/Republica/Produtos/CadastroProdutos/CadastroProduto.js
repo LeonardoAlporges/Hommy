@@ -1,60 +1,40 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import { ScrollView, View, Image, TouchableOpacity, Text } from 'react-native';
-import * as yup from 'yup';
 import { Formik } from 'formik';
-
-import moment from 'moment';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { Item, Input, Label, Button, Icon, DatePicker, Picker } from 'native-base';
-import { useSelector } from 'react-redux';
+import { Button, Input, Item } from 'native-base';
+import React, { Fragment, useState } from 'react';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import ImagePicker from 'react-native-image-picker';
 import TextInputMask from 'react-native-text-input-mask';
-
-import api from '../../../../service/api';
-import estilo from './styles';
+import { useSelector } from 'react-redux';
+import * as yup from 'yup';
 import CustomModal from '../../../../components/Alert';
 import HeaderBack from '../../../../components/CustomHeader';
-
-import { imagePickerOptions, uploadFileToFireBaseRepublicaEventos, uploadProgress } from '../../../../utils';
-import ImagePicker from 'react-native-image-picker';
-
-import {
-  Container,
-  FieldSet,
-  LabelFielSet,
-  Linha,
-  FieldSetLarge,
-  ViewErro,
-  LabelErro,
-  Subtitle,
-  InputHora,
-  ViewBotao,
-  LabeBotaoEnviar,
-  AreaFotos,
-  LabelFotos,
-  DivisaoFotos
-} from './styles';
 import Loading from '../../../../components/Loading';
+import api from '../../../../service/api';
+import { imagePickerOptions, uploadFileToFireBaseRepublicaProduto } from '../../../../utils';
+import estilo, {
+  AreaFotos,
+  Container,
+  DivisaoFotos,
+  FieldSet,
+  FieldSetLarge,
+  LabeBotaoEnviar,
+  LabelErro,
+  LabelFielSet,
+  LabelFotos,
+  Linha,
+  Subtitle,
+  ViewBotao,
+  ViewErro
+} from './styles';
 
 export default function CadastroProduto({ navigation }) {
-  const avatarUser = useSelector(state => state.user.fotoPerfil);
   const emailUser = useSelector(state => state.user.email);
-  const notaUser = useSelector(state => state.user.notaUser);
-  const nomeUser = useSelector(state => state.user.usuario);
 
   const [erro, setErro] = useState(false);
   const [sucesso, setSucesso] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [botaoEnviar, setBotaoEnviar] = useState(true);
   const [contadorImagem, setContadorImagem] = useState(0);
   const [erroSemFoto, setErroSemFoto] = useState(false);
-
-  const [horarioDeInicio, setHorarioInicio] = useState();
-  const [horarioDeInicioPicker, setHorarioInicioPicker] = useState(false);
-  const [placeHorarioDeInicio, setPlaceHorarioInicio] = useState('00:00');
-
-  const [dataEvento, setDataEvento] = useState();
-  const [dataEventoPicker, setDataEventoPicker] = useState(false);
-  const [placeDataEvento, setPlaceDataEvento] = useState('Selecione');
 
   const [imagem1, setImagem1] = useState(null);
   const [imagem2, setImagem2] = useState(null);
@@ -62,20 +42,6 @@ export default function CadastroProduto({ navigation }) {
   const [linkimagem1, setLinkImagem1] = useState(null);
   const [linkimagem2, setLinkImagem2] = useState(null);
   const [linkimagem3, setLinkImagem3] = useState(null);
-
-  function selecionarHorario(date) {
-    const hora = moment(new Date(date)).format('HH:mm');
-    setHorarioInicioPicker(false);
-    setHorarioInicio(date);
-    setPlaceHorarioInicio(hora);
-  }
-
-  function selecionarData(date) {
-    const data = moment(new Date(date)).format('DD/MM');
-    setDataEventoPicker(false);
-    setDataEvento(date);
-    setPlaceDataEvento(data);
-  }
 
   function preencherFoto(linkImagem) {
     if (contadorImagem == 0) {
@@ -98,12 +64,9 @@ export default function CadastroProduto({ navigation }) {
       } else if (error) {
         alert('Ocorreu algum erro: ', error);
       } else {
-        console.log(imagePickerResponse);
         preencherFoto(imagePickerResponse);
-        const referencia = uploadFileToFireBaseRepublicaEventos(imagePickerResponse);
-        console.log(referencia);
+        const referencia = uploadFileToFireBaseRepublicaProduto(imagePickerResponse);
         monitorFileUpload(referencia);
-        console.log(linkimagem1);
       }
     });
   }
@@ -112,7 +75,6 @@ export default function CadastroProduto({ navigation }) {
     task.on('state_changed', snapshot => {
       snapshot.ref.getDownloadURL().then(downloadURL => {
         if (contadorImagem == 0) {
-          console.log(1);
           setLinkImagem1(downloadURL);
         } else if (contadorImagem == 1) {
           setLinkImagem2(downloadURL);
@@ -128,7 +90,7 @@ export default function CadastroProduto({ navigation }) {
       titulo: values.tituloProduto,
       descricao: values.descricao,
       valor: values.valor,
-      userEmail: 'leo@teste.com',
+      userEmail: emailUser,
       telefone: values.contato,
       imagem1: linkimagem1,
       imagem2: linkimagem2,
@@ -140,18 +102,12 @@ export default function CadastroProduto({ navigation }) {
       setLoading(false);
       return;
     }
-    console.log('ANTES', data);
     api
       .post('/produto', data)
       .then(Response => {
-        console.log('DEPOIS', Response);
-        setLoading(false);
         setSucesso(true);
       })
       .catch(error => {
-        console.log(error);
-        console.log(error.Response);
-        setLoading(false);
         setErro(true);
       })
       .finally(setLoading(false));
@@ -167,7 +123,7 @@ export default function CadastroProduto({ navigation }) {
 
   function irParaTelaIncial() {
     setSucesso(false);
-    //resetarPilhaNavegacao('TabsHeader');
+    resetarPilhaNavegacao('TabsHeader');
   }
 
   return (
@@ -185,7 +141,7 @@ export default function CadastroProduto({ navigation }) {
         tituloProduto: yup.string().required('Campo obrigatório').max(40, 'Somente 40 caracteres são permitidos'),
         descricao: yup.string().required('Campo obrigatório').max(100, 'Somente 100 caracteres são permitidos'),
         contato: yup.string().max(9999999999999).required(' Campo obrigatórior'),
-        valor: yup.number('Somente numeros!').max(200, 'Valor maximo de R$ 200,00').required('Campo obrigatório')
+        valor: yup.number('Somente numeros!').max(1000, 'Valor maximo de R$ 1.000,00').required('Campo obrigatório')
       })}
     >
       {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
@@ -211,11 +167,11 @@ export default function CadastroProduto({ navigation }) {
                       onBlur={() => setFieldTouched('tituloProduto')}
                     />
                   </Item>
-                  <View style={estilo.V_error}>
+                  <ViewErro>
                     {touched.tituloProduto && errors.tituloProduto && (
-                      <Text style={estilo.textError}>{errors.tituloProduto}</Text>
+                      <LabelErro style={estilo.textError}>{errors.tituloProduto}</LabelErro>
                     )}
-                  </View>
+                  </ViewErro>
                 </FieldSetLarge>
               </Linha>
               <Linha>
@@ -229,26 +185,27 @@ export default function CadastroProduto({ navigation }) {
                       onBlur={() => setFieldTouched('descricao')}
                     />
                   </Item>
-                  <View style={estilo.V_error}>
-                    {touched.descricao && errors.descricao && <Text style={estilo.textError}>{errors.descricao}</Text>}
-                  </View>
+                  <ViewErro>
+                    {touched.descricao && errors.descricao && <LabelErro>{errors.descricao}</LabelErro>}
+                  </ViewErro>
                 </FieldSetLarge>
               </Linha>
               <Linha>
                 <FieldSet>
                   <LabelFielSet>Valor</LabelFielSet>
                   <Item style={{ borderColor: 'transparent' }}>
-                    <Input
-                      value={values.redeSocial}
+                    <TextInputMask
+                      style={{ alignItems: 'flex-start' }}
+                      keyboardType="number-pad"
+                      mask={'[999]{.}[99]'}
+                      value={values.valor}
                       onChangeText={handleChange('valor')}
-                      placeholder=""
                       onBlur={() => setFieldTouched('valor')}
+                      placeholder="000,00"
                     />
                   </Item>
 
-                  <View style={estilo.V_error}>
-                    {touched.valor && errors.valor && <Text style={estilo.textError}>{errors.valor}</Text>}
-                  </View>
+                  <ViewErro>{touched.valor && errors.valor && <LabelErro>{errors.valor}</LabelErro>}</ViewErro>
                 </FieldSet>
                 <FieldSet>
                   <LabelFielSet>Contato</LabelFielSet>
@@ -263,9 +220,7 @@ export default function CadastroProduto({ navigation }) {
                     />
                   </Item>
 
-                  <View style={estilo.V_error}>
-                    {touched.contato && errors.contato && <Text style={estilo.textError}>{errors.contato}</Text>}
-                  </View>
+                  <ViewErro>{touched.contato && errors.contato && <LabelErro>{errors.contato}</LabelErro>}</ViewErro>
                 </FieldSet>
               </Linha>
 

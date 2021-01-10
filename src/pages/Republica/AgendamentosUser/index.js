@@ -1,34 +1,31 @@
-import React, { Component, useState, useEffect } from 'react';
-import { View, TouchableOpacity } from 'react-native';
-import { Text, Button } from 'native-base';
-import Cartao from '../../../components/Cartao';
-import style from './styles';
-
-import HeaderBack from '../../../components/CustomHeader';
-import { connect, useSelector } from 'react-redux';
-import api from '../../../service/api';
-import CustomModal from '../../../components/Alert';
+import moment from 'moment';
+import { Text } from 'native-base';
+import React, { useEffect, useState } from 'react';
+import { TouchableOpacity, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
-import ModalConfirmacao from '../../../components/ModalConfirmacao';
-
-import moment from 'moment';
+import { useSelector } from 'react-redux';
+import CustomModal from '../../../components/Alert';
+import Cartao from '../../../components/Cartao';
+import HeaderBack from '../../../components/CustomHeader';
 import EmptyState from '../../../components/EmptyState';
 import Loading from '../../../components/Loading';
-import {
+import ModalConfirmacao from '../../../components/ModalConfirmacao';
+import api from '../../../service/api';
+import style, {
+  Analise,
+  Barra,
+  Confirmado,
   Container,
-  ViewDetalhes,
+  Label,
+  LabelConfirmacao,
+  LabelData,
+  LabelReijeicao,
+  Rejeitado,
   Subtitulo,
   ViewData,
-  LabelData,
-  LabelConfirmacao,
-  Barra,
-  Label,
-  ViewLabel,
-  Analise,
-  Confirmado,
-  Rejeitado,
-  LabelReijeicao
+  ViewDetalhes,
+  ViewLabel
 } from './styles';
 
 export default function AgendamentoUser({ navigation }) {
@@ -45,7 +42,6 @@ export default function AgendamentoUser({ navigation }) {
   }, [reload]);
 
   function carregarMeusAgendamentos() {
-    console.log(email);
     setListaAgendamendo([]);
     api
       .get(`/agendamento/${email}`)
@@ -60,7 +56,6 @@ export default function AgendamentoUser({ navigation }) {
   }
 
   function removerMeuAgendamento(valorRetorno, idRepublica) {
-    console.log(valorRetorno);
     if (valorRetorno == 3) {
       return null;
     }

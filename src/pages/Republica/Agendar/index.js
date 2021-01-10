@@ -1,32 +1,28 @@
-import React, { Component, useState } from 'react';
-import { View } from 'react-native';
-
-import { DatePicker, Text, Button, Picker } from 'native-base';
-import { connect, useSelector } from 'react-redux';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
+import { Button, DatePicker } from 'native-base';
+import React, { useState } from 'react';
+import { View } from 'react-native';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
-
-
-import Cartao from '../../../components/Cartao';
-import style from './styles';
-import api from '../../../service/api';
+import { useSelector } from 'react-redux';
 import CustomModal from '../../../components/Alert';
-import Loading from '../../../components/Loading';
+import Cartao from '../../../components/Cartao';
 import HeaderBack from '../../../components/CustomHeader';
-import {
+import Loading from '../../../components/Loading';
+import api from '../../../service/api';
+import style, {
   Container,
-  ViewBotao,
-  ViewDetalhes,
-  ViewDate,
-  ViewClock,
+  TextoAgendamento,
   TextoClock,
   TextoClockPlace,
-  TextoAgendamento,
-  ViewDescricao,
   TextoDescricao,
-  ViewInputs,
-  ViewBotaoCalendario
+  ViewBotao,
+  ViewBotaoCalendario,
+  ViewClock,
+  ViewDate,
+  ViewDescricao,
+  ViewDetalhes,
+  ViewInputs
 } from './styles';
 
 export default function Agendar({ navigation }) {
@@ -43,10 +39,7 @@ export default function Agendar({ navigation }) {
 
   function agendarVisita() {
     setLoading(true);
-    if (
-      (dataAgendamento || horaAgendamento) == null ||
-      (dataAgendamento || horaAgendamento) == false
-    ) {
+    if ((dataAgendamento || horaAgendamento) == null || (dataAgendamento || horaAgendamento) == false) {
       setLoading(false);
       return 0;
     }
@@ -55,7 +48,7 @@ export default function Agendar({ navigation }) {
       data: dataAgendamento,
       hora: horaAgendamento
     };
-    console.log('??:', agendamento, dadosRepublica._id);
+
     api
       .put(`/agendamento/${dadosRepublica._id}`, agendamento)
       .then(response => {
@@ -63,23 +56,19 @@ export default function Agendar({ navigation }) {
         setLoading(false);
       })
       .catch(error => {
-        console.log(error);
         setErro(true);
         setLoading(false);
-        console.log(error.response);
       });
   }
 
   async function selecionarHorario(hora) {
-    console.log(horaPicker);
     setHoraPicker(false);
     const horaLabel = moment(new Date(hora)).format('HH:mm');
     setHoraAgendamento(hora);
     setLabelHoraAgendamento(horaLabel);
-    console.log(horaPicker);
   }
 
-  function picker(){
+  function picker() {
     setHoraPicker(true);
   }
 
@@ -92,9 +81,8 @@ export default function Agendar({ navigation }) {
       </View>
       <ViewDescricao>
         <TextoDescricao>
-          Escolha um dia e hórario para fazer uma visita na república, lembrando que depois de sua
-          visita aprovada o não comparecimento ao local na hora marcada poderá lhe trazer más
-          avaliações.
+          Escolha um dia e hórario para fazer uma visita na república, lembrando que depois de sua visita aprovada o não
+          comparecimento ao local na hora marcada poderá lhe trazer más avaliações.
         </TextoDescricao>
       </ViewDescricao>
 
@@ -122,8 +110,8 @@ export default function Agendar({ navigation }) {
           {labeHoraAgendamento == '00:00' ? (
             <TextoClockPlace>{labeHoraAgendamento}</TextoClockPlace>
           ) : (
-              <TextoClock>{labeHoraAgendamento}</TextoClock>
-            )}
+            <TextoClock>{labeHoraAgendamento}</TextoClock>
+          )}
 
           <ViewBotaoCalendario>
             <Button

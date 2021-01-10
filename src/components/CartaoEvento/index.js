@@ -1,18 +1,14 @@
-import React, { Component, useEffect, useState } from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { ScrollView } from 'react-native-gesture-handler';
-import 'moment/locale/br';
 import moment from 'moment';
+import 'moment/locale/br';
+import React, { useState } from 'react';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { withNavigation } from 'react-navigation';
 
 function CartaoEvento(props) {
   const [data, setDataViagem] = useState(moment(props.dados.data).format('DD/MM'));
   const [hora, sethoraSaida] = useState(moment(new Date(props.dados.hora)).format('HH:mm'));
-
-  useEffect(() => {
-    console.log('PROPS', props);
-  }, []);
 
   function onClickCard() {
     const dados = props.dados;

@@ -1,42 +1,38 @@
-import React, { useState } from 'react';
-import { Modal, Image, Linking } from 'react-native';
-import { useSelector } from 'react-redux';
-import { NavigationActions, StackActions } from 'react-navigation';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AsyncStorage from '@react-native-community/async-storage';
+import React, { useState } from 'react';
+import { Image, Linking, Modal } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { withNavigation } from 'react-navigation';
-
-import Estilos from './style';
-
-import {
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { NavigationActions, StackActions, withNavigation } from 'react-navigation';
+import { useSelector } from 'react-redux';
+import Estilos, {
+  Botao,
+  BotesLogin,
+  Card,
+  CardAmigos,
   Container,
   Header,
-  TituloHeader,
+  HeaderPrincipal,
+  Icone,
+  IconeMenu,
   IconVoltar,
+  Label,
+  LabelBotaoSair,
+  LabelBotoes,
+  Linha,
+  Menu,
+  Nome,
+  SairdoApp,
+  Titulo,
+  TituloHeader,
   ViewDados,
   ViewFotoPerfil,
-  ViewNome,
-  Nome,
-  ViewNota,
-  Menu,
-  Linha,
-  Card,
   ViewIcons,
   ViewLabel,
-  Label,
-  CardAmigos,
   ViewLabelAmigos,
-  BotesLogin,
-  Botao,
-  LabelBotoes,
-  SairdoApp,
-  LabelBotaoSair,
-  HeaderPrincipal,
-  IconeMenu,
-  Icone,
-  V_titulo,
-  Titulo
+  ViewNome,
+  ViewNota,
+  V_titulo
 } from './style';
 
 export function Cabeca({ navigation }) {
@@ -57,7 +53,6 @@ export function Cabeca({ navigation }) {
     await AsyncStorage.removeItem('user')
 
       .then(value => {
-        console.log('SAIU');
         resetNavigation('Login');
       })
       .catch(error => {});

@@ -1,33 +1,24 @@
-import * as yup from 'yup';
 import { Formik } from 'formik';
-import React, { Component, Fragment, useState } from 'react';
-import { Image, Text } from 'react-native';
-import { Button, View, Item, Input } from 'native-base';
+import { Button, Input, Item, View } from 'native-base';
+import React, { Fragment, useState } from 'react';
+import { Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import TextInputMask from 'react-native-text-input-mask';
-import { withNavigation } from 'react-navigation';
-import CustomModal from '../../../components/Alert';
-import api from '../../../service/api';
-import Loading from '../../../components/Loading';
-
-import estilo from './styles';
-import HeaderBack from '../../../components/CustomHeader';
 import { NavigationActions, StackActions } from 'react-navigation';
-import { set, functionsIn } from 'lodash';
-import {
-  Container,
-  ViewImagem,
-  ViewTitulo,
-  Titulo,
-  ViewSubtitulo,
-  Subtitulo,
-  ViewBotao,
-  TextoBotao,
-  ViewModal,
+import * as yup from 'yup';
+import CustomModal from '../../../components/Alert';
+import HeaderBack from '../../../components/CustomHeader';
+import Loading from '../../../components/Loading';
+import api from '../../../service/api';
+import estilo, {
   CamposLogin,
-  CamposLoginSenha,
+  Container,
+  LabelErro,
+  TextoBotao,
+  Titulo,
+  ViewBotao,
   ViewErro,
-  LabelErro
+  ViewImagem,
+  ViewTitulo
 } from './styles';
 
 export default function EsqueciSenha({ navigation }) {
@@ -41,12 +32,10 @@ export default function EsqueciSenha({ navigation }) {
       .then(response => {
         setLoading(false);
         navigation.navigate('ValidarCodigo', { email: values });
-        console.log(response);
       })
       .catch(error => {
         setLoading(false);
         setErro(true);
-        console.log(error);
       });
   }
 

@@ -1,40 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { View, ScrollView, Image, Button, Text, Linking } from 'react-native';
-
-import HeaderBack from '../../../components/CustomHeader';
-
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import React, { useEffect, useState } from 'react';
+import { Image, Linking, ScrollView, View } from 'react-native';
 import { IndicatorViewPager, PagerDotIndicator } from 'rn-viewpager';
-
+import HeaderBack from '../../../components/CustomHeader';
 import {
-  Imagem,
-  ViewTitulo,
-  Titulo,
-  ViewDescricao,
-  Descricao,
-  Card,
-  Linha,
-  CardDeInformacao,
-  IconesInformacao,
-  Icone,
-  Informacaoes,
-  TipoInformacao,
-  Informacao,
-  Categoria,
   Botao,
-  Label,
-  ViewBotao,
+  Card,
+  CardDeInformacao,
   CardDeInformacaoLocalizacao,
-  ViewCaracteristicaTitle,
-  CaracteristicaTitle,
-  ViewTipo,
-  Tipo,
-  ViewCaracteristicaItens,
-  Item2,
-  TextLabel,
-  ViewVagas,
-  ViewInterna,
-  Container
+  Categoria,
+  Descricao,
+  Icone,
+  IconesInformacao,
+  Informacao,
+  Informacaoes,
+  Label,
+  Linha,
+  TipoInformacao,
+  Titulo,
+  ViewBotao,
+  ViewDescricao,
+  ViewTitulo
 } from './style';
 
 export default function DetalhesAnuncio({ navigation }) {
@@ -61,7 +46,6 @@ export default function DetalhesAnuncio({ navigation }) {
     if (republica.imagem3 != '' && republica.imagem3 != null) {
       setContadorImagem(contadorImagem => contadorImagem + 1);
     }
-    console.log(contadorImagem);
   }, []);
 
   function renderDotIndicator() {

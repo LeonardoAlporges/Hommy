@@ -1,39 +1,34 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import { ScrollView, View, Image, TouchableOpacity, Text } from 'react-native';
-import * as yup from 'yup';
 import { Formik } from 'formik';
-
 import moment from 'moment';
+import { Button, Input, Item, Label } from 'native-base';
+import React, { Fragment, useState } from 'react';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import ImagePicker from 'react-native-image-picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { Item, Input, Label, Button, Icon, DatePicker, Picker } from 'native-base';
-import { useSelector } from 'react-redux';
 import TextInputMask from 'react-native-text-input-mask';
-
-import api from '../../../../service/api';
-import estilo from './styles';
+import { useSelector } from 'react-redux';
+import * as yup from 'yup';
 import CustomModal from '../../../../components/Alert';
 import HeaderBack from '../../../../components/CustomHeader';
-
-import { imagePickerOptions, uploadFileToFireBaseRepublicaEventos, uploadProgress } from '../../../../utils';
-import ImagePicker from 'react-native-image-picker';
-
-import {
-  Container,
-  FieldSet,
-  LabelFielSet,
-  Linha,
-  FieldSetLarge,
-  ViewErro,
-  LabelErro,
-  Subtitle,
-  InputHora,
-  ViewBotao,
-  LabeBotaoEnviar,
-  AreaFotos,
-  LabelFotos,
-  DivisaoFotos
-} from './styles';
 import Loading from '../../../../components/Loading';
+import api from '../../../../service/api';
+import { imagePickerOptions, uploadFileToFireBaseRepublicaEventos } from '../../../../utils';
+import estilo, {
+  AreaFotos,
+  Container,
+  DivisaoFotos,
+  FieldSet,
+  FieldSetLarge,
+  InputHora,
+  LabeBotaoEnviar,
+  LabelErro,
+  LabelFielSet,
+  LabelFotos,
+  Linha,
+  Subtitle,
+  ViewBotao,
+  ViewErro
+} from './styles';
 
 export default function CadastroEvento({ navigation }) {
   const avatarUser = useSelector(state => state.user.fotoPerfil);
@@ -98,12 +93,9 @@ export default function CadastroEvento({ navigation }) {
       } else if (error) {
         alert('Ocorreu algum erro: ', error);
       } else {
-        console.log(imagePickerResponse);
         preencherFoto(imagePickerResponse);
         const referencia = uploadFileToFireBaseRepublicaEventos(imagePickerResponse);
-        console.log(referencia);
         monitorFileUpload(referencia);
-        console.log(linkimagem1);
       }
     });
   }
@@ -112,7 +104,6 @@ export default function CadastroEvento({ navigation }) {
     task.on('state_changed', snapshot => {
       snapshot.ref.getDownloadURL().then(downloadURL => {
         if (contadorImagem == 0) {
-          console.log(1);
           setLinkImagem1(downloadURL);
         } else if (contadorImagem == 1) {
           setLinkImagem2(downloadURL);
@@ -141,17 +132,14 @@ export default function CadastroEvento({ navigation }) {
       setLoading(false);
       return;
     }
-    console.log('ANTES', data);
+
     api
       .post('/eventos', data)
       .then(Response => {
-        console.log('DEPOIS', Response);
         setLoading(false);
         setSucesso(true);
       })
       .catch(error => {
-        console.log(error);
-        console.log(error.Response);
         setLoading(false);
         setErro(true);
       })

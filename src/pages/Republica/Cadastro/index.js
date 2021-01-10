@@ -1,32 +1,27 @@
-import * as yup from 'yup';
 import { Formik } from 'formik';
-
-import React, { Component, Fragment, useState, useEffect } from 'react';
-import { View, ScrollView, Image, TouchableOpacity, Modal } from 'react-native';
-import { connect, useSelector } from 'react-redux';
-import HeaderBack from '../../../components/CustomHeader';
-import CustomModal from '../../../components/Alert';
-import TextInputMask from 'react-native-text-input-mask';
-
-import { imagePickerOptions, uploadFileToFireBaseRepublica, uploadProgress } from '../../../utils';
+import { Button, Icon, Input, Item, Label, Picker, Tab, Tabs, Text } from 'native-base';
+import React, { Fragment, useEffect, useState } from 'react';
+import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
-import { Text, Item, Input, Label, Button, Icon, Picker, Spinner, Tabs, Tab } from 'native-base';
+import TextInputMask from 'react-native-text-input-mask';
+import { NavigationActions, StackActions } from 'react-navigation';
+import { useSelector } from 'react-redux';
+import * as yup from 'yup';
+import CustomModal from '../../../components/Alert';
+import HeaderBack from '../../../components/CustomHeader';
 import Loading from '../../../components/Loading';
 import api from '../../../service/api';
-import estilo from './style';
-import { NavigationActions, StackActions } from 'react-navigation';
-import AsyncStorage from '@react-native-community/async-storage';
-import {
-  FieldSet,
-  LabelFielSet,
-  Linha,
-  FieldSetLarge,
-  FieldSetRua,
-  FieldSetNumero,
+import { imagePickerOptions, uploadFileToFireBaseRepublica } from '../../../utils';
+import estilo, {
   AreaFotos,
-  LabelFotos,
   DivisaoFotos,
-  Foto
+  FieldSet,
+  FieldSetLarge,
+  FieldSetNumero,
+  FieldSetRua,
+  LabelFielSet,
+  LabelFotos,
+  Linha
 } from './style';
 
 export default function Cadastro({ navigation }) {
@@ -73,7 +68,6 @@ export default function Cadastro({ navigation }) {
   }, []);
 
   function preencherFoto(linkImagem) {
-    console.log(linkImagem.uri);
     if (contadorImagem == 0) {
       setImagem1(linkImagem.uri);
     } else if (contadorImagem == 1) {
@@ -94,12 +88,10 @@ export default function Cadastro({ navigation }) {
       } else if (error) {
         alert('Ocorreu algum erro: ', error);
       } else {
-        console.log(imagePickerResponse);
         preencherFoto(imagePickerResponse);
         const referencia = uploadFileToFireBaseRepublica(imagePickerResponse);
-        console.log(referencia);
+
         monitorFileUpload(referencia);
-        console.log(linkimagem1);
       }
     });
   }
@@ -108,7 +100,6 @@ export default function Cadastro({ navigation }) {
     task.on('state_changed', snapshot => {
       snapshot.ref.getDownloadURL().then(downloadURL => {
         if (contadorImagem == 0) {
-          console.log(1);
           setLinkImagem1(downloadURL);
         } else if (contadorImagem == 1) {
           setLinkImagem2(downloadURL);
@@ -171,7 +162,6 @@ export default function Cadastro({ navigation }) {
   }
 
   function postaNovaRepublica(dados) {
-    console.log(dados);
     api
       .post('/republica', dados)
       .then(response => {
@@ -186,7 +176,6 @@ export default function Cadastro({ navigation }) {
           setErro(true);
           setLoading(false);
         }
-        console.log(error);
       });
   }
 

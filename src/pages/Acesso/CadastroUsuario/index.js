@@ -1,37 +1,30 @@
-import * as yup from 'yup';
 import { Formik } from 'formik';
-
+import { Input, Item, View } from 'native-base';
 import React, { Fragment, useState } from 'react';
-import { ScrollView, Modal, TouchableOpacity } from 'react-native';
+import { ScrollView, TouchableOpacity } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
-import { Item, Input, Button, Spinner } from 'native-base';
-import { imagePickerOptions, uploadFileToFireBaseUser, uploadProgress } from '../../../utils';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
-import CustomModal from '../../../components/Alert';
-import estilo from './style';
-import { View } from 'native-base';
-import api from '../../../service/api';
-import TextInputMask from 'react-native-text-input-mask';
-import HeaderBack from '../../../components/CustomHeader';
-import { NavigationActions, StackActions } from 'react-navigation';
 import LinearGradient from 'react-native-linear-gradient';
-
-import {
-  Container,
-  Imagem,
+import TextInputMask from 'react-native-text-input-mask';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { NavigationActions, StackActions } from 'react-navigation';
+import * as yup from 'yup';
+import CustomModal from '../../../components/Alert';
+import HeaderBack from '../../../components/CustomHeader';
+import Loading from '../../../components/Loading';
+import api from '../../../service/api';
+import { imagePickerOptions, uploadFileToFireBaseUser } from '../../../utils';
+import estilo, {
+  BotaoCadastro,
   BotaoEnviarFoto,
   BotaoFoto,
-  LabelBotaoFoto,
   CampoLogin,
+  Container,
+  Imagem,
   Invalido,
-  LabelErro,
-  BotaoCadastro,
   LabelBotao,
-  BackgroundLoad,
-  ModalLoad
+  LabelBotaoFoto,
+  LabelErro
 } from './style';
-import Loading from '../../../components/Loading';
 
 export default function CadastroUsuario({ navigation }) {
   const [imagemPerfil, setImagemPerfil] = useState();
@@ -62,12 +55,10 @@ export default function CadastroUsuario({ navigation }) {
     api
       .post('/usuario', value)
       .then(response => {
-        console.log(response);
         setLoading(false);
         setSucesso(true);
       })
       .catch(error => {
-        console.log(error);
         setLoading(false);
         setErro(true);
       });

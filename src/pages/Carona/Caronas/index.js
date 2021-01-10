@@ -1,6 +1,10 @@
+import _ from 'lodash';
+import { Button, CheckBox, Fab, Input, Item, ListItem, Picker, Spinner } from 'native-base';
 import React, { Component } from 'react';
-
-import { FlatList, View, Modal, Text, TouchableOpacity, Image } from 'react-native';
+import { FlatList, Modal, Text, TouchableOpacity, View } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { NavigationEvents, withNavigation } from 'react-navigation';
+import { connect } from 'react-redux';
 import {
   editChegada,
   editData,
@@ -13,20 +17,11 @@ import {
   editVagas,
   editValor
 } from '../../../actions/CaronaActions';
-import { connect } from 'react-redux';
-import { withNavigation, NavigationEvents } from 'react-navigation';
-
-import { CheckBox, Spinner, ListItem, Fab, Input, Item, Button, Picker } from 'native-base';
-
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Estilo from './style';
 import CustomModal from '../../../components/Alert';
 import CartaoCarona from '../../../components/CartaoCarona';
-import api from '../../../service/api';
-import _ from 'lodash';
 import EmptyState from '../../../components/EmptyState';
-
-import { Container } from './style';
+import api from '../../../service/api';
+import Estilo from './style';
 
 class Caronas extends Component {
   static navigationOptions = { header: null };
@@ -207,7 +202,6 @@ class Caronas extends Component {
     return api
       .get('/carona')
       .then(responseJson => {
-        console.log(responseJson);
         this.setState({
           listaCaronas: responseJson.data,
           fullData: responseJson.data,
@@ -278,7 +272,7 @@ class Caronas extends Component {
                     width: '100%',
                     height: 30,
                     justifyContent: 'center',
-                    alignItems: 'flex-end',
+                    alignItems: 'flex-end'
                   }}
                 >
                   <TouchableOpacity
@@ -290,9 +284,7 @@ class Caronas extends Component {
                     <Icon style={{ fontSize: 22 }} name="close" />
                   </TouchableOpacity>
                 </View>
-                <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}>
-                  Valor
-                </Text>
+                <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}>Valor</Text>
                 <ListItem style={Estilo.listStyle}>
                   <View style={Estilo.ViewLabel}>
                     <Text style={Estilo.textValor}>De R$</Text>
@@ -315,9 +307,7 @@ class Caronas extends Component {
                     />
                   </Item>
                 </ListItem>
-                <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}>
-                  Vagas disponíveis
-                </Text>
+                <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}>Vagas disponíveis</Text>
                 <ListItem style={Estilo.listStyle}>
                   <CheckBox
                     color="#142850"
@@ -348,9 +338,7 @@ class Caronas extends Component {
                   />
                   <Text style={Estilo.textList}>4+</Text>
                 </ListItem>
-                <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}>
-                  Saida
-                </Text>
+                <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}>Saida</Text>
                 <ListItem style={Estilo.listStyle2}>
                   <Item picker style={Estilo.pickerStyle}>
                     <Picker
@@ -379,9 +367,7 @@ class Caronas extends Component {
                     </Picker>
                   </Item>
                 </ListItem>
-                <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}>
-                  Destino
-                </Text>
+                <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}>Destino</Text>
 
                 <ListItem style={Estilo.listStyle}>
                   <Item picker style={Estilo.pickerStyle}>

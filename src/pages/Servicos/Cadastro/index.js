@@ -1,26 +1,22 @@
-import React, { Component, Fragment, useState, useEffect } from 'react';
-import { View, ScrollView, TouchableOpacity, Modal, Image } from 'react-native';
-import * as yup from 'yup';
-import { Formik } from 'formik';
 import ViewPager from '@react-native-community/viewpager';
-import api from '../../../service/api';
-import estilo from './styles';
-import { withNavigation } from 'react-navigation';
-import CustomModal from '../../../components/Alert';
-import { useSelector } from 'react-redux';
-import TextInputMask from 'react-native-text-input-mask';
-import HeaderBack from '../../../components/CustomHeader';
-import Loading from '../../../components/Loading';
+import { Formik } from 'formik';
 import moment from 'moment';
+import { Input, Item, Label, Picker, Text } from 'native-base';
+import React, { Fragment, useState } from 'react';
+import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { Text, Item, Input, Label, Button, Icon, DatePicker, Spinner, Picker } from 'native-base';
-import { imagePickerOptions, uploadFileToFireBaseServico, uploadProgress } from '../../../utils';
-
+import TextInputMask from 'react-native-text-input-mask';
 import { NavigationActions, StackActions } from 'react-navigation';
-import { set } from 'lodash';
+import { useSelector } from 'react-redux';
+import * as yup from 'yup';
+import CustomModal from '../../../components/Alert';
+import HeaderBack from '../../../components/CustomHeader';
+import Loading from '../../../components/Loading';
+import api from '../../../service/api';
+import { imagePickerOptions, uploadFileToFireBaseServico } from '../../../utils';
+import estilo, { AreaFotos, DivisaoFotos, FieldSet, FieldSetLarge, LabelFielSet, LabelFotos, Linha } from './styles';
 
-import { FieldSet, LabelFielSet, Linha, FieldSetLarge, AreaFotos, LabelFotos, DivisaoFotos } from './styles';
 export default function CadastroServico({ navigation }) {
   const avatarUser = useSelector(state => state.user.fotoPerfil);
   const emailUser = useSelector(state => state.user.email);
@@ -76,7 +72,7 @@ export default function CadastroServico({ navigation }) {
   function selecionarHorario(date, tipo) {
     if (tipo == 'inicial') {
       const inicial = moment(new Date(date)).format('HH:mm');
-      console.log(date);
+
       setHoraInicialPicker(false);
       setHoraInicial(date);
       setPlaceHoraInicial(inicial);
@@ -97,7 +93,6 @@ export default function CadastroServico({ navigation }) {
   }
 
   function preencherFoto(linkImagem) {
-    console.log(linkImagem.uri);
     if (contadorImagem == 0) {
       setImagem1(linkImagem.uri);
     } else if (contadorImagem == 1) {
@@ -117,12 +112,9 @@ export default function CadastroServico({ navigation }) {
       } else if (error) {
         alert('Ocorreu algum erro: ', error);
       } else {
-        console.log(imagePickerResponse);
         preencherFoto(imagePickerResponse);
         const referencia = uploadFileToFireBaseServico(imagePickerResponse);
-        console.log(referencia);
         monitorFileUpload(referencia);
-        console.log(linkimagem1);
       }
     });
   }
@@ -131,7 +123,6 @@ export default function CadastroServico({ navigation }) {
     task.on('state_changed', snapshot => {
       snapshot.ref.getDownloadURL().then(downloadURL => {
         if (contadorImagem == 0) {
-          console.log(downloadURL);
           setLinkImagem1(downloadURL);
         } else if (contadorImagem == 1) {
           setLinkImagem2(downloadURL);
@@ -143,7 +134,6 @@ export default function CadastroServico({ navigation }) {
   }
 
   function preencherDados(value) {
-    console.log('teste');
     setLoading(true);
     const data = {
       titulo: value.nomeEmpresa,
@@ -165,7 +155,7 @@ export default function CadastroServico({ navigation }) {
       image2: linkimagem2,
       image3: linkimagem3
     };
-    console.log(data);
+
     criarNovoAnuncio(data);
     setLoading(false);
   }
@@ -174,12 +164,10 @@ export default function CadastroServico({ navigation }) {
     api
       .post('/servicos', data)
       .then(Response => {
-        console.log(Response);
         setLoading(false);
         setSucesso(true);
       })
       .catch(error => {
-        console.log(error.response.data);
         setLoading(false);
         setErro(true);
       });

@@ -1,34 +1,30 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import { View, ScrollView, Modal } from 'react-native';
-import * as yup from 'yup';
 import { Formik } from 'formik';
-
 import moment from 'moment';
+import { Button, DatePicker, Icon, Input, Item, Label, Picker } from 'native-base';
+import React, { Fragment, useEffect, useState } from 'react';
+import { ScrollView } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { Item, Input, Label, Button, Icon, DatePicker, Spinner, Picker } from 'native-base';
-import { useSelector } from 'react-redux';
 import TextInputMask from 'react-native-text-input-mask';
 import { NavigationActions, StackActions } from 'react-navigation';
-
-import api from '../../../service/api';
-import estilo from './style';
+import { useSelector } from 'react-redux';
+import * as yup from 'yup';
 import CustomModal from '../../../components/Alert';
 import HeaderBack from '../../../components/CustomHeader';
-
-import {
+import Loading from '../../../components/Loading';
+import api from '../../../service/api';
+import estilo, {
   Container,
   FieldSet,
+  FieldSetLarge,
+  InputHora,
+  LabeBotaoEnviar,
+  LabelErro,
   LabelFielSet,
   Linha,
-  FieldSetLarge,
-  ViewErro,
-  LabelErro,
   Subtitle,
-  InputHora,
   ViewBotao,
-  LabeBotaoEnviar
+  ViewErro
 } from './style';
-import Loading from '../../../components/Loading';
 
 export default function CadastroCarona({ navigation }) {
   const avatarUser = useSelector(state => state.user.fotoPerfil);
@@ -55,7 +51,6 @@ export default function CadastroCarona({ navigation }) {
 
   useEffect(() => {
     if (atualizacao) {
-      console.log(dadosCarona);
       selecionarHorario(dadosCarona.horaSaida, 'Saida');
       selecionarHorario(dadosCarona.horaChegada, 'Chegada');
     }
