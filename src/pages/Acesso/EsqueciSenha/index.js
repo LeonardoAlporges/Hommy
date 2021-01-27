@@ -26,14 +26,17 @@ export default function EsqueciSenha({ navigation }) {
   const [loading, setLoading] = useState(false);
 
   function EnviarCodigo(values) {
+    console.log(api.getUri)
     setLoading(true);
     api
-      .put('/alterar/cod/', values)
+      .put('/alterar/cod', values)
       .then(response => {
+        console.log(response)
         setLoading(false);
         navigation.navigate('ValidarCodigo', { email: values });
       })
       .catch(error => {
+        console.log(error.response)
         setLoading(false);
         setErro(true);
       });
@@ -84,15 +87,16 @@ export default function EsqueciSenha({ navigation }) {
                   placeholder="E-mail"
                 />
               </Item>
-            </CamposLogin>
-
-            {touched.email && errors.email ? (
+              {touched.email && errors.email ? (
               <ViewErro>
                 <LabelErro>{errors.email}</LabelErro>
               </ViewErro>
             ) : (
               <View style={estilo.V_ErroSem} />
             )}
+            </CamposLogin>
+
+            
             <ViewBotao>
               <Button
                 style={estilo.botao}

@@ -14,6 +14,12 @@ export const getFileLocalPath = response => {
   return Platform.OS === 'android' ? path : uri;
 };
 
+export const createStorageReferenceToFileRepublica = response => {
+  const { fileName } = response;
+  return FireBaseStorage.ref(`/pictures/republicas/${fileName}`);
+  //return FireBaseStorage.ref(`/imagem/${fileName}`).delete();
+};
+
 export const createStorageReferenceToFileRepublicaProduto = response => {
   const { fileName } = response;
   return FireBaseStorage.ref(`/pictures/republicasProdutos/${fileName}`);

@@ -12,7 +12,6 @@ import * as yup from 'yup';
 import * as userAction from '../../../actions/UserAction';
 import CustomModal from '../../../components/Alert';
 import api from '../../../service/api';
-import { facebookLogin } from '../../../utils/facebook';
 import style, {
   BackgroundLoad,
   Botao,
@@ -137,13 +136,13 @@ export function Login({ navigation }) {
     navigation.dispatch(resetAction);
   }
 
-  function login_facebook() {
-    facebookLogin()
-      .then(response => {
-        fazerLoginRedeSocial(response.email, response.name, response.picture.data.url, response.id);
-      })
-      .catch(e => {});
-  }
+  // function login_facebook() {
+  //   facebookLogin()
+  //     .then(response => {
+  //       fazerLoginRedeSocial(response.email, response.name, response.picture.data.url, response.id);
+  //     })
+  //     .catch(e => {});
+  // }
 
   function fazerLogin(value) {
     setloading(true);
@@ -157,15 +156,11 @@ export function Login({ navigation }) {
       .post('/session', data)
       .then(response => {
         salvarDadosStorage(response.data);
-
         resetarPilhaNavegacao('TabsHeader');
         setloading(false);
       })
       .catch(error => {
-        resetarPilhaNavegacao('TabsHeader');
-
         setloading(false);
-
         if (error.response.data.code == 206) {
           setmodalErroSenha(true);
         } else if (error.response.data.code == 203) {
@@ -218,7 +213,7 @@ export function Login({ navigation }) {
             source={require('../../../assets/Img/logo-white.png')}
           />
         </LinearGradient>
-        <LabelRedeSocial>FAÇA LOGIN COM SUA REDE SOCIAL</LabelRedeSocial>
+        <LabelRedeSocial>FAÇA LOGIN COM GOOGLE</LabelRedeSocial>
 
         <BotesLogin>
           <Botao transparent onPress={signIn}>
@@ -229,14 +224,14 @@ export function Login({ navigation }) {
             />
             <LabelBotoes>Google</LabelBotoes>
           </Botao>
-          <Botao transparent onPress={login_facebook}>
+          {/* <Botao transparent onPress={login_facebook}>
             <Image
               resizeMode="contain"
               style={{ width: 20, height: 20 }}
               source={require('../../../assets/Img/Login/facebook.png')}
             />
             <LabelBotoes>Facebook</LabelBotoes>
-          </Botao>
+          </Botao> */}
         </BotesLogin>
         <Hr>
           <Divisoria />

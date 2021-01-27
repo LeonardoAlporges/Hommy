@@ -149,6 +149,17 @@ export default function DetalhesAnuncio({ navigation }) {
           </CardDeInformacao>
         </Linha>
         <Linha>
+           <CardDeInformacao>
+            <IconesInformacao>
+              <Icone name="home-city" />
+            </IconesInformacao>
+            <Informacaoes>
+              <TipoInformacao>Ponto de referencia</TipoInformacao>
+              <Informacao>{republica.pontoReferencia}</Informacao>
+            </Informacaoes>
+          </CardDeInformacao>
+        </Linha>
+        <Linha>
           <CardDeInformacaoLocalizacao
             onPress={() =>
               Linking.openURL(

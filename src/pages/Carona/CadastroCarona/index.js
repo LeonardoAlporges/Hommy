@@ -1,6 +1,5 @@
 import { Formik } from 'formik';
-import moment from 'moment';
-import { Button, DatePicker, Icon, Input, Item, Label, Picker } from 'native-base';
+import { Button, Icon, Input, Item, Label, Picker } from 'native-base';
 import React, { Fragment, useEffect, useState } from 'react';
 import { ScrollView } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
@@ -27,6 +26,11 @@ import estilo, {
 } from './style';
 
 export default function CadastroCarona({ navigation }) {
+
+   const moment = require('moment');
+  moment.locale('pt', {
+    months: 'Janeiro_Fevereiro_Março_Abril_Maio_Junho_Julho_Agosto_Setembro_Outubro_Novembro_Dezembro'.split('_')
+  });
   const avatarUser = useSelector(state => state.user.fotoPerfil);
   const emailUser = useSelector(state => state.user.email);
   const notaUser = useSelector(state => state.user.notaUser);
@@ -47,7 +51,10 @@ export default function CadastroCarona({ navigation }) {
   const [placeHoraSaida, setPlaceHoraSaida] = useState();
   const [placeHoraChegada, setPlaceHoraChegada] = useState();
   const [botaoEnviar, setBotaoEnviar] = useState(false);
-  const [dataLabel, setDataLabel] = useState('Selecione');
+  
+  const [dataAgendamento, setDataAgendamento] = useState(new Date());
+  const [labelData, setLabelData] = useState('Selecionar Data');
+  const [dataPicker, setDataPicker] = useState(false);
 
   useEffect(() => {
     if (atualizacao) {
@@ -64,6 +71,13 @@ export default function CadastroCarona({ navigation }) {
     navigation.dispatch(resetAction);
   }
 
+  async function selecionarData(date) {
+    setDataPicker(false);
+    const dataLabel = moment(new Date(date)).format('DD [de] MMMM');
+    setDataAgendamento(date);
+    setLabelData(dataLabel);
+  }
+
   function irParaTelaIncial() {
     resetarPilhaNavegacao('TabsHeader');
   }
@@ -75,7 +89,7 @@ export default function CadastroCarona({ navigation }) {
     const data = {
       localSaida: values.saida,
       localChegada: values.chegada,
-      data: dataViagem,
+      data: dataAgendamento,
       valor: values.valor,
       horaSaida: horaSaida,
       horaChegada: horaChegada,
@@ -281,44 +295,28 @@ export default function CadastroCarona({ navigation }) {
                 </FieldSet>
               </Linha>
               <Linha>
-                <FieldSet>
+              <FieldSet>
                   <LabelFielSet>Data</LabelFielSet>
                   <Item style={{ borderColor: 'transparent' }}>
-                    <DatePicker
-                      minimumDate={new Date()}
-                      locale={'pt-br'}
-                      timeZoneOffsetInMinutes={undefined}
-                      modalTransparent={true}
-                      animationType={'slide'}
-                      androidMode={'calendar'}
-                      placeHolderText={dataLabel}
-                      textStyle={{
-                        width: 155,
-                        paddingTop: 13,
-                        fontFamily: 'WorkSans',
-                        fontSize: 16,
-                        color: '#2e2e2e'
+                    <InputHora
+                      onPress={() => {
+                        setDataPicker(true);
                       }}
-                      placeHolderTextStyle={{
-                        width: 155,
-                        paddingTop: 13,
-                        fontFamily: 'WorkSans',
-                        fontSize: 16,
-                        color: '#bfc6ea'
-                      }}
-                      onDateChange={date => {
-                        setDataViagem(date);
-                      }}
-                      disabled={false}
-                      selectedValue={new Date(values.data)}
-                      onValueChange={handleChange('data')}
-                      value={new Date(values.data)}
-                      onChangeText={handleChange('data')}
-                      onBlur={() => setFieldTouched('data')}
-                    />
+                    >
+                      <Label>{labelData}</Label>
+                      <DateTimePickerModal
+                        isVisible={dataPicker}
+                        mode="date"
+                        onConfirm={date => selecionarData(date)}
+                        onCancel={date => setDataPicker(false)}
+                        date={new Date()}
+                        locale={'pt-br'}                      
+                      />
+                    </InputHora>
                   </Item>
-                  <ViewErro>{!dataViagem && botaoEnviar && <LabelErro>Campo obrigatório</LabelErro>}</ViewErro>
+                  <ViewErro>{!horaSaida && botaoEnviar && <LabelErro>Campo obrigatório</LabelErro>}</ViewErro>
                 </FieldSet>
+
                 <FieldSet>
                   <LabelFielSet>Valor</LabelFielSet>
                   <Item regular style={{ borderColor: 'transparent' }}>
@@ -368,7 +366,7 @@ export default function CadastroCarona({ navigation }) {
                         locale={'pt-br'}
                         is24Hour={true}
                         onDateChange={handleChange('HSaida')}
-                        on
+                        
                       />
                     </InputHora>
                   </Item>

@@ -1,6 +1,5 @@
-import styled from 'styled-components/native';
-import { Button } from 'native-base';
 import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;

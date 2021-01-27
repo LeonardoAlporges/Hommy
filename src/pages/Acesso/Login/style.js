@@ -1,6 +1,6 @@
-import styled from 'styled-components/native';
 import { Button } from 'native-base';
 import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
 
 export const Container = styled.View`
   width: 100%;
@@ -63,7 +63,7 @@ export const Ou = styled.Text`
 `;
 
 export const Hr = styled.View`
-  margin: 6% 0 4% 0;
+  margin: 4% 0 4% 0;
 
   flex-direction: row;
   width: 80%;
@@ -111,6 +111,7 @@ export const BotaoLogin = styled.TouchableOpacity`
   width: 40%;
   height: 50px;
   border-radius: 4px;
+  margin-top:11px;
 `;
 
 export const BotaoCadastro = styled(Button)`

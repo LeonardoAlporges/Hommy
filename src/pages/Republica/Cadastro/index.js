@@ -30,7 +30,7 @@ export default function Cadastro({ navigation }) {
   const nome = useSelector(state => state.user.usuario);
   const [atualizarCadastro, setAtualizarCadastro] = useState(navigation.state.params.update);
   const [dadosRepublica, setDadosRepublica] = useState(navigation.state.params.dadosRepublica);
-  const [contadorImagem, setContadorImagem] = useState('0');
+  const [contadorImagem, setContadorImagem] = useState(0);
   const [loading, setLoading] = useState();
   const [erro, setErro] = useState(false);
   const [sucesso, setSucesso] = useState(false);
@@ -45,6 +45,7 @@ export default function Cadastro({ navigation }) {
   const [usuarioLogado, setUsuarioLogado] = useState();
 
   useEffect(() => {
+    
     if (atualizarCadastro) {
       var cont = 0;
       if (dadosRepublica.imagem1 != null) {
@@ -63,20 +64,24 @@ export default function Cadastro({ navigation }) {
         setImagem3(dadosRepublica.imagem3);
         cont++;
       }
+      setContadorImagem(cont)
     }
-    setContadorImagem(cont);
+   
   }, []);
 
   function preencherFoto(linkImagem) {
+    console.log("Link",linkImagem)
     if (contadorImagem == 0) {
+      console.log('0')
       setImagem1(linkImagem.uri);
     } else if (contadorImagem == 1) {
+      console.log('1')
       setImagem2(linkImagem.uri);
     } else if (contadorImagem == 2) {
+      console.log('2')
       setImagem3(linkImagem.uri);
-    } else {
-      setOcutarBotaoEnvioFoto();
-    }
+    } 
+    console.log('nrenhum')
     setContadorImagem(contadorImagem + 1);
   }
 
@@ -90,7 +95,6 @@ export default function Cadastro({ navigation }) {
       } else {
         preencherFoto(imagePickerResponse);
         const referencia = uploadFileToFireBaseRepublica(imagePickerResponse);
-
         monitorFileUpload(referencia);
       }
     });
@@ -99,6 +103,7 @@ export default function Cadastro({ navigation }) {
   function monitorFileUpload(task) {
     task.on('state_changed', snapshot => {
       snapshot.ref.getDownloadURL().then(downloadURL => {
+        console.log('DOWA',downloadURL)
         if (contadorImagem == 0) {
           setLinkImagem1(downloadURL);
         } else if (contadorImagem == 1) {
