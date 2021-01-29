@@ -14,7 +14,7 @@ class Eventos extends Component {
     this.state = { listaEvento: [], active: false };
   }
   servicosRedux() {
-    this.props.navigation.navigate('CadastroProduto');
+    this.props.navigation.navigate('CadastroEvento');
   }
 
   UNSAFE_componentWillMount() {

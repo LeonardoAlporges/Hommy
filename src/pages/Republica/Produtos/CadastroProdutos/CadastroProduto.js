@@ -4,6 +4,7 @@ import React, { Fragment, useState } from 'react';
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import TextInputMask from 'react-native-text-input-mask';
+import { NavigationActions, StackActions } from 'react-navigation';
 import { useSelector } from 'react-redux';
 import * as yup from 'yup';
 import CustomModal from '../../../../components/Alert';
@@ -105,24 +106,27 @@ export default function CadastroProduto({ navigation }) {
     api
       .post('/produto', data)
       .then(Response => {
+         setLoading(false)
         setSucesso(true);
       })
       .catch(error => {
+         setLoading(false)
         setErro(true);
       })
-      .finally(setLoading(false));
+     
   }
 
-  function resetarPilhaNavegacao(rota) {
+ function resetarPilhaNavegacao(rota) {
     const resetAction = StackActions.reset({
       index: 0,
       actions: [NavigationActions.navigate({ routeName: rota })]
     });
     navigation.dispatch(resetAction);
+    console.log("????")
   }
-
+  
   function irParaTelaIncial() {
-    setSucesso(false);
+   console.log("?22?")
     resetarPilhaNavegacao('TabsHeader');
   }
 
@@ -304,9 +308,7 @@ export default function CadastroProduto({ navigation }) {
         titulo="Tudo certo!"
         descricao="Seu anúncio já estar no ar! "
         botao="Confirmar"
-        callback={() => {
-          irParaTelaIncial();
-        }}
+        callback={irParaTelaIncial}
       />
     );
   }
