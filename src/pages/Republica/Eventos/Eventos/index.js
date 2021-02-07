@@ -21,6 +21,7 @@ class Eventos extends Component {
     return api
       .get('/eventos')
       .then(responseJson => {
+        console.log(responseJson)
         this.setState({ listaEvento: responseJson.data });
       })
       .catch(error => {});

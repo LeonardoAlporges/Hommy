@@ -6,6 +6,7 @@ import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import TextInputMask from 'react-native-text-input-mask';
+import { NavigationActions, StackActions } from 'react-navigation';
 import { useSelector } from 'react-redux';
 import * as yup from 'yup';
 import CustomModal from '../../../../components/Alert';
@@ -132,6 +133,7 @@ export default function CadastroEvento({ navigation }) {
       setLoading(false);
       return;
     }
+    console.log(data)
 
     api
       .post('/eventos', data)
@@ -156,7 +158,7 @@ export default function CadastroEvento({ navigation }) {
 
   function irParaTelaIncial() {
     setSucesso(false);
-    //resetarPilhaNavegacao('TabsHeader');
+    resetarPilhaNavegacao('TabsHeader');
   }
 
   return (

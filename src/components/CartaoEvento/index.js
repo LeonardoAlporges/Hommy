@@ -25,9 +25,6 @@ function CartaoEvento(props) {
         paddingBottom: 20
       }}
     >
-      {/* SEPARAÇÂO DE CARD  */}
-      {/* SEPARAÇÂO DE CARD  */}
-      {/* SEPARAÇÂO DE CARD  */}
       <TouchableOpacity
         onPress={onClickCard}
         style={{
