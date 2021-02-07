@@ -1,32 +1,27 @@
-import * as yup from 'yup';
 import { Formik } from 'formik';
-
-import React, { Component, Fragment, useState, useEffect } from 'react';
-import { View, ScrollView, Image, TouchableOpacity, Modal } from 'react-native';
-import { connect, useSelector } from 'react-redux';
-import HeaderBack from '../../../components/CustomHeader';
-import CustomModal from '../../../components/Alert';
-import TextInputMask from 'react-native-text-input-mask';
-
-import { imagePickerOptions, uploadFileToFireBaseRepublica, uploadProgress } from '../../../utils';
+import { Button, Icon, Input, Item, Label, Picker, Tab, Tabs, Text } from 'native-base';
+import React, { Fragment, useEffect, useState } from 'react';
+import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
-import { Text, Item, Input, Label, Button, Icon, Picker, Spinner, Tabs, Tab } from 'native-base';
+import TextInputMask from 'react-native-text-input-mask';
+import { NavigationActions, StackActions } from 'react-navigation';
+import { useSelector } from 'react-redux';
+import * as yup from 'yup';
+import CustomModal from '../../../components/Alert';
+import HeaderBack from '../../../components/CustomHeader';
 import Loading from '../../../components/Loading';
 import api from '../../../service/api';
-import estilo from './style';
-import { NavigationActions, StackActions } from 'react-navigation';
-import AsyncStorage from '@react-native-community/async-storage';
-import {
-  FieldSet,
-  LabelFielSet,
-  Linha,
-  FieldSetLarge,
-  FieldSetRua,
-  FieldSetNumero,
+import { imagePickerOptions, uploadFileToFireBaseRepublica } from '../../../utils';
+import estilo, {
   AreaFotos,
-  LabelFotos,
   DivisaoFotos,
-  Foto
+  FieldSet,
+  FieldSetLarge,
+  FieldSetNumero,
+  FieldSetRua,
+  LabelFielSet,
+  LabelFotos,
+  Linha
 } from './style';
 
 export default function Cadastro({ navigation }) {
@@ -50,6 +45,7 @@ export default function Cadastro({ navigation }) {
   const [usuarioLogado, setUsuarioLogado] = useState();
 
   useEffect(() => {
+    
     if (atualizarCadastro) {
       var cont = 0;
       if (dadosRepublica.imagem1 != null) {
@@ -68,21 +64,24 @@ export default function Cadastro({ navigation }) {
         setImagem3(dadosRepublica.imagem3);
         cont++;
       }
+      setContadorImagem(cont)
     }
-    setContadorImagem(cont);
+   
   }, []);
 
   function preencherFoto(linkImagem) {
-    console.log(linkImagem.uri);
+    console.log("Link",linkImagem)
     if (contadorImagem == 0) {
+      console.log('0')
       setImagem1(linkImagem.uri);
     } else if (contadorImagem == 1) {
+      console.log('1')
       setImagem2(linkImagem.uri);
     } else if (contadorImagem == 2) {
+      console.log('2')
       setImagem3(linkImagem.uri);
-    } else {
-      setOcutarBotaoEnvioFoto();
-    }
+    } 
+    console.log('nrenhum')
     setContadorImagem(contadorImagem + 1);
   }
 
@@ -94,12 +93,9 @@ export default function Cadastro({ navigation }) {
       } else if (error) {
         alert('Ocorreu algum erro: ', error);
       } else {
-        console.log(imagePickerResponse);
         preencherFoto(imagePickerResponse);
         const referencia = uploadFileToFireBaseRepublica(imagePickerResponse);
-        console.log(referencia);
         monitorFileUpload(referencia);
-        console.log(linkimagem1);
       }
     });
   }
@@ -107,8 +103,8 @@ export default function Cadastro({ navigation }) {
   function monitorFileUpload(task) {
     task.on('state_changed', snapshot => {
       snapshot.ref.getDownloadURL().then(downloadURL => {
+        console.log('DOWA',downloadURL)
         if (contadorImagem == 0) {
-          console.log(1);
           setLinkImagem1(downloadURL);
         } else if (contadorImagem == 1) {
           setLinkImagem2(downloadURL);
@@ -148,6 +144,7 @@ export default function Cadastro({ navigation }) {
       valorAluguel: values.aluguel,
       bairro: values.bairro,
       rua: values.rua,
+      pontoReferencia: values.pontoReferencia,
       numeroCasa: values.numero,
       pessoas: values.moradores,
       descricao: values.desc,
@@ -171,7 +168,6 @@ export default function Cadastro({ navigation }) {
   }
 
   function postaNovaRepublica(dados) {
-    console.log(dados);
     api
       .post('/republica', dados)
       .then(response => {
@@ -186,7 +182,6 @@ export default function Cadastro({ navigation }) {
           setErro(true);
           setLoading(false);
         }
-        console.log(error);
       });
   }
 
@@ -211,6 +206,7 @@ export default function Cadastro({ navigation }) {
         rua: dadosRepublica ? dadosRepublica.rua : '',
         numero: dadosRepublica ? dadosRepublica.numeroCasa : '',
         aluguel: dadosRepublica ? dadosRepublica.valorAluguel.toString() : '',
+        pontoReferencia: dadosRepublica ? dadosRepublica.pontoReferencia : '',
         contas: dadosRepublica ? dadosRepublica.valorContas.toString() : '',
         moradores: dadosRepublica ? dadosRepublica.pessoas : '',
         genero: dadosRepublica ? dadosRepublica.genero : '',
@@ -238,7 +234,12 @@ export default function Cadastro({ navigation }) {
         rua: yup
           .string('')
           .min(3, 'Minimo de 3 caracteres')
-          .max(50, 'Maximo permitido de 25 caracteres')
+          .max(50, 'Maximo permitido de 50 caracteres')
+          .required('Campo obrigatório'),
+        pontoReferencia: yup
+          .string('')
+          .min(3, 'Minimo de 3 caracteres')
+          .max(40, 'Maximo permitido de 40 caracteres')
           .required('Campo obrigatório'),
         numero: yup
           .number('Somente numeros')
@@ -337,49 +338,6 @@ export default function Cadastro({ navigation }) {
                   <Text style={estilo.textRepublica}>
                     Insira as informações necessárias para registrar uma nova república.
                   </Text>
-                  {/* <View style={estilo.V_ImageLabel}>
-                    <Text style={estilo.txtLabel}>Envie Fotos de Sua República</Text>
-                  </View>
-                  <View style={estilo.V_ImageEmpty}>
-                    <ScrollView horizontal={true}>
-                      {imagem1 == null ? (
-                        <View style={estilo.V_ImageFullEmpty}>
-                          <Image
-                            source={require('../../../assets/Img/Republica_Send_Pictures.png')}
-                            style={estilo.ImageEmpty}
-                          />
-                        </View>
-                      ) : (
-                        <View style={estilo.V_ImageFull}>
-                          <Image source={{ uri: imagem1 }} style={estilo.ImageFull} />
-                        </View>
-                      )}
-                      {imagem2 == null ? (
-                        <View style={estilo.V_ImageFullEmpty}>
-                          <Image
-                            source={require('../../../assets/Img/Republica_Send_Pictures.png')}
-                            style={estilo.ImageEmpty}
-                          />
-                        </View>
-                      ) : (
-                        <View style={estilo.V_ImageFull}>
-                          <Image source={{ uri: imagem2 }} style={estilo.ImageFull} />
-                        </View>
-                      )}
-                      {imagem3 == null ? (
-                        <View style={estilo.V_ImageFullEmpty}>
-                          <Image
-                            source={require('../../../assets/Img/Republica_Send_Pictures.png')}
-                            style={estilo.ImageEmpty}
-                          />
-                        </View>
-                      ) : (
-                        <View style={estilo.V_ImageFull}>
-                          <Image source={{ uri: imagem3 }} style={estilo.ImageFull} />
-                        </View>
-                      )}
-                    </ScrollView>
-                  </View> */}
                   <Linha>
                     <FieldSetLarge>
                       <LabelFielSet>Nome da república</LabelFielSet>
@@ -401,12 +359,29 @@ export default function Cadastro({ navigation }) {
                     <FieldSetLarge>
                       <LabelFielSet>Bairro</LabelFielSet>
                       <Item style={{ borderColor: 'transparent' }}>
-                        <Input
+                        <Picker
+                          mode="dropdown"
+                          placeholder="Bairro"
+                          placeholderStyle={{ color: '#bfc6ea' }}
+                          placeholderIconColor="#007aff"
+                          selectedValue={values.bairro}
+                          onValueChange={handleChange('bairro')}
                           value={values.bairro}
                           onChangeText={handleChange('bairro')}
-                          placeholder=""
                           onBlur={() => setFieldTouched('bairro')}
-                        />
+                        >
+                          <Picker.Item label="" value="null" />
+                          <Picker.Item label="Bilau(Guararema)" value="Bilau" />
+                          <Picker.Item label="Colina" value="Colina" />
+                          <Picker.Item label="Conceição" value="Conceição" />
+                          <Picker.Item label="Nova Alegre(Vila Alta)" value="Nova Alegre" />
+                          <Picker.Item label="Centro" value="Centro" />
+                          <Picker.Item label="Vila Reis" value="Vila Reis" />
+                          <Picker.Item label="Campo de Aviação" value="Campo de Aviação" />
+                          <Picker.Item label="Vila do Sul" value="Vila do Sul" />
+                          <Picker.Item label="São Manoel" value="São Manoel" />
+                          <Picker.Item label="Charqueada" value="Charqueada" />
+                        </Picker>
                       </Item>
 
                       <View style={estilo.V_error}>
@@ -457,13 +432,35 @@ export default function Cadastro({ navigation }) {
                           placeholderTextColor="#2e2e2e"
                           //style={estilo.textoValue}
                           placeholderTextColor="#989898"
-                          placeholder="EX.:Perto da UFES, local para estudo..."
+                          placeholder="EX.:Local para estudo..."
                           onBlur={() => setFieldTouched('descricao')}
                         />
                       </Item>
                       <View style={estilo.V_error}>
                         {touched.descricao && errors.descricao && (
                           <Text style={estilo.textError}>{errors.descricao}</Text>
+                        )}
+                      </View>
+                    </FieldSetLarge>
+                  </Linha>
+                  <Linha>
+                    <FieldSetLarge>
+                      <LabelFielSet>Ponto de Referencia</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
+                        <Input
+                          style={{ fontFamily: 'WorkSans' }}
+                          value={values.descricao}
+                          onChangeText={handleChange('pontoReferencia')}
+                          placeholderTextColor="#2e2e2e"
+                          //style={estilo.textoValue}
+                          placeholderTextColor="#989898"
+                          placeholder="EX.:Ao lado do BC Supermercado"
+                          onBlur={() => setFieldTouched('pontoReferencia')}
+                        />
+                      </Item>
+                      <View style={estilo.V_error}>
+                        {touched.pontoReferencia && errors.pontoReferencia && (
+                          <Text style={estilo.textError}>{errors.pontoReferencia}</Text>
                         )}
                       </View>
                     </FieldSetLarge>

@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import HeaderBack from '../../../components/CustomHeader';
-import { View, TouchableOpacity, Linking, FlatList, ScrollView } from 'react-native';
-
+import React, { useEffect, useState } from 'react';
+import { FlatList, Linking, ScrollView, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import api from '../../../service/api';
-
 import CustomModal from '../../../components/Alert';
+import HeaderBack from '../../../components/CustomHeader';
 import EmptyState from '../../../components/EmptyState';
 import Loading from '../../../components/Loading';
-
-import { V_Categoria, Card, Categoria, V_Card, Nome, Numero, IconeSeta } from './styles';
+import api from '../../../service/api';
+import { Card, Categoria, IconeSeta, Nome, Numero, V_Card, V_Categoria } from './styles';
 
 export default function TelefoneUteis({ navigation }) {
   const [telefones, setTelefones] = useState([]);
@@ -31,7 +28,6 @@ export default function TelefoneUteis({ navigation }) {
         setLoading(false);
         setErro(true);
         setReloading(false);
-        console.log(error);
       });
   }
 

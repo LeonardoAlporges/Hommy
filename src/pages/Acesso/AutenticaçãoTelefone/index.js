@@ -1,30 +1,24 @@
-import React, { Component, Fragment, useState, useEffect } from 'react';
-import { Image, Text, View } from 'react-native';
-import * as yup from 'yup';
+import auth from '@react-native-firebase/auth';
 import { Formik } from 'formik';
-
-import { Button, Item, Input } from 'native-base';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Button, Input, Item } from 'native-base';
+import React, { Fragment, useEffect, useState } from 'react';
+import { Image, View } from 'react-native';
 import TextInputMask from 'react-native-text-input-mask';
-
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import * as yup from 'yup';
 import CustomModal from '../../../components/Alert';
 import HeaderBack from '../../../components/CustomHeader';
-import auth from '@react-native-firebase/auth';
-import estilo from './styles';
-import {
-  Container,
-  ViewImagem,
-  ViewTitulo,
-  Titulo,
-  ViewSubtitulo,
-  Subtitulo,
-  ViewBotao,
-  TextoBotao,
-  ViewModal,
+import estilo, {
   CamposLogin,
   CamposLoginSenha,
+  Container,
+  LabelErro,
+  TextoBotao,
+  Titulo,
+  ViewBotao,
   ViewErro,
-  LabelErro
+  ViewImagem,
+  ViewTitulo
 } from './styles';
 
 export default function PhoneSignIn() {
@@ -35,7 +29,7 @@ export default function PhoneSignIn() {
   const [codigoErrado, setCodigoErrado] = useState(false);
   const [confirm, setConfirm] = useState(null);
 
-  useEffect(() => { }, [confirm]);
+  useEffect(() => {}, [confirm]);
 
   // Handle the button press
   async function signInWithPhoneNumber(phoneNumber) {
@@ -44,10 +38,9 @@ export default function PhoneSignIn() {
       confirmation = await auth().signInWithPhoneNumber(phoneNumber);
       setConfirm(confirmation);
       setCodigoValido(true);
-    } catch (error){
-      setErro(true)      
+    } catch (error) {
+      setErro(true);
     }
-    console.log(confirmation);    
   }
 
   async function confirmCode(values) {
@@ -55,7 +48,7 @@ export default function PhoneSignIn() {
       await confirm.confirm(values.codigo);
       setSucesso(true);
     } catch (error) {
-      setErro(true)
+      setErro(true);
     }
   }
 
@@ -77,26 +70,24 @@ export default function PhoneSignIn() {
       <ViewTitulo>
         {codigoValido ? (
           <Titulo>
-            Digite seu telefone para enviarmos o código de confirmação por SMS para você verificar seu número de celular.
+            Digite seu telefone para enviarmos o código de confirmação por SMS para você verificar seu número de
+            celular.
           </Titulo>
         ) : (
-            <Titulo>
-              Um código para prosseguir foi enviado via SMS. Por favor, informe seu código de confirmação no campo abaixo.
-            </Titulo>
-          )}
+          <Titulo>
+            Um código para prosseguir foi enviado via SMS. Por favor, informe seu código de confirmação no campo abaixo.
+          </Titulo>
+        )}
       </ViewTitulo>
 
       <Formik
         initialValues={{
-          codigo: yup
-            .string('')
-            .min(6, 'Mínimo 6 dígitos necessários')
-            .max(6, 'Somente 6 dígitos são permitido'),
+          codigo: yup.string('').min(6, 'Mínimo 6 dígitos necessários').max(6, 'Somente 6 dígitos são permitido'),
           numeroTelefone: yup
             .string('')
             .min(11, 'Mínimo 11 dígitos necessários')
             .max(11, 'Máximo 11 dígitos necessários')
-            .required('Insira uma senha para sua conta'),
+            .required('Insira uma senha para sua conta')
         }}
         validationSchema={yup.object().shape({
           codigo: yup
@@ -158,15 +149,15 @@ export default function PhoneSignIn() {
                   <LabelErro>{errors.numeroTelefone}</LabelErro>
                 </ViewErro>
               ) : (
-                  <View style={estilo.V_ErroSem} />
-                )}
+                <View style={estilo.V_ErroSem} />
+              )}
             </View>
             {!codigoValido && (
               <ViewBotao>
                 <Button
                   style={estilo.botao}
                   onPress={() => {
-                    signInWithPhoneNumber("+55" + values.numeroTelefone);
+                    signInWithPhoneNumber('+55' + values.numeroTelefone);
                   }}
                 >
                   <TextoBotao>Prosseguir</TextoBotao>
@@ -195,8 +186,8 @@ export default function PhoneSignIn() {
                   <LabelErro>{errors.codigo}</LabelErro>
                 </ViewErro>
               ) : (
-                  <View style={estilo.V_ErroSem} />
-                )}
+                <View style={estilo.V_ErroSem} />
+              )}
             </View>
 
             {codigoValido && (

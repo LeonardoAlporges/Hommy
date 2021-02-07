@@ -1,30 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { View, ScrollView, FlatList } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { FlatList, ScrollView, View } from 'react-native';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
-import { useSelector } from 'react-redux';
-
-import api from '../../../service/api';
-import Cartao from '../../../components/Cartao';
 import { withNavigation } from 'react-navigation';
-import EmptyState from '../../../components/EmptyState';
-import HeaderBack from '../../../components/CustomHeader';
+import { useSelector } from 'react-redux';
 import CustomModal from '../../../components/Alert';
+import Cartao from '../../../components/Cartao';
+import CartaoCarona from '../../../components/CartaoCarona';
+import HeaderBack from '../../../components/CustomHeader';
+import EmptyState from '../../../components/EmptyState';
 import Loading from '../../../components/Loading';
 import ModalConfirmacao from '../../../components/ModalConfirmacao';
-import CartaoCarona from '../../../components/CartaoCarona';
-
+import api from '../../../service/api';
 import {
-  Container,
-  V_Subtitulo,
-  Subtitulo,
   BarraSeparacao,
-  ViewOpcoes,
   BotaoDelete,
   BotaoEditar,
   BotaoInteressado,
+  Container,
+  Label,
   LabelBotaoEditar,
-  V_Label,
-  Label
+  ViewOpcoes,
+  V_Label
 } from './style';
 
 function Anuncios({ navigation }) {
@@ -51,7 +47,6 @@ function Anuncios({ navigation }) {
           getlist();
         })
         .catch(error => {
-          console.log(error);
           setLoading(false);
           setErro(true);
         });

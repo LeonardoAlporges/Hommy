@@ -1,49 +1,43 @@
-import React, { Component, useState, useEffect } from 'react';
-import {
-  Container,
-  AdicionarRepublica,
-  Titulo,
-  V_titulo,
-  FieldSetLarge,
-  LabelFielSet,
-  Linha,
-  FieldSetRua,
-  Linha2,
-  FieldSetNumero,
-  ViewBotaoADD,
-  ViewTarefas,
-  ViewTitulo,
-  BotaoAdicionarConta,
-  LabelBotaoADD,
-  Botao,
-  CardsContas,
-  NomeConta,
-  ValorConta,
-  ViewContas,
-  TituloEPicker,
-  TituloSession,
-  LinhaBotao,
-  LabelBotao,
-  ViewNomeRepublica,
-  NomeRepublica,
-  TelaGerenciamento,
-  EmptyContas
-} from './styles';
-import { CustomModal, ModalGerenciamento } from '../../../components/Alert';
-
+import AsyncStorage from '@react-native-community/async-storage';
+import { DatePicker, Input, Item, Picker } from 'native-base';
+import React, { useEffect, useState } from 'react';
+import { FlatList, Image, Modal, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import { useSelector } from 'react-redux';
+import { CustomModal } from '../../../components/Alert';
 import HeaderBack from '../../../components/CustomHeader';
 import Loading from '../../../components/Loading';
-
-import { View, Text, Image, FlatList, Modal, TouchableOpacity } from 'react-native';
-import { Input, Item, Picker, DatePicker, Textarea } from 'native-base';
-import { map, set, values } from 'lodash';
 import api from '../../../service/api';
-import { useSelector } from 'react-redux';
-import moment from 'moment';
-import AsyncStorage from '@react-native-community/async-storage';
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
-import { asyncStorage } from 'reactotron-react-native';
-import { ScrollView } from 'react-native';
+import {
+  AdicionarRepublica,
+  Botao,
+  BotaoAdicionarConta,
+  CardsContas,
+  Container,
+  EmptyContas,
+  FieldSetLarge,
+  FieldSetNumero,
+  FieldSetRua,
+  LabelBotao,
+  LabelBotaoADD,
+  LabelFielSet,
+  Linha,
+  Linha2,
+  LinhaBotao,
+  NomeConta,
+  NomeRepublica,
+  TelaGerenciamento,
+  Titulo,
+  TituloEPicker,
+  TituloSession,
+  ValorConta,
+  ViewBotaoADD,
+  ViewContas,
+  ViewNomeRepublica,
+  ViewTarefas,
+  ViewTitulo,
+  V_titulo
+} from './styles';
 
 export default function GerenciamentoDeRepublica({ navigation }) {
   const moment = require('moment');
@@ -108,24 +102,19 @@ export default function GerenciamentoDeRepublica({ navigation }) {
     const data = {
       email: email
     };
-    console.log(codigoRepublica);
+
     api
       .put(`/gerenciaRepublica/membros/${codigoRepublica}`, data)
       .then(response => {
-        console.log('Resposta', response);
         verificarSeJaCadastrou();
       })
-      .catch(error => {
-        console.log(error.response);
-      });
+      .catch(error => {});
   }
   function cadastrarRepublica() {
-    console.log(nomeRepublica);
     const data = {
       email: email,
       nomeRepublica: nomeRepublica
     };
-    console.log(data);
 
     api
       .post(`/gerenciaRepublica`, data)
@@ -137,7 +126,6 @@ export default function GerenciamentoDeRepublica({ navigation }) {
         // AsyncStorage.setItem('REPUBLICA_GERENCIADA', JSON.stringify(response.data));
       })
       .catch(error => {
-        console.log(error.response);
         setErro(true);
       });
   }
@@ -162,8 +150,6 @@ export default function GerenciamentoDeRepublica({ navigation }) {
         }
       })
       .catch(error => {
-        console.log(error.response);
-
         setErro(true);
       })
       .finally(setLoading(false));
@@ -176,7 +162,6 @@ export default function GerenciamentoDeRepublica({ navigation }) {
         AsyncStorage.setItem('REPUBLICA_GERENCIADA_CONTAS', JSON.stringify(response.data));
       })
       .catch(error => {
-        console.log('CONTAS ERRO :', error);
         setErro(true);
       });
   }
@@ -191,13 +176,11 @@ export default function GerenciamentoDeRepublica({ navigation }) {
     api
       .post(`/contas/`, data)
       .then(response => {
-        console.log(response);
         if (mesSelecionado == response.data.mes) {
           setListaDeContas(listaDeContas.concat(response.data));
         }
       })
       .catch(error => {
-        console.log(error);
         setErro(true);
       });
     setNomeConta('');
@@ -219,7 +202,6 @@ export default function GerenciamentoDeRepublica({ navigation }) {
         setListaDeTarefas(listaDeTarefas.concat(response.data));
       })
       .catch(error => {
-        console.log(error.response);
         setErro(true);
       });
     setNomeTarefa('');
@@ -240,7 +222,7 @@ export default function GerenciamentoDeRepublica({ navigation }) {
   }
   function enviarConviteMembro() {
     setAdiconarMembroButao(!adiconarMembroButao);
-    console.log('EMAIL:', emailMembroConvite);
+
     const data = {
       emailMembroConvite,
       descricao: nomeTarefa,
@@ -254,7 +236,6 @@ export default function GerenciamentoDeRepublica({ navigation }) {
         setListaDeTarefas(listaDeTarefas.concat(response.data));
       })
       .catch(error => {
-        console.log(error.response);
         setErro(true);
       });
     setNomeTarefa('');
@@ -306,7 +287,6 @@ export default function GerenciamentoDeRepublica({ navigation }) {
         buscarTarefas();
       })
       .catch(error => {
-        console.log(error.response);
         setErro(true);
       });
   }
@@ -318,23 +298,10 @@ export default function GerenciamentoDeRepublica({ navigation }) {
         buscarContas();
       })
       .catch(error => {
-        console.log(error.response);
         setErro(true);
       });
   }
-  function excluirMembro() {
-    //   console.log('excluir membro');
-    //   api
-    //     .delete(`/gerenciaRepublica/membros/${idTipoSelecionado}`)
-    //     .then(response => {
-    //       console.log('excluindo membro');
-    //       setListaDeMebros([]);
-    //     })
-    //     .catch(error => {
-    //       console.log(error.response);
-    //       setErro(true);
-    //     });
-  }
+
   function excluirRepublica() {
     api
       .delete(`/gerenciaRepublica/${idRepublica}`)
@@ -342,7 +309,6 @@ export default function GerenciamentoDeRepublica({ navigation }) {
         setExisteRepublica(false);
       })
       .catch(error => {
-        console.log(error.response);
         setErro(true);
       });
   }

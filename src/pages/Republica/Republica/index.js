@@ -1,42 +1,37 @@
-import React, { Component, useEffect } from 'react';
-import { FlatList, View, Modal, Text, TouchableOpacity, Image } from 'react-native';
-
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { connect } from 'react-redux';
-import { withNavigation, NavigationEvents } from 'react-navigation';
-import { CheckBox, ListItem, Button, Fab, Input, Item, Label } from 'native-base';
-import EmptyState from '../../../components/EmptyState';
-
-import Estilos from './style';
-import { Spinner } from 'native-base';
-import Cartao from '../../../components/Cartao/index';
-import api from '../../../service/api';
-import CustomModal from '../../../components/Alert';
 import _ from 'lodash';
+import { Button, CheckBox, Fab, Input, Item, ListItem, Spinner } from 'native-base';
+import React, { Component } from 'react';
+import { Modal, Text, TouchableOpacity, View } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { withNavigation } from 'react-navigation';
+import { connect } from 'react-redux';
 import {
-  editValorAluguel,
-  editNomeRepublica,
-  editBairro,
-  editPessoas,
-  editDescricao,
-  editAnimal,
   editAcomodacaoQuarto,
   editAcomodacaoRepublica,
-  editValorConta,
-  editObservacao,
+  editAnimal,
+  editBairro,
+  editDescricao,
+  editGenero,
+  editIdRepublica,
   editImg1,
   editImg2,
   editImg3,
-  editGenero,
+  editNomeRepublica,
+  editNumeroCasa,
   editNumVagas,
+  editObservacao,
+  editPessoas,
   editRepresentante,
   editRua,
-  editNumeroCasa,
   editTipoImovel,
-  editIdRepublica
+  editValorAluguel,
+  editValorConta
 } from '../../../actions/AuthActions';
-
-import { Container, Listagem } from './style';
+import CustomModal from '../../../components/Alert';
+import Cartao from '../../../components/Cartao/index';
+import EmptyState from '../../../components/EmptyState';
+import api from '../../../service/api';
+import Estilos, { Container, Listagem } from './style';
 
 class Republica extends Component {
   static navigationOptions = { header: null, headerLeft: null };
@@ -103,7 +98,6 @@ class Republica extends Component {
     return api
       .get('/republica')
       .then(responseJson => {
-        console.log(responseJson);
         this.setState({
           listaRepublicas: responseJson.data,
           fullData: responseJson.data,

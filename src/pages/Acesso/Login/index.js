@@ -1,47 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import { View, Image, Modal, TouchableOpacity } from 'react-native';
-import * as yup from 'yup';
-import { Formik } from 'formik';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Input, Item, Button, Spinner, Label } from 'native-base';
-import { withNavigation, NavigationActions, StackActions } from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
-import { useSelector, useDispatch } from 'react-redux';
+import { GoogleSignin, statusCodes } from '@react-native-community/google-signin';
+import { Formik } from 'formik';
+import { Input, Item, Spinner } from 'native-base';
+import React, { useEffect, useState } from 'react';
+import { Image, Modal, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { NavigationActions, StackActions, withNavigation } from 'react-navigation';
+import { useDispatch, useSelector } from 'react-redux';
+import * as yup from 'yup';
+import * as userAction from '../../../actions/UserAction';
+import CustomModal from '../../../components/Alert';
 import api from '../../../service/api';
 import style, {
-  Container,
-  Logo,
-  LabelRedeSocial,
-  Invalido,
-  BotesLogin,
-  Hr,
-  Ou,
-  Divisoria,
-  Botao,
-  LabelBotoes,
-  CampoLogin,
-  RecuperaSenha,
-  LabelEsqueciSenha,
-  BotaoLogin,
-  BotesPrincipal,
-  BotaoCadastro,
-  LabelLogin,
-  LabelCadastro,
   BackgroundLoad,
+  Botao,
+  BotaoCadastro,
+  BotaoLogin,
+  BotesLogin,
+  BotesPrincipal,
+  CampoLogin,
+  Click,
+  Container,
+  Divisoria,
+  Hr,
+  Invalido,
+  LabelBotoes,
+  LabelCadastro,
   LabelErro,
+  LabelEsqueciSenha,
+  LabelLogin,
+  LabelRedeSocial,
+  Logo,
   ModalLoad,
-  Click
+  Ou,
+  RecuperaSenha
 } from './style';
-import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk';
-import { facebookLogin } from '../../../utils/facebook';
-
-import { GoogleSignin, GoogleSigninButton, statusCodes } from '@react-native-community/google-signin';
-
-import CustomModal from '../../../components/Alert';
-import * as userAction from '../../../actions/UserAction';
-import { set } from 'lodash';
 
 export function Login({ navigation }) {
   const [modalErroLogin, setmodalErroLogin] = useState(false);
@@ -68,11 +62,10 @@ export function Login({ navigation }) {
   }, []);
 
   function fazerLoginRedeSocial(email, nome, foto, id) {
-    console.log('FAZENDO LOGIN', email, nome, foto, id);
     const data = {
       email: email,
       password: id,
-      tokenAparelho: tokenAparelho,
+      //tokenAparelho: tokenAparelho,
       nome: nome,
       fotoPerfil: foto
     };
@@ -84,9 +77,8 @@ export function Login({ navigation }) {
         setloading(false);
       })
       .catch(error => {
-        console.log(error.response);
         setloading(false);
-        console.log(error.response.data.code);
+
         if (error.response.data.code == 206) {
           setmodalErroSenha(true);
         } else if (error.response.data.code == 203) {
@@ -99,10 +91,9 @@ export function Login({ navigation }) {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
-      console.log('userInfo', userInfo);
+
       fazerLoginRedeSocial(userInfo.user.email, userInfo.user.name, userInfo.user.photo, userInfo.user.id);
     } catch (error) {
-      console.log(error);
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         // user cancelled the login flow
       } else if (error.code === statusCodes.IN_PROGRESS) {
@@ -122,7 +113,6 @@ export function Login({ navigation }) {
 
   async function pegar() {
     const dados = JSON.parse(await AsyncStorage.getItem('@Facebook:accessData'));
-    console.log(dados);
   }
 
   async function salvarDadosStorage(dados) {
@@ -135,9 +125,7 @@ export function Login({ navigation }) {
 
       await AsyncStorage.setItem('token', JSON.stringify(dados.token));
       await AsyncStorage.setItem('user', JSON.stringify(dados.usuario));
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   }
 
   function resetarPilhaNavegacao(Rota) {
@@ -148,36 +136,31 @@ export function Login({ navigation }) {
     navigation.dispatch(resetAction);
   }
 
-  function login_facebook() {
-    facebookLogin()
-      .then(response => {
-        console.log('Facebook: ', response);
-        fazerLoginRedeSocial(response.email, response.name, response.picture.data.url, response.id);
-      })
-      .catch(e => console.log('erro', e));
-  }
+  // function login_facebook() {
+  //   facebookLogin()
+  //     .then(response => {
+  //       fazerLoginRedeSocial(response.email, response.name, response.picture.data.url, response.id);
+  //     })
+  //     .catch(e => {});
+  // }
 
   function fazerLogin(value) {
-    console.log('?32??');
     setloading(true);
     const data = {
       email: value.email,
-      password: value.password,
-      tokenD: tokenAparelho
+      password: value.password
+      //tokenD: tokenAparelho
     };
-    console.log('?32??', data);
+
     api
       .post('/session', data)
       .then(response => {
         salvarDadosStorage(response.data);
-        console.log('???', response);
         resetarPilhaNavegacao('TabsHeader');
         setloading(false);
       })
       .catch(error => {
-        console.log(error.response);
         setloading(false);
-        console.log(error.response.data.code);
         if (error.response.data.code == 206) {
           setmodalErroSenha(true);
         } else if (error.response.data.code == 203) {
@@ -230,7 +213,7 @@ export function Login({ navigation }) {
             source={require('../../../assets/Img/logo-white.png')}
           />
         </LinearGradient>
-        <LabelRedeSocial>FAÇA LOGIN COM SUA REDE SOCIAL</LabelRedeSocial>
+        <LabelRedeSocial>FAÇA LOGIN COM GOOGLE</LabelRedeSocial>
 
         <BotesLogin>
           <Botao transparent onPress={signIn}>
@@ -241,14 +224,14 @@ export function Login({ navigation }) {
             />
             <LabelBotoes>Google</LabelBotoes>
           </Botao>
-          <Botao transparent onPress={login_facebook}>
+          {/* <Botao transparent onPress={login_facebook}>
             <Image
               resizeMode="contain"
               style={{ width: 20, height: 20 }}
               source={require('../../../assets/Img/Login/facebook.png')}
             />
             <LabelBotoes>Facebook</LabelBotoes>
-          </Botao>
+          </Botao> */}
         </BotesLogin>
         <Hr>
           <Divisoria />

@@ -1,6 +1,5 @@
-import { LoginManager, AccessToken, GraphRequest, GraphRequestManager } from 'react-native-fbsdk';
-
 import { AsyncStorage } from 'react-native';
+import { AccessToken, GraphRequest, GraphRequestManager, LoginManager } from 'react-native-fbsdk';
 
 const getAccountInfo = accessData =>
   new Promise((resolve, reject) => {
@@ -46,7 +45,7 @@ export const facebookLogin = async () => {
       await AsyncStorage.setItem('@Facebook:accessData', JSON.stringify(accessData));
     }
     const info = await getAccountInfo(accessData);
-    console.log('info', info);
+
     return info;
   } catch (err) {
     await AsyncStorage.removeItem('@Facebook:accessData');

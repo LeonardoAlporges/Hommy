@@ -1,28 +1,26 @@
 import React from 'react';
 import { View } from 'react-native';
-import { withNavigation } from 'react-navigation';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
-
-import styles from './style';
-import {
+import { withNavigation } from 'react-navigation';
+import styles, {
   Container,
-  ViewImagem,
+  Descricao,
   Imagem,
-  ViewTitulo,
+  Label,
   Titulo,
+  ViewComIcones,
   ViewDados,
   ViewDescricao,
-  Descricao,
-  ViewValor,
+  ViewImagem,
+  ViewTitulo,
   ViewVagas,
-  Label,
-  ViewComIcones
+  ViewValor
 } from './style';
 
 export function CartaoServico(props) {
   function onClickCard() {
     const dados = props.dados;
-    console.log('leo', props);
+
     props.navigation.navigate('DetalhesServicos', { dados });
   }
 
@@ -46,7 +44,9 @@ export function CartaoServico(props) {
             </ViewValor>
             <ViewVagas>
               <Icon style={styles.icones} name="clock" />
-              <Label>{props.dados.dia.inicio} à {props.dados.dia.fim}</Label>
+              <Label>
+                {props.dados.dia.inicio} à {props.dados.dia.fim}
+              </Label>
             </ViewVagas>
           </ViewComIcones>
         </ViewDados>

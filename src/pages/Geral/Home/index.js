@@ -8,10 +8,11 @@ import Cabeca from '../../../components/Cabeca';
 import Republica from '../../Republica/Republica';
 import Caronas from '../../Carona/Caronas';
 import Servicos from '../../Servicos/Servicos';
-import Divulgacao from '../Divulgacao';
 
 import { BotaoFooter, Icone, Label } from './style';
 import estilo from './style';
+import Produtos from '../../Republica/Produtos/Produtos';
+import Eventos from '../../Republica/Eventos/Eventos';
 
 function TabsHeader({ navigation }) {
   const [index, setIndex] = useState(1);
@@ -25,7 +26,6 @@ function TabsHeader({ navigation }) {
     <Container>
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
       <Cabeca />
-
       <Tabs
         initialPage={0}
         tabBarUnderlineStyle={{ backgroundColor: '#142850', height: 3 }}
@@ -39,8 +39,8 @@ function TabsHeader({ navigation }) {
           activeTextStyle={estilo.tabs_ActiveTextStyle}
         >
           {page === 1 && <Republica style={estilo.card} />}
-          {page === 2 && <Divulgacao />}
-          {page === 3 && <Divulgacao />}
+          {page === 2 && <Eventos />}
+          {page === 3 && <Produtos />}
           <Footer
             style={{
               shadowColor: '#000',

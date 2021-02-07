@@ -1,33 +1,29 @@
-import React, { Component, useState, useEffect } from 'react';
-import { View, ScrollView } from 'react-native';
-import { Text } from 'native-base';
-import style from './styles';
-
-import HeaderBack from '../../../components/CustomHeader';
-import { connect, useSelector } from 'react-redux';
-import api from '../../../service/api';
-import CustomModal from '../../../components/Alert';
-import { FlatList } from 'react-native-gesture-handler';
-import CartaoUser from '../../../components/CartaoUser';
-
 import moment from 'moment';
+import { Text } from 'native-base';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, View } from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
+import { useSelector } from 'react-redux';
+import CustomModal from '../../../components/Alert';
+import CartaoUser from '../../../components/CartaoUser';
+import HeaderBack from '../../../components/CustomHeader';
 import EmptyState from '../../../components/EmptyState';
 import Loading from '../../../components/Loading';
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
-import {
+import api from '../../../service/api';
+import style, {
+  Analise,
+  Barra,
+  Confirmado,
   Container,
-  ViewDetalhes,
+  Label,
+  LabelConfirmacao,
+  LabelData,
+  LabelReijeicao,
+  Rejeitado,
   Subtitulo,
   ViewData,
-  LabelData,
-  LabelConfirmacao,
-  Barra,
-  Label,
-  ViewLabel,
-  Analise,
-  Confirmado,
-  Rejeitado,
-  LabelReijeicao
+  ViewDetalhes,
+  ViewLabel
 } from './styles';
 
 export default function Agendamentos({ navigation }) {

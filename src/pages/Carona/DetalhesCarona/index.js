@@ -1,41 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import React, { useState } from 'react';
+import { ScrollView, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Button } from 'native-base';
+import { withNavigation } from 'react-navigation';
 import { useSelector } from 'react-redux';
-
 import CustomModal from '../../../components/Alert';
-import api from '../../../service/api';
 import Loading from '../../../components/Loading';
-
+import api from '../../../service/api';
 import {
+  BarraSeparadora,
+  Botao,
+  ContainerIformacao,
+  Data,
   Header,
   HeaderUser,
+  Hora,
   Imagem,
   InformacaoPerfil,
-  Nome,
-  ViewNotas,
-  Nota,
-  ContainerIformacao,
-  ViewData,
-  Data,
-  ViewPartida,
-  Partida,
-  ViewHora,
-  Hora,
-  ViewValor,
-  LabelValor,
-  Valor,
-  BarraSeparadora,
-  ViewPontos,
-  ViewPontoEmbarque,
+  Label,
   LabelPontoEmbarque,
-  ViewLabel,
+  LabelValor,
+  Nome,
+  Nota,
+  Partida,
   TextoLabel,
+  Valor,
   ViewBotao,
-  Botao,
-  Label
+  ViewData,
+  ViewHora,
+  ViewLabel,
+  ViewNotas,
+  ViewPartida,
+  ViewPontoEmbarque,
+  ViewPontos,
+  ViewValor
 } from './style';
 
 export function DetalhesCarona({ navigation }) {
@@ -55,9 +52,6 @@ export function DetalhesCarona({ navigation }) {
   const [horaSaida, setHoraSaida] = useState(moment(dados.horaSaida).format('HH:mm'));
   const [horaChegada, setHoraChegada] = useState(moment(dados.horaChegada).format('HH:mm'));
 
-  useEffect(() => {
-    console.log(navigation.state.params.dados);
-  }, []);
   async function demonstrarInteresse() {
     setLoading(true);
     const dado = { email: email }; //ALTERAR ISSO PARA RECEBER SOMENTE O EMAIL

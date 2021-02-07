@@ -1,13 +1,11 @@
+import { Button, Fab } from 'native-base';
 import React, { Component } from 'react';
-import { ScrollView, StyleSheet, FlatList, View } from 'react-native';
-import axios from 'axios';
-import { withNavigation, NavigationEvents } from 'react-navigation';
-
-import CartaoServico from '../../../components/CartaoServico';
-import Estilo from './style';
-import { CheckBox, ListItem, Button, Fab, Input, Item, Label } from 'native-base';
+import { FlatList, ScrollView, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { withNavigation } from 'react-navigation';
+import CartaoServico from '../../../components/CartaoServico';
 import api from '../../../service/api';
+import Estilo from './style';
 
 class Servicos extends Component {
   static navigationOptions = { header: null };
@@ -23,7 +21,6 @@ class Servicos extends Component {
     return api
       .get('/servicos')
       .then(responseJson => {
-        console.log('SERVIÇOS', responseJson);
         this.setState({ listaServicos: responseJson.data });
       })
       .catch(error => {

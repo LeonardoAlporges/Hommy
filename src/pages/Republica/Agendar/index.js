@@ -1,40 +1,44 @@
-import React, { Component, useState } from 'react';
+import 'moment/locale/br';
+import { Button } from 'native-base';
+import React, { useState } from 'react';
 import { View } from 'react-native';
-
-import { DatePicker, Text, Button, Picker } from 'native-base';
-import { connect, useSelector } from 'react-redux';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import moment from 'moment';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
-
-
-import Cartao from '../../../components/Cartao';
-import style from './styles';
-import api from '../../../service/api';
+import { useSelector } from 'react-redux';
 import CustomModal from '../../../components/Alert';
-import Loading from '../../../components/Loading';
+import Cartao from '../../../components/Cartao';
 import HeaderBack from '../../../components/CustomHeader';
-import {
+import Loading from '../../../components/Loading';
+import api from '../../../service/api';
+import style, {
   Container,
-  ViewBotao,
-  ViewDetalhes,
-  ViewDate,
-  ViewClock,
+  TextoAgendamento,
   TextoClock,
   TextoClockPlace,
-  TextoAgendamento,
-  ViewDescricao,
   TextoDescricao,
-  ViewInputs,
-  ViewBotaoCalendario
+  ViewBotao,
+  ViewBotaoCalendario,
+  ViewClock,
+  ViewDate,
+  ViewDescricao,
+  ViewDetalhes,
+  ViewInputs
 } from './styles';
 
 export default function Agendar({ navigation }) {
+  const moment = require('moment');
+  moment.locale('pt', {
+    months: 'Janeiro_Fevereiro_Março_Abril_Maio_Junho_Julho_Agosto_Setembro_Outubro_Novembro_Dezembro'.split('_')
+  });
+
   const email = useSelector(state => state.user.email);
   const [erro, setErro] = useState(false);
   const [sucesso, setSucesso] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [dataAgendamento, setDataAgendamento] = useState();
+  const [dataAgendamento, setDataAgendamento] = useState(new Date());
+  const [labelData, setLabelData] = useState('Selecionar Data');
+  const [dataPicker, setDataPicker] = useState(false);
+
   const [dadosRepublica, setDadosRepuublica] = useState(navigation.state.params.data);
   const [labeHoraAgendamento, setLabelHoraAgendamento] = useState('00:00');
   const [horaAgendamento, setHoraAgendamento] = useState();
@@ -43,10 +47,7 @@ export default function Agendar({ navigation }) {
 
   function agendarVisita() {
     setLoading(true);
-    if (
-      (dataAgendamento || horaAgendamento) == null ||
-      (dataAgendamento || horaAgendamento) == false
-    ) {
+    if ((dataAgendamento || horaAgendamento) == null || (dataAgendamento || horaAgendamento) == false) {
       setLoading(false);
       return 0;
     }
@@ -55,7 +56,7 @@ export default function Agendar({ navigation }) {
       data: dataAgendamento,
       hora: horaAgendamento
     };
-    console.log('??:', agendamento, dadosRepublica._id);
+
     api
       .put(`/agendamento/${dadosRepublica._id}`, agendamento)
       .then(response => {
@@ -63,24 +64,31 @@ export default function Agendar({ navigation }) {
         setLoading(false);
       })
       .catch(error => {
-        console.log(error);
         setErro(true);
         setLoading(false);
-        console.log(error.response);
       });
   }
 
   async function selecionarHorario(hora) {
-    console.log(horaPicker);
     setHoraPicker(false);
     const horaLabel = moment(new Date(hora)).format('HH:mm');
     setHoraAgendamento(hora);
     setLabelHoraAgendamento(horaLabel);
-    console.log(horaPicker);
   }
 
-  function picker(){
+  async function selecionarData(date) {
+    setDataPicker(false);
+    const dataLabel = moment(new Date(date)).format('DD [de] MMMM');
+    setDataAgendamento(date);
+    setLabelData(dataLabel);
+  }
+
+  function picker() {
     setHoraPicker(true);
+  }
+
+  function pickerData() {
+    setDataPicker(true);
   }
 
   return (
@@ -92,38 +100,41 @@ export default function Agendar({ navigation }) {
       </View>
       <ViewDescricao>
         <TextoDescricao>
-          Escolha um dia e hórario para fazer uma visita na república, lembrando que depois de sua
-          visita aprovada o não comparecimento ao local na hora marcada poderá lhe trazer más
-          avaliações.
+          Escolha um dia e hórario para fazer uma visita na república, lembrando que depois de sua visita aprovada o não
+          comparecimento ao local na hora marcada poderá lhe trazer más avaliações.
         </TextoDescricao>
       </ViewDescricao>
 
       <ViewInputs>
-        <ViewDate>
-          <Icon name="calendar" style={style.IconCaledarA} />
-          <DatePicker
-            defaultDate={new Date()}
-            minimumDate={new Date()}
-            locale={'pt-br'}
-            timeZoneOffsetInMinutes={undefined}
-            modalTransparent={true}
-            animationType={'slide'}
-            androidMode={'default'}
-            placeHolderText="Selecione a data"
-            textStyle={style.textStyledate}
-            placeHolderTextStyle={style.placeHolder}
-            onDateChange={date => {
-              setDataAgendamento(date);
+        <ViewBotaoCalendario>
+          <Button
+            style={style.botaoCalendar}
+            onPress={() => {
+              pickerData();
             }}
-            disabled={false}
+          >
+            <Icon name="calendar" style={style.IconCaledar} />
+          </Button>
+        </ViewBotaoCalendario>
+        <ViewDate>
+          <TextoClockPlace>{labelData}</TextoClockPlace>
+          <DateTimePickerModal
+            isVisible={dataPicker}
+            mode="date"
+            onConfirm={hora => selecionarData(hora)}
+            onCancel={() => {
+              setDataPicker(false);
+            }}
+            date={new Date()}
+            locale="pt_BR"
           />
         </ViewDate>
         <ViewClock>
           {labeHoraAgendamento == '00:00' ? (
             <TextoClockPlace>{labeHoraAgendamento}</TextoClockPlace>
           ) : (
-              <TextoClock>{labeHoraAgendamento}</TextoClock>
-            )}
+            <TextoClock>{labeHoraAgendamento}</TextoClock>
+          )}
 
           <ViewBotaoCalendario>
             <Button

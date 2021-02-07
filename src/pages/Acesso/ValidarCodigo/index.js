@@ -1,31 +1,24 @@
-import React, { Component, Fragment, useState, useEffect } from 'react';
-import { Image, Text, View } from 'react-native';
-import * as yup from 'yup';
 import { Formik } from 'formik';
-
-import { Button, Item, Input } from 'native-base';
+import { Button, Input, Item } from 'native-base';
+import React, { Fragment, useEffect, useState } from 'react';
+import { Image, View } from 'react-native';
+import TextInputMask from 'react-native-text-input-mask';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { NavigationActions, StackActions } from 'react-navigation';
-
-import estilo from './styles';
-import HeaderBack from '../../../components/CustomHeader';
+import * as yup from 'yup';
 import CustomModal from '../../../components/Alert';
-import TextInputMask from 'react-native-text-input-mask';
+import HeaderBack from '../../../components/CustomHeader';
 import api from '../../../service/api';
-import {
-  Container,
-  ViewImagem,
-  ViewTitulo,
-  Titulo,
-  ViewSubtitulo,
-  Subtitulo,
-  ViewBotao,
-  TextoBotao,
-  ViewModal,
+import estilo, {
   CamposLogin,
-  CamposLoginSenha,
+  Container,
+  LabelErro,
+  TextoBotao,
+  Titulo,
+  ViewBotao,
   ViewErro,
-  LabelErro
+  ViewImagem,
+  ViewTitulo
 } from './styles';
 
 export default function ValidarCodigo({ navigation }) {
@@ -35,21 +28,20 @@ export default function ValidarCodigo({ navigation }) {
   const [email, setEmail] = useState(navigation.state.params.email);
   const [codigoErrado, setCodigoErrado] = useState(false);
 
-  useEffect(() => { }, [codigoValido]);
+  useEffect(() => {}, [codigoValido]);
 
   function verificarCodigoDigitado(values) {
     const data = {
       email: email.email,
-      numConfirm: values,
+      numConfirm: values
     };
-    console.log(data);
+
     api
       .put('/alterar/confirm', data)
       .then(response => {
         setCodigoValido(true);
       })
       .catch(error => {
-        console.log(error.response)
         if (error.response.data.code == 204) {
           setCodigoErrado(true);
         } else {
@@ -61,7 +53,7 @@ export default function ValidarCodigo({ navigation }) {
   function resetarPilhaNavegacao(rota) {
     const resetAction = StackActions.reset({
       index: 0,
-      actions: [NavigationActions.navigate({ routeName: rota })],
+      actions: [NavigationActions.navigate({ routeName: rota })]
     });
     navigation.dispatch(resetAction);
   }
@@ -69,9 +61,9 @@ export default function ValidarCodigo({ navigation }) {
   function enviarNovaSenha(values) {
     const data = {
       email: email.email,
-      pass: values.novaSenha,
+      pass: values.novaSenha
     };
-    console.log('leo', data);
+
     api
       .put('/alterar/senha', data)
       .then(response => {
@@ -104,22 +96,14 @@ export default function ValidarCodigo({ navigation }) {
             aplicativo.
           </Titulo>
         ) : (
-            <Titulo>
-              Um código para prosseguir foi enviado ao seu e-mail. Por favor, informe-o no campo abaixo.
-            </Titulo>
-          )}
+          <Titulo>Um código para prosseguir foi enviado ao seu e-mail. Por favor, informe-o no campo abaixo.</Titulo>
+        )}
       </ViewTitulo>
 
       <Formik
         initialValues={{
-          codigo: yup
-            .string()
-            .min(6, 'Mínimo 6 dígitos necessários')
-            .max(6, 'Somente 6 dígitos são permitido'),
-          novaSenha: yup
-            .string('')
-            .min(8, 'Mínimo 8 dígitos necessários')
-            .required('Insira uma senha para sua conta'),
+          codigo: yup.string().min(6, 'Mínimo 6 dígitos necessários').max(6, 'Somente 6 dígitos são permitido'),
+          novaSenha: yup.string('').min(8, 'Mínimo 8 dígitos necessários').required('Insira uma senha para sua conta')
         }}
         validationSchema={yup.object().shape({
           codigo: yup
@@ -127,14 +111,8 @@ export default function ValidarCodigo({ navigation }) {
             .min(6, 'Mínimo 6 dígitos necessários')
             .max(6, 'Somente 6 digitos permitido')
             .required('Campo obrigatório'),
-          novaSenha: yup
-            .string()
-            .min(8, 'Mínimo 8 dígitos necessários')
-            .required('Campo obrigatório'),
-          confirmacaoSenha: yup
-            .string()
-            .min(8, 'Mínimo 8 dígitos necessários')
-            .required('Campo obrigatório'),
+          novaSenha: yup.string().min(8, 'Mínimo 8 dígitos necessários').required('Campo obrigatório'),
+          confirmacaoSenha: yup.string().min(8, 'Mínimo 8 dígitos necessários').required('Campo obrigatório')
         })}
       >
         {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
@@ -184,8 +162,8 @@ export default function ValidarCodigo({ navigation }) {
                   <LabelErro>{errors.codigo}</LabelErro>
                 </ViewErro>
               ) : (
-                  <View style={estilo.V_ErroSem} />
-                )}
+                <View style={estilo.V_ErroSem} />
+              )}
             </View>
             {!codigoValido && (
               <ViewBotao>
@@ -221,8 +199,8 @@ export default function ValidarCodigo({ navigation }) {
                   <LabelErro>{errors.novaSenha}</LabelErro>
                 </ViewErro>
               ) : (
-                  <View style={estilo.V_ErroSem} />
-                )}
+                <View style={estilo.V_ErroSem} />
+              )}
             </View>
 
             {codigoValido && (

@@ -1,23 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { Image, Text, TouchableHighlight, View } from 'react-native';
-import { withNavigation } from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
+import React, { useEffect, useState } from 'react';
+import { View } from 'react-native';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
-import Icon2 from 'react-native-vector-icons/Feather';
-import styles from './styles';
-import {
+import { withNavigation } from 'react-navigation';
+import styles, {
   Container,
-  ViewImagem,
+  Descricao,
   Imagem,
-  ViewTitulo,
+  Label,
   Titulo,
+  ViewComIcones,
   ViewDados,
   ViewDescricao,
-  Descricao,
-  ViewValor,
+  ViewImagem,
+  ViewTitulo,
   ViewVagas,
-  Label,
-  ViewComIcones
+  ViewValor
 } from './styles';
 
 export function Cartao({ navigation, data }) {
@@ -36,8 +34,6 @@ export function Cartao({ navigation, data }) {
     await preencherUserLogado();
     const dados = data;
     var desativarBotaoAgenda = false;
-
-    console.log('DADOS : ', dados);
     if (dados.userEmail == usuarioLogado.email) {
       desativarBotaoAgenda = true;
     }

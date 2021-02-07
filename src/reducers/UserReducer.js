@@ -1,13 +1,13 @@
 const initialState = {
-  usuario: 'Padrao ?',
-  email: 'TESTEA@LEO>COM',
+  usuario: '',
+  email: '',
   cpf: '',
   idUser: '',
   telefone: '',
   fotoPerfil: '',
   logado: '',
   notaUser: '5.0',
-  idUser: '',
+  idUser: ''
 };
 
 const UserReducer = (state = [], action) => {
