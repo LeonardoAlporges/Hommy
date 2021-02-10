@@ -1,5 +1,5 @@
 import { Formik } from 'formik';
-import { Button, Input, Item, View } from 'native-base';
+import { Button, Input, Item } from 'native-base';
 import React, { Fragment, useState } from 'react';
 import { Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -87,13 +87,11 @@ export default function EsqueciSenha({ navigation }) {
                   placeholder="E-mail"
                 />
               </Item>
-              {touched.email && errors.email ? (
+              {touched.email && errors.email && 
               <ViewErro>
                 <LabelErro>{errors.email}</LabelErro>
               </ViewErro>
-            ) : (
-              <View style={estilo.V_ErroSem} />
-            )}
+            }
             </CamposLogin>
 
             
