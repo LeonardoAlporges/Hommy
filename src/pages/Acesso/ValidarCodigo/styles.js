@@ -44,10 +44,11 @@ export const Subtitulo = styled.Text`
 
 export const ViewBotao = styled.View`
   margin-top: 30%;
-  justify-content: center;
-  align-items: center;
+  padding-left:20%;
+  text-align:center;
   width: 100%;
-  height: 50;
+  height: 50px;
+  
 `;
 
 export const TextoBotao = styled.Text`
@@ -70,17 +71,22 @@ export const CamposLogin = styled.View`
   width: 330;
 `;
 
-export const ViewErro = styled.View`
-  height: 12px;
-  width: 100%;
-  text-align: left;
+export const Invalido = styled.View`
+  width: 330;
+  height: 20px;
 `;
-
 export const LabelErro = styled.Text`
-  text-align: left;
   font-family: WorkSans;
   font-size: 10px;
   color: red;
+`;
+export const Botao = styled.TouchableOpacity`
+ width:80%;
+ height:50px;
+ justify-content:center;
+ align-items:center;
+ background-color:#142850;
+ border-radius:10;
 `;
 
 const estilo = StyleSheet.create({
@@ -89,15 +95,7 @@ const estilo = StyleSheet.create({
     width: 200,
     height: 150
   },
-  botao: {
-    width: '80%',
-    height: 60,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#142850',
-    borderRadius: 10,
-    flexDirection: 'row'
-  },
+  
   icons_CamposLogin: {
     fontSize: 25,
     margin: 5,

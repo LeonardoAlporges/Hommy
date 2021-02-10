@@ -6,7 +6,7 @@ import {
   Botao,
   Card,
   CardDeInformacao,
-  CardDeInformacaoLocalizacao,
+  CardDeInformacaoLinhaUnica, CardDeInformacaoLocalizacao,
   Categoria,
   Descricao,
   Icone,
@@ -135,7 +135,25 @@ export default function DetalhesAnuncio({ navigation }) {
               <Informacao>{republica.numVagas} Vaga(s)</Informacao>
             </Informacaoes>
           </CardDeInformacao>
-          <CardDeInformacao>
+          <CardDeInformacao> 
+          </CardDeInformacao>
+        </Linha>
+      </Card>
+      <Categoria>Endereço</Categoria>
+      <Card>
+       <Linha>
+           <CardDeInformacaoLinhaUnica>
+            <IconesInformacao>
+              <Icone name="home-city" />
+            </IconesInformacao>
+            <Informacaoes>
+              <TipoInformacao>Ponto de referencia</TipoInformacao>
+              <Informacao>{republica.pontoReferencia}</Informacao>
+            </Informacaoes>
+          </CardDeInformacaoLinhaUnica>
+        </Linha>
+        <Linha>
+          <CardDeInformacaoLinhaUnica>
             <IconesInformacao>
               <Icone name="google-maps" />
             </IconesInformacao>
@@ -146,18 +164,7 @@ export default function DetalhesAnuncio({ navigation }) {
                 {republica.numeroCasa}
               </Informacao>
             </Informacaoes>
-          </CardDeInformacao>
-        </Linha>
-        <Linha>
-           <CardDeInformacao>
-            <IconesInformacao>
-              <Icone name="home-city" />
-            </IconesInformacao>
-            <Informacaoes>
-              <TipoInformacao>Ponto de referencia</TipoInformacao>
-              <Informacao>{republica.pontoReferencia}</Informacao>
-            </Informacaoes>
-          </CardDeInformacao>
+          </CardDeInformacaoLinhaUnica>
         </Linha>
         <Linha>
           <CardDeInformacaoLocalizacao
@@ -175,8 +182,7 @@ export default function DetalhesAnuncio({ navigation }) {
             <TipoInformacao>Buscar no google maps </TipoInformacao>
           </CardDeInformacaoLocalizacao>
         </Linha>
-      </Card>
-
+        </Card>
       <Categoria>Valores</Categoria>
       <Card>
         <Linha>
@@ -203,7 +209,7 @@ export default function DetalhesAnuncio({ navigation }) {
       <Categoria>Mobilia</Categoria>
       <Card>
         <Linha>
-          <CardDeInformacao>
+          <CardDeInformacaoLinhaUnica>
             <IconesInformacao>
               <Icone name="television" />
             </IconesInformacao>
@@ -211,8 +217,10 @@ export default function DetalhesAnuncio({ navigation }) {
               <TipoInformacao>Quarto</TipoInformacao>
               <Informacao>{republica.acomodacaoQuarto}</Informacao>
             </Informacaoes>
-          </CardDeInformacao>
-          <CardDeInformacao>
+          </CardDeInformacaoLinhaUnica>
+           </Linha>
+           <Linha>
+          <CardDeInformacaoLinhaUnica>
             <IconesInformacao>
               <Icone name="fridge-outline" />
             </IconesInformacao>
@@ -220,7 +228,7 @@ export default function DetalhesAnuncio({ navigation }) {
               <TipoInformacao>Social</TipoInformacao>
               <Informacao>{republica.acomodacaoRepublica}</Informacao>
             </Informacaoes>
-          </CardDeInformacao>
+          </CardDeInformacaoLinhaUnica>
         </Linha>
       </Card>
       {!ocutarBotaoAgendamento ? (

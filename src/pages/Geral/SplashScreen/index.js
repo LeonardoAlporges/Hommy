@@ -1,22 +1,35 @@
-import React, { Component, useState } from 'react';
-import { View, Image, Text, Modal } from 'react-native';
-import { withNavigation } from 'react-navigation';
-import {
-  Container,
-  Conteudo,
-  Logo,
-  Imagem,
-  Label,
-  Titulo,
-  Descricao,
-  Botao,
-  Botoes,
-  TituloBotao,
-  FundoModal,
-  Spin
-} from './styles';
 import { Spinner } from 'native-base';
-import { NavigationActions, StackActions } from 'react-navigation';
+import React, { useState } from 'react';
+import { Modal, View } from 'react-native';
+import { NavigationActions, StackActions, withNavigation } from 'react-navigation';
+import {
+  Botao,
+  Botoes, Container,
+  Conteudo,
+
+
+
+
+  Descricao,
+
+
+
+  FundoModal, Imagem,
+  Label, Logo,
+
+
+
+
+
+
+
+
+  Spin, Titulo,
+
+
+
+  TituloBotao
+} from './styles';
 
 function SplashScreen({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -46,7 +59,7 @@ function SplashScreen({ navigation }) {
           <Label>
             <Titulo>Bem vindo ao Hommy </Titulo>
             <Descricao>
-              Realize e acompanhe anúncios! Descubra a república ideal e economize tempo pedindo uma carona
+              Crie e acompanhe anúncios! Descubra a república ideal e economize tempo pedindo uma carona
             </Descricao>
           </Label>
         </Conteudo>

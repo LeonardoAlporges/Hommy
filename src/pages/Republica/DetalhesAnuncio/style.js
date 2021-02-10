@@ -1,5 +1,5 @@
-import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import styled from 'styled-components/native';
 export const Container = styled.ScrollView`
   width: 100%;
   background-color: red;
@@ -9,7 +9,7 @@ export const ViewTitulo = styled.View`
   margin-top: 3%;
   width: 100%;
   padding-left: 6%;
-  margin-bottom: 10;
+  margin-bottom: 5;
 `;
 export const Card = styled.View`
   width: 92%;
@@ -28,6 +28,13 @@ export const Linha = styled.View`
 `;
 export const CardDeInformacao = styled.View`
   width: 48%;
+  justify-content: space-around;
+  height: 50px;
+  justify-content: center;
+  flex-direction: row;
+`;
+export const CardDeInformacaoLinhaUnica = styled.View`
+  width: 98%;
   justify-content: space-around;
   height: 50px;
   justify-content: center;
@@ -92,7 +99,7 @@ export const ViewDescricao = styled.View`
 export const Descricao = styled.Text`
   color: #142850;
   font-family: WorkSans;
-  font-size: 18;
+  font-size: 15;
 `;
 
 export const Barra = styled.View`

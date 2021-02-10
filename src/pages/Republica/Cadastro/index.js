@@ -430,7 +430,6 @@ export default function Cadastro({ navigation }) {
                           value={values.descricao}
                           onChangeText={handleChange('descricao')}
                           placeholderTextColor="#2e2e2e"
-                          //style={estilo.textoValue}
                           placeholderTextColor="#989898"
                           placeholder="EX.:Local para estudo..."
                           onBlur={() => setFieldTouched('descricao')}
@@ -449,10 +448,9 @@ export default function Cadastro({ navigation }) {
                       <Item style={{ borderColor: 'transparent' }}>
                         <Input
                           style={{ fontFamily: 'WorkSans' }}
-                          value={values.descricao}
+                          value={values.pontoReferencia}
                           onChangeText={handleChange('pontoReferencia')}
                           placeholderTextColor="#2e2e2e"
-                          //style={estilo.textoValue}
                           placeholderTextColor="#989898"
                           placeholder="EX.:Ao lado do BC Supermercado"
                           onBlur={() => setFieldTouched('pontoReferencia')}

@@ -1,5 +1,5 @@
-import styled from 'styled-components/native';
 import { Button } from 'native-base';
+import styled from 'styled-components/native';
 
 export const Container = styled.View`
   width: 100%;
@@ -25,8 +25,8 @@ export const Imagem = styled.Image`
   height: 150px;
 `;
 export const Label = styled.View`
-  width: 80%;
-  height: 130px;
+  width: 85%;
+  height: 150px;
   justify-content: space-around;
   align-items: center;
 `;

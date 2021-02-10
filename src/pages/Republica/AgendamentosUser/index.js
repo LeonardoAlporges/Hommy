@@ -98,7 +98,7 @@ export default function AgendamentoUser({ navigation }) {
           mensagem="O que está esperando? Navegue pelo aplicativo e encontre uma vaga na república ideal. "
         />
       )}
-      <View style={{ widht: '100%', height: 20, paddingHorizontal: 20, marginBottom: 10 }}>
+      <View style={{ widht: '100%', height: 20, paddingHorizontal: 20, marginBottom: 10,marginTop:5 }}>
         <Subtitulo>Fique atento no status das repúblicas nas quais você solicitou uma visita.</Subtitulo>
       </View>
       <ViewLabel>

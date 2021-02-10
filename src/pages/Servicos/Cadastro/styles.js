@@ -1,6 +1,5 @@
-import styled from 'styled-components/native';
-import { Button } from 'native-base';
 import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
 
 export const FieldSet = styled.View`
   width: 45%;
@@ -105,7 +104,7 @@ const estilo = StyleSheet.create({
   V_Conteudo: {
     height: '100%',
     width: '100%',
-    paddingVertical: 15,
+    paddingVertical: 5,
     paddingHorizontal: 20
   },
   ruaNum: {
@@ -171,8 +170,8 @@ const estilo = StyleSheet.create({
     fontFamily: 'WorkSans',
     fontSize: 14,
     color: '#687368',
-    marginHorizontal: 20,
-    marginTop: 20
+    marginHorizontal: 15,
+    marginTop: 5
   },
   rowStyle: {
     flexDirection: 'row',
