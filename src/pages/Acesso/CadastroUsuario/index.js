@@ -122,7 +122,7 @@ export default function CadastroUsuario({ navigation }) {
             enviarCadastro(values);
           }}
           validationSchema={yup.object().shape({
-            nome: yup.string().required('Campo obrigatórior').max(20, 'Máxim de caracteres é 20'),
+            nome: yup.string().required('Campo obrigatórior').max(20, 'Máximo de caracteres é 20'),
             email: yup.string().email('E-mail inválido ou incorreto').required('Campo obrigatório'),
             celular: yup.string().max(9999999999999).required(' Campo obrigatórior'),
             password: yup.string().min(8, 'Mínimo 8 dígitos necessários').required('Campo obrigatório')
@@ -134,7 +134,7 @@ export default function CadastroUsuario({ navigation }) {
                 <CustomModal
                   parametro="Erro"
                   titulo="OOPS!"
-                  descricao="Seu email já está cadastrado no aplicativo."
+                  descricao="Esse email já está cadastrado no aplicativo."
                   botao="Voltar"
                   callback={() => {
                     setErro(false);
@@ -145,7 +145,7 @@ export default function CadastroUsuario({ navigation }) {
                 <CustomModal
                   parametro="Custom"
                   titulo="Cadastro Realizado :)"
-                  descricao="Seu cadastro no aplicativo foi realizado com sucesso, voce será redirecionado para fazer login."
+                  descricao="Seu cadastro no aplicativo foi realizado com sucesso, voce será redirecionado para tela de login."
                   botao="Confirmar"
                   callback={() => {
                     resetarPilhaNavegacao('Login');

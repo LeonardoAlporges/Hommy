@@ -86,7 +86,7 @@ export function DetalhesCarona({ navigation }) {
         {erro && (
           <CustomModal
             parametro="Erro"
-            descricao="Você já tem um agendamento cadastrado nessa carona."
+            descricao="Você já tem um interesse cadastrado nessa carona."
             callback={() => {
               setErro(false);
             }}

@@ -614,7 +614,6 @@ export default function CadastroServico({ navigation }) {
                             mode="time"
                             onConfirm={date => selecionarHorario(date, 'inicial')}
                             onCancel={date => fecharPickerHoario(date, 'inicial')}
-                            date={new Date()}
                             locale={'pt-br'}
                             is24Hour={true}
                             onChange={handleChange('horaInicial')}
@@ -640,7 +639,6 @@ export default function CadastroServico({ navigation }) {
                             mode="time"
                             onConfirm={date => selecionarHorario(date, 'final')}
                             onCancel={date => fecharPickerHoario(date, 'final')}
-                            date={new Date()}
                             locale={'pt-br'}
                             is24Hour={true}
                             onCChange={handleChange('horaFinal')}

@@ -109,9 +109,13 @@ export const BotesPrincipal = styled.View`
 
 export const BotaoLogin = styled.TouchableOpacity`
   width: 40%;
+  margin-top:13px;
   height: 50px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #f2f2f2;
+  justify-content: space-around;
   border-radius: 4px;
-  margin-top:11px;
 `;
 
 export const BotaoCadastro = styled(Button)`
@@ -157,11 +161,10 @@ const style = StyleSheet.create({
     alignItems: 'center'
   },
   Botaolinear: {
-    display: 'flex',
+    width:"100%",
+    height:'100%',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
-    height: '100%',
     borderRadius: 4
   }
 });

@@ -1,16 +1,17 @@
 import { Button } from 'native-base';
 import { StyleSheet } from 'react-native';
-import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import styled from 'styled-components/native';
 
 export const BotaoFooter = styled(Button)`
   background: white;
+  border-radius:0;
   border-bottom-width: ${props => (props.active ? '2px' : '0px')};
   border-bottom-color: ${props => (props.active ? '#142850' : 'white')};
   box-shadow: 10px 5px 5px #000;
 `;
 export const Icone = styled(Icon)`
-  font-size: 24;
+  font-size: ${props => (props.active ? 26 : 22 )};
   color: ${props => (props.active ? '#142850' : '#193264')};
 `;
 export const Label = styled.Text`
