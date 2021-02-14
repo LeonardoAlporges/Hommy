@@ -46,6 +46,9 @@ export default function DetalhesAnuncio({ navigation }) {
     if (republica.imagem3 != '' && republica.imagem3 != null) {
       setContadorImagem(contadorImagem => contadorImagem + 1);
     }
+    republica.valorAluguel = parseFloat(republica.valorAluguel).toFixed(2);
+    republica.valorContas = parseFloat(republica.valorContas).toFixed(2);
+
   }, []);
 
   function renderDotIndicator() {
@@ -192,7 +195,7 @@ export default function DetalhesAnuncio({ navigation }) {
             </IconesInformacao>
             <Informacaoes>
               <TipoInformacao>Aluguel</TipoInformacao>
-              <Informacao>R$ {republica.valorAluguel},00</Informacao>
+              <Informacao>R$ {republica.valorAluguel}</Informacao>
             </Informacaoes>
           </CardDeInformacao>
           <CardDeInformacao>
@@ -201,7 +204,7 @@ export default function DetalhesAnuncio({ navigation }) {
             </IconesInformacao>
             <Informacaoes>
               <TipoInformacao>Contas (média)</TipoInformacao>
-              <Informacao>R$ {republica.valorContas},00</Informacao>
+              <Informacao>R$ {republica.valorContas}</Informacao>
             </Informacaoes>
           </CardDeInformacao>
         </Linha>

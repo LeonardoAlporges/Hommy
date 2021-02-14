@@ -4,6 +4,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { ScrollView } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import TextInputMask from 'react-native-text-input-mask';
+import CurrencyInput from 'react-native-currency-input';
 import { NavigationActions, StackActions } from 'react-navigation';
 import { useSelector } from 'react-redux';
 import * as yup from 'yup';
@@ -27,7 +28,7 @@ import estilo, {
 
 export default function CadastroCarona({ navigation }) {
 
-   const moment = require('moment');
+  const moment = require('moment');
   moment.locale('pt', {
     months: 'Janeiro_Fevereiro_Março_Abril_Maio_Junho_Julho_Agosto_Setembro_Outubro_Novembro_Dezembro'.split('_')
   });
@@ -51,7 +52,9 @@ export default function CadastroCarona({ navigation }) {
   const [placeHoraSaida, setPlaceHoraSaida] = useState();
   const [placeHoraChegada, setPlaceHoraChegada] = useState();
   const [botaoEnviar, setBotaoEnviar] = useState(false);
-  
+  const [valor, setValor] = useState();
+
+
   const [dataAgendamento, setDataAgendamento] = useState(new Date());
   const [labelData, setLabelData] = useState('Selecionar Data');
   const [dataPicker, setDataPicker] = useState(false);
@@ -90,7 +93,7 @@ export default function CadastroCarona({ navigation }) {
       localSaida: values.saida,
       localChegada: values.chegada,
       data: dataAgendamento,
-      valor: values.valor,
+      valor: valor,
       horaSaida: horaSaida,
       horaChegada: horaChegada,
       embarque: values.embarque,
@@ -295,7 +298,7 @@ export default function CadastroCarona({ navigation }) {
                 </FieldSet>
               </Linha>
               <Linha>
-              <FieldSet>
+                <FieldSet>
                   <LabelFielSet>Data</LabelFielSet>
                   <Item style={{ borderColor: 'transparent' }}>
                     <InputHora
@@ -310,7 +313,7 @@ export default function CadastroCarona({ navigation }) {
                         onConfirm={date => selecionarData(date)}
                         onCancel={date => setDataPicker(false)}
                         date={new Date()}
-                        locale={'pt-br'}                      
+                        locale={'pt-br'}
                       />
                     </InputHora>
                   </Item>
@@ -331,17 +334,15 @@ export default function CadastroCarona({ navigation }) {
                     >
                       R$
                     </Label>
-                    <TextInputMask
-                      style={{
-                        width: '100%',
-                        height: '100%'
-                      }}
-                      keyboardType="number-pad"
-                      mask={'[999]{.}[99]'}
-                      value={values.valor}
+                    <CurrencyInput
+                      placeholderTextColor="#263b50"
+                      style={{ fontFamily: 'WorkSans', width: '80%', height: '100%' }}
+                      value={valor}
+                      onChangeValue={(formattedValue) => { setValor(formattedValue) }}
+                      separator="."
+                      precision={2}
                       onChangeText={handleChange('valor')}
-                      placeholder="000.00"
-                      onBlur={() => setFieldTouched('valor')}
+
                     />
                   </Item>
                   <ViewErro>{touched.valor && errors.valor && <LabelErro>{errors.valor}</LabelErro>}</ViewErro>
@@ -366,7 +367,7 @@ export default function CadastroCarona({ navigation }) {
                         locale={'pt-br'}
                         is24Hour={true}
                         onDateChange={handleChange('HSaida')}
-                        
+
                       />
                     </InputHora>
                   </Item>

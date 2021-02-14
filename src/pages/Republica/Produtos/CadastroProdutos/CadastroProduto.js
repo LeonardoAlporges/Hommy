@@ -5,6 +5,7 @@ import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import TextInputMask from 'react-native-text-input-mask';
 import { NavigationActions, StackActions } from 'react-navigation';
+import CurrencyInput from 'react-native-currency-input';
 import { useSelector } from 'react-redux';
 import * as yup from 'yup';
 import CustomModal from '../../../../components/Alert';
@@ -43,6 +44,8 @@ export default function CadastroProduto({ navigation }) {
   const [linkimagem1, setLinkImagem1] = useState(null);
   const [linkimagem2, setLinkImagem2] = useState(null);
   const [linkimagem3, setLinkImagem3] = useState(null);
+  const [valor, setValor] = useState();
+
 
   function preencherFoto(linkImagem) {
     if (contadorImagem == 0) {
@@ -90,7 +93,7 @@ export default function CadastroProduto({ navigation }) {
     const data = {
       titulo: values.tituloProduto,
       descricao: values.descricao,
-      valor: values.valor,
+      valor: valor,
       userEmail: emailUser,
       telefone: values.contato,
       imagem1: linkimagem1,
@@ -198,15 +201,14 @@ export default function CadastroProduto({ navigation }) {
                 <FieldSet>
                   <LabelFielSet>Valor</LabelFielSet>
                   <Item style={{ borderColor: 'transparent' }}>
-                    <TextInputMask
+                  <CurrencyInput
                       style={{ alignItems: 'flex-start' }}
-                      keyboardType="number-pad"
-                      mask={'[999]{.}[99]'}
-                      value={values.valor}
+                      value={valor}
+                      onChangeValue={(formattedValue) => { setValor(formattedValue) }}
+                      separator="."
+                      precision={2}
                       onChangeText={handleChange('valor')}
-                      onBlur={() => setFieldTouched('valor')}
-                      placeholder="000,00"
-                    />
+                                          />
                   </Item>
 
                   <ViewErro>{touched.valor && errors.valor && <LabelErro>{errors.valor}</LabelErro>}</ViewErro>

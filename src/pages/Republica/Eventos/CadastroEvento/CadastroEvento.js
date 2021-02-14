@@ -5,7 +5,7 @@ import React, { Fragment, useState } from 'react';
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import TextInputMask from 'react-native-text-input-mask';
+import CurrencyInput from 'react-native-currency-input';
 import { NavigationActions, StackActions } from 'react-navigation';
 import { useSelector } from 'react-redux';
 import * as yup from 'yup';
@@ -58,6 +58,8 @@ export default function CadastroEvento({ navigation }) {
   const [linkimagem1, setLinkImagem1] = useState(null);
   const [linkimagem2, setLinkImagem2] = useState(null);
   const [linkimagem3, setLinkImagem3] = useState(null);
+  const [valor, setValor] = useState();
+
 
   function selecionarHorario(date) {
     const hora = moment(new Date(date)).format('HH:mm');
@@ -118,7 +120,7 @@ export default function CadastroEvento({ navigation }) {
   function publicarEvento(values) {
     const data = {
       titulo: values.tituloEvento,
-      valor: values.valor,
+      valor: valor,
       userEmail: emailUser,
       data: dataEvento,
       hora: horarioDeInicio,
@@ -285,11 +287,14 @@ export default function CadastroEvento({ navigation }) {
                 <FieldSet>
                   <LabelFielSet>Valor</LabelFielSet>
                   <Item style={{ borderColor: 'transparent' }}>
-                    <Input
-                      value={values.redeSocial}
+                  <CurrencyInput
+                      placeholderTextColor="#263b50"
+                      style={{ fontFamily: 'WorkSans', width: '80%', height: '100%' }}
+                      value={valor}
+                      onChangeValue={(formattedValue) => { setValor(formattedValue) }}
+                      separator="."
+                      precision={2}
                       onChangeText={handleChange('valor')}
-                      placeholder=""
-                      onBlur={() => setFieldTouched('valor')}
                     />
                   </Item>
 

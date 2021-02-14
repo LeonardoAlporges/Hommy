@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScrollView, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { withNavigation } from 'react-navigation';
@@ -67,6 +67,12 @@ export function DetalhesCarona({ navigation }) {
         setLoading(false);
       });
   }
+
+  useEffect(() => {
+    dados.valor = parseFloat(dados.valor).toFixed(2);
+  
+  }, []);
+  
 
   return (
     <ScrollView>
@@ -138,7 +144,7 @@ export function DetalhesCarona({ navigation }) {
 
           <ViewValor>
             <LabelValor>Preço para 1 passageiro</LabelValor>
-            <Valor>R$ {dados.valor},00</Valor>
+            <Valor>R$ {dados.valor}</Valor>
           </ViewValor>
         </ContainerIformacao>
         <BarraSeparadora />
