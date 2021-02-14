@@ -120,7 +120,7 @@ export default function DetalhesServicos({ navigation }) {
             <Icon name="home-outline" style={{ fontSize: 25, color: '#142850' }} />
           </ViewIcone>
           <LabelItem>
-            {servico.rua}, {servico.numero} - {servico.bairro}
+            {servico.rua}, {servico.numero} - {servico.bairro} - {servico.pontoReferencia}
           </LabelItem>
         </ItemUnico>
       </LinhaUnica>
