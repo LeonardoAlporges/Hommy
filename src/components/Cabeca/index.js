@@ -40,6 +40,7 @@ export function Cabeca({ navigation }) {
   const nome = useSelector(state => state.user.usuario);
   const fotoPerfil = useSelector(state => state.user.fotoPerfil);
 
+
   function resetNavigation(Rota) {
     const resetAction = StackActions.reset({
       index: 0,
@@ -55,7 +56,7 @@ export function Cabeca({ navigation }) {
       .then(value => {
         resetNavigation('Login');
       })
-      .catch(error => {});
+      .catch(error => { });
   }
   return (
     <HeaderPrincipal>

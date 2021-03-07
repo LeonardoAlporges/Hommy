@@ -63,7 +63,7 @@ export function Cartao({ navigation, data }) {
             </ViewValor>
             <ViewVagas>
               <Icon style={styles.icones} name="home" />
-              <Label>{data.numVagas} Vaga</Label>
+              <Label>{data.numVagas} Vaga(s)</Label>
             </ViewVagas>
           </ViewComIcones>
         </ViewDados>

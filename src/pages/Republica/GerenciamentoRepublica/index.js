@@ -108,7 +108,7 @@ export default function GerenciamentoDeRepublica({ navigation }) {
       .then(response => {
         verificarSeJaCadastrou();
       })
-      .catch(error => {});
+      .catch(error => { });
   }
   function cadastrarRepublica() {
     const data = {
@@ -324,206 +324,297 @@ export default function GerenciamentoDeRepublica({ navigation }) {
       )}
       <HeaderBack title="Gerenciamento de republica" onNavigation={() => navigation.goBack(null)} />
       {loading && <Loading />}
+
       {!existeRepublica ? (
         <ScrollView>
           {loading ? (
             <Loading></Loading>
           ) : (
-            <AdicionarRepublica>
-              <View style={{ alignItems: 'center', marginTop: 50, marginBottom: 40 }}>
-                <Image
-                  source={require('../../../assets/Img/adicionar_republica.png')}
-                  style={{ width: 150, height: 150 }}
-                />
-                <V_titulo>
-                  <Titulo>Voce ainda nao tem uma republica cadastrada para gerenciar. Cadastre agora mesmo</Titulo>
-                </V_titulo>
-                <Linha>
-                  <FieldSetLarge>
-                    <LabelFielSet>Nome Republica</LabelFielSet>
-                    <Item style={{ borderColor: 'transparent' }}>
-                      <Input
-                        placeholderStyle={{ fontFamily: 'WorkSans' }}
-                        onChangeText={value => setNomeRepublica(value)}
-                        placeholder="Nome da sua republica"
-                        placeholderTextColor="#989898"
-                      />
-                    </Item>
-                  </FieldSetLarge>
-                </Linha>
-                <LinhaBotao>
-                  <Botao onPress={() => cadastrarRepublica()}>
-                    <LabelBotao>Continuar cadastro</LabelBotao>
-                  </Botao>
-                </LinhaBotao>
-                <V_titulo style={{ marginTop: 20 }}>
-                  <Titulo> Ou entre em uma republica já existente com o codigo de convite da mesma</Titulo>
-                </V_titulo>
-                <Linha>
-                  <FieldSetLarge>
-                    <LabelFielSet>Codigo da republica{codigoRepublica}</LabelFielSet>
-                    <Item style={{ borderColor: 'transparent' }}>
-                      <Input
-                        placeholderStyle={{ fontFamily: 'WorkSans' }}
-                        onChangeText={value => setCodigoRepublica(value)}
-                        placeholder="Codigo da republica"
-                        placeholderTextColor="#989898"
-                      />
-                    </Item>
-                  </FieldSetLarge>
-                </Linha>
-                <LinhaBotao>
-                  <Botao onPress={() => adicionarMembroPorCodigo()}>
-                    <LabelBotao>Entrar na republica</LabelBotao>
-                  </Botao>
-                </LinhaBotao>
-              </View>
-            </AdicionarRepublica>
-          )}
+              <AdicionarRepublica>
+                <View style={{ alignItems: 'center', marginTop: 50, marginBottom: 40 }}>
+                  <Image
+                    source={require('../../../assets/Img/adicionar_republica.png')}
+                    style={{ width: 150, height: 150 }}
+                  />
+                  <V_titulo>
+                    <Titulo>Voce ainda nao tem uma republica cadastrada para gerenciar. Cadastre agora mesmo</Titulo>
+                  </V_titulo>
+                  <Linha>
+                    <FieldSetLarge>
+                      <LabelFielSet>Nome Republica</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
+                        <Input
+                          placeholderStyle={{ fontFamily: 'WorkSans' }}
+                          onChangeText={value => setNomeRepublica(value)}
+                          placeholder="Nome da sua republica"
+                          placeholderTextColor="#989898"
+                        />
+                      </Item>
+                    </FieldSetLarge>
+                  </Linha>
+                  <LinhaBotao>
+                    <Botao onPress={() => cadastrarRepublica()}>
+                      <LabelBotao>Continuar cadastro</LabelBotao>
+                    </Botao>
+                  </LinhaBotao>
+                  <V_titulo style={{ marginTop: 20 }}>
+                    <Titulo> Ou entre em uma republica já existente com o codigo de convite da mesma</Titulo>
+                  </V_titulo>
+                  <Linha>
+                    <FieldSetLarge>
+                      <LabelFielSet>Codigo da republica{codigoRepublica}</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
+                        <Input
+                          placeholderStyle={{ fontFamily: 'WorkSans' }}
+                          onChangeText={value => setCodigoRepublica(value)}
+                          placeholder="Codigo da republica"
+                          placeholderTextColor="#989898"
+                        />
+                      </Item>
+                    </FieldSetLarge>
+                  </Linha>
+                  <LinhaBotao>
+                    <Botao onPress={() => adicionarMembroPorCodigo()}>
+                      <LabelBotao>Entrar na republica</LabelBotao>
+                    </Botao>
+                  </LinhaBotao>
+                </View>
+              </AdicionarRepublica>
+            )}
         </ScrollView>
       ) : (
-        <TelaGerenciamento>
-          {loading && <Loading />}
-          <ViewNomeRepublica style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <NomeRepublica>{republica.republica}</NomeRepublica>
-            <TouchableOpacity onPress={() => excluirRepublica()}>
-              <Icon
-                style={{
-                  width: 30,
-                  height: 30,
-                  color: 'red',
-                  fontSize: 20,
-                  justifyContent: 'center',
-                  alignItems: 'center'
-                }}
-                name="trash"
-              ></Icon>
-            </TouchableOpacity>
-          </ViewNomeRepublica>
-          <ViewContas>
-            <TituloEPicker>
-              <TituloSession>Contas do mês</TituloSession>
-              <Item style={{ width: 120, height: 30 }}>
-                <Picker
-                  mode="dropdown"
-                  style={{ width: undefined }}
-                  placeholderStyle={{ color: '#bfc6ea' }}
-                  placeholderIconColor="#007aff"
-                  selectedValue={mesSelecionado}
-                  onValueChange={value => {
-                    setMesSelecionado(value);
+          <TelaGerenciamento>
+            {loading && <Loading />}
+            <ViewNomeRepublica style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <NomeRepublica>{republica.republica}</NomeRepublica>
+              <TouchableOpacity onPress={() => excluirRepublica()}>
+                <Icon
+                  style={{
+                    width: 30,
+                    height: 30,
+                    color: 'red',
+                    fontSize: 20,
+                    justifyContent: 'center',
+                    alignItems: 'center'
                   }}
-                  value={mesSelecionado}
-                >
-                  <Picker.Item color={'#142850'} label="Agosto" value="Não informado" />
-                  <Picker.Item color={'#142850'} label="Setembro" value="Setembro" />
-                  <Picker.Item color={'#142850'} label="Outubro" value="Outubro" />
-                  <Picker.Item color={'#142850'} label="Novembro" value="Novembro" />
-                  <Picker.Item color={'#142850'} label="Dezembro" value="Dezembro" />
-                </Picker>
-              </Item>
-            </TituloEPicker>
-            {listaDeContas.length == 0 ? (
-              <EmptyContas>
-                <Image source={require('../../../assets/Img/semInformacao.png')} style={{ width: 80, height: 80 }} />
-                <V_titulo>
-                  <Titulo style={{ fontSize: 14 }}>Voce ainda nao tem contas registradas</Titulo>
-                </V_titulo>
-              </EmptyContas>
-            ) : (
-              <FlatList
-                style={{
-                  backgroundColor: '#f8f8f8',
-                  marginTop: 5,
-                  borderRadius: 4,
-                  borderWidth: 1,
-                  borderColor: '#e2e2e2',
-                  width: '100%',
-                  maxHeight: 160
-                }}
-                data={listaDeContas}
-                renderItem={({ item }) => (
-                  <CardsContas onPress={() => abrirModalDeDetalhes(item, 'Contas')}>
-                    <NomeConta>{item.descricao}</NomeConta>
-                    <ValorConta>{item.valor} R$</ValorConta>
-                  </CardsContas>
+                  name="trash"
+                ></Icon>
+              </TouchableOpacity>
+            </ViewNomeRepublica>
+            <ViewContas>
+              <TituloEPicker>
+                <TituloSession>Contas do mês</TituloSession>
+                <Item style={{ width: 120, height: 30 }}>
+                  <Picker
+                    mode="dropdown"
+                    style={{ width: undefined }}
+                    placeholderStyle={{ color: '#bfc6ea' }}
+                    placeholderIconColor="#007aff"
+                    selectedValue={mesSelecionado}
+                    onValueChange={value => {
+                      setMesSelecionado(value);
+                    }}
+                    value={mesSelecionado}
+                  >
+                    <Picker.Item color={'#142850'} label="Janeiro" value="Janeiro" />
+                    <Picker.Item color={'#142850'} label="Fevereiro" value="Fevereiro" />
+                    <Picker.Item color={'#142850'} label="Março" value="Março" />
+                    <Picker.Item color={'#142850'} label="Abriu" value="Abriu" />
+                    <Picker.Item color={'#142850'} label="Maio" value="Maio" />
+                  </Picker>
+                </Item>
+              </TituloEPicker>
+              {listaDeContas.length == 0 ? (
+                <EmptyContas>
+                  <Image source={require('../../../assets/Img/semInformacao.png')} style={{ width: 80, height: 80 }} />
+                  <V_titulo>
+                    <Titulo style={{ fontSize: 14 }}>Voce ainda nao tem contas registradas</Titulo>
+                  </V_titulo>
+                </EmptyContas>
+              ) : (
+                  <FlatList
+                    style={{
+                      backgroundColor: '#f8f8f8',
+                      marginTop: 5,
+                      borderRadius: 4,
+                      borderWidth: 1,
+                      borderColor: '#e2e2e2',
+                      width: '100%',
+                      maxHeight: 160
+                    }}
+                    data={listaDeContas}
+                    renderItem={({ item }) => (
+                      <CardsContas onPress={() => abrirModalDeDetalhes(item, 'Contas')}>
+                        <NomeConta>{item.descricao}</NomeConta>
+                        <ValorConta>{item.valor} R$</ValorConta>
+                      </CardsContas>
+                    )}
+                    keyExtractor={item => item._id}
+                  />
                 )}
-                keyExtractor={item => item._id}
-              />
-            )}
-            <CardsContas>
-              <NomeConta style={{ fontFamily: 'WorkSans-Bold' }}>
-                Valor dividido para {listaDeMebros.length} membros
+              <CardsContas>
+                <NomeConta style={{ fontFamily: 'WorkSans-Bold' }}>
+                  Valor dividido para {listaDeMebros.length} membros
               </NomeConta>
-              <ValorConta style={{ fontFamily: 'WorkSans-Bold' }}>{valorGeralContas} R$</ValorConta>
-            </CardsContas>
-            {adiconarContaButao ? (
-              <ViewBotaoADD>
-                <BotaoAdicionarConta onPress={() => setAdiconarContaButao(!adiconarContaButao)}>
-                  <LabelBotaoADD>Adiconar Conta</LabelBotaoADD>
-                </BotaoAdicionarConta>
-              </ViewBotaoADD>
-            ) : (
-              <View>
-                <Linha2 style={{ marginTop: 15 }}>
-                  <FieldSetRua>
-                    <LabelFielSet>Descrição</LabelFielSet>
-                    <Item style={{ borderColor: 'transparent' }}>
-                      <Input onChangeText={value => setNomeConta(value)} placeholder="" />
-                    </Item>
-                  </FieldSetRua>
-                  <FieldSetNumero>
-                    <LabelFielSet>Valor</LabelFielSet>
-                    <Item style={{ borderColor: 'transparent' }}>
-                      <Input
-                        onChangeText={value => setValorConta(value)}
-                        style={{ justifyContent: 'center' }}
-                        keyboardType="number-pad"
-                        placeholder=""
-                      />
-                    </Item>
-                  </FieldSetNumero>
-                  <FieldSetRua>
-                    <LabelFielSet>Vencimento</LabelFielSet>
-                    <Item style={{ borderColor: 'transparent' }}>
-                      <DatePicker
-                        defaultDate={new Date()}
-                        minimumDate={new Date()}
-                        locale={'pt-br'}
-                        timeZoneOffsetInMinutes={undefined}
-                        modalTransparent={true}
-                        animationType={'slide'}
-                        androidMode={'default'}
-                        placeHolderText="__/__/___"
-                        onDateChange={date => {
-                          setDataVencimento(date);
-                        }}
-                        disabled={false}
-                      />
-                    </Item>
-                  </FieldSetRua>
-                </Linha2>
+                <ValorConta style={{ fontFamily: 'WorkSans-Bold' }}>{valorGeralContas} R$</ValorConta>
+              </CardsContas>
+              {adiconarContaButao ? (
                 <ViewBotaoADD>
-                  <BotaoAdicionarConta onPress={() => adicionarConta()}>
-                    <LabelBotaoADD>Adicionar</LabelBotaoADD>
+                  <BotaoAdicionarConta onPress={() => setAdiconarContaButao(!adiconarContaButao)}>
+                    <LabelBotaoADD>Adiconar Conta</LabelBotaoADD>
                   </BotaoAdicionarConta>
                 </ViewBotaoADD>
-              </View>
-            )}
-          </ViewContas>
+              ) : (
+                  <View>
+                    <Linha2 style={{ marginTop: 15 }}>
+                      <FieldSetRua>
+                        <LabelFielSet>Descrição</LabelFielSet>
+                        <Item style={{ borderColor: 'transparent' }}>
+                          <Input onChangeText={value => setNomeConta(value)} placeholder="" />
+                        </Item>
+                      </FieldSetRua>
+                      <FieldSetNumero>
+                        <LabelFielSet>Valor</LabelFielSet>
+                        <Item style={{ borderColor: 'transparent' }}>
+                          <Input
+                            onChangeText={value => setValorConta(value)}
+                            style={{ justifyContent: 'center' }}
+                            keyboardType="number-pad"
+                            placeholder=""
+                          />
+                        </Item>
+                      </FieldSetNumero>
+                      <FieldSetRua>
+                        <LabelFielSet>Vencimento</LabelFielSet>
+                        <Item style={{ borderColor: 'transparent' }}>
+                          <DatePicker
+                            defaultDate={new Date()}
+                            minimumDate={new Date()}
+                            locale={'pt-br'}
+                            timeZoneOffsetInMinutes={undefined}
+                            modalTransparent={true}
+                            animationType={'slide'}
+                            androidMode={'default'}
+                            placeHolderText="__/__/___"
+                            onDateChange={date => {
+                              setDataVencimento(date);
+                            }}
+                            disabled={false}
+                          />
+                        </Item>
+                      </FieldSetRua>
+                    </Linha2>
+                    <ViewBotaoADD>
+                      <BotaoAdicionarConta onPress={() => adicionarConta()}>
+                        <LabelBotaoADD>Adicionar</LabelBotaoADD>
+                      </BotaoAdicionarConta>
+                    </ViewBotaoADD>
+                  </View>
+                )}
+            </ViewContas>
 
-          <ViewTarefas>
-            <ViewTitulo>
-              <TituloSession>Tarefas/Eventos</TituloSession>
-            </ViewTitulo>
-            {listaDeTarefas.length == 0 ? (
-              <EmptyContas>
-                <Image source={require('../../../assets/Img/semInformacao.png')} style={{ width: 80, height: 80 }} />
-                <V_titulo>
-                  <Titulo style={{ fontSize: 14 }}>Voce ainda nao tem tarefas registradas</Titulo>
-                </V_titulo>
-              </EmptyContas>
-            ) : (
+            <ViewTarefas>
+              <ViewTitulo>
+                <TituloSession>Tarefas/Eventos</TituloSession>
+              </ViewTitulo>
+              {listaDeTarefas.length == 0 ? (
+                <EmptyContas>
+                  <Image source={require('../../../assets/Img/semInformacao.png')} style={{ width: 80, height: 80 }} />
+                  <V_titulo>
+                    <Titulo style={{ fontSize: 14 }}>Voce ainda nao tem tarefas registradas</Titulo>
+                  </V_titulo>
+                </EmptyContas>
+              ) : (
+                  <FlatList
+                    style={{
+                      backgroundColor: '#f8f8f8',
+                      marginTop: 5,
+                      borderRadius: 4,
+                      borderWidth: 1,
+                      borderColor: '#e2e2e2',
+                      width: '100%',
+                      maxHeight: 160
+                    }}
+                    data={listaDeTarefas}
+                    renderItem={({ item }) => (
+                      <CardsContas onPress={() => abrirModalDeDetalhes(item, 'Tarefas')}>
+                        <NomeConta numberOfLines={1}>{item.descricao}</NomeConta>
+                      </CardsContas>
+                    )}
+                    keyExtractor={item => item._id}
+                  />
+                )}
+              {adiconarTarefaButao ? (
+                <ViewBotaoADD>
+                  <BotaoAdicionarConta onPress={() => setAdiconarTarefaButao(!adiconarTarefaButao)}>
+                    <LabelBotaoADD>Adiconar tarefa</LabelBotaoADD>
+                  </BotaoAdicionarConta>
+                </ViewBotaoADD>
+              ) : (
+                  <View>
+                    <Linha2 style={{ marginTop: 15 }}>
+                      <FieldSetRua style={{ width: '58%' }}>
+                        <LabelFielSet>Descrição</LabelFielSet>
+                        <Item style={{ borderColor: 'transparent' }}>
+                          <Input onChangeText={value => setNomeTarefa(value)} placeholder="" />
+                        </Item>
+                      </FieldSetRua>
+
+                      <FieldSetRua>
+                        <LabelFielSet>Data Limite</LabelFielSet>
+                        <Item style={{ borderColor: 'transparent' }}>
+                          <DatePicker
+                            defaultDate={new Date()}
+                            minimumDate={new Date()}
+                            locale={'pt-br'}
+                            timeZoneOffsetInMinutes={undefined}
+                            modalTransparent={true}
+                            animationType={'slide'}
+                            androidMode={'default'}
+                            placeHolderText="__/__/___"
+                            onDateChange={date => {
+                              setDataVencimento(date);
+                            }}
+                            disabled={false}
+                          />
+                        </Item>
+                      </FieldSetRua>
+                    </Linha2>
+                    <Linha2 style={{ marginTop: 20, marginBottom: 10 }}>
+                      <FieldSetLarge>
+                        <LabelFielSet>Membro</LabelFielSet>
+
+                        <Item style={{ borderColor: 'transparent' }}>
+                          <Picker
+                            mode="dropdown"
+                            style={{ width: undefined }}
+                            placeholderIconColor="#007aff"
+                            selectedValue={emailMebroSelecionado}
+                            onValueChange={value => setEmailMebroSelecionado(value)}
+                            value={emailMebroSelecionado}
+                            onChangeText={value => setEmailMebroSelecionado(value)}
+                          >
+                            <Picker.Item label="Selecione um membro" value="Não informado" />
+                            {listaDeMebros.map(item => {
+                              return <Picker.Item label={item.nome} value={item.email} />;
+                            })}
+                          </Picker>
+                        </Item>
+                      </FieldSetLarge>
+                    </Linha2>
+                    <ViewBotaoADD>
+                      <BotaoAdicionarConta onPress={() => adicionarTarefa()}>
+                        <LabelBotaoADD>Adicionar</LabelBotaoADD>
+                      </BotaoAdicionarConta>
+                    </ViewBotaoADD>
+                  </View>
+                )}
+            </ViewTarefas>
+
+            <ViewTarefas>
+              <ViewTitulo>
+                <TituloSession>Membros</TituloSession>
+              </ViewTitulo>
               <FlatList
                 style={{
                   backgroundColor: '#f8f8f8',
@@ -534,131 +625,41 @@ export default function GerenciamentoDeRepublica({ navigation }) {
                   width: '100%',
                   maxHeight: 160
                 }}
-                data={listaDeTarefas}
+                data={listaDeMebros}
                 renderItem={({ item }) => (
-                  <CardsContas onPress={() => abrirModalDeDetalhes(item, 'Tarefas')}>
-                    <NomeConta numberOfLines={1}>{item.descricao}</NomeConta>
+                  <CardsContas onPress={() => abrirModalDeDetalhes(item, 'Membros')}>
+                    <NomeConta numberOfLines={1}>{item.nome}</NomeConta>
                   </CardsContas>
                 )}
                 keyExtractor={item => item._id}
               />
-            )}
-            {adiconarTarefaButao ? (
-              <ViewBotaoADD>
-                <BotaoAdicionarConta onPress={() => setAdiconarTarefaButao(!adiconarTarefaButao)}>
-                  <LabelBotaoADD>Adiconar tarefa</LabelBotaoADD>
-                </BotaoAdicionarConta>
-              </ViewBotaoADD>
-            ) : (
-              <View>
-                <Linha2 style={{ marginTop: 15 }}>
-                  <FieldSetRua style={{ width: '58%' }}>
-                    <LabelFielSet>Descrição</LabelFielSet>
-                    <Item style={{ borderColor: 'transparent' }}>
-                      <Input onChangeText={value => setNomeTarefa(value)} placeholder="" />
-                    </Item>
-                  </FieldSetRua>
-
-                  <FieldSetRua>
-                    <LabelFielSet>Data Limite</LabelFielSet>
-                    <Item style={{ borderColor: 'transparent' }}>
-                      <DatePicker
-                        defaultDate={new Date()}
-                        minimumDate={new Date()}
-                        locale={'pt-br'}
-                        timeZoneOffsetInMinutes={undefined}
-                        modalTransparent={true}
-                        animationType={'slide'}
-                        androidMode={'default'}
-                        placeHolderText="__/__/___"
-                        onDateChange={date => {
-                          setDataVencimento(date);
-                        }}
-                        disabled={false}
-                      />
-                    </Item>
-                  </FieldSetRua>
-                </Linha2>
-                <Linha2 style={{ marginTop: 20, marginBottom: 10 }}>
-                  <FieldSetLarge>
-                    <LabelFielSet>Membro</LabelFielSet>
-
-                    <Item style={{ borderColor: 'transparent' }}>
-                      <Picker
-                        mode="dropdown"
-                        style={{ width: undefined }}
-                        placeholderIconColor="#007aff"
-                        selectedValue={emailMebroSelecionado}
-                        onValueChange={value => setEmailMebroSelecionado(value)}
-                        value={emailMebroSelecionado}
-                        onChangeText={value => setEmailMebroSelecionado(value)}
-                      >
-                        <Picker.Item label="Selecione um membro" value="Não informado" />
-                        {listaDeMebros.map(item => {
-                          return <Picker.Item label={item.nome} value={item.email} />;
-                        })}
-                      </Picker>
-                    </Item>
-                  </FieldSetLarge>
-                </Linha2>
+              {!adiconarMembroButao ? (
                 <ViewBotaoADD>
-                  <BotaoAdicionarConta onPress={() => adicionarTarefa()}>
-                    <LabelBotaoADD>Adicionar</LabelBotaoADD>
+                  <BotaoAdicionarConta onPress={() => setAdiconarMembroButao(!adiconarMembroButao)}>
+                    <LabelBotaoADD>Adiconar Membro</LabelBotaoADD>
                   </BotaoAdicionarConta>
                 </ViewBotaoADD>
-              </View>
-            )}
-          </ViewTarefas>
-
-          <ViewTarefas>
-            <ViewTitulo>
-              <TituloSession>Membros</TituloSession>
-            </ViewTitulo>
-            <FlatList
-              style={{
-                backgroundColor: '#f8f8f8',
-                marginTop: 5,
-                borderRadius: 4,
-                borderWidth: 1,
-                borderColor: '#e2e2e2',
-                width: '100%',
-                maxHeight: 160
-              }}
-              data={listaDeMebros}
-              renderItem={({ item }) => (
-                <CardsContas onPress={() => abrirModalDeDetalhes(item, 'Membros')}>
-                  <NomeConta numberOfLines={1}>{item.nome}</NomeConta>
-                </CardsContas>
-              )}
-              keyExtractor={item => item._id}
-            />
-            {!adiconarMembroButao ? (
-              <ViewBotaoADD>
-                <BotaoAdicionarConta onPress={() => setAdiconarMembroButao(!adiconarMembroButao)}>
-                  <LabelBotaoADD>Adiconar Membro</LabelBotaoADD>
-                </BotaoAdicionarConta>
-              </ViewBotaoADD>
-            ) : (
-              <View>
-                <Linha2 style={{ marginTop: 15 }}>
-                  <FieldSetRua style={{ width: '100%' }}>
-                    <LabelFielSet>Email</LabelFielSet>
-                    <Item style={{ borderColor: 'transparent' }}>
-                      <Input onChangeText={value => setEmailMembroConvite(value)} placeholder="" />
-                    </Item>
-                  </FieldSetRua>
-                </Linha2>
-                <ViewBotaoADD>
-                  <BotaoAdicionarConta onPress={() => enviarConviteMembro()}>
-                    <LabelBotaoADD>Adicionar</LabelBotaoADD>
-                  </BotaoAdicionarConta>
-                </ViewBotaoADD>
-              </View>
-            )}
-          </ViewTarefas>
-          <ViewBotaoADD></ViewBotaoADD>
-        </TelaGerenciamento>
-      )}
+              ) : (
+                  <View>
+                    <Linha2 style={{ marginTop: 15 }}>
+                      <FieldSetRua style={{ width: '100%' }}>
+                        <LabelFielSet>Email</LabelFielSet>
+                        <Item style={{ borderColor: 'transparent' }}>
+                          <Input onChangeText={value => setEmailMembroConvite(value)} placeholder="" />
+                        </Item>
+                      </FieldSetRua>
+                    </Linha2>
+                    <ViewBotaoADD>
+                      <BotaoAdicionarConta onPress={() => enviarConviteMembro()}>
+                        <LabelBotaoADD>Adicionar</LabelBotaoADD>
+                      </BotaoAdicionarConta>
+                    </ViewBotaoADD>
+                  </View>
+                )}
+            </ViewTarefas>
+            <ViewBotaoADD></ViewBotaoADD>
+          </TelaGerenciamento>
+        )}
       <Modal
         transparent={true}
         animationType="slide"
@@ -760,64 +761,64 @@ export default function GerenciamentoDeRepublica({ navigation }) {
                 </Text>
               </View>
             ) : (
-              <View>
-                {tipoDeInformacao != 'Membros' ? (
-                  <View style={{ width: '100%', padding: 12, flexDirection: 'row' }}>
-                    <Text
-                      style={{
-                        justifyContent: 'center',
-                        marginTop: 10,
-                        fontFamily: 'WorkSans',
-                        fontSize: 16,
-                        color: '#142850',
-                        marginRight: 10
-                      }}
-                    >
-                      Responsavel:
+                <View>
+                  {tipoDeInformacao != 'Membros' ? (
+                    <View style={{ width: '100%', padding: 12, flexDirection: 'row' }}>
+                      <Text
+                        style={{
+                          justifyContent: 'center',
+                          marginTop: 10,
+                          fontFamily: 'WorkSans',
+                          fontSize: 16,
+                          color: '#142850',
+                          marginRight: 10
+                        }}
+                      >
+                        Responsavel:
                     </Text>
-                    <Text
-                      numberOfLines={5}
-                      style={{
-                        marginTop: 10,
-                        width: '75%',
-                        fontFamily: 'WorkSans-SemiBold',
-                        fontSize: 16,
-                        color: '#142850'
-                      }}
-                    >
-                      {responsavelTarefa}
+                      <Text
+                        numberOfLines={5}
+                        style={{
+                          marginTop: 10,
+                          width: '75%',
+                          fontFamily: 'WorkSans-SemiBold',
+                          fontSize: 16,
+                          color: '#142850'
+                        }}
+                      >
+                        {responsavelTarefa}
+                      </Text>
+                    </View>
+                  ) : (
+                      <View style={{ width: '100%', padding: 12, flexDirection: 'row' }}>
+                        <Text
+                          style={{
+                            justifyContent: 'center',
+                            marginTop: 10,
+                            fontFamily: 'WorkSans',
+                            fontSize: 16,
+                            color: '#142850',
+                            marginRight: 10
+                          }}
+                        >
+                          Membro:
                     </Text>
-                  </View>
-                ) : (
-                  <View style={{ width: '100%', padding: 12, flexDirection: 'row' }}>
-                    <Text
-                      style={{
-                        justifyContent: 'center',
-                        marginTop: 10,
-                        fontFamily: 'WorkSans',
-                        fontSize: 16,
-                        color: '#142850',
-                        marginRight: 10
-                      }}
-                    >
-                      Membro:
-                    </Text>
-                    <Text
-                      numberOfLines={5}
-                      style={{
-                        marginTop: 10,
-                        width: '75%',
-                        fontFamily: 'WorkSans-SemiBold',
-                        fontSize: 16,
-                        color: '#142850'
-                      }}
-                    >
-                      {responsavelTarefa}
-                    </Text>
-                  </View>
-                )}
-              </View>
-            )}
+                        <Text
+                          numberOfLines={5}
+                          style={{
+                            marginTop: 10,
+                            width: '75%',
+                            fontFamily: 'WorkSans-SemiBold',
+                            fontSize: 16,
+                            color: '#142850'
+                          }}
+                        >
+                          {responsavelTarefa}
+                        </Text>
+                      </View>
+                    )}
+                </View>
+              )}
             {tipoDeInformacao != 'Membros' && (
               <View style={{ width: '100%', padding: 12, flexDirection: 'row' }}>
                 <Text

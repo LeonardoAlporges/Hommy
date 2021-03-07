@@ -1,77 +1,44 @@
 import moment from 'moment';
 import 'moment/locale/br';
 import React, { useState } from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { View } from 'react-native';
 import { withNavigation } from 'react-navigation';
+import styles, { Container, Data, Icone, Image, Local, Titulo, ViewDataHora, ViewImgaem, ViewInformacoes, ViewLocal, ViewTitulo } from './style';
 
-function CartaoEvento(props) {
+
+
+export function CartaoEvento(props) {
   const [data, setDataViagem] = useState(moment(props.dados.data).format('DD/MM'));
   const [hora, sethoraSaida] = useState(moment(new Date(props.dados.hora)).format('HH:mm'));
 
   function onClickCard() {
     const dados = props.dados;
-    props.navigation.navigate('DetalhesEvento', { dados });
+    props.navigation.navigate('DetalhesEventos', { dados });
   }
 
   return (
-    <ScrollView
-      style={{
-        width: '100%',
-        height: '100%',
-        paddingVertical: 8,
-        paddingHorizontal: 10,
-        paddingBottom: 20
-      }}
-    >
-      <TouchableOpacity
-        onPress={onClickCard}
-        style={{
-          marginVertical: 8,
-          width: '100%',
-          height: 225,
-          backgroundColor: '#F8f8f8',
-          borderRadius: 10,
-          shadowColor: '#000',
-          shadowOffset: {
-            width: 0,
-            height: 7
-          },
-          shadowOpacity: 0.43,
-          shadowRadius: 9.51,
-
-          elevation: 15
-        }}
-      >
-        <View style={{ width: '100%', height: 130, paddingHorizontal: 1 }}>
-          <Image style={{ width: '100%', height: 130, borderRadius: 10 }} source={{ uri: props.dados.imagem1 }} />
-        </View>
-        <View
-          style={{
-            paddingHorizontal: 10,
-            width: '100%',
-            height: 90
-          }}
-        >
-          <View>
-            <Text style={{ fontSize: 22, fontFamily: 'Roboto' }} numberOfLines={1}>
+    <Container underlayColor="#fff" onPress={onClickCard}  >
+      <View style={styles.V_cartao}>
+        <ViewImgaem>
+          <Image source={{ uri: props.dados.imagem1 }} />
+        </ViewImgaem>
+        <ViewInformacoes>
+          <ViewTitulo>
+            <Titulo>
               {props.dados.titulo}
-            </Text>
-          </View>
-          <View style={{ flexDirection: 'row', marginVertical: 3, marginTop: 5 }}>
-            <Icon style={{ fontSize: 24, color: '#142850' }} name="calendar" />
-            <Text>
-              Dia {data} as {hora}
-            </Text>
-          </View>
-          <View style={{ flexDirection: 'row' }}>
-            <Icon style={{ fontSize: 24, color: '#142850' }} name="pin" />
-            <Text style={{ fontSize: 14, fontFamily: 'Roboto', color: '' }}>Parque de exposição de Alegre - ES</Text>
-          </View>
-        </View>
-      </TouchableOpacity>
-    </ScrollView>
+            </Titulo>
+          </ViewTitulo>
+          <ViewDataHora>
+            <Icone name="calendar"></Icone>
+            <Data>{data} as {hora}</Data>
+          </ViewDataHora>
+          <ViewLocal>
+            <Icone name="pin" ></Icone>
+            <Local>Ainda sem</Local>
+          </ViewLocal>
+        </ViewInformacoes>
+      </View>
+    </Container>
   );
 }
 

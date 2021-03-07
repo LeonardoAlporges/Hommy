@@ -1,5 +1,3 @@
-import { Button } from 'native-base';
-import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 
 export const Header = styled.View`
@@ -77,7 +75,6 @@ export const Partida = styled.Text`
 `;
 export const ViewHora = styled.View`
   width: 100%;
-  height: 28px;
 `;
 export const Hora = styled.Text`
   font-family: WorkSans;
@@ -85,10 +82,8 @@ export const Hora = styled.Text`
   font-size: 22;
 `;
 export const ViewValor = styled.View`
-  margin-top: 10%;
   flex-direction: row;
   width: 100%;
-  height: 30px;
 `;
 export const LabelValor = styled.Text`
   font-family: WorkSans;
@@ -106,12 +101,14 @@ export const BarraSeparadora = styled.View`
   margin: 0px 0px 0px 4%;
   border-bottom-width: 1px;
   border-bottom-color: #adadad;
+  margin-top: 2%;
   width: 88%;
 `;
 export const ViewPontos = styled.View`
   padding: 10px;
   width: 100%;
   height: 20%;
+  margin-top: 10px;
   padding: 0px 30px 0px 30px;
 `;
 export const ViewPontoEmbarque = styled.View`
@@ -126,7 +123,6 @@ export const LabelPontoEmbarque = styled.Text`
 `;
 export const ViewLabel = styled.View`
   width: 100%;
-  height: 20px;
   margin-top: 10px;
 `;
 export const TextoLabel = styled.Text`

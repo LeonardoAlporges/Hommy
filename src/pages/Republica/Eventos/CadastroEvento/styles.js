@@ -1,5 +1,6 @@
-import styled from 'styled-components/native';
 import { StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
@@ -96,6 +97,10 @@ export const DivisaoFotos = styled.View`
   flex-direction: row;
   justify-content: space-between;
 `;
+export const Icone = styled(Icon)`
+  color:#142850;
+  font-size:18px;
+`;
 const estilo = StyleSheet.create({
   btnProximo: {
     borderRadius: 3,
@@ -113,6 +118,27 @@ const estilo = StyleSheet.create({
     shadowRadius: 9.51,
 
     elevation: 15
+  },
+  viewCloseFoto: {
+    position: 'absolute',
+    top: -8,
+    right: -10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 24,
+    height: 24,
+    borderRadius: 20,
+    backgroundColor: '#ffffff',
+    opacity: 1,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 12,
+    },
+    shadowOpacity: 0.58,
+    shadowRadius: 16.00,
+
+    elevation: 24,
   },
   ViewFundo: {
     height: '100%',

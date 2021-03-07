@@ -32,6 +32,7 @@ function Anuncios({ navigation }) {
   const [modalConfirmacao, setModalConfirmacao] = useState(false);
   const [item, setItem] = useState('');
   const [tipo, setTipo] = useState('');
+  const [anuncio, setAnuncio] = useState(0);
   const email = useSelector(state => state.user.email);
 
   function DeleteAnuncio(valor, item, tipo) {
@@ -75,7 +76,9 @@ function Anuncios({ navigation }) {
       .catch(error => {
         setLoading(false);
       })
-      .finally(setLoading(false));
+      .finally(() => {
+        setLoading(false), setAnuncio(anuncio++)
+      });
     api
       .get(`/userRepublica/${email}`)
       .then(responseJson => {
@@ -84,7 +87,9 @@ function Anuncios({ navigation }) {
       .catch(error => {
         setLoading(false);
       })
-      .finally(setLoading(false));
+      .finally( () => {
+        setLoading(false), setAnuncio(anuncio++)
+      });
   }
 
   useEffect(() => {
@@ -103,8 +108,9 @@ function Anuncios({ navigation }) {
 
   return (
     <Container>
+      <HeaderBack title="Meus anúncios" onNavigation={() => navigation.navigate('TabsHeader', { menuAberto: true })} />
       {loading && <Loading />}
-      {listaCaronas.length == 0 && listaRepublicas.length == 0 && !loading && (
+      {listaCaronas.length == 0 && listaRepublicas.length == 0 && !loading && (anuncio == 2) && (
         <EmptyState
           titulo="Sem anúncios"
           mensagem="Você ainda não anunciou nada. Nos diga quando houver vagas em sua república ou ofereça uma carona."
@@ -131,7 +137,6 @@ function Anuncios({ navigation }) {
           confirmar={true}
         />
       )}
-      <HeaderBack title="Meus anúncios" onNavigation={() => navigation.goBack(null)} />
       <ScrollView>
         {listaRepublicas.length != 0 && (
           <View>

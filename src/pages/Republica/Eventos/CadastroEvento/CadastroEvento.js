@@ -20,7 +20,7 @@ import estilo, {
   DivisaoFotos,
   FieldSet,
   FieldSetLarge,
-  InputHora,
+  Icone, InputHora,
   LabeBotaoEnviar,
   LabelErro,
   LabelFielSet,
@@ -159,6 +159,20 @@ export default function CadastroEvento({ navigation }) {
   function irParaTelaIncial() {
     setSucesso(false);
     resetarPilhaNavegacao('TabsHeader');
+  }
+
+  function removerFoto(idFoto) {
+    if (idFoto == 1) {
+      setLinkImagem1(null);
+      setImagem1(null);
+    } else if (idFoto == 2) {
+      setLinkImagem2(null);
+      setImagem2(null);
+    } else if (idFoto == 3) {
+      setLinkImagem3(null);
+      setImagem3(null);
+    }
+    setContadorImagem(contadorImagem - 1);
   }
 
   return (
@@ -329,6 +343,9 @@ export default function CadastroEvento({ navigation }) {
                   ) : (
                     <View style={estilo.V_ImageFull}>
                       <Image source={{ uri: imagem1 }} style={estilo.ImageFull} />
+                      <TouchableOpacity onPress={() => { removerFoto(1) }} style={estilo.viewCloseFoto}>
+                        <Icone name="close" ></Icone>
+                      </TouchableOpacity>
                     </View>
                   )}
                   {imagem2 == null ? (
@@ -341,6 +358,9 @@ export default function CadastroEvento({ navigation }) {
                   ) : (
                     <View style={estilo.V_ImageFull}>
                       <Image source={{ uri: imagem2 }} style={estilo.ImageFull} />
+                      <TouchableOpacity onPress={() => { removerFoto(2) }} style={estilo.viewCloseFoto}>
+                        <Icone name="close" ></Icone>
+                      </TouchableOpacity>
                     </View>
                   )}
                   {imagem3 == null ? (
@@ -353,6 +373,9 @@ export default function CadastroEvento({ navigation }) {
                   ) : (
                     <View style={estilo.V_ImageFull}>
                       <Image source={{ uri: imagem3 }} style={estilo.ImageFull} />
+                      <TouchableOpacity onPress={() => { removerFoto(3) }} style={estilo.viewCloseFoto}>
+                        <Icone name="close" ></Icone>
+                      </TouchableOpacity>
                     </View>
                   )}
                 </DivisaoFotos>
