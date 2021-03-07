@@ -54,6 +54,8 @@ export default function DetalhesProduto({ navigation }) {
     if (produto.imagem3 != '' && produto.imagem3 != null) {
       setContadorImagem(contadorImagem => contadorImagem + 1);
     }
+
+    produto.valor = parseFloat(produto.valor).toFixed(2);
   }, []);
 
   function renderDotIndicator() {

@@ -21,6 +21,7 @@ import styles, {
 export function Cartao({ navigation, data }) {
   useEffect(() => {
     preencherUserLogado();
+    data.valorAluguel = parseFloat(data.valorAluguel).toFixed(2);
   }, []);
   const [usuarioLogado, setUsuarioLogado] = useState();
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Image, View } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import 'moment/locale/br';
@@ -29,6 +29,8 @@ export function CartaoCarona({ navigation, dados }) {
   const [horaSaida, sethoraSaida] = useState(moment(new Date(dados.horaSaida)).format('HH:mm'));
   const [horaChegada, sethoraChegada] = useState(moment(new Date(dados.horaChegada)).format('HH:mm'));
   const emailUser = useSelector(state => state.user.email);
+  const [valor, setValor] = useState();
+
 
   async function navegarParaDetalhes() {
     var desativarBotaoInteresse = false;
@@ -37,6 +39,11 @@ export function CartaoCarona({ navigation, dados }) {
     }
     navigation.navigate('DetalhesCarona', { dados, desativarBotaoInteresse });
   }
+
+  useEffect(() => {
+    setValor(parseFloat(dados.valor).toFixed(2));
+    dados.valor = parseFloat(dados.valor).toFixed(2);
+  }, []);
 
   return (
     <Container transparent underlayColor="#f2f2f2" onPress={() => navegarParaDetalhes()}>
@@ -72,7 +79,7 @@ export function CartaoCarona({ navigation, dados }) {
           <Separador></Separador>
           <CardsInfeirores>
             <Label>Valor</Label>
-            <Informacao>R$ {dados.valor}</Informacao>
+            <Informacao>R$ {valor}</Informacao>
           </CardsInfeirores>
           <Separador></Separador>
           <CardsInfeirores>
