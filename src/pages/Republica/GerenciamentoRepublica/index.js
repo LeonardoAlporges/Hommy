@@ -129,6 +129,8 @@ export default function GerenciamentoDeRepublica({ navigation }) {
         setErro(true);
       });
   }
+
+
   function alterarValorGeralDasContas() {
     var valores = 0;
     listaDeContas.map(item => {
@@ -136,6 +138,7 @@ export default function GerenciamentoDeRepublica({ navigation }) {
     });
     setValorGeralContas(valores / listaDeMebros.length);
   }
+
   function verificarSeJaCadastrou() {
     api
       .get(`/gerenciaRepublica/${email}`)
