@@ -1,22 +1,30 @@
+import { Container, Footer, FooterTab, Tab, Tabs } from 'native-base';
 import React, { useEffect, useState } from 'react';
-import { StatusBar, View, Linking } from 'react-native';
-import { Container, Tabs, Tab, Footer, FooterTab, Button, Text } from 'native-base';
+import { StatusBar } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
 import Cabeca from '../../../components/Cabeca';
-import Republica from '../../Republica/Republica';
 import Caronas from '../../Carona/Caronas';
-import Servicos from '../../Servicos/Servicos';
-
-import { BotaoFooter, Icone, Label } from './style';
-import estilo from './style';
-import Produtos from '../../Republica/Produtos/Produtos';
 import Eventos from '../../Republica/Eventos/Eventos';
+import Produtos from '../../Republica/Produtos/Produtos';
+import Republica from '../../Republica/Republica';
+import Servicos from '../../Servicos/Servicos';
+import estilo, { BotaoFooter, Icone, Label } from './style';
+
+
 
 function TabsHeader({ navigation }) {
   const [index, setIndex] = useState(1);
   const [page, setPage] = useState(1);
+  var abrirMenu;
+
+  if (navigation.state.params == undefined) {
+    abrirMenu = false;
+  } else {
+    abrirMenu = navigation.state.params.menuAberto;
+  }
+
+  useEffect(() => {
+  }, [])
 
   function alterarTela(number) {
     setPage(number);
@@ -105,16 +113,6 @@ function TabsHeader({ navigation }) {
         >
           <Servicos />
         </Tab>
-        {/* <Tab
-          heading="Promoções"
-          initialPage="2"
-          tabStyle={estilo.tabs_style}
-          textStyle={estilo.tabs_TextStyle}
-          activeTabStyle={estilo.tabs_ActiveTabs}
-          activeTextStyle={estilo.tabs_ActiveTextStyle}
-        >
-          <Divulgacao />
-        </Tab>*/}
       </Tabs>
     </Container>
   );

@@ -53,8 +53,8 @@
     "yup": "^0.28.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.0",
-    "@babel/runtime": "^7.5.0",
+    "@babel/core": "^7.9.0",
+    "@babel/runtime": "^7.9.2",
     "@babel/traverse": "^7.9.5",
     "@react-native-community/eslint-config": "^0.0.3",
     "babel-eslint": "^10.1.0",

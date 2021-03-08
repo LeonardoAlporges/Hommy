@@ -8,35 +8,18 @@ import ImagePicker from 'react-native-image-picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import TextInputMask from 'react-native-text-input-mask';
 import { NavigationActions, StackActions } from 'react-navigation';
-import { useSelector } from 'react-redux';
 import * as yup from 'yup';
 import CustomModal from '../../../components/Alert';
 import HeaderBack from '../../../components/CustomHeader';
 import Loading from '../../../components/Loading';
 import api from '../../../service/api';
 import { imagePickerOptions, uploadFileToFireBaseServico } from '../../../utils';
-import estilo, { AreaFotos, DivisaoFotos, FieldSet, FieldSetLarge, LabelFielSet, LabelFotos, Linha } from './styles';
+import estilo, { AreaFotos, DivisaoFotos, FieldSet, FieldSetLarge, Icone, LabelFielSet, LabelFotos, Linha } from './styles';
 
 export default function CadastroServico({ navigation }) {
-  const avatarUser = useSelector(state => state.user.fotoPerfil);
-  const emailUser = useSelector(state => state.user.email);
-  const notaUser = useSelector(state => state.user.notaUser);
-  const nomeUser = useSelector(state => state.user.usuario);
+  
 
-  const [nomeEmpresa, setNomeEmpresa] = useState(null);
   const [contadorImagem, setContadorImagem] = useState(0);
-  const [nomePrestador, setNomePrestador] = useState(null);
-  const [telefone, setTelefone] = useState(null);
-  const [email, setEmail] = useState(null);
-  const [cidade, setCidade] = useState(null);
-  const [tipo, setTipo] = useState(null);
-  const [descricao, setDescricao] = useState(null);
-  const [redeSocial, setRedeSocial] = useState(null);
-  const [bairro, setBairro] = useState(null);
-  const [rua, setRua] = useState(null);
-  const [numero, setNumero] = useState(null);
-  const [diaInicial, setDiaInicial] = useState(null);
-  const [diaFinal, setDiaFinal] = useState(null);
   const [imagem1, setImagem1] = useState(null);
   const [imagem2, setImagem2] = useState(null);
   const [imagem3, setImagem3] = useState(null);
@@ -47,7 +30,6 @@ export default function CadastroServico({ navigation }) {
   const [sucesso, setSucesso] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const [datePicker, setDatePicker] = useState(false);
   const [horaInicialPicker, setHoraInicialPicker] = useState(false);
   const [horaFinalPicker, setHoraFinalPicker] = useState(false);
   const [horaInicial, setHoraInicial] = useState('00:00');
@@ -174,6 +156,20 @@ export default function CadastroServico({ navigation }) {
       });
   }
 
+  function removerFoto(idFoto) {
+    if (idFoto == 1) {
+      setLinkImagem1(null);
+      setImagem1(null);
+    } else if (idFoto == 2) {
+      setLinkImagem2(null);
+      setImagem2(null);
+    } else if (idFoto == 3) {
+      setLinkImagem3(null);
+      setImagem3(null);
+    }
+    setContadorImagem(contadorImagem - 1);
+  }
+
   return (
     <Formik
       initialValues={{
@@ -287,132 +283,142 @@ export default function CadastroServico({ navigation }) {
                         Preencha os campos abaixo com as informações necessárias para registrar sua empresa/serviço
                   </Text>
 
-                      <Linha>
-                        <FieldSetLarge>
-                          <LabelFielSet>Nome empresa/serviço</LabelFielSet>
-                          <Item style={{ borderColor: 'transparent' }}>
-                            <Input
-                              value={values.nomeEmpresa}
-                              onChangeText={handleChange('nomeEmpresa')}
-                              placeholder=""
-                              onBlur={() => setFieldTouched('nomeEmpresa')}
-                            />
-                          </Item>
-                          <View style={estilo.V_erro}>
-                            {touched.nomeEmpresa && errors.nomeEmpresa && (
-                              <Text style={estilo.textError}>{errors.nomeEmpresa}</Text>
-                            )}
-                          </View>
-                        </FieldSetLarge>
-                      </Linha>
-                      <Linha>
-                        <FieldSetLarge>
-                          <LabelFielSet>Nome do prestador</LabelFielSet>
-                          <Item style={{ borderColor: 'transparent' }}>
-                            <Input
-                              value={values.nomePrestador}
-                              onChangeText={handleChange('nomePrestador')}
-                              placeholder=""
-                              onBlur={() => setFieldTouched('nomePrestador')}
-                            />
-                          </Item>
-                          <View style={estilo.V_erro}>
-                            {touched.nomePrestador && errors.nomePrestador && (
-                              <Text style={estilo.textError}>{errors.nomePrestador}</Text>
-                            )}
-                          </View>
-                        </FieldSetLarge>
-                      </Linha>
-                      <Linha>
-                        <FieldSetLarge>
-                          <LabelFielSet>Tipo de serviço prestado</LabelFielSet>
-                          <Item style={{ borderColor: 'transparent' }}>
-                            <Input
-                              value={values.tipo}
-                              onChangeText={handleChange('tipo')}
-                              placeholder="Eletricista, mecânico, pintor..."
-                              onBlur={() => setFieldTouched('tipo')}
-                            />
-                          </Item>
-                          <View style={estilo.V_erro}>
-                            {touched.tipo && errors.tipo && <Text style={estilo.textError}>{errors.tipo}</Text>}
-                          </View>
-                        </FieldSetLarge>
-                      </Linha>
-                      <Linha>
-                        <FieldSetLarge>
-                          <LabelFielSet>Descrição</LabelFielSet>
-                          <Item style={{ borderColor: 'transparent' }}>
-                            <Input
-                              value={values.descricao}
-                              onChangeText={handleChange('descricao')}
-                              placeholder="Breve descrição sobre o serviço prestado."
-                              onBlur={() => setFieldTouched('descricao')}
-                            />
-                          </Item>
-                          <View style={estilo.V_erro}>
-                            {touched.descricao && errors.descricao && (
-                              <Text style={estilo.textError}>{errors.descricao}</Text>
-                            )}
-                          </View>
-                        </FieldSetLarge>
-                      </Linha>
-                      <AreaFotos>
-                        <LabelFotos>Fotos da sua empresa</LabelFotos>
-                        <DivisaoFotos>
-                          {imagem1 == null ? (
-                            <View style={estilo.V_ImageFullEmpty}>
-                              <Image
-                                source={require('../../../assets/Img/Republica_Send_Pictures.png')}
-                                style={estilo.ImageEmpty}
-                              />
-                            </View>
-                          ) : (
-                              <View style={estilo.V_ImageFull}>
-                                <Image source={{ uri: imagem1 }} style={estilo.ImageFull} />
-                              </View>
-                            )}
-                          {imagem2 == null ? (
-                            <View style={estilo.V_ImageFullEmpty}>
-                              <Image
-                                source={require('../../../assets/Img/Republica_Send_Pictures.png')}
-                                style={estilo.ImageEmpty}
-                              />
-                            </View>
-                          ) : (
-                              <View style={estilo.V_ImageFull}>
-                                <Image source={{ uri: imagem2 }} style={estilo.ImageFull} />
-                              </View>
-                            )}
-                          {imagem3 == null ? (
-                            <View style={estilo.V_ImageFullEmpty}>
-                              <Image
-                                source={require('../../../assets/Img/Republica_Send_Pictures.png')}
-                                style={estilo.ImageEmpty}
-                              />
-                            </View>
-                          ) : (
-                              <View style={estilo.V_ImageFull}>
-                                <Image source={{ uri: imagem3 }} style={estilo.ImageFull} />
-                              </View>
-                            )}
-                        </DivisaoFotos>
-                        <View style={estilo.V_BotaoImg}>
-                          <TouchableOpacity
-                            disabled={contadorImagem == 3}
-                            style={estilo.botao_send}
-                            onPress={() => {
-                              carregarImagemGaleria();
-                            }}
-                          >
-                            <Text
-                              style={{
-                                color: '#142850',
-                                fontFamily: 'WorkSans-SemiBold',
-                                fontSize: 16
-                              }}
-                            >
-                              Enviar Fotos ({contadorImagem}/3)
+
+                  <Linha>
+                    <FieldSetLarge>
+                      <LabelFielSet>Nome empresa/serviço</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
+                        <Input
+                          value={values.nomeEmpresa}
+                          onChangeText={handleChange('nomeEmpresa')}
+                          placeholder=""
+                          onBlur={() => setFieldTouched('nomeEmpresa')}
+                        />
+                      </Item>
+                      <View style={estilo.V_erro}>
+                        {touched.nomeEmpresa && errors.nomeEmpresa && (
+                          <Text style={estilo.textError}>{errors.nomeEmpresa}</Text>
+                        )}
+                      </View>
+                    </FieldSetLarge>
+                  </Linha>
+                  <Linha>
+                    <FieldSetLarge>
+                      <LabelFielSet>Nome do prestador</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
+                        <Input
+                          value={values.nomePrestador}
+                          onChangeText={handleChange('nomePrestador')}
+                          placeholder=""
+                          onBlur={() => setFieldTouched('nomePrestador')}
+                        />
+                      </Item>
+                      <View style={estilo.V_erro}>
+                        {touched.nomePrestador && errors.nomePrestador && (
+                          <Text style={estilo.textError}>{errors.nomePrestador}</Text>
+                        )}
+                      </View>
+                    </FieldSetLarge>
+                  </Linha>
+                  <Linha>
+                    <FieldSetLarge>
+                      <LabelFielSet>Tipo de serviço prestado</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
+                        <Input
+                          value={values.tipo}
+                          onChangeText={handleChange('tipo')}
+                          placeholder="Eletricista, mecânico, pintor..."
+                          onBlur={() => setFieldTouched('tipo')}
+                        />
+                      </Item>
+                      <View style={estilo.V_erro}>
+                        {touched.tipo && errors.tipo && <Text style={estilo.textError}>{errors.tipo}</Text>}
+                      </View>
+                    </FieldSetLarge>
+                  </Linha>
+                  <Linha>
+                    <FieldSetLarge>
+                      <LabelFielSet>Descrição</LabelFielSet>
+                      <Item style={{ borderColor: 'transparent' }}>
+                        <Input
+                          value={values.descricao}
+                          onChangeText={handleChange('descricao')}
+                          placeholder="Breve descrição sobre o serviço prestado."
+                          onBlur={() => setFieldTouched('descricao')}
+                        />
+                      </Item>
+                      <View style={estilo.V_erro}>
+                        {touched.descricao && errors.descricao && (
+                          <Text style={estilo.textError}>{errors.descricao}</Text>
+                        )}
+                      </View>
+                    </FieldSetLarge>
+                  </Linha>
+                  <AreaFotos>
+                    <LabelFotos>Fotos da sua empresa</LabelFotos>
+                    <DivisaoFotos>
+                      {imagem1 == null ? (
+                        <View style={estilo.V_ImageFullEmpty}>
+                          <Image
+                            source={require('../../../assets/Img/Republica_Send_Pictures.png')}
+                            style={estilo.ImageEmpty}
+                          />
+                        </View>
+                      ) : (
+                        <View style={estilo.V_ImageFull}>
+                          <Image source={{ uri: imagem1 }} style={estilo.ImageFull} />
+                            <TouchableOpacity onPress={() => { removerFoto(1) }} style={estilo.viewCloseFoto}>
+                              <Icone name="close" ></Icone>
+                            </TouchableOpacity>
+                        </View>
+                      )}
+                      {imagem2 == null ? (
+                        <View style={estilo.V_ImageFullEmpty}>
+                          <Image
+                            source={require('../../../assets/Img/Republica_Send_Pictures.png')}
+                            style={estilo.ImageEmpty}
+                          />
+                        </View>
+                      ) : (
+                        <View style={estilo.V_ImageFull}>
+                          <Image source={{ uri: imagem2 }} style={estilo.ImageFull} />
+                            <TouchableOpacity onPress={() => { removerFoto(2) }} style={estilo.viewCloseFoto}>
+                              <Icone name="close" ></Icone>
+                            </TouchableOpacity>
+                        </View>
+                      )}
+                      {imagem3 == null ? (
+                        <View style={estilo.V_ImageFullEmpty}>
+                          <Image
+                            source={require('../../../assets/Img/Republica_Send_Pictures.png')}
+                            style={estilo.ImageEmpty}
+                          />
+                        </View>
+                      ) : (
+                        <View style={estilo.V_ImageFull}>
+                          <Image source={{ uri: imagem3 }} style={estilo.ImageFull} />
+                            <TouchableOpacity onPress={() => { removerFoto(1) }} style={estilo.viewCloseFoto}>
+                              <Icone name="close" ></Icone>
+                            </TouchableOpacity>
+                        </View>
+                      )}
+                    </DivisaoFotos>
+                    <View style={estilo.V_BotaoImg}>
+                      <TouchableOpacity
+                        disabled={contadorImagem == 3}
+                        style={estilo.botao_send}
+                        onPress={() => {
+                          carregarImagemGaleria();
+                        }}
+                      >
+                        <Text
+                          style={{
+                            color: '#142850',
+                            fontFamily: 'WorkSans-SemiBold',
+                            fontSize: 16
+                          }}
+                        >
+                          Enviar Fotos ({contadorImagem}/3)
                         </Text>
                           </TouchableOpacity>
                         </View>

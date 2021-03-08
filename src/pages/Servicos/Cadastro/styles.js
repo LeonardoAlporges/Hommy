@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styled from 'styled-components/native';
 
 export const FieldSet = styled.View`
@@ -57,6 +58,10 @@ export const DivisaoFotos = styled.View`
   flex-direction: row;
   justify-content: space-between;
 `;
+export const Icone = styled(Icon)`
+  color:#142850;
+  font-size:18px;
+`;
 const estilo = StyleSheet.create({
   tabs_TextStyle: {
     color: '#142850',
@@ -85,6 +90,28 @@ const estilo = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start'
   },
+  viewCloseFoto: {
+    position: 'absolute',
+    top: -8,
+    right: -10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 24,
+    height: 24,
+    borderRadius: 20,
+    backgroundColor: '#ffffff',
+    opacity: 1,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 12,
+    },
+    shadowOpacity: 0.58,
+    shadowRadius: 16.00,
+
+    elevation: 24,
+  },
+  
   campos: {
     marginTop: 20
   },
@@ -187,7 +214,7 @@ const estilo = StyleSheet.create({
     fontSize: 14,
     color: '#687368',
     marginHorizontal: 15,
-    marginTop: 5
+    marginTop: 20
   },
   rowStyle: {
     flexDirection: 'row',

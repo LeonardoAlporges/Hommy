@@ -21,6 +21,7 @@ import Agendar from './pages/Republica/Agendar';
 import Cadastro from './pages/Republica/Cadastro/index';
 import DetalhesAnuncio from './pages/Republica/DetalhesAnuncio';
 import CadastroEvento from './pages/Republica/Eventos/CadastroEvento/CadastroEvento';
+import DetalhesEventos from './pages/Republica/Eventos/DetalhesEventos';
 import GerenciamentoDeRepublica from './pages/Republica/GerenciamentoRepublica';
 import CadastroProduto from './pages/Republica/Produtos/CadastroProdutos/CadastroProduto';
 import DetalhesProduto from './pages/Republica/Produtos/DetalhesProduto';
@@ -29,7 +30,6 @@ import CadastroServico from './pages/Servicos/Cadastro';
 import DetalhesServicos from './pages/Servicos/DetalhesServico';
 import Servicos from './pages/Servicos/Servicos';
 import MenuLateral from './pages/Geral/Menu'
-
 
 const Navegação = createStackNavigator(
   {
@@ -48,6 +48,7 @@ const Navegação = createStackNavigator(
 
     DetalhesServicos: DetalhesServicos,
     Detalhes: DetalhesAnuncio,
+    DetalhesEventos,
     Login: Login,
     CadastroUsuario: CadastroUsuario,
     ValidarCodigo,
@@ -71,7 +72,6 @@ const Navegação = createStackNavigator(
     SplashScreen,
     CadastroEvento,
     CadastroProduto,
-    //AutenticacaoTelefone
     CadastroServico,
     DetalhesProduto,
     MenuLateral

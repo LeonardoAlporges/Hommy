@@ -1,5 +1,5 @@
 import { Formik } from 'formik';
-import { Button, Icon, Input, Item, Label, Picker } from 'native-base';
+import { Button, Input, Item, Label } from 'native-base';
 import React, { Fragment, useEffect, useState } from 'react';
 import { ScrollView } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
@@ -213,7 +213,7 @@ export default function CadastroCarona({ navigation }) {
             <CustomModal
               parametro="Custom"
               titulo="Tudo certo!"
-              descricao="Seu anúncio já estar no ar, fique atento com os interesses"
+              descricao="Seu anúncio já esta no ar, fique atento com os interesses"
               botao="Confirmar"
               callback={() => {
                 irParaTelaIncial();
@@ -235,64 +235,24 @@ export default function CadastroCarona({ navigation }) {
                       borderColor: 'transparent'
                     }}
                   >
-                    <Picker
-                      mode="dropdown"
-                      placeholder="Cidades"
-                      placeholderStyle={{ color: '#bfc6ea' }}
-                      placeholderIconColor="#007aff"
-                      selectedValue={values.saida}
-                      onValueChange={handleChange('saida')}
+                    <Input
                       value={values.saida}
                       onChangeText={handleChange('saida')}
+                      placeholder=""
                       onBlur={() => setFieldTouched('saida')}
-                    >
-                      <Picker.Item label="" value="null" />
-                      <Picker.Item label="Alegre" value="Alegre" />
-                      <Picker.Item label="Bom Jesus do Norte" value="Bom Jesus do Norte" />
-                      <Picker.Item label="Cachoeiro" value="Cachoeiro" />
-                      <Picker.Item label="Celina" value="Celina" />
-                      <Picker.Item label="Guacui" value="Guacui" />
-                      <Picker.Item label="Guarapari" value="Guarapari" />
-                      <Picker.Item label="Muniz Freire" value="Muniz Freire" />
-                      <Picker.Item label="Piuma" value="Piuma" />
-                      <Picker.Item label="Rive" value="Rive" />
-                      <Picker.Item label="Serra" value="Serra" />
-                      <Picker.Item label="Vila Velha" value="Vila Velha" />
-                      <Picker.Item label="Vitoria" value="Vitoria" />
-                    </Picker>
+                    />
                   </Item>
                   <ViewErro>{touched.saida && errors.saida && <LabelErro>{errors.saida}</LabelErro>}</ViewErro>
                 </FieldSet>
                 <FieldSet>
                   <LabelFielSet>Local de Chegada</LabelFielSet>
                   <Item style={{ borderColor: 'transparent' }}>
-                    <Picker
-                      mode="dropdown"
-                      iosIcon={<Icon name="arrow-down" />}
-                      style={{ width: undefined }}
-                      placeholder="Cidades"
-                      placeholderStyle={{ color: '#bfc6ea' }}
-                      placeholderIconColor="#007aff"
-                      selectedValue={values.chegada}
-                      onValueChange={handleChange('chegada')}
+                    <Input
                       value={values.chegada}
                       onChangeText={handleChange('chegada')}
+                      placeholder=""
                       onBlur={() => setFieldTouched('chegada')}
-                    >
-                      <Picker.Item label="" value="null" />
-                      <Picker.Item label="Alegre" value="Alegre" />
-                      <Picker.Item label="Bom Jesus do Norte" value="Bom Jesus do Norte" />
-                      <Picker.Item label="Cachoeiro" value="Cachoeiro" />
-                      <Picker.Item label="Celina" value="Celina" />
-                      <Picker.Item label="Guacui" value="Guacui" />
-                      <Picker.Item label="Guarapari" value="Guarapari" />
-                      <Picker.Item label="Muniz Freire" value="Muniz Freire" />
-                      <Picker.Item label="Piuma" value="Piuma" />
-                      <Picker.Item label="Rive" value="Rive" />
-                      <Picker.Item label="Serra" value="Serra" />
-                      <Picker.Item label="Vila Velha" value="Vila Velha" />
-                      <Picker.Item label="Vitoria" value="Vitoria" />
-                    </Picker>
+                    />
                   </Item>
                   <ViewErro>{touched.chegada && errors.chegada && <LabelErro>{errors.chegada}</LabelErro>}</ViewErro>
                 </FieldSet>

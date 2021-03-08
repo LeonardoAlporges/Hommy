@@ -41,6 +41,7 @@ export function Cabeca({ navigation }) {
 
  
 
+
   function resetNavigation(Rota) {
     const resetAction = StackActions.reset({
       index: 0,
@@ -56,7 +57,7 @@ export function Cabeca({ navigation }) {
       .then(value => {
         resetNavigation('Login');
       })
-      .catch(error => {});
+      .catch(error => { });
   }
   return (
     <HeaderPrincipal>
