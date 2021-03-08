@@ -5,6 +5,7 @@ import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import TextInputMask from 'react-native-text-input-mask';
 import { NavigationActions, StackActions } from 'react-navigation';
+import CurrencyInput from 'react-native-currency-input';
 import { useSelector } from 'react-redux';
 import * as yup from 'yup';
 import CustomModal from '../../../../components/Alert';
@@ -18,7 +19,7 @@ import estilo, {
   DivisaoFotos,
   FieldSet,
   FieldSetLarge,
-  LabeBotaoEnviar,
+  Icone, LabeBotaoEnviar,
   LabelErro,
   LabelFielSet,
   LabelFotos,
@@ -43,6 +44,8 @@ export default function CadastroProduto({ navigation }) {
   const [linkimagem1, setLinkImagem1] = useState(null);
   const [linkimagem2, setLinkImagem2] = useState(null);
   const [linkimagem3, setLinkImagem3] = useState(null);
+  const [valor, setValor] = useState();
+
 
   function preencherFoto(linkImagem) {
     if (contadorImagem == 0) {
@@ -90,7 +93,7 @@ export default function CadastroProduto({ navigation }) {
     const data = {
       titulo: values.tituloProduto,
       descricao: values.descricao,
-      valor: values.valor,
+      valor: valor,
       userEmail: emailUser,
       telefone: values.contato,
       imagem1: linkimagem1,
@@ -116,6 +119,7 @@ export default function CadastroProduto({ navigation }) {
      
   }
 
+
  function resetarPilhaNavegacao(rota) {
     const resetAction = StackActions.reset({
       index: 0,
@@ -129,6 +133,22 @@ export default function CadastroProduto({ navigation }) {
    console.log("?22?")
     resetarPilhaNavegacao('TabsHeader');
   }
+
+
+  function removerFoto(idFoto) {
+    if (idFoto == 1) {
+      setLinkImagem1(null);
+      setImagem1(null);
+    } else if (idFoto == 2) {
+      setLinkImagem2(null);
+      setImagem2(null);
+    } else if (idFoto == 3) {
+      setLinkImagem3(null);
+      setImagem3(null);
+    }
+    setContadorImagem(contadorImagem - 1);
+  }
+
 
   return (
     <Formik
@@ -198,15 +218,14 @@ export default function CadastroProduto({ navigation }) {
                 <FieldSet>
                   <LabelFielSet>Valor</LabelFielSet>
                   <Item style={{ borderColor: 'transparent' }}>
-                    <TextInputMask
+                  <CurrencyInput
                       style={{ alignItems: 'flex-start' }}
-                      keyboardType="number-pad"
-                      mask={'[999]{.}[99]'}
-                      value={values.valor}
+                      value={valor}
+                      onChangeValue={(formattedValue) => { setValor(formattedValue) }}
+                      separator="."
+                      precision={2}
                       onChangeText={handleChange('valor')}
-                      onBlur={() => setFieldTouched('valor')}
-                      placeholder="000,00"
-                    />
+                                          />
                   </Item>
 
                   <ViewErro>{touched.valor && errors.valor && <LabelErro>{errors.valor}</LabelErro>}</ViewErro>
@@ -241,6 +260,9 @@ export default function CadastroProduto({ navigation }) {
                   ) : (
                     <View style={estilo.V_ImageFull}>
                       <Image source={{ uri: imagem1 }} style={estilo.ImageFull} />
+                        <TouchableOpacity onPress={() => { removerFoto(1) }} style={estilo.viewCloseFoto}>
+                          <Icone name="close" ></Icone>
+                        </TouchableOpacity>
                     </View>
                   )}
                   {imagem2 == null ? (
@@ -253,6 +275,9 @@ export default function CadastroProduto({ navigation }) {
                   ) : (
                     <View style={estilo.V_ImageFull}>
                       <Image source={{ uri: imagem2 }} style={estilo.ImageFull} />
+                        <TouchableOpacity onPress={() => { removerFoto(2) }} style={estilo.viewCloseFoto}>
+                          <Icone name="close" ></Icone>
+                        </TouchableOpacity>
                     </View>
                   )}
                   {imagem3 == null ? (
@@ -265,6 +290,9 @@ export default function CadastroProduto({ navigation }) {
                   ) : (
                     <View style={estilo.V_ImageFull}>
                       <Image source={{ uri: imagem3 }} style={estilo.ImageFull} />
+                        <TouchableOpacity onPress={() => { removerFoto(3) }} style={estilo.viewCloseFoto}>
+                          <Icone name="close" ></Icone>
+                        </TouchableOpacity>
                     </View>
                   )}
                 </DivisaoFotos>

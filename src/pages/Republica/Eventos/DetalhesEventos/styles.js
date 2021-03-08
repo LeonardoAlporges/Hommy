@@ -1,12 +1,13 @@
-import { Button } from 'native-base';
+import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
+import { Button } from 'native-base';
 
 export const Container = styled.View`
   flex: 1;
 `;
 
 export const ViewDoTitulo = styled.View`
-  min-height: 40px;
+  height: 40px;
   margin-top: 3%;
   margin-bottom: 1%;
   width: 100%;

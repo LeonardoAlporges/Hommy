@@ -1,61 +1,42 @@
-import React, { Component, useState, useEffect } from 'react';
-import { View, ScrollView, Image, Text, Linking } from 'react-native';
-import { Button } from 'native-base';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { withNavigation } from 'react-navigation';
-import estilo from './styles';
+import { IndicatorViewPager, PagerDotIndicator } from 'rn-viewpager';
+import HeaderBack from '../../../../components/CustomHeader';
 import {
-  Container,
-  ViewDoTitulo,
-  Titulo,
-  ViewDescricao,
-  Descricao,
   BarraSeparacao,
-  LinhaDupla,
-  ItemDuplo,
-  ViewIcone,
-  LabelItem,
+  BotaoContato, Descricao,
+  Imagem, ItemUnico,
+  ItemUnicoLink, LabelBotao, LabelItem,
   LinhaUnica,
-  ItemUnico,
-  ViewSubTitle,
-  SubTitle,
-  BotaoContato,
-  ViewBotao,
-  LabelBotao,
-  Imagem,
-  ItemUnicoLink,
-  ItemDuploLink
+  SubTitle, Titulo,
+  ViewBotao, ViewDescricao, ViewDoTitulo,
+  ViewIcone,
+  ViewSubTitle
 } from './styles';
 
-import { IndicatorViewPager, PagerDotIndicator } from 'rn-viewpager';
 
-import HeaderBack from '../../../../components/CustomHeader';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
-export default function DetalhesProduto({ navigation }) {
+export default function DetalhesEventos({ navigation }) {
   const [contadorImagem, setContadorImagem] = useState(0);
-  const [produto, setServicos] = useState(navigation.state.params.dados);
+  const [evento, setEvento] = useState(navigation.state.params.dados);
 
-  function AbrirTelefone() {
-    Linking.openURL(`tel:${produto.telefone}`);
-  }
+
 
   function navegar() {
     navigation.goBack(null);
   }
 
   useEffect(() => {
-    if (produto.imagem1 != '' && produto.imagem1 != null) {
+    if (evento.imagem1 != '' && evento.imagem1 != null) {
       setContadorImagem(contadorImagem => contadorImagem + 1);
     }
-    if (produto.imagem2 != '' && produto.imagem2 != null) {
+    if (evento.imagem2 != '' && evento.imagem2 != null) {
       setContadorImagem(contadorImagem => contadorImagem + 1);
     }
-    if (produto.imagem3 != '' && produto.imagem3 != null) {
+    if (evento.imagem3 != '' && evento.imagem3 != null) {
       setContadorImagem(contadorImagem => contadorImagem + 1);
     }
-
-    produto.valor = parseFloat(produto.valor).toFixed(2);
   }, []);
 
   function renderDotIndicator() {
@@ -70,29 +51,29 @@ export default function DetalhesProduto({ navigation }) {
 
   return (
     <ScrollView>
-      <HeaderBack title="Detalhes do Produto" onNavigation={() => navegar()} />
+      <HeaderBack title="Detalhes do Evento" onNavigation={() => navegar()} />
       <IndicatorViewPager style={{ height: 300 }} indicator={renderDotIndicator()}>
-        {produto.imagem1 != '' && produto.imagem1 != null && (
+        {evento.imagem1 != '' && evento.imagem1 != null && (
           <View key="1">
-            <Imagem source={{ uri: produto.imagem1 }} />
+            <Imagem source={{ uri: evento.imagem1 }} />
           </View>
         )}
-        {produto.imagem2 != '' && produto.imagem2 != null && (
+        {evento.imagem2 != '' && evento.imagem2 != null && (
           <View key="2">
-            <Imagem source={{ uri: produto.imagem2 }} />
+            <Imagem source={{ uri: evento.imagem2 }} />
           </View>
         )}
-        {produto.imagem3 != '' && produto.imagem3 != null && (
+        {evento.imagem3 != '' && evento.imagem3 != null && (
           <View key="3">
-            <Imagem source={{ uri: produto.imagem3 }} />
+            <Imagem source={{ uri: evento.imagem3 }} />
           </View>
         )}
       </IndicatorViewPager>
       <ViewDoTitulo>
-        <Titulo>{produto.titulo}</Titulo>
+        <Titulo>{evento.titulo}</Titulo>
       </ViewDoTitulo>
       <ViewDescricao>
-        <Descricao>{produto.descricao}</Descricao>
+        <Descricao>{evento.descricao}</Descricao>
       </ViewDescricao>
       <BarraSeparacao></BarraSeparacao>
 
@@ -104,7 +85,7 @@ export default function DetalhesProduto({ navigation }) {
           <ViewIcone>
             <Icon name="screwdriver" style={{ fontSize: 25, color: '#142850' }} />
           </ViewIcone>
-          <LabelItem>{produto.valor}</LabelItem>
+          <LabelItem>{evento.valor}</LabelItem>
         </ItemUnico>
       </LinhaUnica>
 
@@ -117,8 +98,16 @@ export default function DetalhesProduto({ navigation }) {
           <ViewIcone>
             <Icon name="phone-outline" style={{ fontSize: 25, color: '#142850' }} />
           </ViewIcone>
+          <LabelItem>{evento.telefone}</LabelItem>
+        </ItemUnicoLink>
+      </LinhaUnica>
+      <LinhaUnica>
+        <ItemUnicoLink>
+          <ViewIcone>
+            <Icon name="instagram" style={{ fontSize: 25, color: '#142850' }} />
+          </ViewIcone>
 
-          <LabelItem>{produto.telefone}</LabelItem>
+          <LabelItem>Instagram: {evento.telefone}</LabelItem>
         </ItemUnicoLink>
       </LinhaUnica>
 

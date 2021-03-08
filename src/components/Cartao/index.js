@@ -21,6 +21,7 @@ import styles, {
 export function Cartao({ navigation, data }) {
   useEffect(() => {
     preencherUserLogado();
+    data.valorAluguel = parseFloat(data.valorAluguel).toFixed(2);
   }, []);
   const [usuarioLogado, setUsuarioLogado] = useState();
 
@@ -63,7 +64,7 @@ export function Cartao({ navigation, data }) {
             </ViewValor>
             <ViewVagas>
               <Icon style={styles.icones} name="home" />
-              <Label>{data.numVagas} Vaga</Label>
+              <Label>{data.numVagas} Vaga(s)</Label>
             </ViewVagas>
           </ViewComIcones>
         </ViewDados>

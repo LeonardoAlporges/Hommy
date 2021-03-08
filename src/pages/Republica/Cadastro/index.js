@@ -1,9 +1,9 @@
 import { Formik } from 'formik';
-import { Button, Icon, Input, Item, Label, Picker, Tab, Tabs, Text } from 'native-base';
+import { Button, Icon, Input, Item, Label, Picker, Tab, Tabs } from 'native-base';
 import React, { Fragment, useEffect, useState } from 'react';
-import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import CurrencyInput from 'react-native-currency-input';
 import ImagePicker from 'react-native-image-picker';
-import TextInputMask from 'react-native-text-input-mask';
 import { NavigationActions, StackActions } from 'react-navigation';
 import { useSelector } from 'react-redux';
 import * as yup from 'yup';
@@ -19,10 +19,12 @@ import estilo, {
   FieldSetLarge,
   FieldSetNumero,
   FieldSetRua,
+  Icone,
   LabelFielSet,
   LabelFotos,
   Linha
 } from './style';
+
 
 export default function Cadastro({ navigation }) {
   const email = useSelector(state => state.user.email);
@@ -43,9 +45,12 @@ export default function Cadastro({ navigation }) {
   const [linkimagem2, setLinkImagem2] = useState(null);
   const [linkimagem3, setLinkImagem3] = useState(null);
   const [usuarioLogado, setUsuarioLogado] = useState();
+  const [aluguel, setAluguel] = useState();
+  const [conta, setConta] = useState();
+
 
   useEffect(() => {
-    
+
     if (atualizarCadastro) {
       var cont = 0;
       if (dadosRepublica.imagem1 != null) {
@@ -66,22 +71,17 @@ export default function Cadastro({ navigation }) {
       }
       setContadorImagem(cont)
     }
-   
+
   }, []);
 
   function preencherFoto(linkImagem) {
-    console.log("Link",linkImagem)
-    if (contadorImagem == 0) {
-      console.log('0')
+    if (imagem1 == null) {
       setImagem1(linkImagem.uri);
-    } else if (contadorImagem == 1) {
-      console.log('1')
+    } else if (imagem2 == null) {
       setImagem2(linkImagem.uri);
-    } else if (contadorImagem == 2) {
-      console.log('2')
+    } else if (imagem3 == null) {
       setImagem3(linkImagem.uri);
-    } 
-    console.log('nrenhum')
+    }
     setContadorImagem(contadorImagem + 1);
   }
 
@@ -103,16 +103,29 @@ export default function Cadastro({ navigation }) {
   function monitorFileUpload(task) {
     task.on('state_changed', snapshot => {
       snapshot.ref.getDownloadURL().then(downloadURL => {
-        console.log('DOWA',downloadURL)
-        if (contadorImagem == 0) {
+        if (linkimagem1 == null) {
           setLinkImagem1(downloadURL);
-        } else if (contadorImagem == 1) {
+        } else if (linkimagem2 == null) {
           setLinkImagem2(downloadURL);
-        } else if (contadorImagem == 2) {
+        } else if (linkimagem3 == null) {
           setLinkImagem3(downloadURL);
         }
       });
     });
+  }
+
+  function removerFoto(idFoto) {
+    if (idFoto == 1) {
+      setLinkImagem1(null);
+      setImagem1(null);
+    } else if (idFoto == 2) {
+      setLinkImagem2(null);
+      setImagem2(null);
+    } else if (idFoto == 3) {
+      setLinkImagem3(null);
+      setImagem3(null);
+    }
+    setContadorImagem(contadorImagem - 1);
   }
 
   function resetarPilhaNavegacao(rota) {
@@ -141,7 +154,7 @@ export default function Cadastro({ navigation }) {
       imagem2: linkimagem2,
       imagem3: linkimagem3,
       nomeRepublica: values.nome,
-      valorAluguel: values.aluguel,
+      valorAluguel:aluguel,
       bairro: values.bairro,
       rua: values.rua,
       pontoReferencia: values.pontoReferencia,
@@ -151,7 +164,7 @@ export default function Cadastro({ navigation }) {
       animal: values.animais,
       acomodacaoQuarto: values.aQuarto,
       acomodacaoRepublica: values.aRepublica,
-      valorContas: values.contas,
+      valorContas: conta,
       genero: values.genero,
       numVagas: values.numeroVagas,
       telefone: telefone,
@@ -474,10 +487,13 @@ export default function Cadastro({ navigation }) {
                           />
                         </View>
                       ) : (
-                        <View style={estilo.V_ImageFull}>
-                          <Image source={{ uri: imagem1 }} style={estilo.ImageFull} />
-                        </View>
-                      )}
+                          <View style={estilo.V_ImageFull}>
+                            <Image source={{ uri: imagem1 }} style={estilo.ImageFull} />
+                            <TouchableOpacity onPress={() => { removerFoto(1) }} style={estilo.viewCloseFoto}>
+                              <Icone name="close" ></Icone>
+                            </TouchableOpacity>
+                          </View>
+                        )}
                       {imagem2 == null ? (
                         <View style={estilo.V_ImageFullEmpty}>
                           <Image
@@ -486,10 +502,13 @@ export default function Cadastro({ navigation }) {
                           />
                         </View>
                       ) : (
-                        <View style={estilo.V_ImageFull}>
-                          <Image source={{ uri: imagem2 }} style={estilo.ImageFull} />
-                        </View>
-                      )}
+                          <View style={estilo.V_ImageFull}>
+                            <Image source={{ uri: imagem2 }} style={estilo.ImageFull} />
+                            <TouchableOpacity onPress={() => { removerFoto(2) }} style={estilo.viewCloseFoto}>
+                              <Icone name="close" ></Icone>
+                            </TouchableOpacity>
+                          </View>
+                        )}
                       {imagem3 == null ? (
                         <View style={estilo.V_ImageFullEmpty}>
                           <Image
@@ -498,10 +517,13 @@ export default function Cadastro({ navigation }) {
                           />
                         </View>
                       ) : (
-                        <View style={estilo.V_ImageFull}>
-                          <Image source={{ uri: imagem3 }} style={estilo.ImageFull} />
-                        </View>
-                      )}
+                          <View style={estilo.V_ImageFull}>
+                            <Image source={{ uri: imagem3 }} style={estilo.ImageFull} />
+                            <TouchableOpacity onPress={() => { removerFoto(3) }} style={estilo.viewCloseFoto}>
+                              <Icone name="close" ></Icone>
+                            </TouchableOpacity>
+                          </View>
+                        )}
                     </DivisaoFotos>
                     <View style={estilo.V_BotaoImg}>
                       <TouchableOpacity
@@ -552,16 +574,17 @@ export default function Cadastro({ navigation }) {
                           >
                             R$
                           </Label>
-                          <TextInputMask
-                            placeholderTextColor="#263b50"
-                            style={{ fontFamily: 'WorkSans', width: '80%', height: '100%' }}
-                            keyboardType="number-pad"
-                            mask={'[9999]{.}[99]'}
-                            value={values.aluguel}
+                          <CurrencyInput
+                             placeholderTextColor="#263b50"
+                             style={{ fontFamily: 'WorkSans', width: '80%', height: '100%' }}
+                            value={aluguel}
+                            onChangeValue={(formattedValue) => { setAluguel(formattedValue)}}
+                            separator="."
+                            precision={2}
                             onChangeText={handleChange('aluguel')}
-                            placeholder="000.00"
-                            onBlur={() => setFieldTouched('aluguel')}
+
                           />
+                         
                         </Item>
                         <View style={estilo.V_error}>
                           {touched.aluguel && errors.aluguel && <Text style={estilo.textError}>{errors.aluguel}</Text>}
@@ -581,20 +604,14 @@ export default function Cadastro({ navigation }) {
                           >
                             R$
                           </Label>
-
-                          <TextInputMask
-                            placeholderTextColor="#263b50"
-                            style={{
-                              fontFamily: 'WorkSans',
-                              width: '80%',
-                              height: '100%'
-                            }}
-                            keyboardType="number-pad"
-                            mask={'[999][99]'}
-                            value={values.contas}
+                          <CurrencyInput
+                             placeholderTextColor="#263b50"
+                             style={{ fontFamily: 'WorkSans', width: '80%', height: '100%' }}
+                            value={conta}
+                            onChangeValue={(formattedValue) => { setConta(formattedValue)}}
+                            separator="."
+                            precision={2}
                             onChangeText={handleChange('contas')}
-                            placeholder="000.00"
-                            onBlur={() => setFieldTouched('contas')}
                           />
                         </Item>
                         <View style={estilo.V_error}>
@@ -767,10 +784,10 @@ export default function Cadastro({ navigation }) {
                             Atualizar república
                           </Text>
                         ) : (
-                          <Text style={{ color: '#142850', fontFamily: 'WorkSans-Bold', fontSize: 18 }}>
-                            Cadastrar república
-                          </Text>
-                        )}
+                            <Text style={{ color: '#142850', fontFamily: 'WorkSans-Bold', fontSize: 18 }}>
+                              Cadastrar república
+                            </Text>
+                          )}
                       </Button>
                     </View>
                   </View>

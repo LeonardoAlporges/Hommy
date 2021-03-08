@@ -44,7 +44,7 @@ export function CartaoServico(props) {
             </ViewValor>
             <ViewVagas>
               <Icon style={styles.icones} name="clock" />
-              <Label>
+              <Label numberOfLines={1}>
                 {props.dados.dia.inicio} à {props.dados.dia.fim}
               </Label>
             </ViewVagas>

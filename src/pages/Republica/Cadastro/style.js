@@ -1,7 +1,6 @@
-import styled from 'styled-components/native';
-import { Button } from 'native-base';
 import { StyleSheet } from 'react-native';
-
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import styled from 'styled-components/native';
 export const FieldSet = styled.View`
   width: 45%;
   height: 50px;
@@ -75,6 +74,10 @@ export const DivisaoFotos = styled.View`
   flex-direction: row;
   justify-content: space-between;
 `;
+export const Icone = styled(Icon)`
+  color:#142850;
+  font-size:18px;
+`;
 
 const estilo = StyleSheet.create({
   V_header: {
@@ -87,6 +90,27 @@ const estilo = StyleSheet.create({
     borderBottomColor: '#00909e',
     alignItems: 'center',
     justifyContent: 'flex-start'
+  },
+  viewCloseFoto: {
+    position: 'absolute',
+    top: -8,
+    right: -10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 24,
+    height: 24,
+    borderRadius: 20,
+    backgroundColor: '#ffffff',
+    opacity: 1,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 12,
+    },
+    shadowOpacity: 0.58,
+    shadowRadius: 16.00,
+
+    elevation: 24,
   },
   tabs_TextStyle: {
     color: '#142850',

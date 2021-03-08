@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
@@ -25,6 +25,13 @@ export function CartaoProdutos(props) {
     props.navigation.navigate('DetalhesProduto', { dados });
   }
 
+  const [valor, setValor] = useState();
+
+  useEffect(() => {
+    setValor(parseFloat(props.dados.valor).toFixed(2));
+    props.dados.valor = parseFloat(props.dados.valor).toFixed(2);
+  }, []);
+
   return (
     <Container underlayColor="#fff" onPress={onClickCard} style={styles.touch_card}>
       <View style={styles.V_cartao}>
@@ -41,7 +48,7 @@ export function CartaoProdutos(props) {
           <ViewComIcones>
             <ViewValor>
               <Icon style={styles.icones} name="wallet" />
-              <Label>{props.dados.valor}</Label>
+              <Label>{valor}</Label>
             </ViewValor>
             <ViewVagas>
               <Icon style={styles.icones} name="clock" />

@@ -5,7 +5,7 @@ import React, { Fragment, useState } from 'react';
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import TextInputMask from 'react-native-text-input-mask';
+import CurrencyInput from 'react-native-currency-input';
 import { NavigationActions, StackActions } from 'react-navigation';
 import { useSelector } from 'react-redux';
 import * as yup from 'yup';
@@ -20,7 +20,7 @@ import estilo, {
   DivisaoFotos,
   FieldSet,
   FieldSetLarge,
-  InputHora,
+  Icone, InputHora,
   LabeBotaoEnviar,
   LabelErro,
   LabelFielSet,
@@ -58,6 +58,8 @@ export default function CadastroEvento({ navigation }) {
   const [linkimagem1, setLinkImagem1] = useState(null);
   const [linkimagem2, setLinkImagem2] = useState(null);
   const [linkimagem3, setLinkImagem3] = useState(null);
+  const [valor, setValor] = useState();
+
 
   function selecionarHorario(date) {
     const hora = moment(new Date(date)).format('HH:mm');
@@ -118,7 +120,7 @@ export default function CadastroEvento({ navigation }) {
   function publicarEvento(values) {
     const data = {
       titulo: values.tituloEvento,
-      valor: values.valor,
+      valor: valor,
       userEmail: emailUser,
       data: dataEvento,
       hora: horarioDeInicio,
@@ -159,6 +161,20 @@ export default function CadastroEvento({ navigation }) {
   function irParaTelaIncial() {
     setSucesso(false);
     resetarPilhaNavegacao('TabsHeader');
+  }
+
+  function removerFoto(idFoto) {
+    if (idFoto == 1) {
+      setLinkImagem1(null);
+      setImagem1(null);
+    } else if (idFoto == 2) {
+      setLinkImagem2(null);
+      setImagem2(null);
+    } else if (idFoto == 3) {
+      setLinkImagem3(null);
+      setImagem3(null);
+    }
+    setContadorImagem(contadorImagem - 1);
   }
 
   return (
@@ -285,11 +301,14 @@ export default function CadastroEvento({ navigation }) {
                 <FieldSet>
                   <LabelFielSet>Valor</LabelFielSet>
                   <Item style={{ borderColor: 'transparent' }}>
-                    <Input
-                      value={values.redeSocial}
+                  <CurrencyInput
+                      placeholderTextColor="#263b50"
+                      style={{ fontFamily: 'WorkSans', width: '80%', height: '100%' }}
+                      value={valor}
+                      onChangeValue={(formattedValue) => { setValor(formattedValue) }}
+                      separator="."
+                      precision={2}
                       onChangeText={handleChange('valor')}
-                      placeholder=""
-                      onBlur={() => setFieldTouched('valor')}
                     />
                   </Item>
 
@@ -329,6 +348,9 @@ export default function CadastroEvento({ navigation }) {
                   ) : (
                     <View style={estilo.V_ImageFull}>
                       <Image source={{ uri: imagem1 }} style={estilo.ImageFull} />
+                      <TouchableOpacity onPress={() => { removerFoto(1) }} style={estilo.viewCloseFoto}>
+                        <Icone name="close" ></Icone>
+                      </TouchableOpacity>
                     </View>
                   )}
                   {imagem2 == null ? (
@@ -341,6 +363,9 @@ export default function CadastroEvento({ navigation }) {
                   ) : (
                     <View style={estilo.V_ImageFull}>
                       <Image source={{ uri: imagem2 }} style={estilo.ImageFull} />
+                      <TouchableOpacity onPress={() => { removerFoto(2) }} style={estilo.viewCloseFoto}>
+                        <Icone name="close" ></Icone>
+                      </TouchableOpacity>
                     </View>
                   )}
                   {imagem3 == null ? (
@@ -353,6 +378,9 @@ export default function CadastroEvento({ navigation }) {
                   ) : (
                     <View style={estilo.V_ImageFull}>
                       <Image source={{ uri: imagem3 }} style={estilo.ImageFull} />
+                      <TouchableOpacity onPress={() => { removerFoto(3) }} style={estilo.viewCloseFoto}>
+                        <Icone name="close" ></Icone>
+                      </TouchableOpacity>
                     </View>
                   )}
                 </DivisaoFotos>

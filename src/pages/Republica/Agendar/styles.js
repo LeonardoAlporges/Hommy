@@ -58,7 +58,7 @@ export const TextoAgendamento = styled.Text`
 
 export const ViewDescricao = styled.View`
   width: 100%;
-  height: 100;
+  min-height: 100;
   padding: 0 20px 0px 20px;
   margin-top: 10;
 `;
