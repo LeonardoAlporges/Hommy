@@ -67,7 +67,8 @@ export function Login({ navigation }) {
       password: id,
       //tokenAparelho: tokenAparelho,
       nome: nome,
-      fotoPerfil: foto
+      fotoPerfil: foto,
+      isGoogle: true
     };
     api
       .post('/verifica/fb/google', data)

@@ -227,23 +227,15 @@ export default function GerenciamentoDeRepublica({ navigation }) {
     setAdiconarMembroButao(!adiconarMembroButao);
 
     const data = {
-      emailMembroConvite,
-      descricao: nomeTarefa,
-      email: 'leo@teste.com',
-      dataLimite: dataVencimento,
-      idRepublica: idRepublica
+      inviteEmail: emailMembroConvite,
+      email: email,
     };
     api
-      .post(`/tarefas/`, data)
-      .then(response => {
-        setListaDeTarefas(listaDeTarefas.concat(response.data));
-      })
+      .post(`/gerenciaRepublica/membros`, data)
+      .then()
       .catch(error => {
         setErro(true);
       });
-    setNomeTarefa('');
-    setEmailMebroSelecionado('');
-    setDataVencimento(null);
   }
   function abrirModalDeDetalhes(item, tipo) {
     setIdTipoSelecionado(item._id);

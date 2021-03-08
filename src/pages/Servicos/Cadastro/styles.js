@@ -63,6 +63,22 @@ export const Icone = styled(Icon)`
   font-size:18px;
 `;
 const estilo = StyleSheet.create({
+  tabs_TextStyle: {
+    color: '#142850',
+    fontFamily: 'WorkSans-SemiBold',
+    fontSize: 12
+  },
+  tabs_ActiveTextStyle: {
+    color: '#142850',
+    fontSize: 12,
+    fontFamily: 'WorkSans-Bold'
+  },
+  tabs_ActiveTabs: {
+    backgroundColor: '#fff'
+  },
+  tabs_style: {
+    backgroundColor: '#fff'
+  },
   V_header: {
     display: 'flex',
     flexDirection: 'row',

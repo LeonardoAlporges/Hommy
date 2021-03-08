@@ -1,7 +1,7 @@
 import ViewPager from '@react-native-community/viewpager';
 import { Formik } from 'formik';
 import moment from 'moment';
-import { Input, Item, Label, Picker, Text } from 'native-base';
+import { Input, Item, Label, Picker, Text, Tab, Tabs } from 'native-base';
 import React, { Fragment, useState } from 'react';
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
@@ -130,6 +130,7 @@ export default function CadastroServico({ navigation }) {
       rua: value.rua,
       numero: value.numero,
       inicioD: value.diaInicial,
+      pontoReferencia: value.pontoReferencia,
       fimD: value.diaFinal,
       inicioH: placeHoraInicial,
       fimH: placeHoraFinal,
@@ -186,7 +187,8 @@ export default function CadastroServico({ navigation }) {
         diaInicial: '',
         diaFnal: '',
         horaInicial: '',
-        horaFinal: ''
+        horaFinal: '',
+        pontoReferencia: ''
       }}
       onSubmit={values => {
         preencherDados(values);
@@ -223,6 +225,8 @@ export default function CadastroServico({ navigation }) {
         bairro: yup.string('').min(3, 'Minimo de 3 caracteres').max(30, 'Maximo permitido de 30 caracteres'),
         rua: yup.string('').min(3, 'Minimo de 3 caracteres').max(30, 'Maximo permitido de 30 caracteres'),
         numero: yup.number('Somente números').required('Campo Obrigatório'),
+        pontoReferencia: yup.string('').min(3, 'Minimo de 3 caracteres').max(30, 'Maximo permitido de 30 caracteres'),
+
         diaInicial: yup
           .string('')
           .min(3, 'Minimo de 3 caracteres')
@@ -257,15 +261,28 @@ export default function CadastroServico({ navigation }) {
               }}
             />
           )}
-          <ViewPager style={{ flex: 1 }}>
-            <ScrollView>
-              <View key="1">
-                <HeaderBack title="Cadastro de serviço" onNavigation={() => navigation.goBack(null)} />
 
-                <View style={estilo.V_Conteudo}>
-                  <Text style={estilo.txtCarona}>
-                    Preencha os campos abaixo com as informações necessárias para registrar sua empresa/serviço
+          <HeaderBack title="Cadastro de serviço" onNavigation={() => navigation.goBack(null)} />
+          <Tabs
+            initialPage={0}
+            tabBarUnderlineStyle={{ backgroundColor: '#142850', height: 3 }}
+            tabContainerStyle={{ height: 45 }}
+          >
+            <Tab
+              heading="INFORMAÇÕES BÁSICAS"
+              tabStyle={estilo.tabs_style}
+              textStyle={estilo.tabs_TextStyle}
+              activeTabStyle={estilo.tabs_ActiveTabs}
+              activeTextStyle={estilo.tabs_ActiveTextStyle}
+            >
+              <ViewPager style={{ flex: 1 }}>
+                <ScrollView>
+                  <View key="1">
+                    <View style={estilo.V_Conteudo}>
+                      <Text style={estilo.txtCarona}>
+                        Preencha os campos abaixo com as informações necessárias para registrar sua empresa/serviço
                   </Text>
+
 
                   <Linha>
                     <FieldSetLarge>
@@ -403,277 +420,315 @@ export default function CadastroServico({ navigation }) {
                         >
                           Enviar Fotos ({contadorImagem}/3)
                         </Text>
-                      </TouchableOpacity>
+                          </TouchableOpacity>
+                        </View>
+                      </AreaFotos>
                     </View>
-                  </AreaFotos>
-                  <Linha>
-                    <FieldSet>
-                      <LabelFielSet>Telefone</LabelFielSet>
-                      <Item style={{ borderColor: 'transparent' }}>
-                        <TextInputMask
-                          placeholderTextColor="#263b50"
-                          style={estilo.labelInput}
-                          keyboardType="number-pad"
-                          mask={'([00]) [00000]-[0000]'}
-                          value={values.telefone}
-                          onChangeText={handleChange('telefone')}
-                          placeholder="(__) ______-______"
-                          onBlur={() => setFieldTouched('telefone')}
-                        />
-                      </Item>
-                      <View style={estilo.V_erro}>
-                        {touched.telefone && errors.telefone && <Text style={estilo.textError}>{errors.telefone}</Text>}
-                      </View>
-                    </FieldSet>
-                    <FieldSet>
-                      <LabelFielSet>Email</LabelFielSet>
-                      <Item style={{ borderColor: 'transparent' }}>
-                        <Input
-                          value={values.email}
-                          onChangeText={handleChange('email')}
-                          placeholder=""
-                          onBlur={() => setFieldTouched('email')}
-                        />
-                      </Item>
-                      <View style={estilo.V_erro}>
-                        {touched.email && errors.email && <Text style={estilo.textError}>{errors.email}</Text>}
-                      </View>
-                    </FieldSet>
-                  </Linha>
-                  <Linha>
-                    <FieldSetLarge>
-                      <LabelFielSet>Rede Social</LabelFielSet>
-                      <Item style={{ borderColor: 'transparent' }}>
-                        <Input
-                          value={values.redeSocial}
-                          onChangeText={handleChange('redeSocial')}
-                          placeholder=""
-                          onBlur={() => setFieldTouched('redeSocial')}
-                        />
-                      </Item>
-                      <View style={estilo.V_erro}>
-                        {touched.redeSocial && errors.redeSocial && (
-                          <Text style={estilo.textError}>{errors.redeSocial}</Text>
-                        )}
-                      </View>
-                    </FieldSetLarge>
-                  </Linha>
-                  <Text style={estilo.txtCarona}>
-                    Preencha as informaçoes abaixo se você presta serviço em local fixo
-                  </Text>
-                  <Linha>
-                    <FieldSet>
-                      <LabelFielSet>Cidade</LabelFielSet>
-                      <Item style={{ borderColor: 'transparent' }}>
-                        <Picker
-                          mode="dropdown"
-                          placeholder="Cidades"
-                          placeholderStyle={{ color: '#bfc6ea' }}
-                          placeholderIconColor="#007aff"
-                          selectedValue={values.cidade}
-                          onValueChange={handleChange('cidade')}
-                          value={values.cidade}
-                          onChangeText={handleChange('cidade')}
-                          onBlur={() => setFieldTouched('cidade')}
-                        >
-                          <Picker.Item label="" value="null" />
-                          <Picker.Item label="Alegre" value="Alegre" />
-                        </Picker>
-                      </Item>
-                      <View style={estilo.V_erro}>
-                        {touched.cidade && errors.cidade && <Text style={estilo.textError}>{errors.cidade}</Text>}
-                      </View>
-                    </FieldSet>
-                    <FieldSet>
-                      <LabelFielSet>Bairro</LabelFielSet>
-                      <Item style={{ borderColor: 'transparent' }}>
-                        <Picker
-                          mode="dropdown"
-                          placeholder="Cidades"
-                          placeholderStyle={{ color: '#bfc6ea' }}
-                          placeholderIconColor="#007aff"
-                          selectedValue={values.bairro}
-                          onValueChange={handleChange('bairro')}
-                          value={values.bairro}
-                          onChangeText={handleChange('bairro')}
-                          onBlur={() => setFieldTouched('bairro')}
-                        >
-                          <Picker.Item label="" value="null" />
-                          <Picker.Item label="Centro" value="Centro" />
-                          <Picker.Item label="Vila do Sul" value="Vila do Sul" />
-                          <Picker.Item label="Guararema" value="Guararema" />
-                          <Picker.Item label="Clerio Mourin" value="Clerio Mourin" />
-                          <Picker.Item label="Vila Alta" value="Vila Alta" />
-                        </Picker>
-                      </Item>
-                      <View style={estilo.V_erro}>
-                        {touched.bairro && errors.bairro && <Text style={estilo.textError}>{errors.bairro}</Text>}
-                      </View>
-                    </FieldSet>
-                  </Linha>
-                  <Linha>
-                    <FieldSet style={{ width: '65%' }}>
-                      <LabelFielSet>Rua</LabelFielSet>
-                      <Item style={{ borderColor: 'transparent' }}>
-                        <Input
-                          value={values.rua}
-                          onChangeText={handleChange('rua')}
-                          placeholder=""
-                          onBlur={() => setFieldTouched('rua')}
-                        />
-                      </Item>
-                      <View style={estilo.V_erro}>
-                        {touched.rua && errors.rua && <Text style={estilo.textError}>{errors.rua}</Text>}
-                      </View>
-                    </FieldSet>
-                    <FieldSet style={{ width: '30%' }}>
-                      <LabelFielSet>Número</LabelFielSet>
-                      <Item style={{ borderColor: 'transparent' }}>
-                        <Input
-                          keyboardType="number-pad"
-                          value={values.numero}
-                          onChangeText={handleChange('numero')}
-                          placeholder=""
-                          onBlur={() => setFieldTouched('numero')}
-                        />
-                      </Item>
-                      <View style={estilo.V_erro}>
-                        {touched.numero && errors.numero && <Text style={estilo.textError}>{errors.numero}</Text>}
-                      </View>
-                    </FieldSet>
-                  </Linha>
-                  <Text style={estilo.txtCarona}>Informe seu período de trabalho nos campos abaixo</Text>
-                  <Linha>
-                    <FieldSet>
-                      <LabelFielSet>Dia de inicio</LabelFielSet>
-                      <Item style={{ borderColor: 'transparent' }}>
-                        <Picker
-                          mode="dropdown"
-                          placeholder="Dias da semana"
-                          placeholderStyle={{ color: '#bfc6ea' }}
-                          placeholderIconColor="#007aff"
-                          selectedValue={values.diaInicial}
-                          onValueChange={handleChange('diaInicial')}
-                          value={values.diaInicial}
-                          onChangeText={handleChange('diaInicial')}
-                          onBlur={() => setFieldTouched('diaInicial')}
-                        >
-                          <Picker.Item label="" value="null" />
-                          <Picker.Item label="Domingo" value="Domingo" />
-                          <Picker.Item label="Segunda" value="Segunda" />
-                          <Picker.Item label="Terça" value="Terça" />
-                          <Picker.Item label="Quarta" value="Quarta" />
-                          <Picker.Item label="Quinta" value="Quinta" />
-                          <Picker.Item label="Sexta" value="Sexta" />
-                          <Picker.Item label="Sábado" value="Sábado" />
-                        </Picker>
-                      </Item>
-                      <View style={estilo.V_erro}>
-                        {touched.diaInicial && errors.diaInicial && (
-                          <Text style={estilo.textError}>{errors.diaInicial}</Text>
-                        )}
-                      </View>
-                    </FieldSet>
-                    <FieldSet>
-                      <LabelFielSet>Dia de termino</LabelFielSet>
-                      <Item style={{ borderColor: 'transparent' }}>
-                        <Picker
-                          mode="dropdown"
-                          placeholder="Dias da semana"
-                          placeholderStyle={{ color: '#bfc6ea' }}
-                          placeholderIconColor="#007aff"
-                          selectedValue={values.diaFinal}
-                          onValueChange={handleChange('diaFinal')}
-                          value={values.diaFinal}
-                          onChangeText={handleChange('diaFinal')}
-                          onBlur={() => setFieldTouched('diaFinal')}
-                        >
-                          <Picker.Item label="" value="null" />
-                          <Picker.Item label="Domingo" value="Domingo" />
-                          <Picker.Item label="Segunda" value="Segunda" />
-                          <Picker.Item label="Terça" value="Terça" />
-                          <Picker.Item label="Quarta" value="Quarta" />
-                          <Picker.Item label="Quinta" value="Quinta" />
-                          <Picker.Item label="Sexta" value="Sexta" />
-                          <Picker.Item label="Sábado" value="Sábado" />
-                        </Picker>
-                      </Item>
-                      <View style={estilo.V_erro}>
-                        {touched.diaFinal && errors.diaFinal && <Text style={estilo.textError}>{errors.diaFinal}</Text>}
-                      </View>
-                    </FieldSet>
-                  </Linha>
-                  <Linha>
-                    <FieldSet>
-                      <LabelFielSet>Hora de inicio</LabelFielSet>
-                      <Item style={{ borderColor: 'transparent' }}>
-                        <TouchableOpacity
-                          onPress={() => {
-                            setHoraInicialPicker(true);
-                          }}
-                          style={estilo.InputHora}
-                        >
-                          <Label>{placeHoraInicial}</Label>
-                          <DateTimePickerModal
-                            isVisible={horaInicialPicker}
-                            mode="time"
-                            onConfirm={date => selecionarHorario(date, 'inicial')}
-                            onCancel={date => fecharPickerHoario(date, 'inicial')}
-                            locale={'pt-br'}
-                            is24Hour={true}
-                            onChange={handleChange('horaInicial')}
-                          />
-                        </TouchableOpacity>
-                      </Item>
-                      <View style={estilo.V_erro}>
-                        {!horaInicial && botaoEnviar && <Text style={estilo.textError}>Campo obrigatório</Text>}
-                      </View>
-                    </FieldSet>
-                    <FieldSet>
-                      <LabelFielSet>Hora de termino</LabelFielSet>
-                      <Item style={{ borderColor: 'transparent' }}>
-                        <TouchableOpacity
-                          onPress={() => {
-                            setHoraFinalPicker(true);
-                          }}
-                          style={estilo.InputHora}
-                        >
-                          <Label>{placeHoraFinal}</Label>
-                          <DateTimePickerModal
-                            isVisible={horaFinalPicker}
-                            mode="time"
-                            onConfirm={date => selecionarHorario(date, 'final')}
-                            onCancel={date => fecharPickerHoario(date, 'final')}
-                            locale={'pt-br'}
-                            is24Hour={true}
-                            onCChange={handleChange('horaFinal')}
-                          />
-                        </TouchableOpacity>
-                      </Item>
-                      <View style={estilo.V_erro}>
-                        {!horaFinal && botaoEnviar && <Text style={estilo.textError}>Campo obrigatório</Text>}
-                      </View>
-                    </FieldSet>
-                  </Linha>
-
-                  <View style={estilo.V_btn}>
-                    <TouchableOpacity
-                      style={estilo.btnProximo}
-                      onPress={() => {
-                        handleSubmit(values);
-                      }}
-                    >
-                      <Text style={{ fontFamily: 'WorkSans-Bold', color: '#142850', fontSize: 18 }}>
-                        Publicar Serviço
-                      </Text>
-                    </TouchableOpacity>
                   </View>
-                </View>
-              </View>
-            </ScrollView>
-          </ViewPager>
-        </Fragment>
-      )}
-    </Formik>
+                </ScrollView>
+              </ViewPager>
+            </Tab>
+            <Tab
+              heading="CONTATO E ENDEREÇO"
+              tabStyle={estilo.tabs_style}
+              textStyle={estilo.tabs_TextStyle}
+              activeTabStyle={estilo.tabs_ActiveTabs}
+              activeTextStyle={estilo.tabs_ActiveTextStyle}
+            >
+              <ViewPager style={{ flex: 1 }}>
+                <ScrollView>
+                  <View key="1">
+                    <View style={estilo.V_Conteudo}>
+                      <Linha>
+                        <FieldSet>
+                          <LabelFielSet>Telefone</LabelFielSet>
+                          <Item style={{ borderColor: 'transparent' }}>
+                            <TextInputMask
+                              placeholderTextColor="#263b50"
+                              style={estilo.labelInput}
+                              keyboardType="number-pad"
+                              mask={'([00]) [00000]-[0000]'}
+                              value={values.telefone}
+                              onChangeText={handleChange('telefone')}
+                              placeholder="(__) ______-______"
+                              onBlur={() => setFieldTouched('telefone')}
+                            />
+                          </Item>
+                          <View style={estilo.V_erro}>
+                            {touched.telefone && errors.telefone && <Text style={estilo.textError}>{errors.telefone}</Text>}
+                          </View>
+                        </FieldSet>
+                        <FieldSet>
+                          <LabelFielSet>Email</LabelFielSet>
+                          <Item style={{ borderColor: 'transparent' }}>
+                            <Input
+                              value={values.email}
+                              onChangeText={handleChange('email')}
+                              placeholder=""
+                              onBlur={() => setFieldTouched('email')}
+                            />
+                          </Item>
+                          <View style={estilo.V_erro}>
+                            {touched.email && errors.email && <Text style={estilo.textError}>{errors.email}</Text>}
+                          </View>
+                        </FieldSet>
+                      </Linha>
+                      <Linha>
+                        <FieldSetLarge>
+                          <LabelFielSet>Rede Social</LabelFielSet>
+                          <Item style={{ borderColor: 'transparent' }}>
+                            <Input
+                              value={values.redeSocial}
+                              onChangeText={handleChange('redeSocial')}
+                              placeholder=""
+                              onBlur={() => setFieldTouched('redeSocial')}
+                            />
+                          </Item>
+                          <View style={estilo.V_erro}>
+                            {touched.redeSocial && errors.redeSocial && (
+                              <Text style={estilo.textError}>{errors.redeSocial}</Text>
+                            )}
+                          </View>
+                        </FieldSetLarge>
+                      </Linha>
+                      <Text style={estilo.txtCarona}>
+                        Preencha as informaçoes abaixo se você presta serviço em local fixo
+                  </Text>
+                      <Linha>
+                        <FieldSet>
+                          <LabelFielSet>Cidade</LabelFielSet>
+                          <Item style={{ borderColor: 'transparent' }}>
+                            <Picker
+                              mode="dropdown"
+                              placeholder="Cidades"
+                              placeholderStyle={{ color: '#bfc6ea' }}
+                              placeholderIconColor="#007aff"
+                              selectedValue={values.cidade}
+                              onValueChange={handleChange('cidade')}
+                              value={values.cidade}
+                              onChangeText={handleChange('cidade')}
+                              onBlur={() => setFieldTouched('cidade')}
+                            >
+                              <Picker.Item label="" value="null" />
+                              <Picker.Item label="Alegre" value="Alegre" />
+                            </Picker>
+                          </Item>
+                          <View style={estilo.V_erro}>
+                            {touched.cidade && errors.cidade && <Text style={estilo.textError}>{errors.cidade}</Text>}
+                          </View>
+                        </FieldSet>
+                        <FieldSet>
+                          <LabelFielSet>Bairro</LabelFielSet>
+                          <Item style={{ borderColor: 'transparent' }}>
+                            <Picker
+                              mode="dropdown"
+                              placeholder="Cidades"
+                              placeholderStyle={{ color: '#bfc6ea' }}
+                              placeholderIconColor="#007aff"
+                              selectedValue={values.bairro}
+                              onValueChange={handleChange('bairro')}
+                              value={values.bairro}
+                              onChangeText={handleChange('bairro')}
+                              onBlur={() => setFieldTouched('bairro')}
+                            >
+                              <Picker.Item label="" value="null" />
+                              <Picker.Item label="Centro" value="Centro" />
+                              <Picker.Item label="Vila do Sul" value="Vila do Sul" />
+                              <Picker.Item label="Guararema" value="Guararema" />
+                              <Picker.Item label="Clerio Mourin" value="Clerio Mourin" />
+                              <Picker.Item label="Vila Alta" value="Vila Alta" />
+                            </Picker>
+                          </Item>
+                          <View style={estilo.V_erro}>
+                            {touched.bairro && errors.bairro && <Text style={estilo.textError}>{errors.bairro}</Text>}
+                          </View>
+                        </FieldSet>
+                      </Linha>
+                      <Linha>
+                        <FieldSet style={{ width: '65%' }}>
+                          <LabelFielSet>Rua</LabelFielSet>
+                          <Item style={{ borderColor: 'transparent' }}>
+                            <Input
+                              value={values.rua}
+                              onChangeText={handleChange('rua')}
+                              placeholder=""
+                              onBlur={() => setFieldTouched('rua')}
+                            />
+                          </Item>
+                          <View style={estilo.V_erro}>
+                            {touched.rua && errors.rua && <Text style={estilo.textError}>{errors.rua}</Text>}
+                          </View>
+                        </FieldSet>
+                        <FieldSet style={{ width: '30%' }}>
+                          <LabelFielSet>Número</LabelFielSet>
+                          <Item style={{ borderColor: 'transparent' }}>
+                            <Input
+                              keyboardType="number-pad"
+                              value={values.numero}
+                              onChangeText={handleChange('numero')}
+                              placeholder=""
+                              onBlur={() => setFieldTouched('numero')}
+                            />
+                          </Item>
+                          <View style={estilo.V_erro}>
+                            {touched.numero && errors.numero && <Text style={estilo.textError}>{errors.numero}</Text>}
+                          </View>
+                        </FieldSet>
+                      </Linha>
+                      <Linha>
+                        <FieldSetLarge>
+                          <LabelFielSet>Ponto de referência</LabelFielSet>
+                          <Item style={{ borderColor: 'transparent' }}>
+                            <Input
+                              value={values.pontoReferencia}
+                              onChangeText={handleChange('pontoReferencia')}
+                              placeholder=""
+                              onBlur={() => setFieldTouched('pontoReferencia')}
+                            />
+                          </Item>
+                          <View style={estilo.V_erro}>
+                            {touched.redeSocial && errors.redeSocial && (
+                              <Text style={estilo.textError}>{errors.redeSocial}</Text>
+                            )}
+                          </View>
+                        </FieldSetLarge>
+                      </Linha>
+                      <Text style={estilo.txtCarona}>Informe seu período de trabalho nos campos abaixo</Text>
+                      <Linha>
+                        <FieldSet>
+                          <LabelFielSet>Dia de inicio</LabelFielSet>
+                          <Item style={{ borderColor: 'transparent' }}>
+                            <Picker
+                              mode="dropdown"
+                              placeholder="Dias da semana"
+                              placeholderStyle={{ color: '#bfc6ea' }}
+                              placeholderIconColor="#007aff"
+                              selectedValue={values.diaInicial}
+                              onValueChange={handleChange('diaInicial')}
+                              value={values.diaInicial}
+                              onChangeText={handleChange('diaInicial')}
+                              onBlur={() => setFieldTouched('diaInicial')}
+                            >
+                              <Picker.Item label="" value="null" />
+                              <Picker.Item label="Domingo" value="Domingo" />
+                              <Picker.Item label="Segunda" value="Segunda" />
+                              <Picker.Item label="Terça" value="Terça" />
+                              <Picker.Item label="Quarta" value="Quarta" />
+                              <Picker.Item label="Quinta" value="Quinta" />
+                              <Picker.Item label="Sexta" value="Sexta" />
+                              <Picker.Item label="Sábado" value="Sábado" />
+                            </Picker>
+                          </Item>
+                          <View style={estilo.V_erro}>
+                            {touched.diaInicial && errors.diaInicial && (
+                              <Text style={estilo.textError}>{errors.diaInicial}</Text>
+                            )}
+                          </View>
+                        </FieldSet>
+                        <FieldSet>
+                          <LabelFielSet>Dia de termino</LabelFielSet>
+                          <Item style={{ borderColor: 'transparent' }}>
+                            <Picker
+                              mode="dropdown"
+                              placeholder="Dias da semana"
+                              placeholderStyle={{ color: '#bfc6ea' }}
+                              placeholderIconColor="#007aff"
+                              selectedValue={values.diaFinal}
+                              onValueChange={handleChange('diaFinal')}
+                              value={values.diaFinal}
+                              onChangeText={handleChange('diaFinal')}
+                              onBlur={() => setFieldTouched('diaFinal')}
+                            >
+                              <Picker.Item label="" value="null" />
+                              <Picker.Item label="Domingo" value="Domingo" />
+                              <Picker.Item label="Segunda" value="Segunda" />
+                              <Picker.Item label="Terça" value="Terça" />
+                              <Picker.Item label="Quarta" value="Quarta" />
+                              <Picker.Item label="Quinta" value="Quinta" />
+                              <Picker.Item label="Sexta" value="Sexta" />
+                              <Picker.Item label="Sábado" value="Sábado" />
+                            </Picker>
+                          </Item>
+                          <View style={estilo.V_erro}>
+                            {touched.diaFinal && errors.diaFinal && <Text style={estilo.textError}>{errors.diaFinal}</Text>}
+                          </View>
+                        </FieldSet>
+                      </Linha>
+                      <Linha>
+                        <FieldSet>
+                          <LabelFielSet>Hora de inicio</LabelFielSet>
+                          <Item style={{ borderColor: 'transparent' }}>
+                            <TouchableOpacity
+                              onPress={() => {
+                                setHoraInicialPicker(true);
+                              }}
+                              style={estilo.InputHora}
+                            >
+                              <Label>{placeHoraInicial}</Label>
+                              <DateTimePickerModal
+                                isVisible={horaInicialPicker}
+                                mode="time"
+                                onConfirm={date => selecionarHorario(date, 'inicial')}
+                                onCancel={date => fecharPickerHoario(date, 'inicial')}
+                                locale={'pt-br'}
+                                is24Hour={true}
+                                onChange={handleChange('horaInicial')}
+                              />
+                            </TouchableOpacity>
+                          </Item>
+                          <View style={estilo.V_erro}>
+                            {!horaInicial && botaoEnviar && <Text style={estilo.textError}>Campo obrigatório</Text>}
+                          </View>
+                        </FieldSet>
+                        <FieldSet>
+                          <LabelFielSet>Hora de termino</LabelFielSet>
+                          <Item style={{ borderColor: 'transparent' }}>
+                            <TouchableOpacity
+                              onPress={() => {
+                                setHoraFinalPicker(true);
+                              }}
+                              style={estilo.InputHora}
+                            >
+                              <Label>{placeHoraFinal}</Label>
+                              <DateTimePickerModal
+                                isVisible={horaFinalPicker}
+                                mode="time"
+                                onConfirm={date => selecionarHorario(date, 'final')}
+                                onCancel={date => fecharPickerHoario(date, 'final')}
+                                locale={'pt-br'}
+                                is24Hour={true}
+                                onCChange={handleChange('horaFinal')}
+                              />
+                            </TouchableOpacity>
+                          </Item>
+                          <View style={estilo.V_erro}>
+                            {!horaFinal && botaoEnviar && <Text style={estilo.textError}>Campo obrigatório</Text>}
+                          </View>
+                        </FieldSet>
+                      </Linha>
+
+                      <View style={estilo.V_btn}>
+                        <TouchableOpacity
+                          style={estilo.btnProximo}
+                          onPress={() => {
+                            handleSubmit(values);
+                          }}
+                        >
+                          <Text style={{ fontFamily: 'WorkSans-Bold', color: '#142850', fontSize: 18 }}>
+                            Publicar Serviço
+                      </Text>
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+                  </View>
+                </ScrollView>
+              </ViewPager>
+            </Tab>
+          </Tabs>
+
+        </Fragment >
+      )
+      }
+    </Formik >
   );
 }
