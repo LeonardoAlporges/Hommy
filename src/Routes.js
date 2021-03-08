@@ -28,7 +28,7 @@ import Republica from './pages/Republica/Republica';
 import CadastroServico from './pages/Servicos/Cadastro';
 import DetalhesServicos from './pages/Servicos/DetalhesServico';
 import Servicos from './pages/Servicos/Servicos';
-
+import MenuLateral from './pages/Geral/Menu'
 
 
 const Navegação = createStackNavigator(
@@ -73,7 +73,8 @@ const Navegação = createStackNavigator(
     CadastroProduto,
     //AutenticacaoTelefone
     CadastroServico,
-    DetalhesProduto
+    DetalhesProduto,
+    MenuLateral
   },
   {
     initialRouteName: 'RenderApp',
