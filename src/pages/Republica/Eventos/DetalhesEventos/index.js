@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, View } from 'react-native';
+import { Linking, ScrollView, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { IndicatorViewPager, PagerDotIndicator } from 'rn-viewpager';
 import HeaderBack from '../../../../components/CustomHeader';
 import {
   BarraSeparacao,
   BotaoContato, Descricao,
-  Imagem, ItemUnico,
+  Imagem, ItemDuplo, ItemUnico,
   ItemUnicoLink, LabelBotao, LabelItem,
+  LinhaDupla,
   LinhaUnica,
   SubTitle, Titulo,
   ViewBotao, ViewDescricao, ViewDoTitulo,
@@ -20,11 +21,15 @@ import {
 export default function DetalhesEventos({ navigation }) {
   const [contadorImagem, setContadorImagem] = useState(0);
   const [evento, setEvento] = useState(navigation.state.params.dados);
-
+  const [habilitarDesconto,setHabilitarDesconto] = useState(false)
 
 
   function navegar() {
     navigation.goBack(null);
+  }
+
+  function AbrirTelefone() {
+    Linking.openURL(`tel:${evento.telefone}`);
   }
 
   useEffect(() => {
@@ -47,6 +52,10 @@ export default function DetalhesEventos({ navigation }) {
         pageCount={contadorImagem}
       />
     );
+  }
+  function participar(){
+    setHabilitarDesconto(true);
+    //Adicionar o contador para enventos
   }
 
   return (
@@ -110,7 +119,36 @@ export default function DetalhesEventos({ navigation }) {
           <LabelItem>Instagram: {evento.telefone}</LabelItem>
         </ItemUnicoLink>
       </LinhaUnica>
+      {evento.descontoDisponivel && habilitarDesconto &&
+       <LinhaDupla>
+         <ItemDuplo>
+         <ViewIcone>
+            <Icon name="currency-usd" style={{ fontSize: 25, color: '#142850' }} />
+          </ViewIcone>
+          <LabelItem>Desconto: {evento.desconto}%</LabelItem>
+         </ItemDuplo>
+         <ItemDuplo>
+         <ViewIcone>
+            <Icon name="ticket" style={{ fontSize: 25, color: '#142850' }} />
+          </ViewIcone>
+          <LabelItem>Cupom: {evento.codigoDesconto}</LabelItem>
+         </ItemDuplo>
+       </LinhaDupla>
 
+      }
+      <ViewBotao>
+       <BotaoContato
+         onPress={() => {
+           participar();
+         }}
+       >
+         <ViewIcone>
+           <Icon name="check-bold" style={{ fontSize: 25, color: '#ffffff', textAlign: 'center' }} />
+         </ViewIcone>
+
+         <LabelBotao>Irei Participar</LabelBotao>
+       </BotaoContato>
+     </ViewBotao>
       <ViewBotao>
         <BotaoContato
           onPress={() => {

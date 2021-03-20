@@ -101,6 +101,13 @@ export const Icone = styled(Icon)`
   color:#142850;
   font-size:18px;
 `;
+export const CheckBoxText = styled.Text`
+  font-family: WorkSans;
+  font-size: 14px;
+  color: #586880;
+  margin-left:15px;
+`;
+
 const estilo = StyleSheet.create({
   btnProximo: {
     borderRadius: 3,

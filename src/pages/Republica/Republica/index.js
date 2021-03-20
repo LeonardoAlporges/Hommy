@@ -364,143 +364,143 @@ class Republica extends Component {
             </View>
           )}
         </View>
-        <Modal animationType="fade" visible={this.state.modalVisible} transparent={true}>
-          <View style={Estilos.V_filtroInterno}>
-            <View
-              style={{
-                width: '100%',
-                height: 30,
-                justifyContent: 'center',
-                alignItems: 'flex-end'
-              }}
-            >
-              <TouchableOpacity
-                style={{ marginRight: 20, marginBottom: 10 }}
-                onPress={() => {
-                  this.setState({ modalVisible: false });
+          <Modal animationType="fade" visible={this.state.modalVisible} transparent={true}>
+            <View style={Estilos.V_filtroInterno}>
+              <View
+                style={{
+                  width: '100%',
+                  height: 30,
+                  justifyContent: 'center',
+                  alignItems: 'flex-end'
                 }}
               >
-                <Icon style={{ fontSize: 22 }} name="close" />
-              </TouchableOpacity>
-            </View>
-            <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}>Valor</Text>
-            <ListItem style={Estilos.listStyleInput}>
-              <View style={Estilos.ViewLabel}>
-                <Text style={Estilos.textFiltroValor}>De R$</Text>
+                <TouchableOpacity
+                  style={{ marginRight: 20, marginBottom: 10 }}
+                  onPress={() => {
+                    this.setState({ modalVisible: false });
+                  }}
+                >
+                  <Icon style={{ fontSize: 22 }} name="close" />
+                </TouchableOpacity>
               </View>
-              <Item underlined style={Estilos.itemInput}>
-                <Input
-                  onChangeText={text => this.valMenor(text)}
-                  value={this.state.aluguelMin}
-                  keyboardType="numeric"
+              <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}>Valor</Text>
+              <ListItem style={Estilos.listStyleInput}>
+                <View style={Estilos.ViewLabel}>
+                  <Text style={Estilos.textFiltroValor}>De R$</Text>
+                </View>
+                <Item underlined style={Estilos.itemInput}>
+                  <Input
+                    onChangeText={text => this.valMenor(text)}
+                    value={this.state.aluguelMin}
+                    keyboardType="numeric"
+                  />
+                </Item>
+                <View style={Estilos.ViewLabel}>
+                  <Text style={Estilos.textFiltroValor}>Até R$</Text>
+                </View>
+                <Item underlined style={Estilos.itemInput}>
+                  <Input
+                    onChangeText={text => this.valMaior(text)}
+                    value={this.state.aluguelMax}
+                    keyboardType="numeric"
+                  />
+                </Item>
+              </ListItem>
+              <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}>Aceita animais?</Text>
+              <ListItem style={Estilos.listStyle}>
+                <CheckBox
+                  color="#142850"
+                  style={{ alignSelf: 'stretch' }}
+                  onPress={this.fAnimalSim}
+                  checked={this.state.filtroAnimalSim}
                 />
-              </Item>
-              <View style={Estilos.ViewLabel}>
-                <Text style={Estilos.textFiltroValor}>Até R$</Text>
-              </View>
-              <Item underlined style={Estilos.itemInput}>
-                <Input
-                  onChangeText={text => this.valMaior(text)}
-                  value={this.state.aluguelMax}
-                  keyboardType="numeric"
+                <Text style={Estilos.textFiltro}>Sim</Text>
+                <CheckBox
+                  color="#142850"
+                  style={{ alignSelf: 'stretch' }}
+                  onPress={this.fAnimalNao}
+                  checked={this.state.filtroAnimalNao}
                 />
-              </Item>
-            </ListItem>
-            <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}>Aceita animais?</Text>
-            <ListItem style={Estilos.listStyle}>
-              <CheckBox
-                color="#142850"
-                style={{ alignSelf: 'stretch' }}
-                onPress={this.fAnimalSim}
-                checked={this.state.filtroAnimalSim}
-              />
-              <Text style={Estilos.textFiltro}>Sim</Text>
-              <CheckBox
-                color="#142850"
-                style={{ alignSelf: 'stretch' }}
-                onPress={this.fAnimalNao}
-                checked={this.state.filtroAnimalNao}
-              />
-              <Text style={Estilos.textFiltro}>Não</Text>
-            </ListItem>
-            <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}> Tipo de república</Text>
-            <ListItem style={Estilos.listStyle}>
-              <CheckBox
-                color="#142850"
-                style={{ alignSelf: 'stretch' }}
-                onPress={this.fMasc}
-                checked={this.state.filtroMasc}
-              />
-              <Text style={Estilos.textFiltro}>Masculina</Text>
-              <CheckBox
-                color="#142850"
-                style={{ alignSelf: 'stretch' }}
-                onPress={this.fFem}
-                checked={this.state.filtroFem}
-              />
-              <Text style={Estilos.textFiltro}>Feminina</Text>
-              <CheckBox
-                color="#142850"
-                style={{ alignSelf: 'stretch' }}
-                onPress={this.fMista}
-                checked={this.state.filtroMista}
-              />
-              <Text style={Estilos.textFiltro}>Mista</Text>
-            </ListItem>
+                <Text style={Estilos.textFiltro}>Não</Text>
+              </ListItem>
+              <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}> Tipo de república</Text>
+              <ListItem style={Estilos.listStyle}>
+                <CheckBox
+                  color="#142850"
+                  style={{ alignSelf: 'stretch' }}
+                  onPress={this.fMasc}
+                  checked={this.state.filtroMasc}
+                />
+                <Text style={Estilos.textFiltro}>Masculina</Text>
+                <CheckBox
+                  color="#142850"
+                  style={{ alignSelf: 'stretch' }}
+                  onPress={this.fFem}
+                  checked={this.state.filtroFem}
+                />
+                <Text style={Estilos.textFiltro}>Feminina</Text>
+                <CheckBox
+                  color="#142850"
+                  style={{ alignSelf: 'stretch' }}
+                  onPress={this.fMista}
+                  checked={this.state.filtroMista}
+                />
+                <Text style={Estilos.textFiltro}>Mista</Text>
+              </ListItem>
 
-            <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}>Vagas disponíveis</Text>
-            <ListItem style={Estilos.listStyle}>
-              <CheckBox
-                color="#142850"
-                style={{ alignSelf: 'stretch' }}
-                onPress={this.fVagas1}
-                checked={this.state.filtroVagas1}
-              />
-              <Text style={Estilos.textFiltro}>1</Text>
-              <CheckBox
-                color="#142850"
-                style={{ alignSelf: 'stretch' }}
-                onPress={this.fVagas2}
-                checked={this.state.filtroVagas2}
-              />
-              <Text style={Estilos.textFiltro}>2</Text>
-              <CheckBox
-                color="#142850"
-                style={{ alignSelf: 'stretch' }}
-                onPress={this.fVagas3}
-                checked={this.state.filtroVagas3}
-              />
-              <Text style={Estilos.textFiltro}>3+</Text>
-            </ListItem>
-            <View
-              style={{
-                width: '100%',
-                flexDirection: 'row',
-                display: 'flex',
-                justifyContent: 'space-evenly'
-              }}
-            >
-              <TouchableOpacity
-                style={Estilos.botaoReload}
-                onPress={() => {
-                  this.setState({ modalVisible: false });
-                  this.padrao();
+              <Text style={{ fontFamily: 'WorkSans', fontWeight: 'bold', fontSize: 18 }}>Vagas disponíveis</Text>
+              <ListItem style={Estilos.listStyle}>
+                <CheckBox
+                  color="#142850"
+                  style={{ alignSelf: 'stretch' }}
+                  onPress={this.fVagas1}
+                  checked={this.state.filtroVagas1}
+                />
+                <Text style={Estilos.textFiltro}>1</Text>
+                <CheckBox
+                  color="#142850"
+                  style={{ alignSelf: 'stretch' }}
+                  onPress={this.fVagas2}
+                  checked={this.state.filtroVagas2}
+                />
+                <Text style={Estilos.textFiltro}>2</Text>
+                <CheckBox
+                  color="#142850"
+                  style={{ alignSelf: 'stretch' }}
+                  onPress={this.fVagas3}
+                  checked={this.state.filtroVagas3}
+                />
+                <Text style={Estilos.textFiltro}>3+</Text>
+              </ListItem>
+              <View
+                style={{
+                  width: '100%',
+                  flexDirection: 'row',
+                  display: 'flex',
+                  justifyContent: 'space-evenly'
                 }}
               >
-                <Icon name="filter-remove-outline" style={Estilos.textBotaoModal} />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={Estilos.botaoModal}
-                onPress={() => {
-                  this.setState({ modalVisible: false });
-                  this.filtro();
-                }}
-              >
-                <Text style={Estilos.textBotaoModal}>Aplicar</Text>
-              </TouchableOpacity>
+                <TouchableOpacity
+                  style={Estilos.botaoReload}
+                  onPress={() => {
+                    this.setState({ modalVisible: false });
+                    this.padrao();
+                  }}
+                >
+                  <Icon name="filter-remove-outline" style={Estilos.textBotaoModal} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={Estilos.botaoModal}
+                  onPress={() => {
+                    this.setState({ modalVisible: false });
+                    this.filtro();
+                  }}
+                >
+                  <Text style={Estilos.textBotaoModal}>Aplicar</Text>
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-        </Modal>
+          </Modal>
         <Fab
           active={this.state.active}
           direction="up"
