@@ -9,6 +9,12 @@ export const Listagem = styled.FlatList`
   width: 100%;
   height: 100%;
 `;
+export const FundoModal = styled.View`
+ flex:1;
+ justify-content:center;
+ align-items:center;
+ background-color: red;
+`;
 const estilosRepublica = StyleSheet.create({
   card: {
     marginTop: 0,
@@ -72,14 +78,14 @@ const estilosRepublica = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 5,
     alignItems: 'center',
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 12,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5
+    shadowOpacity: 0.58,
+    shadowRadius: 16.00,
+    elevation: 24,
   },
   listStyle: {
     alignItems: 'stretch',

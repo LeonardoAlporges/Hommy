@@ -1,11 +1,12 @@
 import { Formik } from 'formik';
 import moment from 'moment';
-import { Button, Input, Item, Label } from 'native-base';
+import { Button, CheckBox, Input, Item, Label } from 'native-base';
 import React, { Fragment, useState } from 'react';
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import CurrencyInput from 'react-native-currency-input';
 import ImagePicker from 'react-native-image-picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import CurrencyInput from 'react-native-currency-input';
+import TextInputMask from 'react-native-text-input-mask';
 import { NavigationActions, StackActions } from 'react-navigation';
 import { useSelector } from 'react-redux';
 import * as yup from 'yup';
@@ -16,6 +17,7 @@ import api from '../../../../service/api';
 import { imagePickerOptions, uploadFileToFireBaseRepublicaEventos } from '../../../../utils';
 import estilo, {
   AreaFotos,
+  CheckBoxText,
   Container,
   DivisaoFotos,
   FieldSet,
@@ -30,6 +32,7 @@ import estilo, {
   ViewBotao,
   ViewErro
 } from './styles';
+
 
 export default function CadastroEvento({ navigation }) {
   const avatarUser = useSelector(state => state.user.fotoPerfil);
@@ -59,6 +62,8 @@ export default function CadastroEvento({ navigation }) {
   const [linkimagem2, setLinkImagem2] = useState(null);
   const [linkimagem3, setLinkImagem3] = useState(null);
   const [valor, setValor] = useState();
+
+  const [descontoDisponivel, setDescontoDisponivel] = useState(false);
 
 
   function selecionarHorario(date) {
@@ -120,6 +125,7 @@ export default function CadastroEvento({ navigation }) {
   function publicarEvento(values) {
     const data = {
       titulo: values.tituloEvento,
+      descontoDisponivel: descontoDisponivel,
       valor: valor,
       userEmail: emailUser,
       data: dataEvento,
@@ -185,7 +191,9 @@ export default function CadastroEvento({ navigation }) {
         horarioDeInicio: '',
         localVenda: '',
         valor: '',
-        contato: ''
+        contato: '',
+        codigoDesconto: '',
+        desconto: '',
       }}
       onSubmit={values => {
         publicarEvento(values);
@@ -194,7 +202,9 @@ export default function CadastroEvento({ navigation }) {
         tituloEvento: yup.string().required('Campo obrigatório').max(40, 'Somente 40 caracteres são permitidos'),
         localVenda: yup.string().required('Campo obrigatório').max(70, 'Somente 70 caracteres são permitidos'),
         contato: yup.string().max(9999999999999).required(' Campo obrigatórior'),
-        valor: yup.number('Somente numeros!').max(200, 'Valor maximo de R$ 200,00').required('Campo obrigatório')
+        valor: yup.number('Somente numeros!').max(200, 'Valor maximo de R$ 200,00').required('Campo obrigatório'),
+        codigoDesconto: yup.string().max(10, 'Somente 10 caracteres são permitidos'),
+        desconto: yup.number().max(100,'Desconto somente até 100%').min(1),
       })}
     >
       {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
@@ -301,7 +311,7 @@ export default function CadastroEvento({ navigation }) {
                 <FieldSet>
                   <LabelFielSet>Valor</LabelFielSet>
                   <Item style={{ borderColor: 'transparent' }}>
-                  <CurrencyInput
+                    <CurrencyInput
                       placeholderTextColor="#263b50"
                       style={{ fontFamily: 'WorkSans', width: '80%', height: '100%' }}
                       value={valor}
@@ -334,7 +344,55 @@ export default function CadastroEvento({ navigation }) {
                   </View>
                 </FieldSet>
               </Linha>
+              <View style={{ flexDirection: "row", marginTop: 15 }}>
+                <CheckBox
+                  color="#142850"
+                  style={{ alignSelf: 'stretch', marginTop: 5, }}
+                  checked={descontoDisponivel}
+                  onPress={() => setDescontoDisponivel(!descontoDisponivel)}
+                />
+                <CheckBoxText >Deseja oferecer uma porcentagem de desconto para usuarios do APP ?</CheckBoxText>
+              </View>
+              {descontoDisponivel && <View>
+                <Linha>
+                  <FieldSetLarge>
+                    <LabelFielSet>Porcentagem de Desconto</LabelFielSet>
+                    <Item style={{ borderColor: 'transparent' }}>
+                      <Input
+                        value={values.desconto}
+                        onChangeText={handleChange('desconto')}
+                        placeholder=""
+                        onBlur={() => setFieldTouched('desconto')}
+                      />
+                    </Item>
+                    <View style={estilo.V_error}>
+                      {touched.desconto && errors.desconto && (
+                        <Text style={estilo.textError}>{errors.desconto}</Text>
+                      )}
+                    </View>
+                  </FieldSetLarge>
+                </Linha>
 
+                <Linha>
+                  <FieldSetLarge>
+                    <LabelFielSet>Codigo do Desconto</LabelFielSet>
+                    <Item style={{ borderColor: 'transparent' }}>
+                      <Input
+                        value={values.codigoDesconto}
+                        onChangeText={handleChange('codigoDesconto')}
+                        placeholder=""
+                        onBlur={() => setFieldTouched('codigoDesconto')}
+                      />
+                    </Item>
+                    <View style={estilo.V_error}>
+                      {touched.codigoDesconto && errors.codigoDesconto && (
+                        <Text style={estilo.textError}>{errors.codigoDesconto}</Text>
+                      )}
+                    </View>
+                  </FieldSetLarge>
+                </Linha>
+              </View>
+}
               <AreaFotos>
                 <LabelFotos>Fotos da sua república</LabelFotos>
                 <DivisaoFotos>
@@ -384,6 +442,7 @@ export default function CadastroEvento({ navigation }) {
                     </View>
                   )}
                 </DivisaoFotos>
+
                 <View style={estilo.V_BotaoImg}>
                   <TouchableOpacity
                     disabled={contadorImagem == 3}
