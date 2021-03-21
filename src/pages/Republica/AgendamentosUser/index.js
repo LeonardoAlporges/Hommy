@@ -98,11 +98,12 @@ export default function AgendamentoUser({ navigation }) {
           mensagem="O que está esperando? Navegue pelo aplicativo e encontre uma vaga na república ideal. "
         />
       )}
-      <View style={{ widht: '100%', height: 20, paddingHorizontal: 20, marginBottom: 10,marginTop:5 }}>
-        <Subtitulo>Fique atento no status das repúblicas nas quais você solicitou uma visita.</Subtitulo>
+      <View style={{ widht: '100%', height: 20, paddingHorizontal: 20, marginBottom: 10, marginTop: 5 }}>
+        <Subtitulo>Fique atento no status das anuncios nas quais você agendou uma visita.</Subtitulo>
       </View>
+      {/*---------------- Agendamentos Republica ------------------------*/}
       <ViewLabel>
-        <Label>Agendamentos</Label>
+        <Label>Republicas</Label>
         <Barra />
       </ViewLabel>
 
@@ -148,6 +149,103 @@ export default function AgendamentoUser({ navigation }) {
         )}
         keyExtractor={item => item._id}
       />
+      {/*---------------- Agendamentos Produtos ------------------------*/}
+      <ViewLabel>
+        <Label>Protutos</Label>
+        <Barra />
+      </ViewLabel>
+
+      {/* <FlatList
+        data={listaAgendamentoProdutos}
+        renderItem={({ item }) => (
+          <View style={{ flex: 1 }}>
+            <CartaoProdutos data={item.republica} />
+            <ViewData>
+              {item.status == 'Análise' && (
+                <Analise>
+                  <LabelData>{item.status}</LabelData>
+                </Analise>
+              )}
+              {item.status == 'Confirmado' && (
+                <Confirmado>
+                  <LabelConfirmacao>{item.status}</LabelConfirmacao>
+                </Confirmado>
+              )}
+              {item.status == 'Rejeitado' && (
+                <Rejeitado>
+                  <LabelReijeicao>{item.status}</LabelReijeicao>
+                </Rejeitado>
+              )}
+
+              <View style={style.viewData2}>
+                <LabelData>{moment(new Date(item.data)).format('DD/MM/YY')}</LabelData>
+                <Text>As</Text>
+                <LabelData>{moment(new Date(item.hora)).format('hh:mm')}</LabelData>
+              </View>
+
+              <TouchableOpacity
+                style={{ width: 30, height: 30, justifyContent: 'center' }}
+                onPress={() => {
+                  setRepublicaID(item.republica._id);
+                  setModalRemocaoAgendamento(true);
+                }}
+              >
+                <Icon name="close" style={style.iconDel} />
+              </TouchableOpacity>
+            </ViewData>
+          </View>
+        )}
+        keyExtractor={item => item._id}
+      /> */}
+
+      {/*---------------- Agendamentos Serviço ------------------------*/}
+      <ViewLabel>
+        <Label>Serviços</Label>
+        <Barra />
+      </ViewLabel>
+
+      {/* <FlatList
+        data={listaAgendamentoServiços}
+        renderItem={({ item }) => (
+          <View style={{ flex: 1 }}>
+            <CartaoProdutos data={item.republica} />
+            <ViewData>
+              {item.status == 'Análise' && (
+                <Analise>
+                  <LabelData>{item.status}</LabelData>
+                </Analise>
+              )}
+              {item.status == 'Confirmado' && (
+                <Confirmado>
+                  <LabelConfirmacao>{item.status}</LabelConfirmacao>
+                </Confirmado>
+              )}
+              {item.status == 'Rejeitado' && (
+                <Rejeitado>
+                  <LabelReijeicao>{item.status}</LabelReijeicao>
+                </Rejeitado>
+              )}
+
+              <View style={style.viewData2}>
+                <LabelData>{moment(new Date(item.data)).format('DD/MM/YY')}</LabelData>
+                <Text>As</Text>
+                <LabelData>{moment(new Date(item.hora)).format('hh:mm')}</LabelData>
+              </View>
+
+              <TouchableOpacity
+                style={{ width: 30, height: 30, justifyContent: 'center' }}
+                onPress={() => {
+                  setRepublicaID(item.republica._id);
+                  setModalRemocaoAgendamento(true);
+                }}
+              >
+                <Icon name="close" style={style.iconDel} />
+              </TouchableOpacity>
+            </ViewData>
+          </View>
+        )}
+        keyExtractor={item => item._id}
+      /> */}
       {erro && (
         <ViewDetalhes>
           <CustomModal
