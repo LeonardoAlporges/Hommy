@@ -7,6 +7,7 @@ import { Platform } from 'react-native';
 export const imagePickerOptions = {
   noData: true
 };
+
 export const FireBaseStorage = storage();
 
 export const getFileLocalPath = response => {
@@ -17,29 +18,52 @@ export const getFileLocalPath = response => {
 export const createStorageReferenceToFileRepublica = response => {
   const { fileName } = response;
   return FireBaseStorage.ref(`/pictures/republicas/${fileName}`);
-  //return FireBaseStorage.ref(`/imagem/${fileName}`).delete();
 };
 
 export const createStorageReferenceToFileRepublicaProduto = response => {
   const { fileName } = response;
   return FireBaseStorage.ref(`/pictures/republicasProdutos/${fileName}`);
-  //return FireBaseStorage.ref(`/imagem/${fileName}`).delete();
 };
 export const createStorageReferenceToFileRepublicaEvento = response => {
   const { fileName } = response;
   return FireBaseStorage.ref(`/pictures/republicasEventos/${fileName}`);
-  //return FireBaseStorage.ref(`/imagem/${fileName}`).delete();
 };
 export const createStorageReferenceToFileUser = response => {
   const { fileName } = response;
   return FireBaseStorage.ref(`/pictures/user/${fileName}`);
-  //return FireBaseStorage.ref(`/imagem/${fileName}`).delete();
 };
 export const createStorageReferenceToFileServico = response => {
   const { fileName } = response;
   return FireBaseStorage.ref(`/pictures/servicos/${fileName}`);
 };
 
+//DELETE 
+export const deleteFileRepublica = response => {
+  const { fileName } = response;
+  return FireBaseStorage.ref(`/pictures/republicas/${fileName}`).delete()
+};
+
+export const deleteRepublicaProduto = response => {
+  const { fileName } = response;
+  return FireBaseStorage.ref(`/pictures/republicasProdutos/${fileName}`).delete()
+};
+export const deleteRepublicaEvento = response => {
+  const { fileName } = response;
+  return FireBaseStorage.ref(`/pictures/republicasEventos/${fileName}`).delete()
+};
+export const deleteFileUser = response => {
+  const { fileName } = response;
+  return FireBaseStorage.ref(`/pictures/user/${fileName}`).delete()
+};
+export const deleteFileServico = response => {
+  const { fileName } = response;
+  return FireBaseStorage.ref(`/pictures/servicos/${fileName}`).delete()
+};
+
+
+
+
+//UPLOAD
 export const uploadFileToFireBaseRepublica = imagePickerResponse => {
   const fileSource = getFileLocalPath(imagePickerResponse);
   const storageRef = createStorageReferenceToFileRepublica(imagePickerResponse);
@@ -74,4 +98,5 @@ export const uploadFileToFireBaseUser = imagePickerResponse => {
   const storageRef = createStorageReferenceToFileUser(imagePickerResponse);
   return storageRef.putFile(fileSource);
 };
+
 export const uploadProgress = ratio => Math.round(ratio * 100);

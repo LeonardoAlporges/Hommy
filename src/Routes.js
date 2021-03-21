@@ -11,6 +11,7 @@ import Interessados from './pages/Carona/Interessados';
 import Viagens from './pages/Carona/Viagens';
 import Anuncios from './pages/Geral/Anuncios';
 import TabsHeader from './pages/Geral/Home';
+import MenuLateral from './pages/Geral/Menu';
 import Perfil from './pages/Geral/Perfil';
 import RenderApp from './pages/Geral/RenderApp/RenderApp';
 import SplashScreen from './pages/Geral/SplashScreen';
@@ -23,13 +24,15 @@ import DetalhesAnuncio from './pages/Republica/DetalhesAnuncio';
 import CadastroEvento from './pages/Republica/Eventos/CadastroEvento/CadastroEvento';
 import DetalhesEventos from './pages/Republica/Eventos/DetalhesEventos';
 import GerenciamentoDeRepublica from './pages/Republica/GerenciamentoRepublica';
+import AgendarVisitaProduto from './pages/Republica/Produtos/AgendarVisita';
 import CadastroProduto from './pages/Republica/Produtos/CadastroProdutos/CadastroProduto';
 import DetalhesProduto from './pages/Republica/Produtos/DetalhesProduto';
 import Republica from './pages/Republica/Republica';
+import AgendarVisitaServico from './pages/Servicos/AgendarVisita';
 import CadastroServico from './pages/Servicos/Cadastro';
 import DetalhesServicos from './pages/Servicos/DetalhesServico';
 import Servicos from './pages/Servicos/Servicos';
-import MenuLateral from './pages/Geral/Menu'
+
 
 const Navegação = createStackNavigator(
   {
@@ -74,7 +77,9 @@ const Navegação = createStackNavigator(
     CadastroProduto,
     CadastroServico,
     DetalhesProduto,
-    MenuLateral
+    MenuLateral,
+    AgendarVisitaProduto,
+    AgendarVisitaServico,
   },
   {
     initialRouteName: 'RenderApp',

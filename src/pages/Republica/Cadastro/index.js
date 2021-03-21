@@ -11,7 +11,7 @@ import CustomModal from '../../../components/Alert';
 import HeaderBack from '../../../components/CustomHeader';
 import Loading from '../../../components/Loading';
 import api from '../../../service/api';
-import { imagePickerOptions, uploadFileToFireBaseRepublica } from '../../../utils';
+import { deleteFileRepublica, imagePickerOptions, uploadFileToFireBaseRepublica } from '../../../utils';
 import estilo, {
   AreaFotos,
   DivisaoFotos,
@@ -118,6 +118,7 @@ export default function Cadastro({ navigation }) {
     if (idFoto == 1) {
       setLinkImagem1(null);
       setImagem1(null);
+      deleteFileRepublica()
     } else if (idFoto == 2) {
       setLinkImagem2(null);
       setImagem2(null);
