@@ -1,168 +1,103 @@
-import React, { useState, useEffect } from 'react';
-import { View, Modal, Text, TouchableOpacity } from 'react-native';
-import api from '../../service/api';
+import React, { useState } from 'react';
+import { Modal, View } from 'react-native';
+import Estilos, { Avaliacao, Avalie, Botao, Container, Icones, LabelBotao, Start, TipoAvaliacao, Toque } from './styles';
 
-import style from './styles';
-import { Button } from 'native-base';
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
-export default function ModalAvaliacao(props) {
+
+export default function ModalAvaliacao(props) { 
+  return (
+    <View>
+      {props.tipo == 'Republica' && < ModalUsuario dados={props} />}
+    </View>
+  );
+}
+
+export function ModalUsuario() {
+
   const [n1, setN1] = useState(false);
   const [n2, setN2] = useState(false);
   const [n3, setN3] = useState(false);
   const [n4, setN4] = useState(false);
   const [n5, setN5] = useState(false);
-  const [valor, setValor] = useState(0);
-  const [modalVisivel, setModalVisivel] = useState(true);
+  const [nota, setNota] = useState(0);
+  const [modalVisivel,setModalVisivel]= useState(true); 
 
-
-  atualizarCor = valor => {
-    if (valor == 1) {
-      setN1(true);
-      setValor(valor);
-    }
-    if (valor == 2) {
-      setN2(true);
-      setValor(valor);
-    }
-    if (valor == 3) {
-      setN3(true);
-      setValor(valor);
-    }
-    if (valor == 4) {
-      setN4(true);
-      setValor(valor);
-    }
-    if (valor == 5) {
-      setN5(true);
-      setValor(valor);
-    }
-  };
-
-  Avaliar = () => {
-    api
-      .put(`/userNota/${props.email}`, { nota: valor })
-      .then(responseJson => { })
-      .catch(error => { });
-    setModalVisivel(true), props.retornoModal();
-  };
-    return (
-      <Modal
-        animationType="fade"
-        visible={modalVisivel}
-        transparent={true}
-        onRequestClose={() => {
-          setModalVisivel(false)
-        }}
-        onDismiss={() => {
-          setModalVisivel(false)
-        }}
-      >
-        <View style={style.ViewFundo}>
-          <View style={style.ViewModal}>
-            <Text style={style.titulo}>Avalie {props.nome}</Text>
-            <View style={style.tipoAva}>
-              <Text style={style.descricao}> Pessimo</Text>
-              <Text style={style.descricao}> Muito bom</Text>
-            </View>
-            <View style={style.iconesAva}>
-              <TouchableOpacity
-                style={{
-                  width: 30,
-                  height: 30,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-                onPress={() => {
-                  atualizarCor(1);
-                }}
-              >
-                {valor > 0 ? (
-                  <Icon name="star" style={style.iconActive} />
-                ) : (
-                    <Icon name="star" style={style.icon} />
-                  )}
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  width: 30,
-                  height: 30,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-                onPress={() => {
-                  atualizarCor(2);
-                }}
-              >
-                {valor > 1 ? (
-                  <Icon name="star" style={style.iconActive} />
-                ) : (
-                    <Icon name="star" style={style.icon} />
-                  )}
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  width: 30,
-                  height: 30,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-                onPress={() => {
-                  atualizarCor(3);
-                }}
-              >
-                {valor > 2 ? (
-                  <Icon name="star" style={style.iconActive} />
-                ) : (
-                    <Icon name="star" style={style.icon} />
-                  )}
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  width: 30,
-                  height: 30,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-                onPress={() => {
-                  atualizarCor(4);
-                }}
-              >
-                {valor > 3 ? (
-                  <Icon name="star" style={style.iconActive} />
-                ) : (
-                    <Icon name="star" style={style.icon} />
-                  )}
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  width: 30,
-                  height: 30,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-                onPress={() => {
-                  atualizarCor(5);
-                }}
-              >
-                {valor > 4 ? (
-                  <Icon name="star" style={style.iconActive} />
-                ) : (
-                    <Icon name="star" style={style.icon} />
-                  )}
-              </TouchableOpacity>
-            </View>
-
-            <Button
-              style={style.botao}
-              onPress={async () => {
-                Avaliar();
-              }}
-            >
-              <Text style={style.botaoTxt}>Confirmar</Text>
-            </Button>
-          </View>
-        </View>
-      </Modal>
-    );
+  function limparAnterior(){
+    setN1(false);
+    setN2(false);
+    setN3(false);
+    setN4(false);
+    setN5(false);
+    setNota(0);
   }
+
+  function onClick(number) {
+    limparAnterior();
+
+    if (number >= 1) {
+      setN1(true);
+      setNota(1);
+    }
+    if (number >= 2) {
+      setN2(true);
+      setNota(2);
+    }
+    if (number >= 3) {
+      setN3(true);
+      setNota(3);
+    }
+    if (number >= 4) {
+      setN4(true);
+      setNota(4);
+    }
+    if (number >= 5) {
+      setN5(true);
+      setNota(5);
+    }
+  } 
+
+  // function avaliar() {
+  //   api
+  //   .put(`/userNota/${props.email}`, { nota: nota })
+  //   .then(responseJson => { })
+  //   .catch(error => { });
+  
+  //   setModalVisivel(false),
+  // } 
+
+
+  return (
+    <Modal animationType="fade" visible={modalVisivel} transparent={true}>
+      <Container>
+        <View style={Estilos.ViewModal}>
+          <Avalie>Avalie o Representante do Anuncio</Avalie>
+          <Avaliacao>
+            <TipoAvaliacao>Pessimo</TipoAvaliacao>
+            <TipoAvaliacao>Muito Bom</TipoAvaliacao>
+          </Avaliacao>
+          <Icones>
+            <Toque onPress={() => onClick(1) }>
+              <Start name="star" active={n1}/>
+            </Toque>
+            <Toque onPress={() => onClick(2) }>
+              <Start name="star" active={n2}/>
+            </Toque>
+            <Toque onPress={() => onClick(3) }>
+              <Start name="star" active={n3}/>
+            </Toque>
+            <Toque onPress={() => onClick(4) }>
+              <Start name="star" active={n4}/>
+            </Toque>
+            <Toque onPress={() => onClick(5) }>
+              <Start name="star" active={n5}/>
+            </Toque>
+          </Icones>
+          <Botao onPress={() => enviarRetorno() }>
+            <LabelBotao>Avaliar</LabelBotao>
+          </Botao>
+        </View>
+      </Container>
+    </Modal>
+  );
+
+}

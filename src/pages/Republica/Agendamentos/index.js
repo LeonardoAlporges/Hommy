@@ -145,6 +145,11 @@ export default function Agendamentos({ navigation }) {
                   <LabelReijeicao>Rejeitada</LabelReijeicao>
                 </Rejeitado>
               )}
+              {item.status == 'Finalizado' && (
+                <Confirmado>
+                  <LabelConfirmacao>Avaliar Republica</LabelConfirmacao>
+                </Confirmado>
+              )}
             </ViewData>
           </ScrollView>
         )}
@@ -162,4 +167,5 @@ export default function Agendamentos({ navigation }) {
       )}
     </Container>
   );
+
 }

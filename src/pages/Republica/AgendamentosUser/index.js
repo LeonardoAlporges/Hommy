@@ -10,6 +10,7 @@ import Cartao from '../../../components/Cartao';
 import HeaderBack from '../../../components/CustomHeader';
 import EmptyState from '../../../components/EmptyState';
 import Loading from '../../../components/Loading';
+import ModalAvaliacao from '../../../components/ModalAvaliacao';
 import ModalConfirmacao from '../../../components/ModalConfirmacao';
 import api from '../../../service/api';
 import style, {
@@ -31,11 +32,15 @@ import style, {
 export default function AgendamentoUser({ navigation }) {
   const email = useSelector(state => state.user.email);
   const [listaAgendamento, setListaAgendamendo] = useState([]);
+  const [listaAgendamentoProduto, setListaAgendamentoProduto] = useState([]);
   const [loading, setLoading] = useState(false);
   const [erro, setErro] = useState(false);
   const [modalRemocaoAgendamento, setModalRemocaoAgendamento] = useState(false);
-  const [republicaID, setRepublicaID] = useState();
+  const [republicaID, setRepublicaID] = useState(null);
+  const [produtoID, setProdutoID] = useState(null);
   const [reload, setReload] = useState();
+  const [avaliar,setAvaliar] = useState(false);
+  const [tipoAvaliacao,setTipoAvaliacao] = useState('');
 
   useEffect(() => {
     carregarMeusAgendamentos();
@@ -47,6 +52,18 @@ export default function AgendamentoUser({ navigation }) {
       .get(`/agendamento/${email}`)
       .then(response => {
         setListaAgendamendo(response.data);
+        setLoading(false);
+      })
+      .catch(error => {
+        setLoading(false);
+        setErro(true);
+      });
+
+    api
+      .get(`/produto/agendamento/interessado`, { emailInteressado: email })
+      .then(response => {
+        console.log("Response", response)
+        setListaAgendamentoProduto(response.data);
         setLoading(false);
       })
       .catch(error => {
@@ -73,6 +90,27 @@ export default function AgendamentoUser({ navigation }) {
       });
   }
 
+  function removerMeuAgendamentoProduto(valorRetorno, idproduto) {
+    if (valorRetorno == 3) {
+      return null;
+    }
+    return api
+      .delete(`/produto/agendamento/${idproduto}`)
+      .then(response => {
+        setReload(!reload);
+        setLoading(false);
+      })
+      .catch(error => {
+        setLoading(false);
+        setErro(true);
+      });
+  }
+
+  function abrirAvaliacao(tipo){
+    setAvaliar(true);
+    setTipoAvaliacao(tipo);
+  }
+
   return (
     <Container>
       <HeaderBack title="Meus agendamentos" onNavigation={() => navigation.goBack(null)} />
@@ -81,7 +119,12 @@ export default function AgendamentoUser({ navigation }) {
       {modalRemocaoAgendamento && (
         <ModalConfirmacao
           retornoModal={valor => {
-            removerMeuAgendamento(valor, republicaID);
+            if (republicaID != null) {
+              removerMeuAgendamento(valor, republicaID);
+            } else if (produtoID != null) {
+              removerMeuAgendamentoProduto(valor, produtoID);
+            }
+
             setModalRemocaoAgendamento(false);
           }}
           titulo="Cancelar visita?"
@@ -128,22 +171,45 @@ export default function AgendamentoUser({ navigation }) {
                   <LabelReijeicao>{item.status}</LabelReijeicao>
                 </Rejeitado>
               )}
+              {item.status == 'Finalizado' && (
+                <Confirmado>
+                  <LabelConfirmacao>{item.status}</LabelConfirmacao>
+                </Confirmado>
+              )}
 
-              <View style={style.viewData2}>
-                <LabelData>{moment(new Date(item.data)).format('DD/MM/YY')}</LabelData>
-                <Text>As</Text>
-                <LabelData>{moment(new Date(item.hora)).format('hh:mm')}</LabelData>
-              </View>
+              {item.status != 'Finalizado' ? (
+                <View>
+                  <View style={style.viewData2}>
+                    <LabelData>{moment(new Date(item.data)).format('DD/MM/YY')}</LabelData>
+                    <Text>As</Text>
+                    <LabelData>{moment(new Date(item.hora)).format('hh:mm')}</LabelData>
+                  </View>
 
-              <TouchableOpacity
-                style={{ width: 30, height: 30, justifyContent: 'center' }}
-                onPress={() => {
-                  setRepublicaID(item.republica._id);
-                  setModalRemocaoAgendamento(true);
-                }}
-              >
-                <Icon name="close" style={style.iconDel} />
-              </TouchableOpacity>
+                  <TouchableOpacity
+                    style={{ width: 30, height: 30, justifyContent: 'center' }}
+                    onPress={() => {
+                      setRepublicaID(item.republica._id);
+                      setModalRemocaoAgendamento(true);
+                    }}
+                  >
+                    <Icon name="close" style={style.iconDel} />
+                  </TouchableOpacity>
+                </View> ) 
+                :
+                (
+                <View >
+                    <TouchableOpacity
+                      style={{ width:100, height: 30, justifyContent: 'center',alignItems:'center', flexDirection: 'row',backgroundColor:'yellow',borderRadius:10 }}
+                      onPress={() => {
+                        abrirAvaliacao('republica');
+                      }}
+                    >
+                      <Text style={{ fontSize: 16, fontFamily: 'WorkSans', color: '#000',marginRight:10}}>Avaliar</Text>
+                      <Icon name="star" style={style.iconDel} />
+                    </TouchableOpacity>
+
+                </View>
+              )}
             </ViewData>
           </View>
         )}
@@ -156,10 +222,10 @@ export default function AgendamentoUser({ navigation }) {
       </ViewLabel>
 
       {/* <FlatList
-        data={listaAgendamentoProdutos}
+        data={listaAgendamentoProduto}
         renderItem={({ item }) => (
           <View style={{ flex: 1 }}>
-            <CartaoProdutos data={item.republica} />
+            <CartaoProdutos data={item.produto} />
             <ViewData>
               {item.status == 'Análise' && (
                 <Analise>
@@ -186,7 +252,7 @@ export default function AgendamentoUser({ navigation }) {
               <TouchableOpacity
                 style={{ width: 30, height: 30, justifyContent: 'center' }}
                 onPress={() => {
-                  setRepublicaID(item.republica._id);
+                  setProdutoID(item.produto._id);
                   setModalRemocaoAgendamento(true);
                 }}
               >
@@ -196,7 +262,7 @@ export default function AgendamentoUser({ navigation }) {
           </View>
         )}
         keyExtractor={item => item._id}
-      /> */}
+      />  */}
 
       {/*---------------- Agendamentos Serviço ------------------------*/}
       <ViewLabel>
@@ -255,6 +321,9 @@ export default function AgendamentoUser({ navigation }) {
             }}
           />
         </ViewDetalhes>
+      )}
+      {avaliar && (
+        <ModalAvaliacao tipo={tipoAvaliacao}></ModalAvaliacao>
       )}
     </Container>
   );
