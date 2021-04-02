@@ -77,7 +77,7 @@ function Anuncios({ navigation }) {
         setLoading(false);
       })
       .finally(() => {
-        setLoading(false), setAnuncio(anuncio++)
+        setLoading(false), setAnuncio(anuncio++),console.log("TESTE1")
       });
     api
       .get(`/userRepublica/${email}`)
@@ -88,7 +88,7 @@ function Anuncios({ navigation }) {
         setLoading(false);
       })
       .finally( () => {
-        setLoading(false), setAnuncio(anuncio++)
+        setLoading(false), setAnuncio(anuncio++),console.log("TESTE2")
       });
   }
 
@@ -110,7 +110,7 @@ function Anuncios({ navigation }) {
     <Container>
       <HeaderBack title="Meus anúncios" onNavigation={() => navigation.navigate('TabsHeader', { menuAberto: true })} />
       {loading && <Loading />}
-      {listaCaronas.length == 0 && listaRepublicas.length == 0 && !loading && (anuncio == 2) && (
+      {listaCaronas.length == 0 && listaRepublicas.length == 0 && !loading && (
         <EmptyState
           titulo="Sem anúncios"
           mensagem="Você ainda não anunciou nada. Nos diga quando houver vagas em sua república ou ofereça uma carona."
