@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import { useSelector } from 'react-redux';
 import CustomModal from '../../../components/Alert';
 import Cartao from '../../../components/Cartao';
+import CartaoProdutos from '../../../components/CartaoProdutos';
 import HeaderBack from '../../../components/CustomHeader';
 import EmptyState from '../../../components/EmptyState';
 import Loading from '../../../components/Loading';
@@ -55,12 +56,12 @@ export default function AgendamentoUser({ navigation }) {
         setLoading(false);
       })
       .catch(error => {
-        setLoading(false);
+        setLoading(false); 
         setErro(true);
       });
 
     api
-      .get(`/produto/agendamento/interessado`, { emailInteressado: email })
+      .get(`/produto/agendamento/interessado/${email}`)
       .then(response => {
         console.log("Response", response)
         setListaAgendamentoProduto(response.data);
@@ -135,7 +136,7 @@ export default function AgendamentoUser({ navigation }) {
           confirmar={true}
         />
       )}
-      {listaAgendamento.length == 0 && !loading && (
+      {listaAgendamento.length == 0 && listaAgendamentoProduto.length == 0 && !loading && (
         <EmptyState
           titulo="Você não possui visitas agendadas."
           mensagem="O que está esperando? Navegue pelo aplicativo e encontre uma vaga na república ideal. "
@@ -221,11 +222,11 @@ export default function AgendamentoUser({ navigation }) {
         <Barra />
       </ViewLabel>
 
-      {/* <FlatList
+      <FlatList
         data={listaAgendamentoProduto}
         renderItem={({ item }) => (
           <View style={{ flex: 1 }}>
-            <CartaoProdutos data={item.produto} />
+            <CartaoProdutos dados={item} />
             <ViewData>
               {item.status == 'Análise' && (
                 <Analise>
@@ -262,7 +263,7 @@ export default function AgendamentoUser({ navigation }) {
           </View>
         )}
         keyExtractor={item => item._id}
-      />  */}
+      /> 
 
       {/*---------------- Agendamentos Serviço ------------------------*/}
       <ViewLabel>

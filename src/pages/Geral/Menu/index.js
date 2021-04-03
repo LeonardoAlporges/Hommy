@@ -1,43 +1,43 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import React, { useState, useEffect } from 'react';
-import { Image, Linking, Modal } from 'react-native';
+import React from 'react';
+import { Image, Linking } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { NavigationActions, StackActions, withNavigation } from 'react-navigation';
 import { useSelector } from 'react-redux';
 import Estilos, {
-  Botao,
-  BotesLogin,
-  Card,
-  CardAmigos,
-  Container,
-  Header,
-  HeaderPrincipal,
-  Icone,
-  IconeMenu,
-  IconVoltar,
-  Label,
-  LabelBotaoSair,
-  LabelBotoes,
-  Linha,
-  Menu,
-  Nome,
-  SairdoApp,
-  Titulo,
-  TituloHeader,
-  ViewDados,
-  ViewFotoPerfil,
-  ViewIcons,
-  ViewLabel,
-  ViewLabelAmigos,
-  ViewNome,
-  ViewNota,
-  V_titulo
+    Botao,
+    BotesLogin,
+    Card,
+    CardAmigos,
+    Container,
+    Header,
+
+
+
+    IconVoltar,
+    Label,
+    LabelBotaoSair,
+    LabelBotoes,
+    Linha,
+    Menu,
+    Nome,
+    SairdoApp,
+
+    TituloHeader,
+    ViewDados,
+    ViewFotoPerfil,
+    ViewIcons,
+    ViewLabel,
+    ViewLabelAmigos,
+    ViewNome,
+    ViewNota
 } from './style';
 
 function MenuLateral({ navigation }) {
     const nome = useSelector(state => state.user.usuario);
     const fotoPerfil = useSelector(state => state.user.fotoPerfil);
+
 
     function resetNavigation(Rota) {
         const resetAction = StackActions.reset({

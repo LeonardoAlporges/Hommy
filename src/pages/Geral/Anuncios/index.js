@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import CustomModal from '../../../components/Alert';
 import Cartao from '../../../components/Cartao';
 import CartaoCarona from '../../../components/CartaoCarona';
+import CartaoProdutos from '../../../components/CartaoProdutos';
 import HeaderBack from '../../../components/CustomHeader';
 import EmptyState from '../../../components/EmptyState';
 import Loading from '../../../components/Loading';
@@ -26,6 +27,7 @@ import {
 function Anuncios({ navigation }) {
   const [listaRepublicas, setListaRepublicas] = useState([]);
   const [listaCaronas, setListaCaronas] = useState([]);
+  const [listaProdutos,setListaProdutos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [erro, setErro] = useState(false);
   const [reloading, setReloading] = useState(false);
@@ -63,6 +65,18 @@ function Anuncios({ navigation }) {
           setReloading(false);
           setLoading(false);
         });
+    } else if (tipo == 'Produto' && valor == 1) {
+      api
+        .delete(`/produto/${item._id}`)
+        .then(responseJson => {
+          setListaProdutos([]);
+          setLoading(false);
+          getlist();
+        })
+        .catch(error => {
+          setReloading(false);
+          setLoading(false);
+        });
     }
   }
 
@@ -89,6 +103,17 @@ function Anuncios({ navigation }) {
       })
       .finally( () => {
         setLoading(false), setAnuncio(anuncio++),console.log("TESTE2")
+      });
+    api
+      .get(`/userProduto/${email}`)
+      .then(responseJson => {
+        setListaProdutos(responseJson.data);
+      })
+      .catch(error => {
+        setLoading(false);
+      })
+      .finally( () => {
+        setLoading(false), setAnuncio(anuncio++),console.log("TESTE3")
       });
   }
 
@@ -237,6 +262,55 @@ function Anuncios({ navigation }) {
               keyExtractor={item => item._id}
             />
           </View>
+          
+        )}
+        {listaProdutos.length != 0 && (
+          <View>
+          <V_Label>
+            <Label>Seus Produtos</Label>
+            <BarraSeparacao />
+          </V_Label>
+          <FlatList
+            data={listaProdutos}
+            renderItem={({ item }) => (
+              <View>
+                <CartaoProdutos dados={item} />
+                <ViewOpcoes>
+                  <BotaoDelete
+                    onPress={() => {
+                      setItem(item);
+                      setTipo('Produto');
+                      setModalConfirmacao(true);
+                    }}
+                  >
+                    <Icon style={{ fontSize: 16, color: '#fff' }} name="close" />
+                  </BotaoDelete>
+
+                  <BotaoEditar
+                    
+                  >
+               
+                  </BotaoEditar>
+
+                  <BotaoInteressado
+                    onPress={() => {
+                      navigation.navigate('InteressadosProduto', {
+                        usario: false,
+                        idProduto: item._id
+                      });
+                    }}
+                  >
+                    <Icon style={{ fontSize: 16, marginRight: 10, color: '#ffffff' }} name="list" />
+                    <LabelBotaoEditar>Ver interessados</LabelBotaoEditar>
+                  </BotaoInteressado>
+                </ViewOpcoes>
+              </View>
+            )}
+            keyExtractor={item => item._id}
+          />
+        </View>
+
+
         )}
       </ScrollView>
     </Container>

@@ -32,6 +32,7 @@ export default function DetalhesProduto({ navigation }) {
   }
 
   useEffect(() => {
+    console.log(produto)
     if (produto.imagem1 != '' && produto.imagem1 != null) {
       setContadorImagem(contadorImagem => contadorImagem + 1);
     }
@@ -89,7 +90,7 @@ export default function DetalhesProduto({ navigation }) {
       <LinhaUnica>
         <ItemUnico>
           <ViewIcone>
-            <Icon name="screwdriver" style={{ fontSize: 25, color: '#142850' }} />
+            <Icon name="wallet" style={{ fontSize: 25, color: '#142850' }} />
           </ViewIcone>
           <LabelItem>{produto.valor}</LabelItem>
         </ItemUnico>
@@ -102,7 +103,7 @@ export default function DetalhesProduto({ navigation }) {
       <LinhaUnica>
         <ItemUnicoLink>
           <ViewIcone>
-            <Icon name="phone-outline" style={{ fontSize: 25, color: '#142850' }} />
+            <Icon name="pencil" style={{ fontSize: 25, color: '#142850' }} />
           </ViewIcone>
 
           <LabelItem>{produto.telefone}</LabelItem>
@@ -116,7 +117,7 @@ export default function DetalhesProduto({ navigation }) {
           }}
         >
           <ViewIcone>
-            <Icon name="phone-outline" style={{ fontSize: 25, color: '#ffffff', textAlign: 'center' }} />
+            <Icon name="home" style={{ fontSize: 25, color: '#ffffff', textAlign: 'center' }} />
           </ViewIcone>
 
           <LabelBotao>Agenda Visita</LabelBotao>

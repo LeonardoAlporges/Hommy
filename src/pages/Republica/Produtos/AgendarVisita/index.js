@@ -58,7 +58,6 @@ export default function AgendarVisitaProduto({ navigation }) {
       hora: horaAgendamento
     };
 
-    console.log("TESTE")
     api
       .post(`/produto/agendamento`, agendamento)
       .then(response => {
