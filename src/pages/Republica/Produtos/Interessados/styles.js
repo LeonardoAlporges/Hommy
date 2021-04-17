@@ -109,7 +109,6 @@ export const LabelFinalizado = styled.Text`
 `;
 
 
-
 const style = StyleSheet.create({
    viewData2: {
     justifyContent: 'space-evenly',

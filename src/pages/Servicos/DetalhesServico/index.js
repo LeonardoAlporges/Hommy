@@ -1,44 +1,81 @@
-import React, { Component, useState, useEffect } from 'react';
-import { View, ScrollView, Image, Text, Linking } from 'react-native';
-import { Button } from 'native-base';
+import React, { useEffect, useState } from 'react';
+import { Linking, ScrollView, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { withNavigation } from 'react-navigation';
-import estilo from './styles';
+import { IndicatorViewPager, PagerDotIndicator } from 'rn-viewpager';
+import HeaderBack from '../../../components/CustomHeader';
 import {
-  Container,
-  ViewDoTitulo,
-  Titulo,
-  ViewDescricao,
-  Descricao,
   BarraSeparacao,
-  LinhaDupla,
-  ItemDuplo,
-  ViewIcone,
-  LabelItem,
+
+
+
+
+
+
+
+
+  BotaoContato, Descricao,
+
+
+
+
+
+
+
+
+
+
+
+
+  Imagem, ItemUnico,
+
+
+
+
+
+
+  ItemUnicoLink, LabelBotao, LabelItem,
   LinhaUnica,
-  ItemUnico,
-  ViewSubTitle,
-  SubTitle,
-  BotaoContato,
-  ViewBotao,
-  LabelBotao,
-  Imagem,
-  ItemUnicoLink,
-  ItemDuploLink
+
+
+  SubTitle, Titulo,
+
+
+
+
+
+
+
+
+
+
+
+
+  ViewBotao, ViewDescricao, ViewDoTitulo,
+
+
+
+
+
+
+  ViewIcone,
+
+
+
+  ViewSubTitle
 } from './styles';
 
-import { IndicatorViewPager, PagerDotIndicator } from 'rn-viewpager';
 
-import HeaderBack from '../../../components/CustomHeader';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function DetalhesServicos({ navigation }) {
   const [contadorImagem, setContadorImagem] = useState(0);
   const [servico, setServicos] = useState(navigation.state.params.dados);
 
-  function AbrirTelefone() {
-    Linking.openURL(`tel:${servico.telefone}`);
+  function irParaAgendamento() {
+    navigation.navigate('AgendarVisitaServico', {
+      dados: servico
+    });
   }
+
   function AbrirInstagram() {
     Linking.openURL(`http://instagram.com/_u/${servico.redeSocial}`);
   }
@@ -169,14 +206,14 @@ export default function DetalhesServicos({ navigation }) {
       <ViewBotao>
         <BotaoContato
           onPress={() => {
-            AbrirTelefone();
+            irParaAgendamento();
           }}
         >
           <ViewIcone>
-            <Icon name="phone-outline" style={{ fontSize: 25, color: '#ffffff', textAlign: 'center' }} />
+            <Icon name="home" style={{ fontSize: 25, color: '#ffffff', textAlign: 'center' }} />
           </ViewIcone>
 
-          <LabelBotao>Entrar em Contato</LabelBotao>
+          <LabelBotao>Agenda Visita</LabelBotao>
         </BotaoContato>
       </ViewBotao>
     </ScrollView>

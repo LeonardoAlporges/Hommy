@@ -27,12 +27,13 @@ import GerenciamentoDeRepublica from './pages/Republica/GerenciamentoRepublica';
 import AgendarVisitaProduto from './pages/Republica/Produtos/AgendarVisita';
 import CadastroProduto from './pages/Republica/Produtos/CadastroProdutos/CadastroProduto';
 import DetalhesProduto from './pages/Republica/Produtos/DetalhesProduto';
+import InteressadosProduto from './pages/Republica/Produtos/Interessados';
 import Republica from './pages/Republica/Republica';
 import AgendarVisitaServico from './pages/Servicos/AgendarVisita';
 import CadastroServico from './pages/Servicos/Cadastro';
 import DetalhesServicos from './pages/Servicos/DetalhesServico';
+import InteressadosServico from './pages/Servicos/Interessados';
 import Servicos from './pages/Servicos/Servicos';
-
 
 const Navegação = createStackNavigator(
   {
@@ -80,6 +81,8 @@ const Navegação = createStackNavigator(
     MenuLateral,
     AgendarVisitaProduto,
     AgendarVisitaServico,
+    InteressadosProduto,
+    InteressadosServico,
   },
   {
     initialRouteName: 'RenderApp',

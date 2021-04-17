@@ -39,7 +39,7 @@ export default function AgendarVisitaServico({ navigation }) {
   const [labelData, setLabelData] = useState('Selecionar Data');
   const [dataPicker, setDataPicker] = useState(false);
 
-  const [produtos, setDadosRepuublica] = useState(navigation.state.params.data);
+  const [servicos, setDadosRepuublica] = useState(navigation.state.params.dados);
   const [labeHoraAgendamento, setLabelHoraAgendamento] = useState('00:00');
   const [horaAgendamento, setHoraAgendamento] = useState();
   const [alertaFaltaDados, setAlertaFaltaDados] = useState(false);
@@ -52,18 +52,20 @@ export default function AgendarVisitaServico({ navigation }) {
       return 0;
     }
     const agendamento = {
+      idServico: servicos._id,
       email: email,
       data: dataAgendamento,
       hora: horaAgendamento
     };
 
     api
-      .put(`/agendamento/${dadosRepublica._id}`, agendamento)
+      .post(`/servicos/agendamento`, agendamento)
       .then(response => {
         setSucesso(true);
         setLoading(false);
       })
       .catch(error => {
+        console.log(error)
         setErro(true);
         setLoading(false);
       });
@@ -96,12 +98,12 @@ export default function AgendarVisitaServico({ navigation }) {
       <HeaderBack title="Agendar visita" onNavigation={() => navigation.goBack(null)} />
       {loading && <Loading />}
       <View style={{ width: '100%', height: 140, marginTop: 20 }}>
-        <CartaoServico dados={servico} />
+        <CartaoServico dados={servicos} />
       </View>
       <ViewDescricao>
         <TextoDescricao>
-          Escolha um dia e hórario para agendar uma visita do prestador. Lembrando que depois de sua visita aprovada o não
-          comparecimento de ambas partes ao local na hora marcada poderá trazer más avaliações para as parte que descomprirem o agendamento.
+          Escolha um dia e hórario para uma visita na república. Lembrando que depois de sua visita aprovada o não
+          comparecimento ao local na hora marcada poderá lhe trazer más avaliações.
         </TextoDescricao>
       </ViewDescricao>
 
@@ -177,7 +179,7 @@ export default function AgendarVisitaServico({ navigation }) {
           <CustomModal
             parametro="Custom"
             titulo="Visita agendada :)"
-            descricao="O prestador irá analisar o dia de seu agendamento em até 48 Hrs."
+            descricao="O dono do anuncio irá analisar o dia de seu agendamento em até 48 Hrs."
             botao="Confirmar"
             callback={() => {
               navigation.navigate('AgendamentoUser', {
@@ -205,7 +207,7 @@ export default function AgendarVisitaServico({ navigation }) {
         <ViewDetalhes>
           <CustomModal
             parametro="Erro"
-            descricao="Você já tem um agendamento cadastrado para esse prestador."
+            descricao="Você já tem um agendamento cadastrado para esse produto."
             callback={() => {
               setErro(false);
             }}

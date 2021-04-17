@@ -1,24 +1,26 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
-import { withNavigation } from 'react-navigation';
 import { useSelector } from 'react-redux';
-
 import ModalConfirmacao from '../../components/ModalConfirmacao';
-import style from './style';
+import style, {
+  AceiteIcon, Container,
 
-import {
-  Container,
-  ViewImagem,
   Imagem,
-  ViewNome,
+
   Nome,
-  ViewNota,
+
   Nota,
-  AceiteIcon,
-  ViewIcones,
-  RejeiteIcon
+
+
+  RejeiteIcon, ViewIcones, ViewImagem,
+
+  ViewNome,
+
+  ViewNota
 } from './style';
+
+
 
 export default function CartaoUser(props) {
   const [modalVisivel, setModalVisivel] = useState(false);
@@ -35,6 +37,14 @@ export default function CartaoUser(props) {
     props.retornoCarona(number, props.dados.email);
   }
 
+  function retornoProduto(number) {
+    props.retornoProduto(number, props.dados.email);
+  }
+
+  function retornoServico(number) {
+    props.retornoServico(number, props.dados.email);
+  }
+
   function mudarStatusInteressado(number) {
     if (number == 3) {
       setModalVisivel(false);
@@ -44,6 +54,12 @@ export default function CartaoUser(props) {
       props.callback();
     } else if (props.tipoRetorno == 'Carona') {
       retornoCarona(number);
+      props.callback();
+    } else if (props.tipoRetorno == 'Produto') {
+      retornoProduto(number);
+      props.callback();
+    } else if (props.tipoRetorno == 'Servico') {
+      retornoServico(number);
       props.callback();
     }
   }

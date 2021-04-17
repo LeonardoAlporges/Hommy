@@ -4,6 +4,7 @@ import { FlatList, ScrollView, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { withNavigation } from 'react-navigation';
 import CartaoEvento from '../../../../components/CartaoEvento';
+import EmptyState from '../../../../components/EmptyState';
 import api from '../../../../service/api';
 import Estilo from './style';
 
@@ -33,6 +34,13 @@ class Eventos extends Component {
   render() {
     return (
       <View style={Estilo.V_externa}>
+        {this.state.listaEvento == 0 &&
+        <EmptyState
+        titulo="Tudo tão vazio por aqui... "
+        mensagem="Parece que não há publicações até o momento. Mas não desanime, logo logo novos eventos surgirão. "
+      />
+      
+      }
         <ScrollView>
           <View style={Estilo.card}>
             <FlatList

@@ -5,11 +5,11 @@ import { View } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import { useSelector } from 'react-redux';
+import CustomModal from '../../../../components/Alert';
 import CartaoProdutos from '../../../../components/CartaoProdutos';
-import CustomModal from '../../../components/Alert';
-import HeaderBack from '../../../components/CustomHeader';
-import Loading from '../../../components/Loading';
-import api from '../../../service/api';
+import HeaderBack from '../../../../components/CustomHeader';
+import Loading from '../../../../components/Loading';
+import api from '../../../../service/api';
 import style, {
   Container,
   TextoAgendamento,
@@ -39,7 +39,7 @@ export default function AgendarVisitaProduto({ navigation }) {
   const [labelData, setLabelData] = useState('Selecionar Data');
   const [dataPicker, setDataPicker] = useState(false);
 
-  const [produtos, setDadosRepuublica] = useState(navigation.state.params.data);
+  const [produtos, setDadosRepuublica] = useState(navigation.state.params.dados);
   const [labeHoraAgendamento, setLabelHoraAgendamento] = useState('00:00');
   const [horaAgendamento, setHoraAgendamento] = useState();
   const [alertaFaltaDados, setAlertaFaltaDados] = useState(false);
@@ -52,18 +52,21 @@ export default function AgendarVisitaProduto({ navigation }) {
       return 0;
     }
     const agendamento = {
+      id: produtos._id,
       email: email,
       data: dataAgendamento,
       hora: horaAgendamento
     };
 
     api
-      .put(`/agendamento/${dadosRepublica._id}`, agendamento)
+      .post(`/produto/agendamento`, agendamento)
       .then(response => {
+        console.log(response)
         setSucesso(true);
         setLoading(false);
       })
       .catch(error => {
+        console.log(error)
         setErro(true);
         setLoading(false);
       });

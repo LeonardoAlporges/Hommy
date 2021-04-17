@@ -4,6 +4,7 @@ import { FlatList, ScrollView, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { withNavigation } from 'react-navigation';
 import CartaoServico from '../../../components/CartaoServico';
+import EmptyState from '../../../components/EmptyState';
 import api from '../../../service/api';
 import Estilo from './style';
 
@@ -34,6 +35,12 @@ class Servicos extends Component {
   render() {
     return (
       <View style={Estilo.V_externa}>
+        { this.state.listaServicos == 0 &&
+          <EmptyState
+            titulo="Tudo tão vazio por aqui... "
+            mensagem="Parece que não há publicações até o momento."
+          />
+        }
         <ScrollView>
           <View style={Estilo.card}>
             <FlatList

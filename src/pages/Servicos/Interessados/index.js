@@ -16,25 +16,9 @@ import style, {
   Barra,
   Confirmado,
   Container,
-
-
-
-
-
-
-
-
-
   Finalizado, Label,
   LabelConfirmacao,
   LabelData,
-
-
-
-
-
-
-
   LabelFinalizado, LabelReijeicao,
   Rejeitado,
   Subtitulo,
@@ -43,14 +27,13 @@ import style, {
   ViewLabel
 } from './styles';
 
+export default function InteressadosServico({ navigation }) {
 
-export default function Agendamentos({ navigation }) {
   const email = useSelector(state => state.user.email);
-
   const [listaAgendamento, setListaAgendamento] = useState([]);
   const [loading, setLoading] = useState(false);
   const [reload, setReload] = useState(false);
-  const [republicaID, setUsuario] = useState(navigation.state.params.idRepublica);
+  const [servicoID, setServicoID] = useState(navigation.state.params.idServico);
   const [erro, setErro] = useState(false);
   const [avaliar,setAvaliar] = useState(false);
   const [usuarioAvaliado,setUsuarioAvaliado] = useState('');
@@ -63,7 +46,7 @@ export default function Agendamentos({ navigation }) {
   function carregarAgendamentos() {
     setLoading(true);
     api
-      .get(`/confirmAgendamento/${email}`)
+      .get(`/servicos/agendamento/ofertante/${servicoID}`)
       .then(response => {
         setListaAgendamento(response.data);
       })
@@ -73,13 +56,15 @@ export default function Agendamentos({ navigation }) {
       .finally(setLoading(false));
   }
 
-  function confirmarAgendamento(user) {
+  function atualizarStatus(user,status) {
     const data = {
+      _id: servicoID,
+      userType : "ofertante",
       email: user,
-      status: 'Confirmado'
+      status: status
     };
     api
-      .put(`/confirmAgendamento/${republicaID}`, data)
+      .put(`/servicos/agendamento/atualizaStatus`, data)
       .then(response => {
         setReload(!reload);
       })
@@ -88,26 +73,17 @@ export default function Agendamentos({ navigation }) {
       });
   }
 
-  function rejeitarAgendamento(user) {
-    const data = {
-      email: user,
-      status: 'Rejeitado'
-    };
-    api
-      .put(`/confirmAgendamento/${republicaID}`, data)
-      .then(response => {
-        setReload(!reload);
-      })
-      .catch(error => {
-        setErro(true);
-      });
+  function abrirAvaliacao(usuario){
+    setAvaliar(true);
+    setUsuarioAvaliado(usuario);
   }
 
   function verificarTipoRequisicao(tipoSocilitacao, usuario) {
     if (tipoSocilitacao == 1) {
-      confirmarAgendamento(usuario);
+      console.log(tipoSocilitacao, usuario)
+      atualizarStatus(usuario,"Confirmado");
     } else if (tipoSocilitacao == 0) {
-      rejeitarAgendamento(usuario);
+      atualizarStatus(usuario,"Rejeitado");
     }
   }
 
@@ -118,13 +94,13 @@ export default function Agendamentos({ navigation }) {
       {listaAgendamento.length == 0 && !loading && (
         <EmptyState
           titulo="Sem Agendamentos"
-          mensagem="Ninguém agendou uma visita a sua república. Aguarde, logo aparecerá alguém para preencher esse vazio"
+          mensagem="Ninguém agendou uma visita para seu Servico. Aguarde, logo aparecerá alguém para preencher esse vazio"
         />
       )}
       {listaAgendamento.length != 0 && !loading && (
         <View>
           <View style={{ width: '100%', paddingHorizontal: 5, height: 40 }}>
-            <Subtitulo>Abaixo estão listadas as pessoas que solicitaram uma visita a sua república.</Subtitulo>
+            <Subtitulo>Abaixo estão listadas as pessoas que solicitaram uma visita para ver seu produto.</Subtitulo>
           </View>
           <ViewLabel>
             <Label>Interessados</Label>
@@ -137,30 +113,30 @@ export default function Agendamentos({ navigation }) {
         renderItem={({ item }) => (
           <ScrollView>
             <CartaoUser
-              status={item.status}
+              status={item.agenda.status}
               callback={() => setReload()}
-              retorno={(number, user) => verificarTipoRequisicao(number, user)}
+              retornoServico={(number, user) => verificarTipoRequisicao(number, user)}
               dados={item.user}
               dadosGerais={item}
-              tipoRetorno="Republica"
+              tipoRetorno="Servico"
             />
             <ViewData>
               <View style={style.viewData2}>
-                <LabelData>{moment(new Date(item.data)).format('DD/MM/YY')}</LabelData>
+                <LabelData>{moment(item.agenda.data).format('DD/MM/YY')}</LabelData>
                 <Text>As</Text>
-                <LabelData>{moment(new Date(item.hora)).format('hh:mm')}</LabelData>
+                <LabelData>{moment(item.agenda.hora).format('hh:mm')}</LabelData>
               </View>
-              {item.status == 'Análise' && (
+              {item.agenda.status == 'Análise' && (
                 <Analise>
                   <Label>Em análise</Label>
                 </Analise>
               )}
-              {item.status == 'Confirmado' && (
+              {item.agenda.status == 'Confirmado' && (
                 <Confirmado>
                   <LabelConfirmacao>Confirmada</LabelConfirmacao>
                 </Confirmado>
               )}
-              {item.status == 'Rejeitado' && (
+              {item.agenda.status == 'Rejeitado' && (
                 <Rejeitado>
                   <LabelReijeicao>Rejeitada</LabelReijeicao>
                 </Rejeitado>

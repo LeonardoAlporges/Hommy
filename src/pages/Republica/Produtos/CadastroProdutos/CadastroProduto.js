@@ -2,10 +2,10 @@ import { Formik } from 'formik';
 import { Button, Input, Item } from 'native-base';
 import React, { Fragment, useState } from 'react';
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import CurrencyInput from 'react-native-currency-input';
 import ImagePicker from 'react-native-image-picker';
 import TextInputMask from 'react-native-text-input-mask';
 import { NavigationActions, StackActions } from 'react-navigation';
-import CurrencyInput from 'react-native-currency-input';
 import { useSelector } from 'react-redux';
 import * as yup from 'yup';
 import CustomModal from '../../../../components/Alert';
@@ -98,7 +98,7 @@ export default function CadastroProduto({ navigation }) {
       telefone: values.contato,
       imagem1: linkimagem1,
       imagem2: linkimagem2,
-      imagem3: linkimagem1
+      imagem3: linkimagem3
     };
 
     if (imagem1 == null && imagem2 == null && imagem3 == null) {

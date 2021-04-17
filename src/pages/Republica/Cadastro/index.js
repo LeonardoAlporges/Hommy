@@ -44,6 +44,10 @@ export default function Cadastro({ navigation }) {
   const [linkimagem1, setLinkImagem1] = useState(null);
   const [linkimagem2, setLinkImagem2] = useState(null);
   const [linkimagem3, setLinkImagem3] = useState(null);
+  const [nomeImagem1, setNomeImagem1] = useState("");
+  const [nomeImagem2, setNomeImagem2] = useState("");
+  const [nomeImagem3, setNomeImagem3] = useState("");
+  
   const [usuarioLogado, setUsuarioLogado] = useState();
   const [aluguel, setAluguel] = useState();
   const [conta, setConta] = useState();
@@ -75,13 +79,20 @@ export default function Cadastro({ navigation }) {
   }, []);
 
   function preencherFoto(linkImagem) {
+    console.log(linkImagem,linkImagem.fileName)
     if (imagem1 == null) {
+      setNomeImagem1(linkImagem.fileName)
       setImagem1(linkImagem.uri);
     } else if (imagem2 == null) {
+      setNomeImagem2(linkImagem.fileName)
       setImagem2(linkImagem.uri);
     } else if (imagem3 == null) {
+      setNomeImagem3(linkImagem.fileName)
       setImagem3(linkImagem.uri);
     }
+    console.log("IMAGEM1",nomeImagem1)
+    console.log("IMAGEM2",nomeImagem2)
+    console.log("IMAGEM3",nomeImagem3)
     setContadorImagem(contadorImagem + 1);
   }
 
@@ -94,6 +105,7 @@ export default function Cadastro({ navigation }) {
         alert('Ocorreu algum erro: ', error);
       } else {
         preencherFoto(imagePickerResponse);
+        console.log("TETSTE")
         const referencia = uploadFileToFireBaseRepublica(imagePickerResponse);
         monitorFileUpload(referencia);
       }
@@ -116,15 +128,18 @@ export default function Cadastro({ navigation }) {
 
   function removerFoto(idFoto) {
     if (idFoto == 1) {
+      deleteFileRepublica()
       setLinkImagem1(null);
       setImagem1(null);
-      deleteFileRepublica()
+      
     } else if (idFoto == 2) {
       setLinkImagem2(null);
       setImagem2(null);
+      deleteFileRepublica( )
     } else if (idFoto == 3) {
       setLinkImagem3(null);
       setImagem3(null);
+      deleteFileRepublica( )
     }
     setContadorImagem(contadorImagem - 1);
   }
@@ -154,6 +169,9 @@ export default function Cadastro({ navigation }) {
       imagem1: linkimagem1,
       imagem2: linkimagem2,
       imagem3: linkimagem3,
+      nomeImagem1:nomeImagem1,
+      nomeImagem2:nomeImagem2,
+      nomeImagem3:nomeImagem3,
       nomeRepublica: values.nome,
       valorAluguel:aluguel,
       bairro: values.bairro,

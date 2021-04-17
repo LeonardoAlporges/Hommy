@@ -6,6 +6,8 @@ import { useSelector } from 'react-redux';
 import CustomModal from '../../../components/Alert';
 import Cartao from '../../../components/Cartao';
 import CartaoCarona from '../../../components/CartaoCarona';
+import CartaoProdutos from '../../../components/CartaoProdutos';
+import { CartaoServico } from '../../../components/CartaoServico';
 import HeaderBack from '../../../components/CustomHeader';
 import EmptyState from '../../../components/EmptyState';
 import Loading from '../../../components/Loading';
@@ -26,6 +28,8 @@ import {
 function Anuncios({ navigation }) {
   const [listaRepublicas, setListaRepublicas] = useState([]);
   const [listaCaronas, setListaCaronas] = useState([]);
+  const [listaProdutos,setListaProdutos] = useState([]);
+  const [listaServicos,setListaServicos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [erro, setErro] = useState(false);
   const [reloading, setReloading] = useState(false);
@@ -63,6 +67,31 @@ function Anuncios({ navigation }) {
           setReloading(false);
           setLoading(false);
         });
+    } else if (tipo == 'Produto' && valor == 1) {
+      api
+        .delete(`/produto/${item._id}`)
+        .then(responseJson => {
+          setListaProdutos([]);
+          setLoading(false);
+          getlist();
+        })
+        .catch(error => {
+          setReloading(false);
+          setLoading(false);
+        });
+    }
+    else if (tipo == 'Servico' && valor == 1) {
+      api
+        .delete(`/servico/${item._id}`)
+        .then(responseJson => {
+          setListaServicos([]);
+          setLoading(false);
+          getlist();
+        })
+        .catch(error => {
+          setReloading(false);
+          setLoading(false);
+        });
     }
   }
 
@@ -77,7 +106,7 @@ function Anuncios({ navigation }) {
         setLoading(false);
       })
       .finally(() => {
-        setLoading(false), setAnuncio(anuncio++)
+        setLoading(false), setAnuncio(anuncio++),console.log("TESTE1")
       });
     api
       .get(`/userRepublica/${email}`)
@@ -88,7 +117,29 @@ function Anuncios({ navigation }) {
         setLoading(false);
       })
       .finally( () => {
-        setLoading(false), setAnuncio(anuncio++)
+        setLoading(false), setAnuncio(anuncio++),console.log("TESTE2")
+      });
+    api
+      .get(`/userProduto/${email}`)
+      .then(responseJson => {
+        setListaProdutos(responseJson.data);
+      })
+      .catch(error => {
+        setLoading(false);
+      })
+      .finally( () => {
+        setLoading(false), setAnuncio(anuncio++),console.log("TESTE3")
+      });
+      api
+      .get(`/userServico/${email}`)
+      .then(responseJson => {
+        setListaServicos(responseJson.data);
+      })
+      .catch(error => {
+        setLoading(false);
+      })
+      .finally( () => {
+        setLoading(false), setAnuncio(anuncio++),console.log("TESTE4")
       });
   }
 
@@ -110,7 +161,7 @@ function Anuncios({ navigation }) {
     <Container>
       <HeaderBack title="Meus anúncios" onNavigation={() => navigation.navigate('TabsHeader', { menuAberto: true })} />
       {loading && <Loading />}
-      {listaCaronas.length == 0 && listaRepublicas.length == 0 && !loading && (anuncio == 2) && (
+      {listaCaronas.length == 0 && listaRepublicas.length == 0 && listaServicos.length == 0 && !loading && (
         <EmptyState
           titulo="Sem anúncios"
           mensagem="Você ainda não anunciou nada. Nos diga quando houver vagas em sua república ou ofereça uma carona."
@@ -236,7 +287,87 @@ function Anuncios({ navigation }) {
               )}
               keyExtractor={item => item._id}
             />
-          </View>
+          </View> 
+        )}
+        {listaProdutos.length != 0 && (
+          <View>
+          <V_Label>
+            <Label>Seus Produtos</Label>
+            <BarraSeparacao />
+          </V_Label>
+          <FlatList
+            data={listaProdutos}
+            renderItem={({ item }) => (
+              <View>
+                <CartaoProdutos dados={item} />
+                <ViewOpcoes>
+                  <BotaoDelete
+                    onPress={() => {
+                      setItem(item);
+                      setTipo('Produto');
+                      setModalConfirmacao(true);
+                    }}
+                  >
+                    <Icon style={{ fontSize: 16, color: '#fff' }} name="close" />
+                  </BotaoDelete>
+
+                  <BotaoInteressado
+                    onPress={() => {
+                      navigation.navigate('InteressadosProduto', {
+                        usario: false,
+                        idProduto: item._id
+                      });
+                    }}
+                  >
+                    <Icon style={{ fontSize: 16, marginRight: 10, color: '#ffffff' }} name="list" />
+                    <LabelBotaoEditar>Ver interessados</LabelBotaoEditar>
+                  </BotaoInteressado>
+                </ViewOpcoes>
+              </View>
+            )}
+            keyExtractor={item => item._id}
+          />
+        </View>
+        )}
+        {listaServicos.length != 0 && (
+          <View>
+          <V_Label>
+            <Label>Seus Serviços</Label>
+            <BarraSeparacao />
+          </V_Label>
+          <FlatList
+            data={listaServicos}
+            renderItem={({ item }) => (
+              <View>
+                <CartaoServico dados={item} />
+                <ViewOpcoes>
+                  <BotaoDelete
+                    onPress={() => {
+                      setItem(item);
+                      setTipo('Servico');
+                      setModalConfirmacao(true);
+                    }}
+                  >
+                    <Icon style={{ fontSize: 16, color: '#fff' }} name="close" />
+                  </BotaoDelete>
+
+                  <BotaoInteressado
+                    onPress={() => {
+                      navigation.navigate('InteressadosServico', {
+                        usario: false,
+                        idServico: item._id
+                      });
+                    }}
+                  >
+                    <Icon style={{ fontSize: 16, marginRight: 10, color: '#ffffff' }} name="list" />
+                    <LabelBotaoEditar>Ver interessados</LabelBotaoEditar>
+                  </BotaoInteressado>
+                </ViewOpcoes>
+              </View>
+            )}
+            keyExtractor={item => item._id}
+          />
+        </View>
         )}
       </ScrollView>
     </Container>

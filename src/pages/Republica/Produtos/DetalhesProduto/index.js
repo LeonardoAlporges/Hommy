@@ -1,43 +1,30 @@
-import React, { Component, useState, useEffect } from 'react';
-import { View, ScrollView, Image, Text, Linking } from 'react-native';
-import { Button } from 'native-base';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { withNavigation } from 'react-navigation';
-import estilo from './styles';
+import { IndicatorViewPager, PagerDotIndicator } from 'rn-viewpager';
+import HeaderBack from '../../../../components/CustomHeader';
 import {
-  Container,
-  ViewDoTitulo,
-  Titulo,
-  ViewDescricao,
-  Descricao,
   BarraSeparacao,
-  LinhaDupla,
-  ItemDuplo,
-  ViewIcone,
-  LabelItem,
+  BotaoContato, Descricao,
+  Imagem, ItemUnico,
+  ItemUnicoLink, LabelBotao, LabelItem,
   LinhaUnica,
-  ItemUnico,
-  ViewSubTitle,
-  SubTitle,
-  BotaoContato,
-  ViewBotao,
-  LabelBotao,
-  Imagem,
-  ItemUnicoLink,
-  ItemDuploLink
+  SubTitle, Titulo,
+  ViewBotao, ViewDescricao, ViewDoTitulo,
+  ViewIcone,
+  ViewSubTitle
 } from './styles';
 
-import { IndicatorViewPager, PagerDotIndicator } from 'rn-viewpager';
 
-import HeaderBack from '../../../../components/CustomHeader';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function DetalhesProduto({ navigation }) {
   const [contadorImagem, setContadorImagem] = useState(0);
   const [produto, setServicos] = useState(navigation.state.params.dados);
 
-  function AbrirTelefone() {
-    Linking.openURL(`tel:${produto.telefone}`);
+  function irParaAgendamento() {
+    navigation.navigate('AgendarVisitaProduto', {
+      dados: produto
+    });
   }
 
   function navegar() {
@@ -45,6 +32,7 @@ export default function DetalhesProduto({ navigation }) {
   }
 
   useEffect(() => {
+    console.log(produto)
     if (produto.imagem1 != '' && produto.imagem1 != null) {
       setContadorImagem(contadorImagem => contadorImagem + 1);
     }
@@ -102,7 +90,7 @@ export default function DetalhesProduto({ navigation }) {
       <LinhaUnica>
         <ItemUnico>
           <ViewIcone>
-            <Icon name="screwdriver" style={{ fontSize: 25, color: '#142850' }} />
+            <Icon name="wallet" style={{ fontSize: 25, color: '#142850' }} />
           </ViewIcone>
           <LabelItem>{produto.valor}</LabelItem>
         </ItemUnico>
@@ -115,7 +103,7 @@ export default function DetalhesProduto({ navigation }) {
       <LinhaUnica>
         <ItemUnicoLink>
           <ViewIcone>
-            <Icon name="phone-outline" style={{ fontSize: 25, color: '#142850' }} />
+            <Icon name="pencil" style={{ fontSize: 25, color: '#142850' }} />
           </ViewIcone>
 
           <LabelItem>{produto.telefone}</LabelItem>
@@ -125,14 +113,14 @@ export default function DetalhesProduto({ navigation }) {
       <ViewBotao>
         <BotaoContato
           onPress={() => {
-            AbrirTelefone();
+            irParaAgendamento();
           }}
         >
           <ViewIcone>
-            <Icon name="phone-outline" style={{ fontSize: 25, color: '#ffffff', textAlign: 'center' }} />
+            <Icon name="home" style={{ fontSize: 25, color: '#ffffff', textAlign: 'center' }} />
           </ViewIcone>
 
-          <LabelBotao>Entrar em Contato</LabelBotao>
+          <LabelBotao>Agenda Visita</LabelBotao>
         </BotaoContato>
       </ViewBotao>
     </ScrollView>
