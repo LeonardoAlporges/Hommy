@@ -7,7 +7,10 @@ import EmptyState from '../../../components/EmptyState';
 import Loading from '../../../components/Loading';
 import ModalAvaliacao from '../../../components/ModalAvaliacao';
 import api from '../../../service/api';
-import { BarraSeparacao, BotaoAnalise, BotaoConfirmado, BotaoRejeitado, Container, Label, LabelAnalise, LabelConfirmado, LabelRejeitado, Subtitulo, V_Label, V_StatusInteresse, V_Subtitulo } from './styles';
+import {
+  BarraSeparacao, BotaoAnalise, BotaoConfirmado, BotaoRejeitado, Container, Finalizado, Label, LabelAnalise, LabelConfirmado,
+  LabelFinalizado, LabelRejeitado, Subtitulo, V_Label, V_StatusInteresse, V_Subtitulo
+} from './styles';
 
 
 

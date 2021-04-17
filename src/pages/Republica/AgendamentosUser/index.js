@@ -19,10 +19,15 @@ import style, {
   Barra,
   Confirmado,
   Container,
-  Label,
+
+
+
+
+  Finalizado, Label,
   LabelConfirmacao,
   LabelData,
   LabelFinalizado,
+
   LabelReijeicao,
   Rejeitado,
   Subtitulo,

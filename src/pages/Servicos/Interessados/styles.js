@@ -92,6 +92,23 @@ color: #FFFFFF;
 font-weight: bold;
 `;
 
+export const Finalizado = styled.TouchableOpacity`
+  width: 30%;
+  min-height:30;
+  border-radius: 10;
+  background-color: green;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const LabelFinalizado = styled.Text`
+  font-size: 16;
+  font-family: WorkSans;
+  color: #ffffff;
+  font-weight: bold;
+`;
+
+
 
 const style = StyleSheet.create({
    viewData2: {
