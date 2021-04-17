@@ -286,12 +286,6 @@ function Anuncios({ navigation }) {
                     <Icon style={{ fontSize: 16, color: '#fff' }} name="close" />
                   </BotaoDelete>
 
-                  <BotaoEditar
-                    
-                  >
-               
-                  </BotaoEditar>
-
                   <BotaoInteressado
                     onPress={() => {
                       navigation.navigate('InteressadosProduto', {

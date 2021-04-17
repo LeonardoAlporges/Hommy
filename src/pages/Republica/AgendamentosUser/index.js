@@ -150,7 +150,7 @@ export default function AgendamentoUser({ navigation }) {
         <Label>Republicas</Label>
         <Barra />
       </ViewLabel>
-
+        {listaAgendamento.length != 0 &&
       <FlatList
         data={listaAgendamento}
         renderItem={({ item }) => (
@@ -216,6 +216,7 @@ export default function AgendamentoUser({ navigation }) {
         )}
         keyExtractor={item => item._id}
       />
+                    }
       {/*---------------- Agendamentos Produtos ------------------------*/}
       <ViewLabel>
         <Label>Protutos</Label>
@@ -226,28 +227,28 @@ export default function AgendamentoUser({ navigation }) {
         data={listaAgendamentoProduto}
         renderItem={({ item }) => (
           <View style={{ flex: 1 }}>
-            <CartaoProdutos dados={item} />
+            <CartaoProdutos dados={item.produto} />
             <ViewData>
               {item.status == 'Análise' && (
                 <Analise>
-                  <LabelData>{item.status}</LabelData>
+                  <LabelData>{item.agenda.status}</LabelData>
                 </Analise>
               )}
               {item.status == 'Confirmado' && (
                 <Confirmado>
-                  <LabelConfirmacao>{item.status}</LabelConfirmacao>
+                  <LabelConfirmacao>{item.agenda.status}</LabelConfirmacao>
                 </Confirmado>
               )}
               {item.status == 'Rejeitado' && (
                 <Rejeitado>
-                  <LabelReijeicao>{item.status}</LabelReijeicao>
+                  <LabelReijeicao>{item.agenda.status}</LabelReijeicao>
                 </Rejeitado>
               )}
 
               <View style={style.viewData2}>
-                <LabelData>{moment(new Date(item.data)).format('DD/MM/YY')}</LabelData>
+                <LabelData>{moment(new Date(item.agenda.data)).format('DD/MM/YY')}</LabelData>
                 <Text>As</Text>
-                <LabelData>{moment(new Date(item.hora)).format('hh:mm')}</LabelData>
+                <LabelData>{moment(new Date(item.agenda.hora)).format('hh:mm')}</LabelData>
               </View>
 
               <TouchableOpacity
@@ -262,8 +263,8 @@ export default function AgendamentoUser({ navigation }) {
             </ViewData>
           </View>
         )}
-        keyExtractor={item => item._id}
-      /> 
+        keyExtractor={item => item.produto._id}
+      />  
 
       {/*---------------- Agendamentos Serviço ------------------------*/}
       <ViewLabel>

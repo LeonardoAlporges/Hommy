@@ -147,7 +147,7 @@ export default function Agendamentos({ navigation }) {
               )}
               {item.status == 'Finalizado' && (
                 <Confirmado>
-                  <LabelConfirmacao>Avaliar Republica</LabelConfirmacao>
+                  <LabelConfirmacao>Avaliar</LabelConfirmacao>
                 </Confirmado>
               )}
             </ViewData>

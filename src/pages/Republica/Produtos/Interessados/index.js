@@ -29,8 +29,6 @@ import style, {
 export default function InteressadosProduto({ navigation }) {
 
   const email = useSelector(state => state.user.email);
-
-
   const [listaAgendamento, setListaAgendamento] = useState([]);
   const [loading, setLoading] = useState(false);
   const [reload, setReload] = useState(false);
@@ -45,8 +43,9 @@ export default function InteressadosProduto({ navigation }) {
   function carregarAgendamentos() {
     setLoading(true);
     api
-      .get(`/produto/agendamento/ofertante`,{userEmail: email})
+      .get(`/produto/agendamento/ofertante/${produtoID}`)
       .then(response => {
+        console.log(response.data)
         setListaAgendamento(response.data);
       })
       .catch(error => {
@@ -55,41 +54,29 @@ export default function InteressadosProduto({ navigation }) {
       .finally(setLoading(false));
   }
 
-  // function confirmarAgendamento(user) {
-  //   const data = {
-  //     email: user,
-  //     status: 'Confirmado'
-  //   };
-  //   api
-  //     .put(`/confirmAgendamento/${republicaID}`, data)
-  //     .then(response => {
-  //       setReload(!reload);
-  //     })
-  //     .catch(error => {
-  //       setErro(true);
-  //     });
-  // }
-
-  // function rejeitarAgendamento(user) {
-  //   const data = {
-  //     email: user,
-  //     status: 'Rejeitado'
-  //   };
-  //   api
-  //     .put(`/confirmAgendamento/${republicaID}`, data)
-  //     .then(response => {
-  //       setReload(!reload);
-  //     })
-  //     .catch(error => {
-  //       setErro(true);
-  //     });
-  // }
+  function atualizarStatus(user,status) {
+    const data = {
+      _id: produtoID,
+      userType : "ofertante",
+      email: user,
+      status: status
+    };
+    api
+      .put(`/produto/agendamento/atualizaStatus`, data)
+      .then(response => {
+        setReload(!reload);
+      })
+      .catch(error => {
+        setErro(true);
+      });
+  }
 
   function verificarTipoRequisicao(tipoSocilitacao, usuario) {
     if (tipoSocilitacao == 1) {
-      confirmarAgendamento(usuario);
+      console.log(tipoSocilitacao, usuario)
+      atualizarStatus(usuario,"Confirmado");
     } else if (tipoSocilitacao == 0) {
-      rejeitarAgendamento(usuario);
+      atualizarStatus(usuario,"Rejeitado");
     }
   }
 
@@ -119,35 +106,35 @@ export default function InteressadosProduto({ navigation }) {
         renderItem={({ item }) => (
           <ScrollView>
             <CartaoUser
-              status={item.status}
+              status={item.agenda.status}
               callback={() => setReload()}
-              retorno={(number, user) => verificarTipoRequisicao(number, user)}
+              retornoProduto={(number, user) => verificarTipoRequisicao(number, user)}
               dados={item.user}
               dadosGerais={item}
               tipoRetorno="Produto"
             />
             <ViewData>
               <View style={style.viewData2}>
-                <LabelData>{moment(new Date(item.data)).format('DD/MM/YY')}</LabelData>
+                <LabelData>{moment(item.agenda.data).format('DD/MM/YY')}</LabelData>
                 <Text>As</Text>
-                <LabelData>{moment(new Date(item.hora)).format('hh:mm')}</LabelData>
+                <LabelData>{moment(item.agenda.hora).format('hh:mm')}</LabelData>
               </View>
-              {item.status == 'Análise' && (
+              {item.agenda.status == 'Análise' && (
                 <Analise>
                   <Label>Em análise</Label>
                 </Analise>
               )}
-              {item.status == 'Confirmado' && (
+              {item.agenda.status == 'Confirmado' && (
                 <Confirmado>
                   <LabelConfirmacao>Confirmada</LabelConfirmacao>
                 </Confirmado>
               )}
-              {item.status == 'Rejeitado' && (
+              {item.agenda.status == 'Rejeitado' && (
                 <Rejeitado>
                   <LabelReijeicao>Rejeitada</LabelReijeicao>
                 </Rejeitado>
               )}
-              {item.status == 'Finalizado' && (
+              {item.agenda.status == 'Finalizado' && (
                 <Confirmado>
                   <LabelConfirmacao>Avaliar Vendedor</LabelConfirmacao>
                 </Confirmado>
