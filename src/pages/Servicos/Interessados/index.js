@@ -4,13 +4,13 @@ import React, { useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { useSelector } from 'react-redux';
-import CustomModal from '../../../../components/Alert';
-import CartaoUser from '../../../../components/CartaoUser';
-import HeaderBack from '../../../../components/CustomHeader';
-import EmptyState from '../../../../components/EmptyState';
-import Loading from '../../../../components/Loading';
-import ModalAvaliacao from '../../../../components/ModalAvaliacao';
-import api from '../../../../service/api';
+import CustomModal from '../../../components/Alert';
+import CartaoUser from '../../../components/CartaoUser';
+import HeaderBack from '../../../components/CustomHeader';
+import EmptyState from '../../../components/EmptyState';
+import Loading from '../../../components/Loading';
+import ModalAvaliacao from '../../../components/ModalAvaliacao';
+import api from '../../../service/api';
 import style, {
   Analise,
   Barra,
@@ -27,34 +27,27 @@ import style, {
   ViewLabel
 } from './styles';
 
-
-export default function InteressadosProduto({ navigation }) {
+export default function InteressadosServico({ navigation }) {
 
   const email = useSelector(state => state.user.email);
   const [listaAgendamento, setListaAgendamento] = useState([]);
   const [loading, setLoading] = useState(false);
   const [reload, setReload] = useState(false);
-  const [produtoID, setProdutoID] = useState(navigation.state.params.idProduto);
+  const [servicoID, setServicoID] = useState(navigation.state.params.idServico);
   const [erro, setErro] = useState(false);
   const [avaliar,setAvaliar] = useState(false);
   const [usuarioAvaliado,setUsuarioAvaliado] = useState('');
-  
+
   useEffect(() => {
     setListaAgendamento([]);
     carregarAgendamentos();
   }, [reload]);
-  
-  function abrirAvaliacao(usuario){
-    setAvaliar(true);
-    setUsuarioAvaliado(usuario);
-  }
 
   function carregarAgendamentos() {
     setLoading(true);
     api
-      .get(`/produto/agendamento/ofertante/${produtoID}`)
+      .get(`/servicos/agendamento/ofertante/${servicoID}`)
       .then(response => {
-        console.log(response.data)
         setListaAgendamento(response.data);
       })
       .catch(error => {
@@ -65,19 +58,24 @@ export default function InteressadosProduto({ navigation }) {
 
   function atualizarStatus(user,status) {
     const data = {
-      _id: produtoID,
+      _id: servicoID,
       userType : "ofertante",
       email: user,
       status: status
     };
     api
-      .put(`/produto/agendamento/atualizaStatus`, data)
+      .put(`/servicos/agendamento/atualizaStatus`, data)
       .then(response => {
         setReload(!reload);
       })
       .catch(error => {
         setErro(true);
       });
+  }
+
+  function abrirAvaliacao(usuario){
+    setAvaliar(true);
+    setUsuarioAvaliado(usuario);
   }
 
   function verificarTipoRequisicao(tipoSocilitacao, usuario) {
@@ -96,7 +94,7 @@ export default function InteressadosProduto({ navigation }) {
       {listaAgendamento.length == 0 && !loading && (
         <EmptyState
           titulo="Sem Agendamentos"
-          mensagem="Ninguém agendou uma visita para seu produto. Aguarde, logo aparecerá alguém para preencher esse vazio"
+          mensagem="Ninguém agendou uma visita para seu Servico. Aguarde, logo aparecerá alguém para preencher esse vazio"
         />
       )}
       {listaAgendamento.length != 0 && !loading && (
@@ -117,10 +115,10 @@ export default function InteressadosProduto({ navigation }) {
             <CartaoUser
               status={item.agenda.status}
               callback={() => setReload()}
-              retornoProduto={(number, user) => verificarTipoRequisicao(number, user)}
+              retornoServico={(number, user) => verificarTipoRequisicao(number, user)}
               dados={item.user}
               dadosGerais={item}
-              tipoRetorno="Produto"
+              tipoRetorno="Servico"
             />
             <ViewData>
               <View style={style.viewData2}>

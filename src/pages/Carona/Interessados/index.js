@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { View, FlatList, ScrollView } from 'react-native';
-
-
-import api from '../../../service/api';
+import React, { useEffect, useState } from 'react';
+import { FlatList, ScrollView, View } from 'react-native';
+import CustomModal from '../../../components/Alert';
 import CartaoUser from '../../../components/CartaoUser';
 import HeaderBack from '../../../components/CustomHeader';
 import EmptyState from '../../../components/EmptyState';
 import Loading from '../../../components/Loading';
-import CustomModal from '../../../components/Alert';
+import ModalAvaliacao from '../../../components/ModalAvaliacao';
+import api from '../../../service/api';
+import { BarraSeparacao, BotaoAnalise, BotaoConfirmado, BotaoRejeitado, Container, Label, LabelAnalise, LabelConfirmado, LabelRejeitado, Subtitulo, V_Label, V_StatusInteresse, V_Subtitulo } from './styles';
 
-import {Container,V_Subtitulo,Subtitulo,V_Label,Label,BarraSeparacao,V_StatusInteresse,BotaoAnalise,BotaoRejeitado,BotaoConfirmado,LabelAnalise,LabelConfirmado,LabelRejeitado} from './styles';
+
+
 
 export default function Interessados({ navigation }) {
 
@@ -19,6 +20,8 @@ export default function Interessados({ navigation }) {
   const [usuarios, setUsuarios] = useState([]);
   const [reload, setReload] = useState();
   const [idCarona, setIdCarona] = useState(navigation.state.params.idCarona);
+  const [avaliar,setAvaliar] = useState(false);
+  const [usuarioAvaliado,setUsuarioAvaliado] = useState('');
 
   useEffect(() => {
     setUsuarios([]);
@@ -46,6 +49,11 @@ export default function Interessados({ navigation }) {
     } else if (number === 0) {
       recusarInteressado(user);
     }
+  }
+
+  function abrirAvaliacao(usuario){
+    setAvaliar(true);
+    setUsuarioAvaliado(usuario);
   }
 
   function recusarInteressado(user) {
@@ -136,6 +144,12 @@ export default function Interessados({ navigation }) {
                       <LabelRejeitado>Rejeitada </LabelRejeitado>
                     </BotaoRejeitado>
                   )}
+                  {item.status == 'Finalizado' && (
+                    <Finalizado>
+                      <LabelFinalizado onPress={()=>{abrirAvaliacao(item.user.email)}}>Avaliar Anunciante</LabelFinalizado>
+                    </Finalizado>
+                  )}
+                  
                 </V_StatusInteresse>
               </View>
             )}
@@ -159,6 +173,9 @@ export default function Interessados({ navigation }) {
             setErroVaga(false);
           }}
         />
+      )}
+        {avaliar && (
+        <ModalAvaliacao usuario={usuarioAvaliado}></ModalAvaliacao>
       )}
     </Container>
   );

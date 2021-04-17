@@ -20,7 +20,7 @@ export const Subtitulo = styled.Text`
 `;
 
 export const ViewData = styled.View`
-  margin-top: 0;
+  margin-top:120;
   flex-direction: row;
   width: 100%;
   justify-content: space-evenly;
@@ -86,6 +86,22 @@ export const Rejeitado = styled.View`
   background-color: red;
   justify-content: center;
   align-items: center;
+`;
+
+export const Finalizado = styled.TouchableOpacity`
+  width: 30%;
+  min-height:30;
+  border-radius: 10;
+  background-color: green;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const LabelFinalizado = styled.Text`
+  font-size: 16;
+  font-family: WorkSans;
+  color: #ffffff;
+  font-weight: bold;
 `;
 
 export const LabelReijeicao = styled.Text`

@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { Modal, View } from 'react-native';
+import api from '../../service/api';
 import Estilos, { Avaliacao, Avalie, Botao, Container, Icones, LabelBotao, Start, TipoAvaliacao, Toque } from './styles';
-
 
 
 export default function ModalAvaliacao(props) { 
   return (
     <View>
-      {props.tipo == 'Republica' && < ModalUsuario dados={props} />}
+       <ModalUsuario user={props.usuario} />
     </View>
   );
 }
 
-export function ModalUsuario() {
+export function ModalUsuario(props) {
 
   const [n1, setN1] = useState(false);
   const [n2, setN2] = useState(false);
@@ -56,14 +56,14 @@ export function ModalUsuario() {
     }
   } 
 
-  // function avaliar() {
-  //   api
-  //   .put(`/userNota/${props.email}`, { nota: nota })
-  //   .then(responseJson => { })
-  //   .catch(error => { });
+  function avaliar() {
+    api
+    .put(`/userNota/${props.usuario}`, { nota: nota })
+    .then(responseJson => { })
+    .catch(error => { });
   
-  //   setModalVisivel(false),
-  // } 
+    setModalVisivel(false)
+  } 
 
 
   return (

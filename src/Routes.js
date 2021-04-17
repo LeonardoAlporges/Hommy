@@ -32,6 +32,7 @@ import Republica from './pages/Republica/Republica';
 import AgendarVisitaServico from './pages/Servicos/AgendarVisita';
 import CadastroServico from './pages/Servicos/Cadastro';
 import DetalhesServicos from './pages/Servicos/DetalhesServico';
+import InteressadosServico from './pages/Servicos/Interessados';
 import Servicos from './pages/Servicos/Servicos';
 
 const Navegação = createStackNavigator(
@@ -81,6 +82,7 @@ const Navegação = createStackNavigator(
     AgendarVisitaProduto,
     AgendarVisitaServico,
     InteressadosProduto,
+    InteressadosServico,
   },
   {
     initialRouteName: 'RenderApp',

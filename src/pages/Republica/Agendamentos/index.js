@@ -9,6 +9,7 @@ import CartaoUser from '../../../components/CartaoUser';
 import HeaderBack from '../../../components/CustomHeader';
 import EmptyState from '../../../components/EmptyState';
 import Loading from '../../../components/Loading';
+import ModalAvaliacao from '../../../components/ModalAvaliacao';
 import api from '../../../service/api';
 import style, {
   Analise,
@@ -26,6 +27,7 @@ import style, {
   ViewLabel
 } from './styles';
 
+
 export default function Agendamentos({ navigation }) {
   const email = useSelector(state => state.user.email);
 
@@ -34,6 +36,8 @@ export default function Agendamentos({ navigation }) {
   const [reload, setReload] = useState(false);
   const [republicaID, setUsuario] = useState(navigation.state.params.idRepublica);
   const [erro, setErro] = useState(false);
+  const [avaliar,setAvaliar] = useState(false);
+  const [usuarioAvaliado,setUsuarioAvaliado] = useState('');
 
   useEffect(() => {
     setListaAgendamento([]);
@@ -146,9 +150,9 @@ export default function Agendamentos({ navigation }) {
                 </Rejeitado>
               )}
               {item.status == 'Finalizado' && (
-                <Confirmado>
-                  <LabelConfirmacao>Avaliar</LabelConfirmacao>
-                </Confirmado>
+                <Finalizado>
+                  <LabelFinalizado onPress={()=>{abrirAvaliacao(item.user.email)}}>Avaliar Anunciante</LabelFinalizado>
+                </Finalizado>
               )}
             </ViewData>
           </ScrollView>
@@ -164,6 +168,9 @@ export default function Agendamentos({ navigation }) {
             }}
           />
         </ViewDetalhes>
+      )}
+       {avaliar && (
+        <ModalAvaliacao usuario={usuarioAvaliado}></ModalAvaliacao>
       )}
     </Container>
   );

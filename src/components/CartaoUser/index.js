@@ -41,6 +41,10 @@ export default function CartaoUser(props) {
     props.retornoProduto(number, props.dados.email);
   }
 
+  function retornoServico(number) {
+    props.retornoServico(number, props.dados.email);
+  }
+
   function mudarStatusInteressado(number) {
     if (number == 3) {
       setModalVisivel(false);
@@ -53,6 +57,9 @@ export default function CartaoUser(props) {
       props.callback();
     } else if (props.tipoRetorno == 'Produto') {
       retornoProduto(number);
+      props.callback();
+    } else if (props.tipoRetorno == 'Servico') {
+      retornoServico(number);
       props.callback();
     }
   }
