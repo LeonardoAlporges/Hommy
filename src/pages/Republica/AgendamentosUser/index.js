@@ -48,8 +48,8 @@ export default function AgendamentoUser({ navigation }) {
   const [produtoID, setProdutoID] = useState(null);
   const [servicoID, setServicoID] = useState(null);
   const [reload, setReload] = useState();
-  const [avaliar,setAvaliar] = useState(false);
-  const [usuarioAvaliado,setUsuarioAvaliado] = useState('');
+  const [avaliar, setAvaliar] = useState(false);
+  const [usuarioAvaliado, setUsuarioAvaliado] = useState('');
 
   useEffect(() => {
     carregarMeusAgendamentos();
@@ -59,11 +59,12 @@ export default function AgendamentoUser({ navigation }) {
     api
       .get(`/agendamento/${email}`)
       .then(response => {
+        console.log(response.data)
         setListaAgendamendo(response.data);
         setLoading(false);
       })
       .catch(error => {
-        setLoading(false); 
+        setLoading(false);
         setErro(true);
       });
 
@@ -90,8 +91,8 @@ export default function AgendamentoUser({ navigation }) {
         setErro(true);
       });
   }
-  
-  
+
+
   function removerMeuAgendamento(valorRetorno, idRepublica) {
     if (valorRetorno == 3) {
       return null;
@@ -143,14 +144,15 @@ export default function AgendamentoUser({ navigation }) {
       });
   }
 
-  function abrirAvaliacao(usuario){
+  function abrirAvaliacao(usuario) {
     setAvaliar(true);
+    console.log("TESTE",usuario);
     setUsuarioAvaliado(usuario);
   }
 
   return (
     <Container>
-      <HeaderBack title="Meus agendamentos" onNavigation={() => navigation.goBack(null)} />
+      <HeaderBack title="Meus agendamentowedaws" onNavigation={() => navigation.goBack(null)} />
       {loading && <Loading />}
 
       {modalRemocaoAgendamento && (
@@ -160,8 +162,8 @@ export default function AgendamentoUser({ navigation }) {
               removerMeuAgendamento(valor, republicaID);
             } else if (produtoID != null) {
               removerMeuAgendamentoProduto(valor, produtoID);
-            } else if ( produtoID != null ){
-              removerMeuAgendamentoServico(valor,servicoID)
+            } else if (produtoID != null) {
+              removerMeuAgendamentoServico(valor, servicoID)
             }
 
             setModalRemocaoAgendamento(false);
@@ -188,59 +190,59 @@ export default function AgendamentoUser({ navigation }) {
         <Label>Republicas</Label>
         <Barra />
       </ViewLabel>
-        {listaAgendamento.length != 0 &&
-      <FlatList
-        data={listaAgendamento}
-        renderItem={({ item }) => (
-          <View>
-            <Cartao data={item.republica} interessado />
-            <ViewData>
-              {item.status == 'Análise' && (
-                <Analise>
-                  <LabelData>{item.status}</LabelData>
-                </Analise>
-              )}
-              {item.status == 'Confirmado' && (
-                <Confirmado>
-                  <LabelConfirmacao>{item.status}</LabelConfirmacao>
-                </Confirmado>
-              )}
-              {item.status == 'Rejeitado' && (
-                <Rejeitado>
-                  <LabelReijeicao>{item.status}</LabelReijeicao>
-                </Rejeitado>
-              )}
-             {item.status == 'Finalizado' && (
-                <Finalizado>
-                  <LabelFinalizado onPress={()=>{abrirAvaliacao(item.republica.userEmail)}}>Avaliar Anunciante</LabelFinalizado>
-                </Finalizado>
-              )}
+      {listaAgendamento.length != 0 &&
+        <FlatList
+          data={listaAgendamento}
+          renderItem={({ item }) => (
+            <View>
+              <Cartao data={item.republica} interessado />
+              <ViewData>
+                {item.status == 'Análise' && (
+                  <Analise>
+                    <LabelData>{item.status}</LabelData>
+                  </Analise>
+                )}
+                {item.status == 'Confirmado' && (
+                  <Confirmado>
+                    <LabelConfirmacao>{item.status}</LabelConfirmacao>
+                  </Confirmado>
+                )}
+                {item.status == 'Rejeitado' && (
+                  <Rejeitado>
+                    <LabelReijeicao>{item.status}</LabelReijeicao>
+                  </Rejeitado>
+                )}
+                {item.status == 'Finalizado' && (
+                  <Finalizado>
+                    <LabelFinalizado onPress={() => { 
+                     
+                      abrirAvaliacao(item.user.email) 
+                      }}>Avaliar Anunciante  </LabelFinalizado>
+                  </Finalizado>
+                )}
 
-      
-                <View>
+                {item.status != 'Finalizado' && (
                   <View style={style.viewData2}>
                     <LabelData>{moment(new Date(item.data)).format('DD/MM/YY')}</LabelData>
                     <Text>As</Text>
                     <LabelData>{moment(new Date(item.hora)).format('hh:mm')}</LabelData>
                   </View>
-
-                  <TouchableOpacity
-                    style={{ width: 30, height: 30, justifyContent: 'center' }}
-                    onPress={() => {
-                      setRepublicaID(item.republica._id);
-                      setModalRemocaoAgendamento(true);
-                    }}
-                  >
-                    <Icon name="close" style={style.iconDel} />
-                  </TouchableOpacity>
-                </View> ) 
-               
+                )}
+                <TouchableOpacity
+                  style={{ width: 30, height: 30, justifyContent: 'center' }}
+                  onPress={() => {
+                    setRepublicaID(item.republica._id);
+                    setModalRemocaoAgendamento(true);
+                  }}
+                >
+                  <Icon name="close" style={style.iconDel} />
+                </TouchableOpacity>
             </ViewData>
-          </View>
-        )}
-        keyExtractor={item => item._id}
-      />
-                    }
+            </View>
+          )}
+          keyExtractor={item => item._id}
+        />
+      }
       {/*---------------- Agendamentos Produtos ------------------------*/}
       <ViewLabel>
         <Label>Produtos</Label>
@@ -249,7 +251,7 @@ export default function AgendamentoUser({ navigation }) {
 
       <FlatList
         data={listaAgendamentoProduto}
-        style={{maxHeight:200}}
+        style={{ maxHeight: 200 }}
         renderItem={({ item }) => (
           <View >
             <CartaoProdutos dados={item.produto} />
@@ -270,16 +272,14 @@ export default function AgendamentoUser({ navigation }) {
                 </Rejeitado>
               )}{item.status == 'Finalizado' && (
                 <Finalizado>
-                  <LabelFinalizado onPress={()=>{abrirAvaliacao(item.produto.userEmail)}}>Avaliar Anunciante</LabelFinalizado>
+                  <LabelFinalizado onPress={() => { abrirAvaliacao(item.produto.userEmail) }}>Avaliar Anunciante</LabelFinalizado>
                 </Finalizado>
-              )}
-              
-              <View style={style.viewData2}>
-                <LabelData>{moment(item.agenda.data).format('DD/MM/YY')}</LabelData>
-                <Text>As</Text>
-                <LabelData>{moment(item.agenda.hora).format('hh:mm')}</LabelData>
-              </View>
-
+              )} {item.status != 'Finalizado' && (
+                <View style={style.viewData2}>
+                  <LabelData>{moment(item.agenda.data).format('DD/MM/YY')}</LabelData>
+                  <Text>As</Text>
+                  <LabelData>{moment(item.agenda.hora).format('hh:mm')}</LabelData>
+                </View>)}
               <TouchableOpacity
                 style={{ width: 30, height: 30, justifyContent: 'center' }}
                 onPress={() => {
@@ -293,8 +293,8 @@ export default function AgendamentoUser({ navigation }) {
           </View>
         )}
         keyExtractor={item => item.produto._id}
-        
-      />  
+
+      />
 
       {/*---------------- Agendamentos Serviço ------------------------*/}
       <ViewLabel>
@@ -304,7 +304,7 @@ export default function AgendamentoUser({ navigation }) {
 
       <FlatList
         data={listaAgendamentoServico}
-        style={{maxHeight:200}}
+        style={{ maxHeight: 200 }}
         renderItem={({ item }) => (
           <View >
             <CartaoServico dados={item.servico} />
@@ -325,16 +325,16 @@ export default function AgendamentoUser({ navigation }) {
                 </Rejeitado>
               )}{item.status == 'Finalizado' && (
                 <Finalizado>
-                  <LabelFinalizado onPress={()=>{abrirAvaliacao(item.servico.userEmail)}}>Avaliar Anunciante</LabelFinalizado>
+                  <LabelFinalizado onPress={() => { abrirAvaliacao(item.servico.userEmail) }}>Avaliar Anunciante</LabelFinalizado>
                 </Finalizado>
               )}
-
-              <View style={style.viewData2}>
-                <LabelData>{moment(item.agenda.data).format('DD/MM/YY')}</LabelData>
-                <Text>As</Text>
-                <LabelData>{moment(item.agenda.hora).format('hh:mm')}</LabelData>
-              </View>
-
+              {item.status != 'Finalizado' && (
+                <View style={style.viewData2}>
+                  <LabelData>{moment(item.agenda.data).format('DD/MM/YY')}</LabelData>
+                  <Text>As</Text>
+                  <LabelData>{moment(item.agenda.hora).format('hh:mm')}</LabelData>
+                </View>
+              )}
               <TouchableOpacity
                 style={{ width: 30, height: 30, justifyContent: 'center' }}
                 onPress={() => {
@@ -348,7 +348,7 @@ export default function AgendamentoUser({ navigation }) {
           </View>
         )}
         keyExtractor={item => item.servico._id}
-      />  
+      />
       {erro && (
         <ViewDetalhes>
           <CustomModal

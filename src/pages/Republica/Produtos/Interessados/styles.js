@@ -16,7 +16,7 @@ export const Subtitulo = styled.Text`
 font-family: WorkSans;
 font-size: 14;
 color: #687368;
-margin-horizontal: 20;
+margin:0 20px 0 20px;
 `;
 
 export const ViewData = styled.View`
@@ -44,7 +44,7 @@ font-weight: bold;
 
 export const Barra = styled.View`
 width: 90%;
-margin-horizontal: 5%;
+margin:0 5% 0 5%;
 border-bottom-width: 1;
 border-bottom-color: #adadad;
 `;
@@ -58,7 +58,7 @@ color: #142850;
 
 export const ViewLabel = styled.View`
 width: 100%;
-margin-vertical: 10;
+margin: 10px 0 10px 0;
 `;
 
 export const Analise = styled.View`
@@ -93,7 +93,8 @@ font-weight: bold;
 `;
 
 export const Finalizado = styled.TouchableOpacity`
-  width: 30%;
+  width: 80%;
+  flex-direction:row;
   min-height:30;
   border-radius: 10;
   background-color: green;

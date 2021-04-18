@@ -56,6 +56,7 @@ export default function Interessados({ navigation }) {
 
   function abrirAvaliacao(usuario){
     setAvaliar(true);
+    console.log(usuario);
     setUsuarioAvaliado(usuario);
   }
 

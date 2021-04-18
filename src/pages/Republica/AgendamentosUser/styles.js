@@ -89,7 +89,8 @@ export const Rejeitado = styled.View`
 `;
 
 export const Finalizado = styled.TouchableOpacity`
-  width: 30%;
+  width: 80%;
+  flex-direction:row;
   min-height:30;
   border-radius: 10;
   background-color: green;

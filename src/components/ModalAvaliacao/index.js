@@ -3,16 +3,7 @@ import { Modal, View } from 'react-native';
 import api from '../../service/api';
 import Estilos, { Avaliacao, Avalie, Botao, Container, Icones, LabelBotao, Start, TipoAvaliacao, Toque } from './styles';
 
-
-export default function ModalAvaliacao(props) { 
-  return (
-    <View>
-       <ModalUsuario user={props.usuario} />
-    </View>
-  );
-}
-
-export function ModalUsuario(props) {
+export default function ModalAvaliacao(props) {
 
   const [n1, setN1] = useState(false);
   const [n2, setN2] = useState(false);
@@ -59,7 +50,7 @@ export function ModalUsuario(props) {
   function avaliar() {
     api
     .put(`/userNota/${props.usuario}`, { nota: nota })
-    .then(responseJson => { })
+    .then(responseJson => { console.log(responseJson)})
     .catch(error => { });
   
     setModalVisivel(false)
@@ -92,7 +83,7 @@ export function ModalUsuario(props) {
               <Start name="star" active={n5}/>
             </Toque>
           </Icones>
-          <Botao onPress={() => enviarRetorno() }>
+          <Botao onPress={() => avaliar() }>
             <LabelBotao>Avaliar</LabelBotao>
           </Botao>
         </View>

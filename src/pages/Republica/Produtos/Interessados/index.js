@@ -52,15 +52,15 @@ export default function InteressadosProduto({ navigation }) {
   const [reload, setReload] = useState(false);
   const [produtoID, setProdutoID] = useState(navigation.state.params.idProduto);
   const [erro, setErro] = useState(false);
-  const [avaliar,setAvaliar] = useState(false);
-  const [usuarioAvaliado,setUsuarioAvaliado] = useState('');
-  
+  const [avaliar, setAvaliar] = useState(false);
+  const [usuarioAvaliado, setUsuarioAvaliado] = useState('');
+
   useEffect(() => {
     setListaAgendamento([]);
     carregarAgendamentos();
   }, [reload]);
-  
-  function abrirAvaliacao(usuario){
+
+  function abrirAvaliacao(usuario) {
     setAvaliar(true);
     setUsuarioAvaliado(usuario);
   }
@@ -79,10 +79,10 @@ export default function InteressadosProduto({ navigation }) {
       .finally(setLoading(false));
   }
 
-  function atualizarStatus(user,status) {
+  function atualizarStatus(user, status) {
     const data = {
       _id: produtoID,
-      userType : "ofertante",
+      userType: "ofertante",
       email: user,
       status: status
     };
@@ -99,9 +99,9 @@ export default function InteressadosProduto({ navigation }) {
   function verificarTipoRequisicao(tipoSocilitacao, usuario) {
     if (tipoSocilitacao == 1) {
       console.log(tipoSocilitacao, usuario)
-      atualizarStatus(usuario,"Confirmado");
+      atualizarStatus(usuario, "Confirmado");
     } else if (tipoSocilitacao == 0) {
-      atualizarStatus(usuario,"Rejeitado");
+      atualizarStatus(usuario, "Rejeitado");
     }
   }
 
@@ -139,11 +139,13 @@ export default function InteressadosProduto({ navigation }) {
               tipoRetorno="Produto"
             />
             <ViewData>
-              <View style={style.viewData2}>
-                <LabelData>{moment(item.agenda.data).format('DD/MM/YY')}</LabelData>
-                <Text>As</Text>
-                <LabelData>{moment(item.agenda.hora).format('hh:mm')}</LabelData>
-              </View>
+              {item.agenda.status != 'Finalizado' &&
+                <View style={style.viewData2}>
+                  <LabelData>{moment(item.agenda.data).format('DD/MM/YY')}</LabelData>
+                  <Text>As</Text>
+                  <LabelData>{moment(item.agenda.hora).format('hh:mm')}</LabelData>
+                </View>
+              }
               {item.agenda.status == 'Análise' && (
                 <Analise>
                   <Label>Em análise</Label>
@@ -159,9 +161,9 @@ export default function InteressadosProduto({ navigation }) {
                   <LabelReijeicao>Rejeitada</LabelReijeicao>
                 </Rejeitado>
               )}
-              {item.status == 'Finalizado' && (
+              {item.agenda.status == 'Finalizado' && (
                 <Finalizado>
-                  <LabelFinalizado onPress={()=>{abrirAvaliacao(item.user.email)}}>Avaliar Anunciante</LabelFinalizado>
+                  <LabelFinalizado onPress={() => { abrirAvaliacao(item.user.email) }}>Avaliar Anunciante</LabelFinalizado>
                 </Finalizado>
               )}
             </ViewData>
@@ -179,7 +181,7 @@ export default function InteressadosProduto({ navigation }) {
           />
         </ViewDetalhes>
       )}
-       {avaliar && (
+      {avaliar && (
         <ModalAvaliacao usuario={usuarioAvaliado}></ModalAvaliacao>
       )}
     </Container>
