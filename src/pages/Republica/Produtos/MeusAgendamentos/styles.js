@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 
-export const Container = styled.ScrollView`
-  flex: 1;
+export const Container = styled.View`
+  align-items: center;
 `;
 
 export const ViewDetalhes = styled.View`
