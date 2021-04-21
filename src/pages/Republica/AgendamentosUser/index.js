@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { useSelector } from 'react-redux';
+import CustomModal from '../../../components/Alert';
 import HeaderBack from '../../../components/CustomHeader';
 import Loading from '../../../components/Loading';
 import api from '../../../service/api';
@@ -30,42 +31,48 @@ export default function AgendamentoUser({ navigation }) {
   const [listaAgendamentoServico, setListaAgendamentoServico] = useState([]);
   const [loading, setLoading] = useState(false);
   const [erro, setErro] = useState(false);
-  const [reload, setReload] = useState();
-  const [avaliar, setAvaliar] = useState(false);
-  const [usuarioAvaliado, setUsuarioAvaliado] = useState('');
 
   useEffect(() => {
-    carregarMeusAgendamentos();
-  }, [reload]);
+    carregarAgendamentoRepublica();
+    carregarAgendamentoProduto();
+    carregarAgendamentoServico();
+  },[]);
 
-  function carregarMeusAgendamentos() {
+  function carregarAgendamentoRepublica() {
+    setListaAgendamendoRepublica([]);
     api
       .get(`/agendamento/${email}`)
       .then(response => {
-        setListaAgendamendoRepublica(response.data); 
+        setListaAgendamendoRepublica(response.data);
       })
       .catch(error => {
         setErro(true);
       });
+  }
 
+  function carregarAgendamentoProduto() {
+    setListaAgendamentoProduto([]);
     api
       .get(`/produto/agendamento/interessado/${email}`)
       .then(response => {
-        setListaAgendamentoProduto(response.data);     
-      })
-      .catch(error => { 
-        setErro(true);
-      });
-
-    api
-      .get(`/servicos/agendamento/interessado/${email}`)
-      .then(response => {
-        setListaAgendamentoServico(response.data); 
+        setListaAgendamentoProduto(response.data);
       })
       .catch(error => {
         setErro(true);
       });
-      setLoading(false);
+  }
+
+  function carregarAgendamentoServico() {
+    setListaAgendamentoServico([]);
+    api
+      .get(`/servicos/agendamento/interessado/${email}`)
+      .then(response => {
+        setListaAgendamentoServico(response.data);
+      })
+      .catch(error => {
+        setErro(true);
+      });
+    setLoading(false);
   }
 
   return (
@@ -75,15 +82,16 @@ export default function AgendamentoUser({ navigation }) {
         <Subtitulo>Fique atento no status das anuncios nas quais você agendou uma visita.</Subtitulo>
       </View>
       {loading && <Loading />}
-      {loading && listaAgendamentoRepublica.length == 0 && listaAgendamentoProduto.length == 0 && listaAgendamentoServico.length == 0 && 
+      {erro && <CustomModal parametro="Erro" callback={() => {setErro(false)}}></CustomModal>}
+      {loading && listaAgendamentoRepublica.length == 0 && listaAgendamentoProduto.length == 0 && listaAgendamentoServico.length == 0 &&
         <EmptyState
           titulo="Nada por aqui !"
           mensagem="Você ainda nao agendou nenhuma vista em nenhum anuncio"
         />
       }
-      <MeusAgendamentosRepublica agendamentos={listaAgendamentoRepublica} />
-      <MeusAgendamentosProduto agendamentos={listaAgendamentoProduto} />
-      <MeusAgendamentosServico agendamentos={listaAgendamentoServico} />
+      <MeusAgendamentosRepublica agendamentos={listaAgendamentoRepublica} callback={() => carregarAgendamentoRepublica()} />
+      <MeusAgendamentosProduto agendamentos={listaAgendamentoProduto} callback={() => carregarAgendamentoProduto()}/>
+      <MeusAgendamentosServico agendamentos={listaAgendamentoServico} callback={() => carregarAgendamentoServico()} />
     </Container>
   );
 }

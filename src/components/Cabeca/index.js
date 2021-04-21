@@ -36,11 +36,6 @@ import Estilos, {
 } from './style';
 
 export function Cabeca({ navigation }) {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
-
- 
-
 
   function resetNavigation(Rota) {
     const resetAction = StackActions.reset({
@@ -53,7 +48,6 @@ export function Cabeca({ navigation }) {
   async function closeToken() {
     await AsyncStorage.removeItem('token');
     await AsyncStorage.removeItem('user')
-
       .then(value => {
         resetNavigation('Login');
       })

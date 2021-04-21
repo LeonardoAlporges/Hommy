@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import { useSelector } from 'react-redux';
 import Cartao from '../../../components/Cartao';
 import ModalConfirmacao from '../../../components/ModalConfirmacao';
+import ModalAvaliacao from '../../../components/ModalAvaliacao'
 import api from '../../../service/api';
 import style, {
   Analise,
@@ -23,11 +24,32 @@ import style, {
 } from './styles';
 
 export default function MeusAgendamentosRepublica(props) {
-
+  const email = useSelector(state => state.user.email);
   const [modalRemocaoAgendamento, setModalRemocaoAgendamento] = useState(false);
   const [republicaID, setRepublicaID] = useState(null);
   const [avaliar, setAvaliar] = useState(false);
   const [usuarioAvaliado, setUsuarioAvaliado] = useState('');
+
+
+  function removerMeuAgendamento(valorRetorno,idRepublica){
+    if(valorRetorno == 3){
+      return null
+    }
+    api.delete(`/agendamento/${idRepublica}`, {
+      data: { email: email }
+    })
+    .then(() => {
+      props.callback();
+    })
+    .catch(() => {
+      setErro(true);
+    });
+  }
+    
+  function abrirAvaliacao(usuario) {
+    setAvaliar(true);
+    setUsuarioAvaliado(usuario);
+  }
 
   return (
     <Container>
@@ -92,10 +114,9 @@ export default function MeusAgendamentosRepublica(props) {
             setModalRemocaoAgendamento(false);
           }}
           titulo="Cancelar visita?"
-          mensagem="A pessoa responsável pela república será notificada da sua desistência."
+          mensagem="A pessoa responsável será notificada da sua desistência."
           botaoCancel="Não"
           botaoConfirmar="Sim"
-          mensagem="Deseja deletar esse Agendamento ?"
           confirmar={true}
         />
       )}

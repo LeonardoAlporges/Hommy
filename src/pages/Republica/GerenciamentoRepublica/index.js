@@ -59,7 +59,7 @@ export default function GerenciamentoDeRepublica({ navigation }) {
   const [nomeConta, setNomeConta] = useState('');
   const [erro, setErro] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [dataVencimento, setDataVencimento] = useState(null);
+  const [dataVencimento, setDataVencimento] = useState(new Date());
   const [listaDeContas, setListaDeContas] = useState([]);
   const [listaDeMebros, setListaDeMebros] = useState([]);
   const [listaDeTarefas, setListaDeTarefas] = useState([]);
@@ -483,12 +483,12 @@ export default function GerenciamentoDeRepublica({ navigation }) {
                         <LabelFielSet>Vencimento</LabelFielSet>
                         <Item style={{ borderColor: 'transparent' }}>
                           <DatePicker
-                            defaultDate={new Date()}
-                            minimumDate={new Date()}
-                            locale={'pt-br'}
-                            timeZoneOffsetInMinutes={undefined}
+                            value={dataVencimento}
+                            defaultDate={new Date(2020, 4, 4)}
+                            minimumDate={new Date(2020, 4, 4)}
+                            locale={"en"}
                             modalTransparent={true}
-                            animationType={'slide'}
+                            animationType={'fade'}
                             androidMode={'default'}
                             placeHolderText="__/__/___"
                             onDateChange={date => {

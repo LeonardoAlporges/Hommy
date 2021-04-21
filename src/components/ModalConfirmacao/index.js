@@ -7,7 +7,7 @@ import { ViewFundo, Titulo, Descricao, BotaoTxt, BotaoTxtCancelar, ViewBotoes } 
 
 export default function ModalConfirmacao(props) {
   const [modalVisivel, setModalVisivel] = useState(true);
-  const [mensagem, setMensagem] = useState('');
+  const [mensagem, setMensagem] = useState(props.mensagem);
   const [confirmar, setConfirmar] = useState(props.confirmar);
   const [rejeitar, setRejeitar] = useState(props.rejeitar);
 
@@ -34,7 +34,6 @@ export default function ModalConfirmacao(props) {
               style={style.botaoCancelar}
               onPress={async () => {
                 onDimiss();
-                setModalVisivel(false);
               }}
             >
               <BotaoTxtCancelar>{props.botaoCancel}</BotaoTxtCancelar>
@@ -43,7 +42,6 @@ export default function ModalConfirmacao(props) {
               style={style.botao}
               onPress={async () => {
                 mudarEstado();
-                setModalVisivel(false);
               }}
             >
               <BotaoTxt>{props.botaoConfirmar}</BotaoTxt>

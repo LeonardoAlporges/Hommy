@@ -42,18 +42,21 @@ export default function MeusAgendamentosProduto(props) {
   const [avaliar, setAvaliar] = useState(false);
   const [usuarioAvaliado, setUsuarioAvaliado] = useState('');
 
- 
   function removerMeuAgendamentoProduto(valorRetorno, idproduto) {
-    
-    return api
-      .delete(`/produto/agendamento/${idproduto}`)
-      .then(response => {
-        
-      })
-      .catch(error => {
-        setLoading(false);
-        setErro(true);
-      });
+    if(valorRetorno == 3){
+      return null
+    }
+    api
+  .delete(`/produto/agendamento/${idproduto}`)
+  .then(response => {
+    console.log(response)
+    setReload(!reload);
+    setLoading(false);
+  })
+  .catch(error => {
+    setLoading(false);
+    setErro(true);
+  });
   }
 
 

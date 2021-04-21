@@ -1,35 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import React, { useState } from 'react';
+import moment from 'moment';
+import { View,Text,TouchableOpacity } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import { useSelector } from 'react-redux';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
+
 import ModalAvaliacao from '../../../components/ModalAvaliacao';
+import CartaoServico from '../../../components/CartaoServico';
 import ModalConfirmacao from '../../../components/ModalConfirmacao';
 import api from '../../../service/api';
-import {
+
+import style, {
+  Analise,
   Barra,
+  Confirmado,
   Container,
-  Label,
+  Finalizado, Label,
+  LabelConfirmacao,
+  LabelData,
+  LabelFinalizado,
+  LabelReijeicao,
+  Rejeitado,
+  ViewData,
   ViewLabel
 } from './styles';
 
 export default function MeusAgendamentosServico(props) {
-  const email = useSelector(state => state.user.email);
-  const [listaAgendamentoServico, setListaAgendamentoServico] = useState([]);
+  
   const [modalRemocaoAgendamento, setModalRemocaoAgendamento] = useState(false);
   const [servicoID, setServicoID] = useState(null);
-  const [reload, setReload] = useState();
   const [avaliar, setAvaliar] = useState(false);
   const [usuarioAvaliado, setUsuarioAvaliado] = useState('');
 
   function removerMeuAgendamentoServico(valorRetorno, idServico) {
+    if(valorRetorno == 3){
+      return null;
+    }
     return api
       .delete(`/servicos/agendamento/${idServico}`)
       .then(response => {
-        setReload(!reload);
-        setLoading(false);
+        props.callback();
       })
       .catch(error => {
-        setLoading(false);
         setErro(true);
       });
   }
@@ -46,32 +57,32 @@ export default function MeusAgendamentosServico(props) {
       </ViewLabel>
 
       <FlatList
-        data={props.agendamnetos}
+        data={props.agendamentos}
         style={{ maxHeight: 200 }}
         renderItem={({ item }) => (
           <View >
             <CartaoServico dados={item.servico} />
             <ViewData>
-              {item.status == 'Análise' && (
+              {item.agenda.status == 'Análise' && (
                 <Analise>
                   <LabelData>{item.agenda.status}</LabelData>
                 </Analise>
               )}
-              {item.status == 'Confirmado' && (
+              {item.agenda.status == 'Confirmado' && (
                 <Confirmado>
                   <LabelConfirmacao>{item.agenda.status}</LabelConfirmacao>
                 </Confirmado>
               )}
-              {item.status == 'Rejeitado' && (
+              {item.agenda.status == 'Rejeitado' && (
                 <Rejeitado>
                   <LabelReijeicao>{item.agenda.status}</LabelReijeicao>
                 </Rejeitado>
-              )}{item.status == 'Finalizado' && (
+              )}{item.agenda.status == 'Finalizado' && (
                 <Finalizado>
                   <LabelFinalizado onPress={() => { abrirAvaliacao(item.servico.userEmail) }}>Avaliar Anunciante</LabelFinalizado>
                 </Finalizado>
               )}
-              {item.status != 'Finalizado' && (
+              {item.agenda.status != 'Finalizado' && (
                 <View style={style.viewData2}>
                   <LabelData>{moment(item.agenda.data).format('DD/MM/YY')}</LabelData>
                   <Text>As</Text>
