@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import { DatePicker, Input, Item, Picker } from 'native-base';
 import React, { useEffect, useState } from 'react';
-import { FlatList, Image, Modal, ScrollView, Text, TouchableOpacity, View,Dimensions } from 'react-native';
+import { FlatList, Image, Modal, ScrollView, Text, TouchableOpacity, View, Dimensions, TouchableWithoutFeedback } from 'react-native';
 import HeaderBack from '../../../../components/CustomHeader';
 import api from '../../../../service/api';
 import Contas from '../Contas'
@@ -85,13 +85,13 @@ export default function Gerenciamento(props, { navigation }) {
           <IconeDelete name="trash" />
         </IconeView>
       </Apresentacao>
-      <ScrollView contentContainerStyle={{flexGrow:1}}>
+      <ScrollView  style={{marginBottom:'5%'}}>
         <Contas></Contas>
         <Tarefas></Tarefas>
         <Membros></Membros>
       </ScrollView>
-      
 
-      </Container>
+
+    </Container>
   );
 }

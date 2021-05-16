@@ -85,7 +85,7 @@ const Navegação = createStackNavigator(
     InteressadosServico,
   },
   {
-    initialRouteName: 'RenderApp',
+    initialRouteName: 'GerenciamentoDeRepublica',
     headerMode: 'none',
     navigationOptions: {
       headerVisible: false

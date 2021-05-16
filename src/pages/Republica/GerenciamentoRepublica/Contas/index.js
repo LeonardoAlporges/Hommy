@@ -35,44 +35,67 @@ export default function Contas(props, { navigation }) {
 
   const [listaDeContas, setListaDeContas] = useState([
     {
-      id:9,
+      id: 9,
       titulo: "Aluguel",
       valorTotal: 200,
       valorParcela: 100,
     },
     {
-      id:8,
+      id: 8,
       titulo: "Internet",
       valorTotal: 200,
       valorParcela: 100,
     },
     {
-      id:7,
+      id: 7,
       titulo: "Luz",
       valorTotal: 200,
       valorParcela: 100,
     },
     {
-      id:7,
+      id: 7,
       titulo: "Luz",
       valorTotal: 200,
       valorParcela: 100,
     },
     {
-      id:7,
+      id: 7,
       titulo: "Luz",
       valorTotal: 200,
       valorParcela: 100,
     },
     {
-      id:7,
+      id: 7,
+      titulo: "Luz",
+      valorTotal: 200,
+      valorParcela: 100,
+    },
+    {
+      id: 7,
+      titulo: "Luz",
+      valorTotal: 200,
+      valorParcela: 100,
+    }
+    , {
+      id: 7,
       titulo: "Luz",
       valorTotal: 200,
       valorParcela: 100,
     }
 
 
+
   ]);
+
+  function listContas(item) {
+    return (
+      <ListContas>
+        <LabelTitulo>{item.titulo}</LabelTitulo>
+        <LabelDescricao>R${item.valorTotal}</LabelDescricao>
+        <LabelValor>R${item.valorParcela}</LabelValor>
+      </ListContas>
+    )
+  }
 
   const [mesSelecionado, setMesSelecionado] = useState(moment().format('MMMM'));
 
@@ -108,8 +131,10 @@ export default function Contas(props, { navigation }) {
           <Picker.Item color={'#142850'} label="Maio" value="Maio" />
         </Picker>
       </ItemPicker>
+
       <FlatList
-        style={{width:'100%',flex:1}}
+      nestedScrollEnabled 
+      style={{flex: 1}}
         data={listaDeContas}
         renderItem={({ item }) => (
           <ListContas>
@@ -121,12 +146,13 @@ export default function Contas(props, { navigation }) {
         keyExtractor={item => item._id}
       />
       <TotalView>
-          <LabelTotal>Total</LabelTotal>
-          <Linhas />
-          <ViewValoraTotal>
-           <Total>R$ 300</Total>
-          </ViewValoraTotal>     
+        <LabelTotal>Total</LabelTotal>
+        <Linhas />
+        <ViewValoraTotal>
+          <Total>R$ 300</Total>
+        </ViewValoraTotal>
       </TotalView>
     </Card>
   );
 }
+

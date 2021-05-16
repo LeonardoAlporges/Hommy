@@ -35,17 +35,17 @@ export default function Membros(props, { navigation }) {
 
   const [listaDeContas, setListaDeContas] = useState([
     {
-      id:1,
+      id: 1,
       nome: "Leonardo",
 
     },
     {
-      id:2,
+      id: 2,
       nome: "Robin",
 
     },
     {
-      id:3,
+      id: 3,
       nome: "Alef",
     }
   ]);
@@ -66,7 +66,8 @@ export default function Membros(props, { navigation }) {
         </Adicionar>
       </Apresentacao>
       <FlatList
-        style={{flex:1}}
+        nestedScrollEnabled
+        style={{ flex: 1 }}
         data={listaDeContas}
         renderItem={({ item }) => (
           <ListContas>
@@ -76,11 +77,11 @@ export default function Membros(props, { navigation }) {
         keyExtractor={item => item._id}
       />
       <TotalView>
-          <LabelTotal>Total</LabelTotal>
-          <Linhas />
-          <ViewValoraTotal>
-           <Total>R$ 300</Total>
-          </ViewValoraTotal>     
+        <LabelTotal>Total</LabelTotal>
+        <Linhas />
+        <ViewValoraTotal>
+          <Total>R$ 300</Total>
+        </ViewValoraTotal>
       </TotalView>
     </Card>
   );

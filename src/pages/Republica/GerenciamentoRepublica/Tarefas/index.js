@@ -35,29 +35,29 @@ export default function Tarefas(props, { navigation }) {
 
   const [listaDeContas, setListaDeContas] = useState([
     {
-      id:9,
+      id: 9,
       nome: "Lixo",
       periodo: 200,
     },
     {
-      id:8,
+      id: 8,
       nome: "Arrumar",
       periodo: 200,
     },
     {
-      id:7,
+      id: 7,
       nome: "Teste",
       periodo: 200,
-    },{
-      id:7,
+    }, {
+      id: 7,
       nome: "Teste",
       periodo: 200,
-    },{
-      id:7,
+    }, {
+      id: 7,
       nome: "Teste",
       periodo: 200,
-    },{
-      id:7,
+    }, {
+      id: 7,
       nome: "Teste",
       periodo: 200,
     },
@@ -79,7 +79,8 @@ export default function Tarefas(props, { navigation }) {
         </Adicionar>
       </Apresentacao>
       <FlatList
-        style={{flex:1}}
+        nestedScrollEnabled
+        style={{ flex: 1 }}
         data={listaDeContas}
         renderItem={({ item }) => (
           <ListContas>
@@ -90,11 +91,11 @@ export default function Tarefas(props, { navigation }) {
         keyExtractor={item => item._id}
       />
       <TotalView>
-          <LabelTotal>Total</LabelTotal>
-          <Linhas />
-          <ViewValoraTotal>
-           <Total>R$ 300</Total>
-          </ViewValoraTotal>     
+        <LabelTotal>Total</LabelTotal>
+        <Linhas />
+        <ViewValoraTotal>
+          <Total>R$ 300</Total>
+        </ViewValoraTotal>
       </TotalView>
     </Card>
   );

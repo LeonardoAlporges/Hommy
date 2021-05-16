@@ -4,8 +4,7 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  background-color:greenyellow;
-
+  background-color:#f7f8f9;
 `;
 export const Apresentacao = styled.View`
   flex:1;
