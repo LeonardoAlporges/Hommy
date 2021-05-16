@@ -102,7 +102,7 @@ class FMCService {
     });
 
     //Triggered when have new token
-    messaging().onTokenRefresh(fmcToken => {
+    messaging().onNewToken(fmcToken => {
       console.log('[FMC] Novo token gerado ', fmcToken);
       onRegister(fmcToken);
     });

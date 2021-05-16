@@ -1,8 +1,7 @@
 import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
-  align-items: center;
+export const Container = styled.ScrollView`
   flex: 1;
 `;
 
@@ -89,7 +88,8 @@ export const Rejeitado = styled.View`
 `;
 
 export const Finalizado = styled.TouchableOpacity`
-  width: 30%;
+  width: 80%;
+  flex-direction:row;
   min-height:30;
   border-radius: 10;
   background-color: green;

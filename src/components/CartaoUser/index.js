@@ -83,7 +83,7 @@ export default function CartaoUser(props) {
           <Nota>{props.dados.nota}</Nota>
         </ViewNota>
         <ViewIcones>
-          {props.status != 'Confirmado' && props.status != 'Rejeitado' && (
+          {props.status != 'Confirmado' && props.status != 'Rejeitado' && props.status != 'Finalizado' && (
             <TouchableOpacity
               onPress={() => {
                 setMensagem('Deseja confirmar ?');
@@ -94,7 +94,7 @@ export default function CartaoUser(props) {
               <AceiteIcon name="check" />
             </TouchableOpacity>
           )}
-          {props.status != 'Rejeitado' && (
+          {props.status != 'Rejeitado' &&  props.status != 'Finalizado' && (
             <TouchableOpacity
               onPress={() => {
                 setMensagem('Deseja rejeitar ?');

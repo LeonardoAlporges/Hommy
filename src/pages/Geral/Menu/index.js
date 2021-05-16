@@ -138,7 +138,6 @@ function MenuLateral({ navigation }) {
                                 style={Estilos.card}
                                 onPress={() => {
                                     navigation.navigate('TelefoneUteis');
-                                    setIsModalVisible(false);
                                 }}
                             >
                                 <ViewIcons>

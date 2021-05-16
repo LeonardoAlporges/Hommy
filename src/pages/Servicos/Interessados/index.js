@@ -1,7 +1,6 @@
 import moment from 'moment';
-import { Text } from 'native-base';
 import React, { useEffect, useState } from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { useSelector } from 'react-redux';
 import CustomModal from '../../../components/Alert';
@@ -121,11 +120,14 @@ export default function InteressadosServico({ navigation }) {
               tipoRetorno="Servico"
             />
             <ViewData>
+              {item.agenda.status != 'Finalizado' &&
               <View style={style.viewData2}>
                 <LabelData>{moment(item.agenda.data).format('DD/MM/YY')}</LabelData>
                 <Text>As</Text>
                 <LabelData>{moment(item.agenda.hora).format('hh:mm')}</LabelData>
               </View>
+             }
+              <View>
               {item.agenda.status == 'Análise' && (
                 <Analise>
                   <Label>Em análise</Label>
@@ -141,11 +143,13 @@ export default function InteressadosServico({ navigation }) {
                   <LabelReijeicao>Rejeitada</LabelReijeicao>
                 </Rejeitado>
               )}
-              {item.status == 'Finalizado' && (
+              {item.agenda.status == 'Finalizado' && (
+              
                 <Finalizado>
                   <LabelFinalizado onPress={()=>{abrirAvaliacao(item.user.email)}}>Avaliar Anunciante</LabelFinalizado>
                 </Finalizado>
               )}
+              </View>
             </ViewData>
           </ScrollView>
         )}

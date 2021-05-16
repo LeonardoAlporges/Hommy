@@ -93,7 +93,7 @@ font-weight: bold;
 `;
 
 export const Finalizado = styled.TouchableOpacity`
-  width: 30%;
+  width: 80%;
   min-height:30;
   border-radius: 10;
   background-color: green;

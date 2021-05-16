@@ -128,18 +128,18 @@ export default function Cadastro({ navigation }) {
 
   function removerFoto(idFoto) {
     if (idFoto == 1) {
-      deleteFileRepublica()
+     // deleteFileRepublica()
       setLinkImagem1(null);
       setImagem1(null);
       
     } else if (idFoto == 2) {
       setLinkImagem2(null);
       setImagem2(null);
-      deleteFileRepublica( )
+      //deleteFileRepublica( )
     } else if (idFoto == 3) {
       setLinkImagem3(null);
       setImagem3(null);
-      deleteFileRepublica( )
+      //deleteFileRepublica( )
     }
     setContadorImagem(contadorImagem - 1);
   }
