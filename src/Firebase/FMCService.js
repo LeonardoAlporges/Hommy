@@ -6,6 +6,7 @@ class FMCService {
     this.checkPermission(onRegister);
     this.createNotificationListerners(onRegister, onNotification, onOpenNotification);
   };
+
   registerAppWithFMC = async () => {
     if (Plataform === 'ios') {
       await messaging().registerDeviceForRemoteMessages();
@@ -102,7 +103,7 @@ class FMCService {
     });
 
     //Triggered when have new token
-    messaging().onNewToken(fmcToken => {
+    messaging().onTokenRefresh(fmcToken => {
       console.log('[FMC] Novo token gerado ', fmcToken);
       onRegister(fmcToken);
     });

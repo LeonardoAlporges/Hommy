@@ -122,15 +122,16 @@ export const ItemPicker = styled(Item)`
   height:20px;
   margin:5px 0 5px 0;
 `;
-export const Adicionar = styled(Button)`
+export const Adicionar = styled.TouchableOpacity`
 align-self:center;
 align-content:center;
 justify-content:center;
-  height:30px !important;
-  width:30px !important;
-  background-color:white;
-      border-radius: 2;
-      border-color: #ddd;
+align-items: center;
+height:30px !important;
+width:30px !important;
+background-color:white;
+border-radius: 2;
+border-color: #ddd;
       border-bottom-width: 0;
       shadow-color: #000;
       shadow-offset: {width: 10, height: 10};
@@ -138,7 +139,7 @@ justify-content:center;
       shadow-radius: 2;
       elevation: 8;  
 `;
-export const ListContas = styled.View`
+export const ListContas = styled.TouchableOpacity`
   flex: 1;
   border-radius:3px;
   margin:5px 0 5px 0;

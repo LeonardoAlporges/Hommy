@@ -23,7 +23,7 @@ import Cadastro from './pages/Republica/Cadastro/index';
 import DetalhesAnuncio from './pages/Republica/DetalhesAnuncio';
 import CadastroEvento from './pages/Republica/Eventos/CadastroEvento/CadastroEvento';
 import DetalhesEventos from './pages/Republica/Eventos/DetalhesEventos';
-import GerenciamentoDeRepublica from './pages/Republica/GerenciamentoRepublica';
+import Gerenciamento from './pages/Republica/GerenciamentoRepublica/Gerenciamento';
 import AgendarVisitaProduto from './pages/Republica/Produtos/AgendarVisita';
 import CadastroProduto from './pages/Republica/Produtos/CadastroProdutos/CadastroProduto';
 import DetalhesProduto from './pages/Republica/Produtos/DetalhesProduto';
@@ -34,6 +34,7 @@ import CadastroServico from './pages/Servicos/Cadastro';
 import DetalhesServicos from './pages/Servicos/DetalhesServico';
 import InteressadosServico from './pages/Servicos/Interessados';
 import Servicos from './pages/Servicos/Servicos';
+import GerenciamentoRepublica from './pages/Republica/GerenciamentoRepublica/Home'
 
 const Navegação = createStackNavigator(
   {
@@ -69,7 +70,7 @@ const Navegação = createStackNavigator(
     DetalhesCarona,
     Caronas,
     Anuncios,
-    GerenciamentoDeRepublica,
+    Gerenciamento,
     Republica,
     Servicos,
     Cadastro,
@@ -83,9 +84,10 @@ const Navegação = createStackNavigator(
     AgendarVisitaServico,
     InteressadosProduto,
     InteressadosServico,
+    GerenciamentoRepublica,
   },
   {
-    initialRouteName: 'GerenciamentoDeRepublica',
+    initialRouteName: 'RenderApp',
     headerMode: 'none',
     navigationOptions: {
       headerVisible: false

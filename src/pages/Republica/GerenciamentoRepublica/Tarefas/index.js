@@ -74,7 +74,7 @@ export default function Tarefas(props, { navigation }) {
         <LabelView>
           <Titulo>Tarefas</Titulo>
         </LabelView>
-        <Adicionar>
+        <Adicionar onPress={() => { props.modalInsercaoDados() }}>
           <LabelBotao>+</LabelBotao>
         </Adicionar>
       </Apresentacao>
@@ -83,7 +83,7 @@ export default function Tarefas(props, { navigation }) {
         style={{ flex: 1 }}
         data={listaDeContas}
         renderItem={({ item }) => (
-          <ListContas>
+          <ListContas onPress={() => { props.modalVisualizacao() }}>
             <LabelTitulo>{item.nome}</LabelTitulo>
             <LabelValor>R${item.periodo}</LabelValor>
           </ListContas>

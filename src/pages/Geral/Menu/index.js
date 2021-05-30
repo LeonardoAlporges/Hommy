@@ -56,186 +56,186 @@ function MenuLateral({ navigation }) {
             })
             .catch(error => { });
     }
-    return (        
-            <Container>
-                <Header>
-                    <IconVoltar
-                        onPress={() => {
-                            navigation.goBack(null);
-                        }}
-                    >
-                        <Icon size={25} name="arrow-left" color="#022250" />
-                    </IconVoltar>
-                    <TituloHeader>Perfil</TituloHeader>
-                </Header>
-                <ScrollView style={{ width: '100%' }}>
-                    <ViewDados>
-                        <ViewFotoPerfil>
-                            <Image
-                                source={{
-                                    uri: fotoPerfil
-                                }}
-                                style={Estilos.fotoPerfil}
-                            />
-                        </ViewFotoPerfil>
-                        <ViewNome>
-                            <Nome>{nome}</Nome>
-                        </ViewNome>
-                        <ViewNota>
-                            <Icon name="star" color="#ffd700" size={16}></Icon>
-                            <Icon name="star" color="#ffd700" size={16}></Icon>
-                            <Icon name="star" color="#ffd700" size={16}></Icon>
-                            <Icon name="star" color="#ffd700" size={16}></Icon>
-                            <Icon name="star-half" color="#ffd700" size={16}></Icon>
-                        </ViewNota>
-                    </ViewDados>
-                    <Menu>
-                        <Linha>
-                            <Card
-                                style={Estilos.card}
-                                onPress={() => {
-                                    navigation.navigate('Anuncios')
-                                }}
-                            >
-                                <ViewIcons>
-                                    <Icon name="card-text-outline" color="#212c50" size={35}></Icon>
-                                </ViewIcons>
-                                <ViewLabel>
-                                    <Label>Anuncios</Label>
-                                </ViewLabel>
-                            </Card>
-                            <Card
-                                style={Estilos.card}
-                                onPress={() => {
-                                    navigation.navigate('AgendamentoUser', {
-                                        usuario: true
-                                    })                                        
-                                }}
-                            >
-                                <ViewIcons>
-                                    <Icon name="calendar-month-outline" color="#212c50" size={35}></Icon>
-                                </ViewIcons>
-                                <ViewLabel>
-                                    <Label>Agendamentos</Label>
-                                </ViewLabel>
-                            </Card>
-                        </Linha>
-                        <Linha>
-                            <Card
-                                style={Estilos.card}
-                                onPress={() => {
-                                    navigation.navigate('Viagens')
-                                }}
-                            >
-                                <ViewIcons>
-                                    <Icon name="car" color="#212c50" size={35}></Icon>
-                                </ViewIcons>
-                                <ViewLabel>
-                                    <Label>Interesses</Label>
-                                </ViewLabel>
-                            </Card>
-                            <Card
-                                style={Estilos.card}
-                                onPress={() => {
-                                    navigation.navigate('TelefoneUteis');
-                                }}
-                            >
-                                <ViewIcons>
-                                    <Icon name="phone-outline" color="#212c50" size={35}></Icon>
-                                </ViewIcons>
-                                <ViewLabel>
-                                    <Label>Telefones</Label>
-                                </ViewLabel>
-                            </Card>
-                        </Linha>
-                        <Linha>
-                            <Card
-                                style={Estilos.card}
-                                onPress={() => {
-                                    Linking.openURL('mailto:contato.hommy@gmail.com');
-                                }}
-                            >
-                                <ViewIcons>
-                                    <Icon name="help-circle-outline" color="#212c50" size={35}></Icon>
-                                </ViewIcons>
-                                <ViewLabel>
-                                    <Label>Ajuda</Label>
-                                </ViewLabel>
-                            </Card>
-                            <Card
-                                style={Estilos.card}
-                                onPress={() => {
-                                    Linking.openURL('mailto:contato.hommy@gmail.com');
-                                }}
-                            >
-                                <ViewIcons>
-                                    <Icon name="heart-outline" color="#212c50" size={35}></Icon>
-                                </ViewIcons>
-                                <ViewLabel>
-                                    <Label>Feedback</Label>
-                                </ViewLabel>
-                            </Card>
-                        </Linha>
-                        <Linha>
-                            <Card
-                                style={Estilos.card}
-                                onPress={() => {
-                                    navigation.navigate('GerenciamentoDeRepublica')
-                                }}
-                            >
-                                <ViewIcons>
-                                    <Icon name="account-group-outline" color="#212c50" size={35}></Icon>
-                                </ViewIcons>
-                                <ViewLabel>
-                                    <Label>Gerenciamento</Label>
-                                </ViewLabel>
-                            </Card>
-                        </Linha>
-                        <Linha>
-                            <CardAmigos style={Estilos.card}>
-                                <ViewIcons>
-                                    <Icon name="account-multiple-plus-outline" color="#212c50" size={35}></Icon>
-                                </ViewIcons>
-                                <ViewLabelAmigos>
-                                    <Label>Convidar amigos</Label>
-                                </ViewLabelAmigos>
-                                <BotesLogin>
-                                    <Botao transparent>
-                                        <Image
-                                            resizeMode="contain"
-                                            style={{ width: 16, height: 16 }}
-                                            source={require('../../../assets/Img/Login/google.png')}
-                                        />
-                                        <LabelBotoes>Google</LabelBotoes>
-                                    </Botao>
-                                    <Botao transparent>
-                                        <Image
-                                            resizeMode="contain"
-                                            style={{ width: 16, height: 16 }}
-                                            source={require('../../../assets/Img/Login/facebook.png')}
-                                        />
-                                        <LabelBotoes>Facebook</LabelBotoes>
-                                    </Botao>
-                                    <Botao transparent>
-                                        <Image
-                                            resizeMode="contain"
-                                            style={{ width: 18, height: 16 }}
-                                            source={require('../../../assets/Img/Login/twitter.png')}
-                                            source={require('../../../assets/Img/Login/twitter.png')}
-                                        />
-                                        <LabelBotoes>Twitter</LabelBotoes>
-                                    </Botao>
-                                </BotesLogin>
-                            </CardAmigos>
-                        </Linha>
-                        <Linha>
-                            <SairdoApp style={Estilos.card} onPress={closeToken}>
-                                <LabelBotaoSair>Desconectar-se</LabelBotaoSair>
-                            </SairdoApp>
-                        </Linha>
-                    </Menu>
-                </ScrollView>
-            </Container>
+    return (
+        <Container>
+            <Header>
+                <IconVoltar
+                    onPress={() => {
+                        navigation.goBack(null);
+                    }}
+                >
+                    <Icon size={25} name="arrow-left" color="#022250" />
+                </IconVoltar>
+                <TituloHeader>Perfil</TituloHeader>
+            </Header>
+            <ScrollView style={{ width: '100%' }}>
+                <ViewDados>
+                    <ViewFotoPerfil>
+                        <Image
+                            source={{
+                                uri: fotoPerfil
+                            }}
+                            style={Estilos.fotoPerfil}
+                        />
+                    </ViewFotoPerfil>
+                    <ViewNome>
+                        <Nome>{nome}</Nome>
+                    </ViewNome>
+                    <ViewNota>
+                        <Icon name="star" color="#ffd700" size={16}></Icon>
+                        <Icon name="star" color="#ffd700" size={16}></Icon>
+                        <Icon name="star" color="#ffd700" size={16}></Icon>
+                        <Icon name="star" color="#ffd700" size={16}></Icon>
+                        <Icon name="star-half" color="#ffd700" size={16}></Icon>
+                    </ViewNota>
+                </ViewDados>
+                <Menu>
+                    <Linha>
+                        <Card
+                            style={Estilos.card}
+                            onPress={() => {
+                                navigation.navigate('Anuncios')
+                            }}
+                        >
+                            <ViewIcons>
+                                <Icon name="card-text-outline" color="#212c50" size={35}></Icon>
+                            </ViewIcons>
+                            <ViewLabel>
+                                <Label>Anuncios</Label>
+                            </ViewLabel>
+                        </Card>
+                        <Card
+                            style={Estilos.card}
+                            onPress={() => {
+                                navigation.navigate('AgendamentoUser', {
+                                    usuario: true
+                                })
+                            }}
+                        >
+                            <ViewIcons>
+                                <Icon name="calendar-month-outline" color="#212c50" size={35}></Icon>
+                            </ViewIcons>
+                            <ViewLabel>
+                                <Label>Agendamentos</Label>
+                            </ViewLabel>
+                        </Card>
+                    </Linha>
+                    <Linha>
+                        <Card
+                            style={Estilos.card}
+                            onPress={() => {
+                                navigation.navigate('Viagens')
+                            }}
+                        >
+                            <ViewIcons>
+                                <Icon name="car" color="#212c50" size={35}></Icon>
+                            </ViewIcons>
+                            <ViewLabel>
+                                <Label>Interesses</Label>
+                            </ViewLabel>
+                        </Card>
+                        <Card
+                            style={Estilos.card}
+                            onPress={() => {
+                                navigation.navigate('TelefoneUteis');
+                            }}
+                        >
+                            <ViewIcons>
+                                <Icon name="phone-outline" color="#212c50" size={35}></Icon>
+                            </ViewIcons>
+                            <ViewLabel>
+                                <Label>Telefones</Label>
+                            </ViewLabel>
+                        </Card>
+                    </Linha>
+                    <Linha>
+                        <Card
+                            style={Estilos.card}
+                            onPress={() => {
+                                Linking.openURL('mailto:contato.hommy@gmail.com');
+                            }}
+                        >
+                            <ViewIcons>
+                                <Icon name="help-circle-outline" color="#212c50" size={35}></Icon>
+                            </ViewIcons>
+                            <ViewLabel>
+                                <Label>Ajuda</Label>
+                            </ViewLabel>
+                        </Card>
+                        <Card
+                            style={Estilos.card}
+                            onPress={() => {
+                                Linking.openURL('mailto:contato.hommy@gmail.com');
+                            }}
+                        >
+                            <ViewIcons>
+                                <Icon name="heart-outline" color="#212c50" size={35}></Icon>
+                            </ViewIcons>
+                            <ViewLabel>
+                                <Label>Feedback</Label>
+                            </ViewLabel>
+                        </Card>
+                    </Linha>
+                    <Linha>
+                        <Card
+                            style={Estilos.card}
+                            onPress={() => {
+                                navigation.navigate('GerenciamentoRepublica')
+                            }}
+                        >
+                            <ViewIcons>
+                                <Icon name="account-group-outline" color="#212c50" size={35}></Icon>
+                            </ViewIcons>
+                            <ViewLabel>
+                                <Label>Gerenciamento</Label>
+                            </ViewLabel>
+                        </Card>
+                    </Linha>
+                    <Linha>
+                        <CardAmigos style={Estilos.card}>
+                            <ViewIcons>
+                                <Icon name="account-multiple-plus-outline" color="#212c50" size={35}></Icon>
+                            </ViewIcons>
+                            <ViewLabelAmigos>
+                                <Label>Convidar amigos</Label>
+                            </ViewLabelAmigos>
+                            <BotesLogin>
+                                <Botao transparent>
+                                    <Image
+                                        resizeMode="contain"
+                                        style={{ width: 16, height: 16 }}
+                                        source={require('../../../assets/Img/Login/google.png')}
+                                    />
+                                    <LabelBotoes>Google</LabelBotoes>
+                                </Botao>
+                                <Botao transparent>
+                                    <Image
+                                        resizeMode="contain"
+                                        style={{ width: 16, height: 16 }}
+                                        source={require('../../../assets/Img/Login/facebook.png')}
+                                    />
+                                    <LabelBotoes>Facebook</LabelBotoes>
+                                </Botao>
+                                <Botao transparent>
+                                    <Image
+                                        resizeMode="contain"
+                                        style={{ width: 18, height: 16 }}
+                                        source={require('../../../assets/Img/Login/twitter.png')}
+                                        source={require('../../../assets/Img/Login/twitter.png')}
+                                    />
+                                    <LabelBotoes>Twitter</LabelBotoes>
+                                </Botao>
+                            </BotesLogin>
+                        </CardAmigos>
+                    </Linha>
+                    <Linha>
+                        <SairdoApp style={Estilos.card} onPress={closeToken}>
+                            <LabelBotaoSair>Desconectar-se</LabelBotaoSair>
+                        </SairdoApp>
+                    </Linha>
+                </Menu>
+            </ScrollView>
+        </Container>
     )
 }
 export default withNavigation(MenuLateral)

@@ -67,6 +67,7 @@ export default function RenderApp(props) {
     pegarToken();
     try {
       await AsyncStorage.getItem('firtOpen').then(value => {
+       
         if (value === 'true') {
           setFirtsOpen(false);
         } else {
@@ -76,6 +77,7 @@ export default function RenderApp(props) {
       });
 
       await AsyncStorage.getItem('token').then(value => {
+       
         if (value != null) {
           setUsuarioLogado(true);
         } else {

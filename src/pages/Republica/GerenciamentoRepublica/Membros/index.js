@@ -61,7 +61,7 @@ export default function Membros(props, { navigation }) {
         <LabelView>
           <Titulo>Tarefas</Titulo>
         </LabelView>
-        <Adicionar>
+        <Adicionar onPress={() => { props.modalInsercaoDados() }}>
           <LabelBotao>+</LabelBotao>
         </Adicionar>
       </Apresentacao>
@@ -70,7 +70,7 @@ export default function Membros(props, { navigation }) {
         style={{ flex: 1 }}
         data={listaDeContas}
         renderItem={({ item }) => (
-          <ListContas>
+          <ListContas onPress={() => { props.modalVisualizacao() }}>
             <LabelTitulo>{item.nome}</LabelTitulo>
           </ListContas>
         )}

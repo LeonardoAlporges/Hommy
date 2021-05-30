@@ -1,7 +1,8 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import { Picker } from 'native-base';
-import React, { useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import { FlatList, Image, Modal, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import api from '../../../../service/api';
 
 import {
   Card,
@@ -27,76 +28,41 @@ import {
   ViewValoraTotal,
 } from './styles';
 
-export default function Contas(props, { navigation }) {
+ const Contas = forwardRef( (props,ref) => { 
   const moment = require('moment');
   moment.locale('pt', {
     months: 'Janeiro_Fevereiro_Março_Abril_Maio_Junho_Julho_Agosto_Setembro_Outubro_Novembro_Dezembro'.split('_')
   });
 
-  const [listaDeContas, setListaDeContas] = useState([
-    {
-      id: 9,
-      titulo: "Aluguel",
-      valorTotal: 200,
-      valorParcela: 100,
-    },
-    {
-      id: 8,
-      titulo: "Internet",
-      valorTotal: 200,
-      valorParcela: 100,
-    },
-    {
-      id: 7,
-      titulo: "Luz",
-      valorTotal: 200,
-      valorParcela: 100,
-    },
-    {
-      id: 7,
-      titulo: "Luz",
-      valorTotal: 200,
-      valorParcela: 100,
-    },
-    {
-      id: 7,
-      titulo: "Luz",
-      valorTotal: 200,
-      valorParcela: 100,
-    },
-    {
-      id: 7,
-      titulo: "Luz",
-      valorTotal: 200,
-      valorParcela: 100,
-    },
-    {
-      id: 7,
-      titulo: "Luz",
-      valorTotal: 200,
-      valorParcela: 100,
-    }
-    , {
-      id: 7,
-      titulo: "Luz",
-      valorTotal: 200,
-      valorParcela: 100,
-    }
+  const anoCorrente = moment().format('YYYY');
 
+  useEffect(()=>{
+    console.log("props",props);
+    carregarContas();
+  },[]);
 
-
-  ]);
-
-  function listContas(item) {
-    return (
-      <ListContas>
-        <LabelTitulo>{item.titulo}</LabelTitulo>
-        <LabelDescricao>R${item.valorTotal}</LabelDescricao>
-        <LabelValor>R${item.valorParcela}</LabelValor>
-      </ListContas>
-    )
+  const carregarContas = () => {
+    api
+      .get(`/contas/${props.idRepublica}/${mesSelecionado}/${anoCorrente}`)
+      .then(response => {
+        console.log("contas",response)
+        setListaDeContas(response.data);
+        AsyncStorage.setItem('REPUBLICA_GERENCIADA_CONTAS', JSON.stringify(response.data));
+      })
+      .catch(error => {
+        setErro(true);
+      });
   }
 
+  useImperativeHandle(ref, () => ({
+    carregarContas(){
+      carregarContas()
+    },
+  }));
+
+  const [modalContas, setModalContas ] = useState(false);
+
+  const [listaDeContas, setListaDeContas] = useState([]);
   const [mesSelecionado, setMesSelecionado] = useState(moment().format('MMMM'));
 
   return (
@@ -108,7 +74,7 @@ export default function Contas(props, { navigation }) {
         <LabelView>
           <Titulo>Contas do mês</Titulo>
         </LabelView>
-        <Adicionar>
+        <Adicionar onPress={() => { props.modalInsercaoDados() }}>
           <LabelBotao>+</LabelBotao>
         </Adicionar>
       </Apresentacao>
@@ -131,13 +97,12 @@ export default function Contas(props, { navigation }) {
           <Picker.Item color={'#142850'} label="Maio" value="Maio" />
         </Picker>
       </ItemPicker>
-
       <FlatList
       nestedScrollEnabled 
       style={{flex: 1}}
         data={listaDeContas}
         renderItem={({ item }) => (
-          <ListContas>
+          <ListContas onPress={() => { props.modalVisualizacao() }}>
             <LabelTitulo>{item.titulo}</LabelTitulo>
             <LabelDescricao>R${item.valorTotal}</LabelDescricao>
             <LabelValor>R${item.valorParcela}</LabelValor>
@@ -154,5 +119,7 @@ export default function Contas(props, { navigation }) {
       </TotalView>
     </Card>
   );
-}
+});
 
+
+export default Contas;
