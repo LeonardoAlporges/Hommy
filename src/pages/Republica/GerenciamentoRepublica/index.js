@@ -104,7 +104,6 @@ export default function GerenciamentoDeRepublica({ navigation }) {
   //   const data = {
   //     email: email
   //   };
-
   //   api
   //     .put(`/gerenciaRepublica/membros/${codigoRepublica}`, data)
   //     .then(response => {

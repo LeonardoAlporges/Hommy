@@ -1,6 +1,6 @@
 import { Formik } from 'formik';
 import moment from 'moment';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { Input, Item } from 'native-base';
 
@@ -30,25 +30,48 @@ import estilo, {
   Linha, FieldSetLarge, LabelFielSet, BotaoView, Botao, LabelBotao, Separador
 } from './styles';
 
-export default function CadastroGerenciamentoRepublica() {
+export default function GerenciamentoRepublica({ navigation }) {
   const emailUser = useSelector(state => state.user.email);
   const [erro, setErro] = useState(false);
   const [nomeRepublica, setNomeRepublica] = useState('');
   const [codigoRepublica, setCodigoRepublica] = useState('');
   const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    setLoading(true);
+    verificarSeJaCadastrou();
+    console.log(navigation)
+  }, []);
+
   function entrarComCodigo() {
+    setLoading(true);
     const data = {
       email: emailUser
     };
     api
       .put(`/gerenciaRepublica/membros/${codigoRepublica}`, data)
       .then(response => {
-       
+        let idRepublica = response.data._id
+        navigation.navigate('Gerenciamento', { idRepublica });
       })
       .catch(error => {
-        console.error("Response:",error.response.erro)
-      });
+        setErro(true);
+      }).finally( () => {setLoading(false)})
+  }
+
+  function verificarSeJaCadastrou() {
+    api
+      .get(`/gerenciaRepublica/${emailUser}`)
+      .then(response => {
+        console.log(response.data)
+          let idRepublica = response.data._id
+          navigation.navigate('Gerenciamento', { idRepublica });
+          setExisteRepublica(true);
+      })
+      .catch(error => {
+        setErro(true);
+      })
+      .finally(setLoading(false));
   }
 
   function cadastrarNovaRepublica() {
@@ -56,22 +79,22 @@ export default function CadastroGerenciamentoRepublica() {
       email: emailUser,
       nomeRepublica: nomeRepublica
     };
-
     api
       .post(`/gerenciaRepublica`, data)
       .then(response => {
-        console.log("Response:",response)
+        let idRepublica = response.data._id
+        navigation.navigate('Gerenciamento', { idRepublica });
       })
       .catch(error => {
-        console.error("Response:",error.response.erro)
         setErro(true);
       });
   }
 
-
   return (
     <Container>
+      {loading && <Loading />}
       <HeaderBack title="Gerenciamento de republica" onNavigation={() => navigation.goBack(null)} />
+      {!loading && 
       <Separador>
         <CadastroView>
           <Apresentacao>
@@ -79,12 +102,8 @@ export default function CadastroGerenciamentoRepublica() {
               <Icone name="home" />
             </IconeView>
             <LabelView>
-              <Titulo>
-                Não tenho uma Republica Cadastrada.
-      </Titulo>
-              <SubTitulo>
-                Quero Cadastrar agora mesmo.
-      </SubTitulo>
+              <Titulo> Não tenho uma Republica Cadastrada. </Titulo>
+              <SubTitulo> Quero Cadastrar agora mesmo. </SubTitulo>
             </LabelView>
           </Apresentacao>
           <DadosView>
@@ -92,9 +111,7 @@ export default function CadastroGerenciamentoRepublica() {
               <FieldSetLarge>
                 <LabelFielSet>Nome da república</LabelFielSet>
                 <Item style={{ borderColor: 'transparent' }}>
-                  <Input
-                    onChangeText={text => setNomeRepublica(text)}
-                  />
+                  <Input onChangeText={text => setNomeRepublica(text)} />
                 </Item>
               </FieldSetLarge>
             </Linha>
@@ -103,20 +120,14 @@ export default function CadastroGerenciamentoRepublica() {
             </BotaoView>
           </DadosView>
         </CadastroView>
-
-
         <EntraCodigoView>
           <Apresentacao>
             <IconeView>
               <Icone name="login" />
             </IconeView>
             <LabelView>
-              <Titulo>
-                Já tenho uma republica cadastrada
-      </Titulo>
-              <SubTitulo>
-                Entrar com código de convite!
-      </SubTitulo>
+              <Titulo>Já tenho uma republica cadastrada </Titulo>
+              <SubTitulo>Entrar com código de convite!</SubTitulo>
             </LabelView>
           </Apresentacao>
           <DadosView>
@@ -137,8 +148,7 @@ export default function CadastroGerenciamentoRepublica() {
             </BotaoView>
           </DadosView>
         </EntraCodigoView>
-
-      </Separador>
+      </Separador>}
     </Container>
 
 
