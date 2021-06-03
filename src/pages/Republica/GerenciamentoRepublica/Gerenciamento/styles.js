@@ -27,7 +27,7 @@ export const DadosView = styled.View`
   padding-right:8%;
 `;
 
-export const IconeView = styled.View`
+export const IconeView = styled.TouchableOpacity`
   flex:2;
   align-items:center;
 `;

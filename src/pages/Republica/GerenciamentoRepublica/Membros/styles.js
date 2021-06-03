@@ -6,7 +6,7 @@ import styled from 'styled-components/native';
 export const Card = styled.View`
 
   margin:5% 5% 5% 5%;
-  height:350px;
+  height:250px;
   background-color:white;
   padding:10px 10px 10px 10px;
   border-radius:3px;

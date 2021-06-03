@@ -167,18 +167,20 @@ export const LabelDescricao = styled.Text`
 `;
 
 export const LabelValor = styled.Text`
-  flex: 1;
+  flex: 2;
   color: #142850;
   font-family: WorkSans-SemiBold;
 `;
 
 export const TotalView = styled.View`
   flex: 1;
+  position:absolute;
+  bottom:30px;
   max-height:30px;
   margin-top:15px;
   flex-direction:row;
-  justify-content:center;
   align-items:center;
+  
 `;
 export const LabelTotal = styled.Text`
   flex: 1;
@@ -208,3 +210,18 @@ export const ViewValoraTotal = styled.Text`
   padding-top:1.5%;
 `;
 
+
+export const SemDados = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+
+
+export const SemDadosLabel= styled.Text`
+  width: 70%;
+  text-align: center;
+  font-size:15px;
+  color: #142850;
+  font-family: WorkSans-SemiBold;
+`;

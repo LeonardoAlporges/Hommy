@@ -7,7 +7,7 @@ class LocalNotificationService {
   configure = onOpenNotification => {
     PushNotification.configure({
       onRegister: function(token) {
-        console.log('[LNS] Registrado', token);
+        //console.log('[LNS] Registrado', token);
       },
       onNotification: function(notification) {
         console.log('[LNS] onNotification', notification);

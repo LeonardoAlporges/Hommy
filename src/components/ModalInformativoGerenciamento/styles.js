@@ -17,6 +17,8 @@ export const Iconefechar = styled(Icon)`
 export const BotaoFechar = styled.TouchableOpacity`
   position: absolute;
   top: 10px;
+  width: 30px;
+  height: 30px;
   right: 10px;
   justify-content:center;
   align-items: center;
@@ -42,11 +44,11 @@ export const Titulo = styled.Text`
 
 export const ViewModal = styled.View`
   min-height: 250px;
-  min-width: 300px;
+  min-width: 320px;
   background-color: white;
   border-radius: 5px;
   max-height: 250px;
-  max-width: 300px;
+  max-width: 320px;
 `;
 
 export const Topico = styled.Text`
@@ -65,3 +67,17 @@ font-family: WorkSans;
 font-size: 16px;
 color: #212c50;
 `;
+
+export const BotaoExcluir = styled.TouchableOpacity`
+  width:30px;
+  position: absolute;
+  top: 10px;
+  right: 60px;
+  height: 30px;
+  border-radius: 30px;
+  align-self: center;
+  background-color: #212c50;
+  justify-content:center;
+  align-items: center;
+`;
+

@@ -40,7 +40,7 @@ export default function RenderApp(props) {
     localNotificationService.configure(onOpenNotification);
 
     function onRegister(token) {
-      console.log('[APP] onRegister:', token);
+      //console.log('[APP] onRegister:', token);
       return token;
     }
 
