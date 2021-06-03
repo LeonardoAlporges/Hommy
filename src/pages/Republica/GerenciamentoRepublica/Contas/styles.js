@@ -146,23 +146,24 @@ export const ListContas = styled.TouchableOpacity`
   flex-direction:row;
   height:30px;
   background-color:#DAE1E7;
-  justify-content:center;
+  justify-content:space-around;
   align-items:center;
 `;
 
 export const LabelTitulo = styled.Text`
-  flex: 2;
+flex: 4;
 padding-left:5%;
 color: #142850;
 font-family: WorkSans-SemiBold;
+align-self:center;
 `;
 
 export const LabelDescricao = styled.Text`
-  flex: 4;
+  flex: 2;
   color: #142850;
   font-family: WorkSans;
+  align-self:flex-end;
 `;
-
 export const LabelValor = styled.Text`
   flex: 1;
   color: #142850;
@@ -208,3 +209,17 @@ export const ViewValoraTotal = styled.Text`
   padding-top:1.5%;
 `;
 
+export const SemDados = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+
+
+export const SemDadosLabel= styled.Text`
+  width: 70%;
+  text-align: center;
+  font-size:15px;
+  color: #142850;
+  font-family: WorkSans-SemiBold;
+`;

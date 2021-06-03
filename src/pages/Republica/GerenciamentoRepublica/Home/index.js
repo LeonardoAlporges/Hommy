@@ -36,11 +36,14 @@ export default function GerenciamentoRepublica({ navigation }) {
   const [nomeRepublica, setNomeRepublica] = useState('');
   const [codigoRepublica, setCodigoRepublica] = useState('');
   const [loading, setLoading] = useState(true);
+  const [existeRepublica, setJaExiteRepublica] = useState(false);
 
   useEffect(() => {
     setLoading(true);
     verificarSeJaCadastrou();
-    console.log(navigation)
+    if (existeRepublica) {
+      navigation.navigate('MenuLateral');
+    }
   }, []);
 
   function entrarComCodigo() {
@@ -51,22 +54,23 @@ export default function GerenciamentoRepublica({ navigation }) {
     api
       .put(`/gerenciaRepublica/membros/${codigoRepublica}`, data)
       .then(response => {
-        let idRepublica = response.data._id
-        navigation.navigate('Gerenciamento', { idRepublica });
+        const idRepublica = response.data._id
+        navigation.navigate('Gerenciamento', { idRepublica: idRepublica, codigoRepublica: response.data.numeroRepublica, nomeRepublica: response.data.republica, membros: response.data.membros });
       })
       .catch(error => {
         setErro(true);
-      }).finally( () => {setLoading(false)})
+      }).finally(() => { setLoading(false) })
   }
 
   function verificarSeJaCadastrou() {
     api
       .get(`/gerenciaRepublica/${emailUser}`)
       .then(response => {
-        console.log(response.data)
-          let idRepublica = response.data._id
-          navigation.navigate('Gerenciamento', { idRepublica });
-          setExisteRepublica(true);
+        if (response.data != null) {
+          setJaExiteRepublica(true);
+          const idRepublica = response.data._id;
+          navigation.navigate('Gerenciamento', { idRepublica: idRepublica, codigoRepublica: response.data.numeroRepublica, nomeRepublica: response.data.republica, membros: response.data.membros });
+        }
       })
       .catch(error => {
         setErro(true);
@@ -82,6 +86,7 @@ export default function GerenciamentoRepublica({ navigation }) {
     api
       .post(`/gerenciaRepublica`, data)
       .then(response => {
+        console.log("Republica:", response);
         let idRepublica = response.data._id
         navigation.navigate('Gerenciamento', { idRepublica });
       })
@@ -92,65 +97,71 @@ export default function GerenciamentoRepublica({ navigation }) {
 
   return (
     <Container>
-      {loading && <Loading />}
       <HeaderBack title="Gerenciamento de republica" onNavigation={() => navigation.goBack(null)} />
-      {!loading && 
-      <Separador>
-        <CadastroView>
-          <Apresentacao>
-            <IconeView>
-              <Icone name="home" />
-            </IconeView>
-            <LabelView>
-              <Titulo> Não tenho uma Republica Cadastrada. </Titulo>
-              <SubTitulo> Quero Cadastrar agora mesmo. </SubTitulo>
-            </LabelView>
-          </Apresentacao>
-          <DadosView>
-            <Linha>
-              <FieldSetLarge>
-                <LabelFielSet>Nome da república</LabelFielSet>
-                <Item style={{ borderColor: 'transparent' }}>
-                  <Input onChangeText={text => setNomeRepublica(text)} />
-                </Item>
-              </FieldSetLarge>
-            </Linha>
-            <BotaoView>
-              <Botao onPress={() => { cadastrarNovaRepublica() }}><LabelBotao>CADASTRAR</LabelBotao></Botao>
-            </BotaoView>
-          </DadosView>
-        </CadastroView>
-        <EntraCodigoView>
-          <Apresentacao>
-            <IconeView>
-              <Icone name="login" />
-            </IconeView>
-            <LabelView>
-              <Titulo>Já tenho uma republica cadastrada </Titulo>
-              <SubTitulo>Entrar com código de convite!</SubTitulo>
-            </LabelView>
-          </Apresentacao>
-          <DadosView>
-            <Linha>
-              <FieldSetLarge>
-                <LabelFielSet>Código da república</LabelFielSet>
-                <Item style={{ borderColor: 'transparent' }}>
-                  <Input
-                    onChangeText={text => setCodigoRepublica(text)}
-                  />
-                </Item>
-              </FieldSetLarge>
-            </Linha>
-            <BotaoView>
-              <Botao onPress={() => entrarComCodigo()}>
-                <LabelBotao>ENTRAR</LabelBotao>
-              </Botao>
-            </BotaoView>
-          </DadosView>
-        </EntraCodigoView>
-      </Separador>}
+      {!loading &&
+        <Separador>
+          <CadastroView>
+            <Apresentacao>
+              <IconeView>
+                <Icone name="home" />
+              </IconeView>
+              <LabelView>
+                <Titulo> Não tenho uma Republica Cadastrada. </Titulo>
+                <SubTitulo> Quero Cadastrar agora mesmo. </SubTitulo>
+              </LabelView>
+            </Apresentacao>
+            <DadosView>
+              <Linha>
+                <FieldSetLarge>
+                  <LabelFielSet>Nome da república</LabelFielSet>
+                  <Item style={{ borderColor: 'transparent' }}>
+                    <Input disabled={existeRepublica} onChangeText={text => setNomeRepublica(text)} />
+                  </Item>
+                </FieldSetLarge>
+              </Linha>
+              {existeRepublica ?
+                <BotaoView>
+                  <Botao onPress={() => { verificarSeJaCadastrou() }}><LabelBotao>Entrar</LabelBotao></Botao>
+                </BotaoView> :
+                <BotaoView>
+                  <Botao onPress={() => { cadastrarNovaRepublica() }}><LabelBotao>CADASTRAR</LabelBotao></Botao>
+                </BotaoView>}
+            </DadosView>
+          </CadastroView>
+          <EntraCodigoView>
+            <Apresentacao>
+              <IconeView>
+                <Icone name="login" />
+              </IconeView>
+              <LabelView>
+                <Titulo>Já tenho uma republica cadastrada </Titulo>
+                <SubTitulo>Entrar com código de convite!</SubTitulo>
+              </LabelView>
+            </Apresentacao>
+            <DadosView>
+              <Linha>
+                <FieldSetLarge>
+                  <LabelFielSet>Código da república</LabelFielSet>
+                  <Item style={{ borderColor: 'transparent' }}>
+                    <Input disabled={existeRepublica}
+                      onChangeText={text => setCodigoRepublica(text)}
+                    />
+                  </Item>
+                </FieldSetLarge>
+              </Linha>
+              {existeRepublica ? <BotaoView>
+                <Botao  onPress={() => { verificarSeJaCadastrou() }} >
+                  <LabelBotao>Entrar</LabelBotao>
+                </Botao>
+              </BotaoView> :
+                <BotaoView>
+                  <Botao onPress={() => entrarComCodigo()}>
+                    <LabelBotao>ENTRAR</LabelBotao>
+                  </Botao>
+                </BotaoView>}
+            </DadosView>
+          </EntraCodigoView>
+        </Separador>}
     </Container>
-
-
   )
 }

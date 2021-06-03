@@ -10,18 +10,12 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { ViewModal, Iconefechar, BotaoFechar, Container, ViewTitulo, Titulo, Linha, LabelFielSet, InputHora, FieldSetLarge, FieldSet, ViewErro, Botao, LabelBotao, LabelErro } from './styles';
 import CustomModal from '../Alert';
 
-export default function ModalAdicaoContas(props) {
+export default function ModalAdicaoTarefas(props) {
 
   const emailUser = useSelector(state => state.user.email);
-
+  
   const [modalVisivel, setModalVisible] = useState(true);
-
-  useEffect(() => {
-    console.log("MODA:",props)
-  }, [])
-
   const [erro, setErro] = useState(false);
-
   const [dataVencimento, setDataVencimento] = useState();
   const [dataVencimentoPicker, setDataVencimentoPicker] = useState(false);
   const [placeDataVencimento, setPlaceDataVencimento] = useState('Selecione');
@@ -37,18 +31,20 @@ export default function ModalAdicaoContas(props) {
     setDataVencimento(date);
   }
 
-  function adicionarConta(values) {
+
+  function adicionarTarefa(value) {
+    console.log('?')
     const data = {
-      descricao: values.descricao,
-      valor: values.valor,
-      vencimento: dataVencimento,
+      descricao: value.descricao,
+      email: emailUser,
+      dataLimite: dataVencimento,
       idRepublica: props.idRepublica
     };
     api
-      .post(`/contas/`, data)
+      .post(`/tarefas/`, data)
       .then(response => {
         console.log(response);
-        onClose();
+        props.onClose();
       })
       .catch(error => {
         console.log(error);
@@ -60,15 +56,14 @@ export default function ModalAdicaoContas(props) {
     <Formik
       initialValues={{
         descricao: '',
-        valor: ''
       }}
       onSubmit={values => {
-        adicionarConta(values);
+        console.log('?123')
+        adicionarTarefa(values);
       }}
 
       validationSchema={yup.object().shape({
         descricao: yup.string().required('Campo obrigatório'),
-        valor: yup.number('Somente numeros!').required('Campo obrigatório'),
       })}
     >
       {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
@@ -88,7 +83,7 @@ export default function ModalAdicaoContas(props) {
               <ViewModal>
                 <ViewTitulo>
                   <Titulo>
-                    Conta do Mês
+                    Tarefa
                   </Titulo>
                   <BotaoFechar onPress={() => onClose()}>
                     <Iconefechar name="close" />
@@ -113,21 +108,6 @@ export default function ModalAdicaoContas(props) {
 
                   </FieldSetLarge>
                   <ViewErro>{touched.descricao && errors.descricao && <LabelErro>{errors.descricao}</LabelErro>}</ViewErro>
-                </Linha>
-                <Linha>
-                  <FieldSetLarge>
-                    <LabelFielSet>Valor</LabelFielSet>
-                    <Item style={{ borderColor: 'transparent' }}>
-                      <Input
-                        value={values.valor}
-                        onChangeText={handleChange('valor')}
-                        placeholder=""
-                        onBlur={() => setFieldTouched('valor')}
-                      />
-                    </Item>
-
-                  </FieldSetLarge>
-                  <ViewErro>{touched.valor && errors.valor && <LabelErro>{errors.valor}</LabelErro>}</ViewErro>
                 </Linha>
                 <Linha>
                   <FieldSetLarge>
@@ -160,9 +140,6 @@ export default function ModalAdicaoContas(props) {
                     <LabelBotao>Salvar</LabelBotao>
                   </Botao >
                 </View>
-
-
-
               </ViewModal>
             </Container>
           </Modal>

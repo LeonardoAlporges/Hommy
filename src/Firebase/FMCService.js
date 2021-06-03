@@ -69,7 +69,7 @@ class FMCService {
   createNotificationListerners = (onRegister, onNotification, onOpenNotification) => {
     //When the application is running, but in the backgroud
     messaging().onNotificationOpenedApp(remoteMessages => {
-      console.log('[FMC] onNotificationOpenedApp Notification caused app to open');
+      //console.log('[FMC] onNotificationOpenedApp Notification caused app to open');
       if (remoteMessages) {
         const notification = remoteMessages.notification;
         onOpenNotification(notification);
@@ -81,7 +81,7 @@ class FMCService {
     messaging()
       .getInitialNotification()
       .then(remoteMessages => {
-        console.log('[FMC] getInitialNotification Abriu o app');
+        //console.log('[FMC] getInitialNotification Abriu o app');
         if (remoteMessages) {
           const notification = remoteMessages.notification;
           onOpenNotification(notification);

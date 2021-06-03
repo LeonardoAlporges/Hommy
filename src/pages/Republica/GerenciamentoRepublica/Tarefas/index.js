@@ -1,7 +1,8 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import { Picker } from 'native-base';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,forwardRef, useImperativeHandle} from 'react';
 import { FlatList, Image, Modal, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import api from '../../../../service/api';
 
 import {
   Card,
@@ -25,43 +26,40 @@ import {
   Linhas,
   Total,
   ViewValoraTotal,
+  SemDados,
+  SemDadosLabel
 } from './styles';
 
-export default function Tarefas(props, { navigation }) {
+const Tarefas = forwardRef((props, ref) => {
   const moment = require('moment');
+
   moment.locale('pt', {
     months: 'Janeiro_Fevereiro_Março_Abril_Maio_Junho_Julho_Agosto_Setembro_Outubro_Novembro_Dezembro'.split('_')
   });
 
-  const [listaDeContas, setListaDeContas] = useState([
-    {
-      id: 9,
-      nome: "Lixo",
-      periodo: 200,
+  useImperativeHandle(ref, () => ({
+    carregarTarefas() {
+      carregarTarefas()
     },
-    {
-      id: 8,
-      nome: "Arrumar",
-      periodo: 200,
-    },
-    {
-      id: 7,
-      nome: "Teste",
-      periodo: 200,
-    }, {
-      id: 7,
-      nome: "Teste",
-      periodo: 200,
-    }, {
-      id: 7,
-      nome: "Teste",
-      periodo: 200,
-    }, {
-      id: 7,
-      nome: "Teste",
-      periodo: 200,
-    },
-  ]);
+  }));
+
+  useEffect(() => {
+    carregarTarefas();
+  }, [])
+
+  const [listaDeTarefas, setListaDeTarefas] = useState([]);
+
+  function carregarTarefas() {
+    api
+      .get(`/tarefas/${props.idRepublica}`)
+      .then(response => {
+        console.log("Tarefas:",response)
+        setListaDeTarefas(response.data);
+      })
+      .catch(error => {
+        setErro(true);
+      });
+  }
 
   const [mesSelecionado, setMesSelecionado] = useState(moment().format('MMMM'));
 
@@ -78,25 +76,27 @@ export default function Tarefas(props, { navigation }) {
           <LabelBotao>+</LabelBotao>
         </Adicionar>
       </Apresentacao>
-      <FlatList
-        nestedScrollEnabled
-        style={{ flex: 1 }}
-        data={listaDeContas}
-        renderItem={({ item }) => (
-          <ListContas onPress={() => { props.modalVisualizacao() }}>
-            <LabelTitulo>{item.nome}</LabelTitulo>
-            <LabelValor>R${item.periodo}</LabelValor>
-          </ListContas>
-        )}
-        keyExtractor={item => item._id}
-      />
-      <TotalView>
-        <LabelTotal>Total</LabelTotal>
-        <Linhas />
-        <ViewValoraTotal>
-          <Total>R$ 300</Total>
-        </ViewValoraTotal>
-      </TotalView>
+      {listaDeTarefas.length == 0 ?
+        <SemDados>
+          <SemDadosLabel>
+            Você nao tem consta para serem exibidas.
+          </SemDadosLabel>
+        </SemDados>
+        :
+        <FlatList
+          nestedScrollEnabled
+          style={{ flex: 1 }}
+          data={listaDeTarefas}
+          renderItem={({ item }) => (
+            <ListContas onPress={() => { props.modalVisualizacao(item) }}>
+              <LabelTitulo>{item.descricao}</LabelTitulo>
+              <LabelValor>Venc: {moment(item.dataLimite).format('DD/MM/YY') }</LabelValor>
+            </ListContas>
+          )}
+          keyExtractor={item => item._id}
+        />}
     </Card>
   );
-}
+});
+
+export default Tarefas;
