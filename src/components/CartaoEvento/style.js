@@ -9,20 +9,23 @@ export const Container = styled.TouchableHighlight`
 `;
 export const Image = styled.Image`
   width:100%;
-  height:100px;
+  height:300px;
   border-radius:4;
 `;
-export const ViewImgaem = styled.View`
+export const ViewImagem = styled.View`
   width: 100%;
-  height: 100px;
   justify-content: center;
   align-items: center;
+  margin-bottom: 5;
 `;
 export const ViewInformacoes = styled.View`
  padding-left: 5%;
-  width: 100%;
+  width: 100%; 
   height: 90px;
   flex-direction: column;
+  margin-bottom: 10;
+  padding-bottom:5;
+  
 
 `;
 export const ViewTitulo = styled.View`
@@ -41,7 +44,7 @@ export const ViewDataHora = styled.View`
 export const Icone = styled(Icon)`
   font-size: 20px;
   color: #203258;
-  margin:0 0 0 5px;
+  margin:0 10px 0 0;
 `;
 export const Data = styled.Text`
   font-family: WorkSans;
@@ -68,7 +71,7 @@ const styles = StyleSheet.create({
   V_cartao: {
     backgroundColor: '#fff',
     display: 'flex',
-    height: 190,
+    height: 400,
     borderRadius: 4,
     width: '100%',
     shadowColor: '#000',
@@ -78,7 +81,8 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.23,
     shadowRadius: 2.62,
-    elevation: 4
+    elevation: 4,
+    
   },
 
 });

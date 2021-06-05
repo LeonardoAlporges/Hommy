@@ -31,6 +31,16 @@ export const FieldSetLarge = styled.View`
   border-color: #dcdcdc;
   padding-top: 5px;
 `;
+export const FieldSetXL = styled.View`
+  width: 100%;
+  height: 100px;
+  border-radius: 3;
+  border-width: 1px;
+  align-items: center;
+  border-color: #dcdcdc;
+  padding-top: 5px;
+  margin-bottom: 5px;
+`;
 export const LabelFielSet = styled.Text`
   position: absolute;
   top: -13px;
