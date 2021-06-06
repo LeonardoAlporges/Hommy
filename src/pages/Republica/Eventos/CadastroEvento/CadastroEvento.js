@@ -30,7 +30,8 @@ import estilo, {
   Linha,
   Subtitle,
   ViewBotao,
-  ViewErro
+  ViewErro,
+  FieldSetXL
 } from './styles';
 
 
@@ -129,12 +130,14 @@ export default function CadastroEvento({ navigation }) {
       descontoDisponivel: descontoDisponivel,
       valor: valor,
       userEmail: emailUser,
+      telefone: values.contato,
       data: dataEvento,
       hora: horarioDeInicio,
-      localCompraIngresso: values.localCompraIngresso,
+      localCompraIngresso: values.localVenda,
       imagem1: linkimagem1,
       imagem2: linkimagem2,
-      imagem3: linkimagem3
+      imagem3: linkimagem3,
+      descricao: values.descricao
     };
 
     if (imagem1 == null && imagem2 == null && imagem3 == null) {
@@ -195,12 +198,15 @@ export default function CadastroEvento({ navigation }) {
         contato: '',
         codigoDesconto: '',
         desconto: '',
+        descricao: '',
       }}
       onSubmit={values => {
         publicarEvento(values);
       }}
       validationSchema={yup.object().shape({
         tituloEvento: yup.string().required('Campo obrigatório').max(40, 'Somente 40 caracteres são permitidos'),
+        descricao: yup.string().required('Campo obrigatório').max(100, 'Somente 100 caracteres são permitidos'),
+
         localVenda: yup.string().required('Campo obrigatório').max(70, 'Somente 70 caracteres são permitidos'),
         contato: yup.string().max(9999999999999).required(' Campo obrigatórior'),
         valor: yup.number('Somente numeros!').max(200, 'Valor maximo de R$ 200,00').required('Campo obrigatório'),
@@ -224,7 +230,7 @@ export default function CadastroEvento({ navigation }) {
                 <FieldSetLarge>
                   <LabelFielSet>Titulo do evento</LabelFielSet>
                   <Item style={{ borderColor: 'transparent' }}>
-                    <Input
+                    <Input multiline
                       value={values.tituloEvento}
                       onChangeText={handleChange('tituloEvento')}
                       placeholder=""
@@ -237,6 +243,24 @@ export default function CadastroEvento({ navigation }) {
                     )}
                   </View>
                 </FieldSetLarge>
+              </Linha>
+              <Linha>
+                <FieldSetXL>
+                  <LabelFielSet>Descrição</LabelFielSet>
+                  <Item style={{ borderColor: 'transparent' }}>
+                    <Input
+                      value={values.descricao}
+                      onChangeText={handleChange('descricao')}
+                      placeholder=""
+                      onBlur={() => setFieldTouched('descricao')}
+                    />
+                  </Item>
+                  <View style={estilo.V_error}>
+                    {touched.descricao && errors.descricao && (
+                      <Text style={estilo.textError}>{errors.descricao}</Text>
+                    )}
+                  </View>
+                </FieldSetXL>
               </Linha>
               <Linha>
                 <FieldSet>

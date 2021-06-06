@@ -3,7 +3,7 @@ import 'moment/locale/br';
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import styles, { Container, Data, Icone, Image, Local, Titulo, ViewDataHora, ViewImgaem, ViewInformacoes, ViewLocal, ViewTitulo } from './style';
+import styles, { Container, Data, Icone, Image, Local, Titulo, ViewDataHora, ViewImagem, ViewInformacoes, ViewLocal, ViewTitulo } from './style';
 
 
 
@@ -19,9 +19,9 @@ export function CartaoEvento(props) {
   return (
     <Container underlayColor="#fff" onPress={onClickCard}  >
       <View style={styles.V_cartao}>
-        <ViewImgaem>
+        <ViewImagem>
           <Image source={{ uri: props.dados.imagem1 }} />
-        </ViewImgaem>
+        </ViewImagem>
         <ViewInformacoes>
           <ViewTitulo>
             <Titulo>
@@ -34,7 +34,7 @@ export function CartaoEvento(props) {
           </ViewDataHora>
           <ViewLocal>
             <Icone name="pin" ></Icone>
-            <Local>Ainda sem</Local>
+            <Local>{props.dados.localCompraIngresso}</Local>
           </ViewLocal>
         </ViewInformacoes>
       </View>
