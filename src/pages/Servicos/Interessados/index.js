@@ -99,7 +99,7 @@ export default function InteressadosServico({ navigation }) {
       {listaAgendamento.length != 0 && !loading && (
         <View>
           <View style={{ width: '100%', paddingHorizontal: 5, height: 40 }}>
-            <Subtitulo>Abaixo estão listadas as pessoas que solicitaram uma visita para ver seu produto.</Subtitulo>
+            <Subtitulo>Abaixo estão listadas as pessoas que solicitaram uma visita para ver seu serviço.</Subtitulo>
           </View>
           <ViewLabel>
             <Label>Interessados</Label>

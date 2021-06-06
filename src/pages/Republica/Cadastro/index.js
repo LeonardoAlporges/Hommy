@@ -55,6 +55,7 @@ export default function Cadastro({ navigation }) {
 
   useEffect(() => {
 
+    console.log("Dados",dadosRepublica)
     if (atualizarCadastro) {
       var cont = 0;
       if (dadosRepublica.imagem1 != null) {
@@ -594,8 +595,8 @@ export default function Cadastro({ navigation }) {
                             R$
                           </Label>
                           <CurrencyInput
-                             placeholderTextColor="#263b50"
-                             style={{ fontFamily: 'WorkSans', width: '80%', height: '100%' }}
+                            placeholderTextColor="#263b50"
+                            style={{ fontFamily: 'WorkSans', width: '80%', height: '100%' }}
                             value={aluguel}
                             onChangeValue={(formattedValue) => { setAluguel(formattedValue)}}
                             separator="."
@@ -626,7 +627,7 @@ export default function Cadastro({ navigation }) {
                           <CurrencyInput
                              placeholderTextColor="#263b50"
                              style={{ fontFamily: 'WorkSans', width: '80%', height: '100%' }}
-                            value={conta}
+                            value={parseInt( conta)}
                             onChangeValue={(formattedValue) => { setConta(formattedValue)}}
                             separator="."
                             precision={2}

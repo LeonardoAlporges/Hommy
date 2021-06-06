@@ -138,7 +138,7 @@ export default function CadastroServico({ navigation }) {
       image2: linkimagem2,
       image3: linkimagem3
     };
-
+    console.log('AE')
     criarNovoAnuncio(data);
     setLoading(false);
   }
@@ -220,7 +220,7 @@ export default function CadastroServico({ navigation }) {
           .max(30, 'Maximo permitido de 30 caracteres')
           .required('Campo obrigatório'),
         telefone: yup.string().max(9999999999999).required(' Campo obrigatórior'),
-        email: yup.string().email('E-mail inválido ou incorreto').required('Campo obrigatório'),
+        //email: yup.string().email('E-mail inválido ou incorreto').required('Campo obrigatório'),
         cidade: yup.string('').min(3, 'Minimo de 3 caracteres').max(30, 'Maximo permitido de 30 caracteres'),
         bairro: yup.string('').min(3, 'Minimo de 3 caracteres').max(30, 'Maximo permitido de 30 caracteres'),
         rua: yup.string('').min(3, 'Minimo de 3 caracteres').max(30, 'Maximo permitido de 30 caracteres'),
@@ -458,7 +458,7 @@ export default function CadastroServico({ navigation }) {
                             {touched.telefone && errors.telefone && <Text style={estilo.textError}>{errors.telefone}</Text>}
                           </View>
                         </FieldSet>
-                        <FieldSet>
+                        {/* <FieldSet>
                           <LabelFielSet>Email</LabelFielSet>
                           <Item style={{ borderColor: 'transparent' }}>
                             <Input
@@ -469,9 +469,9 @@ export default function CadastroServico({ navigation }) {
                             />
                           </Item>
                           <View style={estilo.V_erro}>
-                            {touched.email && errors.email && <Text style={estilo.textError}>{errors.email}</Text>}
+                             {touched.email && errors.email && <Text style={estilo.textError}>{errors.email}</Text>} 
                           </View>
-                        </FieldSet>
+                        </FieldSet> */}
                       </Linha>
                       <Linha>
                         <FieldSetLarge>

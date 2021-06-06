@@ -45,9 +45,11 @@ export default function Agendar({ navigation }) {
   const [alertaFaltaDados, setAlertaFaltaDados] = useState(false);
   const [horaPicker, setHoraPicker] = useState(false);
 
+  const [selecionOuDataHora,setSelecionOuDataHora ] = useState(0);
+
   function agendarVisita() {
     setLoading(true);
-    if ((dataAgendamento || horaAgendamento) == null || (dataAgendamento || horaAgendamento) == false) {
+    if (selecionOuDataHora < 2) {
       setLoading(false);
       return 0;
     }
@@ -70,6 +72,7 @@ export default function Agendar({ navigation }) {
   }
 
   async function selecionarHorario(hora) {
+    setSelecionOuDataHora(selecionOuDataHora++);
     setHoraPicker(false);
     const horaLabel = moment(new Date(hora)).format('HH:mm');
     setHoraAgendamento(hora);
@@ -77,6 +80,7 @@ export default function Agendar({ navigation }) {
   }
 
   async function selecionarData(date) {
+    setSelecionOuDataHora(selecionOuDataHora++);
     setDataPicker(false);
     const dataLabel = moment(new Date(date)).format('DD [de] MMMM');
     setDataAgendamento(date);
@@ -163,6 +167,7 @@ export default function Agendar({ navigation }) {
 
       <ViewBotao>
         <Button
+        disabled={selecionOuDataHora < 2}
           style={style.botao}
           onPress={() => {
             agendarVisita();

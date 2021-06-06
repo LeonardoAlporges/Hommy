@@ -79,8 +79,7 @@ function Anuncios({ navigation }) {
           setReloading(false);
           setLoading(false);
         });
-    }
-    else if (tipo == 'Servico' && valor == 1) {
+    } else if (tipo == 'Servico' && valor == 1) {
       api
         .delete(`/servico/${item._id}`)
         .then(responseJson => {

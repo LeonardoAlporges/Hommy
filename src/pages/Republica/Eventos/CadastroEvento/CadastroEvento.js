@@ -125,6 +125,7 @@ export default function CadastroEvento({ navigation }) {
   function publicarEvento(values) {
     const data = {
       titulo: values.tituloEvento,
+      descricao : values.descricao,
       descontoDisponivel: descontoDisponivel,
       valor: valor,
       userEmail: emailUser,
@@ -333,7 +334,7 @@ export default function CadastroEvento({ navigation }) {
                       placeholderTextColor="#263b50"
                       keyboardType="number-pad"
                       mask={'([00]) [00000]-[0000]'}
-                      value={values.contato} //celular
+                      value={values.contato}
                       onChangeText={handleChange('contato')}
                       onBlur={() => setFieldTouched('contato')}
                     />

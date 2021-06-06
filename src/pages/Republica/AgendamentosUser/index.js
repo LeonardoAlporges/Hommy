@@ -10,17 +10,6 @@ import MeusAgendamentosRepublica from '../MeusAgendamentos';
 import MeusAgendamentosProduto from '../Produtos/MeusAgendamentos';
 import {
   Container,
-
-
-
-
-
-
-
-
-
-
-
   Subtitulo
 } from './styles';
 
