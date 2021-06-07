@@ -440,7 +440,7 @@ export default function CadastroEvento({ navigation }) {
               </View>
 }
               <AreaFotos>
-                <LabelFotos>Fotos da sua república</LabelFotos>
+                <LabelFotos>Fotos do seu evento</LabelFotos>
                 <DivisaoFotos>
                   {imagem1 == null ? (
                     <View style={estilo.V_ImageFullEmpty}>

@@ -52,7 +52,7 @@ export default function AgendarVisitaProduto({ navigation }) {
       return 0;
     }
     const agendamento = {
-      id: produtos._id,
+      idProduto: produtos._id,
       email: email,
       data: dataAgendamento,
       hora: horaAgendamento

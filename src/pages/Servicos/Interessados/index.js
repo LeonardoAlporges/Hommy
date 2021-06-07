@@ -79,7 +79,6 @@ export default function InteressadosServico({ navigation }) {
 
   function verificarTipoRequisicao(tipoSocilitacao, usuario) {
     if (tipoSocilitacao == 1) {
-      console.log(tipoSocilitacao, usuario)
       atualizarStatus(usuario,"Confirmado");
     } else if (tipoSocilitacao == 0) {
       atualizarStatus(usuario,"Rejeitado");
@@ -124,10 +123,10 @@ export default function InteressadosServico({ navigation }) {
               <View style={style.viewData2}>
                 <LabelData>{moment(item.agenda.data).format('DD/MM/YY')}</LabelData>
                 <Text>As</Text>
-                <LabelData>{moment(item.agenda.hora).format('hh:mm')}</LabelData>
+                <LabelData>{moment(item.agenda.horario).format('hh:mm')}</LabelData>
               </View>
              }
-              <View>
+              
               {item.agenda.status == 'Análise' && (
                 <Analise>
                   <Label>Em análise</Label>
@@ -149,7 +148,7 @@ export default function InteressadosServico({ navigation }) {
                   <LabelFinalizado onPress={()=>{abrirAvaliacao(item.user.email)}}>Avaliar Anunciante</LabelFinalizado>
                 </Finalizado>
               )}
-              </View>
+              
             </ViewData>
           </ScrollView>
         )}

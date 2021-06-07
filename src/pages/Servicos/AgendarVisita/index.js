@@ -55,7 +55,7 @@ export default function AgendarVisitaServico({ navigation }) {
       idServico: servicos._id,
       email: email,
       data: dataAgendamento,
-      hora: horaAgendamento
+      horario: horaAgendamento
     };
 
     api

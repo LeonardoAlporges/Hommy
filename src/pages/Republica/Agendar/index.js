@@ -85,6 +85,7 @@ export default function Agendar({ navigation }) {
     const dataLabel = moment(new Date(date)).format('DD [de] MMMM');
     setDataAgendamento(date);
     setLabelData(dataLabel);
+    
   }
 
   function picker() {

@@ -56,6 +56,7 @@ font-size: 16;
 color: #142850;
 `;
 
+
 export const ViewLabel = styled.View`
 width: 100%;
 margin: 10px 0 10px 0;

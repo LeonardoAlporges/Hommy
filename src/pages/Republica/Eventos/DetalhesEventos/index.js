@@ -29,6 +29,7 @@ export default function DetalhesEventos({ navigation }) {
   }
 
   function AbrirTelefone() {
+    console.log(evento);
     Linking.openURL(`tel:${evento.telefone}`);
   }
 
@@ -89,7 +90,7 @@ export default function DetalhesEventos({ navigation }) {
       <LinhaUnica>
         <ItemUnico>
           <ViewIcone>
-            <Icon name="screwdriver" style={{ fontSize: 25, color: '#142850' }} />
+            <Icon name="currency-usd" style={{ fontSize: 25, color: '#142850' }} />
           </ViewIcone>
           <LabelItem>R$ {evento.valor}</LabelItem>
         </ItemUnico>
