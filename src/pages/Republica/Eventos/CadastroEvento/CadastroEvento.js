@@ -68,14 +68,14 @@ export default function CadastroEvento({ navigation }) {
 
 
   function selecionarHorario(date) {
-    const hora = moment(new Date(date)).format('HH:mm');
+    const hora = moment((date)).format('HH:mm');
     setHorarioInicioPicker(false);
     setHorarioInicio(date);
     setPlaceHorarioInicio(hora);
   }
 
   function selecionarData(date) {
-    const data = moment(new Date(date)).format('DD/MM');
+    const data = moment((date)).format('DD/MM');
     setDataEventoPicker(false);
     setDataEvento(date);
     setPlaceDataEvento(data);
@@ -137,7 +137,8 @@ export default function CadastroEvento({ navigation }) {
       imagem1: linkimagem1,
       imagem2: linkimagem2,
       imagem3: linkimagem3,
-      descricao: values.descricao
+      descricao: values.descricao,
+      instagram: values.instagram
     };
 
     if (imagem1 == null && imagem2 == null && imagem3 == null) {
@@ -199,6 +200,7 @@ export default function CadastroEvento({ navigation }) {
         codigoDesconto: '',
         desconto: '',
         descricao: '',
+        instagram: ''
       }}
       onSubmit={values => {
         publicarEvento(values);
@@ -206,7 +208,7 @@ export default function CadastroEvento({ navigation }) {
       validationSchema={yup.object().shape({
         tituloEvento: yup.string().required('Campo obrigatório').max(40, 'Somente 40 caracteres são permitidos'),
         descricao: yup.string().required('Campo obrigatório').max(100, 'Somente 100 caracteres são permitidos'),
-
+        instagram: yup.string().max(100, 'Somente 100 caracteres são permitidos'),
         localVenda: yup.string().required('Campo obrigatório').max(70, 'Somente 70 caracteres são permitidos'),
         contato: yup.string().max(9999999999999).required(' Campo obrigatórior'),
         valor: yup.number('Somente numeros!').max(200, 'Valor maximo de R$ 200,00').required('Campo obrigatório'),
@@ -249,6 +251,7 @@ export default function CadastroEvento({ navigation }) {
                   <LabelFielSet>Descrição</LabelFielSet>
                   <Item style={{ borderColor: 'transparent' }}>
                     <Input
+                      multiline numberOfLines={4}
                       value={values.descricao}
                       onChangeText={handleChange('descricao')}
                       placeholder=""
@@ -368,6 +371,24 @@ export default function CadastroEvento({ navigation }) {
                     {touched.contato && errors.contato && <Text style={estilo.textError}>{errors.contato}</Text>}
                   </View>
                 </FieldSet>
+              </Linha>
+              <Linha>
+                <FieldSetLarge>
+                  <LabelFielSet>Instagram</LabelFielSet>
+                  <Item style={{ borderColor: 'transparent' }}>
+                    <Input multiline
+                      value={values.instagram}
+                      onChangeText={handleChange('instagram')}
+                      placeholder=""
+                      onBlur={() => setFieldTouched('instagram')}
+                    />
+                  </Item>
+                  <View style={estilo.V_error}>
+                    {touched.instagram && errors.instagram && (
+                      <Text style={estilo.textError}>{errors.instagram}</Text>
+                    )}
+                  </View>
+                </FieldSetLarge>
               </Linha>
               <View style={{ flexDirection: "row", marginTop: 15 }}>
                 <CheckBox
