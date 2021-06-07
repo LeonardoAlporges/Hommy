@@ -7,6 +7,7 @@ import HeaderBack from '../../../../components/CustomHeader';
 import ModalAdicaoContas from '../../../../components/ModalAdicaoContas';
 import ModalIformativoGerenciamento from '../../../../components/ModalInformativoGerenciamento';
 import { NavigationActions, StackActions, withNavigation } from 'react-navigation';
+import Loading from '../../../../components/Loading';
 
 import api from '../../../../service/api';
 import Contas from '../Contas'
@@ -48,6 +49,7 @@ export function Gerenciamento(props, { navigation }) {
   const [item, setItem] = useState(null);
   const contaRef = useRef(null);
   const tarefaRef = useRef(null);
+  const [loading, setLoading] = useState(false);
 
   function abrirModalContas(item) {
     setItem(item);
@@ -67,9 +69,12 @@ export function Gerenciamento(props, { navigation }) {
     api
       .delete(`/gerenciaRepublica/${idRepublica}`)
       .then(response => {
-        navigation.goBack(null);
+        props.navigation.goBack(null);
+        console.log(response)
       })
       .catch(error => {
+        console.log(error)
+
         setErro(true);
       });
   }
@@ -93,7 +98,9 @@ export function Gerenciamento(props, { navigation }) {
 
   return (
     <Container altura={Dimensions.get('window').height} >
-      <HeaderBack title="Gerenciamento de republica" onNavigation={() => navigation.goBack(null)} />
+      {loading && <Loading />}
+      <HeaderBack title="Gerenciamento de republica" onNavigation={() => navigation.navigate('MenuLateral')} />
+
       <Apresentacao>
         <IconeView>
           <Icone name="home" />

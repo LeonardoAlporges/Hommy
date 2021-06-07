@@ -54,10 +54,6 @@ export default function DetalhesEventos({ navigation }) {
       />
     );
   }
-  function participar(){
-    setHabilitarDesconto(true);
-    //Adicionar o contador para enventos
-  }
 
   return (
     <ScrollView>
@@ -154,19 +150,6 @@ export default function DetalhesEventos({ navigation }) {
        </LinhaDupla>
 
       }
-      <ViewBotao>
-       <BotaoContato
-         onPress={() => {
-           participar();
-         }}
-       >
-         <ViewIcone>
-           <Icon name="check-bold" style={{ fontSize: 25, color: '#ffffff', textAlign: 'center' }} />
-         </ViewIcone>
-
-         <LabelBotao>Irei Participar</LabelBotao>
-       </BotaoContato>
-     </ViewBotao>
       <ViewBotao>
         <BotaoContato
           onPress={() => {

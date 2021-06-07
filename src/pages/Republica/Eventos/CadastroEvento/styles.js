@@ -39,7 +39,6 @@ export const FieldSetXL = styled.View`
   align-items: center;
   border-color: #dcdcdc;
   padding-top: 5px;
-  margin-bottom: 5px;
 `;
 export const LabelFielSet = styled.Text`
   position: absolute;
@@ -52,7 +51,6 @@ export const LabelFielSet = styled.Text`
   padding: 0 5px 0 5px;
 `;
 export const Linha = styled.View`
-  height: 50px;
   width: 100%;
   flex-direction: row;
   justify-content: space-between;

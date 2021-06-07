@@ -9,7 +9,7 @@ import styles, { Container, Data, Icone, Image, Local, Titulo, ViewDataHora, Vie
 
 export function CartaoEvento(props) {
   const [data, setDataViagem] = useState(moment(props.dados.data).format('DD/MM'));
-  const [hora, sethoraSaida] = useState(moment(new Date(props.dados.hora)).format('HH:mm'));
+  const [hora, sethoraSaida] = useState(moment((props.dados.hora)).format('HH:mm'));
 
   function onClickCard() {
     const dados = props.dados;
