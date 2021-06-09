@@ -397,7 +397,7 @@ export default function CadastroServico({ navigation }) {
                       ) : (
                         <View style={estilo.V_ImageFull}>
                           <Image source={{ uri: imagem3 }} style={estilo.ImageFull} />
-                            <TouchableOpacity onPress={() => { removerFoto(1) }} style={estilo.viewCloseFoto}>
+                            <TouchableOpacity onPress={() => { removerFoto(3) }} style={estilo.viewCloseFoto}>
                               <Icone name="close" ></Icone>
                             </TouchableOpacity>
                         </View>

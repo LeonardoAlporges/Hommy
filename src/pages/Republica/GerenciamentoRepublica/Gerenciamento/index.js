@@ -99,7 +99,7 @@ export function Gerenciamento(props, { navigation }) {
   return (
     <Container altura={Dimensions.get('window').height} >
       {loading && <Loading />}
-      <HeaderBack title="Gerenciamento de republica" onNavigation={() => navigation.navigate('MenuLateral')} />
+      <HeaderBack title="Gerenciamento de republica" onNavigation={() =>props.navigation.goBack(null) } />
 
       <Apresentacao>
         <IconeView>

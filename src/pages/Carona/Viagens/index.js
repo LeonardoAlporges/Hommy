@@ -41,10 +41,6 @@ export default function Viagens({ navigation }) {
   const [modalDesinteresse, setModalDesinteresse] = useState(false);
   const [idCarona, setIdCarona] = useState();
 
-  useEffect(() => {
-    setListaCarona([]);
-    buscarListaCaronaInteressada();
-  }, [reload]);
 
   function avaliarMotorista(item) {
     setEmailAvaliado(item.userEmail);
@@ -62,7 +58,7 @@ export default function Viagens({ navigation }) {
         data: { email: emailUsuario }
       })
       .then(response => {
-        setReload(!reload);
+        buscarListaCaronaInteressada();
         setLoading(false);
       })
       .catch(error => {
@@ -98,7 +94,7 @@ export default function Viagens({ navigation }) {
 
   return (
     <Container>
-      <HeaderBack title="Meus interesses" onNavigation={() => resetarPilhaNavegacao('TabsHeader')} />
+      <HeaderBack title="Meus interesses" onNavigation={() => navigation.goBack(null) } />
       {loading && <Loading />}
       {listaCarona.length == 0 && (
         <EmptyState

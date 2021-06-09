@@ -38,6 +38,10 @@ export default function GerenciamentoRepublica({ navigation }) {
   const [loading, setLoading] = useState(true);
   const [existeRepublica, setJaExiteRepublica] = useState(false);
 
+  
+  function goBackScreen() {
+    navigation.goBack(null);
+  }
 
   useEffect(() => {
     setLoading(true);
@@ -101,7 +105,7 @@ export default function GerenciamentoRepublica({ navigation }) {
 
   return (
     <Container>
-      <HeaderBack title="Gerenciamento de republica" onNavigation={() => navigation.goBack(null)} />
+      <HeaderBack title="Gerenciamento de republica" onNavigation={() =>  goBackScreen() } />
       {loading && <Loading />}
         <Separador>
           <CadastroView>

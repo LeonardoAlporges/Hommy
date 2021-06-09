@@ -163,7 +163,7 @@ function Anuncios({ navigation }) {
 
   return (
     <Container>
-      <HeaderBack title="Meus anúncios" onNavigation={() => navigation.navigate('TabsHeader', { menuAberto: true })} />
+      <HeaderBack title="Meus anúncios" onNavigation={() =>  navigation.goBack(null) }/>
       {loading && <Loading />}
       {listaCaronas.length == 0 && listaRepublicas.length == 0 && listaServicos.length == 0 && !loading && (
         <EmptyState

@@ -50,7 +50,7 @@ export const Icone = styled(Icon)`
 `;
 export const LabelView = styled.View`
   flex: 7;
-  height:60px;
+  height:75px;
 `;
 
 export const Titulo = styled.Text`
