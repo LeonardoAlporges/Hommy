@@ -165,7 +165,7 @@ export default function CadastroProduto({ navigation }) {
         tituloProduto: yup.string().required('Campo obrigatório').max(40, 'Somente 40 caracteres são permitidos'),
         descricao: yup.string().required('Campo obrigatório').max(100, 'Somente 100 caracteres são permitidos'),
         contato: yup.string().max(9999999999999).required(' Campo obrigatórior'),
-        valor: yup.number('Somente numeros!').max(1000, 'Valor maximo de R$ 1.000,00').required('Campo obrigatório')
+        valor: yup.number('Somente numeros!').typeError('Valor inválido').max(1000, 'Valor maximo de R$ 1.000,00').required('Campo obrigatório')
       })}
     >
       {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (

@@ -166,41 +166,57 @@ class Caronas extends Component {
   };
 
   filtro = async () => {
-    await this.setState({ listaCaronas: this.state.fullData });
-    let listaCaronas = this.state.listaCaronas;
+    let dados = {}
     if (this.state.filtroVagas1 === true) {
-      listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas == 1);
+       dados.numVagas = 1;
     }
     if (this.state.filtroVagas2 === true) {
-      listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas == 2);
+       dados.numVagas = 2;
     }
     if (this.state.filtroVagas3 === true) {
-      listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas == 3);
+       dados.numVagas = 3;
     }
     if (this.state.filtroVagas4 === true) {
-      listaCaronas = _.filter(listaCaronas, ({ vagas }) => vagas >= 4);
+       dados.numVagas = 4;
     }
     if (this.state.filtroCidadeS === true) {
-      listaCaronas = _.filter(listaCaronas, { localSaida: this.state.cidadeS });
+      dados.localSaida = this.state.cidadeS;
     }
     if (this.state.filtroCidadeD === true) {
-      listaCaronas = _.filter(listaCaronas, {
-        localChegada: this.state.cidadeD
-      });
+     dados.localChegada = this.state.cidadeD;
     }
     if (this.state.filtroValorMenor === true) {
-      listaCaronas = _.filter(listaCaronas, ({ valor }) => valor >= this.state.aluguelMin);
+      dados.valorGTE = this.state.aluguelMin;
     }
     if (this.state.filtroValorMaior === true) {
-      listaCaronas = _.filter(listaCaronas, ({ valor }) => valor <= this.state.aluguelMax);
+      dados.valorLTE = this.state.aluguelMax;
     }
-    await this.setState({ listaCaronas });
+    await this.search(dados);
   };
 
   getListCarona = () => {
     this.setState({ refreshing: true, listaCaronas: [] });
     return api
       .get('/carona')
+      .then(responseJson => {
+        this.setState({
+          listaCaronas: responseJson.data,
+          fullData: responseJson.data,
+          loading: false,
+          refreshing: false
+        });
+      })
+      .catch(error => {
+        this.setState({ loading: false });
+        this.setState({ erro: true });
+        this.setState({ refreshing: false });
+      });
+  };
+
+  search = (dados) => {
+    this.setState({ refreshing: true, listaCaronas: [] });
+    return api
+      .post('/carona/search', dados)
       .then(responseJson => {
         this.setState({
           listaCaronas: responseJson.data,

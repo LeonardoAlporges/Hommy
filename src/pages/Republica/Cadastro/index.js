@@ -282,11 +282,13 @@ export default function Cadastro({ navigation }) {
         descricao: yup.string('').min(3, 'Minimo de 3 caracteres').max(70, 'No máximo 70 caracteres'),
         aluguel: yup
           .number('Somente numeros')
+          .typeError('Valor inválido')
           .min(10, 'Valor minimo R$ 10')
           .max(2000, 'Valor máximo de R$ 2000')
           .required('Campo obrigatório'),
         contas: yup
           .number('Somente numero')
+          .typeError('Valor inválido')
           .min(10, 'Valor minimo R$ 10')
           .max(600, 'Valor maximo R$ 600')
           .required('Campo obrigatório'),
