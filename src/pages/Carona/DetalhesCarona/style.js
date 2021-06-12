@@ -82,8 +82,11 @@ export const Hora = styled.Text`
   font-size: 22;
 `;
 export const ViewValor = styled.View`
+margin-top: 10%;
   flex-direction: row;
-  width: 100%;
+  width: 90%;
+  padding-right: 5%;
+  padding-left: 5%;
 `;
 export const LabelValor = styled.Text`
   font-family: WorkSans;

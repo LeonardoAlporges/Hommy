@@ -131,7 +131,7 @@ export default function DetalhesEventos({ navigation }) {
             <Icon name="instagram" style={{ fontSize: 25, color: '#142850' }} />
           </ViewIcone>
 
-          <LabelItem>{evento.telefone}</LabelItem>
+          <LabelItem>{evento.instagram}</LabelItem>
         </ItemUnicoLink>
       </LinhaUnica>
       {evento.descontoDisponivel && habilitarDesconto &&

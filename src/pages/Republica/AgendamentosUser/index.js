@@ -44,6 +44,7 @@ export default function AgendamentoUser({ navigation }) {
     api
       .get(`/produto/agendamento/interessado/${email}`)
       .then(response => {
+        console.log("Produto",response);
         setListaAgendamentoProduto(response.data);
       })
       .catch(error => {

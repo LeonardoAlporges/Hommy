@@ -41,6 +41,7 @@ export default function Viagens({ navigation }) {
   const [modalDesinteresse, setModalDesinteresse] = useState(false);
   const [idCarona, setIdCarona] = useState();
 
+  useEffect(() => { buscarListaCaronaInteressada() }, [])
 
   function avaliarMotorista(item) {
     setEmailAvaliado(item.userEmail);
@@ -94,7 +95,7 @@ export default function Viagens({ navigation }) {
 
   return (
     <Container>
-      <HeaderBack title="Meus interesses" onNavigation={() => navigation.goBack(null) } />
+      <HeaderBack title="Meus interesses" onNavigation={() => navigation.goBack(null)} />
       {loading && <Loading />}
       {listaCarona.length == 0 && (
         <EmptyState

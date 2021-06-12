@@ -54,7 +54,7 @@ export const LabelView = styled.View`
 `;
 
 export const Titulo = styled.Text`
-  height:30px;
+  height:45px;
   font-size:16px;
   font-family:WorkSans-SemiBold;
   color:#142850;

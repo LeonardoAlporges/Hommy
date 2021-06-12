@@ -56,6 +56,11 @@ function MenuLateral({ navigation }) {
             })
             .catch(error => { });
     }
+
+    
+shareWhatsApp = (text) => { 
+    Linking.openURL(`whatsapp://send?text=${"Acesse o link abaixo para fazer download do app e venha fazer parte da minha republica! "} + \n + ${"https://play.google.com/store/apps/details?id=br.com.ufes.hommy&hl=pt_BR&gl=US"}`);  
+}
     return (
         <Container>
             <Header>
@@ -192,7 +197,7 @@ function MenuLateral({ navigation }) {
                         </Card>
                     </Linha>
                     <Linha>
-                        <CardAmigos style={Estilos.card}>
+                        <CardAmigos style={Estilos.card} onPress={()=>{shareWhatsApp()}}>
                             <ViewIcons>
                                 <Icon name="account-multiple-plus-outline" color="#212c50" size={35}></Icon>
                             </ViewIcons>

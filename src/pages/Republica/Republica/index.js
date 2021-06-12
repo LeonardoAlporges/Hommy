@@ -131,11 +131,13 @@ class Republica extends Component {
         this.setState({ refreshing: false });
       });
   };
+
   useEffect() {
     this.getListRepublica();
     this.setState({ refreshing: false });
     this.setState({ loading: false });
   }
+  
   fAnimalSim = async checked => {
     if (this.state.filtroAnimalSim) await this.setState({ filtroAnimalSim: false });
     else await this.setState({ filtroAnimalSim: true, filtroAnimalNao: false });

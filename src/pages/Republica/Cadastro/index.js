@@ -604,7 +604,6 @@ export default function Cadastro({ navigation }) {
                             separator="."
                             precision={2}
                             onChangeText={handleChange('aluguel')}
-
                           />
                          
                         </Item>
@@ -629,7 +628,7 @@ export default function Cadastro({ navigation }) {
                           <CurrencyInput
                              placeholderTextColor="#263b50"
                              style={{ fontFamily: 'WorkSans', width: '80%', height: '100%' }}
-                            value={parseInt( conta)}
+                            value={conta}
                             onChangeValue={(formattedValue) => { setConta(formattedValue)}}
                             separator="."
                             precision={2}
