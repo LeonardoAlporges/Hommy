@@ -65,7 +65,7 @@ export default function AgendarVisitaServico({ navigation }) {
         setLoading(false);
       })
       .catch(error => {
-        console.log(error)
+        console.log(error.response)
         setErro(true);
         setLoading(false);
       });

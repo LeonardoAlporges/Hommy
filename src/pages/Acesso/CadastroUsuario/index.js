@@ -70,6 +70,7 @@ export default function CadastroUsuario({ navigation }) {
       if (didCancel) {
         alert('Envio de imagem cancelado');
       } else if (error) {
+        console.log('Erro', error)
         alert('Ocorreu um erro: ', error);
       } else {
         const referencia = uploadFileToFireBaseUser(imagePickerResponse);

@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import { StyleSheet } from 'react-native';
 
 export const Container = styled.TouchableHighlight`
-  flex: 1;
+
   padding: 10px 10px 10px 10px;
 `;
 export const ViewImagem = styled.View`

@@ -1,8 +1,7 @@
 import { Formik } from 'formik';
 import { Button, Input, Item } from 'native-base';
 import React, { Fragment, useState } from 'react';
-import { Image } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Image,Text, View  } from 'react-native';
 import { NavigationActions, StackActions } from 'react-navigation';
 import * as yup from 'yup';
 import CustomModal from '../../../components/Alert';
@@ -18,7 +17,10 @@ import estilo, {
   ViewBotao,
   ViewErro,
   ViewImagem,
-  ViewTitulo
+  ViewTitulo,
+  Linha,
+  LabelFielSet,
+  FieldSetLarge,
 } from './styles';
 
 export default function EsqueciSenha({ navigation }) {
@@ -75,26 +77,28 @@ export default function EsqueciSenha({ navigation }) {
       >
         {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
           <Fragment>
-            <CamposLogin>
-              <Item>
-                <Icon style={estilo.icons_CamposLogin} active name="email-outline" />
-                <Input
-                  placeholderTextColor="#2e2e2e"
-                  style={estilo.labelInput}
-                  value={values.email}
-                  onChangeText={handleChange('email')}
-                  onBlur={() => setFieldTouched('email')}
-                  placeholder="E-mail"
-                />
-              </Item>
-              {touched.email && errors.email && 
-              <ViewErro>
-                <LabelErro>{errors.email}</LabelErro>
-              </ViewErro>
-            }
-            </CamposLogin>
 
-            
+            <Linha>
+              <FieldSetLarge>
+                <LabelFielSet>Email</LabelFielSet>
+                <Item style={{ borderColor: 'transparent' }}>
+                  <Input
+                    style={{ fontFamily: 'WorkSans' }}
+                    value={values.pontoReferencia}
+                    onChangeText={handleChange('email')}
+                    placeholderTextColor="#2e2e2e"
+                    placeholderTextColor="#989898"
+                    placeholder="Insira seu  Email"
+                    onBlur={() => setFieldTouched('email')}
+                  />
+                </Item>
+                <View style={estilo.V_error}>
+                  {touched.email && errors.email && (
+                    <Text style={estilo.textError}>{errors.email}</Text>
+                  )}
+                </View>
+              </FieldSetLarge>
+            </Linha>
             <ViewBotao>
               <Button
                 style={estilo.botao}
