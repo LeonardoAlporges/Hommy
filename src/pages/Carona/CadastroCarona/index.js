@@ -61,6 +61,7 @@ export default function CadastroCarona({ navigation }) {
 
   useEffect(() => {
     if (atualizacao) {
+      setValor(dadosCarona.valor);
       selecionarHorario(dadosCarona.horaSaida, 'Saida');
       selecionarHorario(dadosCarona.horaChegada, 'Chegada');
     }
