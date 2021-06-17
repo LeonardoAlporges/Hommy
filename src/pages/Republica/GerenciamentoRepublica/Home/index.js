@@ -38,6 +38,11 @@ export default function GerenciamentoRepublica({ navigation }) {
   const [loading, setLoading] = useState(true);
   const [existeRepublica, setJaExiteRepublica] = useState(false);
 
+  
+  function goBackScreen() {
+    navigation.goBack(null);
+  }
+
   useEffect(() => {
     setLoading(true);
     verificarSeJaCadastrou();
@@ -63,6 +68,7 @@ export default function GerenciamentoRepublica({ navigation }) {
   }
 
   function verificarSeJaCadastrou() {
+    setLoading(true);
     api
       .get(`/gerenciaRepublica/${emailUser}`)
       .then(response => {
@@ -78,27 +84,29 @@ export default function GerenciamentoRepublica({ navigation }) {
       .finally(setLoading(false));
   }
 
-  function cadastrarNovaRepublica() {
+  async function cadastrarNovaRepublica() {
+    setLoading(true);
     const data = {
       email: emailUser,
       nomeRepublica: nomeRepublica
     };
-    api
+    await api
       .post(`/gerenciaRepublica`, data)
       .then(response => {
         console.log("Republica:", response);
         let idRepublica = response.data._id
-        navigation.navigate('Gerenciamento', { idRepublica });
+        navigation.navigate('Gerenciamento', { idRepublica: idRepublica, codigoRepublica: response.data.numeroRepublica, nomeRepublica: response.data.republica, membros: response.data.membros });
       })
       .catch(error => {
         setErro(true);
-      });
+      })
+      .finally(setLoading(false));
   }
 
   return (
     <Container>
-      <HeaderBack title="Gerenciamento de republica" onNavigation={() => navigation.goBack(null)} />
-      {!loading &&
+      <HeaderBack title="Gerenciamento de republica" onNavigation={() =>  goBackScreen() } />
+      {loading && <Loading />}
         <Separador>
           <CadastroView>
             <Apresentacao>
@@ -115,17 +123,13 @@ export default function GerenciamentoRepublica({ navigation }) {
                 <FieldSetLarge>
                   <LabelFielSet>Nome da república</LabelFielSet>
                   <Item style={{ borderColor: 'transparent' }}>
-                    <Input disabled={existeRepublica} onChangeText={text => setNomeRepublica(text)} />
+                    <Input onChangeText={text => setNomeRepublica(text)} />
                   </Item>
                 </FieldSetLarge>
-              </Linha>
-              {existeRepublica ?
-                <BotaoView>
-                  <Botao onPress={() => { verificarSeJaCadastrou() }}><LabelBotao>Entrar</LabelBotao></Botao>
-                </BotaoView> :
+              </Linha>             
                 <BotaoView>
                   <Botao onPress={() => { cadastrarNovaRepublica() }}><LabelBotao>CADASTRAR</LabelBotao></Botao>
-                </BotaoView>}
+                </BotaoView>
             </DadosView>
           </CadastroView>
           <EntraCodigoView>
@@ -143,25 +147,20 @@ export default function GerenciamentoRepublica({ navigation }) {
                 <FieldSetLarge>
                   <LabelFielSet>Código da república</LabelFielSet>
                   <Item style={{ borderColor: 'transparent' }}>
-                    <Input disabled={existeRepublica}
+                    <Input 
                       onChangeText={text => setCodigoRepublica(text)}
                     />
                   </Item>
                 </FieldSetLarge>
-              </Linha>
-              {existeRepublica ? <BotaoView>
-                <Botao  onPress={() => { verificarSeJaCadastrou() }} >
-                  <LabelBotao>Entrar</LabelBotao>
-                </Botao>
-              </BotaoView> :
+              </Linha>              
                 <BotaoView>
                   <Botao onPress={() => entrarComCodigo()}>
                     <LabelBotao>ENTRAR</LabelBotao>
                   </Botao>
-                </BotaoView>}
+                </BotaoView>
             </DadosView>
           </EntraCodigoView>
-        </Separador>}
+        </Separador>
     </Container>
   )
 }

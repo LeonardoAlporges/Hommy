@@ -22,6 +22,37 @@ export const ViewTitulo = styled.View`
   align-items: flex-start;
 `;
 
+export const Linha = styled.View`
+  height: 50px;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px;
+`;
+
+export const FieldSetLarge = styled.View`
+  width: 80%;
+  
+  height: 50px;
+  border-radius: 3;
+  border-width: 1px;
+  align-items: center;
+  border-color: #dcdcdc;
+  padding-top: 5px;
+`;
+
+export const LabelFielSet = styled.Text`
+  position: absolute;
+  top: -13px;
+  left: 10px;
+  font-family: WorkSans;
+  font-size: 16px;
+  color: #142850;
+  background-color: #ffffff;
+  padding: 0 5px 0 5px;
+`;
+
 export const Titulo = styled.Text`
   font-family: WorkSans;
   font-size: 16;
@@ -107,7 +138,18 @@ const estilo = StyleSheet.create({
     marginLeft: '2%',
     width: '88%',
     height: 60
-  }
+  },
+  V_error: {
+    height: 12,
+    width: '100%',
+    textAlign: 'left'
+  },
+  textError: {
+    fontFamily: 'WorkSans',
+    textAlign: 'left',
+    fontSize: 10,
+    color: 'red'
+  },
 });
 
 export default estilo;

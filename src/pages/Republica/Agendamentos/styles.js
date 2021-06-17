@@ -62,7 +62,7 @@ margin-vertical: 10;
 `;
 
 export const Analise = styled.View`
-width: 30%;
+flex: 1;
 border-radius: 20;
 background-color: yellow;
 justify-content: center;

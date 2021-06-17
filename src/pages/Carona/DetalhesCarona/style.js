@@ -82,8 +82,13 @@ export const Hora = styled.Text`
   font-size: 22;
 `;
 export const ViewValor = styled.View`
+
+margin-top: 10%;
   flex-direction: row;
-  width: 100%;
+  width: 90%;
+  padding-right: 2%; 
+  justify-content:space-around;
+  flex-wrap:wrap;
 `;
 export const LabelValor = styled.Text`
   font-family: WorkSans;
@@ -95,7 +100,6 @@ export const Valor = styled.Text`
   font-family: WorkSans-SemiBold;
   color: #00909e;
   font-size: 22;
-  padding-right: 30;
 `;
 export const BarraSeparadora = styled.View`
   margin: 0px 0px 0px 4%;

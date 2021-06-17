@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _, { filter } from 'lodash';
 import { Button, CheckBox, Fab, Input, Item, ListItem, Spinner } from 'native-base';
 import React, { Component } from 'react';
 import { Modal, Text, TouchableOpacity, View } from 'react-native';
@@ -111,11 +111,33 @@ class Republica extends Component {
         this.setState({ refreshing: false });
       });
   };
+
+  search = async (dados) => {
+    this.setState({ refreshing: true });
+    this.setState({ loading: true });
+    return api
+      .post('/republica/search', dados)
+      .then(responseJson => {
+        this.setState({
+          listaRepublicas: responseJson.data,
+          fullData: responseJson.data,
+          loading: false,
+          refreshing: false
+        });
+      })
+      .catch(error => {
+        this.setState({ loading: false });
+        this.setState({ erro: true });
+        this.setState({ refreshing: false });
+      });
+  };
+
   useEffect() {
     this.getListRepublica();
     this.setState({ refreshing: false });
     this.setState({ loading: false });
   }
+  
   fAnimalSim = async checked => {
     if (this.state.filtroAnimalSim) await this.setState({ filtroAnimalSim: false });
     else await this.setState({ filtroAnimalSim: true, filtroAnimalNao: false });
@@ -272,62 +294,43 @@ class Republica extends Component {
     this.filtro();
   };
   filtro = async () => {
-    await this.setState({ listaRepublicas: this.state.fullData });
-    let listaRepublicas = this.state.listaRepublicas;
-
+    let dados = {};
     if (this.state.filtroAnimalSim === true) {
-      listaRepublicas = _.filter(listaRepublicas, { animal: 'sim' });
+       dados.animal = 'sim';
     }
     if (this.state.filtroAnimalNao === true) {
-      listaRepublicas = _.filter(listaRepublicas, { animal: 'nao' });
+       dados.animal = 'nao'; 
     }
     if (this.state.filtroMasc === true) {
-      listaRepublicas = _.filter(listaRepublicas, {
-        genero: 'Masculina'
-      });
+      
+        dados.genero ='Masculina';
+     
     }
     if (this.state.filtroFem === true) {
-      listaRepublicas = _.filter(listaRepublicas, {
-        genero: 'Feminina'
-      });
+      
+        dados.genero = 'Feminina'
+      
     }
     if (this.state.filtroMista === true) {
-      listaRepublicas = _.filter(listaRepublicas, {
-        genero: 'Mista'
-      });
-    }
-    if (this.state.filtroMoradores2 === true) {
-      listaRepublicas = _.filter(listaRepublicas, ({ pessoas }) => (pessoas = 2));
-    }
-    if (this.state.filtroMoradores3 === true) {
-      listaRepublicas = _.filter(listaRepublicas, ({ pessoas }) => (pessoas = 3));
-    }
-    if (this.state.filtroMoradores4 === true) {
-      listaRepublicas = _.filter(listaRepublicas, ({ pessoas }) => (pessoas = 4));
-    }
-    if (this.state.filtroMoradores5 === true) {
-      listaRepublicas = _.filter(listaRepublicas, ({ pessoas }) => (pessoas = 5));
-      q;
-    }
-    if (this.state.filtroMoradores6 === true) {
-      listaRepublicas = _.filter(listaRepublicas, ({ pessoas }) => pessoas >= 6);
+      
+        dados.genero=  'Mista';
     }
     if (this.state.filtroVagas1 === true) {
-      listaRepublicas = _.filter(listaRepublicas, ({ numVagas }) => numVagas == 1);
+      dados.numVagas = 1;
     }
     if (this.state.filtroVagas2 === true) {
-      listaRepublicas = _.filter(listaRepublicas, ({ numVagas }) => numVagas == 2);
+      dados.numVagas = 2;
     }
     if (this.state.filtroVagas3 === true) {
-      listaRepublicas = _.filter(listaRepublicas, ({ numVagas }) => numVagas >= 3);
+      dados.numVagas = 3;
     }
     if (this.state.filtroValorMenor === true) {
-      listaRepublicas = _.filter(listaRepublicas, ({ valorAluguel }) => valorAluguel >= this.state.aluguelMin);
+      dados.valorAluguelGTE = this.state.aluguelMin;
     }
     if (this.state.filtroValorMaior === true) {
-      listaRepublicas = _.filter(listaRepublicas, ({ valorAluguel }) => valorAluguel <= this.state.aluguelMax);
+      dados.valorAluguelLTE = this.state.aluguelMax;
     }
-    await this.setState({ listaRepublicas });
+    await this.search(dados);
   };
   render() {
     return (

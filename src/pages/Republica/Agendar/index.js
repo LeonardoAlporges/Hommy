@@ -45,9 +45,11 @@ export default function Agendar({ navigation }) {
   const [alertaFaltaDados, setAlertaFaltaDados] = useState(false);
   const [horaPicker, setHoraPicker] = useState(false);
 
+  const [selecionOuDataHora,setSelecionOuDataHora ] = useState();
+
   function agendarVisita() {
     setLoading(true);
-    if ((dataAgendamento || horaAgendamento) == null || (dataAgendamento || horaAgendamento) == false) {
+    if (selecionOuDataHora < 2) {
       setLoading(false);
       return 0;
     }
@@ -70,25 +72,30 @@ export default function Agendar({ navigation }) {
   }
 
   async function selecionarHorario(hora) {
-    setHoraPicker(false);
+    await picker(false);
+    var dataHoraCount = selecionOuDataHora;
+    setSelecionOuDataHora(dataHoraCount++);
     const horaLabel = moment(new Date(hora)).format('HH:mm');
     setHoraAgendamento(hora);
     setLabelHoraAgendamento(horaLabel);
+    
   }
 
   async function selecionarData(date) {
-    setDataPicker(false);
+    await pickerData(false);
+    var dataHoraCount = selecionOuDataHora;
+    setSelecionOuDataHora(dataHoraCount++);
     const dataLabel = moment(new Date(date)).format('DD [de] MMMM');
     setDataAgendamento(date);
     setLabelData(dataLabel);
   }
 
-  function picker() {
-    setHoraPicker(true);
+  function picker(state) {
+    setHoraPicker(state);
   }
 
-  function pickerData() {
-    setDataPicker(true);
+  function pickerData(state) {
+    setDataPicker(state);
   }
 
   return (
@@ -110,7 +117,7 @@ export default function Agendar({ navigation }) {
           <Button
             style={style.botaoCalendar}
             onPress={() => {
-              pickerData();
+              pickerData(true);
             }}
           >
             <Icon name="calendar" style={style.IconCaledar} />
@@ -140,7 +147,7 @@ export default function Agendar({ navigation }) {
             <Button
               style={style.botaoCalendar}
               onPress={() => {
-                picker();
+                picker(true);
               }}
             >
               <Icon name="clock" style={style.IconCaledar} />
@@ -163,6 +170,7 @@ export default function Agendar({ navigation }) {
 
       <ViewBotao>
         <Button
+        disabled={selecionOuDataHora < 2}
           style={style.botao}
           onPress={() => {
             agendarVisita();

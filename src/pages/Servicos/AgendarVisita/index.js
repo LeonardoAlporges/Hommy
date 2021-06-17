@@ -55,7 +55,7 @@ export default function AgendarVisitaServico({ navigation }) {
       idServico: servicos._id,
       email: email,
       data: dataAgendamento,
-      hora: horaAgendamento
+      horario: horaAgendamento
     };
 
     api
@@ -65,7 +65,7 @@ export default function AgendarVisitaServico({ navigation }) {
         setLoading(false);
       })
       .catch(error => {
-        console.log(error)
+        console.log(error.response)
         setErro(true);
         setLoading(false);
       });

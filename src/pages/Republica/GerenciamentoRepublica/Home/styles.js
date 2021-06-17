@@ -50,11 +50,11 @@ export const Icone = styled(Icon)`
 `;
 export const LabelView = styled.View`
   flex: 7;
-  height:60px;
+  height:75px;
 `;
 
 export const Titulo = styled.Text`
-  height:30px;
+  height:45px;
   font-size:16px;
   font-family:WorkSans-SemiBold;
   color:#142850;

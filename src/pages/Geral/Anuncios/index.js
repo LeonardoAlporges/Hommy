@@ -43,6 +43,7 @@ function Anuncios({ navigation }) {
     if (valor == 0) {
       return null;
     }
+    console.log(tipo,valor);
     if (tipo == 'Republica' && valor == 1) {
       api
         .delete(`/republica/${item._id}`)
@@ -79,16 +80,19 @@ function Anuncios({ navigation }) {
           setReloading(false);
           setLoading(false);
         });
-    }
-    else if (tipo == 'Servico' && valor == 1) {
+    } else if (tipo == 'Servico' && valor == 1) {
+      console.log("DELETIN SERVIÇO",item._id);
+
       api
-        .delete(`/servico/${item._id}`)
+        .delete(`/servicos/${item._id}`)
         .then(responseJson => {
+          console.log("Serviço:",responseJson);
           setListaServicos([]);
           setLoading(false);
           getlist();
         })
         .catch(error => {
+          console.log(error.response);
           setReloading(false);
           setLoading(false);
         });
@@ -159,9 +163,9 @@ function Anuncios({ navigation }) {
 
   return (
     <Container>
-      <HeaderBack title="Meus anúncios" onNavigation={() => navigation.navigate('TabsHeader', { menuAberto: true })} />
+      <HeaderBack title="Meus anúncios" onNavigation={() =>  navigation.goBack(null) }/>
       {loading && <Loading />}
-      {listaCaronas.length == 0 && listaRepublicas.length == 0 && listaServicos.length == 0 && !loading && (
+      {listaCaronas.length == 0 && listaRepublicas.length == 0 && listaServicos.length == 0 && listaProdutos.length == 0 && !loading && (
         <EmptyState
           titulo="Sem anúncios"
           mensagem="Você ainda não anunciou nada. Nos diga quando houver vagas em sua república ou ofereça uma carona."

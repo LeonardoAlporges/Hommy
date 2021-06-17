@@ -13,7 +13,7 @@ export const Subtitle = styled.Text`
 `;
 
 export const FieldSet = styled.View`
-  width: 45%;
+  width: 48%;
   height: 50px;
   border-radius: 3;
   border-width: 1px;
@@ -39,6 +39,7 @@ export const LabelFielSet = styled.Text`
   color: #022250;
   background-color: #ffffff;
   padding: 0 5px 0 5px;
+  flex-wrap: nowrap;
 `;
 export const Linha = styled.View`
   height: 50px;

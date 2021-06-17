@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
+import moment from 'moment';
 import { withNavigation } from 'react-navigation';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
@@ -26,6 +27,8 @@ export function CartaoProdutos(props) {
   }
 
   const [valor, setValor] = useState();
+  const [data, setDataViagem] = useState(moment(props.dados.data).format('DD/MM'));
+
 
   useEffect(() => {
     setValor(parseFloat(props.dados.valor).toFixed(2));
@@ -52,7 +55,7 @@ export function CartaoProdutos(props) {
             </ViewValor>
             <ViewVagas>
               <Icon style={styles.icones} name="clock" />
-              <Label>10/01</Label>
+              <Label>{data}</Label>
             </ViewVagas>
           </ViewComIcones>
         </ViewDados>

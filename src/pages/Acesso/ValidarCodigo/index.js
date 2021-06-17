@@ -17,9 +17,11 @@ import estilo, {
   TextoBotao,
   Titulo,
   ViewBotao,
-
   ViewImagem,
-  ViewTitulo
+  ViewTitulo,
+  Linha,
+  LabelFielSet,
+  FieldSetLarge,
 } from './styles';
 
 export default function ValidarCodigo({ navigation }) {
@@ -29,7 +31,7 @@ export default function ValidarCodigo({ navigation }) {
   const [email, setEmail] = useState(navigation.state.params.email);
   const [codigoErrado, setCodigoErrado] = useState(false);
 
-  useEffect(() => {}, [codigoValido]);
+  useEffect(() => { }, [codigoValido]);
 
   function verificarCodigoDigitado(values) {
     const data = {
@@ -91,7 +93,7 @@ export default function ValidarCodigo({ navigation }) {
       </ViewImagem>
 
       <ViewTitulo>
-        {!codigoValido ? (
+        {codigoValido ? (
           <Titulo>
             Cadastre uma nova senha de acesso. Sua senha antiga será apagada, crie uma nova para se conectar ao
             aplicativo.
@@ -104,18 +106,18 @@ export default function ValidarCodigo({ navigation }) {
       <Formik
         initialValues={{
           codigo: '',
-          novaSenha: '' 
+          novaSenha: ''
         }}
         onSubmit={values => {
-           enviarNovaSenha(values);
-         } 
+          enviarNovaSenha(values);
+        }
         }
         validationSchema={yup.object().shape({
           codigo: yup.string().max(6, 'Maximo 8 dígitos'),
           novaSenha: yup.string().min(8, 'Mínimo 8 dígitos necessários').required('Campo obrigatório'),
         })}
       >
-        {({ values, handleChange, errors, setFieldTouched, isValid,handleSubmit }) => (
+        {({ values, handleChange, errors, setFieldTouched, isValid, handleSubmit }) => (
           <Fragment>
             {erro && (
               <CustomModal
@@ -139,25 +141,28 @@ export default function ValidarCodigo({ navigation }) {
               />
             )}
 
-            {codigoValido && (
-              <CamposLogin>
-                <Item>
-                  <Icon style={estilo.icons_CamposLogin} name="key-outline" />
-                  <TextInputMask
-                    placeholderTextColor="#2e2e2e"
-                    style={estilo.labelInput}
-                    keyboardType="number-pad"
-                    value={values.codigo}
-                    onChangeText={handleChange('codigo')}
-                    placeholder="Código"
-                    onBlur={() => setFieldTouched('codigo')}
-                  />
-                </Item>
-              </CamposLogin>
-            )} 
-             <Invalido>{errors.codigo && <LabelErro>{errors.codigo}</LabelErro>}</Invalido>
+            {!codigoValido && (
+              <Linha>
+                <FieldSetLarge>
+                  <LabelFielSet>Codigo</LabelFielSet>
+                  <Item style={{ borderColor: 'transparent' }}>
+                    <Input
+                      keyboardType="number-pad"
+                      style={{ fontFamily: 'WorkSans' }}
+                      value={values.pontoReferencia}
+                      onChangeText={handleChange('codigo')}
+                      placeholderTextColor="#2e2e2e"
+                      placeholderTextColor="#989898"
+                      placeholder="Codigo de 6 digitos"
+                      onBlur={() => setFieldTouched('codigo')}
+                    />
+                  </Item>
+                </FieldSetLarge>
+              </Linha>
+            )}
+            <Invalido>{errors.codigo && <LabelErro>{errors.codigo}</LabelErro>}</Invalido>
 
-            {codigoValido && (
+            {!codigoValido && (
               <ViewBotao>
                 <Botao
                   onPress={() => {
@@ -169,27 +174,28 @@ export default function ValidarCodigo({ navigation }) {
               </ViewBotao>
             )}
 
-            {!codigoValido && (
-              <CamposLogin>
-                <Item>
-                  <Icon style={estilo.icons_CamposLogin} name="key-outline" />
-                  <Input
-                    placeholderTextColor="#2e2e2e"
-                    style={estilo.labelInput}
-                    value={values.novaSenha} //NOME
-                    onChangeText={handleChange('novaSenha')}
-                    onBlur={() => setFieldTouched('novaSenha')}
-                    placeholder="Nova senha"
-                  />
-                </Item>
-              </CamposLogin>
+            {codigoValido && (
+              <Linha>
+                <FieldSetLarge>
+                  <LabelFielSet>Nova senha</LabelFielSet>
+                  <Item style={{ borderColor: 'transparent' }}>
+                    <Input
+                      style={{ fontFamily: 'WorkSans' }}
+                      value={values.pontoReferencia}
+                      onChangeText={handleChange('novaSenha')}
+                      placeholderTextColor="#2e2e2e"
+                      placeholderTextColor="#989898"
+                      placeholder="Nova Senha"
+                      onBlur={() => setFieldTouched('novaSenha')}
+                    />
+                  </Item>
+                </FieldSetLarge>
+              </Linha>
             )}
-              <Invalido>{errors.novaSenha && <LabelErro>{errors.novaSenha}</LabelErro>}</Invalido>
+            <Invalido>{errors.novaSenha && <LabelErro>{errors.novaSenha}</LabelErro>}</Invalido>
 
-            {!codigoValido && (
-              
+            {codigoValido && (
               <ViewBotao>
-                
                 <Botao
                   onPress={() => handleSubmit(values)}
                 >

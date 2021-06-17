@@ -41,10 +41,7 @@ export default function Viagens({ navigation }) {
   const [modalDesinteresse, setModalDesinteresse] = useState(false);
   const [idCarona, setIdCarona] = useState();
 
-  useEffect(() => {
-    setListaCarona([]);
-    buscarListaCaronaInteressada();
-  }, [reload]);
+  useEffect(() => { buscarListaCaronaInteressada() }, [])
 
   function avaliarMotorista(item) {
     setEmailAvaliado(item.userEmail);
@@ -56,24 +53,29 @@ export default function Viagens({ navigation }) {
     if (valor == 0 || valor == 3) {
       return null;
     }
-    setLoading(true);
+    console.log("REMOVENDO :",valor,idCarona);
     return api
       .delete(`/carona/meusInteresses/${idCarona}`, {
         data: { email: emailUsuario }
       })
       .then(response => {
-        setReload(!reload);
+        console.log("OK:",response);
+        buscarListaCaronaInteressada();
+        setListaCarona([]);
         setLoading(false);
       })
       .catch(error => {
+        console.log("ERRO:",error.response);
         setLoading(false);
       });
   }
 
   function buscarListaCaronaInteressada() {
+    console.log("NOVA BUSCA")
     return api
       .get(`/carona/meusInteresses/${emailUsuario}`)
       .then(response => {
+        console.log("NOVA OK :",response)
         setListaCarona(response.data);
         setLoading(false);
       })
@@ -98,7 +100,7 @@ export default function Viagens({ navigation }) {
 
   return (
     <Container>
-      <HeaderBack title="Meus interesses" onNavigation={() => resetarPilhaNavegacao('TabsHeader')} />
+      <HeaderBack title="Meus interesses" onNavigation={() => navigation.goBack(null)} />
       {loading && <Loading />}
       {listaCarona.length == 0 && (
         <EmptyState

@@ -135,9 +135,9 @@ android {
         applicationId "br.com.ufes.hommy"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0.4"
-         multiDexEnabled true
+        versionCode 3
+        versionName "1.0.3"
+        multiDexEnabled true
     }
     signingConfigs {
         release {

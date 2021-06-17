@@ -29,18 +29,20 @@ export default function DetalhesEventos({ navigation }) {
   }
 
   function AbrirTelefone() {
+    console.log(evento);
     Linking.openURL(`tel:${evento.telefone}`);
   }
 
   useEffect(() => {
+    console.log(evento);
     if (evento.imagem1 != '' && evento.imagem1 != null) {
-      setContadorImagem(contadorImagem => contadorImagem + 1);
+      setContadorImagem(contadorImagem => 1);
     }
     if (evento.imagem2 != '' && evento.imagem2 != null) {
-      setContadorImagem(contadorImagem => contadorImagem + 1);
+      setContadorImagem(contadorImagem => 2);
     }
     if (evento.imagem3 != '' && evento.imagem3 != null) {
-      setContadorImagem(contadorImagem => contadorImagem + 1);
+      setContadorImagem(contadorImagem => 3);
     }
   }, []);
 
@@ -52,10 +54,6 @@ export default function DetalhesEventos({ navigation }) {
         pageCount={contadorImagem}
       />
     );
-  }
-  function participar(){
-    setHabilitarDesconto(true);
-    //Adicionar o contador para enventos
   }
 
   return (
@@ -92,9 +90,9 @@ export default function DetalhesEventos({ navigation }) {
       <LinhaUnica>
         <ItemUnico>
           <ViewIcone>
-            <Icon name="screwdriver" style={{ fontSize: 25, color: '#142850' }} />
+            <Icon name="currency-usd" style={{ fontSize: 25, color: '#142850' }} />
           </ViewIcone>
-          <LabelItem>{evento.valor}</LabelItem>
+          <LabelItem>R$ {evento.valor}</LabelItem>
         </ItemUnico>
       </LinhaUnica>
 
@@ -110,13 +108,30 @@ export default function DetalhesEventos({ navigation }) {
           <LabelItem>{evento.telefone}</LabelItem>
         </ItemUnicoLink>
       </LinhaUnica>
+
+      <ViewSubTitle>
+        <SubTitle>Endereço</SubTitle>
+      </ViewSubTitle>
+
+      <LinhaUnica>
+        <ItemUnicoLink>
+          <ViewIcone>
+            <Icon name="pin" style={{ fontSize: 25, color: '#142850' }} />
+          </ViewIcone>
+          <LabelItem>{evento.localCompraIngresso}</LabelItem>
+        </ItemUnicoLink>
+      </LinhaUnica>
+
+      <ViewSubTitle>
+        <SubTitle>Rede social</SubTitle>
+      </ViewSubTitle>
       <LinhaUnica>
         <ItemUnicoLink>
           <ViewIcone>
             <Icon name="instagram" style={{ fontSize: 25, color: '#142850' }} />
           </ViewIcone>
 
-          <LabelItem>Instagram: {evento.telefone}</LabelItem>
+          <LabelItem>{evento.instagram}</LabelItem>
         </ItemUnicoLink>
       </LinhaUnica>
       {evento.descontoDisponivel && habilitarDesconto &&
@@ -136,19 +151,6 @@ export default function DetalhesEventos({ navigation }) {
        </LinhaDupla>
 
       }
-      <ViewBotao>
-       <BotaoContato
-         onPress={() => {
-           participar();
-         }}
-       >
-         <ViewIcone>
-           <Icon name="check-bold" style={{ fontSize: 25, color: '#ffffff', textAlign: 'center' }} />
-         </ViewIcone>
-
-         <LabelBotao>Irei Participar</LabelBotao>
-       </BotaoContato>
-     </ViewBotao>
       <ViewBotao>
         <BotaoContato
           onPress={() => {

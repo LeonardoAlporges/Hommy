@@ -65,7 +65,7 @@ export function Login({ navigation }) {
     const data = {
       email: email,
       password: id,
-      //tokenAparelho: tokenAparelho,
+      tokenAparelho: tokenAparelho,
       nome: nome,
       fotoPerfil: foto,
       isGoogle: true
@@ -149,8 +149,8 @@ export function Login({ navigation }) {
     setloading(true);
     const data = {
       email: value.email,
-      password: value.password
-      //tokenD: tokenAparelho
+      password: value.password,
+      tokenD: tokenAparelho
     };
 
     api

@@ -10,17 +10,6 @@ import MeusAgendamentosRepublica from '../MeusAgendamentos';
 import MeusAgendamentosProduto from '../Produtos/MeusAgendamentos';
 import {
   Container,
-
-
-
-
-
-
-
-
-
-
-
   Subtitulo
 } from './styles';
 
@@ -55,6 +44,7 @@ export default function AgendamentoUser({ navigation }) {
     api
       .get(`/produto/agendamento/interessado/${email}`)
       .then(response => {
+        console.log("Produto",response);
         setListaAgendamentoProduto(response.data);
       })
       .catch(error => {
@@ -67,6 +57,7 @@ export default function AgendamentoUser({ navigation }) {
     api
       .get(`/servicos/agendamento/interessado/${email}`)
       .then(response => {
+        console.log("Serviço",response)
         setListaAgendamentoServico(response.data);
       })
       .catch(error => {

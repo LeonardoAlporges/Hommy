@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Spinner } from 'native-base';
 import { View, StatusBar } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { NavigationActions, StackActions } from 'react-navigation';
 import messaging from '@react-native-firebase/messaging';
 

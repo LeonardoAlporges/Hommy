@@ -49,7 +49,7 @@ export default function MeusAgendamentosProduto(props) {
     api
   .delete(`/produto/agendamento/${idproduto}`)
   .then(response => {
-    console.log(response)
+    props.callback();
     setReload(!reload);
     setLoading(false);
   })
@@ -102,7 +102,7 @@ export default function MeusAgendamentosProduto(props) {
                 <View style={style.viewData2}>
                   <LabelData>{moment(item.agenda.data).format('DD/MM/YY')}</LabelData>
                   <Text>As</Text>
-                  <LabelData>{moment(item.agenda.hora).format('hh:mm')}</LabelData>
+                  <LabelData>{moment(item.agenda.data).format('hh:mm')}</LabelData>
                 </View>
               }
               <TouchableOpacity
