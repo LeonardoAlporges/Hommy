@@ -114,8 +114,9 @@ export default function CadastroCarona({ navigation }) {
   }
 
   function atulizarAnuncioCarona(dados) {
+    console.log("Dados Carona:",dadosCarona)
     api
-      .put(`/carona/${caronaID}`, dados)
+      .put(`/carona/${dadosCarona._id}`, dados)
       .then(Response => {
         setLoading(false);
         setSucesso(true);
@@ -123,8 +124,7 @@ export default function CadastroCarona({ navigation }) {
       .catch(error => {
         setLoading(false);
         setErro(true);
-      })
-      .finally(setLoading(false));
+      });
   }
 
   function criarNovoAnuncioCarona(dados) {

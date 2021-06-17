@@ -143,7 +143,7 @@ export function DetalhesCarona({ navigation }) {
           </ViewHora>
 
           <ViewValor>
-            <LabelValor>Preço para 1 passageiro</LabelValor>
+            <LabelValor>Preço por pessoa </LabelValor>
             <Valor>R$ {dados.valor}</Valor>
           </ViewValor>
         </ContainerIformacao>

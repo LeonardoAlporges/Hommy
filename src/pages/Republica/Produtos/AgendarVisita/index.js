@@ -35,7 +35,7 @@ export default function AgendarVisitaProduto({ navigation }) {
   const [erro, setErro] = useState(false);
   const [sucesso, setSucesso] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [dataAgendamento, setDataAgendamento] = useState(new Date());
+  const [dataAgendamento, setDataAgendamento] = useState();
   const [labelData, setLabelData] = useState('Selecionar Data');
   const [dataPicker, setDataPicker] = useState(false);
 
@@ -164,8 +164,9 @@ export default function AgendarVisitaProduto({ navigation }) {
         is24Hour={true}
       />
 
-      <ViewBotao>
+      <ViewBotao >
         <Button
+          disabled={!horaAgendamento || !dataAgendamento}
           style={style.botao}
           onPress={() => {
             agendarVisita();
