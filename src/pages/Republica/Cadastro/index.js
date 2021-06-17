@@ -57,6 +57,8 @@ export default function Cadastro({ navigation }) {
 
     console.log("Dados",dadosRepublica)
     if (atualizarCadastro) {
+      setAluguel(dadosRepublica.valorAluguel);
+      setConta(dadosRepublica.valorContas);
       var cont = 0;
       if (dadosRepublica.imagem1 != null) {
         setImagem1(dadosRepublica.imagem1);
@@ -75,6 +77,8 @@ export default function Cadastro({ navigation }) {
         cont++;
       }
       setContadorImagem(cont)
+     
+
     }
 
   }, []);
