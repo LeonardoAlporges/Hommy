@@ -165,7 +165,7 @@ function Anuncios({ navigation }) {
     <Container>
       <HeaderBack title="Meus anúncios" onNavigation={() =>  navigation.goBack(null) }/>
       {loading && <Loading />}
-      {listaCaronas.length == 0 && listaRepublicas.length == 0 && listaServicos.length == 0 && !loading && (
+      {listaCaronas.length == 0 && listaRepublicas.length == 0 && listaServicos.length == 0 && listaProdutos.length == 0 && !loading && (
         <EmptyState
           titulo="Sem anúncios"
           mensagem="Você ainda não anunciou nada. Nos diga quando houver vagas em sua república ou ofereça uma carona."

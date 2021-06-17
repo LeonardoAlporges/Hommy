@@ -180,7 +180,6 @@ export default function ValidarCodigo({ navigation }) {
                   <LabelFielSet>Nova senha</LabelFielSet>
                   <Item style={{ borderColor: 'transparent' }}>
                     <Input
-                      keyboardType="number-pad"
                       style={{ fontFamily: 'WorkSans' }}
                       value={values.pontoReferencia}
                       onChangeText={handleChange('novaSenha')}
