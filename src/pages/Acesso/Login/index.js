@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import { GoogleSignin, statusCodes } from '@react-native-community/google-signin';
-import { Formik } from 'formik';
+import { Formik, validateYupSchema } from 'formik';
 import { Input, Item, Spinner } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { Image, Modal, TouchableOpacity, View } from 'react-native';
@@ -40,6 +40,9 @@ import style, {
 export function Login({ navigation }) {
   const [modalErroLogin, setmodalErroLogin] = useState(false);
   const [modalErroSenha, setmodalErroSenha] = useState(false);
+  const [modalErroGoogle, setmodalErroGoogle] = useState(false);
+  const [modalErroCampos, setmodalErroCampos] = useState(false);
+
   const [password, setPassword] = useState(true);
   const tokenAparelho = useSelector(state => state.user.tokenUser);
   const [loading, setloading] = useState(false);
@@ -88,33 +91,17 @@ export function Login({ navigation }) {
       });
   }
 
+
   const signIn = async () => {
     try {
-      await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
-
+      setloading(true);
       fazerLoginRedeSocial(userInfo.user.email, userInfo.user.name, userInfo.user.photo, userInfo.user.id);
     } catch (error) {
-      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        // user cancelled the login flow
-      } else if (error.code === statusCodes.IN_PROGRESS) {
-        // operation (e.g. sign in) is in progress already
-      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        // play services not available or outdated
-      } else {
-        // some other error happened
-      }
-      alert(error);
+      setmodalErroGoogle(true);
+      setloading(false);
     }
   };
-
-  useEffect(() => {
-    pegar();
-  }, []);
-
-  async function pegar() {
-    const dados = JSON.parse(await AsyncStorage.getItem('@Facebook:accessData'));
-  }
 
   async function salvarDadosStorage(dados) {
     try {
@@ -137,14 +124,6 @@ export function Login({ navigation }) {
     navigation.dispatch(resetAction);
   }
 
-  // function login_facebook() {
-  //   facebookLogin()
-  //     .then(response => {
-  //       fazerLoginRedeSocial(response.email, response.name, response.picture.data.url, response.id);
-  //     })
-  //     .catch(e => {});
-  // }
-
   function fazerLogin(value) {
     setloading(true);
     const data = {
@@ -153,6 +132,9 @@ export function Login({ navigation }) {
       tokenD: tokenAparelho
     };
 
+    if(!data.email && !data.password ){
+      setmodalErroCampos(true);
+    }
     api
       .post('/session', data)
       .then(response => {
@@ -200,7 +182,31 @@ export function Login({ navigation }) {
           }}
         />
       )}
+      {modalErroGoogle && (
+        <CustomModal
+          parametro="Custom"
+          imagem="NaoEncontrado"
+          titulo="Ops.."
+          descricao="Não foi possivel fazer login com google ."
+          botao="Voltar"
+          callback={() => {
+            setmodalErroGoogle(false);
+          }}
+        />
+      )}
 
+      {modalErroCampos && (
+        <CustomModal
+          parametro="Custom"
+          imagem="NaoEncontrado"
+          titulo="Alerta"
+          descricao="Email ou senha não informado corretamente"
+          botao="Voltar"
+          callback={() => {
+            setmodalErroCampos(false);
+          }}
+        />
+      )}
       <Container>
         <LinearGradient
           start={{ x: 0, y: 0 }}
@@ -225,14 +231,6 @@ export function Login({ navigation }) {
             />
             <LabelBotoes>Google</LabelBotoes>
           </Botao>
-          {/* <Botao transparent onPress={login_facebook}>
-            <Image
-              resizeMode="contain"
-              style={{ width: 20, height: 20 }}
-              source={require('../../../assets/Img/Login/facebook.png')}
-            />
-            <LabelBotoes>Facebook</LabelBotoes>
-          </Botao> */}
         </BotesLogin>
         <Hr>
           <Divisoria />

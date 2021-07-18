@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Spinner } from 'native-base';
-import { View, StatusBar } from 'react-native';
+import { View, StatusBar,PermissionsAndroid } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useDispatch } from 'react-redux';
 import { NavigationActions, StackActions } from 'react-navigation';
@@ -113,9 +113,58 @@ export default function RenderApp(props) {
   }
 
   useEffect(() => {
+    PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE).then(response => { 
+      console.log("tes:",response)
+
+      if(!response){
+        requestPermissionRead
+      }
+    })
+
+    PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE).then(response => { 
+      console.log("Wri:",response)
+      if(!response){
+        requestPermissionWrite
+      }
+    })
+
+
     Buscar();
   }, []);
 
+  const requestPermissionRead = async () => {
+    try {
+      await PermissionsAndroid.request(
+        PermissionsAndroid.READ_EXTERNAL_STORAGE,
+        {
+          title: "Permisão Necessaria Leitura",
+          message:
+            "Hommy quer acesso para salvar informações exenciais para o funcionamento ",
+          buttonNegative: "Cancelar",
+          buttonPositive: "OK"
+        }
+      );
+    } catch (err) {
+    }
+  };
+ 
+
+  const requestPermissionWrite = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.READ_EXTERNAL_STORAGE,
+        {
+          title: "Permisão Necessaria ",
+          message:
+            "Hommy quer acesso para ler informações exenciais para o funcionamento ",
+          buttonNegative: "Cancelar",
+          buttonPositive: "OK"
+        }
+      );
+    } catch (err) {
+    }
+  };
+ 
   return (
     <View>
       <StatusBar barStyle="light-content" backgroundColor="#142850" />

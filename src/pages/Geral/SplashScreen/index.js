@@ -49,6 +49,11 @@ function SplashScreen({ navigation }) {
 
     resetNavigation('Login');
   }
+
+ 
+  
+
+
   return (
     <View>
       <Container>

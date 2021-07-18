@@ -36,9 +36,21 @@ export default function CadastroUsuario({ navigation }) {
   const [loadingEnvioImagem, setLoadingEnvioImagem] = useState(false);
   const [loading, setLoading] = useState(false);
   const [imagemParaEnvio, setImagemParaEnvio] = useState();
-  const [erro, setErro] = useState(false);
+  const [modal, setModal] = useState(false);
   const [sucesso, setSucesso] = useState(false);
   const [password, setPassword] = useState(true);
+
+  const [modalTipo,setModalTipo] = useState('')
+  const [modalTitulo,setModalTitulo] = useState('')
+  const [modalMensagem,setModalMensagem] = useState('')
+
+  function modalService(tipo,titulo,mensagem){
+    console.log(tipo,titulo,mensagem)
+    setModalTipo(tipo);
+    setModalTitulo(titulo);
+    setModalMensagem(mensagem);
+    setModal(true);
+  };
 
   function resetarPilhaNavegacao(rota) {
     const resetAction = StackActions.reset({
@@ -59,8 +71,8 @@ export default function CadastroUsuario({ navigation }) {
         setSucesso(true);
       })
       .catch(error => {
+        modalService("Erro","",error.response.data.error)
         setLoading(false);
-        setErro(true);
       });
   }
 
@@ -123,26 +135,26 @@ export default function CadastroUsuario({ navigation }) {
             enviarCadastro(values);
           }}
           validationSchema={yup.object().shape({
-            nome: yup.string().required('Campo obrigatórior').max(20, 'Máximo de caracteres é 20'),
+            nome: yup.string().required('Campo obrigatórior').max(20, 'Máximo de caracteres é 20').min(3, 'Minimo de caracteres é 3'),
             email: yup.string().email('E-mail inválido ou incorreto').required('Campo obrigatório'),
-            celular: yup.string().max(9999999999999).required(' Campo obrigatórior'),
+            celular: yup.string().max(9999999999999).required('Campo obrigatórior'),
             password: yup.string().min(8, 'Mínimo 8 dígitos necessários').required('Campo obrigatório')
           })}
         >
           {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
             <Fragment>
-              {erro && (
+              {modal && (
                 <CustomModal
-                  parametro="Erro"
-                  titulo="OOPS!"
-                  descricao="Esse email já está cadastrado no aplicativo."
-                  botao="Voltar"
+                  parametro={modalTipo}
+                  titulo={modalTitulo}
+                  descricao={modalMensagem}
+                  botao="Ok"
                   callback={() => {
-                    setErro(false);
+                    setModal(false);
                   }}
                 />
               )}
-              {sucesso && (
+              {/* {sucesso && (
                 <CustomModal
                   parametro="Custom"
                   titulo="Cadastro Realizado :)"
@@ -152,7 +164,7 @@ export default function CadastroUsuario({ navigation }) {
                     resetarPilhaNavegacao('Login');
                   }}
                 />
-              )}
+              )} */}
               <CampoLogin>
                 <Item regular inlineLabel style={{ borderRadius: 5 }}>
                   <Input
