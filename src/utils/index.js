@@ -42,10 +42,8 @@ export const deleteFileRepublica = response => {
 
   let imageRef = FireBaseStorage.refFromURL(response);
   imageRef.delete().then(() => {
-      console.log("Deleted")
   }).catch(err => console.log(err))
 
-  console.log(response);
   const { fileName } = response;
   return FireBaseStorage.ref(`/pictures/republicas/${fileName}`).delete()
 };

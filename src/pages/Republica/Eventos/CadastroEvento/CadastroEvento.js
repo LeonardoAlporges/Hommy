@@ -102,9 +102,11 @@ export default function CadastroEvento({ navigation }) {
       } else if (error) {
         alert('Ocorreu algum erro: ', error);
       } else {
+        setLoading(true);
         preencherFoto(imagePickerResponse);
         const referencia = uploadFileToFireBaseRepublicaEventos(imagePickerResponse);
         monitorFileUpload(referencia);
+        setLoading(false);
       }
     });
   }

@@ -14,6 +14,7 @@ class Eventos extends Component {
     super(props);
     this.state = { listaEvento: [], active: false };
   }
+
   servicosRedux() {
     this.props.navigation.navigate('CadastroEvento');
   }
@@ -27,6 +28,7 @@ class Eventos extends Component {
       })
       .catch(error => {});
   }
+
   irParaCadastro() {
     this.props.navigation.navigate('CadastroEvento');
   }
@@ -58,7 +60,7 @@ class Eventos extends Component {
           style={Estilo.S_FAB}
           position="bottomRight"
           onPress={() => {
-            this.setState({ active: !this.state.active });
+              this.servicosRedux();
           }}
         >
           {this.state.active ? <Icon name="minus" /> : <Icon name="plus" />}

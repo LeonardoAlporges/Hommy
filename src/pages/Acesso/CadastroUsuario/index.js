@@ -45,7 +45,6 @@ export default function CadastroUsuario({ navigation }) {
   const [modalMensagem,setModalMensagem] = useState('')
 
   function modalService(tipo,titulo,mensagem){
-    console.log(tipo,titulo,mensagem)
     setModalTipo(tipo);
     setModalTitulo(titulo);
     setModalMensagem(mensagem);
@@ -64,15 +63,16 @@ export default function CadastroUsuario({ navigation }) {
   async function enviarCadastro(value) {
     setLoading(true);
     value.fotoPerfil = imagemLink ? imagemLink : imagemPerfilPadrao;
+    console.log(value);
     api
       .post('/usuario', value)
       .then(response => {
         setLoading(false);
-        setSucesso(true);
+        modalService("Sucesso","Cadastrado","Seu cadastro no aplicativo foi realizado com sucesso, voce será redirecionado para tela de login.")
       })
       .catch(error => {
-        modalService("Erro","",error.response.data.error)
         setLoading(false);
+        modalService("Erro","Erro Inesperado","Verifique sua conexão com a internet!")
       });
   }
 
@@ -150,21 +150,13 @@ export default function CadastroUsuario({ navigation }) {
                   descricao={modalMensagem}
                   botao="Ok"
                   callback={() => {
+                    if(modalTipo == "Sucesso"){
+                      resetarPilhaNavegacao('Login');
+                    }
                     setModal(false);
                   }}
                 />
               )}
-              {/* {sucesso && (
-                <CustomModal
-                  parametro="Custom"
-                  titulo="Cadastro Realizado :)"
-                  descricao="Seu cadastro no aplicativo foi realizado com sucesso, voce será redirecionado para tela de login."
-                  botao="Confirmar"
-                  callback={() => {
-                    resetarPilhaNavegacao('Login');
-                  }}
-                />
-              )} */}
               <CampoLogin>
                 <Item regular inlineLabel style={{ borderRadius: 5 }}>
                   <Input

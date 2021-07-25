@@ -34,13 +34,14 @@ export default function RenderApp(props) {
         console.log('[FMCService] GetToken rejeitado');
       });
   }
+
   function registrarNotificacao() {
     fmcService.registerAppWithFMC();
     fmcService.register(onRegister, onNotification, onOpenNotification);
     localNotificationService.configure(onOpenNotification);
 
     function onRegister(token) {
-      //console.log('[APP] onRegister:', token);
+
       return token;
     }
 

@@ -54,8 +54,6 @@ export default function Cadastro({ navigation }) {
 
 
   useEffect(() => {
-
-    console.log("Dados",dadosRepublica)
     if (atualizarCadastro) {
       setAluguel(dadosRepublica.valorAluguel);
       setConta(dadosRepublica.valorContas);
@@ -77,14 +75,11 @@ export default function Cadastro({ navigation }) {
         cont++;
       }
       setContadorImagem(cont)
-     
-
     }
 
   }, []);
 
   function preencherFoto(linkImagem) {
-    console.log(linkImagem,linkImagem.fileName)
     if (imagem1 == null) {
       setNomeImagem1(linkImagem.fileName)
       setImagem1(linkImagem.uri);
@@ -95,9 +90,6 @@ export default function Cadastro({ navigation }) {
       setNomeImagem3(linkImagem.fileName)
       setImagem3(linkImagem.uri);
     }
-    console.log("IMAGEM1",nomeImagem1)
-    console.log("IMAGEM2",nomeImagem2)
-    console.log("IMAGEM3",nomeImagem3)
     setContadorImagem(contadorImagem + 1);
   }
 
@@ -105,12 +97,14 @@ export default function Cadastro({ navigation }) {
     ImagePicker.launchImageLibrary(imagePickerOptions, imagePickerResponse => {
       const { didCancel, error } = imagePickerResponse;
       if (didCancel) {
+        console.log(didCancel)
         alert('Envio cancelado');
       } else if (error) {
+        console.log(error)
         alert('Ocorreu algum erro: ', error);
       } else {
+        setLoading(true);
         preencherFoto(imagePickerResponse);
-        console.log("TETSTE")
         const referencia = uploadFileToFireBaseRepublica(imagePickerResponse);
         monitorFileUpload(referencia);
       }
@@ -129,22 +123,19 @@ export default function Cadastro({ navigation }) {
         }
       });
     });
+    setLoading(false);
   }
 
   function removerFoto(idFoto) {
     if (idFoto == 1) {
-     // deleteFileRepublica()
       setLinkImagem1(null);
       setImagem1(null);
-      
     } else if (idFoto == 2) {
       setLinkImagem2(null);
       setImagem2(null);
-      //deleteFileRepublica( )
     } else if (idFoto == 3) {
       setLinkImagem3(null);
       setImagem3(null);
-      //deleteFileRepublica( )
     }
     setContadorImagem(contadorImagem - 1);
   }
@@ -223,6 +214,7 @@ export default function Cadastro({ navigation }) {
   }
 
   async function atualizarRepublica(dados) {
+    console.log("OQUE TO ENVIANDO :",dados)
     await api
       .put(`/republica/${email}`, dados)
       .then(Response => {

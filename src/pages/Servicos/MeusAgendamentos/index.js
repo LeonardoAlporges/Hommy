@@ -58,7 +58,7 @@ export default function MeusAgendamentosServico(props) {
 
       <FlatList
         data={props.agendamentos}
-        style={{ maxHeight: 200 }}
+        style={{ maxHeight: 250 }}
         renderItem={({ item }) => (
           <View >
             <CartaoServico dados={item.servico} />
@@ -86,7 +86,7 @@ export default function MeusAgendamentosServico(props) {
                 <View style={style.viewData2}>
                   <LabelData>{moment(item.agenda.data).format('DD/MM/YY')}</LabelData>
                   <Text>As</Text>
-                  <LabelData>{moment(item.agenda.data).format('hh:mm')}</LabelData>
+                  <LabelData>{moment(item.agenda.hora).format('hh:mm')}</LabelData>
                 </View>
               )}
               <TouchableOpacity

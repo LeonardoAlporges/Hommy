@@ -9,7 +9,7 @@ import { LogBox } from 'react-native';
 const store = createStore(Reducers, applyMiddleware(ReduxThunk));
 class App extends Component {
   render() {
-    LogBox.ignoreAllLogs(false);
+    LogBox.ignoreAllLogs(true);
     return (
       <Provider store={store}>
         <Routes />

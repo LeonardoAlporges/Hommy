@@ -40,7 +40,7 @@ class Republica extends Component {
     this.state = {
       listaRepublicas: [],
       loading: true,
-      active: false,
+      active: true,
       erro: false,
       fullData: [],
       modalVisible: false,
@@ -511,10 +511,10 @@ class Republica extends Component {
           style={Estilos.S_FAB}
           position="bottomRight"
           onPress={() => {
-            this.setState({ active: !this.state.active });
+            this.limparPropsRepublicaRedux();
           }}
         >
-          {this.state.active ? <Icon name="minus" /> : <Icon name="plus" />}
+          {!this.state.active ? <Icon name="minus" /> : <Icon name="plus" />}
 
           <Button
             style={Estilos.corFAB}
@@ -524,14 +524,14 @@ class Republica extends Component {
           >
             <Icon name="filter-outline" style={Estilos.corIconFab} />
           </Button>
-          <Button
+          {/* <Button
             style={Estilos.corFAB}
             onPress={() => {
               this.limparPropsRepublicaRedux();
             }}
           >
             <Icon name="plus" style={Estilos.corIconFab} />
-          </Button>
+          </Button> */}
         </Fab>
       </Container>
     );
