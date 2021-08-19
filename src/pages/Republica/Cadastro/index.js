@@ -118,6 +118,7 @@ export default function Cadastro({ navigation }) {
   }
 
   function monitorFileUpload(task) {
+    setLoading(true);
     task.on('state_changed', snapshot => {
       snapshot.ref.getDownloadURL().then(downloadURL => {
         if (linkimagem1 == null) {
@@ -127,6 +128,7 @@ export default function Cadastro({ navigation }) {
         } else if (linkimagem3 == null) {
           setLinkImagem3(downloadURL);
         }
+        setLoading(false);
       });
     });
   }

@@ -89,9 +89,11 @@ export default function CadastroUsuario({ navigation }) {
   }
 
   function monitorFileUpload(task) {
+    setLoading(true);
     task.on('state_changed', snapshot => {
       snapshot.ref.getDownloadURL().then(downloadURL => {
         setImagemLink(downloadURL);
+        setLoading(false);
       });
     });
   }

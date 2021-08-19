@@ -110,6 +110,7 @@ export default function CadastroEvento({ navigation }) {
   }
 
   function monitorFileUpload(task) {
+    setLoading(true);
     task.on('state_changed', snapshot => {
       snapshot.ref.getDownloadURL().then(downloadURL => {
         if (contadorImagem == 0) {
@@ -119,6 +120,7 @@ export default function CadastroEvento({ navigation }) {
         } else if (contadorImagem == 2) {
           setLinkImagem3(downloadURL);
         }
+        setLoading(false);
       });
     });
   }

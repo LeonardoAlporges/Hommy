@@ -92,6 +92,7 @@ export default function CadastroServico({ navigation }) {
       if (didCancel) {
         alert('Envio cancelado');
       } else if (error) {
+        console.log(error);
         alert('Ocorreu algum erro: ', error);
       } else {
         preencherFoto(imagePickerResponse);
@@ -102,6 +103,7 @@ export default function CadastroServico({ navigation }) {
   }
 
   function monitorFileUpload(task) {
+    setLoading(true);
     task.on('state_changed', snapshot => {
       snapshot.ref.getDownloadURL().then(downloadURL => {
         if (contadorImagem == 0) {
@@ -111,6 +113,7 @@ export default function CadastroServico({ navigation }) {
         } else if (contadorImagem == 2) {
           setLinkImagem3(downloadURL);
         }
+        setLoading(false);
       });
     });
   }

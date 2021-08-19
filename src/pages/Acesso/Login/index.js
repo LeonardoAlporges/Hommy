@@ -44,6 +44,7 @@ export function Login({ navigation }) {
   const tokenAparelho = useSelector(state => state.user.tokenUser);
   const [loading, setloading] = useState(false);
   const dispatch = useDispatch();
+  const [modalGenerico, setModalGenerico] = useState(false);
 
   const [faceUser, setFaceUser] = useState();
   const [faceErro, setFaceErro] = useState();
@@ -84,6 +85,8 @@ export function Login({ navigation }) {
           setmodalErroSenha(true);
         } else if (error.response.data.code == 203) {
           setmodalErroLogin(true);
+        } else {
+          setModalGenerico(true);
         }
       });
   }
@@ -126,7 +129,7 @@ export function Login({ navigation }) {
 
       await AsyncStorage.setItem('token', JSON.stringify(dados.token));
       await AsyncStorage.setItem('user', JSON.stringify(dados.usuario));
-    } catch (error) {}
+    } catch (error) { }
   }
 
   function resetarPilhaNavegacao(Rota) {
@@ -166,6 +169,8 @@ export function Login({ navigation }) {
           setmodalErroSenha(true);
         } else if (error.response.data.code == 203) {
           setmodalErroLogin(true);
+        } else {
+          setModalGenerico(true);
         }
       });
   }
@@ -200,7 +205,18 @@ export function Login({ navigation }) {
           }}
         />
       )}
-
+      {modalGenerico && (
+        <CustomModal
+          parametro="Custom"
+          imagem="NaoEncontrado"
+          titulo="OOPS!"
+          descricao="Erro inesperado ocorreu!"
+          botao="Voltar"
+          callback={() => {
+            setmodalErroLogin(false);
+          }}
+        />
+      )}
       <Container>
         <LinearGradient
           start={{ x: 0, y: 0 }}
