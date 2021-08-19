@@ -40,11 +40,11 @@ export default function CadastroUsuario({ navigation }) {
   const [sucesso, setSucesso] = useState(false);
   const [password, setPassword] = useState(true);
 
-  const [modalTipo,setModalTipo] = useState('')
-  const [modalTitulo,setModalTitulo] = useState('')
-  const [modalMensagem,setModalMensagem] = useState('')
+  const [modalTipo, setModalTipo] = useState('')
+  const [modalTitulo, setModalTitulo] = useState('')
+  const [modalMensagem, setModalMensagem] = useState('')
 
-  function modalService(tipo,titulo,mensagem){
+  function modalService(tipo, titulo, mensagem) {
     setModalTipo(tipo);
     setModalTitulo(titulo);
     setModalMensagem(mensagem);
@@ -68,11 +68,11 @@ export default function CadastroUsuario({ navigation }) {
       .post('/usuario', value)
       .then(response => {
         setLoading(false);
-        modalService("Sucesso","Cadastrado","Seu cadastro no aplicativo foi realizado com sucesso, voce será redirecionado para tela de login.")
+        modalService("Sucesso", "Cadastrado", "Seu cadastro no aplicativo foi realizado com sucesso, voce será redirecionado para tela de login.")
       })
       .catch(error => {
         setLoading(false);
-        modalService("Erro","Erro Inesperado","Verifique sua conexão com a internet!")
+        modalService("Erro", "Erro Inesperado", error.response.data.error)
       });
   }
 
@@ -150,7 +150,7 @@ export default function CadastroUsuario({ navigation }) {
                   descricao={modalMensagem}
                   botao="Ok"
                   callback={() => {
-                    if(modalTipo == "Sucesso"){
+                    if (modalTipo == "Sucesso") {
                       resetarPilhaNavegacao('Login');
                     }
                     setModal(false);
