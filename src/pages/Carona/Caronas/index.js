@@ -28,7 +28,7 @@ class Caronas extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      active: false,
+      active: true,
       listaCaronas: [],
       loading: true,
       erro: false,
@@ -451,10 +451,10 @@ class Caronas extends Component {
           style={Estilo.FABStyle}
           position="bottomRight"
           onPress={() => {
-            this.setState({ active: !this.state.active });
+            this.limparPropsCaronaRedux();
           }}
         >
-          {this.state.active ? <Icon name="minus" /> : <Icon name="plus" />}
+          {!this.state.active ? <Icon name="minus" /> : <Icon name="plus" />}
 
           <Button
             style={Estilo.FabBTN}
@@ -464,14 +464,14 @@ class Caronas extends Component {
           >
             <Icon name="filter-outline" style={Estilo.FabIcon} />
           </Button>
-          <Button
+          {/* <Button
             style={Estilo.FabBTN}
             onPress={() => {
               this.limparPropsCaronaRedux();
             }}
           >
             <Icon name="plus" style={Estilo.FabIcon} />
-          </Button>
+          </Button> */}
         </Fab>
       </View>
     );

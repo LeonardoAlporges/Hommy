@@ -19,7 +19,6 @@ class FMCService {
       .hasPermission()
       .then(enable => {
         if (enable) {
-          //User has permission
           this.getToken(onRegister);
         } else {
           //User sem permisão
@@ -67,13 +66,11 @@ class FMCService {
   };
 
   createNotificationListerners = (onRegister, onNotification, onOpenNotification) => {
-    //When the application is running, but in the backgroud
     messaging().onNotificationOpenedApp(remoteMessages => {
-      //console.log('[FMC] onNotificationOpenedApp Notification caused app to open');
       if (remoteMessages) {
         const notification = remoteMessages.notification;
         onOpenNotification(notification);
-        //this.removeDeLiveredNotification(notification.notificaitoID)
+
       }
     });
 

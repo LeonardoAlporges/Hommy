@@ -10,7 +10,6 @@ export default function CustomModal(props) {
   const [titulo, setTitulo] = useState();
   const [descricao, setDescricao] = useState();
   const [botao, setBotao] = useState();
-  const [imagem, setImagem] = useState();
 
   function callback() {
     props.callback();
@@ -25,16 +24,18 @@ export default function CustomModal(props) {
   }
 
   function verificarImagem() {
-    if (imagem == '') {
+    if (props.imagem == '') {
       setIcone(require('../../assets/Img/Succes.png'));
-    } else if (imagem == 'NaoEncontrado') {
-      setIcone('../../assets/Img/Nao_Encontrado.png');
-    } else if (imagem == 'EnvieImagem') {
+    } else if (props.imagem == 'NaoEncontrado') {
+      console.log("NaoEncontrado");
+      setIcone(require('../../assets/Img/Nao_Encontrado.png'));
+    } else if (props.imagem == 'EnvieImagem') {
       setIcone(require('../../assets/Img/Enviar_Foto.png'));
-    } else if (imagem == 'Faltando') {
+    } else if (props.imagem == 'Faltando') {
       setIcone(require('../../assets/Img/Vazio.png'));
     }
   }
+  
   function verificarParametro() {
     if (props.parametro == 'Custom') {
       if (props.imagem == '' || !props.imagem) {
@@ -52,9 +53,9 @@ export default function CustomModal(props) {
     }
     if (props.parametro == 'Erro') {
       setIcone(require('../../assets/Img/Fail_Connection.png'));
-      setTitulo('OOPS!');
+      setTitulo(props.titulo);
       setDescricao(props.descricao);
-      setBotao('Voltar');
+      setBotao(props.botao);
       if (!props.descricao) {
         setDescricao('Alguma coisa deu errado. Por favor, verifique sua conexão com a internet.');
       }

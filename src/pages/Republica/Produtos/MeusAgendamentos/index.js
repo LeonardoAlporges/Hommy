@@ -73,7 +73,7 @@ export default function MeusAgendamentosProduto(props) {
       </ViewLabel>
       <FlatList
         data={props.agendamentos}
-        style={{ maxHeight: 200 }}
+        style={{ maxHeight: 250 }}
         renderItem={({ item }) => (
           <View>
             <CartaoProdutos dados={item.produto} />
@@ -100,9 +100,9 @@ export default function MeusAgendamentosProduto(props) {
               }
               {item.agenda.status != 'Finalizado' && 
                 <View style={style.viewData2}>
-                  <LabelData>{moment(item.agenda.data).format('DD/MM/YY')}</LabelData>
+                  <LabelData>{moment(new Date(item.agenda.data)).format('DD/MM/YY')}</LabelData>
                   <Text>As</Text>
-                  <LabelData>{moment(item.agenda.data).format('hh:mm')}</LabelData>
+                  <LabelData>{moment(new Date(item.agenda.data)).format('hh:mm')}</LabelData>
                 </View>
               }
               <TouchableOpacity

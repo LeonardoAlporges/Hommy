@@ -58,19 +58,19 @@ class Servicos extends Component {
           style={Estilo.S_FAB}
           position="bottomRight"
           onPress={() => {
-            this.setState({ active: !this.state.active });
+            this.servicosRedux();
           }}
         >
           {this.state.active ? <Icon name="minus" /> : <Icon name="plus" />}
 
-          <Button
+          {/* <Button
             style={Estilo.corFAB}
             onPress={() => {
               this.servicosRedux();
             }}
           >
             <Icon name="plus" style={Estilo.corIconFab} />
-          </Button>
+          </Button> */}
         </Fab>
       </View>
     );

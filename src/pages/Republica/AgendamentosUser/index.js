@@ -69,7 +69,7 @@ export default function AgendamentoUser({ navigation }) {
   return (
     <Container>
       <HeaderBack title="Meus agendamentos" onNavigation={() => navigation.goBack(null)} />
-      <View style={{ widht: '100%', height: 20, paddingHorizontal: 20, marginBottom: 10, marginTop: 5 }}>
+      <View style={{ widht: '100%', paddingHorizontal: 20, marginBottom: 10, marginTop: 5 }}>
         <Subtitulo>Fique atento no status das anuncios nas quais você agendou uma visita.</Subtitulo>
       </View>
       {loading && <Loading />}

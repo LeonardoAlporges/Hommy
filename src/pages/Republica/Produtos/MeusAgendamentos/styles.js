@@ -19,7 +19,6 @@ export const Subtitulo = styled.Text`
 `;
 
 export const ViewData = styled.View`
-  margin-top:120;
   flex-direction: row;
   width: 100%;
   justify-content: space-evenly;
