@@ -1,19 +1,19 @@
 import { Formik } from 'formik';
-import { Button, Input, Item, Label } from 'native-base';
-import React, { Fragment, useState, Text, useEffect } from 'react';
-import { Modal, View } from 'react-native';
-import api from '../../service/api';
-import * as yup from 'yup';
-import { useSelector } from 'react-redux';
 import moment from 'moment';
+import { Input, Item, Label } from 'native-base';
+import React, { Fragment, useState } from 'react';
+import { Modal, View } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { ViewModal, Iconefechar, BotaoFechar, Container, ViewTitulo, Titulo, Linha, LabelFielSet, InputHora, FieldSetLarge, FieldSet, ViewErro, Botao, LabelBotao, LabelErro } from './styles';
+import { useSelector } from 'react-redux';
+import * as yup from 'yup';
+import api from '../../service/api';
 import CustomModal from '../Alert';
+import { Botao, BotaoFechar, Container, FieldSetLarge, Iconefechar, InputHora, LabelBotao, LabelErro, LabelFielSet, Linha, Titulo, ViewErro, ViewModal, ViewTitulo } from './styles';
 
 export default function ModalAdicaoTarefas(props) {
 
   const emailUser = useSelector(state => state.user.email);
-  
+
   const [modalVisivel, setModalVisible] = useState(true);
   const [erro, setErro] = useState(false);
   const [dataVencimento, setDataVencimento] = useState();
@@ -47,7 +47,6 @@ export default function ModalAdicaoTarefas(props) {
         props.onClose();
       })
       .catch(error => {
-        console.log(error);
         setErro(true);
       });
   }
@@ -68,15 +67,15 @@ export default function ModalAdicaoTarefas(props) {
     >
       {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
         <Fragment>
-           {erro && (
-              <CustomModal
-                parametro="Erro"
-                descricao="Opss! Ocorreu um erro estranho :O"
-                callback={() => {
-                  setErro(false);
-                }}
-              />
-            )}
+          {erro && (
+            <CustomModal
+              parametro="Erro"
+              descricao="Opss! Ocorreu um erro estranho :O"
+              callback={() => {
+                setErro(false);
+              }}
+            />
+          )}
 
           <Modal animationType="fade" visible={modalVisivel} transparent={true} >
             <Container>
@@ -133,7 +132,7 @@ export default function ModalAdicaoTarefas(props) {
                   </FieldSetLarge>
                   <ViewErro>{values.data == '' && !botaoEnviar && <LabelErro>Campo obrigatório</LabelErro>}</ViewErro>
                 </Linha>
-                <View style={{marginTop:'5%'}}>
+                <View style={{ marginTop: '5%' }}>
                   <Botao onPress={() => {
                     handleSubmit(values);
                   }} >

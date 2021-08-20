@@ -34,8 +34,8 @@ export default function InteressadosServico({ navigation }) {
   const [reload, setReload] = useState(false);
   const [servicoID, setServicoID] = useState(navigation.state.params.idServico);
   const [erro, setErro] = useState(false);
-  const [avaliar,setAvaliar] = useState(false);
-  const [usuarioAvaliado,setUsuarioAvaliado] = useState('');
+  const [avaliar, setAvaliar] = useState(false);
+  const [usuarioAvaliado, setUsuarioAvaliado] = useState('');
 
   useEffect(() => {
     setListaAgendamento([]);
@@ -55,16 +55,17 @@ export default function InteressadosServico({ navigation }) {
       .finally(setLoading(false));
   }
 
-  function atualizarStatus(user,status) {
+  function atualizarStatus(user, status) {
     const data = {
       _id: servicoID,
-      userType : "ofertante",
+      userType: "ofertante",
       email: user,
       status: status
     };
     api
       .put(`/servicos/agendamento/atualizaStatus`, data)
       .then(response => {
+        console.log(response)
         setReload(!reload);
       })
       .catch(error => {
@@ -72,16 +73,17 @@ export default function InteressadosServico({ navigation }) {
       });
   }
 
-  function abrirAvaliacao(usuario){
+  function abrirAvaliacao(usuario) {
     setAvaliar(true);
     setUsuarioAvaliado(usuario);
   }
 
   function verificarTipoRequisicao(tipoSocilitacao, usuario) {
     if (tipoSocilitacao == 1) {
-      atualizarStatus(usuario,"Confirmado");
+      console.log(tipoSocilitacao, usuario)
+      atualizarStatus(usuario, "Confirmado");
     } else if (tipoSocilitacao == 0) {
-      atualizarStatus(usuario,"Rejeitado");
+      atualizarStatus(usuario, "Rejeitado");
     }
   }
 
@@ -120,13 +122,13 @@ export default function InteressadosServico({ navigation }) {
             />
             <ViewData>
               {item.agenda.status != 'Finalizado' &&
-              <View style={style.viewData2}>
-                <LabelData>{moment(item.agenda.data).format('DD/MM/YY')}</LabelData>
-                <Text>As</Text>
-                <LabelData>{moment(item.agenda.horario).format('hh:mm')}</LabelData>
-              </View>
-             }
-              
+                <View style={style.viewData2}>
+                  <LabelData>{moment(item.agenda.data).format('DD/MM/YY')}</LabelData>
+                  <Text>As</Text>
+                  <LabelData>{moment(item.agenda.horario).format('hh:mm')}</LabelData>
+                </View>
+              }
+
               {item.agenda.status == 'Análise' && (
                 <Analise>
                   <Label>Em análise</Label>
@@ -143,12 +145,12 @@ export default function InteressadosServico({ navigation }) {
                 </Rejeitado>
               )}
               {item.agenda.status == 'Finalizado' && (
-              
+
                 <Finalizado>
-                  <LabelFinalizado onPress={()=>{abrirAvaliacao(item.user.email)}}>Avaliar Anunciante</LabelFinalizado>
+                  <LabelFinalizado onPress={() => { abrirAvaliacao(item.user.email) }}>Avaliar Anunciante</LabelFinalizado>
                 </Finalizado>
               )}
-              
+
             </ViewData>
           </ScrollView>
         )}
@@ -164,7 +166,7 @@ export default function InteressadosServico({ navigation }) {
           />
         </ViewDetalhes>
       )}
-       {avaliar && (
+      {avaliar && (
         <ModalAvaliacao usuario={usuarioAvaliado}></ModalAvaliacao>
       )}
     </Container>

@@ -98,7 +98,6 @@ export default function InteressadosProduto({ navigation }) {
 
   function verificarTipoRequisicao(tipoSocilitacao, usuario) {
     if (tipoSocilitacao == 1) {
-      console.log(tipoSocilitacao, usuario)
       atualizarStatus(usuario, "Confirmado");
     } else if (tipoSocilitacao == 0) {
       atualizarStatus(usuario, "Rejeitado");

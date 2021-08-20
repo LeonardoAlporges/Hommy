@@ -11,9 +11,9 @@ export default function ModalAvaliacao(props) {
   const [n4, setN4] = useState(false);
   const [n5, setN5] = useState(false);
   const [nota, setNota] = useState(0);
-  const [modalVisivel,setModalVisivel]= useState(true); 
+  const [modalVisivel, setModalVisivel] = useState(true);
 
-  function limparAnterior(){
+  function limparAnterior() {
     setN1(false);
     setN2(false);
     setN3(false);
@@ -45,16 +45,15 @@ export default function ModalAvaliacao(props) {
       setN5(true);
       setNota(5);
     }
-  } 
+  }
 
   function avaliar() {
     api
-    .put(`/userNota/${props.usuario}`, { nota: nota })
-    .then(responseJson => { console.log(responseJson)})
-    .catch(error => { });
-  
+      .put(`/userNota/${props.usuario}`, { nota: nota })
+      .then(responseJson => { console.log(responseJson) })
+      .catch(error => { });
     setModalVisivel(false)
-  } 
+  }
 
 
   return (
@@ -67,23 +66,23 @@ export default function ModalAvaliacao(props) {
             <TipoAvaliacao>Muito Bom</TipoAvaliacao>
           </Avaliacao>
           <Icones>
-            <Toque onPress={() => onClick(1) }>
-              <Start name="star" active={n1}/>
+            <Toque onPress={() => onClick(1)}>
+              <Start name="star" active={n1} />
             </Toque>
-            <Toque onPress={() => onClick(2) }>
-              <Start name="star" active={n2}/>
+            <Toque onPress={() => onClick(2)}>
+              <Start name="star" active={n2} />
             </Toque>
-            <Toque onPress={() => onClick(3) }>
-              <Start name="star" active={n3}/>
+            <Toque onPress={() => onClick(3)}>
+              <Start name="star" active={n3} />
             </Toque>
-            <Toque onPress={() => onClick(4) }>
-              <Start name="star" active={n4}/>
+            <Toque onPress={() => onClick(4)}>
+              <Start name="star" active={n4} />
             </Toque>
-            <Toque onPress={() => onClick(5) }>
-              <Start name="star" active={n5}/>
+            <Toque onPress={() => onClick(5)}>
+              <Start name="star" active={n5} />
             </Toque>
           </Icones>
-          <Botao onPress={() => avaliar() }>
+          <Botao onPress={() => avaliar()}>
             <LabelBotao>Avaliar</LabelBotao>
           </Botao>
         </View>

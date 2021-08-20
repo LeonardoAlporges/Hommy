@@ -11,7 +11,7 @@ import CustomModal from '../../../components/Alert';
 import HeaderBack from '../../../components/CustomHeader';
 import Loading from '../../../components/Loading';
 import api from '../../../service/api';
-import { deleteFileRepublica, imagePickerOptions, uploadFileToFireBaseRepublica } from '../../../utils';
+import { imagePickerOptions, uploadFileToFireBaseRepublica } from '../../../utils';
 import estilo, {
   AreaFotos,
   DivisaoFotos,
@@ -47,7 +47,7 @@ export default function Cadastro({ navigation }) {
   const [nomeImagem1, setNomeImagem1] = useState("");
   const [nomeImagem2, setNomeImagem2] = useState("");
   const [nomeImagem3, setNomeImagem3] = useState("");
-  
+
   const [usuarioLogado, setUsuarioLogado] = useState();
   const [aluguel, setAluguel] = useState();
   const [conta, setConta] = useState();
@@ -165,11 +165,11 @@ export default function Cadastro({ navigation }) {
       imagem1: linkimagem1,
       imagem2: linkimagem2,
       imagem3: linkimagem3,
-      nomeImagem1:nomeImagem1,
-      nomeImagem2:nomeImagem2,
-      nomeImagem3:nomeImagem3,
+      nomeImagem1: nomeImagem1,
+      nomeImagem2: nomeImagem2,
+      nomeImagem3: nomeImagem3,
       nomeRepublica: values.nome,
-      valorAluguel:aluguel,
+      valorAluguel: aluguel,
       bairro: values.bairro,
       rua: values.rua,
       pontoReferencia: values.pontoReferencia,
@@ -214,7 +214,6 @@ export default function Cadastro({ navigation }) {
   }
 
   async function atualizarRepublica(dados) {
-    console.log("OQUE TO ENVIANDO :",dados)
     await api
       .put(`/republica/${email}`, dados)
       .then(Response => {
@@ -505,13 +504,13 @@ export default function Cadastro({ navigation }) {
                           />
                         </View>
                       ) : (
-                          <View style={estilo.V_ImageFull}>
-                            <Image source={{ uri: imagem1 }} style={estilo.ImageFull} />
-                            <TouchableOpacity onPress={() => { removerFoto(1) }} style={estilo.viewCloseFoto}>
-                              <Icone name="close" ></Icone>
-                            </TouchableOpacity>
-                          </View>
-                        )}
+                        <View style={estilo.V_ImageFull}>
+                          <Image source={{ uri: imagem1 }} style={estilo.ImageFull} />
+                          <TouchableOpacity onPress={() => { removerFoto(1) }} style={estilo.viewCloseFoto}>
+                            <Icone name="close" ></Icone>
+                          </TouchableOpacity>
+                        </View>
+                      )}
                       {imagem2 == null ? (
                         <View style={estilo.V_ImageFullEmpty}>
                           <Image
@@ -520,13 +519,13 @@ export default function Cadastro({ navigation }) {
                           />
                         </View>
                       ) : (
-                          <View style={estilo.V_ImageFull}>
-                            <Image source={{ uri: imagem2 }} style={estilo.ImageFull} />
-                            <TouchableOpacity onPress={() => { removerFoto(2) }} style={estilo.viewCloseFoto}>
-                              <Icone name="close" ></Icone>
-                            </TouchableOpacity>
-                          </View>
-                        )}
+                        <View style={estilo.V_ImageFull}>
+                          <Image source={{ uri: imagem2 }} style={estilo.ImageFull} />
+                          <TouchableOpacity onPress={() => { removerFoto(2) }} style={estilo.viewCloseFoto}>
+                            <Icone name="close" ></Icone>
+                          </TouchableOpacity>
+                        </View>
+                      )}
                       {imagem3 == null ? (
                         <View style={estilo.V_ImageFullEmpty}>
                           <Image
@@ -535,13 +534,13 @@ export default function Cadastro({ navigation }) {
                           />
                         </View>
                       ) : (
-                          <View style={estilo.V_ImageFull}>
-                            <Image source={{ uri: imagem3 }} style={estilo.ImageFull} />
-                            <TouchableOpacity onPress={() => { removerFoto(3) }} style={estilo.viewCloseFoto}>
-                              <Icone name="close" ></Icone>
-                            </TouchableOpacity>
-                          </View>
-                        )}
+                        <View style={estilo.V_ImageFull}>
+                          <Image source={{ uri: imagem3 }} style={estilo.ImageFull} />
+                          <TouchableOpacity onPress={() => { removerFoto(3) }} style={estilo.viewCloseFoto}>
+                            <Icone name="close" ></Icone>
+                          </TouchableOpacity>
+                        </View>
+                      )}
                     </DivisaoFotos>
                     <View style={estilo.V_BotaoImg}>
                       <TouchableOpacity
@@ -596,12 +595,12 @@ export default function Cadastro({ navigation }) {
                             placeholderTextColor="#263b50"
                             style={{ fontFamily: 'WorkSans', width: '80%', height: '100%' }}
                             value={aluguel}
-                            onChangeValue={(formattedValue) => { setAluguel(formattedValue)}}
+                            onChangeValue={(formattedValue) => { setAluguel(formattedValue) }}
                             separator="."
                             precision={2}
                             onChangeText={handleChange('aluguel')}
                           />
-                         
+
                         </Item>
                         <View style={estilo.V_error}>
                           {touched.aluguel && errors.aluguel && <Text style={estilo.textError}>{errors.aluguel}</Text>}
@@ -622,10 +621,10 @@ export default function Cadastro({ navigation }) {
                             R$
                           </Label>
                           <CurrencyInput
-                             placeholderTextColor="#263b50"
-                             style={{ fontFamily: 'WorkSans', width: '80%', height: '100%' }}
+                            placeholderTextColor="#263b50"
+                            style={{ fontFamily: 'WorkSans', width: '80%', height: '100%' }}
                             value={conta}
-                            onChangeValue={(formattedValue) => { setConta(formattedValue)}}
+                            onChangeValue={(formattedValue) => { setConta(formattedValue) }}
                             separator="."
                             precision={2}
                             onChangeText={handleChange('contas')}
@@ -801,10 +800,10 @@ export default function Cadastro({ navigation }) {
                             Atualizar república
                           </Text>
                         ) : (
-                            <Text style={{ color: '#142850', fontFamily: 'WorkSans-Bold', fontSize: 18 }}>
-                              Cadastrar república
-                            </Text>
-                          )}
+                          <Text style={{ color: '#142850', fontFamily: 'WorkSans-Bold', fontSize: 18 }}>
+                            Cadastrar república
+                          </Text>
+                        )}
                       </Button>
                     </View>
                   </View>

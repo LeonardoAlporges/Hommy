@@ -1,40 +1,31 @@
-import AsyncStorage from '@react-native-community/async-storage';
-import { DatePicker, Input, Item, Picker } from 'native-base';
-import React, { createRef, useEffect, useRef, useState } from 'react';
-import { FlatList, Image, Modal, ScrollView, Text, TouchableOpacity, View, Dimensions, TouchableWithoutFeedback } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { Dimensions, ScrollView } from 'react-native';
+import { withNavigation } from 'react-navigation';
 import CustomModal from '../../../../components/Alert';
 import HeaderBack from '../../../../components/CustomHeader';
-import ModalAdicaoContas from '../../../../components/ModalAdicaoContas';
-import ModalIformativoGerenciamento from '../../../../components/ModalInformativoGerenciamento';
-import { NavigationActions, StackActions, withNavigation } from 'react-navigation';
 import Loading from '../../../../components/Loading';
-
-import api from '../../../../service/api';
-import Contas from '../Contas'
-import Membros from '../Membros';
-import Tarefas from '../Tarefas'
-import {
-  Container,
-  Apresentacao,
-  DadosView,
-  Icone,
-  SubTitulo,
-  Titulo,
-  LabelView,
-  IconeView,
-  IconeDelete,
-} from './styles';
+import ModalAdicaoContas from '../../../../components/ModalAdicaoContas';
 import ModalAdicaoTarefas from '../../../../components/ModalAdicaoTarefas';
+import ModalIformativoGerenciamento from '../../../../components/ModalInformativoGerenciamento';
+import api from '../../../../service/api';
+import Contas from '../Contas';
+import Membros from '../Membros';
+import Tarefas from '../Tarefas';
+import {
+  Apresentacao, Container, Icone, IconeDelete, IconeView, LabelView, SubTitulo,
+  Titulo
+} from './styles';
+
 
 export function Gerenciamento(props, { navigation }) {
 
 
-  
-  useEffect(()=>{console.log(props)},[])
+
+  useEffect(() => { console.log(props) }, [])
   const [erro, setErro] = useState(false);
 
   const idRepublica = props.navigation.state.params.idRepublica;
-  const nomeRepublica =props.navigation.state.params.nomeRepublica;
+  const nomeRepublica = props.navigation.state.params.nomeRepublica;
   const codigorepublica = props.navigation.state.params.codigoRepublica;
   const membros = props.navigation.state.params.membros;
 
@@ -99,7 +90,7 @@ export function Gerenciamento(props, { navigation }) {
   return (
     <Container altura={Dimensions.get('window').height} >
       {loading && <Loading />}
-      <HeaderBack title="Gerenciamento de republica" onNavigation={() =>props.navigation.goBack(null) } />
+      <HeaderBack title="Gerenciamento de republica" onNavigation={() => props.navigation.navigate('MenuLateral')} />
 
       <Apresentacao>
         <IconeView>
@@ -113,23 +104,23 @@ export function Gerenciamento(props, { navigation }) {
             {nomeRepublica} ({codigorepublica})
           </Titulo>
         </LabelView>
-        <IconeView onPress={()=> excluirRepublica()}>
+        <IconeView onPress={() => excluirRepublica()}>
           <IconeDelete name="trash" />
         </IconeView>
       </Apresentacao>
       <ScrollView style={{ marginBottom: '5%' }}>
         <Contas idRepublica={idRepublica} ref={contaRef} modalVisualizacao={item => { abrirModalContas(item) }} modalInsercaoDados={() => { setModalContaDadosVisible(true) }} ></Contas>
-        <Tarefas idRepublica={idRepublica} ref={tarefaRef} modalVisualizacao={item=> { abrirModalTarefas(item) }}  modalInsercaoDados={() => { setModalTarefaDadosVisible(true) }} ></Tarefas>
+        <Tarefas idRepublica={idRepublica} ref={tarefaRef} modalVisualizacao={item => { abrirModalTarefas(item) }} modalInsercaoDados={() => { setModalTarefaDadosVisible(true) }} ></Tarefas>
         <Membros idRepublica={idRepublica} membros={membros} modalVisualizacao={item => { abrirModalMembro(item) }} ></Membros>
       </ScrollView>
 
       {modalContasDadosVisible && <ModalAdicaoContas idRepublica={idRepublica} onClose={() => { fecharModalConta() }} visivel={true} />}
-      {modalTarefaDadosVisible && <ModalAdicaoTarefas idRepublica={idRepublica}  tarefas={true} onClose={() => {fecharModalTarefa()}} visivel={true} />}
+      {modalTarefaDadosVisible && <ModalAdicaoTarefas idRepublica={idRepublica} tarefas={true} onClose={() => { fecharModalTarefa() }} visivel={true} />}
 
       {modalContasVisible && <ModalIformativoGerenciamento contas={true} item={item} onClose={() => { fecharModalConta() }} visivel={true} />}
-      {modalTarefaVisible && <ModalIformativoGerenciamento tarefas={true} item={item}  onClose={() => { fecharModalTarefa() }} visivel={true} />}
+      {modalTarefaVisible && <ModalIformativoGerenciamento tarefas={true} item={item} onClose={() => { fecharModalTarefa() }} visivel={true} />}
       {modalMembroVisible && <ModalIformativoGerenciamento membros={true} item={item} onClose={() => { fecharModalMembro() }} visivel={true} />}
-      
+
       {erro && (
         <CustomModal
           parametro="Erro"
