@@ -113,7 +113,7 @@ export default function ValidarCodigo({ navigation }) {
         }
         }
         validationSchema={yup.object().shape({
-          codigo: yup.string().max(6, 'Maximo 8 dígitos'),
+          codigo: yup.string().max(6, 'Maximo 6 dígitos'),
           novaSenha: yup.string().min(8, 'Mínimo 8 dígitos necessários').required('Campo obrigatório'),
         })}
       >
