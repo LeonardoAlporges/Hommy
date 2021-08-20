@@ -1,34 +1,15 @@
-import { Formik } from 'formik';
-import moment from 'moment';
-import React, { Fragment, useEffect, useState } from 'react';
-import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { Input, Item } from 'native-base';
-
-import CurrencyInput from 'react-native-currency-input';
-import ImagePicker from 'react-native-image-picker';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import TextInputMask from 'react-native-text-input-mask';
-import { NavigationActions, StackActions } from 'react-navigation';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import * as yup from 'yup';
-import CustomModal from '../../../../components/Alert';
 import HeaderBack from '../../../../components/CustomHeader';
 import Loading from '../../../../components/Loading';
 import api from '../../../../service/api';
-import { imagePickerOptions, uploadFileToFireBaseRepublicaEventos } from '../../../../utils';
-import estilo, {
-  CadastroView,
-  Container,
-  EntraCodigoView,
-  Apresentacao,
-  DadosView,
-  Icone,
-  SubTitulo,
-  Titulo,
-  LabelView,
-  IconeView,
-  Linha, FieldSetLarge, LabelFielSet, BotaoView, Botao, LabelBotao, Separador
+import {
+  Apresentacao, Botao, BotaoView, CadastroView,
+  Container, DadosView, EntraCodigoView, FieldSetLarge, Icone, IconeView, LabelBotao, LabelFielSet, LabelView, Linha, Separador, SubTitulo,
+  Titulo
 } from './styles';
+
 
 export default function GerenciamentoRepublica({ navigation }) {
   const emailUser = useSelector(state => state.user.email);
@@ -38,12 +19,13 @@ export default function GerenciamentoRepublica({ navigation }) {
   const [loading, setLoading] = useState(true);
   const [existeRepublica, setJaExiteRepublica] = useState(false);
 
-  
+
   function goBackScreen() {
     navigation.goBack(null);
   }
 
   useEffect(() => {
+    console.log("???????")
     setLoading(true);
     verificarSeJaCadastrou();
     if (existeRepublica) {
@@ -68,7 +50,6 @@ export default function GerenciamentoRepublica({ navigation }) {
   }
 
   function verificarSeJaCadastrou() {
-    setLoading(true);
     api
       .get(`/gerenciaRepublica/${emailUser}`)
       .then(response => {
@@ -76,12 +57,14 @@ export default function GerenciamentoRepublica({ navigation }) {
           setJaExiteRepublica(true);
           const idRepublica = response.data._id;
           navigation.navigate('Gerenciamento', { idRepublica: idRepublica, codigoRepublica: response.data.numeroRepublica, nomeRepublica: response.data.republica, membros: response.data.membros });
+          setLoading(false);
         }
       })
       .catch(error => {
         setErro(true);
+        setLoading(false);
       })
-      .finally(setLoading(false));
+
   }
 
   async function cadastrarNovaRepublica() {
@@ -96,71 +79,72 @@ export default function GerenciamentoRepublica({ navigation }) {
         console.log("Republica:", response);
         let idRepublica = response.data._id
         navigation.navigate('Gerenciamento', { idRepublica: idRepublica, codigoRepublica: response.data.numeroRepublica, nomeRepublica: response.data.republica, membros: response.data.membros });
+        setLoading(false);
       })
       .catch(error => {
         setErro(true);
+        setLoading(false);
       })
-      .finally(setLoading(false));
   }
 
   return (
     <Container>
-      <HeaderBack title="Gerenciamento de republica" onNavigation={() =>  goBackScreen() } />
+      <HeaderBack title="Gerenciamento de republica" onNavigation={() => goBackScreen()} />
       {loading && <Loading />}
-        <Separador>
-          <CadastroView>
-            <Apresentacao>
-              <IconeView>
-                <Icone name="home" />
-              </IconeView>
-              <LabelView>
-                <Titulo> Não tenho uma Republica Cadastrada. </Titulo>
-                <SubTitulo> Quero Cadastrar agora mesmo. </SubTitulo>
-              </LabelView>
-            </Apresentacao>
-            <DadosView>
-              <Linha>
-                <FieldSetLarge>
-                  <LabelFielSet>Nome da república</LabelFielSet>
-                  <Item style={{ borderColor: 'transparent' }}>
-                    <Input onChangeText={text => setNomeRepublica(text)} />
-                  </Item>
-                </FieldSetLarge>
-              </Linha>             
-                <BotaoView>
-                  <Botao onPress={() => { cadastrarNovaRepublica() }}><LabelBotao>CADASTRAR</LabelBotao></Botao>
-                </BotaoView>
-            </DadosView>
-          </CadastroView>
-          <EntraCodigoView>
-            <Apresentacao>
-              <IconeView>
-                <Icone name="login" />
-              </IconeView>
-              <LabelView>
-                <Titulo>Já tenho uma republica cadastrada </Titulo>
-                <SubTitulo>Entrar com código de convite!</SubTitulo>
-              </LabelView>
-            </Apresentacao>
-            <DadosView>
-              <Linha>
-                <FieldSetLarge>
-                  <LabelFielSet>Código da república</LabelFielSet>
-                  <Item style={{ borderColor: 'transparent' }}>
-                    <Input 
-                      onChangeText={text => setCodigoRepublica(text)}
-                    />
-                  </Item>
-                </FieldSetLarge>
-              </Linha>              
-                <BotaoView>
-                  <Botao onPress={() => entrarComCodigo()}>
-                    <LabelBotao>ENTRAR</LabelBotao>
-                  </Botao>
-                </BotaoView>
-            </DadosView>
-          </EntraCodigoView>
-        </Separador>
+      <Separador>
+        <CadastroView>
+          <Apresentacao>
+            <IconeView>
+              <Icone name="home" />
+            </IconeView>
+            <LabelView>
+              <Titulo> Não tenho uma Republica Cadastrada. </Titulo>
+              <SubTitulo> Quero Cadastrar agora mesmo. </SubTitulo>
+            </LabelView>
+          </Apresentacao>
+          <DadosView>
+            <Linha>
+              <FieldSetLarge>
+                <LabelFielSet>Nome da república</LabelFielSet>
+                <Item style={{ borderColor: 'transparent' }}>
+                  <Input onChangeText={text => setNomeRepublica(text)} />
+                </Item>
+              </FieldSetLarge>
+            </Linha>
+            <BotaoView>
+              <Botao onPress={() => { cadastrarNovaRepublica() }}><LabelBotao>CADASTRAR</LabelBotao></Botao>
+            </BotaoView>
+          </DadosView>
+        </CadastroView>
+        <EntraCodigoView>
+          <Apresentacao>
+            <IconeView>
+              <Icone name="login" />
+            </IconeView>
+            <LabelView>
+              <Titulo>Já tenho uma republica cadastrada </Titulo>
+              <SubTitulo>Entrar com código de convite!</SubTitulo>
+            </LabelView>
+          </Apresentacao>
+          <DadosView>
+            <Linha>
+              <FieldSetLarge>
+                <LabelFielSet>Código da república</LabelFielSet>
+                <Item style={{ borderColor: 'transparent' }}>
+                  <Input
+                    onChangeText={text => setCodigoRepublica(text)}
+                  />
+                </Item>
+              </FieldSetLarge>
+            </Linha>
+            <BotaoView>
+              <Botao onPress={() => entrarComCodigo()}>
+                <LabelBotao>ENTRAR</LabelBotao>
+              </Botao>
+            </BotaoView>
+          </DadosView>
+        </EntraCodigoView>
+      </Separador>
     </Container>
   )
 }

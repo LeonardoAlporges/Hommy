@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { View, Modal } from 'react-native';
-import Estilos from './style';
+import { Modal, View } from 'react-native';
+import Estilos, { Botao, Container, Descricao, Imagem, LabelBotao, Titulo } from './style';
 
-import { Container, Imagem, Titulo, Descricao, Botao, LabelBotao } from './style';
 
 export default function CustomModal(props) {
   const [modalVisivel, setModalVisivel] = useState(props.visivel);
@@ -27,7 +26,6 @@ export default function CustomModal(props) {
     if (props.imagem == '') {
       setIcone(require('../../assets/Img/Succes.png'));
     } else if (props.imagem == 'NaoEncontrado') {
-      console.log("NaoEncontrado");
       setIcone(require('../../assets/Img/Nao_Encontrado.png'));
     } else if (props.imagem == 'EnvieImagem') {
       setIcone(require('../../assets/Img/Enviar_Foto.png'));
@@ -35,7 +33,7 @@ export default function CustomModal(props) {
       setIcone(require('../../assets/Img/Vazio.png'));
     }
   }
-  
+
   function verificarParametro() {
     if (props.parametro == 'Custom') {
       if (props.imagem == '' || !props.imagem) {
@@ -53,12 +51,17 @@ export default function CustomModal(props) {
     }
     if (props.parametro == 'Erro') {
       setIcone(require('../../assets/Img/Fail_Connection.png'));
-      setTitulo(props.titulo);
-      setDescricao(props.descricao);
-      setBotao(props.botao);
-      if (!props.descricao) {
+      if (props.titulo != null) {
+        setTitulo(props.titulo);
+      } else {
+        setTitulo("Erro inesperado");
+      }
+      if (props.descricao != null) {
+        setDescricao(props.descricao);
+      } else {
         setDescricao('Alguma coisa deu errado. Por favor, verifique sua conexão com a internet.');
       }
+      setBotao("OK!");
     }
   }
   useEffect(() => {

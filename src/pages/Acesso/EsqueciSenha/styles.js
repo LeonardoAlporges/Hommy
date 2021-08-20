@@ -18,7 +18,6 @@ export const ViewTitulo = styled.View`
   padding: 10%;
   padding-top: 0%;
   width: 100%;
-  height: 28;
   align-items: flex-start;
 `;
 

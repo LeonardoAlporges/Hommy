@@ -21,8 +21,7 @@ import estilo, {
   Container,
   DivisaoFotos,
   FieldSet,
-  FieldSetLarge,
-  Icone, InputHora,
+  FieldSetLarge, FieldSetXL, Icone, InputHora,
   LabeBotaoEnviar,
   LabelErro,
   LabelFielSet,
@@ -30,8 +29,7 @@ import estilo, {
   Linha,
   Subtitle,
   ViewBotao,
-  ViewErro,
-  FieldSetXL
+  ViewErro
 } from './styles';
 
 
@@ -62,6 +60,9 @@ export default function CadastroEvento({ navigation }) {
   const [linkimagem1, setLinkImagem1] = useState(null);
   const [linkimagem2, setLinkImagem2] = useState(null);
   const [linkimagem3, setLinkImagem3] = useState(null);
+  const [nomeImagem1, setNomeImagem1] = useState("");
+  const [nomeImagem2, setNomeImagem2] = useState("");
+  const [nomeImagem3, setNomeImagem3] = useState("");
   const [valor, setValor] = useState();
 
   const [descontoDisponivel, setDescontoDisponivel] = useState(false);
@@ -82,18 +83,22 @@ export default function CadastroEvento({ navigation }) {
   }
 
   function preencherFoto(linkImagem) {
-    if (contadorImagem == 0) {
+    console.log(imagem1, imagem2, imagem3)
+    if (imagem1 == null) {
+      setNomeImagem1(linkImagem.fileName)
       setImagem1(linkImagem.uri);
-    } else if (contadorImagem == 1) {
+    } else if (imagem2 == null) {
+      setNomeImagem2(linkImagem.fileName)
       setImagem2(linkImagem.uri);
-    } else if (contadorImagem == 2) {
+    } else if (imagem3 == null) {
+      console.log("IMAGEM 3")
+      setNomeImagem3(linkImagem.fileName)
       setImagem3(linkImagem.uri);
-    } else {
-      setOcutarBotaoEnvioFoto();
+
     }
+    console.log(nomeImagem3, imagem3)
     setContadorImagem(contadorImagem + 1);
   }
-
   function carregarImagemGaleria() {
     ImagePicker.launchImageLibrary(imagePickerOptions, imagePickerResponse => {
       const { didCancel, error } = imagePickerResponse;
@@ -106,7 +111,6 @@ export default function CadastroEvento({ navigation }) {
         preencherFoto(imagePickerResponse);
         const referencia = uploadFileToFireBaseRepublicaEventos(imagePickerResponse);
         monitorFileUpload(referencia);
-        setLoading(false);
       }
     });
   }
@@ -114,21 +118,22 @@ export default function CadastroEvento({ navigation }) {
   function monitorFileUpload(task) {
     task.on('state_changed', snapshot => {
       snapshot.ref.getDownloadURL().then(downloadURL => {
-        if (contadorImagem == 0) {
+        if (linkimagem1 == null) {
           setLinkImagem1(downloadURL);
-        } else if (contadorImagem == 1) {
+        } else if (linkimagem2 == null) {
           setLinkImagem2(downloadURL);
-        } else if (contadorImagem == 2) {
+        } else if (linkimagem3 == null) {
           setLinkImagem3(downloadURL);
         }
-      });
+      })
     });
+    setLoading(false);
   }
 
   function publicarEvento(values) {
     const data = {
       titulo: values.tituloEvento,
-      descricao : values.descricao,
+      descricao: values.descricao,
       descontoDisponivel: descontoDisponivel,
       valor: valor,
       userEmail: emailUser,
@@ -139,6 +144,9 @@ export default function CadastroEvento({ navigation }) {
       imagem1: linkimagem1,
       imagem2: linkimagem2,
       imagem3: linkimagem3,
+      nomeImagem1: nomeImagem1,
+      nomeImagem2: nomeImagem2,
+      nomeImagem3: nomeImagem3,
       descricao: values.descricao,
       instagram: values.instagram
     };
@@ -215,7 +223,7 @@ export default function CadastroEvento({ navigation }) {
         contato: yup.string().max(9999999999999).required(' Campo obrigatórior'),
         valor: yup.number('Somente numeros!').max(200, 'Valor maximo de R$ 200,00').required('Campo obrigatório'),
         codigoDesconto: yup.string().max(10, 'Somente 10 caracteres são permitidos'),
-        desconto: yup.number().max(100,'Desconto somente até 100%').min(1),
+        desconto: yup.number().max(100, 'Desconto somente até 100%').min(1),
       })}
     >
       {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
@@ -440,7 +448,7 @@ export default function CadastroEvento({ navigation }) {
                   </FieldSetLarge>
                 </Linha>
               </View>
-}
+              }
               <AreaFotos>
                 <LabelFotos>Fotos do seu evento</LabelFotos>
                 <DivisaoFotos>
