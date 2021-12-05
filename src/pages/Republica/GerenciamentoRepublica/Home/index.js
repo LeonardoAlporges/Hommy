@@ -25,16 +25,14 @@ export default function GerenciamentoRepublica({ navigation }) {
   }
 
   useEffect(() => {
-    console.log("???????")
-    setLoading(true);
     verificarSeJaCadastrou();
     if (existeRepublica) {
       navigation.navigate('MenuLateral');
     }
+    setLoading(false);
   }, []);
 
   function entrarComCodigo() {
-    setLoading(true);
     const data = {
       email: emailUser
     };
@@ -43,10 +41,12 @@ export default function GerenciamentoRepublica({ navigation }) {
       .then(response => {
         const idRepublica = response.data._id
         navigation.navigate('Gerenciamento', { idRepublica: idRepublica, codigoRepublica: response.data.numeroRepublica, nomeRepublica: response.data.republica, membros: response.data.membros });
+        setLoading(false);
       })
       .catch(error => {
+        setLoading(false);
         setErro(true);
-      }).finally(() => { setLoading(false) })
+      })
   }
 
   function verificarSeJaCadastrou() {
@@ -57,8 +57,9 @@ export default function GerenciamentoRepublica({ navigation }) {
           setJaExiteRepublica(true);
           const idRepublica = response.data._id;
           navigation.navigate('Gerenciamento', { idRepublica: idRepublica, codigoRepublica: response.data.numeroRepublica, nomeRepublica: response.data.republica, membros: response.data.membros });
-          setLoading(false);
         }
+        setLoading(false);
+        console.log("CABOU ?")
       })
       .catch(error => {
         setErro(true);

@@ -18,7 +18,6 @@ export const ViewTitulo = styled.View`
   padding: 10%;
   padding-top: 0%;
   width: 100%;
-  height: 28;
   align-items: flex-start;
 `;
 
@@ -28,7 +27,7 @@ export const Linha = styled.View`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 60px;
+  margin-top: 40px;
 `;
 
 export const FieldSetLarge = styled.View`
@@ -126,7 +125,7 @@ const estilo = StyleSheet.create({
     width: 200,
     height: 150
   },
-  
+
   icons_CamposLogin: {
     fontSize: 25,
     margin: 5,

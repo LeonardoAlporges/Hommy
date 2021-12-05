@@ -2,26 +2,18 @@ import { Formik } from 'formik';
 import { Input, Item } from 'native-base';
 import React, { Fragment, useEffect, useState } from 'react';
 import { Image } from 'react-native';
-import TextInputMask from 'react-native-text-input-mask';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { NavigationActions, StackActions } from 'react-navigation';
 import * as yup from 'yup';
 import CustomModal from '../../../components/Alert';
 import HeaderBack from '../../../components/CustomHeader';
 import api from '../../../service/api';
 import estilo, {
-  Botao, CamposLogin,
-  Container,
-  Invalido,
-  LabelErro,
-  TextoBotao,
+  Botao, Container, FieldSetLarge, Invalido,
+  LabelErro, LabelFielSet, Linha, TextoBotao,
   Titulo,
   ViewBotao,
   ViewImagem,
-  ViewTitulo,
-  Linha,
-  LabelFielSet,
-  FieldSetLarge,
+  ViewTitulo
 } from './styles';
 
 export default function ValidarCodigo({ navigation }) {
@@ -131,7 +123,7 @@ export default function ValidarCodigo({ navigation }) {
 
             {codigoErrado && (
               <CustomModal
-                parametro="Custom"
+                parametro="Erro"
                 titulo="Código incorreto"
                 descricao="Verifique se digitou tudo certo. Não foi possível continuar a recuperação de senha com esse código."
                 botao="Verificar"

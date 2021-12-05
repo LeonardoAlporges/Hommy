@@ -3,7 +3,7 @@ import axios from 'axios';
 const api = axios.create({
   //baseURL: 'http://192.168.1.6:3333',//Emulador
   //baseURL:'http://10.0.0.156:3333',//Celular IPV4
-  baseURL: 'http://hommyapplication-com.umbler.net',
+  baseURL: 'http://18.230.113.222:3333',
 });
 
 export default api;

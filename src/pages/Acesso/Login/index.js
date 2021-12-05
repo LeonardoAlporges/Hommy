@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import { GoogleSignin, statusCodes } from '@react-native-community/google-signin';
-import { Formik, validateYupSchema } from 'formik';
+import { GoogleSignin } from '@react-native-community/google-signin';
+import { Formik } from 'formik';
 import { Input, Item, Spinner } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { Image, Modal, TouchableOpacity, View } from 'react-native';
@@ -42,6 +42,7 @@ export function Login({ navigation }) {
   const [modalErroSenha, setmodalErroSenha] = useState(false);
   const [modalErroGoogle, setmodalErroGoogle] = useState(false);
   const [modalErroCampos, setmodalErroCampos] = useState(false);
+  const [modalErro, setModalErro] = useState(false);
 
   const [password, setPassword] = useState(true);
   const tokenAparelho = useSelector(state => state.user.tokenUser);
@@ -113,7 +114,7 @@ export function Login({ navigation }) {
 
       await AsyncStorage.setItem('token', JSON.stringify(dados.token));
       await AsyncStorage.setItem('user', JSON.stringify(dados.usuario));
-    } catch (error) {}
+    } catch (error) { }
   }
 
   function resetarPilhaNavegacao(Rota) {
@@ -132,7 +133,7 @@ export function Login({ navigation }) {
       tokenD: tokenAparelho
     };
 
-    if(!data.email && !data.password ){
+    if (!data.email && !data.password) {
       setmodalErroCampos(true);
     }
     api
@@ -149,6 +150,7 @@ export function Login({ navigation }) {
         } else if (error.response.data.code == 203) {
           setmodalErroLogin(true);
         }
+        setModalErro(true);
       });
   }
 
@@ -204,6 +206,17 @@ export function Login({ navigation }) {
           botao="Voltar"
           callback={() => {
             setmodalErroCampos(false);
+          }}
+        />
+      )}
+      {modalErro && (
+        <CustomModal
+          parametro="Custom"
+          titulo="Erro"
+          descricao="Não foi possivel fazer login. Verifique sua conexão com a internet!"
+          botao="Voltar"
+          callback={() => {
+            setModalErro(false);
           }}
         />
       )}
