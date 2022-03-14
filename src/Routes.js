@@ -39,7 +39,7 @@ import GerenciamentoRepublica from './pages/Republica/GerenciamentoRepublica/Hom
 const Navegação = createStackNavigator(
   {
     RenderApp: {
-      screen: RenderApp,
+      screen: TabsHeader,
       navigationOptions: {
         headerLeft: null
       }
